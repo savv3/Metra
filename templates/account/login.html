@@ -2,6 +2,7 @@
 {% load i18n %}
 {% block title %}{% translate "Log in" %}{% endblock %}
 {% block content %}
+<div class="card auth-card">
   <h1>{% translate "Log in" %}</h1>
   <form method="post" action="{% url 'account_login' %}" class="form form--narrow">
     {% csrf_token %}
@@ -18,4 +19,5 @@
       <button type="submit" class="button button--primary">{% translate "Log in" %}</button>
     </div>
   </form>
+</div>
 {% endblock %}

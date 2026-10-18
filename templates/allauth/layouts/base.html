@@ -1,3 +1,10 @@
 {% extends "base.html" %}
-{% comment %}Account and two-factor pages from django-allauth use the app's own layout.{% endcomment %}
+{% load i18n %}
+{% comment %}Account and two-factor pages from django-allauth use the app's own layout,
+with a way back to the user's account page.{% endcomment %}
 {% block title %}{% block head_title %}{% endblock %}{% endblock %}
+{% block before_content %}
+  {% if user.is_authenticated %}
+    <p class="back-link"><a href="{% url 'accounts:profile' %}">← {% translate "My account" %}</a></p>
+  {% endif %}
+{% endblock %}

@@ -1,4 +1,4 @@
-{% load i18n plugins roles static %}<!doctype html>
+{% load i18n nav plugins roles static %}<!doctype html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -8,42 +8,45 @@
   <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
   <link rel="stylesheet" href="{% static 'css/app.css' %}">
   <script src="{% static 'vendor/htmx-2.0.4.min.js' %}" defer></script>
+  <script src="{% static 'js/app.js' %}" defer></script>
 </head>
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
   <a class="skip-link" href="#main">{% translate "Skip to content" %}</a>
   <header class="site-header">
     <div class="site-header__bar">
-      <a class="brand" href="/">{% translate "Small Company Register" %}</a>
-      <form class="lang-form" action="{% url 'set_language' %}" method="post">
-        {% csrf_token %}
-        <input name="next" type="hidden" value="{{ request.get_full_path }}">
-        <label for="language">{% translate "Language" %}</label>
-        <select id="language" name="language" onchange="this.form.submit()">
-          {% get_available_languages as LANGUAGES %}
-          {% for code, name in LANGUAGES %}
-            <option value="{{ code }}"{% if code == LANGUAGE_CODE %} selected{% endif %}>{{ name }}</option>
-          {% endfor %}
-        </select>
-        <noscript><button type="submit">{% translate "Change" %}</button></noscript>
-      </form>
+      <a class="brand" href="/"><img src="{% static 'favicon.svg' %}" alt="" width="28" height="28">{% translate "Small Company Register" %}</a>
+      {% if user.is_authenticated %}
+        <nav class="main-nav" aria-label="{% translate 'Main' %}">
+          {% if perms.register.view_unit %}{% translate "Units" as label %}{% nav_link "register:unit_list" label %}{% endif %}
+          {% if perms.register.view_person %}{% translate "People" as label %}{% nav_link "register:person_list" label %}{% endif %}
+          {% if perms.readings.view_readinground %}{% translate "Readings" as label %}{% nav_link "readings:round_list" label %}{% endif %}
+          {% if perms.invoicing.view_invoice %}{% translate "Invoices" as label %}{% nav_link "invoicing:invoice_list" label %}{% endif %}
+          {% if perms.messaging.view_messagebatch %}{% translate "Send-outs" as label %}{% nav_link "messaging:batch_list" label %}{% endif %}
+          {% plugin_navigation %}
+          {% if user.is_staff %}{% translate "Settings" as label %}{% nav_link "admin:index" label %}{% endif %}
+        </nav>
+        <details class="user-menu">
+          <summary>
+            <span class="avatar" aria-hidden="true">{{ user.get_username|first|upper }}</span>
+            <span class="user-menu__name">{{ user.get_username }}</span>
+          </summary>
+          <div class="user-menu__panel">
+            <p class="user-menu__who">
+              <strong>{{ user.get_full_name|default:user.get_username }}</strong>
+              {% with roles=user|role_names %}{% if roles %}<span>{{ roles }}</span>{% endif %}{% endwith %}
+            </p>
+            <a href="{% url 'accounts:profile' %}">{% translate "My account" %}</a>
+            {% include "_language_form.html" with suffix="-menu" %}
+            <form class="logout-form" action="{% url 'account_logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="button button--link">{% translate "Log out" %}</button>
+            </form>
+          </div>
+        </details>
+      {% else %}
+        {% include "_language_form.html" %}
+      {% endif %}
     </div>
-    {% if user.is_authenticated %}
-      <nav class="main-nav" aria-label="{% translate 'Main' %}">
-        {% if perms.register.view_unit %}<a href="{% url 'register:unit_list' %}">{% translate "Units" %}</a>{% endif %}
-        {% if perms.register.view_person %}<a href="{% url 'register:person_list' %}">{% translate "People" %}</a>{% endif %}
-        {% if perms.readings.view_readinground %}<a href="{% url 'readings:round_list' %}">{% translate "Readings" %}</a>{% endif %}
-        {% if perms.invoicing.view_invoice %}<a href="{% url 'invoicing:invoice_list' %}">{% translate "Invoices" %}</a>{% endif %}
-        {% if perms.messaging.view_messagebatch %}<a href="{% url 'messaging:batch_list' %}">{% translate "Send-outs" %}</a>{% endif %}
-        {% plugin_navigation %}
-        {% if user.is_staff %}<a href="{% url 'admin:index' %}">{% translate "Settings" %}</a>{% endif %}
-        <a href="{% url 'mfa_index' %}">{% translate "Two-factor login" %}</a>
-        <span class="nav-user">{{ user.get_username }}{% with roles=user|role_names %}{% if roles %} ({{ roles }}){% endif %}{% endwith %}</span>
-        <form class="logout-form" action="{% url 'account_logout' %}" method="post">
-          {% csrf_token %}
-          <button type="submit" class="button button--link">{% translate "Log out" %}</button>
-        </form>
-      </nav>
-    {% endif %}
   </header>
   <main id="main">
     {% if user|two_factor_not_required %}
@@ -51,12 +54,12 @@
         {% translate "Two-factor login is not required on this installation (SCR_REQUIRE_MFA is off). Turn it on before real data goes in." %}
       </p>
     {% endif %}
-    {% if user|should_set_up_two_factor and not request.path|slice:":10" == "/accounts/" %}
+    {% block two_factor_nudge %}{% if user|should_set_up_two_factor and not request.path|slice:":10" == "/accounts/" %}
       <p class="message warning two-factor-nudge" role="note">
         {% translate "Protect your account with two-factor login. It takes a minute with an authenticator app on your phone." %}
         <a href="{% url 'mfa_activate_totp' %}">{% translate "Turn on two-factor login" %}</a>
       </p>
-    {% endif %}
+    {% endif %}{% endblock %}
     {% if messages %}
       <ul class="messages" role="status">
         {% for message in messages %}
@@ -64,6 +67,7 @@
         {% endfor %}
       </ul>
     {% endif %}
+    {% block before_content %}{% endblock %}
     {% block content %}{% endblock %}
   </main>
 </body>

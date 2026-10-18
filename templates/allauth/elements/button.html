@@ -1,7 +1,7 @@
 {% load allauth %}
 {% comment %} djlint:off {% endcomment %}
 <{% if attrs.href %}a href="{{ attrs.href }}"{% else %}button{% endif %}
-class="button{% if attrs.type == 'submit' %} button--primary{% endif %}"
+class="button{% if 'danger' in attrs.tags %} button--danger{% elif attrs.type == 'submit' %} button--primary{% endif %}"
 {% if attrs.form %}form="{{ attrs.form }}"{% endif %}
 {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
 {% if attrs.name %}name="{{ attrs.name }}"{% endif %}

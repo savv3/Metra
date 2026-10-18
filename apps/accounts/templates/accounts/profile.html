@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "My account" %}{% endblock %}
+{% block two_factor_nudge %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "My account" %}</h1>
+  </div>
+
+  <section class="card" aria-labelledby="account-details">
+    <h2 id="account-details">{% translate "Details" %}</h2>
+    <dl class="details-list details-list--plain">
+      <dt>{% translate "Username" %}</dt>
+      <dd>{{ user.get_username }}</dd>
+      {% if user.get_full_name %}<dt>{% translate "Name" %}</dt><dd>{{ user.get_full_name }}</dd>{% endif %}
+      <dt>{% translate "Email" %}</dt>
+      <dd>{{ user.email|default:"–" }}</dd>
+      <dt>{% translate "Roles" %}</dt>
+      <dd>{{ roles|join:", "|default:"–" }}</dd>
+    </dl>
+  </section>
+
+  <section class="card" aria-labelledby="account-security">
+    <h2 id="account-security">{% translate "Login and security" %}</h2>
+    <div class="setting-row">
+      <div>
+        <h3>{% translate "Two-factor login" %}
+          {% if totp %}<span class="pill pill--ok">{% translate "On" %}</span>{% else %}<span class="pill pill--warn">{% translate "Off" %}</span>{% endif %}
+        </h3>
+        <p class="help">
+          {% if totp %}
+            {% translate "You log in with your password and a code from your authenticator app." %}
+          {% elif two_factor_required %}
+            {% translate "Required for your account. Set it up with an authenticator app on your phone." %}
+          {% else %}
+            {% translate "Protect your account with a code from an authenticator app on your phone." %}
+          {% endif %}
+        </p>
+      </div>
+      <div class="actions">
+        {% if totp %}
+          <a class="button" href="{% url 'mfa_deactivate_totp' %}">{% translate "Turn off" %}</a>
+        {% else %}
+          <a class="button button--primary" href="{% url 'mfa_activate_totp' %}">{% translate "Turn on two-factor login" %}</a>
+        {% endif %}
+      </div>
+    </div>
+    {% if totp %}
+      <div class="setting-row">
+        <div>
+          <h3>{% translate "Recovery codes" %}</h3>
+          <p class="help">
+            {% if recovery_unused is None %}
+              {% translate "One-time codes for when you do not have your phone." %}
+            {% else %}
+              {% blocktranslate count count=recovery_unused trimmed %}
+                {{ count }} unused code left. Use one when you do not have your phone.
+              {% plural %}
+                {{ count }} unused codes left. Use one when you do not have your phone.
+              {% endblocktranslate %}
+            {% endif %}
+          </p>
+        </div>
+        <div class="actions">
+          {% if recovery_unused is None %}
+            <a class="button" href="{% url 'mfa_generate_recovery_codes' %}">{% translate "Create codes" %}</a>
+          {% else %}
+            <a class="button" href="{% url 'mfa_view_recovery_codes' %}">{% translate "Show codes" %}</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+    <div class="setting-row">
+      <div>
+        <h3>{% translate "Password" %}</h3>
+        <p class="help">{% translate "Use a long password that you do not use anywhere else." %}</p>
+      </div>
+      <div class="actions">
+        <a class="button" href="{% url 'account_change_password' %}">{% translate "Change password" %}</a>
+      </div>
+    </div>
+  </section>
+{% endblock %}
