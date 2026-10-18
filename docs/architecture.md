@@ -268,8 +268,10 @@ Organisations can extend the app without forking it.
 - **Trust.** Plugins run with full trust, like any other installed code.
   Only install plugins you trust. A plugin must declare which personal data
   it stores, so the export and erasure tools cover it.
-- **Example.** A minimal example plugin lives in the repository and is used
-  in the tests.
+- **Example.** A minimal example plugin lives in the repository
+  (`plugins/example`) and is used in the tests.
+
+How to install, enable and write plugins is in [plugins.md](plugins.md).
 
 The plugin core ships in phase 2 (PR 10) with the first extension points:
 navigation, unit and person panels, and messaging providers. Every later

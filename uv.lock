@@ -355,6 +355,11 @@ wheels = [
 ]
 
 [[package]]
+name = "scr-example-plugin"
+version = "0.1.0"
+source = { editable = "plugins/example" }
+
+[[package]]
 name = "segno"
 version = "1.6.6"
 source = { registry = "https://pypi.org/simple" }
@@ -391,6 +396,7 @@ dev = [
     { name = "pytest" },
     { name = "pytest-django" },
     { name = "ruff" },
+    { name = "scr-example-plugin" },
 ]
 
 [package.metadata]
@@ -409,6 +415,7 @@ dev = [
     { name = "pytest", specifier = ">=9.1.1" },
     { name = "pytest-django", specifier = ">=4.14.0" },
     { name = "ruff", specifier = ">=0.17.1" },
+    { name = "scr-example-plugin", editable = "plugins/example" },
 ]
 
 [[package]]

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 13:07+0300\n"
+"POT-Creation-Date: 2026-10-18 13:13+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -328,8 +328,8 @@ msgid ""
 "characters is one message."
 msgstr ""
 "Platshållare: {name}, {first_name}, {link}, {closes}, {period}, "
-"{reading_type}, {unit} och {organisation}. Håll sms korta: ungefär "
-"160 tecken är ett meddelande."
+"{reading_type}, {unit} och {organisation}. Håll sms korta: ungefär 160 "
+"tecken är ett meddelande."
 
 #: apps/messaging/models.py:163
 msgid "message template"
@@ -342,8 +342,7 @@ msgstr "meddelandemallar"
 #: apps/messaging/sending.py:37
 msgid "There is no message template for this. Add one under Settings."
 msgstr ""
-"Det finns ingen meddelandemall för det här. Lägg till en under "
-"Inställningar."
+"Det finns ingen meddelandemall för det här. Lägg till en under Inställningar."
 
 #: apps/messaging/sending.py:94
 msgid "The unit has no contact person."
@@ -392,8 +391,8 @@ msgstr[1] "%(count)s hushåll behöver brev"
 #: apps/messaging/templates/messaging/batch_detail.html:15
 msgid "They have no phone number or email address that works, or prefer post."
 msgstr ""
-"De har inget fungerande telefonnummer eller e-postadress, eller vill "
-"hellre ha brev."
+"De har inget fungerande telefonnummer eller e-postadress, eller vill hellre "
+"ha brev."
 
 #: apps/messaging/templates/messaging/batch_detail.html:20
 msgid "Print their letters"
@@ -469,6 +468,10 @@ msgstr "Inget har skickats ännu."
 #: apps/messaging/views.py:50
 msgid "Sending has started. This page shows how it goes."
 msgstr "Utskicket har startat. Den här sidan visar hur det går."
+
+#: apps/plugins/apps.py:7
+msgid "Plugins"
+msgstr "Insticksprogram"
 
 #: apps/readings/admin.py:20
 msgid "Archive selected reading types"
@@ -1715,7 +1718,7 @@ msgstr ""
 "enhetstyp under"
 
 #: apps/register/templates/register/unit_type_choose.html:16
-#: templates/base.html:35
+#: templates/base.html:36
 msgid "Settings"
 msgstr "Inställningar"
 
@@ -2118,11 +2121,11 @@ msgstr "Länken fungerar inte längre."
 msgid "%(count)s links no longer work."
 msgstr "%(count)s länkar fungerar inte längre."
 
-#: config/settings.py:149
+#: config/settings.py:159
 msgid "Swedish"
 msgstr "Svenska"
 
-#: config/settings.py:150
+#: config/settings.py:160
 msgid "English"
 msgstr "Engelska"
 
@@ -2150,10 +2153,10 @@ msgstr "Byt"
 msgid "Main"
 msgstr "Huvudnavigering"
 
-#: templates/base.html:36
+#: templates/base.html:37
 msgid "Two-factor login"
 msgstr "Tvåfaktorsinloggning"
 
-#: templates/base.html:40
+#: templates/base.html:41
 msgid "Log out"
 msgstr "Logga ut"

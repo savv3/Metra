@@ -4,6 +4,9 @@ import os
 
 os.environ.setdefault("SCR_DEBUG", "true")
 os.environ.setdefault("SCR_HUEY_IMMEDIATE", "true")
+# The example plugin (plugins/example, a dev dependency) is loaded the way an
+# installation would load it, so the tests cover the real plugin path.
+os.environ.setdefault("SCR_PLUGINS", "example")
 
 from config.settings import *  # noqa: E402, F403
 

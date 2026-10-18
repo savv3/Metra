@@ -25,6 +25,14 @@ COPY . .
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
+# Plugins: extra pip packages (names, URLs or paths) installed into the app's
+# environment. Enable them at run time with SCR_PLUGINS. See docs/plugins.md.
+ARG SCR_PLUGIN_PACKAGES=""
+RUN --mount=type=cache,target=/root/.cache/uv \
+    if [ -n "$SCR_PLUGIN_PACKAGES" ]; then \
+        uv pip install --python /app/.venv/bin/python $SCR_PLUGIN_PACKAGES; \
+    fi
+
 # Dummy key is used only for these build steps and is not kept in the image env.
 ARG SCR_BUILD_SECRET_KEY=build-only-not-a-secret
 RUN SCR_SECRET_KEY="$SCR_BUILD_SECRET_KEY" python manage.py compilemessages --ignore=.venv \
