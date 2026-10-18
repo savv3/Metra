@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 12:58+0300\n"
+"POT-Creation-Date: 2026-10-18 13:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1477,15 +1477,15 @@ msgstr ""
 msgid "self-service links"
 msgstr ""
 
-#: apps/selfservice/public.py:126
+#: apps/selfservice/public.py:123
 msgid "Thank you. Your reading is saved."
 msgstr ""
 
-#: apps/selfservice/public.py:132
+#: apps/selfservice/public.py:129
 msgid "Thank you. Your contact details are updated."
 msgstr ""
 
-#: apps/selfservice/public.py:134
+#: apps/selfservice/public.py:131
 msgid "Nothing was changed."
 msgstr ""
 
@@ -1549,48 +1549,48 @@ msgstr ""
 msgid "Enter the number on the meter by %(closes)s."
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:22
+#: apps/selfservice/templates/selfservice/member.html:23
 msgid "Change reading"
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:22
+#: apps/selfservice/templates/selfservice/member.html:23
 msgid "Save reading"
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:25
+#: apps/selfservice/templates/selfservice/member.html:26
 #, python-format
 msgid "The reading %(value)s was registered on %(date)s."
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:26
+#: apps/selfservice/templates/selfservice/member.html:27
 msgid "The reading round is closed, so it can no longer be changed here."
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:28
+#: apps/selfservice/templates/selfservice/member.html:29
 msgid "The reading round is not open, so no reading can be entered here."
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:34
+#: apps/selfservice/templates/selfservice/member.html:35
 msgid "Your contact details"
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:35
+#: apps/selfservice/templates/selfservice/member.html:36
 msgid "Correct anything that is wrong or missing and save."
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:40
+#: apps/selfservice/templates/selfservice/member.html:42
 msgid "Save contact details"
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:46
+#: apps/selfservice/templates/selfservice/member.html:48
 msgid "Others in your household"
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:56
+#: apps/selfservice/templates/selfservice/member.html:54
 msgid "To change their details, use their own link or contact us."
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:61
+#: apps/selfservice/templates/selfservice/member.html:59
 msgid "This page is personal. Do not share the link."
 msgstr ""
 

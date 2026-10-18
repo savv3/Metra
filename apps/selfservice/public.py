@@ -9,7 +9,6 @@ from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_exempt
 
 from apps.readings.models import Reading
 from apps.readings.usage import earlier_values
@@ -23,7 +22,10 @@ from .models import SelfServiceLink
 def _private(response):
     """Keep the page out of search engines, caches and other sites' logs."""
     response["X-Robots-Tag"] = "noindex, nofollow"
-    response["Referrer-Policy"] = "no-referrer"
+    # same-origin, not no-referrer: the address (with its token) never goes to
+    # other sites, and browsers still send a real Origin on the page's own
+    # form posts, which Django's CSRF check needs.
+    response["Referrer-Policy"] = "same-origin"
     return response
 
 
@@ -61,8 +63,8 @@ def _log_visit(request, link):
 
 
 def _switch_language(request):
-    """?lang=en sets the language and reloads the page. A plain link rather
-    than Django's set_language form, which needs CSRF (see member_page)."""
+    """?lang=en sets the language and reloads the page: plain links, which
+    also work on the page for links that do not work."""
     language = request.GET.get("lang")
     if language not in dict(settings.LANGUAGES):
         return None
@@ -77,11 +79,6 @@ def _switch_language(request):
     return _private(response)
 
 
-# With Referrer-Policy: no-referrer, browsers send "Origin: null" on form
-# posts, which Django's CSRF check refuses. CSRF protection is not needed
-# here: a forged post would need the secret token in the URL, and whoever
-# has that can already use the page.
-@csrf_exempt
 @never_cache
 def member_page(request, token):
     if switched := _switch_language(request):

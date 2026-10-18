@@ -16,7 +16,8 @@
           </p>
         {% endwith %}
         <form method="post" action="{{ request.path }}#reading" class="form" novalidate>
-                    <input type="hidden" name="action" value="reading">
+                    {% csrf_token %}
+          <input type="hidden" name="action" value="reading">
           {% include "selfservice/_errors.html" with form=reading_form id="reading-errors" %}
           {% for field in reading_form %}{% include "register/_field.html" %}{% endfor %}
           <button type="submit" class="button button--primary">{% if reading %}{% translate "Change reading" %}{% else %}{% translate "Save reading" %}{% endif %}</button>
@@ -34,7 +35,8 @@
     <h2 id="contact">{% translate "Your contact details" %}</h2>
     <p>{{ person.full_name }}. {% translate "Correct anything that is wrong or missing and save." %}</p>
     <form method="post" action="{{ request.path }}#contact" class="form" novalidate>
-            <input type="hidden" name="action" value="contact">
+            {% csrf_token %}
+      <input type="hidden" name="action" value="contact">
       {% include "selfservice/_errors.html" with form=contact_form id="contact-errors" %}
       {% for field in contact_form %}{% include "register/_field.html" %}{% endfor %}
       <button type="submit" class="button button--primary">{% translate "Save contact details" %}</button>
@@ -46,11 +48,7 @@
       <h2 id="household">{% translate "Others in your household" %}</h2>
       <ul class="plain-list member-contacts">
         {% for c in household %}
-          <li>
-            <strong>{{ c.person.full_name }}</strong> ({{ c.get_role_display }})
-            {% if c.person.email %}<br>{{ c.person.email }}{% endif %}
-            {% if c.person.phone %}<br>{{ c.person.phone }}{% endif %}
-          </li>
+          <li><strong>{{ c.person.full_name }}</strong> ({{ c.get_role_display }})</li>
         {% endfor %}
       </ul>
       <p class="help">{% translate "To change their details, use their own link or contact us." %}</p>

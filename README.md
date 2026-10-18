@@ -103,8 +103,9 @@ for phones and screen readers, where the member:
 
 - enters the meter reading for the round, and can change it until the round
   closes, and
-- sees their own and their household's contact details, and corrects their
-  own phone, email and address.
+- sees their own contact details and who else is registered for the
+  household (names and roles only), and corrects their own phone, email
+  and address.
 
 Changes are saved straight away. They are in the audit log, marked with the
 link they came through, and listed under **Readings > Recent self-service
@@ -121,8 +122,9 @@ for the same round, and staff can stop links one by one or all at once.
 A link for a round works until the end of the round's closing day; other
 links work for `SCR_SELF_SERVICE_LINK_DAYS` (30) days. Unknown, expired and
 stopped links all show the same page. The member pages are rate-limited per
-visitor address, are kept out of search engines (`noindex`) and send no
-referrer. Letters use `SCR_BASE_URL` (by default `https://SCR_DOMAIN`) for
+visitor address, are kept out of search engines (`noindex`) and send the
+referrer only to the app itself (`Referrer-Policy: same-origin`), so the
+link never reaches other sites. Letters use `SCR_BASE_URL` (by default `https://SCR_DOMAIN`) for
 the address.
 
 Links are personal data about the person they belong to: they are covered

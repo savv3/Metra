@@ -23,7 +23,7 @@ def test_member_page_opens_without_login(client, issued, unit):
     assert "Hello Anna" in body
     assert "Byvägen 4" in body
     assert response["X-Robots-Tag"] == "noindex, nofollow"
-    assert response["Referrer-Policy"] == "no-referrer"
+    assert response["Referrer-Policy"] == "same-origin"
     assert "no-store" in response["Cache-Control"]
     assert '<meta name="robots" content="noindex, nofollow">' in body
 
@@ -43,7 +43,7 @@ def test_unknown_expired_and_revoked_links_look_the_same(client, issued, unit, o
     assert unknown.status_code == old.status_code == revoked.status_code == 404
     pages = [CSRF.sub("", r.content.decode()) for r in (unknown, old, revoked)]
     assert pages[0] == pages[1] == pages[2]
-    assert unknown["Referrer-Policy"] == "no-referrer"
+    assert unknown["Referrer-Policy"] == "same-origin"
 
 
 def test_visits_are_logged_and_last_opened_updated(client, issued):
@@ -159,7 +159,8 @@ def test_member_sees_household_but_cannot_edit_others(client, issued, unit, owne
     page = client.get(url, HTTP_ACCEPT_LANGUAGE="en").content.decode()
     client.post(url, {"action": "contact", "email": "changed@example.com", "person": partner.pk})
 
-    assert "Erik" in page and "erik@example.com" in page
+    assert "Erik" in page
+    assert "erik@example.com" not in page  # names and roles only
     partner.refresh_from_db()
     assert partner.email == "erik@example.com"
 
@@ -216,16 +217,26 @@ def test_member_page_is_translated(client, issued):
     assert "Hej Anna" in page
 
 
-def test_forms_work_from_a_browser_that_sends_no_referrer(issued):
-    """no-referrer makes browsers post with "Origin: null"; that must not be refused."""
+def test_forms_need_a_csrf_token_and_pass_with_same_origin_headers(issued):
     from django.test import Client
 
     _link, _token, url = issued
     browser = Client(enforce_csrf_checks=True)
+    page = browser.get(url)
+    csrf = re.search(r'name="csrfmiddlewaretoken" value="([^"]+)"', page.content.decode())[1]
 
-    response = browser.post(url, {"action": "reading", "value": "5"}, HTTP_ORIGIN="null")
+    refused = browser.post(
+        url, {"action": "reading", "value": "4"}, HTTP_ORIGIN="http://testserver"
+    )
+    accepted = browser.post(
+        url,
+        {"action": "reading", "value": "5", "csrfmiddlewaretoken": csrf},
+        HTTP_ORIGIN="http://testserver",
+        HTTP_REFERER="http://testserver" + url,
+    )
 
-    assert response.status_code == 302
+    assert refused.status_code == 403
+    assert accepted.status_code == 302
     assert Reading.objects.get().value == 5
 
 
