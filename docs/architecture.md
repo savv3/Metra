@@ -223,6 +223,20 @@ data of the person they belong to, so the export and erasure tools (module
 under `SCR_DATA_DIR`, no extra service), with stricter limits for unknown
 tokens.
 
+### Messaging
+
+`apps.messaging` keeps a record of every message (channel, recipient,
+text, status, the provider's id), grouped in send-outs. Providers are
+classes registered by channel and name in `apps.messaging.registry`; an
+installation picks one per channel by setting. The registry is the
+messaging extension point that the plugin core (PR 10) opens to plugins.
+Built-in: email through Django (SMTP or console), SMS through 46elks, and
+console and dummy SMS providers for development and tests. Sending runs in
+Huey tasks. A link's token is only in the message that goes out; the
+stored copy has a placeholder. Messages are personal data of their
+recipient and are covered by the export and erasure tools. Phase 3 builds
+group messaging on the same records and providers.
+
 ## Plugins
 
 Organisations can extend the app without forking it.

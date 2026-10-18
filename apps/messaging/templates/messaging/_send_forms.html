@@ -1,0 +1,23 @@
+{% load i18n %}
+{% comment %}Send buttons for a round; needs round, channels and perms.{% endcomment %}
+{% if perms.messaging.add_messagebatch and perms.selfservice.add_selfservicelink %}
+  <h2>{% translate "Send links" %}</h2>
+  <p>
+    {% if channels.sms %}{% blocktranslate with provider=channels.sms %}SMS goes through {{ provider }}.{% endblocktranslate %}{% else %}{% translate "SMS is not set up, so links go by email." %}{% endif %}
+    {% if not channels.email %}{% translate "Email is not set up." %}{% endif %}
+    {% translate "Households without a working phone or email are listed for printing." %}
+  </p>
+  <div class="actions">
+    <form method="post" action="{% url 'messaging:round_send' round.pk %}" class="inline-form">
+      {% csrf_token %}
+      <input type="hidden" name="kind" value="links">
+      <input type="hidden" name="scope" value="all">
+      <button type="submit" class="button button--primary">{% translate "Send links to all units" %}</button>
+    </form>
+    <form method="post" action="{% url 'messaging:round_send' round.pk %}" class="inline-form">
+      {% csrf_token %}
+      <input type="hidden" name="kind" value="reminder">
+      <button type="submit" class="button">{% translate "Send reminder to units missing a reading" %}</button>
+    </form>
+  </div>
+{% endif %}

@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "apps.backups",
     "apps.readings",
     "apps.selfservice",
+    "apps.messaging",
 ]
 
 MIDDLEWARE = [
@@ -218,6 +219,46 @@ CACHES = {
 # Caddy puts the visitor's address in X-Forwarded-For. Only trust it behind
 # a proxy that sets it, or anyone could pretend to be someone else.
 TRUST_X_FORWARDED_FOR = env_bool("SCR_TRUST_X_FORWARDED_FOR")
+
+# Email: SMTP when SCR_EMAIL_HOST is set, the console in development, or
+# none (links then go by SMS or letter). See README, "Email and SMS".
+EMAIL_HOST = os.environ.get("SCR_EMAIL_HOST", "")
+EMAIL_PORT = int(os.environ.get("SCR_EMAIL_PORT") or 587)
+EMAIL_HOST_USER = os.environ.get("SCR_EMAIL_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("SCR_EMAIL_PASSWORD", "")
+EMAIL_USE_TLS = env_bool("SCR_EMAIL_USE_TLS", True)
+EMAIL_USE_SSL = env_bool("SCR_EMAIL_USE_SSL")
+if EMAIL_USE_SSL:
+    EMAIL_USE_TLS = False
+EMAIL_TIMEOUT = 30
+DEFAULT_FROM_EMAIL = os.environ.get("SCR_EMAIL_FROM") or "register@localhost"
+_email_backend = os.environ.get("SCR_EMAIL_BACKEND", "").strip().lower() or (
+    "smtp" if EMAIL_HOST else ("console" if DEBUG else "none")
+)
+EMAIL_BACKEND = {
+    "smtp": "django.core.mail.backends.smtp.EmailBackend",
+    "console": "django.core.mail.backends.console.EmailBackend",
+}.get(_email_backend, "django.core.mail.backends.dummy.EmailBackend")
+
+_elks_user = os.environ.get("SCR_ELKS_API_USER", "")
+_reminder_days = os.environ.get("SCR_READING_REMINDER_DAYS", "").strip()
+MESSAGING = {
+    # Names in apps.messaging.registry; empty means the channel is not set up.
+    "email_provider": "" if _email_backend == "none" else "django",
+    "sms_provider": os.environ.get("SCR_SMS_PROVIDER", "").strip().lower()
+    or ("46elks" if _elks_user else ("console" if DEBUG else "")),
+    "email_domain": DEFAULT_FROM_EMAIL.rpartition("@")[2] or "localhost",
+    "sms_sender": os.environ.get("SCR_SMS_SENDER", "") or "Register",
+    "sms_country_code": (os.environ.get("SCR_SMS_COUNTRY_CODE") or "358").lstrip("+"),
+    "elks_api_user": _elks_user,
+    "elks_api_password": os.environ.get("SCR_ELKS_API_PASSWORD", ""),
+    "elks_dry_run": env_bool("SCR_ELKS_DRY_RUN"),
+    # Automatic reminders to units missing a reading, this many days before a
+    # round closes. Off unless set.
+    "reminder_days_before_close": int(_reminder_days) if _reminder_days else None,
+}
+if MESSAGING["sms_provider"] == "none":
+    MESSAGING["sms_provider"] = ""
 
 # Behind Caddy, the original scheme arrives in X-Forwarded-Proto.
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

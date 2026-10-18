@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n messaging %}
 {% block title %}{{ round }}{% endblock %}
 {% block content %}
   <div class="page-head">
@@ -15,6 +15,8 @@
     <p id="progress-label">{% blocktranslate count count=expected %}{{ submitted }} of {{ count }} unit has reported. {{ missing }} missing.{% plural %}{{ submitted }} of {{ count }} units have reported. {{ missing }} missing.{% endblocktranslate %}</p>
     <progress max="{{ expected }}" value="{{ submitted }}" aria-labelledby="progress-label"></progress>
   </div>
+
+  {% round_send_forms round %}
 
   <form class="filters" method="get" action="{{ round.get_absolute_url }}" role="search"
         hx-get="{{ round.get_absolute_url }}" hx-target="#results" hx-push-url="true"

@@ -12,5 +12,6 @@ urlpatterns = [
     path("", include("apps.register.urls")),
     path("", include("apps.readings.urls")),
     path("", include("apps.selfservice.urls")),
+    path("", include("apps.messaging.urls")),
     path("", include("apps.core.urls")),
 ]

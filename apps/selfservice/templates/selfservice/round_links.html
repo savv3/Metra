@@ -1,10 +1,12 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n messaging %}
 {% block title %}{% blocktranslate %}Self-service links for {{ round }}{% endblocktranslate %}{% endblock %}
 {% block content %}
   <h1>{% blocktranslate %}Self-service links for {{ round }}{% endblocktranslate %}</h1>
   <p class="subtitle"><a href="{{ round.get_absolute_url }}">{{ round }}</a></p>
   <p>{% translate "Each unit's contact gets a personal link to report the reading and check their contact details, without a password. A link works until the round closes. Making a new link for someone stops their earlier one." %}</p>
+
+  {% round_send_forms round %}
 
   {% if perms.selfservice.add_selfservicelink %}
     <h2>{% translate "Print letters" %}</h2>

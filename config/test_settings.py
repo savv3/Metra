@@ -12,3 +12,7 @@ STORAGES["staticfiles"]["BACKEND"] = "django.contrib.staticfiles.storage.StaticF
 
 CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
 BASE_URL = "https://register.example.com"
+
+# Never send real messages from tests.
+MESSAGING = {**MESSAGING, "sms_provider": "dummy", "email_provider": "django"}  # noqa: F405
+EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"

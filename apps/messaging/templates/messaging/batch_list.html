@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Send-outs" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "Send-outs" %}</h1>
+  {% if batches %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Send-outs' %}">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">{% translate "Send-out" %}</th>
+            <th scope="col">{% translate "Started" %}</th>
+            <th scope="col">{% translate "Sent by" %}</th>
+            <th scope="col">{% translate "Messages" %}</th>
+            <th scope="col">{% translate "Status" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for batch in batches %}
+            <tr>
+              <th scope="row"><a href="{{ batch.get_absolute_url }}">{{ batch }}</a></th>
+              <td>{{ batch.created_at|date:"SHORT_DATETIME_FORMAT" }}</td>
+              <td>{{ batch.created_by|default:_("Automatic") }}</td>
+              <td>{{ batch.total }}</td>
+              <td>{{ batch.get_status_display }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "Nothing has been sent yet." %}</p>
+  {% endif %}
+{% endblock %}

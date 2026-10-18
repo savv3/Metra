@@ -1,0 +1,38 @@
+import datetime
+
+from django.conf import settings
+from django.utils import timezone
+from huey import crontab
+from huey.contrib.djhuey import db_periodic_task, db_task
+
+from apps.readings.models import ReadingRound
+
+from .models import MessageBatch
+from .sending import send_batch
+
+
+@db_task()
+def send_batch_task(batch_id):
+    batch = MessageBatch.objects.filter(pk=batch_id).first()
+    if batch is not None:
+        send_batch(batch)
+
+
+@db_periodic_task(crontab(hour="10", minute="0"))
+def automatic_reminders():
+    """Remind units missing a reading SCR_READING_REMINDER_DAYS before an open
+    round closes. Off unless the setting is given; each round is reminded once."""
+    days = settings.MESSAGING["reminder_days_before_close"]
+    if days is None:
+        return
+    closes = timezone.localdate() + datetime.timedelta(days=days)
+    rounds = ReadingRound.objects.filter(status=ReadingRound.Status.OPEN, closes_on=closes).exclude(
+        message_batches__kind=MessageBatch.Kind.AUTO_REMINDER
+    )
+    for round_ in rounds:
+        batch = MessageBatch.objects.create(
+            kind=MessageBatch.Kind.AUTO_REMINDER,
+            scope=MessageBatch.Scope.MISSING,
+            round=round_,
+        )
+        send_batch(batch)

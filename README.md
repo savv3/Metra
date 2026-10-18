@@ -131,6 +131,56 @@ Links are personal data about the person they belong to: they are covered
 by the per-person export and erasure tools planned for phase 8, together
 with the person's other records.
 
+## Sending links and reminders
+
+On a round's page, **Send links to all units** gives each unit's main
+contact (the owner, else the billing contact) a new personal link by SMS. A
+contact without a phone number, or whose SMS fails, gets it by email. Those
+without either, or whose preferred channel is post, are listed as **needs a
+letter**, with a button that prints their letters. **Send reminder to units
+missing a reading** does the same for units that have not reported yet.
+Sending runs in the worker, and the send-out page (under **Send-outs**)
+shows each message's status as it goes, including delivery reports from
+46elks.
+
+The texts are under **Settings > Message templates**, one per purpose
+(link or reminder) and channel (SMS or email), with the placeholders
+`{name}`, `{first_name}`, `{link}`, `{closes}`, `{period}`,
+`{reading_type}`, `{unit}` and `{organisation}`. The stored copy of each
+message has `[personlig länk]` where the link was, because links are kept
+only as hashes.
+
+Automatic reminders are off by default. Set `SCR_READING_REMINDER_DAYS`
+(for example `7`) to remind units still missing a reading that many days
+before an open round closes, at 10:00, once per round.
+
+### Email and SMS
+
+**Email** goes out over SMTP when `SCR_EMAIL_HOST` is set, with
+`SCR_EMAIL_PORT`, `SCR_EMAIL_USER`, `SCR_EMAIL_PASSWORD`, `SCR_EMAIL_USE_TLS`
+or `SCR_EMAIL_USE_SSL`, and `SCR_EMAIL_FROM` as the sender. Without a host,
+email is off in production and printed to the console in development.
+
+**SMS** goes through [46elks](https://46elks.com):
+
+1. Create an account at 46elks and add credit. Messages are paid per SMS.
+2. Under *Account* copy the **API username** and **API password** into
+   `SCR_ELKS_API_USER` and `SCR_ELKS_API_PASSWORD`.
+3. Set `SCR_SMS_SENDER` to the name shown on the phone (up to 11 letters
+   and digits, for example `Vatten`) or to a number you have at 46elks.
+4. Numbers written without a country code (`040 123 4567`) get
+   `SCR_SMS_COUNTRY_CODE`, 358 (Finland and Åland) by default.
+5. Optional: set `SCR_ELKS_DRY_RUN=true` to have 46elks check messages
+   without sending them or charging, while you try the setup.
+6. Restart: `docker compose up -d`.
+
+Delivery reports come back automatically when the app is reachable over
+HTTPS at `SCR_BASE_URL`. 46elks posts them to a secret address the app
+derives from `SCR_SECRET_KEY`, so they need no setup. Without SMS settings,
+links go by email or letter. 46elks receives the phone number and text of
+each SMS; list it as a processor in your GDPR records. Other providers can
+be added in code: see `apps/messaging/registry.py`.
+
 ## Develop locally
 
 Needs Python 3.13, [uv](https://docs.astral.sh/uv/) and GNU gettext.
