@@ -161,6 +161,12 @@ for operational information, not marketing. Only the Admin role may send
 them; an admin can give the "Can send messages and alerts to everyone"
 permission to Board under **Settings > Groups**.
 
+To write to one household, open the unit and use **Send message** under
+**Messages**. It goes to the unit's contacts, by email unless you choose
+SMS, with the same check page before sending. The unit page lists every
+message its contacts have been sent, including links, reminders and
+invoices. Admin and Board can do this ("Can send a message to one unit").
+
 ## Newsletters
 
 Newsletters are email to people who have said yes, and only to them.

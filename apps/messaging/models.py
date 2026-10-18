@@ -103,6 +103,7 @@ class MessageBatch(models.Model):
         permissions = [
             ("send_broadcast", _("Can send messages and alerts to everyone")),
             ("send_newsletter", _("Can send newsletters")),
+            ("send_unit_message", _("Can send a message to one unit")),
         ]
 
     def __str__(self):
