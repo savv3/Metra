@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% if form.urgent.value %}{% translate "Urgent alert" %}{% else %}{% translate "New message" %}{% endif %}{% endblock %}
+{% block title %}{% if unit %}{% blocktranslate with name=unit.name %}Message to {{ name }}{% endblocktranslate %}{% elif form.urgent.value %}{% translate "Urgent alert" %}{% else %}{% translate "New message" %}{% endif %}{% endblock %}
 {% block content %}
   <div class="{% if form.urgent.value %}alert-compose{% endif %}">
-  <h1>{% if form.urgent.value %}<span class="alert-badge">{% translate "Urgent" %}</span> {% translate "Urgent alert" %}{% else %}{% translate "New message" %}{% endif %}</h1>
+  <h1>{% if form.urgent.value %}<span class="alert-badge">{% translate "Urgent" %}</span> {% translate "Urgent alert" %}{% elif unit %}{% blocktranslate with name=unit.name %}Message to {{ name }}{% endblocktranslate %}{% else %}{% translate "New message" %}{% endif %}</h1>
   {% if not channels_set_up.sms or not channels_set_up.email %}
     <p class="notice">
       {% if not channels_set_up.sms %}{% translate "SMS is not set up, so nobody gets an SMS." %}{% endif %}
@@ -52,11 +52,20 @@
       {% csrf_token %}
       <input type="hidden" name="step" value="preview">
       {% if form.non_field_errors %}<div class="errorlist-box" role="alert">{{ form.non_field_errors }}</div>{% endif %}
-      {% include "register/_field.html" with field=form.urgent %}
-      {% include "register/_field.html" with field=form.scope %}
-      {% include "register/_field.html" with field=form.tag %}
-      {% include "register/_field.html" with field=form.unit_type %}
-      {{ form.filters }}
+      {% if unit %}
+        <p>{% blocktranslate with name=unit.name %}To the contacts of {{ name }}.{% endblocktranslate %} <a href="{{ unit.get_absolute_url }}">{% translate "Back to the unit" %}</a></p>
+      {% else %}
+        {% include "register/_field.html" with field=form.urgent %}
+        {% include "register/_field.html" with field=form.scope %}
+        {# Shown only for the scope they belong to; app.js switches them as the choice changes. #}
+        <div data-scope-only="tag"{% if form.scope.value != "tag" %} hidden{% endif %}>
+          {% include "register/_field.html" with field=form.tag %}
+        </div>
+        <div data-scope-only="unit_type"{% if form.scope.value != "unit_type" %} hidden{% endif %}>
+          {% include "register/_field.html" with field=form.unit_type %}
+        </div>
+        {{ form.filters }}
+      {% endif %}
       {% include "register/_field.html" with field=form.contacts %}
       {% include "register/_field.html" with field=form.channels %}
       <div class="field{% if form.body.errors %} field--error{% endif %}">
@@ -79,7 +88,7 @@
       {% endif %}
       <div class="actions">
         <button type="submit" class="button button--primary">{% translate "Check recipients" %}</button>
-        <a class="button" href="{% url 'messaging:batch_list' %}">{% translate "Cancel" %}</a>
+        <a class="button" href="{{ cancel_url }}">{% translate "Cancel" %}</a>
       </div>
       <p class="help">{% translate "Nothing is sent until you have checked the recipients and confirmed." %}</p>
     </form>

@@ -35,3 +35,27 @@ def person_newsletter(context, person):
         "perms": context.get("perms"),
         "csrf_token": context.get("csrf_token"),
     }
+
+
+UNIT_MESSAGES_SHOWN = 20
+
+
+@register.inclusion_tag("messaging/_unit_messages.html", takes_context=True)
+def unit_messages(context, unit):
+    """Recent messages to the unit's contacts, with a button to write a new one."""
+    from ..models import Message
+
+    user = context["request"].user
+    if not user.has_perm("messaging.view_message"):
+        return {"show": False}
+    unit_messages = (
+        Message.objects.filter(unit=unit)
+        .select_related("person", "batch")
+        .order_by("-created_at", "-pk")[:UNIT_MESSAGES_SHOWN]
+    )
+    return {
+        "show": True,
+        "unit": unit,
+        "unit_messages": unit_messages,
+        "can_send": user.has_perm("messaging.send_unit_message") and not unit.is_archived,
+    }

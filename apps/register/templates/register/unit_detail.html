@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n plugins readings selfservice %}
+{% load i18n messaging plugins readings selfservice %}
 {% block title %}{{ unit.name }}{% endblock %}
 {% block content %}
   <div class="page-head">
@@ -83,6 +83,7 @@
 
   {% unit_readings unit %}
   {% unit_self_service unit %}
+  {% unit_messages unit %}
   {% plugin_panels "unit" unit %}
 
   {% if history %}{% include "register/_history.html" %}{% endif %}
