@@ -56,8 +56,6 @@ msgid ""
 "The client may do what a user with this role may. Choose the narrowest role "
 "that does the job."
 msgstr "Klienten får göra det som en användare med den här rollen får göra. Välj den snävaste roll som räcker."
-"Klienten får göra det som en användare med den här rollen får göra. Välj den "
-"snävaste roll som räcker."
 
 #: forms.py:57
 msgid "Choose today or a later day."

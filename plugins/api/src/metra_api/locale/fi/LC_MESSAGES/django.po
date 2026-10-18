@@ -57,8 +57,6 @@ msgid ""
 "The client may do what a user with this role may. Choose the narrowest role "
 "that does the job."
 msgstr "Asiakas saa tehdä sen, mitä tämän roolin käyttäjä saa. Valitse suppein rooli, joka riittää."
-"Asiakas saa tehdä sen, mitä tämän roolin käyttäjä saa. Valitse suppein "
-"rooli, joka riittää."
 
 #: forms.py:57
 msgid "Choose today or a later day."

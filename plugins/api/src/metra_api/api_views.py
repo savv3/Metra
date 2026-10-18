@@ -75,8 +75,8 @@ class ApiViewMixin:
         self._audit.enter_context(
             set_actor(
                 request.user,
-                remote_addr=AuditlogMiddleware._get_remote_addr(request),
-                remote_port=AuditlogMiddleware._get_remote_port(request),
+                remote_addr=_remote(request, "_get_remote_addr", "REMOTE_ADDR"),
+                remote_port=_remote(request, "_get_remote_port", "REMOTE_PORT"),
             )
         )
 
@@ -84,6 +84,13 @@ class ApiViewMixin:
         if audit := getattr(self, "_audit", None):
             audit.close()
         return super().finalize_response(request, response, *args, **kwargs)
+
+
+def _remote(request, method, meta_key):
+    """The client address the audit log middleware would record. Its helpers
+    are internal to django-auditlog, so fall back to the request if they go."""
+    helper = getattr(AuditlogMiddleware, method, None)
+    return helper(request) if helper else request.META.get(meta_key)
 
 
 def _flag(value):
