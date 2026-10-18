@@ -160,7 +160,7 @@ flowchart TD
     p3[Phase 3: Messaging<br/>SMS and email to groups, newsletters with consent]
     p4[Phase 4: Invoicing<br/>fee plans, usage lines, numbered PDF invoices, email and print]
     p5[Phase 5: Messaging and setup<br/>email a unit, attachments, setup wizard, deliverability]
-    p6[Phase 6: Integrations as plugins<br/>REST API, webhooks, bookkeeping export;<br/>46elks SMS moves to a plugin]
+    p6[Phase 6: Integrations as plugins<br/>REST API, webhooks;<br/>46elks SMS moves to a plugin]
     p7[Phase 7: Bank file import<br/>match payments by reference number]
     p8[Phase 8: E-invoicing<br/>Finvoice, Peppol later]
     p9[Phase 9: Privacy automation<br/>retention rules that run on a schedule]
@@ -382,11 +382,11 @@ ships as four pull requests, with deliverability last.
 ## Phase 6 build plan
 
 Phase 6 is done when outside systems can read and update the register
-through a documented API, receive signed webhooks when things change, and
-the accountant gets a bookkeeping export, all delivered as plugins under
+through a documented API and receive signed webhooks when things change,
+all delivered as plugins under
 `plugins/` that could move to their own repository without changes. The
 core keeps the interfaces: provider registry, hooks, permissions and the
-audit log. It ships as five pull requests.
+audit log. It ships as four pull requests.
 
 | PR | Contents | Done when |
 | --- | --- | --- |
@@ -394,10 +394,10 @@ audit log. It ships as five pull requests.
 | B. 46elks SMS plugin | `metra-sms-46elks` with its delivery-report route and the same `METRA_ELKS_*` settings; console and dummy providers stay in the core | An existing install upgrades and keeps sending SMS with no setting changes |
 | C. REST API plugin | `metra-api` (Django REST framework): tokens per user or per API client, limited to model permissions; read and write units, people, contacts and readings; read invoices and payments; an OpenAPI docs page, rate limits and audit logging | A script with a token lists households and submits a reading, and the audit log shows it |
 | D. Webhooks plugin | `metra-webhooks`: endpoints set by an admin, HMAC-signed payloads for the events from A, retries in the worker and a delivery log | A test endpoint receives a signed event when a payment is recorded, and a failed delivery is retried |
-| E. Bookkeeping export plugin | `metra-bookkeeping`: a CSV per period of invoices, credit notes, payments and reminder fees, with account settings; a Finnish format (for example Procountor or Netvisor) as an option or its own plugin | The accountant imports the year's export without retyping |
 
-Still open: whether SMTP email stays in the core (recommended) or becomes
-a plugin, and which accounting software the association uses.
+SMTP email stays in the core. The bookkeeping export is left out until
+we know which accounting software the association uses; it can then be
+added as its own plugin.
 
 ## Plugins
 
@@ -440,11 +440,10 @@ Python packages under `plugins/` in this repository, one package per
 plugin, each installable with pip and tested against the current Metra
 release. They depend on the core only through the hook registry and
 public models, so they can later move to their own plugins repository
-without changes. Phase 6 starts this: the API (`metra-api`), webhooks
-(`metra-webhooks`) and bookkeeping export (`metra-bookkeeping`) are
-built as plugins, and the 46elks SMS provider moves out of the core
+without changes. Phase 6 starts this: the API (`metra-api`) and webhooks
+(`metra-webhooks`) are built as plugins, and the 46elks SMS provider moves out of the core
 into a plugin too. The core keeps the provider interface, the console
-and dummy providers, and (unless decided otherwise) SMTP email.
+and dummy providers, and SMTP email.
 Plugins import only `apps.plugins.api`. The support plugin in phase 12 is
 built the same way. The example plugin stays here because the core
 tests use it.
