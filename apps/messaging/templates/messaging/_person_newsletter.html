@@ -1,0 +1,28 @@
+{% load i18n %}
+{% if show %}
+  <h2 id="newsletter">{% translate "Newsletter" %}</h2>
+  <p>
+    {% if current %}
+      {% if current.subscribed %}{% translate "Wants the newsletter" %}{% else %}{% translate "Does not want the newsletter" %}{% endif %}
+      &middot; {{ current.recorded_at|date:"SHORT_DATETIME_FORMAT" }} &middot; {{ current.get_source_display }}{% if current.recorded_by %} ({{ current.recorded_by }}){% endif %}{% if current.note %} &middot; {{ current.note }}{% endif %}
+    {% else %}
+      {% translate "Has not been asked. Without a yes, no newsletter is sent." %}
+    {% endif %}
+  </p>
+  {% if not person.email %}<p class="help">{% translate "Newsletters go by email, and this person has no email address." %}</p>{% endif %}
+  {% if perms.register.change_person %}
+    <form method="post" action="{% url 'messaging:person_consent' person.pk %}" class="form form--inline">
+      {% csrf_token %}
+      {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+      <button type="submit" class="button">{% translate "Save the newsletter choice" %}</button>
+    </form>
+  {% endif %}
+  {% if history|length > 1 %}
+    <details>
+      <summary>{% translate "Earlier answers" %}</summary>
+      <ul class="plain-list">
+        {% for record in history %}<li>{{ record.recorded_at|date:"SHORT_DATETIME_FORMAT" }}: {% if record.subscribed %}{% translate "yes" %}{% else %}{% translate "no" %}{% endif %}, {{ record.get_source_display }}</li>{% endfor %}
+      </ul>
+    </details>
+  {% endif %}
+{% endif %}

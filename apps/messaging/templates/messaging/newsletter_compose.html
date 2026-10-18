@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "New newsletter" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "New newsletter" %}</h1>
+  <p>{% blocktranslate count count=count %}{{ count }} person wants the newsletter and has an email address.{% plural %}{{ count }} people want the newsletter and have an email address.{% endblocktranslate %}
+    {% translate "Only they get it: a newsletter needs each person's consent, given on their self-service page or recorded by staff." %}</p>
+  {% if not email %}<p class="notice">{% translate "Email is not set up, so a newsletter cannot be sent." %}</p>{% endif %}
+
+  {% if step == "confirm" %}
+    <h2>{% translate "Check before sending" %}</h2>
+    <h3>{% if example_for %}{% blocktranslate with name=example_for.full_name %}The newsletter, as {{ name }} gets it{% endblocktranslate %}{% endif %}</h3>
+    <p><strong>{{ form.cleaned_data.subject }}</strong></p>
+    <blockquote class="message-preview">{{ example|linebreaksbr }}</blockquote>
+    <form method="post" class="form">
+      {% csrf_token %}
+      {% for field in form %}{{ field.as_hidden }}{% endfor %}
+      <input type="hidden" name="step" value="confirm">
+      <div class="actions">
+        {% if count and email %}<button type="submit" class="button button--primary">{% blocktranslate count count=count %}Send to {{ count }} person{% plural %}Send to {{ count }} people{% endblocktranslate %}</button>{% endif %}
+        <button type="submit" name="edit" value="1" class="button">{% translate "Change the newsletter" %}</button>
+      </div>
+    </form>
+  {% else %}
+    <form method="post" class="form" novalidate>
+      {% csrf_token %}
+      <input type="hidden" name="step" value="preview">
+      {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+      <div class="actions">
+        <button type="submit" class="button button--primary">{% translate "Preview" %}</button>
+        <a class="button" href="{% url 'messaging:batch_list' %}">{% translate "Cancel" %}</a>
+      </div>
+    </form>
+  {% endif %}
+{% endblock %}

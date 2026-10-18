@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n plugins %}
+{% load i18n messaging plugins %}
 {% block title %}{{ person.full_name }}{% endblock %}
 {% block content %}
   <div class="page-head">
@@ -39,6 +39,8 @@
   {% else %}
     <p class="empty">{% translate "Not linked to any unit." %}</p>
   {% endif %}
+
+  {% person_newsletter person %}
 
   {% plugin_panels "person" person %}
 

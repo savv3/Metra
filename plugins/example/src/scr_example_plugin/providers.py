@@ -12,6 +12,6 @@ class LogSMS(api.Provider):
     channel = api.SMS
     name = "example-log"
 
-    def send(self, recipient, body, subject="", callback_url=None):
+    def send(self, recipient, body, subject="", callback_url=None, headers=None):
         logger.info("Example SMS to %s: %s", recipient, body)
         return api.SendResult(provider_id="example")

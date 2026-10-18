@@ -274,6 +274,9 @@ MESSAGING = {
     # Automatic reminders to units missing a reading, this many days before a
     # round closes. Off unless set.
     "reminder_days_before_close": int(_reminder_days) if _reminder_days else None,
+    # Newsletters go out this many emails at a time, with a pause between.
+    "newsletter_batch_size": int(os.environ.get("SCR_NEWSLETTER_BATCH_SIZE") or 50),
+    "newsletter_pause_seconds": int(os.environ.get("SCR_NEWSLETTER_PAUSE_SECONDS") or 60),
 }
 if MESSAGING["sms_provider"] == "none":
     MESSAGING["sms_provider"] = ""
