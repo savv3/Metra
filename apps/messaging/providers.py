@@ -27,14 +27,14 @@ class DjangoEmail(Provider):
     channel = EMAIL
     name = "django"
 
-    def send(self, recipient, body, subject="", callback_url=None):
+    def send(self, recipient, body, subject="", callback_url=None, headers=None):
         message_id = make_msgid(domain=settings.MESSAGING["email_domain"])
         email = EmailMessage(
             subject=subject,
             body=body,
             from_email=settings.DEFAULT_FROM_EMAIL,
             to=[recipient],
-            headers={"Message-ID": message_id},
+            headers={"Message-ID": message_id, **(headers or {})},
         )
         try:
             email.send()
@@ -79,7 +79,7 @@ class FortySixElks(Provider):
             return None
         return settings.BASE_URL + reverse("messaging:elks_delivery", args=[elks_callback_secret()])
 
-    def send(self, recipient, body, subject="", callback_url=None):
+    def send(self, recipient, body, subject="", callback_url=None, headers=None):
         config = settings.MESSAGING
         if not (config["elks_api_user"] and config["elks_api_password"]):
             raise ProviderError("Set SCR_ELKS_API_USER and SCR_ELKS_API_PASSWORD.")
@@ -117,7 +117,7 @@ class ConsoleSMS(Provider):
     channel = SMS
     name = "console"
 
-    def send(self, recipient, body, subject="", callback_url=None):
+    def send(self, recipient, body, subject="", callback_url=None, headers=None):
         logger.warning("SMS to %s:\n%s", recipient, body)
         return SendResult()
 
@@ -133,7 +133,7 @@ class DummySMS(Provider):
     channel = SMS
     name = "dummy"
 
-    def send(self, recipient, body, subject="", callback_url=None):
+    def send(self, recipient, body, subject="", callback_url=None, headers=None):
         if recipient.strip() == "+000":
             raise ProviderError("Dummy failure")
         outbox.append({"to": recipient, "body": body, "callback_url": callback_url})

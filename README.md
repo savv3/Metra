@@ -207,6 +207,31 @@ for operational information, not marketing. Only the Admin role may send
 them; an admin can give the "Can send messages and alerts to everyone"
 permission to Board under **Settings > Groups**.
 
+## Newsletters
+
+Newsletters are email to people who have said yes, and only to them.
+
+- **Consent.** Each person's yes or no is kept as a record with the time and
+  the source: the member's own self-service page, staff (for a yes given on
+  paper or by phone, with a note on how it was given), or the unsubscribe
+  link. A person's newest answer counts; no answer means no. Staff see and
+  record it on the person page; earlier answers are listed there too, and
+  the records are never edited (**Settings > Newsletter consents**).
+- **Sending.** **Send-outs > New newsletter** (Admin): write a subject and
+  plain text with `{first_name}`, `{name}` and `{organisation}`, check how it
+  looks, and send. It goes to active people whose newest answer is yes and
+  who have an email address, `SCR_NEWSLETTER_BATCH_SIZE` (50) at a time with
+  `SCR_NEWSLETTER_PAUSE_SECONDS` (60) between parts, so the mail server's
+  limits hold. Anyone who unsubscribes meanwhile is skipped.
+- **Unsubscribing.** Every newsletter ends with a personal unsubscribe link
+  (a signed address, nothing stored) and carries `List-Unsubscribe` headers,
+  so mail programs show their own one-click unsubscribe button. Opening the
+  link asks for a click before anything changes, so mail scanners that open
+  links do not unsubscribe anyone.
+
+Service messages and alerts (above) are not newsletters and reach everyone.
+Consent records are personal data, covered by the export and erasure tools.
+
 ### Email and SMS
 
 **Email** goes out over SMTP when `SCR_EMAIL_HOST` is set, with

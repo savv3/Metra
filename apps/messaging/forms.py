@@ -135,3 +135,32 @@ class MessageForm(forms.Form):
         if data["scope"] in (broadcast.TAG, broadcast.UNIT_TYPE) and detail:
             label = f"{label}: {detail}"
         return f"{label} ({dict(CONTACTS)[data['contacts']].lower()})"
+
+
+class NewsletterForm(forms.Form):
+    subject = forms.CharField(label=_("Subject"), max_length=200)
+    body = forms.CharField(
+        label=_("Text"),
+        widget=forms.Textarea(attrs={"rows": 14}),
+        help_text=_(
+            "Plain text. You can use {first_name}, {name} and {organisation}. "
+            "An unsubscribe link is added at the end of every email."
+        ),
+    )
+
+
+class ConsentForm(forms.Form):
+    """Staff record a yes or no given on paper, by phone or in person."""
+
+    subscribed = forms.TypedChoiceField(
+        label=_("Newsletter"),
+        choices=[("1", _("Wants the newsletter")), ("0", _("Does not want it"))],
+        coerce=lambda value: value == "1",
+        widget=forms.RadioSelect,
+    )
+    note = forms.CharField(
+        label=_("How it was given"),
+        max_length=200,
+        required=False,
+        help_text=_("For example: signed form at the annual meeting."),
+    )

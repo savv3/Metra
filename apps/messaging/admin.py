@@ -1,7 +1,7 @@
 from auditlog.mixins import AuditlogHistoryAdminMixin
 from django.contrib import admin
 
-from .models import Message, MessageBatch, MessageTemplate
+from .models import ConsentRecord, Message, MessageBatch, MessageTemplate
 
 
 @admin.register(MessageTemplate)
@@ -31,3 +31,12 @@ class MessageAdmin(ReadOnlyAdmin):
     list_display = ["channel", "recipient", "person", "status", "sent_at"]
     list_filter = ["channel", "status", "provider"]
     search_fields = ["recipient", "person__first_name", "person__last_name"]
+
+
+@admin.register(ConsentRecord)
+class ConsentRecordAdmin(ReadOnlyAdmin):
+    """The consent record is evidence: answers are added, never edited."""
+
+    list_display = ["person", "subscribed", "source", "recorded_at", "recorded_by"]
+    list_filter = ["subscribed", "source"]
+    search_fields = ["person__first_name", "person__last_name", "person__email"]

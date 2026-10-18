@@ -12,6 +12,7 @@ from auditlog.registry import auditlog
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.text import Truncator
 from django.utils.translation import gettext_lazy as _
 
@@ -34,6 +35,7 @@ class MessageBatch(models.Model):
         AUTO_REMINDER = "auto_reminder", _("Automatic reminder")
         BROADCAST = "broadcast", _("Message")
         ALERT = "alert", _("Urgent alert")
+        NEWSLETTER = "newsletter", _("Newsletter")
 
     class Scope(models.TextChoices):
         ALL = "all", _("All units")
@@ -96,7 +98,10 @@ class MessageBatch(models.Model):
         ordering = ["-created_at", "-pk"]
         verbose_name = _("send-out")
         verbose_name_plural = _("send-outs")
-        permissions = [("send_broadcast", _("Can send messages and alerts to everyone"))]
+        permissions = [
+            ("send_broadcast", _("Can send messages and alerts to everyone")),
+            ("send_newsletter", _("Can send newsletters")),
+        ]
 
     def __str__(self):
         label = self.get_kind_display()
@@ -112,7 +117,7 @@ class MessageBatch(models.Model):
     @property
     def is_written(self):
         """A message staff wrote, as opposed to links or reminders."""
-        return self.kind in (self.Kind.BROADCAST, self.Kind.ALERT)
+        return self.kind in (self.Kind.BROADCAST, self.Kind.ALERT, self.Kind.NEWSLETTER)
 
 
 class Message(models.Model):
@@ -237,5 +242,66 @@ class MessageTemplate(models.Model):
         return PLACEHOLDER.sub(lambda match: str(values.get(match[1], match[0])), text)
 
 
+class ConsentRecord(models.Model):
+    """One yes or no to the newsletter, kept as a record of who agreed when and
+    how. A person's current answer is their newest record; no record is a no."""
+
+    class Source(models.TextChoices):
+        SELF_SERVICE = "self_service", _("Self-service page")
+        STAFF = "staff", _("Entered by staff")
+        UNSUBSCRIBE_LINK = "unsubscribe_link", _("Unsubscribe link")
+
+    person = models.ForeignKey(
+        Person, verbose_name=_("person"), on_delete=models.CASCADE, related_name="consents"
+    )
+    subscribed = models.BooleanField(_("wants the newsletter"))
+    source = models.CharField(_("source"), max_length=20, choices=Source.choices)
+    recorded_at = models.DateTimeField(_("recorded"), default=timezone.now)
+    recorded_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_("recorded by"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="+",
+    )
+    note = models.CharField(
+        _("note"), max_length=200, blank=True, help_text=_("For example: signed form, 3 May.")
+    )
+
+    class Meta:
+        ordering = ["-recorded_at", "-pk"]
+        verbose_name = _("newsletter consent")
+        verbose_name_plural = _("newsletter consents")
+
+    def __str__(self):
+        answer = _("yes") if self.subscribed else _("no")
+        return f"{self.person}: {answer} ({self.get_source_display()})"
+
+    @classmethod
+    def current(cls, person):
+        """The person's newest record, or None if they never answered."""
+        return cls.objects.filter(person=person).first()
+
+    @classmethod
+    def subscribed_people(cls):
+        """People whose newest answer is yes."""
+        newest = cls.objects.filter(person=models.OuterRef("pk")).order_by("-recorded_at", "-pk")
+        return Person.objects.annotate(
+            newsletter=models.Subquery(newest.values("subscribed")[:1])
+        ).filter(newsletter=True)
+
+    @classmethod
+    def record(cls, person, subscribed, source, by=None, note=""):
+        """Add a record if the answer changes; returns the person's current record."""
+        current = cls.current(person)
+        if current is not None and current.subscribed == subscribed:
+            return current
+        return cls.objects.create(
+            person=person, subscribed=subscribed, source=source, recorded_by=by, note=note
+        )
+
+
 auditlog.register(MessageTemplate)
+auditlog.register(ConsentRecord)
 auditlog.register(MessageBatch, exclude_fields=["finished_at", "recipients"])

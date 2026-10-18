@@ -249,6 +249,10 @@ page, and members can subscribe to newsletters and unsubscribe from them.
 | 12. Public organisation page | Public contact fields and logo in organisation settings; a translated, mobile-first landing page at `/` (can be switched off, the only page search engines may index); a notice banner an alert can publish; the contact block on member pages, in letters and as message placeholders | A visitor on a phone finds the emergency number and the current notice |
 | 13. Newsletters with consent | Per-person consent with time and source, changeable on the self-service page; newsletters by email to consenting people only, with an unsubscribe link in every one | A newsletter reaches only those who said yes, and one click unsubscribes |
 
+Newsletters reuse the send-out records and the email provider. Consent is
+an append-only list of answers per person (`ConsentRecord`: yes or no, time,
+source, who recorded it); the newest answer counts and none means no. The
+unsubscribe link is a signed token naming the person, so it needs no table.
 Messages and alerts in PR 11 are service messages about the organisation's
 own service, sent on the basis of membership, so they need no marketing
 consent. Newsletters (PR 13) do.
