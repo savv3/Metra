@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n plugins %}
 {% block title %}{{ person.full_name }}{% endblock %}
 {% block content %}
   <div class="page-head">
@@ -39,6 +39,8 @@
   {% else %}
     <p class="empty">{% translate "Not linked to any unit." %}</p>
   {% endif %}
+
+  {% plugin_panels "person" person %}
 
   {% if history %}{% include "register/_history.html" %}{% endif %}
 {% endblock %}

@@ -11,7 +11,8 @@ class RequireStaffTwoFactorMiddleware:
     """Send staff who have not set up an authenticator app to do so first.
 
     Only the account pages (to set up two-factor, change password or log
-    out), the language switch, static files and the health check stay open.
+    out), member self-service pages, the language switch, static files and
+    the health check stay open.
     """
 
     def __init__(self, get_response):
@@ -31,6 +32,7 @@ class RequireStaffTwoFactorMiddleware:
     def _is_exempt(path):
         exempt = [
             "/accounts/",
+            "/m/",
             reverse("set_language"),
             reverse("core:healthz"),
             "/" + settings.STATIC_URL.lstrip("/"),

@@ -168,7 +168,7 @@ def round_export(request, pk):
                 reading_value(assessment.usage, reading_type, unit=False),
                 reading_type.unit_label,
                 reading.get_source_display() if reading else "",
-                (reading.submitted_by or "") if reading else "",
+                (reading.submitted_by or reading.submitted_by_person or "") if reading else "",
                 timezone.localtime(reading.submitted_at).strftime("%Y-%m-%d %H:%M")
                 if reading
                 else "",
@@ -208,6 +208,7 @@ def reading_entry(request, pk, unit_pk):
         if "value" in form.changed_data or reading.pk is None:
             reading.source = Reading.Source.STAFF
             reading.submitted_by = request.user
+            reading.submitted_by_person = None
             reading.submitted_at = timezone.now()
         reading.save()
         assessment = assess(

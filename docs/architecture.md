@@ -209,6 +209,34 @@ one, or a usage more than three times the unit's average over its last three
 rounds, is saved but marked for a check. A round expects every active,
 non-archived unit of the type, plus any unit that has a reading in it.
 
+### Self-service links
+
+A link holds a random 256-bit token. Only its SHA-256 hash is stored, so the
+token exists only in the letter or message that carries it, and a copy of
+the database cannot open anyone's page. A link belongs to one unit, one
+person and optionally a round. It expires at the end of the round's closing
+day, or after `SCR_SELF_SERVICE_LINK_DAYS`, and can be stopped. Changes made
+through a link are applied directly and audit-logged with the link's id in
+`additional_data`. Links, and the audit entries they produce, are personal
+data of the person they belong to, so the export and erasure tools (module
+8) must include them. Member pages are rate-limited with Django's cache (files
+under `SCR_DATA_DIR`, no extra service), with stricter limits for unknown
+tokens.
+
+### Messaging
+
+`apps.messaging` keeps a record of every message (channel, recipient,
+text, status, the provider's id), grouped in send-outs. Providers are
+classes registered by channel and name in `apps.messaging.registry`; an
+installation picks one per channel by setting. The registry is the
+messaging extension point that the plugin core (PR 10) opens to plugins.
+Built-in: email through Django (SMTP or console), SMS through 46elks, and
+console and dummy SMS providers for development and tests. Sending runs in
+Huey tasks. A link's token is only in the message that goes out; the
+stored copy has a placeholder. Messages are personal data of their
+recipient and are covered by the export and erasure tools. Phase 3 builds
+group messaging on the same records and providers.
+
 ## Plugins
 
 Organisations can extend the app without forking it.
@@ -240,8 +268,10 @@ Organisations can extend the app without forking it.
 - **Trust.** Plugins run with full trust, like any other installed code.
   Only install plugins you trust. A plugin must declare which personal data
   it stores, so the export and erasure tools cover it.
-- **Example.** A minimal example plugin lives in the repository and is used
-  in the tests.
+- **Example.** A minimal example plugin lives in the repository
+  (`plugins/example`) and is used in the tests.
+
+How to install, enable and write plugins is in [plugins.md](plugins.md).
 
 The plugin core ships in phase 2 (PR 10) with the first extension points:
 navigation, unit and person panels, and messaging providers. Every later

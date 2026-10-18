@@ -52,6 +52,12 @@ def object_history(obj):
     }
 
 
+def describe(entries):
+    """Readable changes for any audit entries, e.g. those made through self-service."""
+    contact_type = ContentType.objects.get_for_model(UnitContact)
+    return [_describe(entry, contact_type) for entry in entries]
+
+
 def _describe(entry, contact_type):
     actions = {
         LogEntry.Action.CREATE: _("Created"),

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ batch }}{% endblock %}
+{% block content %}
+  <h1>{{ batch }}</h1>
+  <div id="batch-status"{% if batch.status != "done" %} hx-get="{{ batch.get_absolute_url }}" hx-trigger="every 3s" hx-select="#batch-status" hx-swap="outerHTML"{% endif %}>
+    <p class="subtitle">{{ batch.get_scope_display }} &middot; {{ batch.get_status_display }} &middot; {{ batch.created_at|date:"SHORT_DATETIME_FORMAT" }}{% if batch.created_by %} &middot; {{ batch.created_by }}{% endif %}</p>
+    <ul class="plain-list status-counts" aria-live="polite">
+      {% for label, count in counts %}{% if count %}<li><strong>{{ count }}</strong> {{ label|lower }}</li>{% endif %}{% endfor %}
+    </ul>
+
+    {% if to_print and batch.round and perms.selfservice.add_selfservicelink %}
+      <div class="status-panel status-panel--warning">
+        <h2>{% blocktranslate count count=to_print|length %}{{ count }} household needs a letter{% plural %}{{ count }} households need a letter{% endblocktranslate %}</h2>
+        <p>{% translate "They have no phone number or email address that works, or prefer post." %}</p>
+        <form method="post" action="{% url 'selfservice:round_print' batch.round.pk %}" target="_blank">
+          {% csrf_token %}
+          {% for message in to_print %}<input type="hidden" name="units" value="{{ message.unit_id }}">{% endfor %}
+          <input type="hidden" name="layout" value="letters">
+          <p><button type="submit" class="button button--primary">{% translate "Print their letters" %}</button></p>
+        </form>
+      </div>
+    {% endif %}
+
+    {% if batch_messages %}
+      <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Messages' %}">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">{% translate "Unit" %}</th>
+              <th scope="col">{% translate "Person" %}</th>
+              <th scope="col">{% translate "Channel" %}</th>
+              <th scope="col">{% translate "Status" %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for message in batch_messages %}
+              <tr>
+                <th scope="row">{% if message.unit %}<a href="{{ message.unit.get_absolute_url }}">{{ message.unit.name }}</a>{% endif %}</th>
+                <td>{% if message.person %}<a href="{{ message.person.get_absolute_url }}">{{ message.person.full_name }}</a>{% endif %}<span class="help">{{ message.recipient }}</span></td>
+                <td>{{ message.get_channel_display }}</td>
+                <td>
+                  <span class="{% if message.status == 'failed' %}status-error{% elif message.status == 'to_print' %}status-skip{% else %}status-ok{% endif %}">{{ message.get_status_display }}</span>
+                  {% if message.error %}<span class="help">{{ message.error }}</span>{% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% elif batch.status != "done" %}
+      <p class="empty">{% translate "Sending…" %}</p>
+    {% endif %}
+  </div>
+{% endblock %}

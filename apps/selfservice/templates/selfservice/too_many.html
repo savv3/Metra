@@ -1,0 +1,7 @@
+{% extends "selfservice/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Please wait a moment" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "Please wait a moment" %}</h1>
+  <p>{% translate "There have been too many attempts from your connection. Try again in an hour." %}</p>
+{% endblock %}

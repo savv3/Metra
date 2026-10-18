@@ -8,6 +8,7 @@ dependencies = [
     "django-auditlog>=3.4.1",
     "gunicorn>=26.2.0",
     "huey>=3.4.0",
+    "segno>=1.6.6",
     "whitenoise>=6.12.0",
 ]
 
@@ -16,7 +17,12 @@ dev = [
     "pytest>=9.1.1",
     "pytest-django>=4.14.0",
     "ruff>=0.17.1",
+    "scr-example-plugin",
 ]
+
+[tool.uv.sources]
+# The example plugin, installed for the tests (SCR_PLUGINS=example there).
+scr-example-plugin = { path = "plugins/example", editable = true }
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.test_settings"

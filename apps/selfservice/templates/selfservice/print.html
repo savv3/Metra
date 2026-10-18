@@ -1,0 +1,79 @@
+{% load i18n static %}<!doctype html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{% if round %}{{ round }}{% else %}{% translate "Self-service letter" %}{% endif %}</title>
+  <link rel="stylesheet" href="{% static 'css/print-letters.css' %}">
+</head>
+<body>
+  <div class="screen-only">
+    <p>{% blocktranslate count count=letters|length %}{{ count }} link was made.{% plural %}{{ count }} links were made.{% endblocktranslate %}
+      {% translate "Print this page now: the links are not shown again." %}</p>
+    {% if skipped %}
+      <p>{% translate "These units have no contact person, so they got no link:" %}
+        {% for unit in skipped %}{{ unit.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    {% endif %}
+    <p><button type="button" onclick="window.print()">{% translate "Print" %}</button></p>
+  </div>
+
+  {% if layout == "list" %}
+    <table class="link-list">
+      <thead>
+        <tr>
+          <th scope="col">{% translate "Unit" %}</th>
+          <th scope="col">{% translate "Person" %}</th>
+          <th scope="col">{% translate "Link" %}</th>
+          <th scope="col">{% translate "QR code" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for letter in letters %}
+          <tr>
+            <td>{{ letter.issued.unit.name }}<br>{{ letter.issued.unit.address_line }}</td>
+            <td>{{ letter.issued.person.full_name }}</td>
+            <td class="url">{{ letter.url }}</td>
+            <td class="qr">{{ letter.qr }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    {% for letter in letters %}
+      {% with person=letter.issued.person unit=letter.issued.unit %}
+        <article class="letter">
+          <header class="letter-sender">
+            {% if organisation %}
+              <strong>{{ organisation.name }}</strong><br>
+              {% if organisation.street_address %}{{ organisation.street_address }}<br>{% endif %}
+              {% if organisation.postal_code or organisation.city %}{{ organisation.postal_code }} {{ organisation.city }}<br>{% endif %}
+            {% endif %}
+          </header>
+          <address class="letter-recipient">
+            {{ person.full_name }}<br>
+            {% if person.street_address %}{{ person.street_address }}<br>{{ person.postal_code }} {{ person.city }}{% else %}{{ unit.street_address }}<br>{{ unit.postal_code }} {{ unit.city }}{% endif %}
+          </address>
+          <h1>{% if round %}{% blocktranslate with what=round.reading_type.name period=round.period_label %}{{ what }} {{ period }}: please report your reading{% endblocktranslate %}{% else %}{% translate "Please check your contact details" %}{% endif %}</h1>
+          <p>{% blocktranslate with name=person.first_name %}Hello {{ name }},{% endblocktranslate %}</p>
+          {% if round %}
+            <p>{% blocktranslate with unit=unit.name date=round.closes_on|date:"DATE_FORMAT" %}Please read the meter at {{ unit }} and report the number by {{ date }}. You can also check that we have your correct contact details.{% endblocktranslate %}</p>
+          {% else %}
+            <p>{% blocktranslate with unit=unit.name %}Please check that we have the correct contact details for you at {{ unit }}.{% endblocktranslate %}</p>
+          {% endif %}
+          <p>{% translate "Scan the QR code with your phone's camera, or type the address into a web browser:" %}</p>
+          <div class="letter-link">
+            <div class="qr">{{ letter.qr }}</div>
+            <p class="url">{{ letter.url }}</p>
+          </div>
+          <p>{% blocktranslate with date=letter.issued.link.expires_at|date:"DATE_FORMAT" %}The link is personal and works until {{ date }}. You do not need a password.{% endblocktranslate %}</p>
+          {% if organisation.email or organisation.phone %}
+            <p>{% translate "If you cannot use the link, contact us:" %} {{ organisation.email }} {{ organisation.phone }}</p>
+          {% endif %}
+        </article>
+      {% endwith %}
+    {% endfor %}
+  {% endif %}
+</body>
+</html>

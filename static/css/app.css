@@ -239,3 +239,15 @@ tbody th { font-weight: 600; }
 .reading-inline input { width: 8rem; }
 .reading-warning { margin: 0.25rem 0 0; font-size: 0.9rem; }
 th .help, td .help { display: block; font-weight: 400; }
+
+/* Member self-service pages: phone first, generous targets. */
+.member-main { max-width: 36rem; }
+.member-section { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 0.25rem 1rem 1rem; margin-bottom: 1.25rem; }
+.member-section h2 { margin-top: 0.75rem; }
+.member .button--primary { width: 100%; max-width: 32rem; min-height: 3rem; }
+.member-contacts li { margin-bottom: 0.75rem; overflow-wrap: anywhere; }
+.member-footer { color: var(--muted); font-size: 0.95rem; }
+.lang-links { display: flex; gap: 1rem; font-size: 0.95rem; }
+.lang-links a, .lang-links span { display: inline-block; padding: 0.5rem 0.25rem; }
+.lang-links span { font-weight: 600; }
+.status-counts { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }

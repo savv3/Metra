@@ -10,6 +10,8 @@ from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import gettext_lazy as _
 
+from config.plugins import enabled_apps
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -54,7 +56,17 @@ INSTALLED_APPS = [
     "apps.register",
     "apps.backups",
     "apps.readings",
+    "apps.selfservice",
+    "apps.messaging",
+    "apps.plugins",
 ]
+
+# Plugins: installed packages that are Django apps, enabled by name (see
+# docs/plugins.md). They come last, so they can override templates only by
+# their own names and never replace the app's.
+PLUGINS = env_list("SCR_PLUGINS")
+PLUGIN_APPS = enabled_apps(PLUGINS)
+INSTALLED_APPS += list(PLUGIN_APPS.values())
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -193,6 +205,70 @@ BACKUP = {
     "password": os.environ.get("SCR_BACKUP_PASSWORD", ""),
     "sftp_key_file": os.environ.get("SCR_BACKUP_SFTP_KEY_FILE", ""),
 }
+
+# The address members and staff use, for links in letters, SMS and email.
+_domain = os.environ.get("SCR_DOMAIN", "").strip()
+BASE_URL = (
+    os.environ.get("SCR_BASE_URL")
+    or (f"https://{_domain}" if _domain and _domain != "localhost" else "http://localhost:8000")
+).rstrip("/")
+
+# Member self-service links: valid until the reading round closes, or this
+# many days when the link is not for a round.
+SELF_SERVICE_LINK_DAYS = int(os.environ.get("SCR_SELF_SERVICE_LINK_DAYS") or 30)
+
+# Rate limits and other short-lived counters, shared by all web processes
+# through files in the data directory (no cache server needed).
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": str(DATA_DIR / "cache"),
+    }
+}
+
+# Caddy puts the visitor's address in X-Forwarded-For. Only trust it behind
+# a proxy that sets it, or anyone could pretend to be someone else.
+TRUST_X_FORWARDED_FOR = env_bool("SCR_TRUST_X_FORWARDED_FOR")
+
+# Email: SMTP when SCR_EMAIL_HOST is set, the console in development, or
+# none (links then go by SMS or letter). See README, "Email and SMS".
+EMAIL_HOST = os.environ.get("SCR_EMAIL_HOST", "")
+EMAIL_PORT = int(os.environ.get("SCR_EMAIL_PORT") or 587)
+EMAIL_HOST_USER = os.environ.get("SCR_EMAIL_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("SCR_EMAIL_PASSWORD", "")
+EMAIL_USE_TLS = env_bool("SCR_EMAIL_USE_TLS", True)
+EMAIL_USE_SSL = env_bool("SCR_EMAIL_USE_SSL")
+if EMAIL_USE_SSL:
+    EMAIL_USE_TLS = False
+EMAIL_TIMEOUT = 30
+DEFAULT_FROM_EMAIL = os.environ.get("SCR_EMAIL_FROM") or "register@localhost"
+_email_backend = os.environ.get("SCR_EMAIL_BACKEND", "").strip().lower() or (
+    "smtp" if EMAIL_HOST else ("console" if DEBUG else "none")
+)
+EMAIL_BACKEND = {
+    "smtp": "django.core.mail.backends.smtp.EmailBackend",
+    "console": "django.core.mail.backends.console.EmailBackend",
+}.get(_email_backend, "django.core.mail.backends.dummy.EmailBackend")
+
+_elks_user = os.environ.get("SCR_ELKS_API_USER", "")
+_reminder_days = os.environ.get("SCR_READING_REMINDER_DAYS", "").strip()
+MESSAGING = {
+    # Names in apps.messaging.registry; empty means the channel is not set up.
+    "email_provider": "" if _email_backend == "none" else "django",
+    "sms_provider": os.environ.get("SCR_SMS_PROVIDER", "").strip().lower()
+    or ("46elks" if _elks_user else ("console" if DEBUG else "")),
+    "email_domain": DEFAULT_FROM_EMAIL.rpartition("@")[2] or "localhost",
+    "sms_sender": os.environ.get("SCR_SMS_SENDER", "") or "Register",
+    "sms_country_code": (os.environ.get("SCR_SMS_COUNTRY_CODE") or "358").lstrip("+"),
+    "elks_api_user": _elks_user,
+    "elks_api_password": os.environ.get("SCR_ELKS_API_PASSWORD", ""),
+    "elks_dry_run": env_bool("SCR_ELKS_DRY_RUN"),
+    # Automatic reminders to units missing a reading, this many days before a
+    # round closes. Off unless set.
+    "reminder_days_before_close": int(_reminder_days) if _reminder_days else None,
+}
+if MESSAGING["sms_provider"] == "none":
+    MESSAGING["sms_provider"] = ""
 
 # Behind Caddy, the original scheme arrives in X-Forwarded-Proto.
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

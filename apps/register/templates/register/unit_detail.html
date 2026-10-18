@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n readings %}
+{% load i18n plugins readings selfservice %}
 {% block title %}{{ unit.name }}{% endblock %}
 {% block content %}
   <div class="page-head">
@@ -82,6 +82,8 @@
   {% endif %}
 
   {% unit_readings unit %}
+  {% unit_self_service unit %}
+  {% plugin_panels "unit" unit %}
 
   {% if history %}{% include "register/_history.html" %}{% endif %}
 {% endblock %}

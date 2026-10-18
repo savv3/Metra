@@ -35,7 +35,7 @@
   <td>
     {% if reading %}
       {{ reading.submitted_at|date:"SHORT_DATE_FORMAT" }}
-      <span class="help">{{ reading.get_source_display }}{% if reading.submitted_by %}, {{ reading.submitted_by }}{% endif %}</span>
+      <span class="help">{{ reading.get_source_display }}{% if reading.submitted_by %}, {{ reading.submitted_by }}{% elif reading.submitted_by_person %}, {{ reading.submitted_by_person }}{% endif %}</span>
     {% else %}–{% endif %}
   </td>
 </tr>

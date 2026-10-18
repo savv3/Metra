@@ -10,7 +10,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from apps.register.models import Archivable, Unit, UnitType
+from apps.register.models import Archivable, Person, Unit, UnitType
 
 
 class ReadingType(Archivable):
@@ -147,6 +147,15 @@ class Reading(models.Model):
         null=True,
         blank=True,
         related_name="+",
+    )
+    submitted_by_person = models.ForeignKey(
+        Person,
+        verbose_name=_("reported by"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="+",
+        help_text=_("The member who reported it through a self-service link."),
     )
     submitted_at = models.DateTimeField(_("submitted"), default=timezone.now)
     note = models.TextField(_("note"), blank=True)

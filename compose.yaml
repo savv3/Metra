@@ -1,9 +1,16 @@
 services:
   web:
-    build: .
+    build:
+      context: .
+      args:
+        # Extra plugin packages to install into the image (see docs/plugins.md).
+        SCR_PLUGIN_PACKAGES: ${SCR_PLUGIN_PACKAGES:-}
     image: smallcompanyregister:latest
     command: web
     env_file: .env
+    environment:
+      # Caddy sets X-Forwarded-For; used to rate-limit the member pages.
+      SCR_TRUST_X_FORWARDED_FOR: "true"
     volumes:
       - data:/data
     restart: unless-stopped

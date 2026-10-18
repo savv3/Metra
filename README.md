@@ -95,6 +95,101 @@ log, shown under the reading's **Details**, and **Export as CSV** downloads
 the round. Admin and Board can enter readings; Treasurer and Read-only can
 see them.
 
+## Member self-service
+
+Members never get a password. Instead the board gives each household's
+contact a personal link (`https://your-domain/m/…`). It opens a page, made
+for phones and screen readers, where the member:
+
+- enters the meter reading for the round, and can change it until the round
+  closes, and
+- sees their own contact details and who else is registered for the
+  household (names and roles only), and corrects their own phone, email
+  and address.
+
+Changes are saved straight away. They are in the audit log, marked with the
+link they came through, and listed under **Readings > Recent self-service
+changes**.
+
+On a round's page, **Self-service links** makes links for all units, those
+missing a reading, or those whose contact has no phone or email, and shows
+them as printable letters (one per page, with a QR code) or as a list. A
+unit page has **Print self-service letter** for one household. The links are
+shown only on that page: the database keeps only a hash of each link, so
+print straight away. Making a new link for a person stops their earlier one
+for the same round, and staff can stop links one by one or all at once.
+
+A link for a round works until the end of the round's closing day; other
+links work for `SCR_SELF_SERVICE_LINK_DAYS` (30) days. Unknown, expired and
+stopped links all show the same page. The member pages are rate-limited per
+visitor address, are kept out of search engines (`noindex`) and send the
+referrer only to the app itself (`Referrer-Policy: same-origin`), so the
+link never reaches other sites. Letters use `SCR_BASE_URL` (by default `https://SCR_DOMAIN`) for
+the address.
+
+Links are personal data about the person they belong to: they are covered
+by the per-person export and erasure tools planned for phase 8, together
+with the person's other records.
+
+## Sending links and reminders
+
+On a round's page, **Send links to all units** gives each unit's main
+contact (the owner, else the billing contact) a new personal link by SMS. A
+contact without a phone number, or whose SMS fails, gets it by email. Those
+without either, or whose preferred channel is post, are listed as **needs a
+letter**, with a button that prints their letters. **Send reminder to units
+missing a reading** does the same for units that have not reported yet.
+Sending runs in the worker, and the send-out page (under **Send-outs**)
+shows each message's status as it goes, including delivery reports from
+46elks.
+
+The texts are under **Settings > Message templates**, one per purpose
+(link or reminder) and channel (SMS or email), with the placeholders
+`{name}`, `{first_name}`, `{link}`, `{closes}`, `{period}`,
+`{reading_type}`, `{unit}` and `{organisation}`. The stored copy of each
+message has `[personlig länk]` where the link was, because links are kept
+only as hashes.
+
+Automatic reminders are off by default. Set `SCR_READING_REMINDER_DAYS`
+(for example `7`) to remind units still missing a reading that many days
+before an open round closes, at 10:00, once per round.
+
+### Email and SMS
+
+**Email** goes out over SMTP when `SCR_EMAIL_HOST` is set, with
+`SCR_EMAIL_PORT`, `SCR_EMAIL_USER`, `SCR_EMAIL_PASSWORD`, `SCR_EMAIL_USE_TLS`
+or `SCR_EMAIL_USE_SSL`, and `SCR_EMAIL_FROM` as the sender. Without a host,
+email is off in production and printed to the console in development.
+
+**SMS** goes through [46elks](https://46elks.com):
+
+1. Create an account at 46elks and add credit. Messages are paid per SMS.
+2. Under *Account* copy the **API username** and **API password** into
+   `SCR_ELKS_API_USER` and `SCR_ELKS_API_PASSWORD`.
+3. Set `SCR_SMS_SENDER` to the name shown on the phone (up to 11 letters
+   and digits, for example `Vatten`) or to a number you have at 46elks.
+4. Numbers written without a country code (`040 123 4567`) get
+   `SCR_SMS_COUNTRY_CODE`, 358 (Finland and Åland) by default.
+5. Optional: set `SCR_ELKS_DRY_RUN=true` to have 46elks check messages
+   without sending them or charging, while you try the setup.
+6. Restart: `docker compose up -d`.
+
+Delivery reports come back automatically when the app is reachable over
+HTTPS at `SCR_BASE_URL`. 46elks posts them to a secret address the app
+derives from `SCR_SECRET_KEY`, so they need no setup. Without SMS settings,
+links go by email or letter. 46elks receives the phone number and text of
+each SMS; list it as a processor in your GDPR records. Other providers can
+be added in code: see `apps/messaging/registry.py`.
+
+## Plugins
+
+Plugins are pip-installable packages that add pages, menu items, panels on
+unit and person pages, or SMS and email providers. Install them through
+`SCR_PLUGIN_PACKAGES` (Docker build) or pip, and enable them by name in
+`SCR_PLUGINS`; nothing loads unless it is listed. Plugins run with full
+trust, so install only ones you trust. See [docs/plugins.md](docs/plugins.md)
+and the [example plugin](plugins/example).
+
 ## Develop locally
 
 Needs Python 3.13, [uv](https://docs.astral.sh/uv/) and GNU gettext.
