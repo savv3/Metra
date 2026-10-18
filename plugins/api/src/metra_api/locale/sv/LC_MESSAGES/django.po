@@ -1,0 +1,377 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-18 23:43+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps.py:7
+msgid "API"
+msgstr "API"
+
+#: apps.py:19 models.py:78 templates/metra_api/client_list.html:3
+#: templates/metra_api/client_list.html:6
+#: templates/metra_api/client_list.html:14 templates/metra_api/docs.html:9
+msgid "API clients"
+msgstr "API-klienter"
+
+#: apps.py:22
+msgid "Tokens for other systems that read or change the register."
+msgstr "Tokens för andra system som läser eller ändrar registret."
+
+#: auth.py:28
+msgid "Give the token after Bearer, without spaces."
+msgstr "Ange tokenen efter Bearer, utan mellanslag."
+
+#: auth.py:32 auth.py:41
+msgid "The token is not valid."
+msgstr "Tokenen är inte giltig."
+
+#: auth.py:43
+msgid "The token has been revoked or has expired."
+msgstr "Tokenen har återkallats eller gått ut."
+
+#: forms.py:33
+msgid "Expires after"
+msgstr "Gäller till och med"
+
+#: forms.py:36
+msgid "Optional. The token stops working when this day is over."
+msgstr "Valfritt. Tokenen slutar fungera när dagen är slut."
+
+#: forms.py:45
+msgid ""
+"The client may do what a user with this role may. Choose the narrowest role "
+"that does the job."
+msgstr "Klienten får göra det som en användare med den här rollen får göra. Välj den snävaste roll som räcker."
+"Klienten får göra det som en användare med den här rollen får göra. Välj den "
+"snävaste roll som räcker."
+
+#: forms.py:57
+msgid "Choose today or a later day."
+msgstr "Välj i dag eller en senare dag."
+
+#: models.py:25
+msgid "Admin"
+msgstr "Admin"
+
+#: models.py:26
+msgid "Board"
+msgstr "Styrelse"
+
+#: models.py:27
+msgid "Treasurer"
+msgstr "Kassör"
+
+#: models.py:28
+msgid "Read-only"
+msgstr "Läsbehörighet"
+
+#: models.py:43
+msgid "name"
+msgstr "namn"
+
+#: models.py:45
+msgid "description"
+msgstr "beskrivning"
+
+#: models.py:45
+msgid "What the client is and who runs it."
+msgstr "Vad klienten är och vem som sköter den."
+
+#: models.py:49
+msgid "user"
+msgstr "användare"
+
+#: models.py:54
+msgid "role"
+msgstr "roll"
+
+#: models.py:56 templates/metra_api/client_token.html:17
+msgid "read only"
+msgstr "endast läsning"
+
+#: models.py:58
+msgid "Refuse every change, whatever the role allows."
+msgstr "Neka alla ändringar, oavsett vad rollen tillåter."
+
+#: models.py:61
+msgid "token starts with"
+msgstr "tokenen börjar med"
+
+#: models.py:64
+msgid "created by"
+msgstr "skapad av"
+
+#: models.py:70
+msgid "created"
+msgstr "skapad"
+
+#: models.py:71
+msgid "last used"
+msgstr "senast använd"
+
+#: models.py:72
+msgid "expires"
+msgstr "går ut"
+
+#: models.py:73
+msgid "revoked"
+msgstr "återkallad"
+
+#: models.py:77
+msgid "API client"
+msgstr "API-klient"
+
+#: serializers.py:52
+msgid "There is no such field."
+msgstr "Det finns inget sådant fält."
+
+#: serializers.py:57
+msgid "Give a single value."
+msgstr "Ange ett enda värde."
+
+#: serializers.py:153
+msgid "A unit's type cannot change."
+msgstr "En enhets typ kan inte ändras."
+
+#: serializers.py:157 serializers.py:245
+msgid "This field is required."
+msgstr "Detta fält måste fyllas i."
+
+#: serializers.py:239
+msgid "A reading cannot move; enter a new one instead."
+msgstr "En avläsning kan inte flyttas; för in en ny i stället."
+
+#: serializers.py:253
+msgid "This round is not read from units of this type."
+msgstr "Den här omgången gäller inte enheter av den här typen."
+
+#: serializers.py:257
+msgid "This unit already has a reading in this round; change it."
+msgstr "Enheten har redan en avläsning i den här omgången; ändra den."
+
+#: templates/metra_api/client_form.html:3
+#: templates/metra_api/client_form.html:5
+msgid "New API client"
+msgstr "Ny API-klient"
+
+#: templates/metra_api/client_form.html:28
+msgid "Create client"
+msgstr "Skapa klient"
+
+#: templates/metra_api/client_form.html:29
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: templates/metra_api/client_list.html:8
+#: templates/metra_api/client_token.html:23
+msgid "Endpoints"
+msgstr "Slutpunkter"
+
+#: templates/metra_api/client_list.html:9
+msgid "New client"
+msgstr "Ny klient"
+
+#: templates/metra_api/client_list.html:12
+msgid ""
+"Each client is another system with its own token. It may do what its role "
+"allows, and every change it makes is logged under its name."
+msgstr "Varje klient är ett annat system med en egen token. Den får göra det som rollen tillåter, och varje ändring den gör loggas under dess namn."
+"Varje klient är ett annat system med en egen token. Den får göra det som "
+"rollen tillåter, och varje ändring den gör loggas under dess namn."
+
+#: templates/metra_api/client_list.html:18
+msgid "Client"
+msgstr "Klient"
+
+#: templates/metra_api/client_list.html:19
+#: templates/metra_api/client_token.html:16
+msgid "Role"
+msgstr "Roll"
+
+#: templates/metra_api/client_list.html:20
+#: templates/metra_api/client_token.html:12
+msgid "Token"
+msgstr "Token"
+
+#: templates/metra_api/client_list.html:21
+msgid "Last used"
+msgstr "Senast använd"
+
+#: templates/metra_api/client_list.html:22
+msgid "Expires"
+msgstr "Går ut"
+
+#: templates/metra_api/client_list.html:23
+msgid "Status"
+msgstr "Status"
+
+#: templates/metra_api/client_list.html:24
+msgid "Actions"
+msgstr "Åtgärder"
+
+#: templates/metra_api/client_list.html:32
+#, python-format
+msgid "Acts as %(user)s. Created %(created)s by %(by)s."
+msgstr "Agerar som %(user)s. Skapad %(created)s av %(by)s."
+
+#: templates/metra_api/client_list.html:36
+msgid "Read only"
+msgstr "Endast läsning"
+
+#: templates/metra_api/client_list.html:41
+msgid "Revoked"
+msgstr "Återkallad"
+
+#: templates/metra_api/client_list.html:42
+msgid "Expired"
+msgstr "Har gått ut"
+
+#: templates/metra_api/client_list.html:43
+msgid "Active"
+msgstr "Aktiv"
+
+#: templates/metra_api/client_list.html:51
+msgid "New token"
+msgstr "Ny token"
+
+#: templates/metra_api/client_list.html:55
+msgid "Revoke"
+msgstr "Återkalla"
+
+#: templates/metra_api/client_list.html:67
+msgid "No API clients yet."
+msgstr "Inga API-klienter ännu."
+
+#: templates/metra_api/client_token.html:3
+#: templates/metra_api/client_token.html:6
+#, python-format
+msgid "Token for %(name)s"
+msgstr "Token för %(name)s"
+
+#: templates/metra_api/client_token.html:9
+msgid "Copy the token now"
+msgstr "Kopiera tokenen nu"
+
+#: templates/metra_api/client_token.html:10
+msgid ""
+"This is the only time the token is shown. Metra keeps only a fingerprint of "
+"it. If it is lost, make a new one."
+msgstr "Tokenen visas bara den här gången. Metra sparar endast ett fingeravtryck av den. Om den kommer bort, skapa en ny."
+"Tokenen visas bara den här gången. Metra sparar endast ett fingeravtryck av "
+"den. Om den kommer bort, skapa en ny."
+
+#: templates/metra_api/client_token.html:14
+msgid "Header"
+msgstr "Rubrik"
+
+#: templates/metra_api/client_token.html:19
+msgid ""
+"Store it in the other system's settings or a password manager, never in "
+"email or chat."
+msgstr "Spara den i det andra systemets inställningar eller i en lösenordshanterare, aldrig i e-post eller chatt."
+"Spara den i det andra systemets inställningar eller i en lösenordshanterare, "
+"aldrig i e-post eller chatt."
+
+#: templates/metra_api/client_token.html:22
+msgid "Done"
+msgstr "Klar"
+
+#: templates/metra_api/docs.html:3 templates/metra_api/docs.html:6
+#: templates/metra_api/docs.html:23
+msgid "API endpoints"
+msgstr "API-slutpunkter"
+
+#: templates/metra_api/docs.html:8
+msgid "OpenAPI schema (JSON)"
+msgstr "OpenAPI-schema (JSON)"
+
+#: templates/metra_api/docs.html:13
+msgid "How to call the API"
+msgstr "Så anropar du API:et"
+
+#: templates/metra_api/docs.html:14
+msgid ""
+"Send the client's token in every request as <code>Authorization: Bearer "
+"&lt;token&gt;</code>. Requests and answers are JSON. Lists come in pages: "
+"<code>?page=2&amp;page_size=100</code> (at most 200)."
+msgstr "Skicka klientens token i varje anrop som <code>Authorization: Bearer &lt;token&gt;</code>. Anrop och svar är JSON. Listor kommer i sidor: <code>?page=2&amp;page_size=100</code> (högst 200)."
+"Skicka klientens token i varje anrop som <code>Authorization: Bearer "
+"&lt;token&gt;</code>. Anrop och svar är JSON. Listor kommer i sidor: <code>?"
+"page=2&amp;page_size=100</code> (högst 200)."
+
+#: templates/metra_api/docs.html:18
+msgid ""
+"Units and people are never deleted: DELETE archives them. Custom fields are "
+"in <code>custom_fields</code>, keyed by the field's key, and are checked as "
+"on the web pages."
+msgstr "Enheter och personer raderas aldrig: DELETE arkiverar dem. Egna fält finns i <code>custom_fields</code> med fältets nyckel och kontrolleras som på webbsidorna."
+"Enheter och personer raderas aldrig: DELETE arkiverar dem. Egna fält finns i "
+"<code>custom_fields</code> med fältets nyckel och kontrolleras som på "
+"webbsidorna."
+
+#: templates/metra_api/docs.html:27
+msgid "Path"
+msgstr "Sökväg"
+
+#: templates/metra_api/docs.html:28
+msgid "Methods"
+msgstr "Metoder"
+
+#: templates/metra_api/docs.html:29
+msgid "What it is"
+msgstr "Vad det är"
+
+#: views.py:65
+#, python-format
+msgid "Revoked %(name)s. Its token no longer works."
+msgstr "%(name)s har återkallats. Dess token fungerar inte längre."
+
+#: views.py:72
+msgid "Units: list, read, add, change; DELETE archives."
+msgstr "Enheter: lista, läsa, lägga till, ändra; DELETE arkiverar."
+
+#: views.py:73
+msgid "People: list, read, add, change; DELETE archives."
+msgstr "Personer: lista, läsa, lägga till, ändra; DELETE arkiverar."
+
+#: views.py:74
+msgid "Who is linked to which unit, and in what role."
+msgstr "Vem som är kopplad till vilken enhet, och i vilken roll."
+
+#: views.py:75
+msgid "Unit types and their custom fields. Read only."
+msgstr "Enhetstyper och deras egna fält. Endast läsning."
+
+#: views.py:76
+msgid "The custom fields people have. Read only."
+msgstr "Personernas egna fält. Endast läsning."
+
+#: views.py:77
+msgid "Reading rounds. Read only."
+msgstr "Avläsningsomgångar. Endast läsning."
+
+#: views.py:78
+msgid "Readings: list, read, enter and correct."
+msgstr "Avläsningar: lista, läsa, föra in och rätta."
+
+#: views.py:79
+msgid "Invoices and credit notes, with their lines. Read only."
+msgstr "Fakturor och kreditnotor med sina rader. Endast läsning."
+
+#: views.py:80
+msgid "Payments recorded on invoices. Read only."
+msgstr "Betalningar som bokförts på fakturor. Endast läsning."

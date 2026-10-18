@@ -8,6 +8,7 @@ dependencies = [
     "django-auditlog>=3.4.1",
     "gunicorn>=26.2.0",
     "huey>=3.4.0",
+    "metra-api",
     "python-barcode>=0.16.1",
     "segno>=1.6.6",
     "weasyprint>=70.0",
@@ -30,6 +31,8 @@ members = ["plugins/*"]
 [tool.uv.sources]
 # The example plugin, installed for the tests (METRA_PLUGINS=example there).
 metra-example-plugin = { workspace = true }
+# The REST API plugin: in the Docker image, off until METRA_PLUGINS=api.
+metra-api = { workspace = true }
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.test_settings"

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% blocktranslate with name=client.name %}Token for {{ name }}{% endblocktranslate %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% blocktranslate with name=client.name %}Token for {{ name }}{% endblocktranslate %}</h1>
+  </div>
+  <section class="card" aria-labelledby="token-heading">
+    <h2 id="token-heading">{% translate "Copy the token now" %}</h2>
+    <p class="message warning" role="note">{% translate "This is the only time the token is shown. Metra keeps only a fingerprint of it. If it is lost, make a new one." %}</p>
+    <dl class="details-list details-list--plain">
+      <dt>{% translate "Token" %}</dt>
+      <dd><code data-api-token>{{ token }}</code></dd>
+      <dt>{% translate "Header" %}</dt>
+      <dd><code>Authorization: Bearer {{ token }}</code></dd>
+      <dt>{% translate "Role" %}</dt>
+      <dd>{{ client.get_role_display }}{% if client.read_only %} ({% translate "read only" %}){% endif %}</dd>
+    </dl>
+    <p class="help">{% translate "Store it in the other system's settings or a password manager, never in email or chat." %}</p>
+  </section>
+  <div class="actions">
+    <a class="button button--primary" href="{% url 'metra_api:client_list' %}">{% translate "Done" %}</a>
+    <a class="button" href="{% url 'metra_api:docs' %}">{% translate "Endpoints" %}</a>
+  </div>
+{% endblock %}
