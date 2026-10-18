@@ -12,6 +12,8 @@ dependencies = [
     "segno>=1.6.6",
     "weasyprint>=70.0",
     "whitenoise>=6.12.0",
+    # Bundled plugins (plugins/), on by default; see config.plugins.BUNDLED.
+    "metra-sms-46elks",
 ]
 
 [dependency-groups]
@@ -30,6 +32,7 @@ members = ["plugins/*"]
 [tool.uv.sources]
 # The example plugin, installed for the tests (METRA_PLUGINS=example there).
 metra-example-plugin = { workspace = true }
+metra-sms-46elks = { workspace = true }
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.test_settings"

@@ -107,8 +107,9 @@ Delivery reports come back automatically when the app is reachable over
 HTTPS at `METRA_BASE_URL`. 46elks posts them to a secret address the app
 derives from `METRA_SECRET_KEY`, so they need no setup. Without SMS settings,
 links go by email or letter. 46elks receives the phone number and text of
-each SMS; list it as a processor in your GDPR records. Other providers can
-be added in code: see `apps/messaging/registry.py`.
+each SMS; list it as a processor in your GDPR records. 46elks support is the
+bundled [metra-sms-46elks](plugins/sms-46elks) plugin, on by default; other
+providers can be added as plugins (see [docs/plugins.md](docs/plugins.md)).
 
 ## Plugins
 

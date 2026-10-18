@@ -93,6 +93,10 @@ listed in `BUNDLED` in `config/plugins.py`, installed in the Docker image and
 on by default; `METRA_PLUGINS_DISABLED` turns one off. The example plugin is
 installed only for development and tests.
 
+| Plugin | Name | What it does |
+| --- | --- | --- |
+| [metra-sms-46elks](../plugins/sms-46elks) | `46elks` | SMS through 46elks, with delivery reports. Bundled, on by default |
+
 So that each can later move to its own repository, a plugin in plugins/:
 
 - imports only `apps.plugins.api` from Metra, never other app modules;
@@ -109,7 +113,7 @@ So that each can later move to its own repository, a plugin in plugins/:
 | Navigation | `api.add_navigation(NavItem(label, url_name, permission))` | A main-menu link, shown to users with the permission |
 | Unit panels | `api.add_unit_panel(Panel(template, title, permission, context))` | A section on unit pages. The template gets `object`, `title`, `perms`, `request` and whatever `context(request, unit)` returns |
 | Person panels | `api.add_person_panel(Panel(...))` | The same, on person pages |
-| SMS and email providers | `api.add_messaging_provider(ProviderClass)` | An `api.Provider` subclass with `channel` (`api.SMS` or `api.EMAIL`), `name` and `send()`. Chosen with `METRA_SMS_PROVIDER=<name>` |
+| SMS and email providers | `api.add_messaging_provider(ProviderClass)` | An `api.Provider` subclass with `channel` (`api.SMS` or `api.EMAIL`), `name` and `send()`. Chosen with `METRA_SMS_PROVIDER=<name>`, or automatically when `is_configured()` returns true. `api.sms_sender()`, `api.sms_country_code()`, `api.normalise_phone()` and `api.record_delivery()` help SMS providers |
 | Settings links | `api.add_settings_link(SettingsLink(label, url_name, permission, description))` | A link on the Settings page to the plugin's own settings or tools |
 
 ## Events
