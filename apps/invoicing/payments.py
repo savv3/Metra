@@ -21,6 +21,7 @@ from apps.messaging.models import (
     organisation_placeholders,
 )
 from apps.messaging.registry import EMAIL, SMS, ProviderError, provider_for
+from apps.plugins import events
 from apps.register.models import Person
 
 from .delivery import filename
@@ -41,6 +42,7 @@ def record_payment(invoice, amount, paid_on, reference="", note="", user=None):
     payment.full_clean()
     payment.save()
     invoice.refresh_payment_status()
+    events.send_on_commit(events.payment_recorded, Payment, payment=payment)
     return payment
 
 

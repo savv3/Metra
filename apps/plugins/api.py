@@ -11,6 +11,10 @@ the same API_VERSION; anything else in the app may change.
             api.add_navigation(api.NavItem("My page", "my_plugin:index", "register.view_unit"))
             api.add_unit_panel(api.Panel("my_plugin/panel.html", title="Mine"))
             api.add_messaging_provider(MySMSProvider)
+            api.add_settings_link(api.SettingsLink("My settings", "my_plugin:settings"))
+
+    @receiver(api.events.invoice_issued)
+    def on_issue(sender, invoice, **kwargs): ...
 """
 
 from collections.abc import Callable
@@ -18,7 +22,9 @@ from dataclasses import dataclass, field
 
 from apps.messaging.registry import EMAIL, SMS, Provider, ProviderError, SendResult, registry
 
-from .hooks import NAVIGATION, PERSON_PANELS, UNIT_PANELS, hooks
+from . import events
+from .hooks import NAVIGATION, PERSON_PANELS, SETTINGS_LINKS, UNIT_PANELS, hooks
+from .roles import grant_to_roles
 
 API_VERSION = 1
 
@@ -31,10 +37,14 @@ __all__ = [
     "Provider",
     "ProviderError",
     "SendResult",
+    "SettingsLink",
     "add_messaging_provider",
     "add_navigation",
     "add_person_panel",
+    "add_settings_link",
     "add_unit_panel",
+    "events",
+    "grant_to_roles",
 ]
 
 
@@ -76,3 +86,17 @@ def add_person_panel(panel):
 def add_messaging_provider(provider_class):
     """An SMS or email provider, chosen with METRA_SMS_PROVIDER by its ``name``."""
     return registry.register(provider_class)
+
+
+@dataclass
+class SettingsLink:
+    """A link on the Settings page to a plugin's own settings or tools."""
+
+    label: str
+    url_name: str
+    permission: str = ""
+    description: str = ""
+
+
+def add_settings_link(link):
+    return hooks.register(SETTINGS_LINKS, link)

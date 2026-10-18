@@ -22,9 +22,14 @@ dev = [
     "metra-example-plugin",
 ]
 
+# Every package in plugins/ is a plugin developed alongside Metra. They share
+# one lock file and are tested in CI; each can later move to its own repository.
+[tool.uv.workspace]
+members = ["plugins/*"]
+
 [tool.uv.sources]
 # The example plugin, installed for the tests (METRA_PLUGINS=example there).
-metra-example-plugin = { path = "plugins/example", editable = true }
+metra-example-plugin = { workspace = true }
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.test_settings"

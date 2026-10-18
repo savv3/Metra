@@ -17,10 +17,11 @@ RUN apt-get update \
 
 WORKDIR /app
 
-# Dependencies first for layer caching.
+# Dependencies first for layer caching. The bundled plugins in plugins/ are
+# workspace members, installed with the app in the next step.
 COPY pyproject.toml uv.lock ./
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --frozen --no-dev --no-install-project
+    uv sync --frozen --no-dev --no-install-workspace
 
 COPY . .
 RUN --mount=type=cache,target=/root/.cache/uv \

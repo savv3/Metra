@@ -7,7 +7,10 @@ entry point in the ``metra.plugins`` group, for example in its pyproject.toml:
     example = "metra_example_plugin"
 
 Installed plugins are not loaded on their own: only names listed in
-METRA_PLUGINS are added to INSTALLED_APPS. See docs/plugins.md.
+METRA_PLUGINS are added to INSTALLED_APPS. The official plugins in BUNDLED
+are the exception: they come with Metra (in plugins/ and in the Docker image)
+and are on whenever installed, unless METRA_PLUGINS_DISABLED lists them.
+See docs/plugins.md.
 """
 
 from importlib.metadata import entry_points
@@ -17,6 +20,8 @@ from django.core.exceptions import ImproperlyConfigured
 GROUP = "metra.plugins"
 # The group's name before the rename to Metra; plugins using it still load.
 LEGACY_GROUP = "scr.plugins"
+# Official plugins that ship with Metra and are on by default, in load order.
+BUNDLED = ()
 
 
 def available():
@@ -29,6 +34,15 @@ def available():
 def app_for(entry_point):
     """The INSTALLED_APPS entry: "pkg" or "pkg.apps:Config" becomes "pkg.apps.Config"."""
     return entry_point.value.replace(":", ".").strip()
+
+
+def enabled_names(listed, disabled=(), found=None, bundled=BUNDLED):
+    """The plugins to load: the installed bundled ones not disabled, then the
+    ones METRA_PLUGINS lists, each once."""
+    found = available() if found is None else found
+    names = [name for name in bundled if name in found and name not in disabled]
+    names += [name for name in listed if name not in names]
+    return names
 
 
 def enabled_apps(names, found=None):
