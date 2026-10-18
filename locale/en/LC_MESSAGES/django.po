@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 13:07+0300\n"
+"POT-Creation-Date: 2026-10-18 13:13+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -452,6 +452,10 @@ msgstr ""
 
 #: apps/messaging/views.py:50
 msgid "Sending has started. This page shows how it goes."
+msgstr ""
+
+#: apps/plugins/apps.py:7
+msgid "Plugins"
 msgstr ""
 
 #: apps/readings/admin.py:20
@@ -1663,7 +1667,7 @@ msgid ""
 msgstr ""
 
 #: apps/register/templates/register/unit_type_choose.html:16
-#: templates/base.html:35
+#: templates/base.html:36
 msgid "Settings"
 msgstr ""
 
@@ -2044,11 +2048,11 @@ msgstr ""
 msgid "%(count)s links no longer work."
 msgstr ""
 
-#: config/settings.py:149
+#: config/settings.py:159
 msgid "Swedish"
 msgstr ""
 
-#: config/settings.py:150
+#: config/settings.py:160
 msgid "English"
 msgstr ""
 
@@ -2074,10 +2078,10 @@ msgstr ""
 msgid "Main"
 msgstr ""
 
-#: templates/base.html:36
+#: templates/base.html:37
 msgid "Two-factor login"
 msgstr ""
 
-#: templates/base.html:40
+#: templates/base.html:41
 msgid "Log out"
 msgstr ""

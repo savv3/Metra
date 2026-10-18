@@ -181,6 +181,15 @@ links go by email or letter. 46elks receives the phone number and text of
 each SMS; list it as a processor in your GDPR records. Other providers can
 be added in code: see `apps/messaging/registry.py`.
 
+## Plugins
+
+Plugins are pip-installable packages that add pages, menu items, panels on
+unit and person pages, or SMS and email providers. Install them through
+`SCR_PLUGIN_PACKAGES` (Docker build) or pip, and enable them by name in
+`SCR_PLUGINS`; nothing loads unless it is listed. Plugins run with full
+trust, so install only ones you trust. See [docs/plugins.md](docs/plugins.md)
+and the [example plugin](plugins/example).
+
 ## Develop locally
 
 Needs Python 3.13, [uv](https://docs.astral.sh/uv/) and GNU gettext.

@@ -1,6 +1,9 @@
 from allauth.account.decorators import secure_admin_login
+from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
+
+from config.plugins import url_patterns
 
 # Settings uses the app's login page, so admins pass two-factor there too.
 admin.site.login = secure_admin_login(admin.site.login)
@@ -15,3 +18,6 @@ urlpatterns = [
     path("", include("apps.messaging.urls")),
     path("", include("apps.core.urls")),
 ]
+
+# Enabled plugins' pages, each under its own /plugins/<name>/ prefix.
+urlpatterns += url_patterns(settings.PLUGIN_APPS)

@@ -1,4 +1,4 @@
-{% load i18n roles static %}<!doctype html>
+{% load i18n plugins roles static %}<!doctype html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -32,6 +32,7 @@
         {% if perms.register.view_person %}<a href="{% url 'register:person_list' %}">{% translate "People" %}</a>{% endif %}
         {% if perms.readings.view_readinground %}<a href="{% url 'readings:round_list' %}">{% translate "Readings" %}</a>{% endif %}
         {% if perms.messaging.view_messagebatch %}<a href="{% url 'messaging:batch_list' %}">{% translate "Send-outs" %}</a>{% endif %}
+        {% plugin_navigation %}
         {% if user.is_staff %}<a href="{% url 'admin:index' %}">{% translate "Settings" %}</a>{% endif %}
         <a href="{% url 'mfa_index' %}">{% translate "Two-factor login" %}</a>
         <span class="nav-user">{{ user.get_username }}{% with roles=user|role_names %}{% if roles %} ({{ roles }}){% endif %}{% endwith %}</span>
