@@ -286,14 +286,14 @@ def test_public_address_is_allowed(settings, monkeypatch):
         socket, "getaddrinfo", lambda *a, **k: [(0, 0, 0, "", ("93.184.216.34", 443))]
     )
 
-    assert service.resolve("example.org", 443) == "93.184.216.34"
+    assert service.resolve("example.org", 443) == ["93.184.216.34"]
 
 
 def test_internal_addresses_are_allowed_in_development(settings, monkeypatch):
     settings.DEBUG = True
     monkeypatch.setattr(socket, "getaddrinfo", lambda *a, **k: [(0, 0, 0, "", ("127.0.0.1", 80))])
 
-    assert service.resolve("localhost", 80) == "127.0.0.1"
+    assert "127.0.0.1" in service.resolve("localhost", 80)
 
 
 def test_http_is_refused_unless_debugging(settings):
@@ -374,3 +374,20 @@ def test_real_request_to_a_local_server_in_development(settings, monkeypatch):
     assert redirected == 302  # not followed
     assert seen[0] == (f"localhost:{port}", "x")
     assert len(seen) == 2  # the redirect target was not requested
+
+
+def test_the_next_checked_address_is_tried_when_one_does_not_answer(monkeypatch):
+    tried = []
+
+    def create_connection(address, timeout):
+        tried.append(address[0])
+        if address[0] == "2001:db8::1":
+            raise ConnectionRefusedError("unreachable")
+        return "socket"
+
+    monkeypatch.setattr(socket, "create_connection", create_connection)
+    connection = service._HTTPConnection("example.org", 80)
+    connection.pinned_ips = ["2001:db8::1", "93.184.216.34"]
+
+    assert connection._connect_socket() == "socket"
+    assert tried == ["2001:db8::1", "93.184.216.34"]

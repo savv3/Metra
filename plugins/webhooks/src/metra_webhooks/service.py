@@ -80,14 +80,14 @@ def is_public(address):
 
 
 def resolve(host, port):
-    """The IP address to connect to for ``host``. Every address the name
-    resolves to must be public (unless DEBUG), so a name cannot be pointed at
-    the internal network."""
+    """The IP addresses to connect to for ``host``, in the resolver's order.
+    Every address the name resolves to must be public (unless DEBUG), so a
+    name cannot be pointed at the internal network."""
     try:
         found = socket.getaddrinfo(host, port, type=socket.SOCK_STREAM)
     except OSError as error:
         raise UnsafeURL(_("The address %(host)s could not be found.") % {"host": host}) from error
-    addresses = [info[4][0].split("%")[0] for info in found]
+    addresses = list(dict.fromkeys(info[4][0].split("%")[0] for info in found))
     if not addresses:
         raise UnsafeURL(_("The address %(host)s could not be found.") % {"host": host})
     if not settings.DEBUG:
@@ -97,7 +97,7 @@ def resolve(host, port):
                     _("%(host)s points to an internal address, which is not allowed.")
                     % {"host": host}
                 )
-    return addresses[0]
+    return addresses
 
 
 # -- The request -----------------------------------------------------------
@@ -111,10 +111,18 @@ class _PinnedMixin:
     the Host header, and for https the certificate name and SNI.
     """
 
-    pinned_ip = None
+    pinned_ips = ()
 
     def _connect_socket(self):
-        return socket.create_connection((self.pinned_ip, self.port), self.timeout)
+        # Each checked address in turn, like create_connection does for a name
+        # (a host may have an IPv6 address that is not reachable from here).
+        error = OSError("No address to connect to")
+        for ip in self.pinned_ips:
+            try:
+                return socket.create_connection((ip, self.port), self.timeout)
+            except OSError as failed:
+                error = failed
+        raise error
 
 
 class _HTTPConnection(_PinnedMixin, http.client.HTTPConnection):
@@ -138,10 +146,10 @@ def http_post(url, body, headers, timeout=TIMEOUT):
     """
     parts = check_scheme(url)
     port = parts.port or (443 if parts.scheme == "https" else 80)
-    ip = resolve(parts.hostname, port)
+    ips = resolve(parts.hostname, port)
     connection_class = _HTTPSConnection if parts.scheme == "https" else _HTTPConnection
     connection = connection_class(parts.hostname, port, timeout=timeout)
-    connection.pinned_ip = ip
+    connection.pinned_ips = ips
     path = parts.path or "/"
     if parts.query:
         path += "?" + parts.query
