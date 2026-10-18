@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 17:33+0300\n"
+"POT-Creation-Date: 2026-10-18 17:52+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
-#: apps/accounts/middleware.py:26
+#: apps/accounts/middleware.py:28
 msgid "Set up two-factor login with an authenticator app before you continue."
 msgstr ""
 
@@ -851,7 +851,7 @@ msgstr ""
 
 #: apps/messaging/templates/messaging/batch_list.html:3
 #: apps/messaging/templates/messaging/batch_list.html:6
-#: apps/messaging/templates/messaging/batch_list.html:17 templates/base.html:34
+#: apps/messaging/templates/messaging/batch_list.html:17 templates/base.html:35
 msgid "Send-outs"
 msgstr ""
 
@@ -1085,7 +1085,7 @@ msgstr ""
 #: apps/readings/apps.py:7
 #: apps/readings/templates/readings/_round_results.html:3
 #: apps/readings/templates/readings/_unit_readings.html:3
-#: templates/base.html:33
+#: templates/base.html:34
 msgid "Readings"
 msgstr ""
 
@@ -1609,7 +1609,7 @@ msgstr ""
 #: apps/register/templates/register/_unit_results.html:3
 #: apps/register/templates/register/person_detail.html:32
 #: apps/register/templates/register/unit_list.html:3
-#: apps/register/templates/register/unit_list.html:6 templates/base.html:31
+#: apps/register/templates/register/unit_list.html:6 templates/base.html:32
 msgid "Units"
 msgstr ""
 
@@ -2049,7 +2049,7 @@ msgstr ""
 
 #: apps/register/templates/register/_person_results.html:3
 #: apps/register/templates/register/person_list.html:3
-#: apps/register/templates/register/person_list.html:6 templates/base.html:32
+#: apps/register/templates/register/person_list.html:6 templates/base.html:33
 msgid "People"
 msgstr ""
 
@@ -2309,7 +2309,7 @@ msgid ""
 msgstr ""
 
 #: apps/register/templates/register/unit_type_choose.html:16
-#: templates/base.html:36
+#: templates/base.html:37
 msgid "Settings"
 msgstr ""
 
@@ -2416,16 +2416,16 @@ msgid "Print self-service letter"
 msgstr ""
 
 #: apps/selfservice/templates/selfservice/base.html:9
-#: apps/selfservice/templates/selfservice/base.html:16 templates/base.html:7
-#: templates/base.html:15
+#: apps/selfservice/templates/selfservice/base.html:17 templates/base.html:7
+#: templates/base.html:16
 msgid "Small Company Register"
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/base.html:13 templates/base.html:12
+#: apps/selfservice/templates/selfservice/base.html:14 templates/base.html:13
 msgid "Skip to content"
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/base.html:17 templates/base.html:19
+#: apps/selfservice/templates/selfservice/base.html:18 templates/base.html:20
 msgid "Language"
 msgstr ""
 
@@ -2720,11 +2720,11 @@ msgstr ""
 msgid "%(count)s links no longer work."
 msgstr ""
 
-#: config/settings.py:160
+#: config/settings.py:167
 msgid "Swedish"
 msgstr ""
 
-#: config/settings.py:161
+#: config/settings.py:168
 msgid "English"
 msgstr ""
 
@@ -2742,18 +2742,34 @@ msgstr ""
 msgid "Go to the start page"
 msgstr ""
 
-#: templates/base.html:26
+#: templates/base.html:27
 msgid "Change"
 msgstr ""
 
-#: templates/base.html:30
+#: templates/base.html:31
 msgid "Main"
 msgstr ""
 
-#: templates/base.html:37
+#: templates/base.html:38
 msgid "Two-factor login"
 msgstr ""
 
-#: templates/base.html:41
+#: templates/base.html:42
 msgid "Log out"
+msgstr ""
+
+#: templates/base.html:50
+msgid ""
+"Two-factor login is not required on this installation (SCR_REQUIRE_MFA is "
+"off). Turn it on before real data goes in."
+msgstr ""
+
+#: templates/base.html:55
+msgid ""
+"Protect your account with two-factor login. It takes a minute with an "
+"authenticator app on your phone."
+msgstr ""
+
+#: templates/base.html:56
+msgid "Turn on two-factor login"
 msgstr ""

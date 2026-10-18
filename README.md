@@ -323,6 +323,10 @@ scan the QR code, enter the six-digit code, and save the recovery codes it
 shows. Staff and superusers cannot use the app until this is done, and from
 then on every login asks for a code.
 
+In development (`SCR_DEBUG=true`) two-factor is not required, so you can
+log in with just a password; staff see a warning banner saying so.
+`SCR_REQUIRE_MFA` sets it either way (it is on by default in production).
+
 Further users are added under **Settings > Users**. Give each one a role by
 adding them to one group:
 

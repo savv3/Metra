@@ -96,8 +96,11 @@ docker compose up --build                       # full stack, needs a .env (see 
   buttons with `perms`. Roles are the groups created in
   `apps/accounts/migrations/0001_roles.py`; a new model or permission needs a
   migration that adds it to the right roles. Staff must use two-factor login
-  (`apps/accounts/middleware.py`); keep every login path going through
-  django-allauth.
+  (`apps/accounts/middleware.py`) unless `SCR_REQUIRE_MFA` is off, which is
+  the default only when `SCR_DEBUG=true` (staff then see a warning banner);
+  tests run with it on. Keep every login path going through django-allauth,
+  and keep requests that are not pages (icons, robots.txt) out of the
+  middleware's redirect.
 - **Audit log:** register models are registered with django-auditlog in
   `apps/register/models.py`; register new models holding personal or
   business data the same way, and log views of detail pages with

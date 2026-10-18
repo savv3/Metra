@@ -120,6 +120,10 @@ ACCOUNT_LOGIN_METHODS = {"username"}
 ACCOUNT_SIGNUP_FIELDS = ["username*", "password1*", "password2*"]
 ACCOUNT_EMAIL_VERIFICATION = "none"
 MFA_ADAPTER = "apps.accounts.adapter.MFAAdapter"
+MFA_FORMS = {"activate_totp": "apps.accounts.forms.ActivateTOTPForm"}
+# Staff (who can open Settings) must use two-factor login. On by default in
+# production and off in development (SCR_DEBUG=true); an explicit value wins.
+REQUIRE_MFA = env_bool("SCR_REQUIRE_MFA", not DEBUG)
 MFA_SUPPORTED_TYPES = ["totp", "recovery_codes"]
 MFA_TOTP_ISSUER = "Small Company Register"
 

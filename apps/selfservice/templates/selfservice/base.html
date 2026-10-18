@@ -7,6 +7,7 @@
   {% block robots %}<meta name="robots" content="noindex, nofollow">{% endblock %}
   <meta name="referrer" content="same-origin">
   <title>{% block title %}{% if organisation %}{{ organisation.public_name }}{% else %}{% translate "Small Company Register" %}{% endif %}{% endblock %}</title>
+  <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
   <link rel="stylesheet" href="{% static 'css/app.css' %}">
 </head>
 <body class="member">
