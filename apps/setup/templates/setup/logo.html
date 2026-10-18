@@ -1,0 +1,17 @@
+{% extends "setup/base.html" %}
+{% load i18n %}
+{% block step %}
+  {% if organisation %}
+    <p>{% translate "The logo appears on the public page, members' pages, letters and invoices." %}</p>
+    {% if organisation.logo %}
+      <p><img src="{% url 'core:logo' %}" alt="{% translate 'Current logo' %}" class="setup-logo"></p>
+      <form method="post" class="inline-form">
+        {% csrf_token %}
+        <button type="submit" name="remove" value="1" class="button button--small">{% translate "Remove the logo" %}</button>
+      </form>
+    {% endif %}
+    {% include "setup/_form.html" with multipart=True %}
+  {% else %}
+    <p>{% translate "Fill in the organisation first; the logo belongs to it." %}</p>
+  {% endif %}
+{% endblock %}

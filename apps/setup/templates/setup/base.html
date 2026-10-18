@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Setup" %}: {{ title }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Set up Metra" %}</h1>
+  </div>
+  <nav class="setup-steps" aria-label="{% translate 'Setup steps' %}">
+    <ol>
+      {% for s in steps %}
+        <li{% if s.current %} aria-current="step"{% endif %}{% if s.saved %} class="is-saved"{% endif %}>
+          <a href="{% url 'setup:step' s.name %}">{{ s.label }}</a>{% if s.saved %} <span class="visually-hidden">({% translate "saved" %})</span>{% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+  </nav>
+  <section class="card setup-card" aria-labelledby="step-title">
+    <h2 id="step-title">{% blocktranslate with number=number total=total %}Step {{ number }} of {{ total }}{% endblocktranslate %}: {{ title }}</h2>
+    {% block step %}{% endblock %}
+  </section>
+  <div class="actions setup-nav">
+    {% if back_url %}<a class="button" href="{{ back_url }}">{% translate "Back" %}</a>{% endif %}
+    <a class="button" href="{{ next_url }}">{% translate "Skip this step" %}</a>
+  </div>
+  <p class="help">{% translate "Nothing changes until you save a step. You can run the wizard again from Settings." %}</p>
+{% endblock %}

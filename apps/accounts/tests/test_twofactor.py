@@ -72,7 +72,7 @@ def test_login_asks_for_the_authenticator_code(client, admin_user):
     assert client.get(reverse("register:unit_list")).status_code == 302  # not logged in yet
 
     response = client.post(reverse("mfa_authenticate"), {"code": current_code()})
-    assert response.url == reverse("register:unit_list")
+    assert response.url == reverse("setup:start")  # a new install starts in the setup wizard
     assert client.get(reverse("register:unit_list")).status_code == 200
 
 

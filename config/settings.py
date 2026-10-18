@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     "apps.messaging",
     "apps.invoicing",
     "apps.plugins",
+    "apps.setup",
 ]
 
 # Plugins: installed packages that are Django apps, enabled by name (see

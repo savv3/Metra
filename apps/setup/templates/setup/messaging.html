@@ -1,0 +1,29 @@
+{% extends "setup/base.html" %}
+{% load i18n %}
+{% block step %}
+  <p>{% translate "Email and SMS are set by whoever installed Metra, in the server's settings file (.env). Here you can see what is set up and send yourself a test." %}</p>
+  <dl class="details-list">
+    <dt>{% translate "Email" %}</dt>
+    <dd>{% if email %}<span class="pill pill--ok">{% translate "Set up" %}</span> {% blocktranslate with sender=from_email %}Sent from {{ sender }}{% endblocktranslate %}{% else %}<span class="pill pill--warn">{% translate "Not set up" %}</span> <span class="help">METRA_EMAIL_HOST, METRA_EMAIL_USER, METRA_EMAIL_PASSWORD, METRA_EMAIL_FROM</span>{% endif %}</dd>
+    <dt>{% translate "SMS" %}</dt>
+    <dd>{% if sms %}<span class="pill pill--ok">{% translate "Set up" %}</span> {{ sms.name }} &middot; {% blocktranslate with sender=sms_sender %}Sender {{ sender }}{% endblocktranslate %}{% else %}<span class="pill pill--warn">{% translate "Not set up" %}</span> <span class="help">METRA_ELKS_API_USER, METRA_ELKS_API_PASSWORD, METRA_SMS_SENDER</span>{% endif %}</dd>
+  </dl>
+  {% if email %}
+    <form method="post" class="form form--inline">
+      {% csrf_token %}
+      <input type="hidden" name="channel" value="email">
+      <div class="field"><label for="test-email">{% translate "Send a test email to" %}</label><input type="email" id="test-email" name="to" value="{{ email_to }}" required></div>
+      <button type="submit" class="button">{% translate "Send test email" %}</button>
+    </form>
+  {% endif %}
+  {% if sms %}
+    <form method="post" class="form form--inline">
+      {% csrf_token %}
+      <input type="hidden" name="channel" value="sms">
+      <div class="field"><label for="test-sms">{% translate "Send a test SMS to" %}</label><input type="tel" id="test-sms" name="to" required></div>
+      <button type="submit" class="button">{% translate "Send test SMS" %}</button>
+    </form>
+  {% endif %}
+  <p class="help">{% translate "How to set them is described in INSTALL.md, under Email and SMS." %}</p>
+  <div class="actions"><a class="button button--primary" href="{{ next_url }}">{% translate "Continue" %}</a></div>
+{% endblock %}

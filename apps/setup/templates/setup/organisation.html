@@ -1,0 +1,6 @@
+{% extends "setup/base.html" %}
+{% load i18n %}
+{% block step %}
+  <p>{% translate "Who runs this installation. The contact details appear on the public page, on members' pages and in letters, so use the organisation's own details, not a person's." %}</p>
+  {% include "setup/_form.html" %}
+{% endblock %}

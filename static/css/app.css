@@ -489,3 +489,12 @@ th.num, td.num { text-align: right; white-space: nowrap; }
 .line-table input[type=text] { min-width: 4rem; }
 .line-table td:first-child input { min-width: 14rem; }
 .totals dd { text-align: left; }
+
+/* Setup wizard */
+.setup-steps ol { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; list-style: none; margin: 0 0 1rem; padding: 0; counter-reset: step; }
+.setup-steps li { counter-increment: step; }
+.setup-steps li::before { content: counter(step) ". "; color: var(--muted); }
+.setup-steps li.is-saved::before { content: "✓ "; color: var(--success); }
+.setup-steps li[aria-current="step"] a { font-weight: 600; text-decoration: none; color: var(--text); }
+.setup-logo { max-height: 4rem; max-width: 12rem; }
+.setup-nav { margin-bottom: 0.5rem; }

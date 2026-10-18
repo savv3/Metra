@@ -1,0 +1,22 @@
+{% extends "setup/base.html" %}
+{% load i18n roles %}
+{% block step %}
+  <p>{% translate "Invite the people who work in Metra. Each gets an email with a link to choose a password. Members do not need accounts: they use their personal links." %}</p>
+  {% if users %}
+    <h3>{% translate "Accounts" %}</h3>
+    <ul class="plain-list">
+      {% for u in users %}<li>{{ u.get_full_name|default:u.get_username }} <span class="help">{{ u.email }}{% with roles=u|role_names %}{% if roles %} &middot; {{ roles }}{% endif %}{% endwith %}</span></li>{% endfor %}
+    </ul>
+  {% endif %}
+  {% if email_set_up %}
+    <h3>{% translate "Invite someone" %}</h3>
+    <form method="post" class="form" novalidate>
+      {% csrf_token %}
+      {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+      <button type="submit" class="button button--primary">{% translate "Send invitation" %}</button>
+    </form>
+  {% else %}
+    <p class="notice">{% translate "Email is not set up, so invitations cannot be sent. Add people under Settings instead." %}</p>
+  {% endif %}
+  <div class="actions"><a class="button" href="{{ next_url }}">{% translate "Continue" %}</a></div>
+{% endblock %}
