@@ -27,7 +27,7 @@ class DjangoEmail(Provider):
     channel = EMAIL
     name = "django"
 
-    def send(self, recipient, body, subject="", callback_url=None, headers=None):
+    def send(self, recipient, body, subject="", callback_url=None, headers=None, attachments=None):
         message_id = make_msgid(domain=settings.MESSAGING["email_domain"])
         email = EmailMessage(
             subject=subject,
@@ -36,6 +36,8 @@ class DjangoEmail(Provider):
             to=[recipient],
             headers={"Message-ID": message_id, **(headers or {})},
         )
+        for filename, content, mimetype in attachments or []:
+            email.attach(filename, content, mimetype)
         try:
             email.send()
         except Exception as error:  # smtplib and socket errors alike

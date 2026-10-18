@@ -34,6 +34,12 @@
       {% for label, count in counts %}{% if count %}<li><strong>{{ count }}</strong> {{ label|lower }}</li>{% endif %}{% endfor %}
     </ul>
 
+    {% if to_print and batch.kind == "invoices" %}
+      <div class="status-panel status-panel--warning">
+        <h2>{% blocktranslate count count=to_print|length %}{{ count }} invoice goes by post{% plural %}{{ count }} invoices go by post{% endblocktranslate %}</h2>
+        <p><a class="button button--primary" href="{% url 'invoicing:batch_print' batch.pk %}">{% translate "PDF to print" %}</a></p>
+      </div>
+    {% endif %}
     {% if to_print and batch.round and perms.selfservice.add_selfservicelink %}
       <div class="status-panel status-panel--warning">
         <h2>{% blocktranslate count count=to_print|length %}{{ count }} household needs a letter{% plural %}{{ count }} households need a letter{% endblocktranslate %}</h2>

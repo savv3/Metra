@@ -28,6 +28,7 @@ from apps.readings.models import ReadingRound, ReadingType
 from apps.register.models import Organisation, Person, Tag, Unit, UnitType
 
 from .money import ZERO, cents, vat_of
+from .reference import fi_reference, grouped, invoice_base, rf_reference, virtual_barcode
 
 VAT_RATE_VALIDATORS = [MinValueValidator(0), MaxValueValidator(100)]
 
@@ -73,6 +74,17 @@ class BillingSettings(models.Model):
         default=1,
         validators=[MinValueValidator(1)],
         help_text=_("The number the next issued invoice gets. Numbers never skip."),
+    )
+
+    class ReferenceType(models.TextChoices):
+        FINNISH = "fi", _("Finnish reference number (viitenumero)")
+        RF = "rf", _("International RF creditor reference")
+
+    reference_type = models.CharField(
+        _("payment reference"),
+        max_length=2,
+        choices=ReferenceType.choices,
+        default=ReferenceType.FINNISH,
     )
     late_interest_text = models.CharField(
         _("late payment interest"),
@@ -338,6 +350,7 @@ class Invoice(models.Model):
     # Set when issued, never changed afterwards.
     sequence = models.PositiveIntegerField(_("sequence number"), null=True, blank=True, unique=True)
     number = models.CharField(_("number"), max_length=40, blank=True)
+    reference = models.CharField(_("payment reference"), max_length=30, blank=True)
     issue_date = models.DateField(_("invoice date"), null=True, blank=True)
     due_date = models.DateField(_("due date"), null=True, blank=True)
     seller = models.JSONField(_("seller"), default=dict, blank=True)
@@ -399,6 +412,19 @@ class Invoice(models.Model):
     @property
     def is_draft(self):
         return self.status == self.Status.DRAFT
+
+    @property
+    def reference_display(self):
+        return grouped(self.reference) if self.reference else ""
+
+    @property
+    def barcode(self):
+        """The virtual barcode bank apps read, or "" (credit notes, non-Finnish IBAN)."""
+        if not self.reference or self.kind != self.Kind.INVOICE:
+            return ""
+        return virtual_barcode(
+            self.seller.get("iban", ""), self.total, self.reference, self.due_date
+        )
 
     @property
     def is_overdue(self):
@@ -501,6 +527,11 @@ class Invoice(models.Model):
         self.number = f"{billing.number_prefix}{billing.next_number}"
         billing.next_number += 1
         billing.save(update_fields=["next_number"])
+        if self.kind == self.Kind.INVOICE:
+            reference = fi_reference(invoice_base(self.sequence))
+            if billing.reference_type == BillingSettings.ReferenceType.RF:
+                reference = rf_reference(reference)
+            self.reference = reference
         self.issue_date = today
         self.due_date = (
             today + datetime.timedelta(days=billing.payment_terms_days)
@@ -623,6 +654,37 @@ class InvoiceLine(models.Model):
             and not Invoice.objects.filter(pk=self.invoice_id, status=Invoice.Status.DRAFT).exists()
         ):
             raise LockedError("Lines of an issued invoice cannot change.")
+
+
+class InvoiceDelivery(models.Model):
+    """How an issued invoice reached its recipient: an email (with the message
+    record) or a printed letter."""
+
+    class Channel(models.TextChoices):
+        EMAIL = "email", _("Email")
+        LETTER = "letter", _("Letter")
+
+    invoice = models.ForeignKey(
+        Invoice, verbose_name=_("invoice"), on_delete=models.CASCADE, related_name="deliveries"
+    )
+    channel = models.CharField(_("channel"), max_length=10, choices=Channel.choices)
+    message = models.ForeignKey(
+        "messaging.Message",
+        verbose_name=_("message"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="invoice_deliveries",
+    )
+    created_at = models.DateTimeField(_("created"), auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at", "-pk"]
+        verbose_name = _("invoice delivery")
+        verbose_name_plural = _("invoice deliveries")
+
+    def __str__(self):
+        return f"{self.invoice} – {self.get_channel_display()}"
 
 
 auditlog.register(BillingSettings)

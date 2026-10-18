@@ -1,10 +1,11 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n invoicing %}
 {% block title %}{{ invoice }}{% endblock %}
 {% block content %}
   <div class="page-head">
     <h1>{{ invoice }}{% if invoice.is_overdue %} <span class="badge">{% translate "Overdue" %}</span>{% endif %}</h1>
     <div class="actions">
+      <a class="button" href="{% url 'invoicing:invoice_pdf' invoice.pk %}">{% if invoice.is_draft %}{% translate "Preview PDF" %}{% else %}PDF{% endif %}</a>
       {% if invoice.is_draft %}
         {% if perms.invoicing.issue_invoice %}
           <form method="post" action="{% url 'invoicing:invoice_issue' invoice.pk %}" class="inline-form">
@@ -46,6 +47,7 @@
     <dd>{% if invoice.is_draft %}<a href="{{ invoice.person.get_absolute_url }}">{{ invoice.person.full_name }}</a>{% else %}{{ invoice.buyer.name }}{% endif %}<br>
       {% if invoice.is_draft %}{% for line in invoice.buyer_from_register.address %}{{ line }}<br>{% endfor %}{% else %}{% for line in invoice.buyer.address %}{{ line }}<br>{% endfor %}{% endif %}</dd>
     <dt>{% translate "Unit" %}</dt><dd><a href="{{ invoice.unit.get_absolute_url }}">{{ invoice.unit.name }}</a></dd>
+    {% if invoice.reference %}<dt>{% translate "Reference" %}</dt><dd>{{ invoice.reference_display }}</dd>{% endif %}
     {% if invoice.issue_date %}<dt>{% translate "Invoice date" %}</dt><dd>{{ invoice.issue_date|date:"SHORT_DATE_FORMAT" }}</dd>{% endif %}
     {% if invoice.due_date %}<dt>{% translate "Due date" %}</dt><dd>{{ invoice.due_date|date:"SHORT_DATE_FORMAT" }}</dd>{% endif %}
     {% if invoice.issued_by %}<dt>{% translate "Issued by" %}</dt><dd>{{ invoice.issued_by }}</dd>{% endif %}
@@ -87,7 +89,7 @@
         </tr></thead>
         <tbody>
           {% for line in lines %}
-            <tr><td>{{ line.description }}</td><td class="num">{{ line.quantity|floatformat:"-3" }} {{ line.unit_label }}</td><td class="num">{{ line.unit_price|floatformat:"-4" }} €</td>{% if invoice.vat_registered %}<td class="num">{{ line.vat_rate|floatformat:"-2" }}</td>{% endif %}<td class="num">{{ line.net|floatformat:2 }} €</td></tr>
+            <tr><td>{{ line.description }}</td><td class="num">{{ line.quantity|quantity }} {{ line.unit_label }}</td><td class="num">{{ line.unit_price|price }} €</td>{% if invoice.vat_registered %}<td class="num">{{ line.vat_rate|floatformat:"-2" }}</td>{% endif %}<td class="num">{{ line.net|floatformat:2 }} €</td></tr>
           {% endfor %}
         </tbody>
       </table>
@@ -108,6 +110,11 @@
     {% endif %}
     <dt>{% translate "To pay" %}</dt><dd><strong>{{ invoice.total|floatformat:2 }} €</strong></dd>
   </dl>
+
+  {% if deliveries %}
+    <h2>{% translate "Sent" %}</h2>
+    <ul class="plain-list">{% for delivery in deliveries %}<li>{{ delivery.created_at|date:"SHORT_DATETIME_FORMAT" }} &middot; {{ delivery.get_channel_display }}{% if delivery.message %} &middot; {{ delivery.message.recipient }} &middot; {{ delivery.message.get_status_display }}{% endif %}</li>{% endfor %}</ul>
+  {% endif %}
 
   {% if credit_notes %}
     <h2>{% translate "Credit notes" %}</h2>

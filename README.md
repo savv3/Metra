@@ -259,6 +259,31 @@ with a **credit note**, which can credit all or part of it.
 
 Treasurer and Admin run invoicing; Board can look at it; Read-only cannot.
 
+### Invoice PDFs and sending
+
+Issued invoices are PDFs with everything a Finnish invoice needs: the
+seller's details and business ID, the buyer, the lines, VAT per rate or the
+exemption text, the due date, the payment reference and a payment block
+with the IBAN, a SEPA payment QR code and the bank barcode
+(virtuaaliviivakoodi) that bank apps read. The reference is a Finnish
+reference number (viitenumero) by default; **Settings > Invoice settings >
+Payment reference** switches to international RF references. The barcode
+needs a Finnish IBAN.
+
+**Send invoices** on a run page emails each issued invoice with its PDF
+attached (the text is under **Settings > Message templates**, "Invoice").
+Recipients without email, or who prefer post, end up in **PDF to print** on
+the send-out page; **PDF of invoices for post** on the run page gives the
+same letters at any time. Members find their household's invoices as PDFs
+on their self-service page.
+
+PDFs are made with [WeasyPrint](https://weasyprint.org), which the Docker
+image includes. For local development install its Pango library
+(`brew install pango` on a Mac, `apt install libpango-1.0-0
+libpangoft2-1.0-0` on Debian or Ubuntu); on a Mac also run the app with
+`DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib` so Python finds it. Without
+Pango everything works except making PDFs, and the PDF tests are skipped.
+
 ### Email and SMS
 
 **Email** goes out over SMTP when `SCR_EMAIL_HOST` is set, with
@@ -297,7 +322,8 @@ and the [example plugin](plugins/example).
 
 ## Develop locally
 
-Needs Python 3.13, [uv](https://docs.astral.sh/uv/) and GNU gettext.
+Needs Python 3.13, [uv](https://docs.astral.sh/uv/) and GNU gettext, and
+Pango for invoice PDFs (see [Invoice PDFs and sending](#invoice-pdfs-and-sending)).
 
 ```sh
 uv sync

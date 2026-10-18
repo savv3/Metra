@@ -3,15 +3,20 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.db.models import Count, Q, Sum
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
+from apps.messaging.models import MessageBatch
 from apps.register.history import log_view, object_history
 
+from .delivery import channel_for, filename, unsent
 from .forms import InvoiceForm, LineFormSet, RunForm
-from .models import BillingSettings, Invoice, InvoiceRun
+from .models import BillingSettings, Invoice, InvoiceDelivery, InvoiceRun
+from .pdf import PDFUnavailable, render_pdf
 from .runs import build_run, rebuild_invoice
+from .tasks import send_invoices_task
 
 STATUS_FILTERS = ["draft", "issued", "overdue", "credited", "credit_notes"]
 
@@ -64,6 +69,7 @@ def invoice_detail(request, pk):
         "lines": invoice.lines.all(),
         "breakdown": invoice.vat_breakdown(),
         "credit_notes": invoice.credit_notes.all(),
+        "deliveries": invoice.deliveries.select_related("message"),
         "can_issue_problems": invoice.check_can_issue() if invoice.is_draft else [],
     }
     can_edit = request.user.has_perm("invoicing.change_invoice") and invoice.is_draft
@@ -182,6 +188,7 @@ def run_detail(request, pk):
     context = {
         "run": run,
         "invoices": invoices,
+        "unsent": unsent(run.invoices.all()).count(),
         "drafts": len(drafts),
         "with_problems": [i for i in drafts if i.problems],
         "totals": invoices.aggregate(total=Sum("total"), vat=Sum("total_vat")),
@@ -223,3 +230,86 @@ def run_issue(request, pk):
             _("%(count)s drafts were not issued: check them first.") % {"count": held},
         )
     return redirect(run)
+
+
+# PDFs and sending
+
+
+def pdf_response(pdf, name, inline=True):
+    response = HttpResponse(pdf, content_type="application/pdf")
+    disposition = "inline" if inline else "attachment"
+    response["Content-Disposition"] = f'{disposition}; filename="{name}"'
+    response["Cache-Control"] = "private, no-store"
+    return response
+
+
+def _pdf_or_message(request, invoices, name, fallback):
+    try:
+        pdf = render_pdf(invoices)
+    except PDFUnavailable as error:
+        messages.error(request, str(error))
+        return redirect(fallback)
+    return pdf_response(pdf, name)
+
+
+@login_required
+@permission_required("invoicing.view_invoice", raise_exception=True)
+def invoice_pdf(request, pk):
+    invoice = get_object_or_404(Invoice, pk=pk)
+    log_view(invoice)
+    name = filename(invoice) if invoice.number else "draft.pdf"
+    return _pdf_or_message(request, [invoice], name, invoice)
+
+
+@login_required
+@permission_required("invoicing.view_invoice", raise_exception=True)
+def run_print(request, pk):
+    """One PDF with every issued invoice of the run that goes by post."""
+    run = get_object_or_404(InvoiceRun, pk=pk)
+    invoices = [
+        invoice
+        for invoice in run.invoices.issued().select_related("person", "unit").order_by("sequence")
+        if channel_for(invoice) == InvoiceDelivery.Channel.LETTER
+    ]
+    if not invoices:
+        messages.info(request, _("No invoices in this run go by post."))
+        return redirect(run)
+    return _pdf_or_message(request, invoices, f"invoices-{run.period_label}-post.pdf", run)
+
+
+@login_required
+@permission_required("invoicing.view_invoice", raise_exception=True)
+def batch_print(request, pk):
+    """The letters of a send-out of invoices, as one PDF to print."""
+    batch = get_object_or_404(MessageBatch, pk=pk, kind=MessageBatch.Kind.INVOICES)
+    invoices = list(
+        Invoice.objects.filter(
+            deliveries__message__batch=batch, deliveries__channel=InvoiceDelivery.Channel.LETTER
+        ).order_by("sequence")
+    )
+    if not invoices:
+        messages.info(request, _("There is nothing to print in this send-out."))
+        return redirect(batch)
+    return _pdf_or_message(request, invoices, f"invoices-post-{batch.pk}.pdf", batch)
+
+
+@login_required
+@permission_required(["invoicing.issue_invoice", "invoicing.view_invoice"], raise_exception=True)
+@require_POST
+def run_send(request, pk):
+    """Email the run's issued invoices that have not gone out yet; the rest are
+    listed for printing on the send-out page."""
+    run = get_object_or_404(InvoiceRun, pk=pk)
+    invoices = list(unsent(run.invoices.all()).values_list("pk", flat=True))
+    if not invoices:
+        messages.info(request, _("All issued invoices of this run have been sent."))
+        return redirect(run)
+    batch = MessageBatch.objects.create(
+        kind=MessageBatch.Kind.INVOICES,
+        channels=MessageBatch.Channels.EMAIL,
+        audience=str(run),
+        created_by=request.user,
+    )
+    send_invoices_task(batch.pk, invoices)
+    messages.success(request, _("Sending has started. This page shows how it goes."))
+    return redirect(batch)

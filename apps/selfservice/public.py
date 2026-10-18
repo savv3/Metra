@@ -2,6 +2,7 @@
 
 from auditlog.context import set_extra_data
 from auditlog.models import LogEntry
+from django.apps import apps
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.utils import timezone
@@ -144,5 +145,47 @@ def member_page(request, token):
         "organisation": Organisation.current(),
         "notices": Notice.objects.current(),
         "consent": ConsentRecord.current(link.person),
+        "invoices": _invoices(link),
     }
     return _private(render(request, "selfservice/member.html", context))
+
+
+def _invoices(link):
+    """The household's issued invoices and credit notes, newest first."""
+    if not apps.is_installed("apps.invoicing"):
+        return []
+    from apps.invoicing.models import Invoice
+
+    return Invoice.objects.issued().filter(unit=link.unit).order_by("-issue_date", "-sequence")[:20]
+
+
+@never_cache
+def member_invoice(request, token, pk):
+    """An invoice PDF for the household behind the link."""
+    if not ratelimit.allow_visit(request):
+        return _unavailable(request, status=429)
+    link = SelfServiceLink.find(token)
+    if link is None or not apps.is_installed("apps.invoicing"):
+        ratelimit.record_failure(request)
+        return _unavailable(request)
+    from apps.invoicing.delivery import filename
+    from apps.invoicing.models import Invoice
+    from apps.invoicing.pdf import PDFUnavailable, render_pdf
+    from apps.invoicing.views import pdf_response
+
+    invoice = Invoice.objects.issued().filter(pk=pk, unit=link.unit).first()
+    if invoice is None:
+        return _unavailable(request)
+    LogEntry.objects.log_create(
+        invoice,
+        action=LogEntry.Action.ACCESS,
+        changes=None,
+        force_log=True,
+        additional_data={"self_service_link": link.pk, "person_id": link.person_id},
+        remote_addr=ratelimit.client_ip(request) or None,
+    )
+    try:
+        pdf = render_pdf([invoice])
+    except PDFUnavailable:
+        return _unavailable(request)
+    return _private(pdf_response(pdf, filename(invoice)))

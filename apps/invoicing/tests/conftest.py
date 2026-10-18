@@ -2,6 +2,7 @@ import datetime
 from decimal import Decimal as D
 
 import pytest
+from django.utils import translation
 
 from apps.invoicing.models import BillingSettings, FeeLine, FeePlan
 from apps.readings.models import Reading, ReadingRound, ReadingType
@@ -96,3 +97,10 @@ def make_household(household):
 @pytest.fixture
 def treasurer_client(role_client):
     return role_client("Treasurer")
+
+
+@pytest.fixture(autouse=True)
+def english():
+    """Messages in English, whatever an earlier test left active."""
+    with translation.override("en"):
+        yield

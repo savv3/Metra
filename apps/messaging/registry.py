@@ -31,9 +31,10 @@ class Provider:
     channel = ""
     name = ""
 
-    def send(self, recipient, body, subject="", callback_url=None, headers=None):
+    def send(self, recipient, body, subject="", callback_url=None, headers=None, attachments=None):
         """Send and return a SendResult, or raise ProviderError. Email providers
-        add ``headers`` (e.g. List-Unsubscribe) to the message; SMS ignore them."""
+        add ``headers`` (e.g. List-Unsubscribe) and ``attachments`` ([(filename,
+        bytes, mimetype)], e.g. an invoice PDF) to the message; SMS ignore them."""
         raise NotImplementedError
 
     def delivery_callback_url(self):
