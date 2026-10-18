@@ -22,6 +22,9 @@ docker compose up -d --build
 Caddy serves the app on your domain with automatic HTTPS. All data lives in
 the `data` Docker volume.
 
+To host several organisations on one server, each as its own separate
+install, see [docs/multiple-organisations.md](docs/multiple-organisations.md).
+
 ## Backup and restore
 
 Every night at 02:30 (`SCR_BACKUP_TIME`, local time) the worker makes a

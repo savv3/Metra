@@ -5,7 +5,7 @@ services:
       args:
         # Extra plugin packages to install into the image (see docs/plugins.md).
         SCR_PLUGIN_PACKAGES: ${SCR_PLUGIN_PACKAGES:-}
-    image: smallcompanyregister:latest
+    image: ${SCR_IMAGE:-smallcompanyregister:latest}
     command: web
     env_file: .env
     environment:
@@ -22,7 +22,7 @@ services:
       start_period: 30s
 
   worker:
-    image: smallcompanyregister:latest
+    image: ${SCR_IMAGE:-smallcompanyregister:latest}
     command: worker
     env_file: .env
     volumes:
