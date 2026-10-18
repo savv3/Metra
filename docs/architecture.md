@@ -159,12 +159,70 @@ flowchart TD
     gate{{Pilot with the water association}}
     p3[Phase 3: Messaging<br/>SMS and email to groups, newsletters with consent]
     p4[Phase 4: Invoicing<br/>fee plans, usage lines, numbered PDF invoices, email and print]
-    p5[Phase 5: Integrations<br/>public REST API, webhooks, bookkeeping export, e-invoicing later]
-    p1 --> p2 --> gate --> p3 --> p4 --> p5
+    p5[Phase 5: Integrations<br/>public REST API, webhooks, bookkeeping export]
+    p6[Phase 6: Bank file import<br/>match payments by reference number]
+    p7[Phase 7: E-invoicing<br/>Finvoice, Peppol later]
+    p8[Phase 8: Privacy automation<br/>retention rules that run on a schedule]
+    p9[Phase 9: Sweden<br/>Bankgiro with OCR references, Swish, Swedish rules]
+    p10[Phase 10: Orchestrator<br/>separate tool: self-service sign-up, many installs]
+    p11[Phase 11: Support plugin<br/>time-limited, audited access to help with setup]
+    p1 --> p2 --> gate --> p3 --> p4 --> p5 --> p6 --> p7 --> p8 --> p9 --> p10 --> p11
 ```
 
 The API is built into every phase, since pages and API share models and
 permissions; phase 5 opens it to outside systems.
+
+| Phase | Status |
+| --- | --- |
+| 1 to 4 | Done. Alongside them: alerts, a public page, Finnish, the rename to Metra, a new layout with a dark theme, and READMEs in three languages |
+| 5 to 11 | Planned. Each phase gets a build plan with one row per pull request before work starts |
+
+## Later phases
+
+Outlines only; each becomes a build plan like the ones below when it is
+next.
+
+- **Phase 6: Bank file import.** Import the bank's ISO 20022 statement
+  files (camt.054 for incoming reference payments, camt.053 as a fallback)
+  and match payments to open invoices by reference number, Finnish or RF.
+  Unmatched and partial payments land in a review list for the treasurer.
+  Importing the same file twice is safe. Bank formats sit behind an
+  importer interface, open to plugins.
+- **Phase 7: E-invoicing.** Send invoices as Finvoice to business clients
+  and members who ask for it, through an operator behind a provider
+  interface, chosen per unit. Peppol follows when a client needs it.
+  Households keep getting PDFs.
+- **Phase 8: Privacy automation.** Admin-set retention rules per kind of
+  data (archived people, old messages, readings, audit entries) run on a
+  schedule in the worker, with a preview of what the next run removes and
+  a log of what it did. Bookkeeping material keeps its legal period and is
+  never removed early.
+- **Phase 9: Sweden.** Country rules become a setting per organisation:
+  Swedish VAT and invoice details, Bankgiro and OCR references, Swish
+  payment requests and QR codes, and Swedish bookkeeping retention (7
+  years). This proves the country layer so further countries are mostly
+  configuration.
+- **Phase 10: Orchestrator.** A separate tool in its own repository that
+  runs many Metra installations, so an organisation can sign up and get
+  its own install without the maintainer's help, and so hosting can later
+  be sold. Each customer keeps a separate install with its own data
+  directory and SQLite database, which keeps data apart and backups simple.
+  The orchestrator handles sign-up, creating, upgrading, suspending and
+  deleting installs, a domain or subdomain per install, health and backup
+  status, and later plans and payment. Metra itself needs only small
+  additions: a command that creates an organisation and its first admin
+  (sent a one-time setup link), and a way to read version and health.
+- **Phase 11: Support plugin.** A plugin, the first in the plugins
+  repository (see [Plugins](#plugins)), that lets
+  the maintainer help an organisation set up its install. The
+  organisation's admin grants support access from a page in the app, for
+  a limited time and with a role they choose; support signs in with their
+  own account and two-factor login, never a shared password, and access
+  ends by itself or when the admin revokes it. Everything support does is
+  in the audit log under their name, and a banner shows staff when
+  support access is open. Admins can also send a help request with the
+  page they were on. It works on a standalone install and through the
+  orchestrator, which can list the installs that have granted access.
 
 ## Phase 1 build plan
 
@@ -339,6 +397,12 @@ Organisations can extend the app without forking it.
   (`plugins/example`) and is used in the tests.
 
 How to install, enable and write plugins is in [plugins.md](plugins.md).
+
+Official plugins that are not part of the core live in a separate
+plugins repository, one Python package per plugin, each installable with
+pip and tested against the current Metra release. The repository is
+created with the first such plugin, the support plugin in phase 11. The
+example plugin stays in this repository because the core tests use it.
 
 The plugin core ships in phase 2 (PR 10) with the first extension points:
 navigation, unit and person panels, and messaging providers. Every later
