@@ -3,7 +3,10 @@
 An installation picks one provider per channel with a setting
 (``METRA_SMS_PROVIDER``, ``METRA_EMAIL_BACKEND``). Providers register here
 under a name, so another one (GatewayAPI, Sinch, a plugin's own) can be
-added without touching the code that sends messages.
+added without touching the code that sends messages. With
+``METRA_SMS_PROVIDER`` left at "auto", the first registered provider that
+says it is configured is used, so installing a provider plugin and giving it
+its settings is enough.
 """
 
 from dataclasses import dataclass
@@ -30,6 +33,11 @@ class Provider:
 
     channel = ""
     name = ""
+
+    @classmethod
+    def is_configured(cls):
+        """True when the provider has what it needs to send, so "auto" may pick it."""
+        return False
 
     def send(self, recipient, body, subject="", callback_url=None, headers=None, attachments=None):
         """Send and return a SendResult, or raise ProviderError. Email providers
@@ -62,11 +70,25 @@ class ProviderRegistry:
         except KeyError:
             raise ProviderError(f"No {channel} provider called {name!r}") from None
 
+    def configured(self, channel):
+        """The first registered provider of the channel that is configured, or None."""
+        for provider_class in self._providers[channel].values():
+            if provider_class.is_configured():
+                return provider_class()
+        return None
+
 
 registry = ProviderRegistry()
+
+AUTO = "auto"
 
 
 def provider_for(channel):
     """The installation's provider for a channel, or None when it is not set up."""
     name = settings.MESSAGING[f"{channel}_provider"]
-    return registry.get(channel, name) if name else None
+    if name == AUTO:
+        provider = registry.configured(channel)
+        if provider is None and settings.DEBUG and channel == SMS:
+            provider = registry.get(channel, "console")
+        return provider
+    return registry.get(channel, name) if name and name != "none" else None

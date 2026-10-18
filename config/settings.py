@@ -285,19 +285,17 @@ EMAIL_BACKEND = {
     "console": "django.core.mail.backends.console.EmailBackend",
 }.get(_email_backend, "django.core.mail.backends.dummy.EmailBackend")
 
-_elks_user = os.environ.get("METRA_ELKS_API_USER", "")
 _reminder_days = os.environ.get("METRA_READING_REMINDER_DAYS", "").strip()
 MESSAGING = {
     # Names in apps.messaging.registry; empty means the channel is not set up.
     "email_provider": "" if _email_backend == "none" else "django",
-    "sms_provider": os.environ.get("METRA_SMS_PROVIDER", "").strip().lower()
-    or ("46elks" if _elks_user else ("console" if DEBUG else "")),
+    # SMS: a provider's name, "none", or "auto" (the default): the first
+    # provider that is configured (the bundled 46elks plugin is when its
+    # METRA_ELKS_* settings are set), else the console in development.
+    "sms_provider": os.environ.get("METRA_SMS_PROVIDER", "").strip().lower() or "auto",
     "email_domain": DEFAULT_FROM_EMAIL.rpartition("@")[2] or "localhost",
     "sms_sender": os.environ.get("METRA_SMS_SENDER", "") or "Register",
     "sms_country_code": (os.environ.get("METRA_SMS_COUNTRY_CODE") or "358").lstrip("+"),
-    "elks_api_user": _elks_user,
-    "elks_api_password": os.environ.get("METRA_ELKS_API_PASSWORD", ""),
-    "elks_dry_run": env_bool("METRA_ELKS_DRY_RUN"),
     # Automatic reminders to units missing a reading, this many days before a
     # round closes. Off unless set.
     "reminder_days_before_close": int(_reminder_days) if _reminder_days else None,

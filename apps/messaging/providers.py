@@ -1,19 +1,13 @@
-"""The built-in providers: email through Django, SMS through 46elks, and
-console and dummy SMS providers for development and tests."""
+"""The built-in providers: email through Django, and console and dummy SMS
+providers for development and tests. Real SMS providers are plugins, such as
+the bundled 46elks plugin in plugins/sms-46elks."""
 
-import base64
-import json
 import logging
 import re
-import urllib.error
-import urllib.parse
-import urllib.request
 
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.core.mail.message import make_msgid
-from django.urls import reverse
-from django.utils.crypto import salted_hmac
 
 from .registry import EMAIL, SMS, Provider, ProviderError, SendResult, registry
 
@@ -60,56 +54,6 @@ def normalise_phone(number, country_code):
     if not 8 <= len(digits) <= 15:
         raise ProviderError(f"Not a phone number: {number!r}")
     return "+" + digits
-
-
-def elks_callback_secret():
-    """Part of the delivery-report address, so only 46elks (who knows it) can post there."""
-    return salted_hmac("scr.messaging.46elks", "delivery").hexdigest()[:32]
-
-
-@registry.register
-class FortySixElks(Provider):
-    """SMS through 46elks (https://46elks.com), a Swedish provider."""
-
-    channel = SMS
-    name = "46elks"
-    api_url = "https://api.46elks.com/a1/sms"
-
-    def delivery_callback_url(self):
-        # 46elks can only report to a public HTTPS address.
-        if not settings.BASE_URL.startswith("https://"):
-            return None
-        return settings.BASE_URL + reverse("messaging:elks_delivery", args=[elks_callback_secret()])
-
-    def send(self, recipient, body, subject="", callback_url=None, headers=None):
-        config = settings.MESSAGING
-        if not (config["elks_api_user"] and config["elks_api_password"]):
-            raise ProviderError("Set METRA_ELKS_API_USER and METRA_ELKS_API_PASSWORD.")
-        data = {
-            "from": config["sms_sender"],
-            "to": normalise_phone(recipient, config["sms_country_code"]),
-            "message": body,
-        }
-        if callback_url:
-            data["whendelivered"] = callback_url
-        if config["elks_dry_run"]:
-            data["dryrun"] = "yes"
-        credentials = f"{config['elks_api_user']}:{config['elks_api_password']}"
-        request = urllib.request.Request(
-            self.api_url,
-            data=urllib.parse.urlencode(data).encode(),
-            headers={"Authorization": "Basic " + base64.b64encode(credentials.encode()).decode()},
-            method="POST",
-        )
-        try:
-            with urllib.request.urlopen(request, timeout=20) as response:
-                payload = json.load(response)
-        except urllib.error.HTTPError as error:
-            detail = error.read(300).decode(errors="replace")
-            raise ProviderError(f"46elks: {error.code} {detail}") from error
-        except (urllib.error.URLError, TimeoutError, ValueError) as error:
-            raise ProviderError(f"46elks: {error}") from error
-        return SendResult(provider_id=payload.get("id", ""))
 
 
 @registry.register

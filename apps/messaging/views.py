@@ -1,13 +1,10 @@
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
 from django.db.models import Count
-from django.http import FileResponse, Http404, HttpResponse
+from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.utils import timezone
-from django.utils.crypto import constant_time_compare
 from django.utils.translation import gettext as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -19,7 +16,6 @@ from apps.register.models import Unit
 from . import attachments, broadcast, newsletter
 from .forms import ConsentForm, MessageForm, NewsletterForm
 from .models import Attachment, ConsentRecord, Message, MessageBatch, MessageTemplate
-from .providers import elks_callback_secret
 from .registry import EMAIL, SMS, provider_for
 from .sms import segments
 from .tasks import send_batch_task
@@ -28,8 +24,8 @@ from .tasks import send_batch_task
 def channel_status():
     """Which channels this installation can send on, for the send buttons."""
     return {
-        "sms": settings.MESSAGING["sms_provider"] if provider_for(SMS) else "",
-        "email": settings.MESSAGING["email_provider"] if provider_for(EMAIL) else "",
+        "sms": getattr(provider_for(SMS), "name", ""),
+        "email": getattr(provider_for(EMAIL), "name", ""),
     }
 
 
@@ -83,24 +79,6 @@ def batch_detail(request, pk):
         "to_print": to_print,
     }
     return render(request, "messaging/batch_detail.html", context)
-
-
-@csrf_exempt
-@require_POST
-def elks_delivery(request, secret):
-    """46elks reports here whether an SMS was delivered (the "whendelivered" URL)."""
-    if not constant_time_compare(secret, elks_callback_secret()):
-        raise Http404
-    provider_id = request.POST.get("id", "")
-    status = {"delivered": Message.Status.DELIVERED, "failed": Message.Status.FAILED}.get(
-        request.POST.get("status", "")
-    )
-    if provider_id and status:
-        Message.objects.filter(channel=SMS, provider="46elks", provider_id=provider_id).update(
-            status=status, status_changed_at=timezone.now()
-        )
-    # 46elks retries anything but 200, so unknown ids are acknowledged too.
-    return HttpResponse("")
 
 
 @login_required
