@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 22:47+0300\n"
+"POT-Creation-Date: 2026-10-18 22:51+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,7 +89,8 @@ msgstr "Namn"
 #: apps/register/csv_io.py:520 apps/register/models.py:265
 #: apps/register/templates/register/_person_results.html:8
 #: apps/register/templates/register/person_detail.html:19
-#: apps/register/templates/register/unit_detail.html:39
+#: apps/register/templates/register/unit_detail.html:39 apps/setup/forms.py:142
+#: apps/setup/templates/setup/messaging.html:6
 msgid "Email"
 msgstr "E-post"
 
@@ -191,6 +192,7 @@ msgid "started"
 msgstr "startad"
 
 #: apps/backups/models.py:14 apps/messaging/models.py:85
+#: apps/setup/models.py:10
 msgid "finished"
 msgstr "klar"
 
@@ -1001,7 +1003,7 @@ msgstr "%(type)s är lägre än föregående avläsning."
 #: apps/invoicing/templates/invoicing/invoice_list.html:3
 #: apps/invoicing/templates/invoicing/invoice_list.html:6
 #: apps/invoicing/templates/invoicing/run_detail.html:31
-#: apps/messaging/models.py:43 templates/base.html:24
+#: apps/messaging/models.py:43 apps/setup/views.py:44 templates/base.html:24
 msgid "Invoices"
 msgstr "Fakturor"
 
@@ -1939,7 +1941,7 @@ msgstr "Till exempel: underskriven blankett vid årsmötet."
 
 #: apps/messaging/models.py:28
 #: apps/messaging/templates/messaging/compose.html:19
-#: apps/register/models.py:266
+#: apps/register/models.py:266 apps/setup/templates/setup/messaging.html:8
 msgid "SMS"
 msgstr "SMS"
 
@@ -2796,6 +2798,7 @@ msgid "Save"
 msgstr "Spara"
 
 #: apps/readings/templates/readings/_round_row.html:24
+#: apps/setup/templates/setup/done.html:10
 msgid "Saved"
 msgstr "Sparad"
 
@@ -3089,11 +3092,11 @@ msgstr "Arkiverad"
 msgid "Contacts"
 msgstr "Kontakter"
 
-#: apps/register/csv_io.py:518
+#: apps/register/csv_io.py:518 apps/setup/forms.py:140
 msgid "First name"
 msgstr "Förnamn"
 
-#: apps/register/csv_io.py:519
+#: apps/register/csv_io.py:519 apps/setup/forms.py:141
 msgid "Last name"
 msgstr "Efternamn"
 
@@ -3713,7 +3716,7 @@ msgid "This person will be added to %(for_unit)s"
 msgstr "Personen läggs till i %(for_unit)s"
 
 #: apps/register/templates/register/person_form.html:12
-#: apps/register/templates/register/unit_detail.html:38
+#: apps/register/templates/register/unit_detail.html:38 apps/setup/forms.py:143
 msgid "Role"
 msgstr "Roll"
 
@@ -3892,8 +3895,8 @@ msgid "Print self-service letter"
 msgstr "Skriv ut brev med länk"
 
 #: apps/selfservice/templates/selfservice/base.html:9
-#: apps/selfservice/templates/selfservice/base.html:18 templates/base.html:7
-#: templates/base.html:18
+#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:262
+#: templates/base.html:7 templates/base.html:18
 msgid "Metra"
 msgstr "Metra"
 
@@ -3901,7 +3904,7 @@ msgstr "Metra"
 msgid "Skip to content"
 msgstr "Hoppa till innehållet"
 
-#: apps/selfservice/templates/selfservice/base.html:19
+#: apps/selfservice/templates/selfservice/base.html:19 apps/setup/views.py:40
 #: templates/_language_form.html:5
 msgid "Language"
 msgstr "Språk"
@@ -4228,15 +4231,492 @@ msgstr "Länken fungerar inte längre."
 msgid "%(count)s links no longer work."
 msgstr "%(count)s länkar fungerar inte längre."
 
-#: config/settings.py:183
+#: apps/setup/apps.py:7 apps/setup/models.py:28
+#: apps/setup/templates/setup/base.html:3
+#: apps/setup/templates/setup/done.html:3
+msgid "Setup"
+msgstr "Installation"
+
+#: apps/setup/examples.py:17
+msgid "Household"
+msgstr "Hushåll"
+
+#: apps/setup/examples.py:18
+msgid "A property connected to the water network."
+msgstr "En fastighet ansluten till vattennätet."
+
+#: apps/setup/examples.py:21
+msgid "Property ID"
+msgstr "Fastighetsbeteckning"
+
+#
+#: apps/setup/examples.py:22
+msgid "Meter number"
+msgstr "Mätarnummer"
+
+#: apps/setup/examples.py:23
+msgid "Year connected"
+msgstr "Anslutningsår"
+
+#: apps/setup/examples.py:26
+msgid "Connection"
+msgstr "Anslutning"
+
+#: apps/setup/examples.py:28
+msgid "Water"
+msgstr "Vatten"
+
+#: apps/setup/examples.py:28
+msgid "Water and sewage"
+msgstr "Vatten och avlopp"
+
+#: apps/setup/examples.py:31
+msgid "Number of residents"
+msgstr "Antal boende"
+
+#
+#: apps/setup/examples.py:47
+msgid "Water meter"
+msgstr "Vattenmätare"
+
+#
+#: apps/setup/forms.py:49
+msgid "Your language"
+msgstr "Ditt språk"
+
+#: apps/setup/forms.py:53
+msgid ""
+"Everyone picks their own language in the menu, and members on their own "
+"pages."
+msgstr ""
+"Var och en väljer sitt eget språk i menyn, och medlemmar på sina egna sidor."
+
+#
+#: apps/setup/forms.py:78
+msgid "Applies to"
+msgstr "Gäller"
+
+#
+#: apps/setup/forms.py:89 apps/setup/templates/setup/types.html:19
+msgid "Every person"
+msgstr "Alla personer"
+
+#: apps/setup/forms.py:111
+msgid "There is already a field with this name."
+msgstr "Det finns redan ett fält med det här namnet."
+
+#
+#: apps/setup/forms.py:152
+msgid "Someone already has this email as their username."
+msgstr "Någon har redan den här e-postadressen som användarnamn."
+
+#
+#: apps/setup/forms.py:158
+msgid "Send a test to"
+msgstr "Skicka ett test till"
+
+#
+#: apps/setup/models.py:13
+msgid "finished by"
+msgstr "slutförd av"
+
+#: apps/setup/models.py:23 apps/setup/models.py:24
+msgid "setup"
+msgstr "installation"
+
+#: apps/setup/models.py:25
+msgid "Can run the setup wizard"
+msgstr "Kan köra installationsguiden"
+
+#: apps/setup/templates/admin/metra_index.html:7
+msgid "Setup wizard"
+msgstr "Installationsguide"
+
+#: apps/setup/templates/admin/metra_index.html:9
+msgid ""
+"Organisation, language, logo, units and fields, email and SMS, invoices and "
+"the board, step by step."
+msgstr ""
+"Organisation, språk, logotyp, enheter och fält, e-post och sms, fakturor och "
+"styrelsen, steg för steg."
+
+#: apps/setup/templates/admin/metra_index.html:10
+msgid "Run the setup wizard"
+msgstr "Kör installationsguiden"
+
+#
+#: apps/setup/templates/setup/_form.html:7
+msgid "Save and continue"
+msgstr "Spara och fortsätt"
+
+#: apps/setup/templates/setup/base.html:6
+#: apps/setup/templates/setup/done.html:5
+msgid "Set up Metra"
+msgstr "Ställ in Metra"
+
+#: apps/setup/templates/setup/base.html:8
+msgid "Setup steps"
+msgstr "Steg i installationen"
+
+#
+#: apps/setup/templates/setup/base.html:12
+msgid "saved"
+msgstr "sparat"
+
+#: apps/setup/templates/setup/base.html:18
+#, python-format
+msgid "Step %(number)s of %(total)s"
+msgstr "Steg %(number)s av %(total)s"
+
+#
+#: apps/setup/templates/setup/base.html:22
+msgid "Back"
+msgstr "Tillbaka"
+
+#
+#: apps/setup/templates/setup/base.html:23
+msgid "Skip this step"
+msgstr "Hoppa över steget"
+
+#: apps/setup/templates/setup/base.html:25
+msgid ""
+"Nothing changes until you save a step. You can run the wizard again from "
+"Settings."
+msgstr ""
+"Inget ändras förrän du sparar ett steg. Du kan köra guiden igen från "
+"Inställningar."
+
+#: apps/setup/templates/setup/board.html:4
+msgid ""
+"Invite the people who work in Metra. Each gets an email with a link to "
+"choose a password. Members do not need accounts: they use their personal "
+"links."
+msgstr ""
+"Bjud in dem som arbetar i Metra. Var och en får ett e-postmeddelande med en "
+"länk för att välja lösenord. Medlemmar behöver inga konton, de använder sina "
+"personliga länkar."
+
+#
+#: apps/setup/templates/setup/board.html:6
+msgid "Accounts"
+msgstr "Konton"
+
+#: apps/setup/templates/setup/board.html:12
+msgid "Invite someone"
+msgstr "Bjud in någon"
+
+#
+#: apps/setup/templates/setup/board.html:16
+msgid "Send invitation"
+msgstr "Skicka inbjudan"
+
+#
+#: apps/setup/templates/setup/board.html:19
+msgid ""
+"Email is not set up, so invitations cannot be sent. Add people under "
+"Settings instead."
+msgstr ""
+"E-post är inte inställd, så inbjudningar kan inte skickas. Lägg till "
+"personer under Inställningar i stället."
+
+#: apps/setup/templates/setup/board.html:21
+#: apps/setup/templates/setup/messaging.html:28
+#: apps/setup/templates/setup/types.html:39
+msgid "Continue"
+msgstr "Fortsätt"
+
+#: apps/setup/templates/setup/done.html:7
+msgid "Almost done"
+msgstr "Nästan klart"
+
+#
+#: apps/setup/templates/setup/done.html:10
+msgid "Skipped"
+msgstr "Överhoppat"
+
+#: apps/setup/templates/setup/done.html:13
+msgid "Skipped steps can be done later here or under Settings."
+msgstr "Överhoppade steg kan göras senare här eller under Inställningar."
+
+#: apps/setup/templates/setup/done.html:16
+msgid "Finish and go to the register"
+msgstr "Slutför och gå till registret"
+
+#: apps/setup/templates/setup/invoicing.html:4
+msgid ""
+"What every invoice needs: your bank account, payment terms, VAT and "
+"numbering. Fees are set up later under Invoices."
+msgstr ""
+"Det som varje faktura behöver: bankkonto, betalningsvillkor, moms och "
+"numrering. Avgifterna ställs in senare under Fakturor."
+
+#: apps/setup/templates/setup/language.html:4
+msgid ""
+"Metra is in Swedish, English and Finnish. The Finnish translation was made "
+"automatically and has not been checked yet."
+msgstr ""
+"Metra finns på svenska, engelska och finska. Den finska översättningen är "
+"gjord automatiskt och har inte granskats ännu."
+
+#: apps/setup/templates/setup/logo.html:5
+msgid ""
+"The logo appears on the public page, members' pages, letters and invoices."
+msgstr ""
+"Logotypen visas på den offentliga sidan, medlemmarnas sidor, i brev och på "
+"fakturor."
+
+#: apps/setup/templates/setup/logo.html:7
+msgid "Current logo"
+msgstr "Nuvarande logotyp"
+
+#
+#: apps/setup/templates/setup/logo.html:10
+msgid "Remove the logo"
+msgstr "Ta bort logotypen"
+
+#: apps/setup/templates/setup/logo.html:15 apps/setup/views.py:132
+msgid "Fill in the organisation first; the logo belongs to it."
+msgstr "Fyll först i organisationen, logotypen hör till den."
+
+#: apps/setup/templates/setup/messaging.html:4
+msgid ""
+"Email and SMS are set by whoever installed Metra, in the server's settings "
+"file (.env). Here you can see what is set up and send yourself a test."
+msgstr ""
+"E-post och sms ställs in av den som installerade Metra, i serverns "
+"inställningsfil (.env). Här ser du vad som är inställt och kan skicka ett "
+"test till dig själv."
+
+#: apps/setup/templates/setup/messaging.html:7
+#: apps/setup/templates/setup/messaging.html:9
+msgid "Set up"
+msgstr "Inställt"
+
+#: apps/setup/templates/setup/messaging.html:7
+#, python-format
+msgid "Sent from %(sender)s"
+msgstr "Skickas från %(sender)s"
+
+#
+#: apps/setup/templates/setup/messaging.html:7
+#: apps/setup/templates/setup/messaging.html:9
+msgid "Not set up"
+msgstr "Inte inställt"
+
+#: apps/setup/templates/setup/messaging.html:9
+#, python-format
+msgid "Sender %(sender)s"
+msgstr "Avsändare %(sender)s"
+
+#: apps/setup/templates/setup/messaging.html:15
+msgid "Send a test email to"
+msgstr "Skicka ett testmejl till"
+
+#
+#: apps/setup/templates/setup/messaging.html:16
+msgid "Send test email"
+msgstr "Skicka testmejl"
+
+#: apps/setup/templates/setup/messaging.html:23
+msgid "Send a test SMS to"
+msgstr "Skicka ett test-sms till"
+
+#
+#: apps/setup/templates/setup/messaging.html:24
+msgid "Send test SMS"
+msgstr "Skicka test-sms"
+
+#: apps/setup/templates/setup/messaging.html:27
+msgid "How to set them is described in INSTALL.md, under Email and SMS."
+msgstr "Hur de ställs in beskrivs i INSTALL.md, under Email and SMS."
+
+#
+#: apps/setup/templates/setup/organisation.html:4
+msgid ""
+"Who runs this installation. The contact details appear on the public page, "
+"on members' pages and in letters, so use the organisation's own details, not "
+"a person's."
+msgstr ""
+"Vem som driver den här installationen. Kontaktuppgifterna visas på den "
+"offentliga sidan, på medlemmarnas sidor och i brev, så använd "
+"organisationens egna uppgifter, inte en persons."
+
+#: apps/setup/templates/setup/types.html:4
+msgid ""
+"A unit is what you keep a record of: a household, a property, a boat berth "
+"or a member. Each unit type has its own fields; people can have fields too."
+msgstr ""
+"En enhet är det ni för register över: ett hushåll, en fastighet, en båtplats "
+"eller en medlem. Varje enhetstyp har sina egna fält, och personer kan också "
+"ha fält."
+
+#: apps/setup/templates/setup/types.html:8
+msgid "Start from an example"
+msgstr "Börja från ett exempel"
+
+#: apps/setup/templates/setup/types.html:9
+msgid ""
+"A water association: households with property ID, meter number, year "
+"connected, connection and number of residents, and a water meter read once a "
+"year. You can change or remove any of it afterwards."
+msgstr ""
+"Ett vattenandelslag: hushåll med fastighetsbeteckning, mätarnummer, "
+"anslutningsår, anslutning och antal boende, och en vattenmätare som läses av "
+"en gång per år. Allt går att ändra eller ta bort efteråt."
+
+#
+#: apps/setup/templates/setup/types.html:10
+msgid "Add the water association example"
+msgstr "Lägg till exemplet vattenandelslag"
+
+#
+#: apps/setup/templates/setup/types.html:14
+msgid "Unit types"
+msgstr "Enhetstyper"
+
+#
+#: apps/setup/templates/setup/types.html:17
+msgid "no fields yet"
+msgstr "inga fält ännu"
+
+#
+#: apps/setup/templates/setup/types.html:23
+msgid "Add a unit type"
+msgstr "Lägg till en enhetstyp"
+
+#
+#: apps/setup/templates/setup/types.html:27
+msgid "Add unit type"
+msgstr "Lägg till enhetstyp"
+
+#: apps/setup/templates/setup/types.html:31
+msgid "Add a field"
+msgstr "Lägg till ett fält"
+
+#: apps/setup/templates/setup/types.html:36
+msgid "Add field"
+msgstr "Lägg till fält"
+
+#
+#: apps/setup/views.py:39
+msgid "Organisation"
+msgstr "Organisation"
+
+#: apps/setup/views.py:41
+msgid "Logo"
+msgstr "Logotyp"
+
+#: apps/setup/views.py:42
+msgid "Units and fields"
+msgstr "Enheter och fält"
+
+#
+#: apps/setup/views.py:43
+msgid "Email and SMS"
+msgstr "E-post och sms"
+
+#: apps/setup/views.py:45
+msgid "Invite the board"
+msgstr "Bjud in styrelsen"
+
+#
+#: apps/setup/views.py:75
+msgid "Saved."
+msgstr "Sparat."
+
+#: apps/setup/views.py:136
+msgid "The logo was removed."
+msgstr "Logotypen togs bort."
+
+#: apps/setup/views.py:153
+#, python-format
+msgid "Added %(name)s with its fields and a water meter."
+msgstr "La till %(name)s med fält och en vattenmätare."
+
+#: apps/setup/views.py:184
+msgid "This is a test message from Metra. If you got it, sending works."
+msgstr ""
+"Det här är ett testmeddelande från Metra. Om du fick det fungerar utskicket."
+
+#
+#: apps/setup/views.py:187
+msgid "This channel is not set up."
+msgstr "Den här kanalen är inte inställd."
+
+#: apps/setup/views.py:188
+msgid "Test message from Metra"
+msgstr "Testmeddelande från Metra"
+
+#: apps/setup/views.py:190
+#, python-format
+msgid "The test failed: %(error)s"
+msgstr "Testet misslyckades: %(error)s"
+
+#: apps/setup/views.py:192
+#, python-format
+msgid "Test sent to %(to)s."
+msgstr "Testet skickades till %(to)s."
+
+#
+#: apps/setup/views.py:236
+msgid ""
+"Email is not set up, so no invitation can be sent. Add the person under "
+"Settings."
+msgstr ""
+"E-post är inte inställd, så ingen inbjudan kan skickas. Lägg till personen "
+"under Inställningar."
+
+#: apps/setup/views.py:267
+#, python-format
+msgid "Your account for %(organisation)s"
+msgstr "Ditt konto för %(organisation)s"
+
+#: apps/setup/views.py:270
+#, python-format
+msgid ""
+"Hello %(name)s,\n"
+"\n"
+"%(inviter)s has made you an account for %(organisation)s in Metra. Your "
+"username is %(username)s.\n"
+"\n"
+"Choose your password here:\n"
+"%(link)s\n"
+"\n"
+"The link works for a few days."
+msgstr ""
+"Hej %(name)s,\n"
+"\n"
+"%(inviter)s har skapat ett konto åt dig för %(organisation)s i Metra. Ditt "
+"användarnamn är %(username)s.\n"
+"\n"
+"Välj ditt lösenord här:\n"
+"%(link)s\n"
+"\n"
+"Länken fungerar i några dagar."
+
+#: apps/setup/views.py:280
+#, python-format
+msgid "The invitation could not be sent: %(error)s"
+msgstr "Inbjudan kunde inte skickas: %(error)s"
+
+#: apps/setup/views.py:282
+#, python-format
+msgid "Invitation sent to %(email)s."
+msgstr "Inbjudan skickad till %(email)s."
+
+#: apps/setup/views.py:303
+msgid "Setup is done. You can run it again from Settings."
+msgstr "Inställningen är klar. Du kan köra den igen från Inställningar."
+
+#: config/settings.py:184
 msgid "Swedish"
 msgstr "Svenska"
 
-#: config/settings.py:184
+#: config/settings.py:185
 msgid "English"
 msgstr "Engelska"
 
-#: config/settings.py:185
+#: config/settings.py:186
 msgid "Finnish (machine translated)"
 msgstr "Finska (maskinöversatt)"
 

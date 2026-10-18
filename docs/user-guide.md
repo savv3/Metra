@@ -5,6 +5,31 @@
 How to set up and use Metra once it is running. Menu names are given in
 English; the app shows them in the user's language.
 
+## Setup wizard
+
+On a new installation, the first admin to log in lands in the setup wizard.
+It goes through, one page each:
+
+1. **Organisation**: name, business ID, address and the public contact
+   details.
+2. **Language**: your own language (everyone picks their own).
+3. **Logo**: shown on the public page, member pages, letters and invoices.
+4. **Units and fields**: unit types and their fields, and fields for every
+   person. **Add the water association example** creates a Household type
+   with property ID, meter number, year connected, connection and number of
+   residents, and a yearly water meter; change or remove any of it later.
+5. **Email and SMS**: shows what the server is set up with (these are set in
+   `.env`, see [INSTALL.md](../INSTALL.md#email-and-sms)) and sends you a
+   test email or SMS.
+6. **Invoices**: bank account, payment terms, VAT and numbering.
+7. **Invite the board**: each person gets an email with a link to choose a
+   password, and the role you pick.
+
+Every step can be skipped, and nothing changes until a step is saved. When
+you finish, the wizard stops appearing; admins can run it again any time
+from **Settings > Run the setup wizard**. Installations that were set up
+before the wizard existed are not sent to it.
+
 ## Readings
 
 An admin sets up what is read under **Settings > Reading types**: a name,

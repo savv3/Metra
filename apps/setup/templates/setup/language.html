@@ -1,0 +1,6 @@
+{% extends "setup/base.html" %}
+{% load i18n %}
+{% block step %}
+  <p>{% translate "Metra is in Swedish, English and Finnish. The Finnish translation was made automatically and has not been checked yet." %}</p>
+  {% include "setup/_form.html" %}
+{% endblock %}

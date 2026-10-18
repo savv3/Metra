@@ -1,0 +1,40 @@
+{% extends "setup/base.html" %}
+{% load i18n %}
+{% block step %}
+  <p>{% translate "A unit is what you keep a record of: a household, a property, a boat berth or a member. Each unit type has its own fields; people can have fields too." %}</p>
+
+  <form method="post" class="status-panel">
+    {% csrf_token %}
+    <h3>{% translate "Start from an example" %}</h3>
+    <p>{% translate "A water association: households with property ID, meter number, year connected, connection and number of residents, and a water meter read once a year. You can change or remove any of it afterwards." %}</p>
+    <button type="submit" name="action" value="example" class="button">{% translate "Add the water association example" %}</button>
+  </form>
+
+  {% if unit_types %}
+    <h3>{% translate "Unit types" %}</h3>
+    <ul class="plain-list">
+      {% for t in unit_types %}
+        <li><strong>{{ t.name }}</strong>{% with fields=t.custom_fields.all %}{% if fields %}: {% for f in fields %}{{ f.label }}{% if not forloop.last %}, {% endif %}{% endfor %}{% else %} <span class="help">{% translate "no fields yet" %}</span>{% endif %}{% endwith %}</li>
+      {% endfor %}
+      {% if person_fields %}<li><strong>{% translate "Every person" %}</strong>: {% for f in person_fields %}{{ f.label }}{% if not forloop.last %}, {% endif %}{% endfor %}</li>{% endif %}
+    </ul>
+  {% endif %}
+
+  <h3>{% translate "Add a unit type" %}</h3>
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    {% for field in type_form %}{% include "register/_field.html" %}{% endfor %}
+    <button type="submit" name="action" value="type" class="button">{% translate "Add unit type" %}</button>
+  </form>
+
+  {% if has_types %}
+    <h3>{% translate "Add a field" %}</h3>
+    <form method="post" class="form" novalidate>
+      {% csrf_token %}
+      {% if field_form.non_field_errors %}<div class="errorlist-box" role="alert">{{ field_form.non_field_errors }}</div>{% endif %}
+      {% for field in field_form %}{% include "register/_field.html" %}{% endfor %}
+      <button type="submit" name="action" value="field" class="button">{% translate "Add field" %}</button>
+    </form>
+  {% endif %}
+  <div class="actions"><a class="button button--primary" href="{{ next_url }}">{% translate "Continue" %}</a></div>
+{% endblock %}

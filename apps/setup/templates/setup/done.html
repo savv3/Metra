@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Setup" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "Set up Metra" %}</h1>
+  <section class="card">
+    <h2>{% translate "Almost done" %}</h2>
+    <ul class="plain-list">
+      {% for s in steps %}
+        <li>{% if s.saved %}<span class="pill pill--ok">{% translate "Saved" %}</span>{% else %}<span class="pill">{% translate "Skipped" %}</span>{% endif %} <a href="{% url 'setup:step' s.name %}">{{ s.label }}</a></li>
+      {% endfor %}
+    </ul>
+    <p>{% translate "Skipped steps can be done later here or under Settings." %}</p>
+    <form method="post" action="{% url 'setup:finish' %}">
+      {% csrf_token %}
+      <button type="submit" class="button button--primary">{% translate "Finish and go to the register" %}</button>
+    </form>
+  </section>
+{% endblock %}

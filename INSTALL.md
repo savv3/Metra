@@ -26,6 +26,8 @@ Create the first account with
 `docker compose exec web python manage.py createsuperuser` and log in. Staff
 must set up two-factor login with an authenticator app on their first login;
 see [Users, roles and two-factor login](docs/user-guide.md#users-roles-and-two-factor-login).
+After that, the [setup wizard](docs/user-guide.md#setup-wizard) takes you
+through the rest.
 
 ## Backup and restore
 

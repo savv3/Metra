@@ -1,0 +1,16 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+{% block content %}
+  {% if perms.setup.run_setup %}
+    <div class="module" id="setup-wizard">
+      <table>
+        <caption>{% translate "Setup wizard" %}</caption>
+        <tr>
+          <th scope="row">{% translate "Organisation, language, logo, units and fields, email and SMS, invoices and the board, step by step." %}</th>
+          <td><a href="{% url 'setup:start' %}" class="addlink">{% translate "Run the setup wizard" %}</a></td>
+        </tr>
+      </table>
+    </div>
+  {% endif %}
+  {{ block.super }}
+{% endblock %}

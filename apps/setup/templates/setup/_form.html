@@ -1,0 +1,9 @@
+{% load i18n %}
+<form method="post" class="form"{% if multipart %} enctype="multipart/form-data"{% endif %} novalidate>
+  {% csrf_token %}
+  {% if form.non_field_errors %}<div class="errorlist-box" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+  {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+  <div class="actions">
+    <button type="submit" class="button button--primary">{% translate "Save and continue" %}</button>
+  </div>
+</form>

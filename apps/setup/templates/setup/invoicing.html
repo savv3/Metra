@@ -1,0 +1,6 @@
+{% extends "setup/base.html" %}
+{% load i18n %}
+{% block step %}
+  <p>{% translate "What every invoice needs: your bank account, payment terms, VAT and numbering. Fees are set up later under Invoices." %}</p>
+  {% include "setup/_form.html" %}
+{% endblock %}
