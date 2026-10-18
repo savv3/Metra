@@ -35,6 +35,17 @@ tag.
 To host several organisations on one server, each as its own separate
 install, see [docs/multiple-organisations.md](docs/multiple-organisations.md).
 
+## Languages
+
+Metra is available in Swedish (the default), English and Finnish. Everyone
+picks their own language in the menu, and members switch on their own pages.
+
+The Finnish translation was generated automatically and has not been reviewed
+by a Finnish speaker. Pages in Finnish say so in a notice at the top.
+Corrections are welcome in `locale/fi/LC_MESSAGES/django.po`; once a person
+has reviewed it, take `fi` out of `MACHINE_TRANSLATED_LANGUAGES` in
+`config/settings.py` to drop the notice.
+
 ## Backup and restore
 
 Every night at 02:30 (`METRA_BACKUP_TIME`, local time) the worker makes a

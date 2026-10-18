@@ -23,7 +23,7 @@ from .models import COUNTRY_CHOICES, CustomField, Organisation, Person, Tag, Uni
 MAX_UPLOAD_BYTES = 2 * 1024 * 1024
 MAX_ROWS = 5000
 DELIMITERS = [";", ",", "\t"]
-LANGUAGES = ["sv", "en"]
+LANGUAGES = ["sv", "en", "fi"]
 
 
 class CSVError(Exception):

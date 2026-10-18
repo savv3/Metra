@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 18:43+0300\n"
+"POT-Creation-Date: 2026-10-18 19:30+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,8 +75,7 @@ msgstr "Uppgifter"
 msgid "Username"
 msgstr "Användarnamn"
 
-#: apps/accounts/templates/accounts/profile.html:15
-#: apps/register/csv_io.py:465
+#: apps/accounts/templates/accounts/profile.html:15 apps/register/csv_io.py:465
 #: apps/register/templates/register/_person_results.html:7
 #: apps/register/templates/register/_unit_results.html:7
 #: apps/register/templates/register/import_preview.html:36
@@ -120,8 +119,7 @@ msgstr "Du loggar in med ditt lösenord och en kod från din autentiseringsapp."
 
 #: apps/accounts/templates/accounts/profile.html:34
 msgid ""
-"Required for your account. Set it up with an authenticator app on your "
-"phone."
+"Required for your account. Set it up with an authenticator app on your phone."
 msgstr ""
 "Krävs för ditt konto. Ställ in det med en autentiseringsapp i telefonen."
 
@@ -134,7 +132,7 @@ msgstr "Skydda ditt konto med en kod från en autentiseringsapp i telefonen."
 msgid "Turn off"
 msgstr "Stäng av"
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:69
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:70
 msgid "Turn on two-factor login"
 msgstr "Slå på tvåfaktorsinloggning"
 
@@ -846,8 +844,7 @@ msgstr "Mottagaren har ingen adress."
 #: apps/invoicing/models.py:504
 msgid ""
 "Fill in the organisation's name, address and business ID under Settings."
-msgstr ""
-"Fyll i organisationens namn, adress och FO-nummer under Inställningar."
+msgstr "Fyll i organisationens namn, adress och FO-nummer under Inställningar."
 
 #: apps/invoicing/models.py:507
 msgid "A VAT registered organisation needs its VAT number under Settings."
@@ -973,8 +970,7 @@ msgstr "betalningspåminnelser"
 #: apps/invoicing/payments.py:122 apps/messaging/sending.py:39
 msgid "There is no message template for this. Add one under Settings."
 msgstr ""
-"Det finns ingen meddelandemall för det här. Lägg till en under "
-"Inställningar."
+"Det finns ingen meddelandemall för det här. Lägg till en under Inställningar."
 
 #: apps/invoicing/runs.py:62
 #, python-format
@@ -1111,8 +1107,8 @@ msgid ""
 "Payments and reminder fees as a CSV file for the bookkeeping. Leave a date "
 "empty for no limit."
 msgstr ""
-"Betalningar och påminnelseavgifter som en CSV-fil för bokföringen. Lämna ett"
-" datum tomt för ingen gräns."
+"Betalningar och påminnelseavgifter som en CSV-fil för bokföringen. Lämna ett "
+"datum tomt för ingen gräns."
 
 #: apps/invoicing/templates/invoicing/export_payments.html:10
 msgid "Download CSV"
@@ -1485,8 +1481,8 @@ msgid ""
 "Please pay by %(new)s. If you have already paid, you can ignore this "
 "reminder."
 msgstr ""
-"Vi har inte fått betalning för den här fakturan, som förföll %(due)s. Betala"
-" senast %(new)s. Om du redan har betalat kan du bortse från den här "
+"Vi har inte fått betalning för den här fakturan, som förföll %(due)s. Betala "
+"senast %(new)s. Om du redan har betalat kan du bortse från den här "
 "påminnelsen."
 
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:138
@@ -1522,11 +1518,11 @@ msgstr "Utfärda alla kontrollerade utkast"
 
 #: apps/invoicing/templates/invoicing/run_detail.html:20
 msgid ""
-"Issued invoices go by email with the PDF attached. Recipients without email,"
-" or who prefer post, are listed for printing."
+"Issued invoices go by email with the PDF attached. Recipients without email, "
+"or who prefer post, are listed for printing."
 msgstr ""
-"Utfärdade fakturor skickas per e-post med PDF bifogad. Mottagare utan "
-"e-post, eller som föredrar post, listas för utskrift."
+"Utfärdade fakturor skickas per e-post med PDF bifogad. Mottagare utan e-"
+"post, eller som föredrar post, listas för utskrift."
 
 #: apps/invoicing/templates/invoicing/run_detail.html:22
 #, python-format
@@ -1554,8 +1550,8 @@ msgid ""
 "These are not issued with the others. Enter the missing reading or fix the "
 "lines, then rebuild or save the draft."
 msgstr ""
-"Dessa utfärdas inte tillsammans med de andra. Fyll i den saknade avläsningen"
-" eller rätta raderna, och bygg sedan om eller spara utkastet."
+"Dessa utfärdas inte tillsammans med de andra. Fyll i den saknade avläsningen "
+"eller rätta raderna, och bygg sedan om eller spara utkastet."
 
 #: apps/invoicing/templates/invoicing/run_form.html:3
 #: apps/invoicing/templates/invoicing/run_form.html:5
@@ -2055,13 +2051,13 @@ msgstr "Endast e-post."
 msgid ""
 "Placeholders: {name}, {first_name}, {link}, {closes}, {period}, "
 "{reading_type}, {unit}, {organisation}, {organisation_phone}, "
-"{organisation_email}, {organisation_website} and {emergency_phone}. Keep SMS"
-" short: about 160 characters is one message."
+"{organisation_email}, {organisation_website} and {emergency_phone}. Keep SMS "
+"short: about 160 characters is one message."
 msgstr ""
 "Platshållare: {name}, {first_name}, {link}, {closes}, {period}, "
 "{reading_type}, {unit}, {organisation}, {organisation_phone}, "
-"{organisation_email}, {organisation_website} och {emergency_phone}. Håll sms"
-" korta: ungefär 160 tecken är ett meddelande."
+"{organisation_email}, {organisation_website} och {emergency_phone}. Håll sms "
+"korta: ungefär 160 tecken är ett meddelande."
 
 #: apps/messaging/models.py:234
 msgid "message template"
@@ -2269,8 +2265,7 @@ msgstr "Skickas…"
 
 #: apps/messaging/templates/messaging/batch_list.html:3
 #: apps/messaging/templates/messaging/batch_list.html:6
-#: apps/messaging/templates/messaging/batch_list.html:17
-#: templates/base.html:25
+#: apps/messaging/templates/messaging/batch_list.html:17 templates/base.html:25
 msgid "Send-outs"
 msgstr "Utskick"
 
@@ -2298,8 +2293,7 @@ msgstr "Startat"
 msgid "Sent by"
 msgstr "Skickat av"
 
-#: apps/messaging/templates/messaging/batch_list.html:33
-#: templates/base.html:44
+#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:44
 msgid "Automatic"
 msgstr "Automatiskt"
 
@@ -2377,8 +2371,7 @@ msgstr "Kontrollera mottagare"
 
 #: apps/messaging/templates/messaging/compose.html:84
 msgid "Nothing is sent until you have checked the recipients and confirmed."
-msgstr ""
-"Ingenting skickas förrän du har kontrollerat mottagarna och bekräftat."
+msgstr "Ingenting skickas förrän du har kontrollerat mottagarna och bekräftat."
 
 #: apps/messaging/templates/messaging/newsletter_compose.html:6
 #, python-format
@@ -2438,11 +2431,11 @@ msgstr "Du har avslutat prenumerationen"
 
 #: apps/messaging/templates/messaging/unsubscribe.html:10
 msgid ""
-"You will not get the newsletter any more. Messages about the service itself,"
-" such as disruptions, still reach you."
+"You will not get the newsletter any more. Messages about the service itself, "
+"such as disruptions, still reach you."
 msgstr ""
-"Du får inte nyhetsbrevet längre. Meddelanden om tjänsten själv, till exempel"
-" störningar, når dig fortfarande."
+"Du får inte nyhetsbrevet längre. Meddelanden om tjänsten själv, till exempel "
+"störningar, når dig fortfarande."
 
 #: apps/messaging/templates/messaging/unsubscribe.html:12
 msgid "Unsubscribe from the newsletter?"
@@ -2717,8 +2710,8 @@ msgid ""
 "Members can submit readings while the round is open, from the day it opens "
 "until the day it closes."
 msgstr ""
-"Medlemmar kan lämna in avläsningar medan omgången är öppen, från och med den"
-" dag den öppnar till och med den dag den stänger."
+"Medlemmar kan lämna in avläsningar medan omgången är öppen, från och med den "
+"dag den öppnar till och med den dag den stänger."
 
 #: apps/readings/templates/readings/round_list.html:3
 #: apps/readings/templates/readings/round_list.html:6
@@ -2756,8 +2749,7 @@ msgstr "Inga avläsningsomgångar ännu."
 
 #: apps/readings/usage.py:55
 #, python-format
-msgid ""
-"Lower than the previous reading (%(previous)s). Was the meter replaced?"
+msgid "Lower than the previous reading (%(previous)s). Was the meter replaced?"
 msgstr "Lägre än föregående avläsning (%(previous)s). Byttes mätaren ut?"
 
 #: apps/readings/usage.py:68
@@ -3112,10 +3104,8 @@ msgid "show the public page"
 msgstr "visa den offentliga sidan"
 
 #: apps/register/models.py:70
-msgid ""
-"A page at the site's address with the details below, for anyone to see."
-msgstr ""
-"En sida på webbplatsens adress med uppgifterna nedan, som alla kan se."
+msgid "A page at the site's address with the details below, for anyone to see."
+msgstr "En sida på webbplatsens adress med uppgifterna nedan, som alla kan se."
 
 #: apps/register/models.py:73
 msgid "public name"
@@ -3471,8 +3461,8 @@ msgstr[1] "%(count)s rader har fel"
 
 #: apps/register/templates/register/import_preview.html:15
 msgid ""
-"Nothing is imported while any row has errors. Correct the file and upload it"
-" again, or choose other columns."
+"Nothing is imported while any row has errors. Correct the file and upload it "
+"again, or choose other columns."
 msgstr ""
 "Ingenting importeras så länge någon rad har fel. Korrigera filen och ladda "
 "upp den igen, eller välj andra kolumner."
@@ -3534,11 +3524,11 @@ msgstr "Exempel för vattenandelslagets uppsättning:"
 
 #: apps/register/templates/register/import_upload.html:24
 msgid ""
-"There are no unit types yet. An administrator must create one under Settings"
-" first."
+"There are no unit types yet. An administrator must create one under Settings "
+"first."
 msgstr ""
-"Det finns inga enhetstyper ännu. En administratör måste först skapa en under"
-" Inställningar."
+"Det finns inga enhetstyper ännu. En administratör måste först skapa en under "
+"Inställningar."
 
 #: apps/register/templates/register/person_detail.html:12
 #: apps/register/templates/register/unit_detail.html:12
@@ -3681,8 +3671,7 @@ msgstr ""
 
 #: apps/selfservice/forms.py:35
 msgid "We send you messages by SMS, so it cannot be empty."
-msgstr ""
-"Vi skickar meddelanden till dig via sms, så fältet kan inte vara tomt."
+msgstr "Vi skickar meddelanden till dig via sms, så fältet kan inte vara tomt."
 
 #: apps/selfservice/models.py:74
 msgid "expires"
@@ -3806,8 +3795,7 @@ msgstr "Avläsningsomgången är stängd, så den kan inte längre ändras här.
 #: apps/selfservice/templates/selfservice/member.html:30
 msgid "The reading round is not open, so no reading can be entered here."
 msgstr ""
-"Avläsningsomgången är inte öppen, så du kan inte mata in någon avläsning "
-"här."
+"Avläsningsomgången är inte öppen, så du kan inte mata in någon avläsning här."
 
 #: apps/selfservice/templates/selfservice/member.html:36
 msgid "Your contact details"
@@ -3925,11 +3913,11 @@ msgstr "Hej %(name)s,"
 #: apps/selfservice/templates/selfservice/print.html:61
 #, python-format
 msgid ""
-"Please read the meter at %(unit)s and report the number by %(date)s. You can"
-" also check that we have your correct contact details."
+"Please read the meter at %(unit)s and report the number by %(date)s. You can "
+"also check that we have your correct contact details."
 msgstr ""
-"Läs av mätaren vid %(unit)s och rapportera siffrorna senast %(date)s. Du kan"
-" också kontrollera att vi har rätt kontaktuppgifter till dig."
+"Läs av mätaren vid %(unit)s och rapportera siffrorna senast %(date)s. Du kan "
+"också kontrollera att vi har rätt kontaktuppgifter till dig."
 
 #: apps/selfservice/templates/selfservice/print.html:63
 #, python-format
@@ -4009,8 +3997,7 @@ msgstr "En lista med QR-koder"
 msgid ""
 "The links are shown only once, on the page that opens. Print it straight "
 "away."
-msgstr ""
-"Länkarna visas bara en gång, på sidan som öppnas. Skriv ut den direkt."
+msgstr "Länkarna visas bara en gång, på sidan som öppnas. Skriv ut den direkt."
 
 #: apps/selfservice/templates/selfservice/round_links.html:29
 msgid "Make links and print"
@@ -4052,11 +4039,9 @@ msgstr "Vänta en stund"
 
 #: apps/selfservice/templates/selfservice/too_many.html:6
 msgid ""
-"There have been too many attempts from your connection. Try again in an "
-"hour."
+"There have been too many attempts from your connection. Try again in an hour."
 msgstr ""
-"Det har gjorts för många försök från din anslutning. Försök igen om en "
-"timme."
+"Det har gjorts för många försök från din anslutning. Försök igen om en timme."
 
 #: apps/selfservice/templates/selfservice/unavailable.html:6
 msgid ""
@@ -4091,13 +4076,17 @@ msgstr "Länken fungerar inte längre."
 msgid "%(count)s links no longer work."
 msgstr "%(count)s länkar fungerar inte längre."
 
-#: config/settings.py:168
+#: config/settings.py:183
 msgid "Swedish"
 msgstr "Svenska"
 
-#: config/settings.py:169
+#: config/settings.py:184
 msgid "English"
 msgstr "Engelska"
+
+#: config/settings.py:185
+msgid "Finnish (machine translated)"
+msgstr "Finska (maskinöversatt)"
 
 #: templates/403.html:3 templates/403.html:5
 msgid "No access"
@@ -4119,6 +4108,14 @@ msgstr "Gå till startsidan"
 msgid "Change"
 msgstr "Byt"
 
+#: templates/_machine_translation_notice.html:2
+msgid ""
+"This translation was generated automatically and has not been reviewed. Some "
+"wording may be wrong."
+msgstr ""
+"Den här översättningen är gjord automatiskt och har inte granskats. En del "
+"formuleringar kan vara fel."
+
 #: templates/base.html:20
 msgid "Main"
 msgstr "Huvudnavigering"
@@ -4139,15 +4136,15 @@ msgstr "Mörkt"
 msgid "Log out"
 msgstr "Logga ut"
 
-#: templates/base.html:63
+#: templates/base.html:64
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
 msgstr ""
-"Tvåfaktorsinloggning krävs inte i den här installationen (METRA_REQUIRE_MFA är"
-" avstängd). Slå på den innan riktiga uppgifter läggs in."
+"Tvåfaktorsinloggning krävs inte i den här installationen (METRA_REQUIRE_MFA "
+"är avstängd). Slå på den innan riktiga uppgifter läggs in."
 
-#: templates/base.html:68
+#: templates/base.html:69
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."

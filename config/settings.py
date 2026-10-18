@@ -114,6 +114,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "apps.core.context_processors.languages",
             ],
         },
     },
@@ -181,7 +182,11 @@ LANGUAGE_CODE = "sv"
 LANGUAGES = [
     ("sv", _("Swedish")),
     ("en", _("English")),
+    ("fi", _("Finnish (machine translated)")),
 ]
+# Languages whose translation was generated automatically and has not been
+# reviewed by a person. Pages in these languages show a notice saying so.
+MACHINE_TRANSLATED_LANGUAGES = ["fi"]
 LOCALE_PATHS = [BASE_DIR / "locale"]
 TIME_ZONE = os.environ.get("METRA_TIME_ZONE", "Europe/Helsinki")
 USE_I18N = True
