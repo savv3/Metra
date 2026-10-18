@@ -4,6 +4,7 @@ import pytest
 from allauth.mfa.adapter import get_adapter
 from allauth.mfa.models import Authenticator
 from allauth.mfa.totp.internal.auth import TOTP, format_hotp_value, generate_totp_secret, hotp_value
+from django.core.cache import cache
 from django.urls import reverse
 
 SECRET = generate_totp_secret()
@@ -136,3 +137,67 @@ def test_reminder_goes_once_two_factor_is_on(board_client):
     response = board_client.get(reverse("register:unit_list"))
 
     assert reverse("mfa_activate_totp") not in response.content.decode()
+
+
+def code_for(secret):
+    return format_hotp_value(hotp_value(secret, int(time.time()) // 30))
+
+
+def test_setup_survives_a_second_page_load_and_then_login_needs_the_code(client, admin_user):
+    """The bug from the pilot: a second load of the setup page (here the browser
+    asking for /favicon.ico, which used to be redirected to it) changed the
+    secret, so the code from the scanned QR code was always refused."""
+    from allauth.mfa.totp.internal.auth import SECRET_SESSION_KEY
+
+    log_in_and_confirm_password(client)
+    page = client.get(reverse("mfa_activate_totp"))
+    secret = client.session[SECRET_SESSION_KEY]
+    assert secret in page.content.decode()
+
+    icon = client.get("/favicon.ico")
+    client.get(reverse("mfa_activate_totp"))  # a reload or a second tab
+
+    assert icon.status_code == 301
+    assert icon.url.endswith("favicon.svg")
+    assert client.session[SECRET_SESSION_KEY] == secret
+    response = client.post(reverse("mfa_activate_totp"), {"code": code_for(secret)})
+    assert response.status_code == 302, response.content.decode()
+    assert Authenticator.objects.filter(user=admin_user, type="totp").exists()
+
+    client.post(reverse("account_logout"))
+    after_password = client.post(reverse("account_login"), {"login": "admin", "password": "pw"})
+    assert after_password.url == reverse("mfa_authenticate")
+    assert client.get(reverse("register:unit_list")).status_code == 302  # not in yet
+    # A code works once (allauth remembers used codes in the cache); forgetting
+    # that is the same as the next 30-second code coming round.
+    cache.clear()
+    signed_in = client.post(reverse("mfa_authenticate"), {"code": code_for(secret)})
+    assert signed_in.status_code == 302
+    assert client.get(reverse("register:unit_list")).status_code == 200
+
+
+def test_requests_that_are_not_pages_are_not_sent_to_setup(client, admin_user):
+    client.force_login(admin_user)
+
+    for url in ["/favicon.ico", "/robots.txt", "/logo"]:
+        response = client.get(url)
+        assert response.status_code != 302 or "2fa" not in response.url, url
+
+
+def test_two_factor_can_be_made_optional(client, admin_user, settings):
+    settings.REQUIRE_MFA = False
+    client.force_login(admin_user)
+
+    response = client.get(reverse("register:unit_list"), HTTP_ACCEPT_LANGUAGE="en")
+
+    assert response.status_code == 200
+    assert "Two-factor login is not required on this installation" in response.content.decode()
+
+
+def test_no_warning_when_two_factor_is_required(client, admin_user):
+    TOTP.activate(admin_user, SECRET)
+    client.force_login(admin_user)
+
+    page = client.get(reverse("register:unit_list"), HTTP_ACCEPT_LANGUAGE="en").content.decode()
+
+    assert "is not required on this installation" not in page

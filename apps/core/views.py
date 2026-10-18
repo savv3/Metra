@@ -3,6 +3,7 @@ import mimetypes
 from django.db import connection
 from django.http import FileResponse, Http404, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
+from django.templatetags.static import static
 
 from apps.register.models import Organisation
 
@@ -32,6 +33,11 @@ def logo(request):
     response = FileResponse(organisation.logo.open("rb"), content_type=content_type)
     response["Cache-Control"] = "public, max-age=3600"
     return response
+
+
+def favicon(request):
+    """Browsers ask for /favicon.ico even when the page names another icon."""
+    return redirect(static("favicon.svg"), permanent=True)
 
 
 def robots(request):

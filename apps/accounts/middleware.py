@@ -11,8 +11,10 @@ class RequireStaffTwoFactorMiddleware:
     """Send staff who have not set up an authenticator app to do so first.
 
     Only the account pages (to set up two-factor, change password or log
-    out), member self-service pages, the language switch, static files and
-    the health check stay open.
+    out), public pages (member self-service, unsubscribe, robots.txt, the
+    logo and the icon), the language switch, static files and the health
+    check stay open. Requests that are not pages, such as the browser's
+    icon, are never redirected to the setup page: loading it is not free.
     """
 
     def __init__(self, get_response):
@@ -33,8 +35,12 @@ class RequireStaffTwoFactorMiddleware:
         exempt = [
             "/accounts/",
             "/m/",
+            "/unsubscribe/",
+            "/favicon.ico",
             reverse("set_language"),
             reverse("core:healthz"),
+            reverse("core:robots"),
+            reverse("core:logo"),
             "/" + settings.STATIC_URL.lstrip("/"),
         ]
         return any(path.startswith(prefix) for prefix in exempt)

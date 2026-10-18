@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% translate "Small Company Register" %}{% endblock %}</title>
+  <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
   <link rel="stylesheet" href="{% static 'css/app.css' %}">
   <script src="{% static 'vendor/htmx-2.0.4.min.js' %}" defer></script>
 </head>
@@ -44,6 +45,11 @@
     {% endif %}
   </header>
   <main id="main">
+    {% if user|two_factor_not_required %}
+      <p class="message warning two-factor-off" role="note">
+        {% translate "Two-factor login is not required on this installation (SCR_REQUIRE_MFA is off). Turn it on before real data goes in." %}
+      </p>
+    {% endif %}
     {% if user|should_set_up_two_factor and not request.path|slice:":10" == "/accounts/" %}
       <p class="message warning two-factor-nudge" role="note">
         {% translate "Protect your account with two-factor login. It takes a minute with an authenticator app on your phone." %}
