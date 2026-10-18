@@ -137,11 +137,12 @@ adding them to one group:
 | Role | Can |
 | --- | --- |
 | Admin | Everything; also tick "Staff status" so they can open Settings |
-| Board | View, add and edit units, people, contacts and tags; archive; see history |
-| Treasurer | View the register (invoicing comes later) |
-| Read-only | View the register |
+| Board (Styrelse) | View, add and edit units, people, contacts and tags; archive; see history |
+| Treasurer (Kassör) | View the register (invoicing comes later) |
+| Read-only (Läsbehörighet) | View the register |
 
-Two-factor login is optional for users without staff status; they can turn it
+The roles are shown in the user's language; groups you create yourself keep
+the name you give them. Two-factor login is optional for users without staff status; they can turn it
 on under **Two-factor login**. Every change to the register, every role
 change and every opened unit or person page is recorded in the audit log,
 shown on the unit and person pages for Admin and Board and under
