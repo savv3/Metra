@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 12:01+0300\n"
+"POT-Creation-Date: 2026-10-18 12:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: apps/accounts/admin.py:13 apps/register/models.py:281
+msgid "role"
+msgstr "roll"
+
+#: apps/accounts/admin.py:28 apps/register/models.py:24
+#: apps/register/models.py:47 apps/register/models.py:61
+#: apps/register/models.py:238
+msgid "name"
+msgstr "namn"
+
 #: apps/accounts/apps.py:7
 msgid "Access"
 msgstr "Åtkomst"
 
 #: apps/accounts/middleware.py:25
 msgid "Set up two-factor login with an authenticator app before you continue."
-msgstr "Ställ in tvåfaktorsinloggning med en autentiseringsapp innan du fortsätter."
+msgstr ""
+"Ställ in tvåfaktorsinloggning med en autentiseringsapp innan du fortsätter."
+
+#: apps/accounts/roles.py:12
+msgctxt "role"
+msgid "Admin"
+msgstr "Admin"
+
+#: apps/accounts/roles.py:13
+msgctxt "role"
+msgid "Board"
+msgstr "Styrelse"
+
+#: apps/accounts/roles.py:14
+msgctxt "role"
+msgid "Treasurer"
+msgstr "Kassör"
+
+#: apps/accounts/roles.py:15
+msgctxt "role"
+msgid "Read-only"
+msgstr "Läsbehörighet"
 
 #: apps/core/templates/core/home.html:4
 msgid "Welcome"
@@ -115,11 +146,6 @@ msgstr "Danmark"
 #: apps/register/models.py:17
 msgid "Iceland"
 msgstr "Island"
-
-#: apps/register/models.py:24 apps/register/models.py:47
-#: apps/register/models.py:61 apps/register/models.py:238
-msgid "name"
-msgstr "namn"
 
 #: apps/register/models.py:25
 msgid "business ID"
@@ -372,10 +398,6 @@ msgstr "Faktureringskontakt"
 #: apps/register/models.py:273
 msgid "Contact"
 msgstr "Kontakt"
-
-#: apps/register/models.py:281
-msgid "role"
-msgstr "roll"
 
 #: apps/register/models.py:285
 msgid "contact"
@@ -720,7 +742,9 @@ msgstr "Ingen åtkomst"
 msgid ""
 "Your role does not allow you to open this page. Ask an admin if you need "
 "access."
-msgstr "Din roll ger inte åtkomst till den här sidan. Be en administratör om du behöver åtkomst."
+msgstr ""
+"Din roll ger inte åtkomst till den här sidan. Be en administratör om du "
+"behöver åtkomst."
 
 #: templates/403.html:7
 msgid "Go to the start page"
@@ -750,6 +774,6 @@ msgstr "Huvudnavigering"
 msgid "Two-factor login"
 msgstr "Tvåfaktorsinloggning"
 
-#: templates/base.html:37
+#: templates/base.html:38
 msgid "Log out"
 msgstr "Logga ut"

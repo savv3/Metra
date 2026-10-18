@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 12:01+0300\n"
+"POT-Creation-Date: 2026-10-18 12:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: apps/accounts/admin.py:13 apps/register/models.py:281
+msgid "role"
+msgstr ""
+
+#: apps/accounts/admin.py:28 apps/register/models.py:24
+#: apps/register/models.py:47 apps/register/models.py:61
+#: apps/register/models.py:238
+msgid "name"
+msgstr ""
+
 #: apps/accounts/apps.py:7
 msgid "Access"
 msgstr ""
 
 #: apps/accounts/middleware.py:25
 msgid "Set up two-factor login with an authenticator app before you continue."
+msgstr ""
+
+#: apps/accounts/roles.py:12
+msgctxt "role"
+msgid "Admin"
+msgstr ""
+
+#: apps/accounts/roles.py:13
+msgctxt "role"
+msgid "Board"
+msgstr ""
+
+#: apps/accounts/roles.py:14
+msgctxt "role"
+msgid "Treasurer"
+msgstr ""
+
+#: apps/accounts/roles.py:15
+msgctxt "role"
+msgid "Read-only"
 msgstr ""
 
 #: apps/core/templates/core/home.html:4
@@ -115,11 +145,6 @@ msgstr ""
 
 #: apps/register/models.py:17
 msgid "Iceland"
-msgstr ""
-
-#: apps/register/models.py:24 apps/register/models.py:47
-#: apps/register/models.py:61 apps/register/models.py:238
-msgid "name"
 msgstr ""
 
 #: apps/register/models.py:25
@@ -371,10 +396,6 @@ msgstr ""
 
 #: apps/register/models.py:273
 msgid "Contact"
-msgstr ""
-
-#: apps/register/models.py:281
-msgid "role"
 msgstr ""
 
 #: apps/register/models.py:285
@@ -748,6 +769,6 @@ msgstr ""
 msgid "Two-factor login"
 msgstr ""
 
-#: templates/base.html:37
+#: templates/base.html:38
 msgid "Log out"
 msgstr ""
