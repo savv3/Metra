@@ -1,6 +1,8 @@
 """The register: configurable record types, the units registered under them,
 the people you contact, and the roles that link the two."""
 
+import os
+
 from auditlog.registry import auditlog
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -18,8 +20,39 @@ COUNTRY_CHOICES = [
 ]
 
 
+LOGO_TYPES = {
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".webp": "image/webp",
+}
+LOGO_MAX_BYTES = 1024 * 1024
+
+
+def validate_logo(file):
+    """PNG, JPEG or WebP up to 1 MB, checked by content, not only by name.
+    (No SVG: it can carry scripts.)"""
+    extension = os.path.splitext(file.name)[1].lower()
+    if extension not in LOGO_TYPES:
+        raise ValidationError(_("Upload a PNG, JPEG or WebP image."))
+    if file.size > LOGO_MAX_BYTES:
+        raise ValidationError(_("The image is larger than 1 MB."))
+    head = file.read(12)
+    file.seek(0)
+    if not (
+        head.startswith(b"\x89PNG\r\n\x1a\n")
+        or head.startswith(b"\xff\xd8\xff")
+        or (head[:4] == b"RIFF" and head[8:12] == b"WEBP")
+    ):
+        raise ValidationError(_("The file is not a PNG, JPEG or WebP image."))
+
+
 class Organisation(models.Model):
-    """The company or association running this installation. One row."""
+    """The company or association running this installation. One row.
+
+    The "public" fields are shown to anyone on the public page at /, on
+    member pages and in letters: organisation data only, never personal data.
+    """
 
     name = models.CharField(_("name"), max_length=200)
     business_id = models.CharField(_("business ID"), max_length=50, blank=True)
@@ -30,6 +63,37 @@ class Organisation(models.Model):
     postal_code = models.CharField(_("postal code"), max_length=20, blank=True)
     city = models.CharField(_("city"), max_length=100, blank=True)
     country = models.CharField(_("country"), max_length=2, choices=COUNTRY_CHOICES, default="FI")
+    # Public contact information
+    public_page = models.BooleanField(
+        _("show the public page"),
+        default=True,
+        help_text=_("A page at the site's address with the details below, for anyone to see."),
+    )
+    display_name = models.CharField(
+        _("public name"), max_length=200, blank=True, help_text=_("If different from the name.")
+    )
+    description = models.TextField(
+        _("short description"), blank=True, help_text=_("A few sentences about what you do.")
+    )
+    website = models.URLField(_("website"), blank=True)
+    emergency_phone = models.CharField(
+        _("emergency phone"),
+        max_length=50,
+        blank=True,
+        help_text=_("For urgent matters, also outside opening hours."),
+    )
+    opening_hours = models.TextField(
+        _("opening hours or availability"),
+        blank=True,
+        help_text=_("For example: Weekdays 9–16. Calls answered evenings in emergencies."),
+    )
+    logo = models.FileField(
+        _("logo"),
+        upload_to="organisation/",
+        blank=True,
+        validators=[validate_logo],
+        help_text=_("PNG, JPEG or WebP, up to 1 MB."),
+    )
 
     class Meta:
         verbose_name = _("organisation")
@@ -41,6 +105,10 @@ class Organisation(models.Model):
     @classmethod
     def current(cls):
         return cls.objects.order_by("pk").first()
+
+    @property
+    def public_name(self):
+        return self.display_name or self.name
 
 
 class Tag(models.Model):

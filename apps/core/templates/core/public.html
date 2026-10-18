@@ -1,0 +1,20 @@
+{% extends "selfservice/base.html" %}
+{% load i18n %}
+{% block robots %}{% if organisation.description %}<meta name="description" content="{{ organisation.description|truncatechars:160 }}">{% endif %}{% endblock %}
+{% block title %}{{ organisation.public_name }}{% endblock %}
+{% block content %}
+  {% include "core/_notices.html" %}
+  <div class="public-head">
+    {% if organisation.logo %}<img class="public-logo" src="{% url 'core:logo' %}" alt="{{ organisation.public_name }}">{% endif %}
+    <h1>{{ organisation.public_name }}</h1>
+  </div>
+  {% if organisation.description %}<p class="public-description">{{ organisation.description|linebreaksbr }}</p>{% endif %}
+
+  <section class="member-section" aria-labelledby="contact">
+    <h2 id="contact">{% translate "Contact us" %}</h2>
+    {% include "core/_contact.html" %}
+  </section>
+
+  <p class="public-note">{% translate "Members report readings and update their details through the personal link they get by SMS, email or letter." %}</p>
+  <p><a href="{% url 'account_login' %}">{% translate "Staff login" %}</a></p>
+{% endblock %}

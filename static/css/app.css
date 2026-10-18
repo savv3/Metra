@@ -258,3 +258,18 @@ th .help, td .help { display: block; font-weight: 400; }
 .alert-badge { display: inline-block; background: var(--error); color: #fff; font-size: 0.8em; padding: 0.1rem 0.6rem; border-radius: 4px; vertical-align: middle; }
 .alert-compose { border-left: 6px solid var(--error); padding-left: 1rem; }
 .message-preview { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; margin: 0 0 1rem; padding: 0.75rem 1rem; white-space: normal; }
+
+/* Public page, contact details and notices */
+.public-head { display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; align-items: center; margin: 0.5rem 0 0.5rem; }
+.public-head h1 { margin: 0; }
+.public-logo { max-height: 4rem; max-width: 10rem; width: auto; height: auto; }
+.public-description { font-size: 1.1rem; }
+.public-note { color: var(--muted); }
+.contact-list { display: grid; grid-template-columns: max-content 1fr; gap: 0.4rem 1rem; margin: 0; }
+.contact-list dt { font-weight: 600; }
+.contact-list dd { margin: 0; overflow-wrap: anywhere; }
+.contact-emergency { background: var(--error-bg); border-left: 6px solid var(--error); padding: 0.5rem 0.75rem; border-radius: 4px; font-size: 1.1rem; }
+.notice-banner { background: var(--warning-bg); border: 1px solid var(--focus); border-left-width: 6px; border-radius: 4px; padding: 0.5rem 1rem; margin-bottom: 1rem; }
+.notice-banner--urgent { background: var(--error-bg); border-color: var(--error); }
+.notice-banner p { margin: 0.25rem 0; }
+.notice-banner__time { color: var(--muted); font-size: 0.9rem; }

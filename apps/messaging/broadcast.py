@@ -10,11 +10,11 @@ from dataclasses import dataclass, field
 from django.utils import timezone, translation
 from django.utils.translation import gettext as _
 
-from apps.register.models import Organisation, Person, Unit, UnitContact
+from apps.register.models import Person, Unit, UnitContact
 from apps.register.views import filter_units
 from apps.selfservice.models import ROLE_PREFERENCE
 
-from .models import Channel, Message, MessageBatch, MessageTemplate
+from .models import Channel, Message, MessageBatch, MessageTemplate, organisation_placeholders
 from .registry import EMAIL, SMS, ProviderError, provider_for
 from .sms import segments
 
@@ -113,12 +113,7 @@ def plan(pairs, mode):
 
 
 def placeholders(person=None, unit=None):
-    organisation = Organisation.current()
-    values = {
-        "organisation": organisation.name if organisation else "",
-        "organisation_phone": organisation.phone if organisation else "",
-        "organisation_email": organisation.email if organisation else "",
-    }
+    values = organisation_placeholders()
     if person is not None:
         values |= {"name": person.full_name, "first_name": person.first_name}
     if unit is not None:

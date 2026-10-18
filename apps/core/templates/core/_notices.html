@@ -1,0 +1,7 @@
+{% load i18n %}
+{% for notice in notices %}
+  <div class="notice-banner{% if notice.level == 'urgent' %} notice-banner--urgent{% endif %}" role="{% if notice.level == 'urgent' %}alert{% else %}status{% endif %}">
+    <p><strong>{% if notice.level == 'urgent' %}{% translate "Urgent" %}{% else %}{% translate "Notice" %}{% endif %}:</strong> {{ notice.text|linebreaksbr }}</p>
+    <p class="notice-banner__time">{{ notice.starts_at|date:"SHORT_DATETIME_FORMAT" }}{% if notice.ends_at %} – {{ notice.ends_at|date:"SHORT_DATETIME_FORMAT" }}{% endif %}</p>
+  </div>
+{% endfor %}

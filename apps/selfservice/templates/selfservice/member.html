@@ -2,6 +2,7 @@
 {% load i18n readings %}
 {% block title %}{{ unit.name }} – {{ block.super }}{% endblock %}
 {% block content %}
+  {% include "core/_notices.html" %}
   <h1>{% blocktranslate with name=person.first_name %}Hello {{ name }}{% endblocktranslate %}</h1>
   <p class="subtitle">{% if unit.street_address == unit.name %}{{ unit.address_line }}{% else %}{{ unit.name }}{% if unit.address_line %}, {{ unit.address_line }}{% endif %}{% endif %}</p>
 
@@ -55,10 +56,13 @@
     </section>
   {% endif %}
 
+  {% if organisation %}
+    <section class="member-section" aria-labelledby="org-contact">
+      <h2 id="org-contact">{% blocktranslate with name=organisation.public_name %}Contact {{ name }}{% endblocktranslate %}</h2>
+      {% include "core/_contact.html" %}
+    </section>
+  {% endif %}
   <footer class="member-footer">
     <p>{% translate "This page is personal. Do not share the link." %}</p>
-    {% if organisation %}
-      <p>{{ organisation.name }}{% if organisation.email %} &middot; <a href="mailto:{{ organisation.email }}">{{ organisation.email }}</a>{% endif %}{% if organisation.phone %} &middot; {{ organisation.phone }}{% endif %}</p>
-    {% endif %}
   </footer>
 {% endblock %}

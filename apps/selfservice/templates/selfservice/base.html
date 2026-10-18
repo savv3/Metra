@@ -4,20 +4,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
+  {% block robots %}<meta name="robots" content="noindex, nofollow">{% endblock %}
   <meta name="referrer" content="same-origin">
-  <title>{% block title %}{% if organisation %}{{ organisation.name }}{% else %}{% translate "Small Company Register" %}{% endif %}{% endblock %}</title>
+  <title>{% block title %}{% if organisation %}{{ organisation.public_name }}{% else %}{% translate "Small Company Register" %}{% endif %}{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'css/app.css' %}">
 </head>
 <body class="member">
   <a class="skip-link" href="#main">{% translate "Skip to content" %}</a>
   <header class="site-header">
     <div class="site-header__bar">
-      <span class="brand">{% if organisation %}{{ organisation.name }}{% else %}{% translate "Small Company Register" %}{% endif %}</span>
+      <span class="brand">{% if organisation %}{{ organisation.public_name }}{% else %}{% translate "Small Company Register" %}{% endif %}</span>
       <nav class="lang-links" aria-label="{% translate 'Language' %}">
         {% get_available_languages as LANGUAGES %}
         {% for code, name in LANGUAGES %}
-          {% if code == LANGUAGE_CODE %}<span aria-current="true">{{ name }}</span>{% else %}<a href="?lang={{ code }}" lang="{{ code }}" hreflang="{{ code }}">{{ name }}</a>{% endif %}
+          {% get_language_info for code as language %}{% if code == LANGUAGE_CODE %}<span aria-current="true">{{ language.name_local|capfirst }}</span>{% else %}<a href="?lang={{ code }}" lang="{{ code }}" hreflang="{{ code }}">{{ language.name_local|capfirst }}</a>{% endif %}
         {% endfor %}
       </nav>
     </div>

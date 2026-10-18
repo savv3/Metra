@@ -2,14 +2,14 @@
 
 from auditlog.context import set_extra_data
 from auditlog.models import LogEntry
-from django.conf import settings
 from django.contrib import messages
-from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.views.decorators.cache import never_cache
 
+from apps.core.language import switch_language
+from apps.core.models import Notice
 from apps.readings.models import Reading
 from apps.readings.usage import earlier_values
 from apps.register.models import Organisation
@@ -62,27 +62,10 @@ def _log_visit(request, link):
     SelfServiceLink.objects.filter(pk=link.pk).update(last_used_at=timezone.now())
 
 
-def _switch_language(request):
-    """?lang=en sets the language and reloads the page: plain links, which
-    also work on the page for links that do not work."""
-    language = request.GET.get("lang")
-    if language not in dict(settings.LANGUAGES):
-        return None
-    response = HttpResponseRedirect(request.path)
-    response.set_cookie(
-        settings.LANGUAGE_COOKIE_NAME,
-        language,
-        max_age=settings.LANGUAGE_COOKIE_AGE,
-        samesite="Lax",
-        secure=request.is_secure(),
-    )
-    return _private(response)
-
-
 @never_cache
 def member_page(request, token):
-    if switched := _switch_language(request):
-        return switched
+    if switched := switch_language(request):
+        return _private(switched)
     if not ratelimit.allow_visit(request):
         return _unavailable(request, status=429)
     link = SelfServiceLink.find(token)
@@ -149,5 +132,6 @@ def member_page(request, token):
         "contact_form": contact_form,
         "household": household,
         "organisation": Organisation.current(),
+        "notices": Notice.objects.current(),
     }
     return _private(render(request, "selfservice/member.html", context))
