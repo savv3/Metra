@@ -67,6 +67,7 @@ docker compose up -d --build
   messages, newsletters, invoicing, import and roles
 - [Several organisations on one server](docs/multiple-organisations.md)
 - [Plugins](docs/plugins.md)
+- [Webhooks](docs/webhooks.md): tell outside systems when something changes
 - [AGENTS.md](AGENTS.md): conventions for contributors
 
 ## Licence

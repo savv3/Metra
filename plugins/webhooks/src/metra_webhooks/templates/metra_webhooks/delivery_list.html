@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% blocktranslate with name=endpoint %}Deliveries to {{ name }}{% endblocktranslate %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% blocktranslate with name=endpoint %}Deliveries to {{ name }}{% endblocktranslate %}</h1>
+    {% if perms.metra_webhooks.change_webhookendpoint %}
+      <form method="post" action="{% url 'metra_webhooks:endpoint_test' endpoint.pk %}" class="inline-form">
+        {% csrf_token %}
+        <button type="submit" class="button button--primary">{% translate "Send a test event" %}</button>
+      </form>
+    {% endif %}
+  </div>
+  <p class="subtitle">{{ endpoint.url }} &middot; <a href="{% url 'metra_webhooks:endpoint_list' %}">{% translate "All endpoints" %}</a></p>
+  <p class="help">{% translate "The latest 100. Older deliveries are removed after a while." %}</p>
+  {% if deliveries %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Deliveries' %}">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">{% translate "Event" %}</th>
+            <th scope="col">{% translate "Created" %}</th>
+            <th scope="col">{% translate "Status" %}</th>
+            <th scope="col">{% translate "Attempts" %}</th>
+            <th scope="col">{% translate "Response code" %}</th>
+            <th scope="col">{% translate "Error" %}</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for delivery in deliveries %}
+            <tr>
+              <th scope="row">{{ delivery.event }}</th>
+              <td>{{ delivery.created_at|date:"SHORT_DATETIME_FORMAT" }}</td>
+              <td>
+                <span class="{% if delivery.status == 'delivered' %}status-ok{% elif delivery.status == 'pending' %}status-skip{% else %}status-error{% endif %}">{{ delivery.get_status_display }}</span>
+                {% if delivery.status == 'failed' %}<span class="help">{% blocktranslate with when=delivery.next_attempt_at|date:"SHORT_DATETIME_FORMAT" %}Next try {{ when }}{% endblocktranslate %}</span>{% endif %}
+              </td>
+              <td>{{ delivery.attempts }}</td>
+              <td>{{ delivery.response_status|default_if_none:"–" }}</td>
+              <td>{{ delivery.error|default:"–" }}</td>
+              <td>
+                {% if delivery.status == 'failed' or delivery.status == 'given_up' %}{% if perms.metra_webhooks.change_webhookendpoint %}
+                  <form method="post" action="{% url 'metra_webhooks:delivery_retry' endpoint.pk delivery.pk %}" class="inline-form">
+                    {% csrf_token %}
+                    <button type="submit" class="button button--small">{% translate "Retry now" %}</button>
+                  </form>
+                {% endif %}{% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "Nothing has been sent to this endpoint yet." %}</p>
+  {% endif %}
+{% endblock %}

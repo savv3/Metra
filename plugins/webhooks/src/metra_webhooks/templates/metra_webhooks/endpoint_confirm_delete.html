@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Delete endpoint" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "Delete endpoint" %}</h1>
+  <p>{% blocktranslate with name=endpoint %}Delete {{ name }} and its delivery history? Nothing more is sent to it.{% endblocktranslate %}</p>
+  <form method="post" class="form">
+    {% csrf_token %}
+    <div class="actions">
+      <button type="submit" class="button button--danger">{% translate "Delete" %}</button>
+      <a class="button" href="{{ endpoint.get_absolute_url }}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+{% endblock %}
