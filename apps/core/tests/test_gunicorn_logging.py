@@ -32,6 +32,12 @@ def test_member_tokens_stay_out_of_the_access_log():
     assert atoms["U"] == "/m/[redacted]/?lang=en"
 
 
+def test_file_link_tokens_stay_out_of_the_access_log():
+    atoms = _atoms("/f/secret-token/3/", "-")
+
+    assert atoms["U"] == "/f/[redacted]/3/"
+
+
 def test_delivery_report_secret_stays_out_of_the_access_log():
     atoms = _atoms("/messaging/46elks/delivery/abc123/", "-")
 

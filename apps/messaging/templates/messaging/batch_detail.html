@@ -9,6 +9,10 @@
       <dt>{% translate "Send by" %}</dt><dd>{{ batch.get_channels_display }}</dd>
       <dt>{% translate "Message" %}</dt><dd>{{ batch.body|linebreaksbr }}</dd>
       {% if batch.subject %}<dt>{% translate "Email subject" %}</dt><dd>{{ batch.subject }}</dd>{% endif %}
+      {% with files=batch.attachments.all %}{% if files %}
+        <dt>{% translate "Attached files" %}</dt>
+        <dd><ul class="plain-list">{% for file in files %}<li><a href="{% url 'messaging:attachment_download' batch.pk file.pk %}">{{ file.name }}</a> <span class="help">{{ file.size|filesizeformat }}</span></li>{% endfor %}</ul></dd>
+      {% endif %}{% endwith %}
       {% if batch.notice %}
         <dt>{% translate "Public notice" %}</dt>
         <dd>

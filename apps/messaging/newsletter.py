@@ -15,6 +15,7 @@ from django.utils.translation import gettext as _
 
 from apps.register.models import Person
 
+from . import attachments
 from .models import ConsentRecord, Message, MessageBatch, MessageTemplate, organisation_placeholders
 from .registry import EMAIL, ProviderError, provider_for
 
@@ -117,6 +118,7 @@ def _send(batch, person, provider):
                 "List-Unsubscribe": f"<{url}>",
                 "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
             }
+        extra |= attachments.email_kwargs(provider, batch)
         result = provider.send(person.email, body, subject=subject, **extra)
     except ProviderError as error:
         message.status = Message.Status.FAILED

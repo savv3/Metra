@@ -12,9 +12,11 @@
     <h3>{% if example_for %}{% blocktranslate with name=example_for.full_name %}The newsletter, as {{ name }} gets it{% endblocktranslate %}{% endif %}</h3>
     <p><strong>{{ form.cleaned_data.subject }}</strong></p>
     <blockquote class="message-preview">{{ example|linebreaksbr }}</blockquote>
+    {% include "messaging/_attachments.html" %}
     <form method="post" class="form">
       {% csrf_token %}
-      {% for field in form %}{{ field.as_hidden }}{% endfor %}
+      {% for field in form %}{% if field.name != "files" and field.name != "attachments" %}{{ field.as_hidden }}{% endif %}{% endfor %}
+      {% for file in attachments %}<input type="hidden" name="attachments" value="{{ file.pk }}">{% endfor %}
       <input type="hidden" name="step" value="confirm">
       <div class="actions">
         {% if count and email %}<button type="submit" class="button button--primary">{% blocktranslate count count=count %}Send to {{ count }} person{% plural %}Send to {{ count }} people{% endblocktranslate %}</button>{% endif %}
@@ -22,10 +24,13 @@
       </div>
     </form>
   {% else %}
-    <form method="post" class="form" novalidate>
+    <form method="post" class="form" enctype="multipart/form-data" novalidate>
       {% csrf_token %}
       <input type="hidden" name="step" value="preview">
-      {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+      {% include "register/_field.html" with field=form.subject %}
+      {% include "register/_field.html" with field=form.body %}
+      {% if form.attachments.field.queryset %}{% include "register/_field.html" with field=form.attachments %}{% endif %}
+      {% include "register/_field.html" with field=form.files %}
       <div class="actions">
         <button type="submit" class="button button--primary">{% translate "Preview" %}</button>
         <a class="button" href="{% url 'messaging:batch_list' %}">{% translate "Cancel" %}</a>

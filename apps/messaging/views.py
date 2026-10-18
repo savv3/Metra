@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
 from django.db.models import Count
-from django.http import Http404, HttpResponse
+from django.http import FileResponse, Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
@@ -16,9 +16,9 @@ from apps.core.models import Notice
 from apps.readings.models import ReadingRound
 from apps.register.models import Unit
 
-from . import broadcast, newsletter
+from . import attachments, broadcast, newsletter
 from .forms import ConsentForm, MessageForm, NewsletterForm
-from .models import ConsentRecord, Message, MessageBatch, MessageTemplate
+from .models import Attachment, ConsentRecord, Message, MessageBatch, MessageTemplate
 from .providers import elks_callback_secret
 from .registry import EMAIL, SMS, provider_for
 from .sms import segments
@@ -113,9 +113,11 @@ def compose(request):
         initial["scope"] = broadcast.FILTERED
     form = MessageForm(
         request.POST or None,
+        request.FILES or None,
         initial=initial,
         urgent=urgent,
         can_publish_notice=request.user.has_perm("core.add_notice"),
+        user=request.user,
     )
     return _compose(request, form)
 
@@ -125,7 +127,8 @@ def compose(request):
 def unit_compose(request, pk):
     """Write to one unit's contacts, from the unit page."""
     unit = get_object_or_404(Unit.objects.active(), pk=pk)
-    return _compose(request, MessageForm(request.POST or None, unit=unit), unit=unit)
+    form = MessageForm(request.POST or None, request.FILES or None, unit=unit, user=request.user)
+    return _compose(request, form, unit=unit)
 
 
 def _compose(request, form, unit=None):
@@ -138,6 +141,8 @@ def _compose(request, form, unit=None):
     }
     if request.method == "POST" and form.is_valid():
         data = form.cleaned_data
+        files = form.save_attachments()
+        context["attachments"] = files
         pairs = broadcast.people_for(form.units(), data["contacts"])
         plan = broadcast.plan(pairs, data["channels"])
         if request.POST.get("step") == "confirm" and "edit" not in request.POST:
@@ -156,6 +161,7 @@ def _compose(request, form, unit=None):
                     recipients=[[p.pk, u.pk] for p, u in pairs],
                     created_by=request.user,
                 )
+                form.attach(batch, files)
                 if data.get("notice"):
                     batch.notice = Notice.objects.create(
                         text=data["notice_text"],
@@ -168,7 +174,7 @@ def _compose(request, form, unit=None):
                 messages.success(request, _("Sending has started. This page shows how it goes."))
                 return redirect(batch)
         if "edit" not in request.POST:
-            per_person, total = broadcast.sms_estimate(data["body"], plan)
+            per_person, total = broadcast.sms_estimate(data["body"], plan, files=bool(files))
             first = plan.recipients[0] if plan.recipients else None
             values = broadcast.placeholders(first and first.person, first and first.unit)
             context |= {
@@ -219,11 +225,13 @@ def notice_end(request, pk):
 @permission_required("messaging.send_newsletter", raise_exception=True)
 def newsletter_compose(request):
     """Write a newsletter, see who gets it, and send it to those who said yes."""
-    form = NewsletterForm(request.POST or None)
+    form = NewsletterForm(request.POST or None, request.FILES or None, user=request.user)
     people = list(newsletter.recipients())
     context = {"form": form, "count": len(people), "email": channel_status()["email"]}
     if request.method == "POST" and form.is_valid():
         data = form.cleaned_data
+        files = form.save_attachments()
+        context["attachments"] = files
         if request.POST.get("step") == "confirm" and "edit" not in request.POST and people:
             batch = MessageBatch.objects.create(
                 kind=MessageBatch.Kind.NEWSLETTER,
@@ -235,6 +243,7 @@ def newsletter_compose(request):
                 recipients=[[person.pk, None] for person in people],
                 created_by=request.user,
             )
+            form.attach(batch, files)
             send_batch_task(batch.pk)
             messages.success(request, _("Sending has started. This page shows how it goes."))
             return redirect(batch)
@@ -289,3 +298,53 @@ def unsubscribe(request, token):
     response = render(request, "messaging/unsubscribe.html", context, status=status)
     response["Referrer-Policy"] = "same-origin"
     return response
+
+
+def _download(attachment):
+    response = FileResponse(
+        attachment.file.open("rb"),
+        as_attachment=True,
+        filename=attachment.name,
+        content_type=attachment.content_type,
+    )
+    response["X-Content-Type-Options"] = "nosniff"
+    return response
+
+
+@login_required
+@permission_required("messaging.view_messagebatch", raise_exception=True)
+def attachment_download(request, pk, file_pk):
+    attachment = get_object_or_404(Attachment, pk=file_pk, batch_id=pk)
+    return _download(attachment)
+
+
+def files(request, token):
+    """The page an SMS links to: the files sent with that message. No login,
+    like a self-service link; the link expires."""
+    from apps.register.models import Organisation
+
+    batch = attachments.batch_for_token(token)
+    if batch is None:
+        return render(
+            request,
+            "messaging/files_unavailable.html",
+            {"organisation": Organisation.current()},
+            status=404,
+        )
+    return render(
+        request,
+        "messaging/files.html",
+        {
+            "batch": batch,
+            "token": token,
+            "files": batch.attachments.all(),
+            "organisation": Organisation.current(),
+        },
+    )
+
+
+def file_download(request, token, pk):
+    batch = attachments.batch_for_token(token)
+    if batch is None:
+        raise Http404
+    return _download(get_object_or_404(Attachment, pk=pk, batch=batch))

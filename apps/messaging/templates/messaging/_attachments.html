@@ -1,0 +1,8 @@
+{% load i18n %}{% comment %}The files of a message: a list on the check page, with their ids carried to the next step.{% endcomment %}
+{% if attachments %}
+  <h3>{% translate "Attached files" %}</h3>
+  <ul class="plain-list">
+    {% for file in attachments %}<li>{{ file.name }} <span class="help">{{ file.size|filesizeformat }}</span></li>{% endfor %}
+  </ul>
+  {% if sms_note %}<p class="help">{% translate "SMS recipients get a link to the files at the end of the SMS." %}</p>{% endif %}
+{% endif %}

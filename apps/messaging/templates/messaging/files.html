@@ -1,0 +1,13 @@
+{% extends "selfservice/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Files" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "Files" %}</h1>
+  <p>{% if organisation %}{% blocktranslate with name=organisation.public_name date=batch.created_at|date:"SHORT_DATE_FORMAT" %}Sent by {{ name }} on {{ date }}.{% endblocktranslate %}{% else %}{% blocktranslate with date=batch.created_at|date:"SHORT_DATE_FORMAT" %}Sent on {{ date }}.{% endblocktranslate %}{% endif %}</p>
+  <ul class="plain-list file-list">
+    {% for file in files %}
+      <li><a class="button" href="{% url 'messaging:file_download' token file.pk %}" download>{{ file.name }}</a> <span class="help">{{ file.size|filesizeformat }}</span></li>
+    {% endfor %}
+  </ul>
+  <p class="help">{% blocktranslate with until=batch.files_expire_at|date:"SHORT_DATE_FORMAT" %}This link works until {{ until }}.{% endblocktranslate %}</p>
+{% endblock %}
