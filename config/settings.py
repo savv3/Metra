@@ -30,6 +30,9 @@ if not SECRET_KEY:
     if not DEBUG:
         raise ImproperlyConfigured("Set SCR_SECRET_KEY, or SCR_DEBUG=true for local development.")
     SECRET_KEY = "insecure-development-key"
+elif not DEBUG and SECRET_KEY in {"change-me", "insecure-development-key"}:
+    # The key signs sessions and password resets; a published one lets anyone forge them.
+    raise ImproperlyConfigured("SCR_SECRET_KEY is still the example value; generate a new one.")
 
 ALLOWED_HOSTS = env_list("SCR_ALLOWED_HOSTS", "localhost,127.0.0.1")
 CSRF_TRUSTED_ORIGINS = env_list("SCR_CSRF_TRUSTED_ORIGINS")
@@ -229,6 +232,10 @@ CACHES = {
 # Caddy puts the visitor's address in X-Forwarded-For. Only trust it behind
 # a proxy that sets it, or anyone could pretend to be someone else.
 TRUST_X_FORWARDED_FOR = env_bool("SCR_TRUST_X_FORWARDED_FOR")
+# The same for allauth's login and two-factor rate limits: without it every
+# visitor shares the proxy's address, so one person's failed logins would lock
+# out everyone.
+ALLAUTH_TRUSTED_PROXY_COUNT = 1 if TRUST_X_FORWARDED_FOR else 0
 
 # Email: SMTP when SCR_EMAIL_HOST is set, the console in development, or
 # none (links then go by SMS or letter). See README, "Email and SMS".
