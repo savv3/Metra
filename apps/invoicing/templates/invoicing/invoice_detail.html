@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ invoice }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{{ invoice }}{% if invoice.is_overdue %} <span class="badge">{% translate "Overdue" %}</span>{% endif %}</h1>
+    <div class="actions">
+      {% if invoice.is_draft %}
+        {% if perms.invoicing.issue_invoice %}
+          <form method="post" action="{% url 'invoicing:invoice_issue' invoice.pk %}" class="inline-form">
+            {% csrf_token %}
+            <button type="submit" class="button button--primary"{% if can_issue_problems %} disabled aria-describedby="issue-problems"{% endif %}>{% if invoice.kind == "credit_note" %}{% translate "Issue credit note" %}{% else %}{% translate "Issue invoice" %}{% endif %}</button>
+          </form>
+        {% endif %}
+        {% if perms.invoicing.change_invoice and invoice.run %}
+          <form method="post" action="{% url 'invoicing:invoice_rebuild' invoice.pk %}" class="inline-form">
+            {% csrf_token %}
+            <button type="submit" class="button">{% translate "Rebuild from fee plans" %}</button>
+          </form>
+        {% endif %}
+        {% if perms.invoicing.delete_invoice %}
+          <form method="post" action="{% url 'invoicing:invoice_delete' invoice.pk %}" class="inline-form">
+            {% csrf_token %}
+            <button type="submit" class="button">{% translate "Delete draft" %}</button>
+          </form>
+        {% endif %}
+      {% elif invoice.kind == "invoice" and perms.invoicing.issue_invoice and perms.invoicing.add_invoice and invoice.status == "issued" %}
+        <form method="post" action="{% url 'invoicing:invoice_credit' invoice.pk %}" class="inline-form">
+          {% csrf_token %}
+          <button type="submit" class="button">{% translate "Make a credit note" %}</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+  <p class="subtitle">{{ invoice.get_status_display }}{% if invoice.run %} &middot; <a href="{{ invoice.run.get_absolute_url }}">{{ invoice.run }}</a>{% endif %}{% if invoice.credits %} &middot; {% translate "Credits" %} <a href="{{ invoice.credits.get_absolute_url }}">{{ invoice.credits }}</a>{% endif %}</p>
+
+  {% if invoice.problems or can_issue_problems %}
+    <div class="status-panel status-panel--warning" id="issue-problems">
+      <h2>{% translate "Check before issuing" %}</h2>
+      <ul>{% for problem in invoice.problems %}<li>{{ problem }}</li>{% endfor %}{% for problem in can_issue_problems %}<li>{{ problem }}</li>{% endfor %}</ul>
+    </div>
+  {% endif %}
+
+  <dl class="details-list">
+    <dt>{% translate "Recipient" %}</dt>
+    <dd>{% if invoice.is_draft %}<a href="{{ invoice.person.get_absolute_url }}">{{ invoice.person.full_name }}</a>{% else %}{{ invoice.buyer.name }}{% endif %}<br>
+      {% if invoice.is_draft %}{% for line in invoice.buyer_from_register.address %}{{ line }}<br>{% endfor %}{% else %}{% for line in invoice.buyer.address %}{{ line }}<br>{% endfor %}{% endif %}</dd>
+    <dt>{% translate "Unit" %}</dt><dd><a href="{{ invoice.unit.get_absolute_url }}">{{ invoice.unit.name }}</a></dd>
+    {% if invoice.issue_date %}<dt>{% translate "Invoice date" %}</dt><dd>{{ invoice.issue_date|date:"SHORT_DATE_FORMAT" }}</dd>{% endif %}
+    {% if invoice.due_date %}<dt>{% translate "Due date" %}</dt><dd>{{ invoice.due_date|date:"SHORT_DATE_FORMAT" }}</dd>{% endif %}
+    {% if invoice.issued_by %}<dt>{% translate "Issued by" %}</dt><dd>{{ invoice.issued_by }}</dd>{% endif %}
+  </dl>
+
+  <h2>{% translate "Lines" %}</h2>
+  {% if formset %}
+    <form method="post" class="form form--wide">
+      {% csrf_token %}
+      {{ formset.management_form }}
+      {% if formset.non_form_errors %}<div class="errorlist-box" role="alert">{{ formset.non_form_errors }}</div>{% endif %}
+      <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Lines' %}">
+        <table class="line-table">
+          <thead><tr>
+            <th scope="col">{% translate "Description" %}</th><th scope="col">{% translate "Quantity" %}</th><th scope="col">{% translate "Unit" %}</th>
+            <th scope="col">{% translate "Unit price" %}</th><th scope="col">{% translate "VAT %" %}</th><th scope="col">{% translate "Remove" %}</th>
+          </tr></thead>
+          <tbody>
+            {% for line_form in formset %}
+              <tr>
+                {% for field in line_form.visible_fields %}
+                  <td>{% if field.name == "DELETE" %}<label class="visually-hidden" for="{{ field.id_for_label }}">{% translate "Remove" %}</label>{% else %}<label class="visually-hidden" for="{{ field.id_for_label }}">{{ field.label }}</label>{% endif %}{{ field }}{% for error in field.errors %}<span class="errorlist">{{ error }}</span>{% endfor %}</td>
+                {% endfor %}
+                {% for hidden in line_form.hidden_fields %}{{ hidden }}{% endfor %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% include "register/_field.html" with field=form.note %}
+      <button type="submit" class="button button--primary">{% translate "Save the draft" %}</button>
+    </form>
+  {% else %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Lines' %}">
+      <table>
+        <thead><tr>
+          <th scope="col">{% translate "Description" %}</th><th scope="col" class="num">{% translate "Quantity" %}</th>
+          <th scope="col" class="num">{% translate "Unit price" %}</th>{% if invoice.vat_registered %}<th scope="col" class="num">{% translate "VAT %" %}</th>{% endif %}<th scope="col" class="num">{% translate "Amount" %}</th>
+        </tr></thead>
+        <tbody>
+          {% for line in lines %}
+            <tr><td>{{ line.description }}</td><td class="num">{{ line.quantity|floatformat:"-3" }} {{ line.unit_label }}</td><td class="num">{{ line.unit_price|floatformat:"-4" }} €</td>{% if invoice.vat_registered %}<td class="num">{{ line.vat_rate|floatformat:"-2" }}</td>{% endif %}<td class="num">{{ line.net|floatformat:2 }} €</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% if invoice.note %}<p>{{ invoice.note|linebreaksbr }}</p>{% endif %}
+  {% endif %}
+
+  <h2>{% translate "Total" %}</h2>
+  <dl class="details-list totals">
+    {% if invoice.effective_vat_registered %}
+      {% for rate, base, vat in breakdown %}
+        <dt>{% blocktranslate with rate=rate|floatformat:"-2" %}VAT {{ rate }} %{% endblocktranslate %}</dt><dd>{% blocktranslate with base=base|floatformat:2 vat=vat|floatformat:2 %}{{ vat }} € on {{ base }} €{% endblocktranslate %}</dd>
+      {% endfor %}
+      <dt>{% translate "Without VAT" %}</dt><dd>{{ invoice.total_net|floatformat:2 }} €</dd>
+      <dt>{% translate "VAT" %}</dt><dd>{{ invoice.total_vat|floatformat:2 }} €</dd>
+    {% else %}
+      <dt>{% translate "VAT" %}</dt><dd>{% if invoice.is_draft %}{% translate "Not VAT registered" %}{% else %}{{ invoice.seller.vat_exemption_text }}{% endif %}</dd>
+    {% endif %}
+    <dt>{% translate "To pay" %}</dt><dd><strong>{{ invoice.total|floatformat:2 }} €</strong></dd>
+  </dl>
+
+  {% if credit_notes %}
+    <h2>{% translate "Credit notes" %}</h2>
+    <ul class="plain-list">{% for note in credit_notes %}<li><a href="{{ note.get_absolute_url }}">{{ note }}</a> &middot; {{ note.total|floatformat:2 }} € &middot; {{ note.get_status_display }}</li>{% endfor %}</ul>
+  {% endif %}
+
+  {% if history %}{% include "register/_history.html" %}{% endif %}
+{% endblock %}

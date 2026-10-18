@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Invoices" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Invoices" %}</h1>
+    <div class="actions"><a class="button" href="{% url 'invoicing:run_list' %}">{% translate "Invoice runs" %}</a></div>
+  </div>
+  <form class="filters" method="get" role="search" hx-get="{% url 'invoicing:invoice_list' %}" hx-target="#results" hx-push-url="true" hx-trigger="input delay:300ms from:#f-q, change, submit">
+    <div class="field">
+      <label for="f-q">{% translate "Search" %}</label>
+      <input type="search" id="f-q" name="q" value="{{ filters.q }}">
+    </div>
+    <div class="field">
+      <label for="f-status">{% translate "Show" %}</label>
+      <select id="f-status" name="status">
+        <option value="">{% translate "All" %}</option>
+        <option value="draft"{% if filters.status == "draft" %} selected{% endif %}>{% translate "Drafts" %}</option>
+        <option value="issued"{% if filters.status == "issued" %} selected{% endif %}>{% translate "Issued" %}</option>
+        <option value="overdue"{% if filters.status == "overdue" %} selected{% endif %}>{% translate "Overdue" %}</option>
+        <option value="credited"{% if filters.status == "credited" %} selected{% endif %}>{% translate "Credited" %}</option>
+        <option value="credit_notes"{% if filters.status == "credit_notes" %} selected{% endif %}>{% translate "Credit notes" %}</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="f-run">{% translate "Invoice run" %}</label>
+      <select id="f-run" name="run">
+        <option value="">{% translate "All runs" %}</option>
+        {% for run in runs %}<option value="{{ run.pk }}"{% if filters.run == run.pk|stringformat:"d" %} selected{% endif %}>{{ run }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="field field--submit"><button type="submit" class="button">{% translate "Filter" %}</button></div>
+  </form>
+  <div id="results" aria-live="polite">{% include "invoicing/_invoice_results.html" %}</div>
+{% endblock %}

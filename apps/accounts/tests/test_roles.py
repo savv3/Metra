@@ -102,7 +102,16 @@ def test_roles_have_the_agreed_permissions():
 
     every = Permission.objects.filter(content_type__app_label__in=["register", "auth", "auditlog"])
     assert set(every.values_list("codename", flat=True)) <= codenames("Admin")
-    assert codenames("Treasurer") == codenames("Read-only")
+    # The treasurer sees what Read-only sees, and also runs invoicing.
+    invoicing = set(
+        Permission.objects.filter(content_type__app_label="invoicing").values_list(
+            "codename", flat=True
+        )
+    )
+    assert codenames("Treasurer") == codenames("Read-only") | invoicing
+    assert not codenames("Read-only") & invoicing
+    assert {name for name in invoicing if name.startswith("view_")} <= codenames("Board")
+    assert not {name for name in invoicing if not name.startswith("view_")} & codenames("Board")
     assert all(name.startswith("view_") for name in codenames("Read-only"))
     assert {"change_unit", "add_person", "delete_unitcontact", "view_logentry"} <= codenames(
         "Board"

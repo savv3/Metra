@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "New invoice run" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "New invoice run" %}</h1>
+  <p>{% translate "Makes a draft invoice for every active unit the chosen fee plans apply to. Nothing is sent or numbered until you issue the drafts." %}</p>
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}<div class="errorlist-box" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+    {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Make draft invoices" %}</button>
+      <a class="button" href="{% url 'invoicing:run_list' %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+{% endblock %}

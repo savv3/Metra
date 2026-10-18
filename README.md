@@ -235,6 +235,30 @@ Newsletters are email to people who have said yes, and only to them.
 Service messages and alerts (above) are not newsletters and reach everyone.
 Consent records are personal data, covered by the export and erasure tools.
 
+## Invoicing
+
+Under **Settings > Invoice settings** an admin sets whether the organisation
+is VAT registered (off by default; invoices then carry the exemption text),
+the IBAN and BIC, payment terms, the invoice numbering and the texts on
+invoices. **Settings > Fee plans** says what units pay: fixed fees (with
+`{period}` in the text, for example "Grundavgift {period}") and usage fees
+priced per unit of a reading, optionally in tiers, each with its VAT rate.
+A fee line can apply only to units with a given custom field value, and a
+plan only to units with a tag. The water setup adds "Kommunal vattenavgift"
+with a base fee and a price per m³; delete the m³ line if usage is not
+charged.
+
+**Invoices > Invoice runs > New invoice run** picks the period, the fee
+plans and the reading round, and makes a draft invoice for each active unit
+the plans apply to, addressed to its billing contact (or the owner).
+Drafts whose reading is missing or looks wrong are marked **Check** and are
+not issued with the others: enter the reading and rebuild the draft, or
+edit its lines. **Issue** gives an invoice the next number and the invoice
+and due dates, and locks it. A mistake in an issued invoice is corrected
+with a **credit note**, which can credit all or part of it.
+
+Treasurer and Admin run invoicing; Board can look at it; Read-only cannot.
+
 ### Email and SMS
 
 **Email** goes out over SMTP when `SCR_EMAIL_HOST` is set, with
