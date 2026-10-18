@@ -77,7 +77,7 @@ docker compose up -d --build
 Muu dokumentaatio on englanniksi:
 
 - [INSTALL.md](INSTALL.md): asennus, asetukset, sähköposti ja tekstiviestit,
-  varmuuskopiot, päivittäminen ja kehitys
+  varmuuskopiot ja kehitys
 - [Käyttöopas](docs/user-guide.md): lukemat, itsepalvelu, viestit,
   uutiskirjeet, laskutus, tuonti ja roolit
 - [Useita organisaatioita yhdellä palvelimella](docs/multiple-organisations.md)
