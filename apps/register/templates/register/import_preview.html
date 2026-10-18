@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Check the import" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "Check the import" %}</h1>
+  <p class="subtitle">{{ data.filename }} &middot; {{ unit_type }}</p>
+  <ul class="plain-list">
+    <li><span class="status-ok">{% blocktranslate count count=ok_count %}{{ count }} row will be imported{% plural %}{{ count }} rows will be imported{% endblocktranslate %}</span></li>
+    {% if skip_count %}<li><span class="status-skip">{% blocktranslate count count=skip_count %}{{ count }} row is skipped because the unit already exists{% plural %}{{ count }} rows are skipped because the units already exist{% endblocktranslate %}</span></li>{% endif %}
+    {% if error_count %}<li><span class="status-error">{% blocktranslate count count=error_count %}{{ count }} row has errors{% plural %}{{ count }} rows have errors{% endblocktranslate %}</span></li>{% endif %}
+  </ul>
+
+  {% if error_count %}
+    <div class="errorlist-box" role="alert">
+      {% translate "Nothing is imported while any row has errors. Correct the file and upload it again, or choose other columns." %}
+    </div>
+  {% endif %}
+
+  <div class="actions">
+    {% if not error_count and ok_count %}
+      <form method="post" class="inline-form">
+        {% csrf_token %}
+        <button type="submit" class="button button--primary">{% blocktranslate count count=ok_count %}Import {{ count }} unit{% plural %}Import {{ count }} units{% endblocktranslate %}</button>
+      </form>
+    {% endif %}
+    <a class="button" href="{% url 'register:unit_import_map' %}">{% translate "Change columns" %}</a>
+    <a class="button" href="{% url 'register:unit_import' %}">{% translate "Choose another file" %}</a>
+  </div>
+
+  <h2>{% translate "Rows" %}</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Rows' %}">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">{% translate "Line" %}</th>
+          <th scope="col">{% translate "Name" %}</th>
+          <th scope="col">{% translate "Result" %}</th>
+          <th scope="col">{% translate "Contact" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in results %}
+          <tr>
+            <td>{{ row.line }}</td>
+            <th scope="row">{{ row.name|default:"–" }}</th>
+            <td>
+              {% if row.status == "ok" %}<span class="status-ok">{% translate "OK" %}</span>
+              {% elif row.status == "skip" %}<span class="status-skip">{% translate "Skipped: already in the register" %}</span>
+              {% else %}
+                <span class="status-error">{% translate "Errors" %}</span>
+                <ul class="errorlist">{% for error in row.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+              {% endif %}
+            </td>
+            <td>{{ row.contact }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

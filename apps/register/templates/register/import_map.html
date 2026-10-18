@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Choose columns" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "Choose columns" %}</h1>
+  <p class="subtitle">{% blocktranslate with filename=data.filename unit_type=unit_type count count=data.rows|length trimmed %}
+    {{ filename }}: {{ count }} row, imported as {{ unit_type }}
+  {% plural %}
+    {{ filename }}: {{ count }} rows, imported as {{ unit_type }}
+  {% endblocktranslate %}</p>
+
+  <h2>{% translate "First rows of the file" %}</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'First rows of the file' %}">
+    <table>
+      <thead><tr>{% for header in data.headers %}<th scope="col">{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {% for row in sample %}<tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    <fieldset>
+      <legend>{{ unit_type }}</legend>
+      <div class="import-columns">
+        {% for field in form.unit_fields %}{% include "register/_field.html" %}{% endfor %}
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>{% translate "Contact person" %}</legend>
+      <p class="help">{% translate "People already in the register are matched by email, or by phone when there is no email, and are not added twice." %}</p>
+      <div class="import-columns">
+        {% for field in form.contact_fields %}{% include "register/_field.html" %}{% endfor %}
+        {% include "register/_field.html" with field=form.default_role %}
+      </div>
+    </fieldset>
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Check the rows" %}</button>
+      <a class="button" href="{% url 'register:unit_import' %}">{% translate "Choose another file" %}</a>
+    </div>
+  </form>
+{% endblock %}

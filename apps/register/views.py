@@ -4,9 +4,11 @@ from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
+from . import csv_io
 from .custom_fields import custom_values
 from .forms import PersonForm, UnitContactForm, UnitForm
 from .history import history, log_view
@@ -37,9 +39,7 @@ def _archive_filter(queryset, value):
 # Units
 
 
-@login_required
-@permission_required("register.view_unit", raise_exception=True)
-def unit_list(request):
+def _filtered_units(request):
     filters = {
         "q": request.GET.get("q", "").strip(),
         "type": request.GET.get("type", ""),
@@ -66,14 +66,39 @@ def unit_list(request):
         units = units.filter(status=filters["status"])
     if filters["tag"].isdigit():
         units = units.filter(tags__id=filters["tag"])
+    return units, filters
+
+
+@login_required
+@permission_required("register.view_unit", raise_exception=True)
+def unit_list(request):
+    units, filters = _filtered_units(request)
     context = {
         "page": _list_page(request, units),
         "filters": filters,
+        "query": request.GET.urlencode(),
         "unit_types": UnitType.objects.all(),
         "statuses": Unit.Status.choices,
         "tags": Tag.objects.all(),
     }
     return _render_list(request, "register/unit_list.html", "register/_unit_results.html", context)
+
+
+@login_required
+@permission_required(["register.view_unit", "register.view_person"], raise_exception=True)
+def unit_export(request):
+    units, filters = _filtered_units(request)
+    units = list(units.prefetch_related("unit_contacts__person"))
+    definitions = CustomField.objects.filter(target=CustomField.Target.UNIT).select_related(
+        "unit_type"
+    )
+    if filters["type"].isdigit():
+        definitions = definitions.filter(unit_type_id=filters["type"])
+    else:
+        definitions = definitions.order_by("unit_type__order", "unit_type__name", "order")
+    header, rows = csv_io.export_units(units, list(definitions))
+    csv_io.log_export(request, Unit, units, filters)
+    return csv_io.csv_response(f"units-{timezone.localdate():%Y-%m-%d}.csv", header, rows)
 
 
 @login_required
@@ -172,9 +197,7 @@ def unit_contact_remove(request, pk, contact_pk):
 # People
 
 
-@login_required
-@permission_required("register.view_person", raise_exception=True)
-def person_list(request):
+def _filtered_people(request):
     filters = {
         "q": request.GET.get("q", "").strip(),
         "tag": request.GET.get("tag", ""),
@@ -193,10 +216,33 @@ def person_list(request):
         )
     if filters["tag"].isdigit():
         people = people.filter(tags__id=filters["tag"])
-    context = {"page": _list_page(request, people), "filters": filters, "tags": Tag.objects.all()}
+    return people, filters
+
+
+@login_required
+@permission_required("register.view_person", raise_exception=True)
+def person_list(request):
+    people, filters = _filtered_people(request)
+    context = {
+        "page": _list_page(request, people),
+        "filters": filters,
+        "query": request.GET.urlencode(),
+        "tags": Tag.objects.all(),
+    }
     return _render_list(
         request, "register/person_list.html", "register/_person_results.html", context
     )
+
+
+@login_required
+@permission_required("register.view_person", raise_exception=True)
+def person_export(request):
+    people, filters = _filtered_people(request)
+    people = list(people.prefetch_related("unit_contacts__unit"))
+    definitions = list(CustomField.objects.filter(target=CustomField.Target.PERSON))
+    header, rows = csv_io.export_people(people, definitions)
+    csv_io.log_export(request, Person, people, filters)
+    return csv_io.csv_response(f"people-{timezone.localdate():%Y-%m-%d}.csv", header, rows)
 
 
 @login_required

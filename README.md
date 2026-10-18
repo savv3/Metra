@@ -10,7 +10,7 @@ a configurable register, annual readings with member self-service, SMS and
 email messaging, newsletters, invoicing, an API and offsite backups. See
 [docs/architecture.md](docs/architecture.md) for the plan.
 
-**Status:** early development (phase 1: register, roles, two-factor login and audit log).
+**Status:** early development (phase 1: register, roles, two-factor login, audit log, CSV import and export).
 
 ## Run it with Docker
 
@@ -39,6 +39,33 @@ uv run python manage.py runserver
 Log in at http://localhost:8000. Record types and their custom fields are set
 up under **Settings** (the Django admin); units and people are managed on the
 main pages.
+
+### Import and export
+
+**Units > Import CSV** (Admin and Board) imports units of one type, each with
+up to one contact person:
+
+1. Choose the unit type and the file. It must be UTF-8 (in Excel: *CSV UTF-8*),
+   with semicolons, commas or tabs between columns and one header row.
+2. Check which column goes to which field. Columns whose header matches a
+   field name or a custom field's label or key are chosen for you.
+3. Check the preview: every row is marked OK, skipped (the unit name is
+   already in the register, if you chose to skip those) or shown with its
+   errors. Nothing is imported while any row has errors, and the import is
+   all or nothing.
+
+Contacts are matched to people already in the register by email, or by phone
+when there is no email, so nobody is added twice; existing people are linked,
+not changed. Dates can be written 2026-04-01 or 1.4.2026, yes/no fields as
+ja/nej or yes/no, and tags must already exist. An example file for the water
+association setup is linked on the import page
+([static/examples/hushall-exempel.csv](static/examples/hushall-exempel.csv)).
+
+The unit and people lists have an **Export as CSV** link that downloads the
+current filtered list, semicolon-separated with a UTF-8 BOM so Excel shows å,
+ä and ö correctly. Custom fields become columns named by their labels. Every
+export is recorded in the audit log with who exported which records; the
+file is made in memory and never stored on the server.
 
 ### Users, roles and two-factor login
 
