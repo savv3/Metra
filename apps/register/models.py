@@ -1,6 +1,7 @@
 """The register: configurable record types, the units registered under them,
 the people you contact, and the roles that link the two."""
 
+from auditlog.registry import auditlog
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
@@ -291,3 +292,19 @@ class UnitContact(models.Model):
 
     def __str__(self):
         return f"{self.person} ({self.get_role_display()}) – {self.unit}"
+
+    def get_additional_data(self):
+        """Stored with each audit entry so it shows on the unit's and the person's history."""
+        return {"unit_id": self.unit_id, "person_id": self.person_id}
+
+
+# Every change to register data is logged with who made it. The timestamps
+# are left out: they change on every save and the log has its own.
+TIMESTAMPS = ["created_at", "updated_at"]
+auditlog.register(Organisation)
+auditlog.register(Tag)
+auditlog.register(UnitType)
+auditlog.register(CustomField)
+auditlog.register(Person, exclude_fields=TIMESTAMPS, m2m_fields={"tags"})
+auditlog.register(Unit, exclude_fields=TIMESTAMPS, m2m_fields={"tags"})
+auditlog.register(UnitContact)

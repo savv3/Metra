@@ -1,0 +1,49 @@
+{% load i18n %}
+<h2 id="history">{% translate "History" %}</h2>
+{% if history.changes %}
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="history">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">{% translate "When" %}</th>
+          <th scope="col">{% translate "Who" %}</th>
+          <th scope="col">{% translate "What" %}</th>
+          <th scope="col">{% translate "Changes" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for change in history.changes %}
+          <tr>
+            <td>{{ change.entry.timestamp|date:"SHORT_DATETIME_FORMAT" }}</td>
+            <td>{{ change.entry.actor|default:_("System") }}</td>
+            <td>{{ change.action }}</td>
+            <td>
+              {% if change.summary %}{{ change.summary }}{% endif %}
+              {% if change.fields %}
+                <ul class="change-list">
+                  {% for label, old, new in change.fields %}
+                    <li><strong>{{ label|capfirst }}:</strong>
+                      {% if old is not None and new is not None %}{{ old }} &rarr; {{ new }}{% elif new is not None %}{{ new }}{% else %}{{ old }}{% endif %}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p class="empty">{% translate "No changes recorded yet." %}</p>
+{% endif %}
+
+<h3>{% translate "Recently viewed by" %}</h3>
+{% if history.views %}
+  <ul class="plain-list">
+    {% for entry in history.views %}
+      <li>{{ entry.timestamp|date:"SHORT_DATETIME_FORMAT" }} &middot; {{ entry.actor|default:_("System") }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="empty">{% translate "No views recorded yet." %}</p>
+{% endif %}

@@ -44,8 +44,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "allauth",
+    "allauth.account",
+    "allauth.mfa",
+    "auditlog",
     "huey.contrib.djhuey",
     "apps.core",
+    "apps.accounts",
     "apps.register",
 ]
 
@@ -57,7 +62,10 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
+    "auditlog.middleware.AuditlogMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "apps.accounts.middleware.RequireStaffTwoFactorMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -80,9 +88,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-LOGIN_URL = "login"
+# Login, two-factor and password pages come from django-allauth. Accounts are
+# created by an admin under Settings; nobody can sign up on their own.
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+LOGIN_URL = "account_login"
 LOGIN_REDIRECT_URL = "register:unit_list"
-LOGOUT_REDIRECT_URL = "login"
+ACCOUNT_LOGOUT_REDIRECT_URL = "account_login"
+ACCOUNT_ADAPTER = "apps.accounts.adapter.AccountAdapter"
+ACCOUNT_LOGIN_METHODS = {"username"}
+ACCOUNT_SIGNUP_FIELDS = ["username*", "password1*", "password2*"]
+ACCOUNT_EMAIL_VERIFICATION = "none"
+MFA_ADAPTER = "apps.accounts.adapter.MFAAdapter"
+MFA_SUPPORTED_TYPES = ["totp", "recovery_codes"]
+MFA_TOTP_ISSUER = "Small Company Register"
+
+# The audit log records who changed or viewed register data. Changes are
+# stored as JSON so custom field values keep their structure.
+AUDITLOG_STORE_JSON_CHANGES = True
+# Store the name of a linked record (e.g. the unit type) rather than its id.
+AUDITLOG_USE_FK_STRING_REPRESENTATION = True
 
 # SQLite in WAL mode lets the web app and the worker read while one writes.
 # IMMEDIATE transactions take the write lock up front, which avoids

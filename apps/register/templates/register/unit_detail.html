@@ -4,13 +4,15 @@
 {% block content %}
   <div class="page-head">
     <h1>{{ unit.name }}{% if unit.is_archived %} <span class="badge">{% translate "Archived" %}</span>{% endif %}</h1>
-    <div class="actions">
-      <a class="button" href="{% url 'register:unit_edit' unit.pk %}">{% translate "Edit" %}</a>
-      <form method="post" action="{% url 'register:unit_archive' unit.pk %}" class="inline-form">
-        {% csrf_token %}
-        <button type="submit" class="button">{% if unit.is_archived %}{% translate "Restore" %}{% else %}{% translate "Archive" %}{% endif %}</button>
-      </form>
-    </div>
+    {% if perms.register.change_unit %}
+      <div class="actions">
+        <a class="button" href="{% url 'register:unit_edit' unit.pk %}">{% translate "Edit" %}</a>
+        <form method="post" action="{% url 'register:unit_archive' unit.pk %}" class="inline-form">
+          {% csrf_token %}
+          <button type="submit" class="button">{% if unit.is_archived %}{% translate "Restore" %}{% else %}{% translate "Archive" %}{% endif %}</button>
+        </form>
+      </div>
+    {% endif %}
   </div>
   <p class="subtitle">{{ unit.unit_type }} &middot; {{ unit.get_status_display }}</p>
 
@@ -36,7 +38,7 @@
             <th scope="col">{% translate "Role" %}</th>
             <th scope="col">{% translate "Email" %}</th>
             <th scope="col">{% translate "Phone" %}</th>
-            <th scope="col"><span class="visually-hidden">{% translate "Actions" %}</span></th>
+            {% if perms.register.delete_unitcontact %}<th scope="col"><span class="visually-hidden">{% translate "Actions" %}</span></th>{% endif %}
           </tr>
         </thead>
         <tbody>
@@ -46,12 +48,14 @@
               <td>{{ c.get_role_display }}</td>
               <td>{{ c.person.email }}</td>
               <td>{{ c.person.phone }}</td>
-              <td>
-                <form method="post" action="{% url 'register:unit_contact_remove' unit.pk c.pk %}" class="inline-form">
-                  {% csrf_token %}
-                  <button type="submit" class="button button--small">{% translate "Remove" %}<span class="visually-hidden"> {{ c.person.full_name }}</span></button>
-                </form>
-              </td>
+              {% if perms.register.delete_unitcontact %}
+                <td>
+                  <form method="post" action="{% url 'register:unit_contact_remove' unit.pk c.pk %}" class="inline-form">
+                    {% csrf_token %}
+                    <button type="submit" class="button button--small">{% translate "Remove" %}<span class="visually-hidden"> {{ c.person.full_name }}</span></button>
+                  </form>
+                </td>
+              {% endif %}
             </tr>
           {% endfor %}
         </tbody>
@@ -61,15 +65,21 @@
     <p class="empty">{% translate "No contacts yet." %}</p>
   {% endif %}
 
-  <h3>{% translate "Add existing person" %}</h3>
-  <form method="post" action="{% url 'register:unit_contact_add' unit.pk %}" class="form form--inline">
-    {% csrf_token %}
-    {% for field in contact_form %}
-      {% include "register/_field.html" %}
-    {% endfor %}
-    <div class="field field--submit">
-      <button type="submit" class="button">{% translate "Add" %}</button>
-    </div>
-  </form>
-  <p><a class="button" href="{% url 'register:person_create' %}?unit={{ unit.pk }}">{% translate "Add new person" %}</a></p>
+  {% if perms.register.add_unitcontact %}
+    <h3>{% translate "Add existing person" %}</h3>
+    <form method="post" action="{% url 'register:unit_contact_add' unit.pk %}" class="form form--inline">
+      {% csrf_token %}
+      {% for field in contact_form %}
+        {% include "register/_field.html" %}
+      {% endfor %}
+      <div class="field field--submit">
+        <button type="submit" class="button">{% translate "Add" %}</button>
+      </div>
+    </form>
+    {% if perms.register.add_person %}
+      <p><a class="button" href="{% url 'register:person_create' %}?unit={{ unit.pk }}">{% translate "Add new person" %}</a></p>
+    {% endif %}
+  {% endif %}
+
+  {% if history %}{% include "register/_history.html" %}{% endif %}
 {% endblock %}
