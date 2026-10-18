@@ -2,7 +2,15 @@
 {% load i18n %}
 {% block title %}{% translate "Send-outs" %}{% endblock %}
 {% block content %}
-  <h1>{% translate "Send-outs" %}</h1>
+  <div class="page-head">
+    <h1>{% translate "Send-outs" %}</h1>
+    {% if perms.messaging.send_broadcast %}
+      <div class="actions">
+        <a class="button" href="{% url 'messaging:compose' %}">{% translate "New message" %}</a>
+        <a class="button button--danger" href="{% url 'messaging:compose' %}?urgent=1">{% translate "Urgent alert" %}</a>
+      </div>
+    {% endif %}
+  </div>
   {% if batches %}
     <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Send-outs' %}">
       <table>

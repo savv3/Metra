@@ -40,12 +40,17 @@ def _archive_filter(queryset, value):
 
 
 def _filtered_units(request):
+    return filter_units(request.GET)
+
+
+def filter_units(params):
+    """Units matching the unit list's filters (a QueryDict or dict), and the filters."""
     filters = {
-        "q": request.GET.get("q", "").strip(),
-        "type": request.GET.get("type", ""),
-        "status": request.GET.get("status", ""),
-        "tag": request.GET.get("tag", ""),
-        "show": request.GET.get("show", "active"),
+        "q": params.get("q", "").strip(),
+        "type": params.get("type", ""),
+        "status": params.get("status", ""),
+        "tag": params.get("tag", ""),
+        "show": params.get("show", "active"),
     }
     units = Unit.objects.select_related("unit_type").prefetch_related("tags")
     units = _archive_filter(units, filters["show"])

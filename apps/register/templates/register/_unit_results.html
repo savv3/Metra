@@ -26,6 +26,9 @@
     </table>
   </div>
   {% include "register/_pagination.html" %}
+  {% if perms.messaging.send_broadcast %}
+    <p class="export-link"><a href="{% url 'messaging:compose' %}?filters={{ query|urlencode }}">{% translate "Send a message to these units" %}</a></p>
+  {% endif %}
   {% if perms.register.view_person %}
     <p class="export-link"><a href="{% url 'register:unit_export' %}{% if query %}?{{ query }}{% endif %}" download>{% blocktranslate count count=page.paginator.count %}Export {{ count }} unit as CSV{% plural %}Export {{ count }} units as CSV{% endblocktranslate %}</a></p>
   {% endif %}

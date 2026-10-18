@@ -12,6 +12,7 @@ from auditlog.registry import auditlog
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from django.utils.text import Truncator
 from django.utils.translation import gettext_lazy as _
 
 from apps.readings.models import ReadingRound
@@ -31,10 +32,20 @@ class MessageBatch(models.Model):
         LINKS = "links", _("Self-service links")
         REMINDER = "reminder", _("Reminder")
         AUTO_REMINDER = "auto_reminder", _("Automatic reminder")
+        BROADCAST = "broadcast", _("Message")
+        ALERT = "alert", _("Urgent alert")
 
     class Scope(models.TextChoices):
         ALL = "all", _("All units")
         MISSING = "missing", _("Units missing a reading")
+
+    class Channels(models.TextChoices):
+        """For messages written by staff: which channels each person gets."""
+
+        SMS = "sms", _("SMS only")
+        EMAIL = "email", _("Email only")
+        SMS_OR_EMAIL = "sms_or_email", _("SMS, or email for those without a phone")
+        SMS_AND_EMAIL = "sms_and_email", _("Both SMS and email")
 
     class Status(models.TextChoices):
         QUEUED = "queued", _("Waiting to be sent")
@@ -64,18 +75,36 @@ class MessageBatch(models.Model):
     )
     created_at = models.DateTimeField(_("created"), auto_now_add=True)
     finished_at = models.DateTimeField(_("finished"), null=True, blank=True)
+    # Messages written by staff (kind broadcast or alert).
+    channels = models.CharField(_("channels"), max_length=20, choices=Channels.choices, blank=True)
+    subject = models.CharField(_("email subject"), max_length=200, blank=True)
+    body = models.TextField(_("text"), blank=True)
+    email_body = models.TextField(_("email text"), blank=True)
+    audience = models.CharField(_("recipients"), max_length=300, blank=True)
+    # [[person id, unit id], ...] as confirmed before sending.
+    recipients = models.JSONField(default=list, blank=True, editable=False)
 
     class Meta:
         ordering = ["-created_at", "-pk"]
         verbose_name = _("send-out")
         verbose_name_plural = _("send-outs")
+        permissions = [("send_broadcast", _("Can send messages and alerts to everyone"))]
 
     def __str__(self):
         label = self.get_kind_display()
-        return f"{label}: {self.round}" if self.round_id else label
+        if self.round_id:
+            return f"{label}: {self.round}"
+        if self.is_written and self.body:
+            return f"{label}: {Truncator(self.body).chars(40)}"
+        return label
 
     def get_absolute_url(self):
         return reverse("messaging:batch_detail", args=[self.pk])
+
+    @property
+    def is_written(self):
+        """A message staff wrote, as opposed to links or reminders."""
+        return self.kind in (self.Kind.BROADCAST, self.Kind.ALERT)
 
 
 class Message(models.Model):
@@ -176,4 +205,4 @@ class MessageTemplate(models.Model):
 
 
 auditlog.register(MessageTemplate)
-auditlog.register(MessageBatch, exclude_fields=["finished_at"])
+auditlog.register(MessageBatch, exclude_fields=["finished_at", "recipients"])

@@ -40,3 +40,8 @@ def make_household(household):
         return unit
 
     return make
+
+
+@pytest.fixture
+def admin_client(role_client):
+    return role_client("Admin")

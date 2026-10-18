@@ -1,4 +1,5 @@
-"""Sending a round's self-service links and reminders.
+"""Sending send-outs: a round's self-service links and reminders here, and
+messages staff write in apps.messaging.broadcast.
 
 Each unit's primary contact gets a new link by SMS, or by email when there
 is no phone number or the SMS fails, or else a letter to print. A person
@@ -14,6 +15,7 @@ from django.utils.translation import gettext as _
 from apps.register.models import Organisation, Person
 from apps.selfservice.models import SelfServiceLink, primary_contact
 
+from .broadcast import send_written
 from .models import Channel, Message, MessageBatch, MessageTemplate
 from .registry import EMAIL, SMS, ProviderError, provider_for
 
@@ -70,6 +72,9 @@ def send_batch(batch):
         return
     batch.status = MessageBatch.Status.SENDING
     batch.save(update_fields=["status"])
+    if batch.is_written:
+        send_written(batch)
+        return _finish(batch)
     purpose = (
         MessageTemplate.Purpose.LINK
         if batch.kind == MessageBatch.Kind.LINKS
@@ -78,6 +83,10 @@ def send_batch(batch):
     with translation.override(translation.get_language() or "sv"):
         for unit in _units(batch):
             send_to_unit(batch, unit, purpose)
+    _finish(batch)
+
+
+def _finish(batch):
     batch.status = MessageBatch.Status.DONE
     batch.finished_at = timezone.now()
     batch.save(update_fields=["status", "finished_at"])
