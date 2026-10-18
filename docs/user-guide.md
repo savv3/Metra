@@ -136,6 +136,20 @@ for operational information, not marketing. Only the Admin role may send
 them; an admin can give the "Can send messages and alerts to everyone"
 permission to Board under **Settings > Groups**.
 
+### Attachments
+
+Messages and newsletters can carry files, such as the annual meeting's
+agenda: PDF, images and office documents, up to 10 MB per file and 15 MB per
+message (`METRA_ATTACHMENT_FILE_MB` and `METRA_ATTACHMENT_TOTAL_MB`). Email
+recipients get the files attached. SMS recipients get a short link at the end
+of the SMS to a page with the files; it needs no login and stops working
+after `METRA_SELF_SERVICE_LINK_DAYS` days (30 by default). The check page
+lists the files and counts the link in the number of SMS.
+
+The files are kept with the send-out, where staff can download them again,
+and are stored in the data folder, so backups include them. Files uploaded
+for a message that was never sent are removed after a day.
+
 ## Newsletters
 
 Newsletters are email to people who have said yes, and only to them.

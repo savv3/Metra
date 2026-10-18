@@ -10,7 +10,7 @@ import re
 
 from gunicorn.glogging import Logger
 
-SECRET_PATH = re.compile(r"(/m/|/messaging/46elks/delivery/)[^/?#\s]+")
+SECRET_PATH = re.compile(r"(/m/|/f/|/messaging/46elks/delivery/)[^/?#\s]+")
 
 
 def redact(value):

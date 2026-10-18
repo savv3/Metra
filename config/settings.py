@@ -303,6 +303,11 @@ MESSAGING = {
     # Newsletters go out this many emails at a time, with a pause between.
     "newsletter_batch_size": int(os.environ.get("METRA_NEWSLETTER_BATCH_SIZE") or 50),
     "newsletter_pause_seconds": int(os.environ.get("METRA_NEWSLETTER_PAUSE_SECONDS") or 60),
+    # Files attached to messages and newsletters: the largest file, and all of
+    # one message's files together, in megabytes. Many mail servers refuse
+    # emails over about 20 MB, and attachments grow by a third when sent.
+    "attachment_file_mb": int(os.environ.get("METRA_ATTACHMENT_FILE_MB") or 10),
+    "attachment_total_mb": int(os.environ.get("METRA_ATTACHMENT_TOTAL_MB") or 15),
 }
 if MESSAGING["sms_provider"] == "none":
     MESSAGING["sms_provider"] = ""

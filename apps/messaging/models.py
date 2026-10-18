@@ -7,10 +7,14 @@ apps.selfservice), so a copy of the database must not hold them either.
 """
 
 import re
+import secrets
 
 from auditlog.registry import auditlog
 from django.conf import settings
 from django.db import models
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+from django.template.defaultfilters import filesizeformat
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import Truncator
@@ -95,6 +99,10 @@ class MessageBatch(models.Model):
         blank=True,
         related_name="batches",
     )
+    # The link SMS recipients get to the attached files. Only its hash is kept,
+    # like self-service links, so a copy of the database cannot open it.
+    files_token_hash = models.CharField(max_length=64, blank=True, editable=False)
+    files_expire_at = models.DateTimeField(_("file link expires"), null=True, blank=True)
 
     class Meta:
         ordering = ["-created_at", "-pk"]
@@ -306,6 +314,52 @@ class ConsentRecord(models.Model):
         )
 
 
+def attachment_path(attachment, filename):
+    # A random folder per file keeps names readable without clashes or guessing.
+    return f"attachments/{timezone.now():%Y}/{secrets.token_hex(8)}/{filename}"
+
+
+class Attachment(models.Model):
+    """A file sent with a message or newsletter: attached to emails, and a
+    link in SMS. Until the send-out is confirmed it has no batch."""
+
+    batch = models.ForeignKey(
+        MessageBatch,
+        verbose_name=_("send-out"),
+        on_delete=models.CASCADE,
+        related_name="attachments",
+        null=True,
+        blank=True,
+    )
+    file = models.FileField(_("file"), upload_to=attachment_path, max_length=300)
+    name = models.CharField(_("name"), max_length=200)
+    size = models.PositiveIntegerField(_("size"))
+    content_type = models.CharField(_("type"), max_length=100)
+    uploaded_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_("uploaded by"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="+",
+    )
+    uploaded_at = models.DateTimeField(_("uploaded"), auto_now_add=True)
+
+    class Meta:
+        ordering = ["pk"]
+        verbose_name = _("attachment")
+        verbose_name_plural = _("attachments")
+
+    def __str__(self):
+        return f"{self.name} ({filesizeformat(self.size)})"
+
+
+@receiver(post_delete, sender=Attachment)
+def _delete_attachment_file(sender, instance, **kwargs):
+    instance.file.delete(save=False)
+
+
 auditlog.register(MessageTemplate)
 auditlog.register(ConsentRecord)
-auditlog.register(MessageBatch, exclude_fields=["finished_at", "recipients"])
+auditlog.register(MessageBatch, exclude_fields=["finished_at", "recipients", "files_token_hash"])
+auditlog.register(Attachment)

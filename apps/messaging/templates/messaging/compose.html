@@ -25,6 +25,7 @@
     {% endif %}
     <h3>{% if example_for %}{% blocktranslate with name=example_for.full_name %}The message, as {{ name }} gets it{% endblocktranslate %}{% else %}{% translate "Message" %}{% endif %}</h3>
     <blockquote class="message-preview">{{ example|linebreaksbr }}</blockquote>
+    {% include "messaging/_attachments.html" with sms_note=sms_count %}
 
     {% if plan.unreachable %}
       <div class="status-panel status-panel--warning">
@@ -40,7 +41,8 @@
 
     <form method="post" class="form">
       {% csrf_token %}
-      {% for field in form %}{{ field.as_hidden }}{% endfor %}
+      {% for field in form %}{% if field.name != "files" and field.name != "attachments" %}{{ field.as_hidden }}{% endif %}{% endfor %}
+      {% for file in attachments %}<input type="hidden" name="attachments" value="{{ file.pk }}">{% endfor %}
       <input type="hidden" name="step" value="confirm">
       <div class="actions">
         {% if plan.recipients %}<button type="submit" class="button {% if form.cleaned_data.urgent %}button--danger{% else %}button--primary{% endif %}">{% blocktranslate count count=plan.recipients|length %}Send now to {{ count }} person{% plural %}Send now to {{ count }} people{% endblocktranslate %}</button>{% endif %}
@@ -48,7 +50,7 @@
       </div>
     </form>
   {% else %}
-    <form method="post" class="form" novalidate>
+    <form method="post" class="form" enctype="multipart/form-data" novalidate>
       {% csrf_token %}
       <input type="hidden" name="step" value="preview">
       {% if form.non_field_errors %}<div class="errorlist-box" role="alert">{{ form.non_field_errors }}</div>{% endif %}
@@ -69,6 +71,8 @@
       </div>
       {% include "register/_field.html" with field=form.subject %}
       {% include "register/_field.html" with field=form.email_body %}
+      {% if form.attachments.field.queryset %}{% include "register/_field.html" with field=form.attachments %}{% endif %}
+      {% include "register/_field.html" with field=form.files %}
       {% if form.notice %}
         <fieldset>
           <legend>{% translate "Public notice" %}</legend>

@@ -7,7 +7,7 @@ from huey.contrib.djhuey import db_periodic_task, db_task
 
 from apps.readings.models import ReadingRound
 
-from . import newsletter
+from . import attachments, newsletter
 from .models import MessageBatch
 from .sending import send_batch
 
@@ -45,3 +45,9 @@ def automatic_reminders():
             round=round_,
         )
         send_batch(batch)
+
+
+@db_periodic_task(crontab(hour="3", minute="15"))
+def remove_unsent_attachments():
+    """Files uploaded for a message that was never sent are kept for a day."""
+    attachments.remove_unsent()

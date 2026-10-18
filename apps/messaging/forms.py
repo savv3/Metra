@@ -4,8 +4,14 @@ from django.utils.translation import gettext_lazy as _
 
 from apps.register.models import Tag, UnitType
 
-from . import broadcast
-from .models import PLACEHOLDER, MessageBatch, MessageTemplate, organisation_placeholders
+from . import attachments, broadcast
+from .models import (
+    PLACEHOLDER,
+    Attachment,
+    MessageBatch,
+    MessageTemplate,
+    organisation_placeholders,
+)
 
 SCOPES = [
     (broadcast.EVERYONE, _("Everyone")),
@@ -23,7 +29,69 @@ PLACEHOLDER_HELP = _(
 )
 
 
-class MessageForm(forms.Form):
+class MultipleFileInput(forms.ClearableFileInput):
+    allow_multiple_selected = True
+
+
+class MultipleFileField(forms.FileField):
+    """Several files from one file input; cleans to a list."""
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("widget", MultipleFileInput(attrs={"accept": attachments.ACCEPT}))
+        super().__init__(*args, **kwargs)
+
+    def clean(self, data, initial=None):
+        if not data:
+            return []
+        if not isinstance(data, (list, tuple)):
+            data = [data]
+        return [super(MultipleFileField, self).clean(item, initial) for item in data]
+
+
+class AttachmentsMixin:
+    """Files to send with the message. New uploads are stored by
+    ``save_attachments`` once the form is valid; files already uploaded for
+    this message come back as ids and can be unticked to drop them."""
+
+    def add_attachment_fields(self, user):
+        self.user = user
+        ids = self.data.getlist("attachments") if self.is_bound else []
+        self.fields["attachments"] = forms.ModelMultipleChoiceField(
+            label=_("Attached files"),
+            queryset=attachments.unsent(user).filter(pk__in=[i for i in ids if i.isdigit()]),
+            required=False,
+            widget=forms.CheckboxSelectMultiple,
+            help_text=_("Untick a file to leave it out."),
+        )
+        self.fields["files"] = MultipleFileField(
+            label=_("Attach files"),
+            required=False,
+            help_text=_(
+                "PDF, images or office documents, up to %(file)s MB each and %(total)s MB "
+                "together. Email recipients get the files attached; SMS recipients get a link."
+            )
+            % {
+                "file": attachments.max_file_bytes() // 2**20,
+                "total": attachments.max_total_bytes() // 2**20,
+            },
+        )
+
+    def clean_files(self):
+        uploads = self.cleaned_data.get("files") or []
+        attachments.validate(uploads, kept=self.cleaned_data.get("attachments") or [])
+        return uploads
+
+    def save_attachments(self):
+        """Store new uploads; every attachment the message now has."""
+        new = attachments.save(self.cleaned_data["files"], self.user)
+        return list(self.cleaned_data["attachments"]) + new
+
+    @staticmethod
+    def attach(batch, files):
+        Attachment.objects.filter(pk__in=[a.pk for a in files], batch=None).update(batch=batch)
+
+
+class MessageForm(AttachmentsMixin, forms.Form):
     """A message staff write to many people. ``urgent`` is an alert about the service."""
 
     urgent = forms.BooleanField(
@@ -88,8 +156,9 @@ class MessageForm(forms.Form):
         help_text=_("Empty: until you remove it."),
     )
 
-    def __init__(self, *args, urgent=False, can_publish_notice=False, **kwargs):
+    def __init__(self, *args, urgent=False, can_publish_notice=False, user=None, **kwargs):
         super().__init__(*args, **kwargs)
+        self.add_attachment_fields(user)
         if not can_publish_notice:
             for name in ("notice", "notice_text", "notice_until"):
                 del self.fields[name]
@@ -137,7 +206,7 @@ class MessageForm(forms.Form):
         return f"{label} ({dict(CONTACTS)[data['contacts']].lower()})"
 
 
-class NewsletterForm(forms.Form):
+class NewsletterForm(AttachmentsMixin, forms.Form):
     subject = forms.CharField(label=_("Subject"), max_length=200)
     body = forms.CharField(
         label=_("Text"),
@@ -147,6 +216,10 @@ class NewsletterForm(forms.Form):
             "An unsubscribe link is added at the end of every email."
         ),
     )
+
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.add_attachment_fields(user)
 
 
 class ConsentForm(forms.Form):

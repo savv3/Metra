@@ -14,6 +14,7 @@ from apps.register.models import Person, Unit, UnitContact
 from apps.register.views import filter_units
 from apps.selfservice.models import ROLE_PREFERENCE
 
+from . import attachments
 from .models import Channel, Message, MessageBatch, MessageTemplate, organisation_placeholders
 from .registry import EMAIL, SMS, ProviderError, provider_for
 from .sms import segments
@@ -121,8 +122,11 @@ def placeholders(person=None, unit=None):
     return values
 
 
-def sms_estimate(text, plan_):
-    """(SMS per person, SMS in total) for the text with each person's own values."""
+def sms_estimate(text, plan_, files=False):
+    """(SMS per person, SMS in total) for the text with each person's own values,
+    and the link to the files when there are any."""
+    if files:
+        text += attachments.sms_line_estimate()
     per_person = [
         segments(MessageTemplate.fill(text, placeholders(r.person, r.unit)))[0]
         for r in plan_.recipients
@@ -169,7 +173,10 @@ def _send(batch, person, unit, channel):
     else:
         recipient, subject, body = person.email, batch.subject, batch.email_body or batch.body
     subject = MessageTemplate.fill(subject, values)
-    body = MessageTemplate.fill(body, values)
+    body = stored = MessageTemplate.fill(body, values)
+    if channel == SMS:
+        line, stored_line = attachments.sms_line(batch)
+        body, stored = body + line, stored + stored_line
     message = Message.objects.create(
         batch=batch,
         person=person,
@@ -177,12 +184,17 @@ def _send(batch, person, unit, channel):
         channel=channel,
         recipient=recipient,
         subject=subject,
-        body=body,
+        body=stored,
         provider=provider.name,
     )
     try:
+        extra = attachments.email_kwargs(provider, batch) if channel == EMAIL else {}
         result = provider.send(
-            recipient, body, subject=subject, callback_url=provider.delivery_callback_url()
+            recipient,
+            body,
+            subject=subject,
+            callback_url=provider.delivery_callback_url(),
+            **extra,
         )
     except ProviderError as error:
         message.status = Message.Status.FAILED
