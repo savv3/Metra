@@ -10,15 +10,15 @@ def test_sqlite_enforces_foreign_keys():
 
 
 def _load_settings(**env):
-    """Import config.settings in a fresh interpreter with only these SCR_ values."""
+    """Import config.settings in a fresh interpreter with only these METRA_ or SCR_ values."""
     import os
     import subprocess
     import sys
 
-    clean = {k: v for k, v in os.environ.items() if not k.startswith("SCR_")}
+    clean = {k: v for k, v in os.environ.items() if not k.startswith(("METRA_", "SCR_"))}
     return subprocess.run(
         [sys.executable, "-c", "import config.settings as s; print(s.ALLAUTH_TRUSTED_PROXY_COUNT)"],
-        env={**clean, "SCR_DATA_DIR": env.pop("data_dir"), **env},
+        env={**clean, "METRA_DATA_DIR": env.pop("data_dir"), **env},
         capture_output=True,
         text=True,
     )
@@ -26,7 +26,7 @@ def _load_settings(**env):
 
 @pytest.mark.parametrize("key", ["change-me", "insecure-development-key"])
 def test_example_secret_key_is_refused_in_production(tmp_path, key):
-    result = _load_settings(data_dir=str(tmp_path), SCR_SECRET_KEY=key)
+    result = _load_settings(data_dir=str(tmp_path), METRA_SECRET_KEY=key)
 
     assert result.returncode != 0
     assert "example value" in result.stderr
@@ -35,9 +35,9 @@ def test_example_secret_key_is_refused_in_production(tmp_path, key):
 def test_login_rate_limits_trust_the_proxy_only_when_told(tmp_path):
     key = "a-real-secret-key-for-this-test-only"
     behind = _load_settings(
-        data_dir=str(tmp_path), SCR_SECRET_KEY=key, SCR_TRUST_X_FORWARDED_FOR="true"
+        data_dir=str(tmp_path), METRA_SECRET_KEY=key, METRA_TRUST_X_FORWARDED_FOR="true"
     )
-    direct = _load_settings(data_dir=str(tmp_path), SCR_SECRET_KEY=key)
+    direct = _load_settings(data_dir=str(tmp_path), METRA_SECRET_KEY=key)
 
     assert behind.stdout.strip() == "1"
     assert direct.stdout.strip() == "0"
@@ -48,10 +48,10 @@ def _require_mfa(tmp_path, **env):
     import subprocess
     import sys
 
-    clean = {k: v for k, v in os.environ.items() if not k.startswith("SCR_")}
+    clean = {k: v for k, v in os.environ.items() if not k.startswith(("METRA_", "SCR_"))}
     result = subprocess.run(
         [sys.executable, "-c", "import config.settings as s; print(s.REQUIRE_MFA)"],
-        env={**clean, "SCR_DATA_DIR": str(tmp_path), **env},
+        env={**clean, "METRA_DATA_DIR": str(tmp_path), **env},
         capture_output=True,
         text=True,
     )
@@ -61,7 +61,17 @@ def _require_mfa(tmp_path, **env):
 def test_two_factor_is_required_in_production_and_optional_in_development(tmp_path):
     key = "a-real-secret-key-for-this-test-only"
 
-    assert _require_mfa(tmp_path, SCR_SECRET_KEY=key) == "True"
-    assert _require_mfa(tmp_path, SCR_DEBUG="true") == "False"
-    assert _require_mfa(tmp_path, SCR_DEBUG="true", SCR_REQUIRE_MFA="true") == "True"
+    assert _require_mfa(tmp_path, METRA_SECRET_KEY=key) == "True"
+    assert _require_mfa(tmp_path, METRA_DEBUG="true") == "False"
+    assert _require_mfa(tmp_path, METRA_DEBUG="true", METRA_REQUIRE_MFA="true") == "True"
+    assert _require_mfa(tmp_path, METRA_SECRET_KEY=key, METRA_REQUIRE_MFA="false") == "False"
+
+
+def test_settings_from_before_the_rename_still_work(tmp_path):
+    key = "a-real-secret-key-for-this-test-only"
+
     assert _require_mfa(tmp_path, SCR_SECRET_KEY=key, SCR_REQUIRE_MFA="false") == "False"
+    assert _require_mfa(tmp_path, SCR_DEBUG="true") == "False"
+    # The new name wins when an install sets both.
+    both = {"METRA_REQUIRE_MFA": "true", "SCR_REQUIRE_MFA": "false"}
+    assert _require_mfa(tmp_path, METRA_SECRET_KEY=key, **both) == "True"

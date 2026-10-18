@@ -3,14 +3,14 @@
 rclone is configured entirely through environment variables passed to the
 subprocess, so no config file with credentials is ever written. The backups
 go through an rclone "crypt" remote: file contents and names are encrypted
-with SCR_BACKUP_ENCRYPTION_PASSWORD before they leave the server.
+with METRA_BACKUP_ENCRYPTION_PASSWORD before they leave the server.
 Secrets are never put on the command line, where other processes could see them.
 """
 
 import os
 import subprocess
 
-from .archive import is_archive_name
+from .archive import archive_time, is_archive_name
 
 BASE = "SCRREMOTE"
 CRYPT = "scrcrypt"
@@ -29,12 +29,12 @@ class Remote:
         self.runner = runner
         if self.type not in TYPES:
             raise RcloneError(
-                f"SCR_BACKUP_REMOTE_TYPE must be one of s3, sftp or ftps, not {self.type!r}."
+                f"METRA_BACKUP_REMOTE_TYPE must be one of s3, sftp or ftps, not {self.type!r}."
             )
         if not config["encryption_password"]:
-            raise RcloneError("Set SCR_BACKUP_ENCRYPTION_PASSWORD to upload backups.")
+            raise RcloneError("Set METRA_BACKUP_ENCRYPTION_PASSWORD to upload backups.")
         if self.type in ("sftp", "ftps") and not config["host"]:
-            raise RcloneError("Set SCR_BACKUP_HOST for SFTP and FTPS backups.")
+            raise RcloneError("Set METRA_BACKUP_HOST for SFTP and FTPS backups.")
         self._env = None
 
     @classmethod
@@ -92,7 +92,7 @@ class Remote:
         env = {
             key: value
             for key, value in os.environ.items()
-            if not key.startswith(("RCLONE_", "SCR_BACKUP_"))
+            if not key.startswith(("RCLONE_", "METRA_BACKUP_", "SCR_BACKUP_"))
         }
         env.update({f"RCLONE_CONFIG_{BASE}_{k}": v for k, v in options.items() if v})
         env.update(
@@ -137,7 +137,8 @@ class Remote:
     def list(self):
         """Archive names on the remote, oldest first."""
         output = self.run("lsf", "--files-only", f"{CRYPT}:")
-        return sorted(name for name in output.splitlines() if is_archive_name(name.strip()))
+        names = (name.strip() for name in output.splitlines())
+        return sorted((name for name in names if is_archive_name(name)), key=archive_time)
 
     def prune(self, keep):
         names = self.list()

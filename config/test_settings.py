@@ -2,13 +2,13 @@
 
 import os
 
-os.environ.setdefault("SCR_DEBUG", "true")
-os.environ.setdefault("SCR_HUEY_IMMEDIATE", "true")
+os.environ.setdefault("METRA_DEBUG", "true")
+os.environ.setdefault("METRA_HUEY_IMMEDIATE", "true")
 # Tests run as production does: staff must use two-factor login.
-os.environ.setdefault("SCR_REQUIRE_MFA", "true")
+os.environ.setdefault("METRA_REQUIRE_MFA", "true")
 # The example plugin (plugins/example, a dev dependency) is loaded the way an
 # installation would load it, so the tests cover the real plugin path.
-os.environ.setdefault("SCR_PLUGINS", "example")
+os.environ.setdefault("METRA_PLUGINS", "example")
 
 from config.settings import *  # noqa: E402, F403
 

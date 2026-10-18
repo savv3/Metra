@@ -125,7 +125,7 @@ def test_archive_holds_database_media_and_manifest(tmp_path):
 
     path = archive.create_archive(db, media, tmp_path / "backups", MOMENT)
 
-    assert path.name == "scr-backup-20261018-023000.tar.gz"
+    assert path.name == "metra-backup-20261018-023000.tar.gz"
     assert path.stat().st_mode & 0o777 == 0o600
     with tarfile.open(path) as tar:
         names = set(tar.getnames())
@@ -168,18 +168,34 @@ def test_extract_refuses_files_that_are_not_backups(tmp_path):
 
 def test_local_retention_keeps_the_newest(tmp_path):
     for day in range(1, 6):
-        (tmp_path / f"scr-backup-202610{day:02d}-023000.tar.gz").write_bytes(b"x")
+        (tmp_path / f"metra-backup-202610{day:02d}-023000.tar.gz").write_bytes(b"x")
     (tmp_path / "unrelated.txt").write_text("keep me")
 
     removed = archive.prune_local(tmp_path, keep=2)
 
     assert [p.name for p in removed] == [
-        f"scr-backup-202610{day:02d}-023000.tar.gz" for day in (1, 2, 3)
+        f"metra-backup-202610{day:02d}-023000.tar.gz" for day in (1, 2, 3)
     ]
     assert sorted(p.name for p in tmp_path.iterdir()) == [
-        "scr-backup-20261004-023000.tar.gz",
-        "scr-backup-20261005-023000.tar.gz",
+        "metra-backup-20261004-023000.tar.gz",
+        "metra-backup-20261005-023000.tar.gz",
         "unrelated.txt",
+    ]
+
+
+def test_archives_from_before_the_rename_sort_by_time(tmp_path):
+    for name in (
+        "scr-backup-20261001-023000.tar.gz",
+        "metra-backup-20261002-023000.tar.gz",
+        "scr-backup-20261003-023000.tar.gz",
+    ):
+        (tmp_path / name).write_bytes(b"x")
+
+    removed = archive.prune_local(tmp_path, keep=1)
+
+    assert [p.name for p in removed] == [
+        "scr-backup-20261001-023000.tar.gz",
+        "metra-backup-20261002-023000.tar.gz",
     ]
 
 
@@ -190,7 +206,7 @@ def test_rclone_is_configured_through_the_environment_only():
     runner = FakeRclone()
     remote = Remote(REMOTE, runner)
 
-    remote.upload(archive.Path("/data/backups/scr-backup-20261018-023000.tar.gz"))
+    remote.upload(archive.Path("/data/backups/metra-backup-20261018-023000.tar.gz"))
 
     obscure, upload = runner.calls
     assert obscure["command"] == ["rclone", "obscure", "-"]
@@ -198,8 +214,8 @@ def test_rclone_is_configured_through_the_environment_only():
     assert upload["command"] == [
         "rclone",
         "copyto",
-        "/data/backups/scr-backup-20261018-023000.tar.gz",
-        "scrcrypt:scr-backup-20261018-023000.tar.gz",
+        "/data/backups/metra-backup-20261018-023000.tar.gz",
+        "scrcrypt:metra-backup-20261018-023000.tar.gz",
     ]
     env = upload["env"]
     assert env["RCLONE_CONFIG_SCRREMOTE_TYPE"] == "s3"
@@ -227,14 +243,22 @@ def test_sftp_and_ftps_remotes(kind, rclone_type):
 
 
 def test_remote_retention_deletes_the_oldest():
-    listing = "\n".join(f"scr-backup-202610{d:02d}-023000.tar.gz" for d in (3, 1, 2)) + "\nother"
+    listing = "\n".join(f"metra-backup-202610{d:02d}-023000.tar.gz" for d in (3, 1, 2)) + "\nother"
     runner = FakeRclone(listing=listing)
 
     removed = Remote(REMOTE, runner).prune(keep=1)
 
-    assert removed == ["scr-backup-20261001-023000.tar.gz", "scr-backup-20261002-023000.tar.gz"]
+    assert removed == ["metra-backup-20261001-023000.tar.gz", "metra-backup-20261002-023000.tar.gz"]
     deletes = [c["command"] for c in runner.calls if c["command"][1] == "deletefile"]
     assert deletes == [["rclone", "deletefile", f"scrcrypt:{name}"] for name in removed]
+
+
+def test_remote_lists_archives_from_before_the_rename():
+    listing = "metra-backup-20261020-023000.tar.gz\nscr-backup-20261019-023000.tar.gz\n"
+
+    names = Remote(REMOTE, FakeRclone(listing=listing)).list()
+
+    assert names == ["scr-backup-20261019-023000.tar.gz", "metra-backup-20261020-023000.tar.gz"]
 
 
 def test_remote_needs_an_encryption_password():
@@ -246,7 +270,7 @@ def test_rclone_errors_never_show_secrets():
     remote = Remote(REMOTE, FakeRclone(fail="copyto"))
 
     with pytest.raises(RcloneError) as error:
-        remote.upload(archive.Path("/x/scr-backup-1.tar.gz"))
+        remote.upload(archive.Path("/x/metra-backup-1.tar.gz"))
 
     assert SECRET not in str(error.value)
     assert "s3-secret-value" not in str(error.value)
@@ -376,7 +400,7 @@ def test_restore_downloads_from_the_remote(backup_file, restored, settings, monk
 @pytest.mark.django_db
 def test_restore_reports_a_missing_file(restored):
     with pytest.raises(CommandError, match="does not exist"):
-        call_command("restore", "/nowhere/scr-backup-x.tar.gz")
+        call_command("restore", "/nowhere/metra-backup-x.tar.gz")
 
 
 # Status panel

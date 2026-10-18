@@ -3753,8 +3753,8 @@ msgstr "Skriv ut brev med länk"
 #: apps/selfservice/templates/selfservice/base.html:9
 #: apps/selfservice/templates/selfservice/base.html:18 templates/base.html:7
 #: templates/base.html:18
-msgid "Small Company Register"
-msgstr "Small Company Register"
+msgid "Metra"
+msgstr "Metra"
 
 #: apps/selfservice/templates/selfservice/base.html:15 templates/base.html:15
 msgid "Skip to content"
@@ -4141,10 +4141,10 @@ msgstr "Logga ut"
 
 #: templates/base.html:63
 msgid ""
-"Two-factor login is not required on this installation (SCR_REQUIRE_MFA is "
+"Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
 msgstr ""
-"Tvåfaktorsinloggning krävs inte i den här installationen (SCR_REQUIRE_MFA är"
+"Tvåfaktorsinloggning krävs inte i den här installationen (METRA_REQUIRE_MFA är"
 " avstängd). Slå på den innan riktiga uppgifter läggs in."
 
 #: templates/base.html:68

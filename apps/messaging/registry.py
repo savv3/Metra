@@ -1,7 +1,7 @@
 """SMS and email providers, looked up by name.
 
 An installation picks one provider per channel with a setting
-(``SCR_SMS_PROVIDER``, ``SCR_EMAIL_BACKEND``). Providers register here
+(``METRA_SMS_PROVIDER``, ``METRA_EMAIL_BACKEND``). Providers register here
 under a name, so another one (GatewayAPI, Sinch, a plugin's own) can be
 added without touching the code that sends messages.
 """

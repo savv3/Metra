@@ -1,7 +1,7 @@
 """Newsletters: email to people who said yes, each with its own unsubscribe link.
 
 Unlike service messages and alerts, a newsletter needs the person's consent.
-A newsletter goes out in parts of SCR_NEWSLETTER_BATCH_SIZE emails with a
+A newsletter goes out in parts of METRA_NEWSLETTER_BATCH_SIZE emails with a
 pause between them, so a mail server's rate limits are respected.
 """
 

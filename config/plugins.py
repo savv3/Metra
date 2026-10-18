@@ -1,25 +1,29 @@
-"""Find the plugins an installation enabled with SCR_PLUGINS.
+"""Find the plugins an installation enabled with METRA_PLUGINS.
 
 A plugin is a pip-installable package that is a Django app and declares an
-entry point in the ``scr.plugins`` group, for example in its pyproject.toml:
+entry point in the ``metra.plugins`` group, for example in its pyproject.toml:
 
-    [project.entry-points."scr.plugins"]
-    example = "scr_example_plugin"
+    [project.entry-points."metra.plugins"]
+    example = "metra_example_plugin"
 
 Installed plugins are not loaded on their own: only names listed in
-SCR_PLUGINS are added to INSTALLED_APPS. See docs/plugins.md.
+METRA_PLUGINS are added to INSTALLED_APPS. See docs/plugins.md.
 """
 
 from importlib.metadata import entry_points
 
 from django.core.exceptions import ImproperlyConfigured
 
-GROUP = "scr.plugins"
+GROUP = "metra.plugins"
+# The group's name before the rename to Metra; plugins using it still load.
+LEGACY_GROUP = "scr.plugins"
 
 
 def available():
     """{name: entry point} for every installed plugin."""
-    return {entry_point.name: entry_point for entry_point in entry_points(group=GROUP)}
+    found = {entry_point.name: entry_point for entry_point in entry_points(group=LEGACY_GROUP)}
+    found.update((entry_point.name, entry_point) for entry_point in entry_points(group=GROUP))
+    return found
 
 
 def app_for(entry_point):
@@ -35,7 +39,7 @@ def enabled_apps(names, found=None):
         if name not in found:
             installed = ", ".join(sorted(found)) or "none"
             raise ImproperlyConfigured(
-                f"SCR_PLUGINS lists {name!r}, but no installed package provides a plugin by "
+                f"METRA_PLUGINS lists {name!r}, but no installed package provides a plugin by "
                 f"that name (installed: {installed})."
             )
         apps[name] = app_for(found[name])

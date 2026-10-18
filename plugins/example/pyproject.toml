@@ -1,18 +1,18 @@
 [project]
-name = "scr-example-plugin"
+name = "metra-example-plugin"
 version = "0.1.0"
-description = "A minimal SmallCompanyRegister plugin: a menu item, a unit panel and an SMS provider."
+description = "A minimal Metra plugin: a menu item, a unit panel and an SMS provider."
 requires-python = ">=3.13"
 license = "MIT"
 dependencies = []
 
-# This is what makes the package a plugin: SCR_PLUGINS=example enables it.
-[project.entry-points."scr.plugins"]
-example = "scr_example_plugin"
+# This is what makes the package a plugin: METRA_PLUGINS=example enables it.
+[project.entry-points."metra.plugins"]
+example = "metra_example_plugin"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/scr_example_plugin"]
+packages = ["src/metra_example_plugin"]

@@ -17,8 +17,8 @@ def entry_point(name, value):
 
 
 def test_the_example_plugin_is_found_through_its_entry_point():
-    assert app_for(available()["example"]) == "scr_example_plugin"
-    assert apps.is_installed("scr_example_plugin")
+    assert app_for(available()["example"]) == "metra_example_plugin"
+    assert apps.is_installed("metra_example_plugin")
 
 
 def test_only_listed_plugins_are_enabled():
@@ -97,7 +97,7 @@ def test_unknown_extension_point_is_refused():
 
 
 def test_plugins_must_declare_personal_data(monkeypatch, settings):
-    config = apps.get_app_config("scr_example_plugin")
+    config = apps.get_app_config("metra_example_plugin")
     assert "plugins.W001" not in [w.id for w in run_checks()]
 
     monkeypatch.delattr(type(config), "personal_data")

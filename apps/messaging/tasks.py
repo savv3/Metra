@@ -29,7 +29,7 @@ def send_batch_task(batch_id):
 
 @db_periodic_task(crontab(hour="10", minute="0"))
 def automatic_reminders():
-    """Remind units missing a reading SCR_READING_REMINDER_DAYS before an open
+    """Remind units missing a reading METRA_READING_REMINDER_DAYS before an open
     round closes. Off unless the setting is given; each round is reminded once."""
     days = settings.MESSAGING["reminder_days_before_close"]
     if days is None:

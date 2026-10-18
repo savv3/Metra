@@ -5,7 +5,7 @@ Guidance for AI coding agents (and humans) working in this repository.
 
 ## What this is
 
-SmallCompanyRegister is an open source (MIT), self-hostable web app for small
+Metra is an open source (MIT), self-hostable web app for small
 companies and associations to manage members and clients: a register of
 households or other units and their contacts, annual readings (for example
 water usage), SMS and email messaging, newsletters, invoicing, an API, and
@@ -59,7 +59,7 @@ Do not revisit these without the maintainer asking.
 
 ```sh
 uv sync                                         # install dependencies
-export SCR_DEBUG=true                           # local development defaults
+export METRA_DEBUG=true                           # local development defaults
 uv run python manage.py migrate
 uv run python manage.py compilemessages --ignore=.venv
 uv run python manage.py runserver               # http://localhost:8000
@@ -78,8 +78,8 @@ docker compose up --build                       # full stack, needs a .env (see 
 - **Layout:** project settings in `config/`, Django apps in `apps/<name>/`,
   shared templates in `templates/`, translations in `locale/`.
 - **Configuration:** every per-installation value is an environment variable
-  prefixed `SCR_` and documented in `.env.example`. No secrets in the repo.
-- **Data:** everything persistent lives under `SCR_DATA_DIR` (databases,
+  prefixed `METRA_` and documented in `.env.example`. No secrets in the repo.
+- **Data:** everything persistent lives under `METRA_DATA_DIR` (databases,
   uploads), so one directory is all a backup needs.
 - **Translations:** every user-facing string goes through `gettext` /
   `{% translate %}`. Add the Swedish translation in
@@ -96,8 +96,8 @@ docker compose up --build                       # full stack, needs a .env (see 
   buttons with `perms`. Roles are the groups created in
   `apps/accounts/migrations/0001_roles.py`; a new model or permission needs a
   migration that adds it to the right roles. Staff must use two-factor login
-  (`apps/accounts/middleware.py`) unless `SCR_REQUIRE_MFA` is off, which is
-  the default only when `SCR_DEBUG=true` (staff then see a warning banner);
+  (`apps/accounts/middleware.py`) unless `METRA_REQUIRE_MFA` is off, which is
+  the default only when `METRA_DEBUG=true` (staff then see a warning banner);
   tests run with it on. Keep every login path going through django-allauth,
   and keep requests that are not pages (icons, robots.txt) out of the
   middleware's redirect.

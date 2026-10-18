@@ -1,6 +1,6 @@
 # Plugins
 
-A plugin adds features to SmallCompanyRegister without changing its code.
+A plugin adds features to Metra without changing its code.
 It is an ordinary Python package that is a Django app, so it can have
 models, migrations, views, templates, static files and translations.
 
@@ -10,15 +10,15 @@ and change everything in the register. Install only plugins you trust.
 ## Installing and enabling
 
 1. Install the package into the app's environment.
-   - With Docker, list it in `SCR_PLUGIN_PACKAGES` in `.env`. Use pip names,
+   - With Docker, list it in `METRA_PLUGIN_PACKAGES` in `.env`. Use pip names,
      URLs or paths, separated by spaces, for example
-     `SCR_PLUGIN_PACKAGES="scr-something==1.2 git+https://example.org/x.git"`.
+     `METRA_PLUGIN_PACKAGES="scr-something==1.2 git+https://example.org/x.git"`.
      Then rebuild with `docker compose up -d --build`. You can also build
-     your own image `FROM smallcompanyregister:latest` and `pip install`
+     your own image `FROM metra:latest` and `pip install`
      into `/app/.venv`.
    - Without Docker, install it with `uv pip install` or `pip install`.
-2. Enable it by name in `SCR_PLUGINS`, a comma-separated list, for example
-   `SCR_PLUGINS=example`. Installed plugins that are not listed are never
+2. Enable it by name in `METRA_PLUGINS`, a comma-separated list, for example
+   `METRA_PLUGINS=example`. Installed plugins that are not listed are never
    loaded. An unknown name stops the app at startup with a clear error.
 3. Restart. The web container runs the plugin's migrations on start.
 
@@ -27,12 +27,12 @@ and change everything in the register. Install only plugins you trust.
 Start from [plugins/example](../plugins/example), which the tests load. A
 plugin needs three things.
 
-**An entry point** in the `scr.plugins` group, whose value is the Django app
+**An entry point** in the `metra.plugins` group, whose value is the Django app
 (a module, or `module:AppConfig`):
 
 ```toml
-[project.entry-points."scr.plugins"]
-example = "scr_example_plugin"
+[project.entry-points."metra.plugins"]
+example = "metra_example_plugin"
 ```
 
 **An AppConfig that declares its personal data**, so the export and erasure
@@ -41,7 +41,7 @@ it, `manage.py check` warns (`plugins.W001`).
 
 ```python
 class ExamplePluginConfig(AppConfig):
-    name = "scr_example_plugin"
+    name = "metra_example_plugin"
     personal_data = ["Person: membership card number"]
 ```
 
@@ -69,10 +69,10 @@ model events, use Django signals (`post_save` and so on).
 | Navigation | `api.add_navigation(NavItem(label, url_name, permission))` | A main-menu link, shown to users with the permission |
 | Unit panels | `api.add_unit_panel(Panel(template, title, permission, context))` | A section on unit pages. The template gets `object`, `title`, `perms`, `request` and whatever `context(request, unit)` returns |
 | Person panels | `api.add_person_panel(Panel(...))` | The same, on person pages |
-| SMS and email providers | `api.add_messaging_provider(ProviderClass)` | An `api.Provider` subclass with `channel` (`api.SMS` or `api.EMAIL`), `name` and `send()`. Chosen with `SCR_SMS_PROVIDER=<name>` |
+| SMS and email providers | `api.add_messaging_provider(ProviderClass)` | An `api.Provider` subclass with `channel` (`api.SMS` or `api.EMAIL`), `name` and `send()`. Chosen with `METRA_SMS_PROVIDER=<name>` |
 
 A panel that raises an error is left out of the page and logged. With
-`SCR_DEBUG=true` the error is shown instead.
+`METRA_DEBUG=true` the error is shown instead.
 
 More extension points come with the features they hook into: custom field
 types, backup targets, CSV import and export formats, reading validators,

@@ -40,7 +40,7 @@ def primary_contact(unit):
 
 
 def default_expiry(round_=None):
-    """The end of the round's last day, or SCR_SELF_SERVICE_LINK_DAYS from now."""
+    """The end of the round's last day, or METRA_SELF_SERVICE_LINK_DAYS from now."""
     if round_ is not None:
         end = datetime.datetime.combine(round_.closes_on, datetime.time.max)
         return timezone.make_aware(end)

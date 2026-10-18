@@ -3652,7 +3652,7 @@ msgstr ""
 #: apps/selfservice/templates/selfservice/base.html:9
 #: apps/selfservice/templates/selfservice/base.html:18 templates/base.html:7
 #: templates/base.html:18
-msgid "Small Company Register"
+msgid "Metra"
 msgstr ""
 
 #: apps/selfservice/templates/selfservice/base.html:15 templates/base.html:15
@@ -4012,7 +4012,7 @@ msgstr ""
 
 #: templates/base.html:63
 msgid ""
-"Two-factor login is not required on this installation (SCR_REQUIRE_MFA is "
+"Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
 msgstr ""
 

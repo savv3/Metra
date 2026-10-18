@@ -1,4 +1,4 @@
-# SmallCompanyRegister
+# Metra
 
 A simple, self-hostable web app for small companies and associations to keep
 track of their members and clients. Free and open source under the MIT
@@ -15,32 +15,42 @@ email messaging, newsletters, invoicing, an API and offsite backups. See
 ## Run it with Docker
 
 ```sh
-cp .env.example .env    # then set SCR_DOMAIN and SCR_SECRET_KEY
+cp .env.example .env    # then set METRA_DOMAIN and METRA_SECRET_KEY
 docker compose up -d --build
 ```
 
 Caddy serves the app on your domain with automatic HTTPS. All data lives in
 the `data` Docker volume.
 
+### Upgrading from SmallCompanyRegister
+
+Metra was called SmallCompanyRegister, and its settings were prefixed `SCR_`.
+An existing `.env` keeps working unchanged: every `SCR_` setting is still
+read, and a `METRA_` setting wins when both are set. Rename them at your own
+pace. The data volume, database and older `scr-backup-*` archives are used
+as before. The image is now tagged `metra:latest`; an install that loads a
+prebuilt image should tag it `metra:latest`, or set `METRA_IMAGE` to the old
+tag.
+
 To host several organisations on one server, each as its own separate
 install, see [docs/multiple-organisations.md](docs/multiple-organisations.md).
 
 ## Backup and restore
 
-Every night at 02:30 (`SCR_BACKUP_TIME`, local time) the worker makes a
+Every night at 02:30 (`METRA_BACKUP_TIME`, local time) the worker makes a
 backup: a consistent copy of the database, taken with SQLite's online backup
 while the app runs, and all uploaded files, in one
-`scr-backup-YYYYMMDD-HHMMSS.tar.gz` archive. The newest 14
-(`SCR_BACKUP_KEEP`) are kept in `/data/backups`. Admins see the last backup,
+`metra-backup-YYYYMMDD-HHMMSS.tar.gz` archive. The newest 14
+(`METRA_BACKUP_KEEP`) are kept in `/data/backups`. Admins see the last backup,
 its size and any error at the top of the Units page; every run is also listed
 under **Settings > Backups**.
 
 Those local copies are on the same disk as the data, so also set a remote in
-`.env` (see `.env.example`): `SCR_BACKUP_REMOTE_TYPE` is `s3`, `sftp` or
-`ftps`, with its address, credentials and `SCR_BACKUP_REMOTE_PATH`. Archives
-are encrypted with `SCR_BACKUP_ENCRYPTION_PASSWORD` (rclone crypt) before
+`.env` (see `.env.example`): `METRA_BACKUP_REMOTE_TYPE` is `s3`, `sftp` or
+`ftps`, with its address, credentials and `METRA_BACKUP_REMOTE_PATH`. Archives
+are encrypted with `METRA_BACKUP_ENCRYPTION_PASSWORD` (rclone crypt) before
 they leave the server, and the remote also keeps the newest
-`SCR_BACKUP_KEEP`. **Keep a copy of the encryption password somewhere other
+`METRA_BACKUP_KEEP`. **Keep a copy of the encryption password somewhere other
 than the server**: without it the remote backups cannot be read.
 
 Make a backup now, or list the ones on the remote:
@@ -53,20 +63,20 @@ docker compose exec web python manage.py backup --list-remote
 ### Restore onto a fresh install
 
 1. Install as in [Run it with Docker](#run-it-with-docker), with a `.env`
-   that has the same `SCR_BACKUP_*` settings (including the encryption
+   that has the same `METRA_BACKUP_*` settings (including the encryption
    password), and start it once: `docker compose up -d --build`.
 2. Stop the app so nothing writes during the restore:
    `docker compose stop web worker`
 3. Restore the backup you want, from the remote:
 
    ```sh
-   docker compose run --rm web python manage.py restore --remote scr-backup-20261018-023000.tar.gz
+   docker compose run --rm web python manage.py restore --remote metra-backup-20261018-023000.tar.gz
    ```
 
    or from an archive file on the host:
 
    ```sh
-   docker compose run --rm -v "$PWD/scr-backup-20261018-023000.tar.gz:/tmp/restore.tar.gz:ro" web python manage.py restore /tmp/restore.tar.gz
+   docker compose run --rm -v "$PWD/metra-backup-20261018-023000.tar.gz:/tmp/restore.tar.gz:ro" web python manage.py restore /tmp/restore.tar.gz
    ```
 
 4. Start again: `docker compose up -d`, and log in as before.
@@ -77,7 +87,7 @@ the database already has users or register data; add `--force` to restore
 over an install that is in use (for example to go back to last night).
 
 To copy a local backup off the server:
-`docker compose cp web:/data/backups/scr-backup-20261018-023000.tar.gz .`
+`docker compose cp web:/data/backups/metra-backup-20261018-023000.tar.gz .`
 
 ## Readings
 
@@ -123,11 +133,11 @@ print straight away. Making a new link for a person stops their earlier one
 for the same round, and staff can stop links one by one or all at once.
 
 A link for a round works until the end of the round's closing day; other
-links work for `SCR_SELF_SERVICE_LINK_DAYS` (30) days. Unknown, expired and
+links work for `METRA_SELF_SERVICE_LINK_DAYS` (30) days. Unknown, expired and
 stopped links all show the same page. The member pages are rate-limited per
 visitor address, are kept out of search engines (`noindex`) and send the
 referrer only to the app itself (`Referrer-Policy: same-origin`), so the
-link never reaches other sites. Letters use `SCR_BASE_URL` (by default `https://SCR_DOMAIN`) for
+link never reaches other sites. Letters use `METRA_BASE_URL` (by default `https://METRA_DOMAIN`) for
 the address.
 
 Links are personal data about the person they belong to: they are covered
@@ -153,7 +163,7 @@ The texts are under **Settings > Message templates**, one per purpose
 message has `[personlig länk]` where the link was, because links are kept
 only as hashes.
 
-Automatic reminders are off by default. Set `SCR_READING_REMINDER_DAYS`
+Automatic reminders are off by default. Set `METRA_READING_REMINDER_DAYS`
 (for example `7`) to remind units still missing a reading that many days
 before an open round closes, at 10:00, once per round.
 
@@ -223,8 +233,8 @@ Newsletters are email to people who have said yes, and only to them.
 - **Sending.** **Send-outs > New newsletter** (Admin): write a subject and
   plain text with `{first_name}`, `{name}` and `{organisation}`, check how it
   looks, and send. It goes to active people whose newest answer is yes and
-  who have an email address, `SCR_NEWSLETTER_BATCH_SIZE` (50) at a time with
-  `SCR_NEWSLETTER_PAUSE_SECONDS` (60) between parts, so the mail server's
+  who have an email address, `METRA_NEWSLETTER_BATCH_SIZE` (50) at a time with
+  `METRA_NEWSLETTER_PAUSE_SECONDS` (60) between parts, so the mail server's
   limits hold. Anyone who unsubscribes meanwhile is skipped.
 - **Unsubscribing.** Every newsletter ends with a personal unsubscribe link
   (a signed address, nothing stored) and carries `List-Unsubscribe` headers,
@@ -310,27 +320,27 @@ Pango everything works except making PDFs, and the PDF tests are skipped.
 
 ### Email and SMS
 
-**Email** goes out over SMTP when `SCR_EMAIL_HOST` is set, with
-`SCR_EMAIL_PORT`, `SCR_EMAIL_USER`, `SCR_EMAIL_PASSWORD`, `SCR_EMAIL_USE_TLS`
-or `SCR_EMAIL_USE_SSL`, and `SCR_EMAIL_FROM` as the sender. Without a host,
+**Email** goes out over SMTP when `METRA_EMAIL_HOST` is set, with
+`METRA_EMAIL_PORT`, `METRA_EMAIL_USER`, `METRA_EMAIL_PASSWORD`, `METRA_EMAIL_USE_TLS`
+or `METRA_EMAIL_USE_SSL`, and `METRA_EMAIL_FROM` as the sender. Without a host,
 email is off in production and printed to the console in development.
 
 **SMS** goes through [46elks](https://46elks.com):
 
 1. Create an account at 46elks and add credit. Messages are paid per SMS.
 2. Under *Account* copy the **API username** and **API password** into
-   `SCR_ELKS_API_USER` and `SCR_ELKS_API_PASSWORD`.
-3. Set `SCR_SMS_SENDER` to the name shown on the phone (up to 11 letters
+   `METRA_ELKS_API_USER` and `METRA_ELKS_API_PASSWORD`.
+3. Set `METRA_SMS_SENDER` to the name shown on the phone (up to 11 letters
    and digits, for example `Vatten`) or to a number you have at 46elks.
 4. Numbers written without a country code (`040 123 4567`) get
-   `SCR_SMS_COUNTRY_CODE`, 358 (Finland and Åland) by default.
-5. Optional: set `SCR_ELKS_DRY_RUN=true` to have 46elks check messages
+   `METRA_SMS_COUNTRY_CODE`, 358 (Finland and Åland) by default.
+5. Optional: set `METRA_ELKS_DRY_RUN=true` to have 46elks check messages
    without sending them or charging, while you try the setup.
 6. Restart: `docker compose up -d`.
 
 Delivery reports come back automatically when the app is reachable over
-HTTPS at `SCR_BASE_URL`. 46elks posts them to a secret address the app
-derives from `SCR_SECRET_KEY`, so they need no setup. Without SMS settings,
+HTTPS at `METRA_BASE_URL`. 46elks posts them to a secret address the app
+derives from `METRA_SECRET_KEY`, so they need no setup. Without SMS settings,
 links go by email or letter. 46elks receives the phone number and text of
 each SMS; list it as a processor in your GDPR records. Other providers can
 be added in code: see `apps/messaging/registry.py`.
@@ -339,8 +349,8 @@ be added in code: see `apps/messaging/registry.py`.
 
 Plugins are pip-installable packages that add pages, menu items, panels on
 unit and person pages, or SMS and email providers. Install them through
-`SCR_PLUGIN_PACKAGES` (Docker build) or pip, and enable them by name in
-`SCR_PLUGINS`; nothing loads unless it is listed. Plugins run with full
+`METRA_PLUGIN_PACKAGES` (Docker build) or pip, and enable them by name in
+`METRA_PLUGINS`; nothing loads unless it is listed. Plugins run with full
 trust, so install only ones you trust. See [docs/plugins.md](docs/plugins.md)
 and the [example plugin](plugins/example).
 
@@ -351,7 +361,7 @@ Pango for invoice PDFs (see [Invoice PDFs and sending](#invoice-pdfs-and-sending
 
 ```sh
 uv sync
-export SCR_DEBUG=true
+export METRA_DEBUG=true
 uv run python manage.py migrate
 uv run python manage.py compilemessages --ignore=.venv
 uv run python manage.py createsuperuser
@@ -400,9 +410,9 @@ scan the QR code, enter the six-digit code, and save the recovery codes it
 shows. Staff and superusers cannot use the app until this is done, and from
 then on every login asks for a code.
 
-In development (`SCR_DEBUG=true`) two-factor is not required, so you can
+In development (`METRA_DEBUG=true`) two-factor is not required, so you can
 log in with just a password; staff see a warning banner saying so.
-`SCR_REQUIRE_MFA` sets it either way (it is on by default in production).
+`METRA_REQUIRE_MFA` sets it either way (it is on by default in production).
 
 Further users are added under **Settings > Users**. Give each one a role by
 adding them to one group:

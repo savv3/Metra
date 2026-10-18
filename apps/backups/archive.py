@@ -13,7 +13,9 @@ import tarfile
 import tempfile
 from pathlib import Path
 
-PREFIX = "scr-backup-"
+PREFIX = "metra-backup-"
+# Archives made before the rename to Metra; still listed, restored and pruned.
+LEGACY_PREFIX = "scr-backup-"
 SUFFIX = ".tar.gz"
 FORMAT = 1
 DB_NAME = "db.sqlite3"
@@ -30,7 +32,12 @@ def archive_name(moment):
 
 
 def is_archive_name(name):
-    return name.startswith(PREFIX) and name.endswith(SUFFIX)
+    return name.startswith((PREFIX, LEGACY_PREFIX)) and name.endswith(SUFFIX)
+
+
+def archive_time(name):
+    """The time stamp in an archive name; sorts archives oldest first."""
+    return name.removeprefix(PREFIX).removeprefix(LEGACY_PREFIX)
 
 
 def copy_database(source, destination):
@@ -49,7 +56,7 @@ def copy_database(source, destination):
 
 
 def create_archive(db_path, media_dir, out_dir, moment):
-    """Write ``<out_dir>/scr-backup-<time>.tar.gz`` and return its path."""
+    """Write ``<out_dir>/metra-backup-<time>.tar.gz`` and return its path."""
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     target = out_dir / archive_name(moment)
@@ -70,11 +77,12 @@ def create_archive(db_path, media_dir, out_dir, moment):
 
 
 def local_archives(out_dir):
-    """Archive paths in ``out_dir``, oldest first (names sort by time)."""
+    """Archive paths in ``out_dir``, oldest first."""
     out_dir = Path(out_dir)
     if not out_dir.is_dir():
         return []
-    return sorted(p for p in out_dir.iterdir() if p.is_file() and is_archive_name(p.name))
+    archives = (p for p in out_dir.iterdir() if p.is_file() and is_archive_name(p.name))
+    return sorted(archives, key=lambda p: archive_time(p.name))
 
 
 def prune_local(out_dir, keep):
@@ -97,7 +105,7 @@ def extract_archive(path, workdir):
     try:
         manifest = json.loads((workdir / MANIFEST_NAME).read_text())
     except (OSError, ValueError) as error:
-        raise ArchiveError(f"{path} is not a Small Company Register backup.") from error
+        raise ArchiveError(f"{path} is not a Metra backup.") from error
     if manifest.get("format") != FORMAT or not (workdir / DB_NAME).is_file():
         raise ArchiveError(f"{path} is not a backup this version can restore.")
     media = workdir / MEDIA_NAME
