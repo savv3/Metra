@@ -2848,3 +2848,15 @@ msgstr "Tvåfaktorsinloggning"
 #: templates/base.html:41
 msgid "Log out"
 msgstr "Logga ut"
+
+#: templates/base.html
+msgid ""
+"Protect your account with two-factor login. It takes a minute with an "
+"authenticator app on your phone."
+msgstr ""
+"Skydda ditt konto med tvåfaktorsinloggning. Det tar en minut med en "
+"autentiseringsapp i telefonen."
+
+#: templates/base.html
+msgid "Turn on two-factor login"
+msgstr "Slå på tvåfaktorsinloggning"

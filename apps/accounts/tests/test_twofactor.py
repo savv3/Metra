@@ -120,3 +120,19 @@ def test_nobody_can_sign_up(client, django_user_model):
     )
 
     assert not django_user_model.objects.filter(username="visitor").exists()
+
+
+def test_other_users_are_reminded_to_turn_on_two_factor(board_client):
+    response = board_client.get(reverse("register:unit_list"))
+
+    assert response.status_code == 200
+    assert reverse("mfa_activate_totp") in response.content.decode()
+
+
+def test_reminder_goes_once_two_factor_is_on(board_client):
+    user = board_client.get(reverse("register:unit_list")).wsgi_request.user
+    TOTP.activate(user, SECRET)
+
+    response = board_client.get(reverse("register:unit_list"))
+
+    assert reverse("mfa_activate_totp") not in response.content.decode()

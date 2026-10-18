@@ -44,6 +44,12 @@
     {% endif %}
   </header>
   <main id="main">
+    {% if user|should_set_up_two_factor and not request.path|slice:":10" == "/accounts/" %}
+      <p class="message warning two-factor-nudge" role="note">
+        {% translate "Protect your account with two-factor login. It takes a minute with an authenticator app on your phone." %}
+        <a href="{% url 'mfa_activate_totp' %}">{% translate "Turn on two-factor login" %}</a>
+      </p>
+    {% endif %}
     {% if messages %}
       <ul class="messages" role="status">
         {% for message in messages %}
