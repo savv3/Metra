@@ -1,0 +1,24 @@
+{% load i18n %}
+{% if rows %}
+  <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Readings' %}">
+    <table class="readings-table">
+      <thead>
+        <tr>
+          <th scope="col">{% translate "Unit" %}</th>
+          <th scope="col">{% translate "Previous reading" %}</th>
+          <th scope="col">{% translate "Reading" %}</th>
+          <th scope="col">{% translate "Usage" %}</th>
+          <th scope="col">{% translate "Submitted" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}{% include "readings/_round_row.html" %}{% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% if perms.readings.view_reading and perms.register.view_unit %}
+    <p class="export-link"><a href="{% url 'readings:round_export' round.pk %}{% if query %}?{{ query }}{% endif %}" download>{% translate "Export as CSV" %}</a></p>
+  {% endif %}
+{% else %}
+  <p class="empty">{% translate "No units found." %}</p>
+{% endif %}

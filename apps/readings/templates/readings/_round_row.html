@@ -1,0 +1,42 @@
+{% load i18n readings %}
+{% with reading=row.reading assessment=row.assessment unit=row.unit reading_type=round.reading_type %}
+<tr id="unit-{{ unit.pk }}">
+  <th scope="row">
+    <a href="{{ unit.get_absolute_url }}">{{ unit.name }}</a>
+    {% if unit.address_line and unit.address_line != unit.name %}<span class="help">{{ unit.address_line }}</span>{% endif %}
+  </th>
+  <td>{{ assessment.previous|reading_value:reading_type|default:"–" }}</td>
+  <td>
+    {% if can_enter %}
+      <form method="post" action="{% url 'readings:reading_entry' round.pk unit.pk %}" class="reading-inline"
+            hx-post="{% url 'readings:reading_entry' round.pk unit.pk %}" hx-target="closest tr" hx-swap="outerHTML">
+        {% csrf_token %}
+        <input type="hidden" name="inline" value="1">
+        <label class="visually-hidden" for="value-{{ unit.pk }}">{% blocktranslate with name=unit.name %}Reading for {{ name }}{% endblocktranslate %}</label>
+        <input type="text" inputmode="decimal" autocomplete="off" id="value-{{ unit.pk }}" name="value"
+               value="{% if row.errors %}{{ row.posted }}{% elif reading %}{{ reading.value|reading_number:reading_type }}{% endif %}"
+               {% if row.errors %}aria-invalid="true" aria-describedby="value-{{ unit.pk }}-errors"{% endif %}>
+        {% if reading_type.unit_label %}<span aria-hidden="true">{{ reading_type.unit_label }}</span>{% endif %}
+        <button type="submit" class="button button--small">{% translate "Save" %}<span class="visually-hidden"> {{ unit.name }}</span></button>
+        <a href="{% url 'readings:reading_entry' round.pk unit.pk %}">{% translate "Details" %}<span class="visually-hidden"> {{ unit.name }}</span></a>
+      </form>
+      {% if row.errors %}<ul class="errorlist" id="value-{{ unit.pk }}-errors">{% for error in row.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
+      {% if row.saved %}<p class="status-ok" role="status">{% translate "Saved" %}</p>{% endif %}
+    {% elif reading %}
+      {{ reading.value|reading_value:reading_type }}
+    {% else %}
+      <span class="status-skip">{% translate "Missing" %}</span>
+    {% endif %}
+  </td>
+  <td>
+    {{ assessment.usage|reading_value:reading_type|default:"–" }}
+    {% for warning in assessment.warnings %}<p class="reading-warning"><span class="badge">{% translate "Check" %}</span> {{ warning }}</p>{% endfor %}
+  </td>
+  <td>
+    {% if reading %}
+      {{ reading.submitted_at|date:"SHORT_DATE_FORMAT" }}
+      <span class="help">{{ reading.get_source_display }}{% if reading.submitted_by %}, {{ reading.submitted_by }}{% endif %}</span>
+    {% else %}–{% endif %}
+  </td>
+</tr>
+{% endwith %}

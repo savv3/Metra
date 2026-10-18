@@ -183,3 +183,66 @@ requests.
 
 A sample "water association" configuration ships as a ready-made setup that
 can be loaded on first start.
+
+## Phase 2 build plan
+
+Phase 2 is done when the board can open a reading round, send every
+household a personal link by SMS or email (or print a letter for those with
+neither), and see who has reported and who needs a reminder. It ships as
+four pull requests; the last one adds the plugin core (see
+[Plugins](#plugins)).
+
+| PR | Contents | Done when |
+| --- | --- | --- |
+| 7. Readings | Reading types set up by an admin (unit of measure, decimals, cumulative meter), reading rounds, one reading per unit and round; usage from the previous reading with warnings for values that look wrong; round progress with a filter for missing units; entry and correction from the round and the unit page; history from the audit log; CSV export | The board enters 50 households' meter readings for 2026 and exports the round |
+| 8. Self-service links | Personal links with a random token stored only as a hash, expiring and revocable; a public, mobile-first page where a member enters the reading and corrects their own contact details; changes logged with the link; printable letters with a QR code | A member opens the link on a phone, reports the meter, fixes their email, and the board sees it |
+| 9. Sending links and reminders | A messaging app with a provider interface (SMTP email, 46elks SMS, console for development), message records with delivery status, editable templates, sending a round's links and reminders to missing units through the worker | Links go out by SMS, falling back to email, falling back to the print list, and a reminder reaches only those who have not reported |
+| 10. Plugin core | Entry-point loader, `SCR_PLUGINS`, hook registry with the first extension points (navigation, unit and person panels, messaging providers), example plugin and docs | The example plugin, enabled with `SCR_PLUGINS`, adds a menu item, a unit panel and an SMS provider, and the tests load it |
+
+### Readings
+
+A **reading type** says what is read from which unit type, for example
+"Vattenmätare" in m³ from households. For a cumulative meter the usage of a
+round is the value minus the unit's most recent earlier reading of the same
+type (rounds without a reading are skipped). A value lower than the previous
+one, or a usage more than three times the unit's average over its last three
+rounds, is saved but marked for a check. A round expects every active,
+non-archived unit of the type, plus any unit that has a reading in it.
+
+## Plugins
+
+Organisations can extend the app without forking it.
+
+- **A plugin is a normal Python package** that can be installed with pip and
+  is a Django app.
+- **Discovery and enabling.** Plugins are found through the Python entry
+  point group `scr.plugins` and enabled per installation with
+  `SCR_PLUGINS`, a comma-separated list. Nothing loads unless it is listed.
+- **Docker.** The image installs extra packages listed in
+  `SCR_PLUGIN_PACKAGES` at build time, or the user builds a derived image
+  `FROM` ours.
+- **Django integration.** Settings appends the enabled plugins to
+  `INSTALLED_APPS`, so their migrations, templates, static files and
+  translations work as for any app.
+- **Hook registry.** A small in-house registry, with no new dependency, gives
+  named extension points:
+  - navigation items
+  - panels on unit and person pages
+  - custom field types
+  - SMS and email providers
+  - backup targets
+  - CSV import and export formats
+  - reading validators
+  - invoice line generators (phase 4)
+  - API routes and webhook events (phase 5)
+
+  For model events, plugins use ordinary Django signals.
+- **Trust.** Plugins run with full trust, like any other installed code.
+  Only install plugins you trust. A plugin must declare which personal data
+  it stores, so the export and erasure tools cover it.
+- **Example.** A minimal example plugin lives in the repository and is used
+  in the tests.
+
+The plugin core ships in phase 2 (PR 10) with the first extension points:
+navigation, unit and person panels, and messaging providers. Every later
+phase adds its own extension points as it builds the feature they hook into.

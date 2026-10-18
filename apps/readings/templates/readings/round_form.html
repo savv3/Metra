@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if round %}{% blocktranslate %}Edit {{ round }}{% endblocktranslate %}{% else %}{% translate "New reading round" %}{% endif %}{% endblock %}
+{% block content %}
+  <h1>{% if round %}{% blocktranslate %}Edit {{ round }}{% endblocktranslate %}{% else %}{% translate "New reading round" %}{% endif %}</h1>
+  {% if not round and not form.reading_type.field.queryset %}
+    <p class="notice">{% translate "There are no reading types yet. An admin adds them under Settings > Reading types." %}</p>
+  {% endif %}
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+      <div class="errorlist-box" role="alert">{{ form.non_field_errors }}</div>
+    {% endif %}
+    {% for field in form %}
+      {% include "register/_field.html" %}
+    {% endfor %}
+    <p class="help">{% translate "Members can submit readings while the round is open, from the day it opens until the day it closes." %}</p>
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+      <a class="button" href="{% if round %}{{ round.get_absolute_url }}{% else %}{% url 'readings:round_list' %}{% endif %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+{% endblock %}
