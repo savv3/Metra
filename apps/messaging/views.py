@@ -1,9 +1,11 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
+from django.core.exceptions import PermissionDenied
 from django.db.models import Count
 from django.http import FileResponse, Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.crypto import constant_time_compare
 from django.utils.translation import gettext as _
@@ -12,6 +14,7 @@ from django.views.decorators.http import require_POST
 
 from apps.core.models import Notice
 from apps.readings.models import ReadingRound
+from apps.register.models import Unit
 
 from . import attachments, broadcast, newsletter
 from .forms import ConsentForm, MessageForm, NewsletterForm
@@ -116,7 +119,26 @@ def compose(request):
         can_publish_notice=request.user.has_perm("core.add_notice"),
         user=request.user,
     )
-    context = {"form": form, "channels_set_up": channel_status(), "step": "edit"}
+    return _compose(request, form)
+
+
+@login_required
+@permission_required("messaging.send_unit_message", raise_exception=True)
+def unit_compose(request, pk):
+    """Write to one unit's contacts, from the unit page."""
+    unit = get_object_or_404(Unit.objects.active(), pk=pk)
+    form = MessageForm(request.POST or None, request.FILES or None, unit=unit, user=request.user)
+    return _compose(request, form, unit=unit)
+
+
+def _compose(request, form, unit=None):
+    context = {
+        "form": form,
+        "unit": unit,
+        "channels_set_up": channel_status(),
+        "step": "edit",
+        "cancel_url": unit.get_absolute_url() if unit else reverse("messaging:batch_list"),
+    }
     if request.method == "POST" and form.is_valid():
         data = form.cleaned_data
         files = form.save_attachments()
@@ -128,7 +150,9 @@ def compose(request):
                 messages.error(request, _("Nobody can be reached with these choices."))
             else:
                 batch = MessageBatch.objects.create(
-                    kind=MessageBatch.Kind.ALERT if data["urgent"] else MessageBatch.Kind.BROADCAST,
+                    kind=MessageBatch.Kind.ALERT
+                    if data.get("urgent")
+                    else MessageBatch.Kind.BROADCAST,
                     channels=data["channels"],
                     subject=data["subject"],
                     body=data["body"],
@@ -141,7 +165,7 @@ def compose(request):
                 if data.get("notice"):
                     batch.notice = Notice.objects.create(
                         text=data["notice_text"],
-                        level=Notice.Level.URGENT if data["urgent"] else Notice.Level.INFO,
+                        level=Notice.Level.URGENT if data.get("urgent") else Notice.Level.INFO,
                         ends_at=data.get("notice_until"),
                         created_by=request.user,
                     )
@@ -168,9 +192,14 @@ def compose(request):
 
 
 @login_required
-@permission_required("messaging.send_broadcast", raise_exception=True)
 def sms_count(request):
     """The live "1 SMS, 42 of 160 characters" line under the message box (HTMX)."""
+    # Shown on both message forms, so either permission will do.
+    if not (
+        request.user.has_perm("messaging.send_broadcast")
+        or request.user.has_perm("messaging.send_unit_message")
+    ):
+        raise PermissionDenied
     text = MessageTemplate.fill(request.GET.get("body", ""), broadcast.placeholders())
     count, used, per_sms = segments(text)
     return render(

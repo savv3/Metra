@@ -9,7 +9,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("messaging", "0011_payment_reminder_templates"),
+        ("messaging", "0012_send_unit_message"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 

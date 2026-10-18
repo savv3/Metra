@@ -1,0 +1,35 @@
+{% load i18n %}
+{% if show %}
+  <div class="page-head">
+    <h2 id="messages">{% translate "Messages" %}</h2>
+    {% if can_send %}<div class="actions"><a class="button" href="{% url 'messaging:unit_compose' unit.pk %}">{% translate "Send message" %}</a></div>{% endif %}
+  </div>
+  {% if unit_messages %}
+    <div class="table-wrap" tabindex="0" role="region" aria-labelledby="messages">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">{% translate "When" %}</th>
+            <th scope="col">{% translate "Message" %}</th>
+            <th scope="col">{% translate "Person" %}</th>
+            <th scope="col">{% translate "Channel" %}</th>
+            <th scope="col">{% translate "Status" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for message in unit_messages %}
+            <tr>
+              <td>{{ message.created_at|date:"SHORT_DATETIME_FORMAT" }}</td>
+              <th scope="row">{% if message.batch %}<a href="{{ message.batch.get_absolute_url }}">{{ message.batch.get_kind_display }}</a>{% endif %}<span class="help">{{ message.subject|default:message.body|truncatechars:80 }}</span></th>
+              <td>{% if message.person %}<a href="{{ message.person.get_absolute_url }}">{{ message.person.full_name }}</a>{% endif %}<span class="help">{{ message.recipient }}</span></td>
+              <td>{{ message.get_channel_display }}</td>
+              <td><span class="{% if message.status == 'failed' %}status-error{% elif message.status == 'to_print' %}status-skip{% else %}status-ok{% endif %}">{{ message.get_status_display }}</span></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "No messages yet." %}</p>
+  {% endif %}
+{% endif %}

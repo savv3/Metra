@@ -197,3 +197,16 @@ def test_a_provider_without_attachments_fails_cleanly(admin_client, make_househo
     message = Message.objects.get()
     assert message.status == "failed"
     assert "cannot send attachments" in message.error
+
+
+def test_a_message_to_one_unit_can_carry_files(board_client, make_household):
+    unit = make_household("A", first_name="Anna", email="anna@example.com")
+    url = reverse("messaging:unit_compose", args=[unit.pk])
+    data = {"contacts": "all", "channels": "email", "body": "Hej", "subject": "Avtal"}
+
+    preview = board_client.post(url, {**data, "step": "preview", "files": [agenda("Avtal.pdf")]})
+    board_client.post(
+        url, {**data, "step": "confirm", "attachments": ids(preview.content.decode())}
+    )
+
+    assert [name for name, _c, _t in mail.outbox[0].attachments] == ["Avtal.pdf"]

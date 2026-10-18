@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 22:10+0300\n"
+"POT-Creation-Date: 2026-10-18 22:47+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgid "role"
 msgstr "roll"
 
 #: apps/accounts/admin.py:28 apps/invoicing/models.py:142
-#: apps/messaging/models.py:335 apps/readings/models.py:23
+#: apps/messaging/models.py:336 apps/readings/models.py:23
 #: apps/register/models.py:57 apps/register/models.py:115
 #: apps/register/models.py:129 apps/register/models.py:306
 msgid "name"
@@ -214,7 +214,7 @@ msgstr "storlek i byte"
 msgid "target"
 msgstr "mål"
 
-#: apps/backups/models.py:23 apps/messaging/models.py:174
+#: apps/backups/models.py:23 apps/messaging/models.py:175
 msgid "error"
 msgstr "fel"
 
@@ -260,7 +260,7 @@ msgid "Urgent"
 msgstr "Brådskande"
 
 #: apps/core/models.py:23 apps/messaging/models.py:89
-#: apps/messaging/models.py:168 apps/messaging/models.py:231
+#: apps/messaging/models.py:169 apps/messaging/models.py:232
 msgid "text"
 msgstr "text"
 
@@ -287,7 +287,7 @@ msgstr "skapad av"
 
 #: apps/core/models.py:37 apps/invoicing/models.py:303
 #: apps/invoicing/models.py:401 apps/invoicing/models.py:741
-#: apps/messaging/models.py:84 apps/messaging/models.py:175
+#: apps/messaging/models.py:84 apps/messaging/models.py:176
 #: apps/readings/models.py:78 apps/register/models.py:227
 #: apps/selfservice/models.py:76
 msgid "created"
@@ -618,7 +618,7 @@ msgid "Fixed fees only."
 msgstr "Endast fasta avgifter."
 
 #: apps/invoicing/models.py:201 apps/invoicing/models.py:361
-#: apps/invoicing/models.py:673 apps/messaging/models.py:159
+#: apps/invoicing/models.py:673 apps/messaging/models.py:160
 #: apps/readings/models.py:137 apps/register/models.py:321
 #: apps/register/models.py:344 apps/selfservice/models.py:58
 msgid "unit"
@@ -754,7 +754,7 @@ msgstr "Krediterad"
 
 #: apps/invoicing/models.py:345
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:6
-#: apps/invoicing/views.py:493 apps/messaging/models.py:220
+#: apps/invoicing/views.py:493 apps/messaging/models.py:221
 msgid "Invoice"
 msgstr "Faktura"
 
@@ -764,12 +764,12 @@ msgid "Credit note"
 msgstr "Kreditnota"
 
 #: apps/invoicing/models.py:350 apps/messaging/models.py:74
-#: apps/messaging/models.py:170 apps/readings/models.py:76
+#: apps/messaging/models.py:171 apps/readings/models.py:76
 #: apps/register/models.py:308
 msgid "status"
 msgstr "status"
 
-#: apps/invoicing/models.py:364 apps/messaging/models.py:166
+#: apps/invoicing/models.py:364 apps/messaging/models.py:167
 msgid "recipient"
 msgstr "mottagare"
 
@@ -889,12 +889,12 @@ msgid "Letter"
 msgstr "Brev"
 
 #: apps/invoicing/models.py:732 apps/invoicing/models.py:814
-#: apps/messaging/models.py:165 apps/messaging/models.py:225
+#: apps/messaging/models.py:166 apps/messaging/models.py:226
 msgid "channel"
 msgstr "kanal"
 
 #: apps/invoicing/models.py:735 apps/invoicing/models.py:817
-#: apps/messaging/models.py:181
+#: apps/messaging/models.py:182
 msgid "message"
 msgstr "meddelande"
 
@@ -922,16 +922,16 @@ msgstr "betalningsdag"
 msgid "reference given"
 msgstr "angiven referens"
 
-#: apps/invoicing/models.py:780 apps/messaging/models.py:281
+#: apps/invoicing/models.py:780 apps/messaging/models.py:282
 #: apps/readings/models.py:161
 msgid "note"
 msgstr "anteckning"
 
-#: apps/invoicing/models.py:783 apps/messaging/models.py:274
+#: apps/invoicing/models.py:783 apps/messaging/models.py:275
 msgid "recorded by"
 msgstr "registrerat av"
 
-#: apps/invoicing/models.py:789 apps/messaging/models.py:271
+#: apps/invoicing/models.py:789 apps/messaging/models.py:272
 msgid "recorded"
 msgstr "registrerat"
 
@@ -955,7 +955,7 @@ msgstr "ny förfallodag"
 msgid "sent by"
 msgstr "skickat av"
 
-#: apps/invoicing/models.py:831 apps/messaging/models.py:176
+#: apps/invoicing/models.py:831 apps/messaging/models.py:177
 msgid "sent"
 msgstr "skickat"
 
@@ -1056,6 +1056,7 @@ msgstr "Summa"
 #: apps/invoicing/templates/invoicing/_invoice_results.html:13
 #: apps/invoicing/templates/invoicing/run_detail.html:33
 #: apps/invoicing/views.py:445
+#: apps/messaging/templates/messaging/_unit_messages.html:16
 #: apps/messaging/templates/messaging/batch_detail.html:68
 #: apps/messaging/templates/messaging/batch_list.html:25
 #: apps/readings/templates/readings/round_list.html:22
@@ -1291,7 +1292,7 @@ msgid "Record payment"
 msgstr "Registrera betalningen"
 
 #: apps/invoicing/templates/invoicing/invoice_detail.html:135
-#: apps/messaging/models.py:136
+#: apps/messaging/models.py:137
 msgid "Sent"
 msgstr "Skickat"
 
@@ -1572,7 +1573,7 @@ msgid "Make draft invoices"
 msgstr "Skapa fakturautkast"
 
 #: apps/invoicing/templates/invoicing/run_form.html:13
-#: apps/messaging/templates/messaging/compose.html:86
+#: apps/messaging/templates/messaging/compose.html:95
 #: apps/messaging/templates/messaging/newsletter_compose.html:36
 #: apps/readings/templates/readings/reading_form.html:31
 #: apps/readings/templates/readings/round_form.html:20
@@ -1666,8 +1667,8 @@ msgid "All issued invoices of this run have been sent."
 msgstr "Alla utfärdade fakturor i den här omgången har skickats."
 
 #: apps/invoicing/views.py:353 apps/invoicing/views.py:416
-#: apps/messaging/views.py:54 apps/messaging/views.py:150
-#: apps/messaging/views.py:219
+#: apps/messaging/views.py:57 apps/messaging/views.py:174
+#: apps/messaging/views.py:248
 msgid "Sending has started. This page shows how it goes."
 msgstr "Utskicket har startat. Den här sidan visar hur det går."
 
@@ -1719,8 +1720,8 @@ msgstr "%(name)s är större än %(limit)s."
 msgid "The files are %(size)s together; at most %(limit)s can be sent."
 msgstr "Filerna är %(size)s tillsammans; högst %(limit)s kan skickas."
 
-#: apps/messaging/attachments.py:136
 #
+#: apps/messaging/attachments.py:136
 msgid "This email provider cannot send attachments."
 msgstr "Den här e-postleverantören kan inte skicka bilagor."
 
@@ -1768,10 +1769,10 @@ msgstr ""
 "{organisation_phone}, {organisation_email}, {organisation_website} och "
 "{emergency_phone}."
 
+#
 #: apps/messaging/forms.py:60
 #: apps/messaging/templates/messaging/_attachments.html:4
 #: apps/messaging/templates/messaging/batch_detail.html:13
-#
 msgid "Attached files"
 msgstr "Bifogade filer"
 
@@ -1788,7 +1789,10 @@ msgstr "Bifoga filer"
 msgid ""
 "PDF, images or office documents, up to %(file)s MB each and %(total)s MB "
 "together. Email recipients get the files attached; SMS recipients get a link."
-msgstr "PDF, bilder eller kontorsdokument, högst %(file)s MB per fil och %(total)s MB tillsammans. Den som får e-post får filerna bifogade, den som får sms får en länk."
+msgstr ""
+"PDF, bilder eller kontorsdokument, högst %(file)s MB per fil och %(total)s "
+"MB tillsammans. Den som får e-post får filerna bifogade, den som får sms får "
+"en länk."
 
 #: apps/messaging/forms.py:98 apps/messaging/models.py:41
 #: apps/messaging/templates/messaging/batch_list.html:12
@@ -1827,6 +1831,7 @@ msgid "Send by"
 msgstr "Skicka via"
 
 #: apps/messaging/forms.py:121 apps/messaging/models.py:40
+#: apps/messaging/templates/messaging/_unit_messages.html:13
 #: apps/messaging/templates/messaging/batch_detail.html:10
 #: apps/messaging/templates/messaging/compose.html:26
 msgid "Message"
@@ -1875,31 +1880,31 @@ msgstr "Visa anslaget till"
 msgid "Empty: until you remove it."
 msgstr "Tomt: visas tills du tar bort det."
 
-#: apps/messaging/forms.py:176
+#: apps/messaging/forms.py:187
 msgid "Choose a tag."
 msgstr "Välj en tagg."
 
-#: apps/messaging/forms.py:178
+#: apps/messaging/forms.py:189
 msgid "Choose a unit type."
 msgstr "Välj en enhetstyp."
 
-#: apps/messaging/forms.py:180
+#: apps/messaging/forms.py:191
 msgid "Add a subject for the email."
 msgstr "Lägg till ett ämne för e-postmeddelandet."
 
-#: apps/messaging/forms.py:186
+#: apps/messaging/forms.py:197
 msgid "Write the notice without personal placeholders."
 msgstr "Skriv anslaget utan personliga platshållare."
 
-#: apps/messaging/forms.py:210
+#: apps/messaging/forms.py:225
 msgid "Subject"
 msgstr "Ämne"
 
-#: apps/messaging/forms.py:212 apps/register/models.py:150
+#: apps/messaging/forms.py:227 apps/register/models.py:150
 msgid "Text"
 msgstr "Text"
 
-#: apps/messaging/forms.py:215
+#: apps/messaging/forms.py:230
 #, python-brace-format
 msgid ""
 "Plain text. You can use {first_name}, {name} and {organisation}. An "
@@ -1908,27 +1913,27 @@ msgstr ""
 "Ren text. Du kan använda {first_name}, {name} och {organisation}. En "
 "avregistreringslänk läggs till i slutet av varje e-post."
 
-#: apps/messaging/forms.py:229 apps/messaging/models.py:42
+#: apps/messaging/forms.py:244 apps/messaging/models.py:42
 #: apps/messaging/templates/messaging/_person_newsletter.html:3
 #: apps/messaging/templates/messaging/unsubscribe.html:3
 #: apps/selfservice/templates/selfservice/member.html:62
 msgid "Newsletter"
 msgstr "Nyhetsbrev"
 
-#: apps/messaging/forms.py:230
+#: apps/messaging/forms.py:245
 #: apps/messaging/templates/messaging/_person_newsletter.html:6
 msgid "Wants the newsletter"
 msgstr "Vill ha nyhetsbrevet"
 
-#: apps/messaging/forms.py:230
+#: apps/messaging/forms.py:245
 msgid "Does not want it"
 msgstr "Vill inte ha det"
 
-#: apps/messaging/forms.py:235
+#: apps/messaging/forms.py:250
 msgid "How it was given"
 msgstr "Hur det gavs"
 
-#: apps/messaging/forms.py:238
+#: apps/messaging/forms.py:253
 msgid "For example: signed form at the annual meeting."
 msgstr "Till exempel: underskriven blankett vid årsmötet."
 
@@ -1943,7 +1948,7 @@ msgstr "SMS"
 msgid "Self-service links"
 msgstr "Självbetjäningslänkar"
 
-#: apps/messaging/models.py:38 apps/messaging/models.py:219
+#: apps/messaging/models.py:38 apps/messaging/models.py:220
 msgid "Reminder"
 msgstr "Påminnelse"
 
@@ -2018,13 +2023,13 @@ msgstr "e-posttext"
 msgid "recipients"
 msgstr "mottagare"
 
-#: apps/messaging/models.py:105
 #
+#: apps/messaging/models.py:105
 msgid "file link expires"
 msgstr "fillänken går ut"
 
-#: apps/messaging/models.py:109 apps/messaging/models.py:143
-#: apps/messaging/models.py:328
+#: apps/messaging/models.py:109 apps/messaging/models.py:144
+#: apps/messaging/models.py:329
 msgid "send-out"
 msgstr "utskick"
 
@@ -2040,65 +2045,70 @@ msgstr "Kan skicka meddelanden och varningar till alla"
 msgid "Can send newsletters"
 msgstr "Kan skicka nyhetsbrev"
 
-#: apps/messaging/models.py:135
+#
+#: apps/messaging/models.py:114
+msgid "Can send a message to one unit"
+msgstr "Kan skicka ett meddelande till en enhet"
+
+#: apps/messaging/models.py:136
 msgid "Queued"
 msgstr "I kö"
 
-#: apps/messaging/models.py:137
+#: apps/messaging/models.py:138
 msgid "Delivered"
 msgstr "Levererat"
 
-#: apps/messaging/models.py:138
+#: apps/messaging/models.py:139
 msgid "Failed"
 msgstr "Misslyckades"
 
-#: apps/messaging/models.py:139
+#: apps/messaging/models.py:140
 msgid "To print"
 msgstr "Ska skrivas ut"
 
-#: apps/messaging/models.py:151 apps/messaging/models.py:267
+#: apps/messaging/models.py:152 apps/messaging/models.py:268
 #: apps/register/models.py:282 apps/register/models.py:347
 #: apps/selfservice/models.py:62
 msgid "person"
 msgstr "person"
 
-#: apps/messaging/models.py:167 apps/messaging/models.py:229
+#: apps/messaging/models.py:168 apps/messaging/models.py:230
 msgid "subject"
 msgstr "ämne"
 
-#: apps/messaging/models.py:172
+#: apps/messaging/models.py:173
 msgid "provider"
 msgstr "leverantör"
 
-#: apps/messaging/models.py:173
+#: apps/messaging/models.py:174
 msgid "provider's id"
 msgstr "leverantörens id"
 
-#: apps/messaging/models.py:177
+#: apps/messaging/models.py:178
 msgid "status changed"
 msgstr "status ändrad"
 
-#: apps/messaging/models.py:182
+#: apps/messaging/models.py:183
 msgid "messages"
 msgstr "meddelanden"
 
-#: apps/messaging/models.py:218
+#: apps/messaging/models.py:219
 msgid "Self-service link"
 msgstr "Självbetjäningslänk"
 
-#: apps/messaging/models.py:221
+#: apps/messaging/models.py:222
 msgid "Payment reminder"
 msgstr "Betalningspåminnelse"
 
-#: apps/messaging/models.py:223
+#: apps/messaging/models.py:224
 msgid "purpose"
 msgstr "syfte"
 
-#: apps/messaging/models.py:229
+#: apps/messaging/models.py:230
 msgid "Email only."
 msgstr "Endast e-post."
 
-#: apps/messaging/models.py:233
+#: apps/messaging/models.py:234
 #, python-brace-format
 msgid ""
 "Placeholders: {name}, {first_name}, {link}, {closes}, {period}, "
@@ -2111,84 +2121,84 @@ msgstr ""
 "{organisation_email}, {organisation_website} och {emergency_phone}. Håll sms "
 "korta: ungefär 160 tecken är ett meddelande."
 
-#: apps/messaging/models.py:242
+#: apps/messaging/models.py:243
 msgid "message template"
 msgstr "meddelandemall"
 
-#: apps/messaging/models.py:243
+#: apps/messaging/models.py:244
 msgid "message templates"
 msgstr "meddelandemallar"
 
-#: apps/messaging/models.py:262
+#: apps/messaging/models.py:263
 msgid "Self-service page"
 msgstr "Självbetjäningssidan"
 
-#: apps/messaging/models.py:263
+#: apps/messaging/models.py:264
 msgid "Entered by staff"
 msgstr "Inmatat av personal"
 
-#: apps/messaging/models.py:264
+#: apps/messaging/models.py:265
 msgid "Unsubscribe link"
 msgstr "Avregistreringslänk"
 
-#: apps/messaging/models.py:269
+#: apps/messaging/models.py:270
 msgid "wants the newsletter"
 msgstr "vill ha nyhetsbrevet"
 
-#: apps/messaging/models.py:270 apps/readings/models.py:141
+#: apps/messaging/models.py:271 apps/readings/models.py:141
 msgid "source"
 msgstr "källa"
 
-#: apps/messaging/models.py:281
+#: apps/messaging/models.py:282
 msgid "For example: signed form, 3 May."
 msgstr "Till exempel: underskriven blankett, 3 maj."
 
-#: apps/messaging/models.py:286
+#: apps/messaging/models.py:287
 msgid "newsletter consent"
 msgstr "samtycke till nyhetsbrev"
 
-#: apps/messaging/models.py:287
+#: apps/messaging/models.py:288
 msgid "newsletter consents"
 msgstr "samtycken till nyhetsbrev"
 
-#: apps/messaging/models.py:290
+#: apps/messaging/models.py:291
 #: apps/messaging/templates/messaging/_person_newsletter.html:24
 msgid "yes"
 msgstr "ja"
 
-#: apps/messaging/models.py:290
+#: apps/messaging/models.py:291
 #: apps/messaging/templates/messaging/_person_newsletter.html:24
 msgid "no"
 msgstr "nej"
 
-#: apps/messaging/models.py:334
 #
+#: apps/messaging/models.py:335
 msgid "file"
 msgstr "fil"
 
-#: apps/messaging/models.py:336
+#: apps/messaging/models.py:337
 msgid "size"
 msgstr "storlek"
 
-#: apps/messaging/models.py:337 apps/register/models.py:304
+#: apps/messaging/models.py:338 apps/register/models.py:304
 msgid "type"
 msgstr "typ"
 
-#: apps/messaging/models.py:340
 #
+#: apps/messaging/models.py:341
 msgid "uploaded by"
 msgstr "uppladdad av"
 
-#: apps/messaging/models.py:346
+#: apps/messaging/models.py:347
 msgid "uploaded"
 msgstr "uppladdad"
 
-#: apps/messaging/models.py:350
+#: apps/messaging/models.py:351
 msgid "attachment"
 msgstr "bilaga"
 
-#: apps/messaging/models.py:351
 #
+#: apps/messaging/models.py:352
 msgid "attachments"
 msgstr "bilagor"
 
@@ -2271,8 +2281,44 @@ msgid_plural "%(count)s SMS each (%(used)s characters, %(per_sms)s per SMS)"
 msgstr[0] "%(count)s SMS (%(used)s tecken, %(per_sms)s per SMS)"
 msgstr[1] "%(count)s SMS vardera (%(used)s tecken, %(per_sms)s per SMS)"
 
+#: apps/messaging/templates/messaging/_unit_messages.html:4
+#: apps/messaging/templates/messaging/batch_detail.html:61
+#: apps/messaging/templates/messaging/batch_list.html:24
+msgid "Messages"
+msgstr "Meddelanden"
+
+#
+#: apps/messaging/templates/messaging/_unit_messages.html:5
+msgid "Send message"
+msgstr "Skicka meddelande"
+
+#: apps/messaging/templates/messaging/_unit_messages.html:12
+#: apps/register/templates/register/_history.html:8
+#: apps/selfservice/templates/selfservice/recent_changes.html:12
+msgid "When"
+msgstr "När"
+
+#: apps/messaging/templates/messaging/_unit_messages.html:14
+#: apps/messaging/templates/messaging/batch_detail.html:66
+#: apps/register/models.py:147
+#: apps/register/templates/register/unit_detail.html:37
+#: apps/selfservice/templates/selfservice/print.html:27
+#: apps/selfservice/templates/selfservice/round_links.html:40
+msgid "Person"
+msgstr "Person"
+
+#: apps/messaging/templates/messaging/_unit_messages.html:15
+#: apps/messaging/templates/messaging/batch_detail.html:67
+msgid "Channel"
+msgstr "Kanal"
+
+#
+#: apps/messaging/templates/messaging/_unit_messages.html:33
+msgid "No messages yet."
+msgstr "Inga meddelanden än."
+
 #: apps/messaging/templates/messaging/batch_detail.html:17
-#: apps/messaging/templates/messaging/compose.html:78
+#: apps/messaging/templates/messaging/compose.html:87
 msgid "Public notice"
 msgstr "Offentligt anslag"
 
@@ -2329,23 +2375,6 @@ msgstr ""
 msgid "Print their letters"
 msgstr "Skriv ut deras brev"
 
-#: apps/messaging/templates/messaging/batch_detail.html:61
-#: apps/messaging/templates/messaging/batch_list.html:24
-msgid "Messages"
-msgstr "Meddelanden"
-
-#: apps/messaging/templates/messaging/batch_detail.html:66
-#: apps/register/models.py:147
-#: apps/register/templates/register/unit_detail.html:37
-#: apps/selfservice/templates/selfservice/print.html:27
-#: apps/selfservice/templates/selfservice/round_links.html:40
-msgid "Person"
-msgstr "Person"
-
-#: apps/messaging/templates/messaging/batch_detail.html:67
-msgid "Channel"
-msgstr "Kanal"
-
 #: apps/messaging/templates/messaging/batch_detail.html:87
 msgid "Sending…"
 msgstr "Skickas…"
@@ -2387,6 +2416,12 @@ msgstr "Automatiskt"
 #: apps/messaging/templates/messaging/batch_list.html:42
 msgid "Nothing has been sent yet."
 msgstr "Inget har skickats ännu."
+
+#: apps/messaging/templates/messaging/compose.html:3
+#: apps/messaging/templates/messaging/compose.html:6
+#, python-format
+msgid "Message to %(name)s"
+msgstr "Meddelande till %(name)s"
 
 #: apps/messaging/templates/messaging/compose.html:9
 msgid "SMS is not set up, so nobody gets an SMS."
@@ -2452,11 +2487,20 @@ msgstr[1] "Skicka nu till %(count)s personer"
 msgid "Change the message"
 msgstr "Ändra meddelandet"
 
-#: apps/messaging/templates/messaging/compose.html:85
+#: apps/messaging/templates/messaging/compose.html:58
+#, python-format
+msgid "To the contacts of %(name)s."
+msgstr "Till kontakterna för %(name)s."
+
+#: apps/messaging/templates/messaging/compose.html:58
+msgid "Back to the unit"
+msgstr "Tillbaka till enheten"
+
+#: apps/messaging/templates/messaging/compose.html:94
 msgid "Check recipients"
 msgstr "Kontrollera mottagare"
 
-#: apps/messaging/templates/messaging/compose.html:88
+#: apps/messaging/templates/messaging/compose.html:97
 msgid "Nothing is sent until you have checked the recipients and confirmed."
 msgstr "Ingenting skickas förrän du har kontrollerat mottagarna och bekräftat."
 
@@ -2492,7 +2536,9 @@ msgstr "Den här länken fungerar inte"
 msgid ""
 "The link to the files may be old or mistyped. Contact the organisation that "
 "sent it if you still need the files."
-msgstr "Länken till filerna kan vara gammal eller felskriven. Kontakta den som skickade den om du fortfarande behöver filerna."
+msgstr ""
+"Länken till filerna kan vara gammal eller felskriven. Kontakta den som "
+"skickade den om du fortfarande behöver filerna."
 
 #: apps/messaging/templates/messaging/newsletter_compose.html:6
 #, python-format
@@ -2565,19 +2611,19 @@ msgstr "Nyhetsbrevet skickas till %(name)s."
 msgid "Unsubscribe"
 msgstr "Avsluta prenumerationen"
 
-#: apps/messaging/views.py:128
+#: apps/messaging/views.py:150
 msgid "Nobody can be reached with these choices."
 msgstr "Ingen kan nås med de här valen."
 
-#: apps/messaging/views.py:190
+#: apps/messaging/views.py:219
 msgid "The notice is no longer shown."
 msgstr "Anslaget visas inte längre."
 
-#: apps/messaging/views.py:213
+#: apps/messaging/views.py:242
 msgid "Everyone who wants the newsletter"
 msgstr "Alla som vill ha nyhetsbrevet"
 
-#: apps/messaging/views.py:249
+#: apps/messaging/views.py:278
 msgid "Saved the newsletter choice."
 msgstr "Valet för nyhetsbrevet är sparat."
 
@@ -3422,11 +3468,6 @@ msgstr "kontakt"
 #: apps/register/templates/register/_history.html:2
 msgid "History"
 msgstr "Historik"
-
-#: apps/register/templates/register/_history.html:8
-#: apps/selfservice/templates/selfservice/recent_changes.html:12
-msgid "When"
-msgstr "När"
 
 #: apps/register/templates/register/_history.html:9
 #: apps/selfservice/templates/selfservice/recent_changes.html:13

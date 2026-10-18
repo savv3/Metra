@@ -2,7 +2,7 @@ from django import forms
 from django.http import QueryDict
 from django.utils.translation import gettext_lazy as _
 
-from apps.register.models import Tag, UnitType
+from apps.register.models import Tag, Unit, UnitType
 
 from . import attachments, broadcast
 from .models import (
@@ -156,9 +156,20 @@ class MessageForm(AttachmentsMixin, forms.Form):
         help_text=_("Empty: until you remove it."),
     )
 
-    def __init__(self, *args, urgent=False, can_publish_notice=False, user=None, **kwargs):
+    def __init__(
+        self, *args, urgent=False, can_publish_notice=False, unit=None, user=None, **kwargs
+    ):
         super().__init__(*args, **kwargs)
         self.add_attachment_fields(user)
+        self.unit = unit
+        if unit is not None:
+            # A message to one unit: the recipients are fixed, and alerts and
+            # public notices are for everyone, so they are left out.
+            for name in ("urgent", "scope", "tag", "unit_type", "filters"):
+                del self.fields[name]
+            can_publish_notice = urgent = False
+            if not self.is_bound:
+                self.initial["channels"] = MessageBatch.Channels.EMAIL
         if not can_publish_notice:
             for name in ("notice", "notice_text", "notice_until"):
                 del self.fields[name]
@@ -189,6 +200,8 @@ class MessageForm(AttachmentsMixin, forms.Form):
         return cleaned
 
     def units(self):
+        if self.unit is not None:
+            return Unit.objects.filter(pk=self.unit.pk)
         data = self.cleaned_data
         value = {broadcast.TAG: data.get("tag"), broadcast.UNIT_TYPE: data.get("unit_type")}.get(
             data["scope"]
@@ -199,6 +212,8 @@ class MessageForm(AttachmentsMixin, forms.Form):
 
     def audience_label(self):
         data = self.cleaned_data
+        if self.unit is not None:
+            return f"{self.unit.name} ({dict(CONTACTS)[data['contacts']].lower()})"
         label = dict(SCOPES)[data["scope"]]
         detail = data.get("tag") or data.get("unit_type")
         if data["scope"] in (broadcast.TAG, broadcast.UNIT_TYPE) and detail:
