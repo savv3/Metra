@@ -11,6 +11,7 @@ from django.utils import timezone
 from apps.invoicing.models import Invoice, InvoiceRun, LockedError, Payment, PaymentReminder
 from apps.invoicing.payments import record_payment, send_reminders
 from apps.invoicing.runs import build_run
+from apps.invoicing.tests.test_delivery import weasyprint_or_skip
 from apps.messaging import providers
 from apps.messaging.models import MessageBatch
 
@@ -103,6 +104,7 @@ def test_reminder_fee_is_off_by_default():
 
 
 def test_reminders_go_by_email_sms_or_letter_with_fee(invoices, billing):
+    weasyprint_or_skip()  # the email reminder attaches the invoice PDF
     billing.reminder_fee = D("5")
     billing.save()
     batch = MessageBatch.objects.create(kind=MessageBatch.Kind.PAYMENT_REMINDERS)
