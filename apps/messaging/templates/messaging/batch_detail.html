@@ -9,6 +9,23 @@
       <dt>{% translate "Send by" %}</dt><dd>{{ batch.get_channels_display }}</dd>
       <dt>{% translate "Message" %}</dt><dd>{{ batch.body|linebreaksbr }}</dd>
       {% if batch.subject %}<dt>{% translate "Email subject" %}</dt><dd>{{ batch.subject }}</dd>{% endif %}
+      {% if batch.notice %}
+        <dt>{% translate "Public notice" %}</dt>
+        <dd>
+          {{ batch.notice.text }}
+          {% if batch.notice.is_current %}
+            <span class="help">{% if batch.notice.ends_at %}{% blocktranslate with until=batch.notice.ends_at|date:"SHORT_DATETIME_FORMAT" %}Shown until {{ until }}{% endblocktranslate %}{% else %}{% translate "Shown until you remove it" %}{% endif %}</span>
+            {% if perms.core.change_notice %}
+              <form method="post" action="{% url 'messaging:notice_end' batch.notice.pk %}" class="inline-form">
+                {% csrf_token %}
+                <button type="submit" class="button button--small">{% translate "Remove the notice" %}</button>
+              </form>
+            {% endif %}
+          {% else %}
+            <span class="help">{% translate "No longer shown" %}</span>
+          {% endif %}
+        </dd>
+      {% endif %}
     </dl>
   {% endif %}
   <div id="batch-status"{% if batch.status != "done" %} hx-get="{{ batch.get_absolute_url }}" hx-trigger="every 3s" hx-select="#batch-status" hx-swap="outerHTML"{% endif %}>

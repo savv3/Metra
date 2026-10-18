@@ -1,0 +1,22 @@
+{% load i18n %}
+{% comment %}The organisation's public contact details. Needs organisation; heading_level optional.{% endcomment %}
+{% if organisation %}
+  <div class="contact-block">
+    {% if organisation.emergency_phone %}
+      <p class="contact-emergency">
+        <strong>{% translate "Emergencies" %}:</strong>
+        <a href="tel:{{ organisation.emergency_phone|cut:' ' }}">{{ organisation.emergency_phone }}</a>
+      </p>
+    {% endif %}
+    <dl class="contact-list">
+      {% if organisation.phone %}<dt>{% translate "Phone" %}</dt><dd><a href="tel:{{ organisation.phone|cut:' ' }}">{{ organisation.phone }}</a></dd>{% endif %}
+      {% if organisation.email %}<dt>{% translate "Email" %}</dt><dd><a href="mailto:{{ organisation.email }}">{{ organisation.email }}</a></dd>{% endif %}
+      {% if organisation.street_address or organisation.city %}
+        <dt>{% translate "Address" %}</dt>
+        <dd>{{ organisation.street_address }}{% if organisation.street_address and organisation.city %}<br>{% endif %}{{ organisation.postal_code }} {{ organisation.city }}</dd>
+      {% endif %}
+      {% if organisation.opening_hours %}<dt>{% translate "Opening hours" %}</dt><dd>{{ organisation.opening_hours|linebreaksbr }}</dd>{% endif %}
+      {% if organisation.website %}<dt>{% translate "Website" %}</dt><dd><a href="{{ organisation.website }}">{{ organisation.website|cut:"https://"|cut:"http://" }}</a></dd>{% endif %}
+    </dl>
+  </div>
+{% endif %}

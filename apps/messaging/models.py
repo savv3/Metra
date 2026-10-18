@@ -16,7 +16,7 @@ from django.utils.text import Truncator
 from django.utils.translation import gettext_lazy as _
 
 from apps.readings.models import ReadingRound
-from apps.register.models import Person, Unit
+from apps.register.models import Organisation, Person, Unit
 
 
 class Channel(models.TextChoices):
@@ -83,6 +83,14 @@ class MessageBatch(models.Model):
     audience = models.CharField(_("recipients"), max_length=300, blank=True)
     # [[person id, unit id], ...] as confirmed before sending.
     recipients = models.JSONField(default=list, blank=True, editable=False)
+    notice = models.ForeignKey(
+        "core.Notice",
+        verbose_name=_("notice"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="batches",
+    )
 
     class Meta:
         ordering = ["-created_at", "-pk"]
@@ -165,6 +173,29 @@ class Message(models.Model):
 PLACEHOLDER = re.compile(r"\{(\w+)\}")
 
 
+def organisation_placeholders():
+    """{organisation}, {organisation_phone}, ... from the public contact details."""
+    organisation = Organisation.current()
+    if organisation is None:
+        return dict.fromkeys(
+            [
+                "organisation",
+                "organisation_phone",
+                "organisation_email",
+                "organisation_website",
+                "emergency_phone",
+            ],
+            "",
+        )
+    return {
+        "organisation": organisation.public_name,
+        "organisation_phone": organisation.phone,
+        "organisation_email": organisation.email,
+        "organisation_website": organisation.website,
+        "emergency_phone": organisation.emergency_phone or organisation.phone,
+    }
+
+
 class MessageTemplate(models.Model):
     """The text of one kind of message on one channel, edited under Settings."""
 
@@ -183,7 +214,9 @@ class MessageTemplate(models.Model):
         _("text"),
         help_text=_(
             "Placeholders: {name}, {first_name}, {link}, {closes}, {period}, {reading_type}, "
-            "{unit} and {organisation}. Keep SMS short: about 160 characters is one message."
+            "{unit}, {organisation}, {organisation_phone}, {organisation_email}, "
+            "{organisation_website} and {emergency_phone}. Keep SMS short: about 160 "
+            "characters is one message."
         ),
     )
 

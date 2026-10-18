@@ -154,6 +154,31 @@ Automatic reminders are off by default. Set `SCR_READING_REMINDER_DAYS`
 (for example `7`) to remind units still missing a reading that many days
 before an open round closes, at 10:00, once per round.
 
+## Public page and contact details
+
+Visitors who are not logged in see the organisation's own page at the
+site's address: its public name, logo, a short description, phone, email,
+address, opening hours, website and an emergency phone, with a link to the
+staff login. An admin fills these in under **Settings > Organisation >
+Public page and contact details**. The logo can be a PNG, JPEG or WebP
+image up to 1 MB. Untick **Show the public page** to show only a plain
+welcome page instead.
+
+The same contact details appear on members' self-service pages and at the
+foot of printed letters, and messages can use `{organisation}`,
+`{organisation_phone}`, `{organisation_email}`, `{organisation_website}`
+and `{emergency_phone}` (the ordinary phone when no emergency phone is
+set). Only organisation data is shown there, never anyone's personal data.
+
+**Notices** are short banners at the top of the public page and of members'
+pages, for example "Water off in the village until 18:00". An urgent alert
+can publish one (**Also show as a notice on the public page**, with an
+optional end time); the send-out page has **Remove the notice**, and all
+notices are listed under **Settings > Notices**.
+
+Search engines may index the public page and nothing else: `robots.txt`
+allows only `/`, and every other page sends `X-Robots-Tag: noindex`.
+
 ## Messages and urgent alerts
 
 Admins can write one message to many households under **Send-outs > New
@@ -161,9 +186,9 @@ message**. It can go to everyone, to units with a tag or of a type, or to
 the units in the current unit list (the **Send a message to these units**
 link under the list), and to all contacts of each unit or only its main
 contact. Choose SMS only, email only, SMS (or email for those without a
-phone), or both. The text can use `{first_name}`, `{name}`, `{unit}`,
-`{organisation}` and `{organisation_phone}`; a live counter shows how many
-SMS it takes.
+phone), or both. The text can use `{first_name}`, `{name}`, `{unit}` and the organisation's
+contact placeholders (see above); a live counter shows how many SMS it
+takes.
 
 Before anything is sent, a check page shows how many people get an SMS and
 how many an email, the total number of SMS, and who cannot be reached, so

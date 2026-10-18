@@ -186,3 +186,52 @@ def test_only_admin_can_send_to_everyone(role_client, make_household):
         page = client.get(reverse("messaging:batch_list")).content.decode()
         assert "Urgent alert" not in page, role
     assert not MessageBatch.objects.exists()
+
+
+def test_alert_can_publish_a_notice(admin_client, make_household):
+    from apps.core.models import Notice
+
+    make_household("A", first_name="Anna", phone="0401234567")
+
+    compose(
+        admin_client,
+        step="confirm",
+        urgent="on",
+        notice="on",
+        notice_until="2030-01-01T18:00",
+        body="Vattnet är avstängt. Ring {organisation_phone}.",
+    )
+
+    notice = Notice.objects.get()
+    batch = MessageBatch.objects.get()
+    assert batch.notice == notice
+    assert notice.level == "urgent"
+    assert notice.text.startswith("Vattnet är avstängt. Ring")
+    assert notice.ends_at.year == 2030
+    page = admin_client.get(batch.get_absolute_url(), HTTP_ACCEPT_LANGUAGE="en").content.decode()
+    assert "Remove the notice" in page
+
+    admin_client.post(reverse("messaging:notice_end", args=[notice.pk]))
+
+    notice.refresh_from_db()
+    assert not notice.is_current
+
+
+def test_notice_needs_its_own_text_when_the_message_is_personal(admin_client, make_household):
+    response = compose(admin_client, notice="on", body="Hej {first_name}, vattnet är avstängt.")
+
+    assert "notice_text" in response.context["form"].errors
+
+
+def test_notice_option_needs_the_permission(client, make_user):
+    from django.contrib.auth.models import Group, Permission
+
+    senders = Group.objects.create(name="Senders")
+    senders.permissions.add(Permission.objects.get(codename="send_broadcast"))
+    sender = make_user("sender")
+    sender.groups.add(senders)
+    client.force_login(sender)
+
+    form = client.get(URL).context["form"]
+
+    assert "notice" not in form.fields

@@ -1,5 +1,7 @@
 from auditlog.mixins import AuditlogHistoryAdminMixin
 from django.contrib import admin
+from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from .models import CustomField, Organisation, Person, Tag, Unit, UnitContact, UnitType
 
@@ -17,6 +19,44 @@ class UnitCustomFieldInline(admin.TabularInline):
 class OrganisationAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
     show_auditlog_history_link = True
     list_display = ["name", "business_id", "country"]
+    # A website typed as example.org becomes https://example.org.
+    formfield_overrides = {models.URLField: {"assume_scheme": "https"}}
+    fieldsets = [
+        (
+            None,
+            {
+                "fields": [
+                    "name",
+                    "business_id",
+                    "vat_number",
+                    "email",
+                    "phone",
+                    "street_address",
+                    "postal_code",
+                    "city",
+                    "country",
+                ]
+            },
+        ),
+        (
+            _("Public page and contact details"),
+            {
+                "description": _(
+                    "Shown to anyone on the public page, on members' pages and in letters, "
+                    "together with the email, phone and address above."
+                ),
+                "fields": [
+                    "public_page",
+                    "display_name",
+                    "description",
+                    "website",
+                    "emergency_phone",
+                    "opening_hours",
+                    "logo",
+                ],
+            },
+        ),
+    ]
 
     def has_add_permission(self, request):
         # One installation serves one organisation.

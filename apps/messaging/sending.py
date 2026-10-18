@@ -12,11 +12,11 @@ out; the stored copy of the message has a placeholder instead.
 from django.utils import timezone, translation
 from django.utils.translation import gettext as _
 
-from apps.register.models import Organisation, Person
+from apps.register.models import Person
 from apps.selfservice.models import SelfServiceLink, primary_contact
 
 from .broadcast import send_written
-from .models import Channel, Message, MessageBatch, MessageTemplate
+from .models import Channel, Message, MessageBatch, MessageTemplate, organisation_placeholders
 from .registry import EMAIL, SMS, ProviderError, provider_for
 
 
@@ -41,8 +41,7 @@ def template_text(purpose, channel):
 
 
 def placeholders(person, unit, round_, link_text):
-    organisation = Organisation.current()
-    return {
+    return organisation_placeholders() | {
         "name": person.full_name,
         "first_name": person.first_name,
         "link": link_text,
@@ -50,7 +49,6 @@ def placeholders(person, unit, round_, link_text):
         "period": round_.period_label if round_ else "",
         "reading_type": round_.reading_type.name if round_ else "",
         "unit": unit.name,
-        "organisation": organisation.name if organisation else "",
     }
 
 

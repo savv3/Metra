@@ -1,8 +1,9 @@
 import pytest
 from django.urls import reverse
 
+pytestmark = pytest.mark.django_db
 
-@pytest.mark.django_db
+
 def test_healthz_reports_ok(client):
     response = client.get(reverse("core:healthz"))
 

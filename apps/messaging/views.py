@@ -10,6 +10,7 @@ from django.utils.translation import gettext as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
+from apps.core.models import Notice
 from apps.readings.models import ReadingRound
 
 from . import broadcast
@@ -107,7 +108,12 @@ def compose(request):
     initial = {"filters": request.GET.get("filters", "")}
     if initial["filters"]:
         initial["scope"] = broadcast.FILTERED
-    form = MessageForm(request.POST or None, initial=initial, urgent=urgent)
+    form = MessageForm(
+        request.POST or None,
+        initial=initial,
+        urgent=urgent,
+        can_publish_notice=request.user.has_perm("core.add_notice"),
+    )
     context = {"form": form, "channels_set_up": channel_status(), "step": "edit"}
     if request.method == "POST" and form.is_valid():
         data = form.cleaned_data
@@ -127,6 +133,14 @@ def compose(request):
                     recipients=[[p.pk, u.pk] for p, u in pairs],
                     created_by=request.user,
                 )
+                if data.get("notice"):
+                    batch.notice = Notice.objects.create(
+                        text=data["notice_text"],
+                        level=Notice.Level.URGENT if data["urgent"] else Notice.Level.INFO,
+                        ends_at=data.get("notice_until"),
+                        created_by=request.user,
+                    )
+                    batch.save(update_fields=["notice"])
                 send_batch_task(batch.pk)
                 messages.success(request, _("Sending has started. This page shows how it goes."))
                 return redirect(batch)
@@ -159,3 +173,15 @@ def sms_count(request):
         "messaging/_sms_count.html",
         {"count": count, "used": used, "per_sms": per_sms},
     )
+
+
+@login_required
+@permission_required("core.change_notice", raise_exception=True)
+@require_POST
+def notice_end(request, pk):
+    notice = get_object_or_404(Notice, pk=pk)
+    if notice.is_current:
+        notice.end_now()
+    messages.success(request, _("The notice is no longer shown."))
+    batch = notice.batches.first()
+    return redirect(batch or "messaging:batch_list")

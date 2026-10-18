@@ -46,7 +46,7 @@
         <article class="letter">
           <header class="letter-sender">
             {% if organisation %}
-              <strong>{{ organisation.name }}</strong><br>
+              <strong>{{ organisation.public_name }}</strong><br>
               {% if organisation.street_address %}{{ organisation.street_address }}<br>{% endif %}
               {% if organisation.postal_code or organisation.city %}{{ organisation.postal_code }} {{ organisation.city }}<br>{% endif %}
             {% endif %}
@@ -68,8 +68,11 @@
             <p class="url">{{ letter.url }}</p>
           </div>
           <p>{% blocktranslate with date=letter.issued.link.expires_at|date:"DATE_FORMAT" %}The link is personal and works until {{ date }}. You do not need a password.{% endblocktranslate %}</p>
-          {% if organisation.email or organisation.phone %}
-            <p>{% translate "If you cannot use the link, contact us:" %} {{ organisation.email }} {{ organisation.phone }}</p>
+          {% if organisation.email or organisation.phone or organisation.emergency_phone %}
+            <footer class="letter-contact">
+              <p>{% translate "If you cannot use the link, contact us:" %}</p>
+              {% include "core/_contact.html" %}
+            </footer>
           {% endif %}
         </article>
       {% endwith %}

@@ -16,3 +16,10 @@ body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-se
 .link-list .qr svg { width: 28mm; height: 28mm; }
 .link-list tr { break-inside: avoid; }
 @media print { .screen-only { display: none; } body { padding: 0; max-width: none; } }
+.letter-contact { margin-top: 8mm; font-size: 9.5pt; border-top: 1px solid #999; padding-top: 3mm; }
+.letter-contact p { margin: 0 0 2mm; }
+.contact-list { display: grid; grid-template-columns: max-content 1fr; gap: 1mm 4mm; margin: 0; }
+.contact-list dt { font-weight: 600; }
+.contact-list dd { margin: 0; }
+.contact-list a, .contact-emergency a { color: inherit; text-decoration: none; }
+.contact-emergency { font-weight: 600; margin: 0 0 2mm; }

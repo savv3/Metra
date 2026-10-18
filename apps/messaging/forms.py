@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from apps.register.models import Tag, UnitType
 
 from . import broadcast
-from .models import MessageBatch
+from .models import PLACEHOLDER, MessageBatch, MessageTemplate, organisation_placeholders
 
 SCOPES = [
     (broadcast.EVERYONE, _("Everyone")),
@@ -18,7 +18,8 @@ CONTACTS = [
     (broadcast.MAIN_CONTACT, _("Only each unit's main contact")),
 ]
 PLACEHOLDER_HELP = _(
-    "You can use {first_name}, {name}, {unit}, {organisation} and {organisation_phone}."
+    "You can use {first_name}, {name}, {unit}, {organisation}, {organisation_phone}, "
+    "{organisation_email}, {organisation_website} and {emergency_phone}."
 )
 
 
@@ -67,8 +68,31 @@ class MessageForm(forms.Form):
         help_text=_("Optional. Without it, the email has the same text as the SMS."),
     )
 
-    def __init__(self, *args, urgent=False, **kwargs):
+    notice = forms.BooleanField(
+        label=_("Also show as a notice on the public page"),
+        required=False,
+        help_text=_("Anyone can see it there and on members' pages, so no personal details."),
+    )
+    notice_text = forms.CharField(
+        label=_("Notice text"),
+        max_length=500,
+        required=False,
+        widget=forms.Textarea(attrs={"rows": 2}),
+        help_text=_("Empty: the message text."),
+    )
+    notice_until = forms.DateTimeField(
+        label=_("Show the notice until"),
+        required=False,
+        widget=forms.DateTimeInput(attrs={"type": "datetime-local"}, format="%Y-%m-%dT%H:%M"),
+        input_formats=["%Y-%m-%dT%H:%M", "%Y-%m-%d %H:%M"],
+        help_text=_("Empty: until you remove it."),
+    )
+
+    def __init__(self, *args, urgent=False, can_publish_notice=False, **kwargs):
         super().__init__(*args, **kwargs)
+        if not can_publish_notice:
+            for name in ("notice", "notice_text", "notice_until"):
+                del self.fields[name]
         if urgent and not self.is_bound:
             self.initial |= {
                 "urgent": True,
@@ -85,6 +109,14 @@ class MessageForm(forms.Form):
             self.add_error("unit_type", _("Choose a unit type."))
         if cleaned.get("channels") != MessageBatch.Channels.SMS and not cleaned.get("subject"):
             self.add_error("subject", _("Add a subject for the email."))
+        if cleaned.get("notice") and not cleaned.get("notice_text"):
+            body = cleaned.get("body", "")
+            text = MessageTemplate.fill(body, organisation_placeholders())
+            if PLACEHOLDER.search(text):
+                # {first_name} and the like have no value on a public page.
+                self.add_error("notice_text", _("Write the notice without personal placeholders."))
+            else:
+                cleaned["notice_text"] = text
         return cleaned
 
     def units(self):

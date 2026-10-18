@@ -19,6 +19,10 @@
       <dt>{% translate "SMS" %}</dt><dd>{% blocktranslate count count=sms_count %}{{ count }} person{% plural %}{{ count }} people{% endblocktranslate %}{% if sms_count %}, {% blocktranslate count count=sms_total %}{{ count }} SMS in total{% plural %}{{ count }} SMS in total{% endblocktranslate %}{% if sms_per_person > 1 %} ({% blocktranslate %}up to {{ sms_per_person }} per person{% endblocktranslate %}){% endif %}{% endif %}</dd>
       <dt>{% translate "Email" %}</dt><dd>{% blocktranslate count count=email_count %}{{ count }} person{% plural %}{{ count }} people{% endblocktranslate %}</dd>
     </dl>
+    {% if form.cleaned_data.notice %}
+      <h3>{% translate "Notice on the public page" %}</h3>
+      <blockquote class="message-preview">{{ form.cleaned_data.notice_text|linebreaksbr }}{% if form.cleaned_data.notice_until %}<br><span class="help">{% blocktranslate with until=form.cleaned_data.notice_until|date:"SHORT_DATETIME_FORMAT" %}Shown until {{ until }}{% endblocktranslate %}</span>{% endif %}</blockquote>
+    {% endif %}
     <h3>{% if example_for %}{% blocktranslate with name=example_for.full_name %}The message, as {{ name }} gets it{% endblocktranslate %}{% else %}{% translate "Message" %}{% endif %}</h3>
     <blockquote class="message-preview">{{ example|linebreaksbr }}</blockquote>
 
@@ -65,6 +69,14 @@
       </div>
       {% include "register/_field.html" with field=form.subject %}
       {% include "register/_field.html" with field=form.email_body %}
+      {% if form.notice %}
+        <fieldset>
+          <legend>{% translate "Public notice" %}</legend>
+          {% include "register/_field.html" with field=form.notice %}
+          {% include "register/_field.html" with field=form.notice_text %}
+          {% include "register/_field.html" with field=form.notice_until %}
+        </fieldset>
+      {% endif %}
       <div class="actions">
         <button type="submit" class="button button--primary">{% translate "Check recipients" %}</button>
         <a class="button" href="{% url 'messaging:batch_list' %}">{% translate "Cancel" %}</a>
