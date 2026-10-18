@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 12:01+0300\n"
+"POT-Creation-Date: 2026-10-18 12:13+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,6 +41,185 @@ msgstr ""
 
 #: apps/register/apps.py:7
 msgid "Register"
+msgstr ""
+
+#: apps/register/csv_io.py:41
+msgid "The file is larger than 2 MB. Split it into smaller files."
+msgstr ""
+
+#: apps/register/csv_io.py:45
+msgid "The file is not UTF-8. In Excel, save it as “CSV UTF-8”."
+msgstr ""
+
+#: apps/register/csv_io.py:50
+msgid "The file needs a header row and at least one row of data."
+msgstr ""
+
+#: apps/register/csv_io.py:52
+#, python-format
+msgid "The file has more than %(max)s rows."
+msgstr ""
+
+#: apps/register/csv_io.py:93 apps/register/models.py:273
+#: apps/register/templates/register/import_preview.html:38
+msgid "Contact"
+msgstr ""
+
+#: apps/register/csv_io.py:218
+#, python-format
+msgid "Tags: “%(name)s” does not exist. Add it under Settings first."
+msgstr ""
+
+#: apps/register/csv_io.py:244
+#, python-format
+msgid "%(label)s: write yes or no, not “%(value)s”."
+msgstr ""
+
+#: apps/register/csv_io.py:327
+msgid "The row has more values than the header has columns."
+msgstr ""
+
+#: apps/register/csv_io.py:335
+#, python-format
+msgid "The name is also used on line %(line)s."
+msgstr ""
+
+#: apps/register/csv_io.py:351
+#, python-format
+msgid "Same person as line %(line)s"
+msgstr ""
+
+#: apps/register/csv_io.py:355
+msgid "A role is given but no contact details."
+msgstr ""
+
+#: apps/register/csv_io.py:366
+#, python-format
+msgid "Role: “%(value)s” is not one of owner, billing contact or contact."
+msgstr ""
+
+#: apps/register/csv_io.py:372
+#, python-format
+msgid "Existing person: %(name)s"
+msgstr ""
+
+#: apps/register/csv_io.py:383
+#, python-format
+msgid "New person: %(name)s"
+msgstr ""
+
+#: apps/register/csv_io.py:465
+#: apps/register/templates/register/_person_results.html:7
+#: apps/register/templates/register/_unit_results.html:7
+#: apps/register/templates/register/import_preview.html:36
+msgid "Name"
+msgstr ""
+
+#: apps/register/csv_io.py:466
+#: apps/register/templates/register/_unit_results.html:8
+#: apps/register/templates/register/unit_list.html:20
+msgid "Type"
+msgstr ""
+
+#: apps/register/csv_io.py:467
+#: apps/register/templates/register/_unit_results.html:10
+#: apps/register/templates/register/unit_list.html:27
+msgid "Status"
+msgstr ""
+
+#: apps/register/csv_io.py:468 apps/register/csv_io.py:523
+msgid "Street address"
+msgstr ""
+
+#: apps/register/csv_io.py:469 apps/register/csv_io.py:524
+msgid "Postal code"
+msgstr ""
+
+#: apps/register/csv_io.py:470 apps/register/csv_io.py:525
+msgid "City"
+msgstr ""
+
+#: apps/register/csv_io.py:471 apps/register/csv_io.py:526
+msgid "Country"
+msgstr ""
+
+#: apps/register/csv_io.py:472
+#: apps/register/templates/register/unit_detail.html:21
+msgid "Start date"
+msgstr ""
+
+#: apps/register/csv_io.py:473
+#: apps/register/templates/register/unit_detail.html:22
+msgid "End date"
+msgstr ""
+
+#: apps/register/csv_io.py:474 apps/register/csv_io.py:527
+#: apps/register/templates/register/_person_results.html:11
+#: apps/register/templates/register/_unit_results.html:11
+#: apps/register/templates/register/person_detail.html:24
+#: apps/register/templates/register/unit_detail.html:23
+msgid "Tags"
+msgstr ""
+
+#: apps/register/csv_io.py:475 apps/register/csv_io.py:528
+#: apps/register/templates/register/person_detail.html:26
+#: apps/register/templates/register/unit_detail.html:25
+msgid "Notes"
+msgstr ""
+
+#: apps/register/csv_io.py:476 apps/register/csv_io.py:529
+#: apps/register/templates/register/_person_results.html:18
+#: apps/register/templates/register/_show_select.html:6
+#: apps/register/templates/register/_unit_results.html:18
+#: apps/register/templates/register/person_detail.html:6
+#: apps/register/templates/register/unit_detail.html:6
+msgid "Archived"
+msgstr ""
+
+#: apps/register/csv_io.py:478
+#: apps/register/templates/register/unit_detail.html:31
+#: apps/register/templates/register/unit_detail.html:33
+msgid "Contacts"
+msgstr ""
+
+#: apps/register/csv_io.py:518
+msgid "First name"
+msgstr ""
+
+#: apps/register/csv_io.py:519
+msgid "Last name"
+msgstr ""
+
+#: apps/register/csv_io.py:520 apps/register/models.py:197
+#: apps/register/templates/register/_person_results.html:8
+#: apps/register/templates/register/person_detail.html:19
+#: apps/register/templates/register/unit_detail.html:39
+msgid "Email"
+msgstr ""
+
+#: apps/register/csv_io.py:521
+#: apps/register/templates/register/_person_results.html:9
+#: apps/register/templates/register/person_detail.html:21
+#: apps/register/templates/register/unit_detail.html:40
+msgid "Phone"
+msgstr ""
+
+#: apps/register/csv_io.py:522
+#: apps/register/templates/register/person_detail.html:22
+msgid "Preferred channel"
+msgstr ""
+
+#: apps/register/csv_io.py:531
+#: apps/register/templates/register/_unit_results.html:3
+#: apps/register/templates/register/person_detail.html:32
+#: apps/register/templates/register/unit_list.html:3
+#: apps/register/templates/register/unit_list.html:6 templates/base.html:31
+msgid "Units"
+msgstr ""
+
+#: apps/register/csv_io.py:564
+#, python-format
+msgid "CSV export of %(count)s %(things)s"
 msgstr ""
 
 #: apps/register/custom_fields.py:60
@@ -91,6 +270,42 @@ msgstr ""
 #: apps/register/history.py:81
 #, python-format
 msgid "removed %(names)s"
+msgstr ""
+
+#: apps/register/import_views.py:24
+msgid "Unit type"
+msgstr ""
+
+#: apps/register/import_views.py:27
+msgid "CSV file"
+msgstr ""
+
+#: apps/register/import_views.py:29
+msgid ""
+"UTF-8, with semicolons or commas between the columns and one header row."
+msgstr ""
+
+#: apps/register/import_views.py:33
+msgid "Skip rows whose unit name is already in the register"
+msgstr ""
+
+#: apps/register/import_views.py:52
+msgid "Not in the file"
+msgstr ""
+
+#: apps/register/import_views.py:53
+#, python-format
+msgid "Column %(number)s"
+msgstr ""
+
+#: apps/register/import_views.py:61
+msgid "Role for contacts without one"
+msgstr ""
+
+#: apps/register/import_views.py:151
+#, python-format
+msgid ""
+"Imported %(units)s units and %(people)s new people; skipped %(skipped)s."
 msgstr ""
 
 #: apps/register/models.py:12
@@ -281,13 +496,6 @@ msgstr ""
 msgid "updated"
 msgstr ""
 
-#: apps/register/models.py:197
-#: apps/register/templates/register/_person_results.html:8
-#: apps/register/templates/register/person_detail.html:19
-#: apps/register/templates/register/unit_detail.html:39
-msgid "Email"
-msgstr ""
-
 #: apps/register/models.py:198
 msgid "SMS"
 msgstr ""
@@ -369,10 +577,6 @@ msgstr ""
 msgid "Billing contact"
 msgstr ""
 
-#: apps/register/models.py:273
-msgid "Contact"
-msgstr ""
-
 #: apps/register/models.py:281
 msgid "role"
 msgstr ""
@@ -432,6 +636,7 @@ msgid "Page %(number)s of %(total)s"
 msgstr ""
 
 #: apps/register/templates/register/_pagination.html:9
+#: apps/register/templates/register/import_upload.html:19
 msgid "Next"
 msgstr ""
 
@@ -441,17 +646,6 @@ msgstr ""
 msgid "People"
 msgstr ""
 
-#: apps/register/templates/register/_person_results.html:7
-#: apps/register/templates/register/_unit_results.html:7
-msgid "Name"
-msgstr ""
-
-#: apps/register/templates/register/_person_results.html:9
-#: apps/register/templates/register/person_detail.html:21
-#: apps/register/templates/register/unit_detail.html:40
-msgid "Phone"
-msgstr ""
-
 #: apps/register/templates/register/_person_results.html:10
 #: apps/register/templates/register/_unit_results.html:9
 #: apps/register/templates/register/person_detail.html:23
@@ -459,22 +653,14 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: apps/register/templates/register/_person_results.html:11
-#: apps/register/templates/register/_unit_results.html:11
-#: apps/register/templates/register/person_detail.html:24
-#: apps/register/templates/register/unit_detail.html:23
-msgid "Tags"
-msgstr ""
+#: apps/register/templates/register/_person_results.html:29
+#, python-format
+msgid "Export %(count)s person as CSV"
+msgid_plural "Export %(count)s people as CSV"
+msgstr[0] ""
+msgstr[1] ""
 
-#: apps/register/templates/register/_person_results.html:18
-#: apps/register/templates/register/_show_select.html:6
-#: apps/register/templates/register/_unit_results.html:18
-#: apps/register/templates/register/person_detail.html:6
-#: apps/register/templates/register/unit_detail.html:6
-msgid "Archived"
-msgstr ""
-
-#: apps/register/templates/register/_person_results.html:30
+#: apps/register/templates/register/_person_results.html:31
 msgid "No people found."
 msgstr ""
 
@@ -486,25 +672,147 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: apps/register/templates/register/_unit_results.html:3
-#: apps/register/templates/register/person_detail.html:32
-#: apps/register/templates/register/unit_list.html:3
-#: apps/register/templates/register/unit_list.html:6 templates/base.html:31
-msgid "Units"
-msgstr ""
-
-#: apps/register/templates/register/_unit_results.html:8
-#: apps/register/templates/register/unit_list.html:17
-msgid "Type"
-msgstr ""
-
-#: apps/register/templates/register/_unit_results.html:10
-#: apps/register/templates/register/unit_list.html:24
-msgid "Status"
-msgstr ""
-
 #: apps/register/templates/register/_unit_results.html:30
+#, python-format
+msgid "Export %(count)s unit as CSV"
+msgid_plural "Export %(count)s units as CSV"
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/register/templates/register/_unit_results.html:33
 msgid "No units found."
+msgstr ""
+
+#: apps/register/templates/register/import_map.html:3
+#: apps/register/templates/register/import_map.html:5
+msgid "Choose columns"
+msgstr ""
+
+#: apps/register/templates/register/import_map.html:6
+#, python-format
+msgid "%(filename)s: %(count)s row, imported as %(unit_type)s"
+msgid_plural "%(filename)s: %(count)s rows, imported as %(unit_type)s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/register/templates/register/import_map.html:12
+#: apps/register/templates/register/import_map.html:13
+msgid "First rows of the file"
+msgstr ""
+
+#: apps/register/templates/register/import_map.html:31
+msgid "Contact person"
+msgstr ""
+
+#: apps/register/templates/register/import_map.html:32
+msgid ""
+"People already in the register are matched by email, or by phone when there "
+"is no email, and are not added twice."
+msgstr ""
+
+#: apps/register/templates/register/import_map.html:39
+msgid "Check the rows"
+msgstr ""
+
+#: apps/register/templates/register/import_map.html:40
+#: apps/register/templates/register/import_preview.html:27
+msgid "Choose another file"
+msgstr ""
+
+#: apps/register/templates/register/import_preview.html:3
+#: apps/register/templates/register/import_preview.html:5
+msgid "Check the import"
+msgstr ""
+
+#: apps/register/templates/register/import_preview.html:8
+#, python-format
+msgid "%(count)s row will be imported"
+msgid_plural "%(count)s rows will be imported"
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/register/templates/register/import_preview.html:9
+#, python-format
+msgid "%(count)s row is skipped because the unit already exists"
+msgid_plural "%(count)s rows are skipped because the units already exist"
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/register/templates/register/import_preview.html:10
+#, python-format
+msgid "%(count)s row has errors"
+msgid_plural "%(count)s rows have errors"
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/register/templates/register/import_preview.html:15
+msgid ""
+"Nothing is imported while any row has errors. Correct the file and upload it "
+"again, or choose other columns."
+msgstr ""
+
+#: apps/register/templates/register/import_preview.html:23
+#, python-format
+msgid "Import %(count)s unit"
+msgid_plural "Import %(count)s units"
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/register/templates/register/import_preview.html:26
+msgid "Change columns"
+msgstr ""
+
+#: apps/register/templates/register/import_preview.html:30
+#: apps/register/templates/register/import_preview.html:31
+msgid "Rows"
+msgstr ""
+
+#: apps/register/templates/register/import_preview.html:35
+msgid "Line"
+msgstr ""
+
+#: apps/register/templates/register/import_preview.html:37
+msgid "Result"
+msgstr ""
+
+#: apps/register/templates/register/import_preview.html:47
+msgid "OK"
+msgstr ""
+
+#: apps/register/templates/register/import_preview.html:48
+msgid "Skipped: already in the register"
+msgstr ""
+
+#: apps/register/templates/register/import_preview.html:50
+msgid "Errors"
+msgstr ""
+
+#: apps/register/templates/register/import_upload.html:3
+#: apps/register/templates/register/import_upload.html:5
+msgid "Import units from CSV"
+msgstr ""
+
+#: apps/register/templates/register/import_upload.html:6
+msgid ""
+"Each row becomes one unit, optionally with one contact person. You choose "
+"which column goes where in the next step, and see every row checked before "
+"anything is saved."
+msgstr ""
+
+#: apps/register/templates/register/import_upload.html:10
+msgid "Example for the water association setup:"
+msgstr ""
+
+#: apps/register/templates/register/import_upload.html:20
+#: apps/register/templates/register/person_form.html:38
+#: apps/register/templates/register/unit_form.html:29
+msgid "Cancel"
+msgstr ""
+
+#: apps/register/templates/register/import_upload.html:24
+msgid ""
+"There are no unit types yet. An administrator must create one under Settings "
+"first."
 msgstr ""
 
 #: apps/register/templates/register/person_detail.html:9
@@ -520,15 +828,6 @@ msgstr ""
 #: apps/register/templates/register/person_detail.html:12
 #: apps/register/templates/register/unit_detail.html:12
 msgid "Archive"
-msgstr ""
-
-#: apps/register/templates/register/person_detail.html:22
-msgid "Preferred channel"
-msgstr ""
-
-#: apps/register/templates/register/person_detail.html:26
-#: apps/register/templates/register/unit_detail.html:25
-msgid "Notes"
 msgstr ""
 
 #: apps/register/templates/register/person_detail.html:40
@@ -566,46 +865,28 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: apps/register/templates/register/person_form.html:38
-#: apps/register/templates/register/unit_form.html:29
-msgid "Cancel"
-msgstr ""
-
 #: apps/register/templates/register/person_list.html:7
 msgid "Add person"
 msgstr ""
 
 #: apps/register/templates/register/person_list.html:13
-#: apps/register/templates/register/unit_list.html:13
+#: apps/register/templates/register/unit_list.html:16
 msgid "Search"
 msgstr ""
 
 #: apps/register/templates/register/person_list.html:17
-#: apps/register/templates/register/unit_list.html:31
+#: apps/register/templates/register/unit_list.html:34
 msgid "Tag"
 msgstr ""
 
 #: apps/register/templates/register/person_list.html:19
-#: apps/register/templates/register/unit_list.html:33
+#: apps/register/templates/register/unit_list.html:36
 msgid "All tags"
 msgstr ""
 
 #: apps/register/templates/register/person_list.html:25
-#: apps/register/templates/register/unit_list.html:39
+#: apps/register/templates/register/unit_list.html:42
 msgid "Filter"
-msgstr ""
-
-#: apps/register/templates/register/unit_detail.html:21
-msgid "Start date"
-msgstr ""
-
-#: apps/register/templates/register/unit_detail.html:22
-msgid "End date"
-msgstr ""
-
-#: apps/register/templates/register/unit_detail.html:31
-#: apps/register/templates/register/unit_detail.html:33
-msgid "Contacts"
 msgstr ""
 
 #: apps/register/templates/register/unit_detail.html:41
@@ -644,16 +925,20 @@ msgstr ""
 msgid "New %(unit_type)s"
 msgstr ""
 
-#: apps/register/templates/register/unit_list.html:7
+#: apps/register/templates/register/unit_list.html:8
+msgid "Import CSV"
+msgstr ""
+
+#: apps/register/templates/register/unit_list.html:9
 #: apps/register/templates/register/unit_type_choose.html:3
 msgid "Add unit"
 msgstr ""
 
-#: apps/register/templates/register/unit_list.html:19
+#: apps/register/templates/register/unit_list.html:22
 msgid "All types"
 msgstr ""
 
-#: apps/register/templates/register/unit_list.html:26
+#: apps/register/templates/register/unit_list.html:29
 msgid "All statuses"
 msgstr ""
 
@@ -672,32 +957,32 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: apps/register/views.py:92 apps/register/views.py:124
-#: apps/register/views.py:213 apps/register/views.py:251
+#: apps/register/views.py:117 apps/register/views.py:149
+#: apps/register/views.py:259 apps/register/views.py:297
 #, python-format
 msgid "Saved %(name)s."
 msgstr ""
 
-#: apps/register/views.py:140 apps/register/views.py:267
+#: apps/register/views.py:165 apps/register/views.py:313
 #, python-format
 msgid "Restored %(name)s."
 msgstr ""
 
-#: apps/register/views.py:143 apps/register/views.py:270
+#: apps/register/views.py:168 apps/register/views.py:316
 #, python-format
 msgid "Archived %(name)s."
 msgstr ""
 
-#: apps/register/views.py:155
+#: apps/register/views.py:180
 #, python-format
 msgid "Added %(name)s."
 msgstr ""
 
-#: apps/register/views.py:157
+#: apps/register/views.py:182
 msgid "Choose a person and a role."
 msgstr ""
 
-#: apps/register/views.py:168
+#: apps/register/views.py:193
 #, python-format
 msgid "Removed %(name)s."
 msgstr ""

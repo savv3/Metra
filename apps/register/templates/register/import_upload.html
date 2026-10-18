@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% block title %}{% translate "Import units from CSV" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "Import units from CSV" %}</h1>
+  <p>{% blocktranslate trimmed %}
+    Each row becomes one unit, optionally with one contact person. You choose which
+    column goes where in the next step, and see every row checked before anything is saved.
+  {% endblocktranslate %}</p>
+  <p>{% translate "Example for the water association setup:" %}
+    <a href="{% static 'examples/hushall-exempel.csv' %}" download>hushall-exempel.csv</a></p>
+  {% if form.unit_type.field.queryset %}
+    <form method="post" enctype="multipart/form-data" class="form form--narrow" novalidate>
+      {% csrf_token %}
+      {% for field in form %}
+        {% include "register/_field.html" %}
+      {% endfor %}
+      <div class="actions">
+        <button type="submit" class="button button--primary">{% translate "Next" %}</button>
+        <a class="button" href="{% url 'register:unit_list' %}">{% translate "Cancel" %}</a>
+      </div>
+    </form>
+  {% else %}
+    <p class="empty">{% translate "There are no unit types yet. An administrator must create one under Settings first." %}</p>
+  {% endif %}
+{% endblock %}
