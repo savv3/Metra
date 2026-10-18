@@ -9,7 +9,8 @@ case "$role" in
     exec gunicorn config.wsgi:application \
       --bind 0.0.0.0:8000 \
       --workers "${GUNICORN_WORKERS:-3}" \
-      --access-logfile -
+      --access-logfile - \
+      --logger-class config.gunicorn_logging.RedactingLogger
     ;;
   worker)
     exec python manage.py run_huey
