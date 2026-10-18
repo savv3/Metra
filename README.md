@@ -334,8 +334,8 @@ adding them to one group:
 | Read-only (Läsbehörighet) | View the register |
 
 The roles are shown in the user's language; groups you create yourself keep
-the name you give them. Two-factor login is optional for users without staff status; they can turn it
-on under **Two-factor login**. Every change to the register, every role
+the name you give them. Two-factor login is optional for users without staff status; until they turn it
+on under **Two-factor login**, every page reminds them to. Every change to the register, every role
 change and every opened unit or person page is recorded in the audit log,
 shown on the unit and person pages for Admin and Board and under
 **Settings > Log entries**.
