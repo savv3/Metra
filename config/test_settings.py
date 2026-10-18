@@ -9,3 +9,6 @@ from config.settings import *  # noqa: E402, F403
 
 # Tests check the real templates, not hashed static file names.
 STORAGES["staticfiles"]["BACKEND"] = "django.contrib.staticfiles.storage.StaticFilesStorage"  # noqa: F405
+
+CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
+BASE_URL = "https://register.example.com"

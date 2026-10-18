@@ -1,0 +1,18 @@
+/* Self-service letters and link lists, made to be printed on A4. */
+@page { size: A4; margin: 20mm; }
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-size: 11pt; line-height: 1.45; color: #000; background: #fff; margin: 0 auto; max-width: 170mm; padding: 1rem; }
+.screen-only { background: #e8f0fb; border: 1px solid #1a5fb4; padding: 0.5rem 1rem; margin-bottom: 1.5rem; }
+.screen-only button { font: inherit; padding: 0.5rem 1.25rem; min-height: 2.75rem; }
+.letter { page-break-after: always; break-after: page; padding-bottom: 2rem; }
+.letter:last-child { page-break-after: auto; break-after: auto; }
+.letter-sender { font-size: 9pt; margin-bottom: 12mm; }
+.letter-recipient { font-style: normal; min-height: 30mm; margin-bottom: 12mm; }
+.letter h1 { font-size: 15pt; margin: 0 0 1rem; }
+.letter-link { display: flex; gap: 8mm; align-items: center; margin: 6mm 0; }
+.letter-link .qr svg { width: 40mm; height: 40mm; }
+.url { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 10pt; overflow-wrap: anywhere; }
+.link-list { border-collapse: collapse; width: 100%; }
+.link-list th, .link-list td { border: 1px solid #555; padding: 2mm; vertical-align: top; text-align: left; }
+.link-list .qr svg { width: 28mm; height: 28mm; }
+.link-list tr { break-inside: avoid; }
+@media print { .screen-only { display: none; } body { padding: 0; max-width: none; } }

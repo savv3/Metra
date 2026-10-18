@@ -8,6 +8,7 @@ dependencies = [
     "django-auditlog>=3.4.1",
     "gunicorn>=26.2.0",
     "huey>=3.4.0",
+    "segno>=1.6.6",
     "whitenoise>=6.12.0",
 ]
 

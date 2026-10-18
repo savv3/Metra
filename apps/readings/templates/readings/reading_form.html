@@ -10,7 +10,7 @@
     {% if reading %}
       <dt>{% translate "Usage" %}</dt><dd>{{ assessment.usage|reading_value:round.reading_type|default:"–" }}</dd>
       <dt>{% translate "Submitted" %}</dt>
-      <dd>{{ reading.submitted_at|date:"SHORT_DATETIME_FORMAT" }} &middot; {{ reading.get_source_display }}{% if reading.submitted_by %}, {{ reading.submitted_by }}{% endif %}</dd>
+      <dd>{{ reading.submitted_at|date:"SHORT_DATETIME_FORMAT" }} &middot; {{ reading.get_source_display }}{% if reading.submitted_by %}, {{ reading.submitted_by }}{% elif reading.submitted_by_person %}, {{ reading.submitted_by_person }}{% endif %}</dd>
     {% endif %}
   </dl>
   {% for warning in assessment.warnings %}

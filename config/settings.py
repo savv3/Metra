@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "apps.register",
     "apps.backups",
     "apps.readings",
+    "apps.selfservice",
 ]
 
 MIDDLEWARE = [
@@ -193,6 +194,30 @@ BACKUP = {
     "password": os.environ.get("SCR_BACKUP_PASSWORD", ""),
     "sftp_key_file": os.environ.get("SCR_BACKUP_SFTP_KEY_FILE", ""),
 }
+
+# The address members and staff use, for links in letters, SMS and email.
+_domain = os.environ.get("SCR_DOMAIN", "").strip()
+BASE_URL = (
+    os.environ.get("SCR_BASE_URL")
+    or (f"https://{_domain}" if _domain and _domain != "localhost" else "http://localhost:8000")
+).rstrip("/")
+
+# Member self-service links: valid until the reading round closes, or this
+# many days when the link is not for a round.
+SELF_SERVICE_LINK_DAYS = int(os.environ.get("SCR_SELF_SERVICE_LINK_DAYS") or 30)
+
+# Rate limits and other short-lived counters, shared by all web processes
+# through files in the data directory (no cache server needed).
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": str(DATA_DIR / "cache"),
+    }
+}
+
+# Caddy puts the visitor's address in X-Forwarded-For. Only trust it behind
+# a proxy that sets it, or anyone could pretend to be someone else.
+TRUST_X_FORWARDED_FOR = env_bool("SCR_TRUST_X_FORWARDED_FOR")
 
 # Behind Caddy, the original scheme arrives in X-Forwarded-Proto.
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

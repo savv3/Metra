@@ -5,6 +5,7 @@
   <div class="page-head">
     <h1>{{ round }}</h1>
     <div class="actions">
+      {% if perms.selfservice.view_selfservicelink %}<a class="button" href="{% url 'selfservice:round_links' round.pk %}">{% translate "Self-service links" %}</a>{% endif %}
       {% if perms.readings.change_readinground %}<a class="button" href="{% url 'readings:round_edit' round.pk %}">{% translate "Edit" %}</a>{% endif %}
     </div>
   </div>

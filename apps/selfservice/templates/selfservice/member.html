@@ -1,0 +1,66 @@
+{% extends "selfservice/base.html" %}
+{% load i18n readings %}
+{% block title %}{{ unit.name }} – {{ block.super }}{% endblock %}
+{% block content %}
+  <h1>{% blocktranslate with name=person.first_name %}Hello {{ name }}{% endblocktranslate %}</h1>
+  <p class="subtitle">{% if unit.street_address == unit.name %}{{ unit.address_line }}{% else %}{{ unit.name }}{% if unit.address_line %}, {{ unit.address_line }}{% endif %}{% endif %}</p>
+
+  {% if round %}
+    <section class="member-section" aria-labelledby="reading">
+      <h2 id="reading">{{ round.reading_type.name }} {{ round.period_label }}</h2>
+      {% if reading_form %}
+        {% with closes=round.closes_on|date:"DATE_FORMAT" %}
+          <p id="value-help">
+            {% if previous is not None %}{% blocktranslate with value=previous|reading_value:round.reading_type %}Last time the reading was {{ value }}.{% endblocktranslate %} {% endif %}
+            {% if reading %}{% blocktranslate with value=reading.value|reading_value:round.reading_type %}You have reported {{ value }}. You can change it until {{ closes }}.{% endblocktranslate %}{% else %}{% blocktranslate %}Enter the number on the meter by {{ closes }}.{% endblocktranslate %}{% endif %}
+          </p>
+        {% endwith %}
+        <form method="post" action="{{ request.path }}#reading" class="form" novalidate>
+                    <input type="hidden" name="action" value="reading">
+          {% include "selfservice/_errors.html" with form=reading_form id="reading-errors" %}
+          {% for field in reading_form %}{% include "register/_field.html" %}{% endfor %}
+          <button type="submit" class="button button--primary">{% if reading %}{% translate "Change reading" %}{% else %}{% translate "Save reading" %}{% endif %}</button>
+        </form>
+      {% elif reading %}
+        <p>{% blocktranslate with value=reading.value|reading_value:round.reading_type date=reading.submitted_at|date:"DATE_FORMAT" %}The reading {{ value }} was registered on {{ date }}.{% endblocktranslate %}</p>
+        <p>{% translate "The reading round is closed, so it can no longer be changed here." %}</p>
+      {% else %}
+        <p>{% translate "The reading round is not open, so no reading can be entered here." %}</p>
+      {% endif %}
+    </section>
+  {% endif %}
+
+  <section class="member-section" aria-labelledby="contact">
+    <h2 id="contact">{% translate "Your contact details" %}</h2>
+    <p>{{ person.full_name }}. {% translate "Correct anything that is wrong or missing and save." %}</p>
+    <form method="post" action="{{ request.path }}#contact" class="form" novalidate>
+            <input type="hidden" name="action" value="contact">
+      {% include "selfservice/_errors.html" with form=contact_form id="contact-errors" %}
+      {% for field in contact_form %}{% include "register/_field.html" %}{% endfor %}
+      <button type="submit" class="button button--primary">{% translate "Save contact details" %}</button>
+    </form>
+  </section>
+
+  {% if household %}
+    <section class="member-section" aria-labelledby="household">
+      <h2 id="household">{% translate "Others in your household" %}</h2>
+      <ul class="plain-list member-contacts">
+        {% for c in household %}
+          <li>
+            <strong>{{ c.person.full_name }}</strong> ({{ c.get_role_display }})
+            {% if c.person.email %}<br>{{ c.person.email }}{% endif %}
+            {% if c.person.phone %}<br>{{ c.person.phone }}{% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+      <p class="help">{% translate "To change their details, use their own link or contact us." %}</p>
+    </section>
+  {% endif %}
+
+  <footer class="member-footer">
+    <p>{% translate "This page is personal. Do not share the link." %}</p>
+    {% if organisation %}
+      <p>{{ organisation.name }}{% if organisation.email %} &middot; <a href="mailto:{{ organisation.email }}">{{ organisation.email }}</a>{% endif %}{% if organisation.phone %} &middot; {{ organisation.phone }}{% endif %}</p>
+    {% endif %}
+  </footer>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% load i18n %}
+{% if show %}
+  <h2 id="self-service">{% translate "Self-service" %}</h2>
+  {% if links %}
+    <ul class="plain-list">
+      {% for link in links %}
+        <li>
+          {% blocktranslate with person=link.person.full_name date=link.expires_at|date:"SHORT_DATE_FORMAT" %}Link for {{ person }}, works until {{ date }}{% endblocktranslate %}{% if link.round %} ({{ link.round }}){% endif %}
+          {% if perms.selfservice.change_selfservicelink %}
+            <form method="post" action="{% url 'selfservice:link_revoke' link.pk %}" class="inline-form">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="unit">
+              <button type="submit" class="button button--small">{% translate "Stop link" %}</button>
+            </form>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">{% translate "No working self-service link." %}</p>
+  {% endif %}
+  {% if perms.selfservice.add_selfservicelink %}
+    <form method="post" action="{% url 'selfservice:unit_print' unit.pk %}" target="_blank">
+      {% csrf_token %}
+      <button type="submit" class="button">{% translate "Print self-service letter" %}</button>
+    </form>
+  {% endif %}
+{% endif %}

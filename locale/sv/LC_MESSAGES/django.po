@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 12:44+0300\n"
+"POT-Creation-Date: 2026-10-18 12:58+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgstr "namn"
 msgid "Access"
 msgstr "Åtkomst"
 
-#: apps/accounts/middleware.py:25
+#: apps/accounts/middleware.py:26
 msgid "Set up two-factor login with an authenticator app before you continue."
 msgstr ""
 "Konfigurera tvåfaktorsinloggning med en autentiseringsapp innan du "
@@ -131,8 +131,7 @@ msgstr "Den senaste säkerhetskopieringen misslyckades %(when)s:"
 #: apps/backups/templates/backups/_status.html:17
 msgid "The last successful backup is more than a day and a half old."
 msgstr ""
-"Den senaste lyckade säkerhetskopian är mer än ett och ett halvt dygn "
-"gammal."
+"Den senaste lyckade säkerhetskopian är mer än ett och ett halvt dygn gammal."
 
 #: apps/core/templates/core/home.html:4
 msgid "Welcome"
@@ -207,8 +206,8 @@ msgid ""
 "The value is a meter position that only grows. Usage is the value minus the "
 "previous reading."
 msgstr ""
-"Värdet är en mätarställning som bara ökar. Förbrukningen är värdet "
-"minus föregående avläsning."
+"Värdet är en mätarställning som bara ökar. Förbrukningen är värdet minus "
+"föregående avläsning."
 
 #: apps/readings/models.py:45 apps/register/models.py:62
 msgid "description"
@@ -255,6 +254,7 @@ msgid "status"
 msgstr "status"
 
 #: apps/readings/models.py:78 apps/register/models.py:159
+#: apps/selfservice/models.py:76
 msgid "created"
 msgstr "skapad"
 
@@ -262,7 +262,7 @@ msgstr "skapad"
 msgid "updated"
 msgstr "uppdaterad"
 
-#: apps/readings/models.py:83
+#: apps/readings/models.py:83 apps/selfservice/models.py:68
 msgid "reading round"
 msgstr "avläsningsomgång"
 
@@ -287,7 +287,7 @@ msgid "round"
 msgstr "omgång"
 
 #: apps/readings/models.py:137 apps/register/models.py:253
-#: apps/register/models.py:276
+#: apps/register/models.py:276 apps/selfservice/models.py:58
 msgid "unit"
 msgstr "enhet"
 
@@ -304,24 +304,34 @@ msgstr "källa"
 msgid "entered by"
 msgstr "inmatad av"
 
-#: apps/readings/models.py:151
+#: apps/readings/models.py:153
+msgid "reported by"
+msgstr "rapporterad av"
+
+#: apps/readings/models.py:158
+msgid "The member who reported it through a self-service link."
+msgstr "Medlemmen som rapporterade det via en självbetjäningslänk."
+
+#: apps/readings/models.py:160
 msgid "submitted"
 msgstr "inlämnad"
 
-#: apps/readings/models.py:152
+#: apps/readings/models.py:161
 msgid "note"
 msgstr "anteckning"
 
-#: apps/readings/models.py:156
+#: apps/readings/models.py:165
 msgid "reading"
 msgstr "avläsning"
 
-#: apps/readings/models.py:157
+#: apps/readings/models.py:166
 msgid "readings"
 msgstr "avläsningar"
 
 #: apps/readings/templates/readings/_round_results.html:7
 #: apps/readings/views.py:145 apps/register/models.py:78
+#: apps/selfservice/templates/selfservice/print.html:26
+#: apps/selfservice/templates/selfservice/round_links.html:37
 msgid "Unit"
 msgstr "Enhet"
 
@@ -341,7 +351,7 @@ msgstr "Förbrukning"
 #: apps/readings/templates/readings/_round_results.html:11
 #: apps/readings/templates/readings/_unit_readings.html:11
 #: apps/readings/templates/readings/reading_form.html:12
-#: apps/readings/templates/readings/round_list.html:22
+#: apps/readings/templates/readings/round_list.html:23
 #: apps/readings/views.py:154
 msgid "Submitted"
 msgstr "Inlämnad"
@@ -391,12 +401,13 @@ msgid "Check"
 msgstr "Kontrollera"
 
 #: apps/readings/templates/readings/_unit_readings.html:8
-#: apps/readings/templates/readings/round_list.html:18
+#: apps/readings/templates/readings/round_list.html:19
 msgid "Round"
 msgstr "Omgång"
 
 #: apps/readings/templates/readings/_unit_readings.html:12
 #: apps/register/templates/register/unit_detail.html:41
+#: apps/selfservice/templates/selfservice/round_links.html:42
 msgid "Actions"
 msgstr "Åtgärder"
 
@@ -417,12 +428,16 @@ msgid "Cancel"
 msgstr "Avbryt"
 
 #: apps/readings/templates/readings/round_detail.html:8
+msgid "Self-service links"
+msgstr "Självbetjäningslänkar"
+
+#: apps/readings/templates/readings/round_detail.html:9
 #: apps/register/templates/register/person_detail.html:9
 #: apps/register/templates/register/unit_detail.html:9
 msgid "Edit"
 msgstr "Redigera"
 
-#: apps/readings/templates/readings/round_detail.html:14
+#: apps/readings/templates/readings/round_detail.html:15
 #, python-format
 msgid "%(submitted)s of %(count)s unit has reported. %(missing)s missing."
 msgid_plural ""
@@ -430,33 +445,33 @@ msgid_plural ""
 msgstr[0] ""
 "%(submitted)s av %(count)s enhet har rapporterat. %(missing)s saknas."
 msgstr[1] ""
-"%(submitted)s av %(count)s enheter har rapporterat. %(missing)s "
-"saknas."
+"%(submitted)s av %(count)s enheter har rapporterat. %(missing)s saknas."
 
-#: apps/readings/templates/readings/round_detail.html:22
+#: apps/readings/templates/readings/round_detail.html:23
 #: apps/register/templates/register/person_list.html:13
 #: apps/register/templates/register/unit_list.html:17
 msgid "Search"
 msgstr "Sök"
 
-#: apps/readings/templates/readings/round_detail.html:26
+#: apps/readings/templates/readings/round_detail.html:27
 #: apps/register/templates/register/_show_select.html:3
 msgid "Show"
 msgstr "Visa"
 
-#: apps/readings/templates/readings/round_detail.html:28
+#: apps/readings/templates/readings/round_detail.html:29
+#: apps/selfservice/views.py:23
 msgid "All units"
 msgstr "Alla enheter"
 
-#: apps/readings/templates/readings/round_detail.html:29
+#: apps/readings/templates/readings/round_detail.html:30
 msgid "Missing a reading"
 msgstr "Saknar avläsning"
 
-#: apps/readings/templates/readings/round_detail.html:30
+#: apps/readings/templates/readings/round_detail.html:31
 msgid "Reported"
 msgstr "Rapporterade"
 
-#: apps/readings/templates/readings/round_detail.html:34
+#: apps/readings/templates/readings/round_detail.html:35
 #: apps/register/templates/register/person_list.html:25
 #: apps/register/templates/register/unit_list.html:43
 msgid "Filter"
@@ -479,48 +494,56 @@ msgid ""
 "There are no reading types yet. An admin adds them under Settings > Reading "
 "types."
 msgstr ""
-"Det finns inga avläsningstyper ännu. En administratör lägger till dem "
-"under Inställningar > Avläsningstyper."
+"Det finns inga avläsningstyper ännu. En administratör lägger till dem under "
+"Inställningar > Avläsningstyper."
 
 #: apps/readings/templates/readings/round_form.html:17
 msgid ""
 "Members can submit readings while the round is open, from the day it opens "
 "until the day it closes."
 msgstr ""
-"Medlemmar kan lämna in avläsningar medan omgången är öppen, från och "
-"med den dag den öppnar till och med den dag den stänger."
+"Medlemmar kan lämna in avläsningar medan omgången är öppen, från och med den "
+"dag den öppnar till och med den dag den stänger."
 
 #: apps/readings/templates/readings/round_list.html:3
 #: apps/readings/templates/readings/round_list.html:6
-#: apps/readings/templates/readings/round_list.html:14
+#: apps/readings/templates/readings/round_list.html:15
 msgid "Reading rounds"
 msgstr "Avläsningsomgångar"
 
 #: apps/readings/templates/readings/round_list.html:9
+#: apps/selfservice/templates/selfservice/recent_changes.html:3
+#: apps/selfservice/templates/selfservice/recent_changes.html:5
+#: apps/selfservice/templates/selfservice/recent_changes.html:8
+msgid "Recent self-service changes"
+msgstr "Senaste ändringar via självbetjäning"
+
+#: apps/readings/templates/readings/round_list.html:10
 msgid "New round"
 msgstr "Ny omgång"
 
-#: apps/readings/templates/readings/round_list.html:19
+#: apps/readings/templates/readings/round_list.html:20
 msgid "Opens"
 msgstr "Öppnar"
 
-#: apps/readings/templates/readings/round_list.html:20
+#: apps/readings/templates/readings/round_list.html:21
 msgid "Closes"
 msgstr "Stänger"
 
-#: apps/readings/templates/readings/round_list.html:21
+#: apps/readings/templates/readings/round_list.html:22
 #: apps/register/csv_io.py:467
 #: apps/register/templates/register/_unit_results.html:10
 #: apps/register/templates/register/unit_list.html:28
+#: apps/selfservice/templates/selfservice/round_links.html:41
 msgid "Status"
 msgstr "Status"
 
-#: apps/readings/templates/readings/round_list.html:32
+#: apps/readings/templates/readings/round_list.html:33
 #, python-format
 msgid "%(submitted)s of %(expected)s"
 msgstr "%(submitted)s av %(expected)s"
 
-#: apps/readings/templates/readings/round_list.html:39
+#: apps/readings/templates/readings/round_list.html:40
 msgid "No reading rounds yet."
 msgstr "Inga avläsningsomgångar ännu."
 
@@ -574,7 +597,7 @@ msgstr "Anteckning"
 msgid "Warnings"
 msgstr "Varningar"
 
-#: apps/readings/views.py:223
+#: apps/readings/views.py:224
 #, python-format
 msgid "Saved the reading for %(name)s."
 msgstr "Avläsningen för %(name)s har sparats."
@@ -609,8 +632,7 @@ msgstr "Kontakt"
 #, python-format
 msgid "Tags: “%(name)s” does not exist. Add it under Settings first."
 msgstr ""
-"Taggar: “%(name)s” finns inte. Lägg först till den under "
-"Inställningar."
+"Taggar: “%(name)s” finns inte. Lägg först till den under Inställningar."
 
 #: apps/register/csv_io.py:244
 #, python-format
@@ -783,32 +805,33 @@ msgstr "Lägg till ett telefonnummer eller välj en annan kanal."
 msgid "This person already has that role on this unit."
 msgstr "Den här personen har redan den rollen för den här enheten."
 
-#: apps/register/history.py:57
+#: apps/register/history.py:63
+#: apps/selfservice/templates/selfservice/round_links.html:39
 msgid "Created"
 msgstr "Skapad"
 
-#: apps/register/history.py:58
+#: apps/register/history.py:64
 msgid "Changed"
 msgstr "Ändrad"
 
-#: apps/register/history.py:59
+#: apps/register/history.py:65
 msgid "Deleted"
 msgstr "Borttagen"
 
-#: apps/register/history.py:64
+#: apps/register/history.py:70
 msgid "Contact added"
 msgstr "Kontakt tillagd"
 
-#: apps/register/history.py:65
+#: apps/register/history.py:71
 msgid "Contact removed"
 msgstr "Kontakt borttagen"
 
-#: apps/register/history.py:93
+#: apps/register/history.py:99
 #, python-format
 msgid "added %(names)s"
 msgstr "lade till %(names)s"
 
-#: apps/register/history.py:95
+#: apps/register/history.py:101
 #, python-format
 msgid "removed %(names)s"
 msgstr "tog bort %(names)s"
@@ -826,8 +849,7 @@ msgstr "CSV-fil"
 msgid ""
 "UTF-8, with semicolons or commas between the columns and one header row."
 msgstr ""
-"UTF-8, med semikolon eller kommatecken mellan kolumnerna och en "
-"rubrikrad."
+"UTF-8, med semikolon eller kommatecken mellan kolumnerna och en rubrikrad."
 
 #: apps/register/import_views.py:33
 msgid "Skip rows whose unit name is already in the register"
@@ -851,8 +873,8 @@ msgstr "Roll för kontakter som saknar roll"
 msgid ""
 "Imported %(units)s units and %(people)s new people; skipped %(skipped)s."
 msgstr ""
-"Importerade %(units)s enheter och %(people)s nya personer; "
-"%(skipped)s hoppades över."
+"Importerade %(units)s enheter och %(people)s nya personer; %(skipped)s "
+"hoppades över."
 
 #: apps/register/models.py:12
 msgid "Finland"
@@ -933,6 +955,8 @@ msgstr "enhetstyper"
 
 #: apps/register/models.py:79
 #: apps/register/templates/register/unit_detail.html:37
+#: apps/selfservice/templates/selfservice/print.html:27
+#: apps/selfservice/templates/selfservice/round_links.html:38
 msgid "Person"
 msgstr "Person"
 
@@ -967,8 +991,7 @@ msgstr "nyckel"
 #: apps/register/models.py:100
 msgid "Short identifier used in CSV files and the API, e.g. meter_number."
 msgstr ""
-"Kort identifierare som används i CSV-filer och i API:et, t.ex. "
-"meter_number."
+"Kort identifierare som används i CSV-filer och i API:et, t.ex. meter_number."
 
 #: apps/register/models.py:102
 msgid "label"
@@ -1044,6 +1067,7 @@ msgid "notes"
 msgstr "anteckningar"
 
 #: apps/register/models.py:214 apps/register/models.py:279
+#: apps/selfservice/models.py:62
 msgid "person"
 msgstr "person"
 
@@ -1101,18 +1125,22 @@ msgid "History"
 msgstr "Historik"
 
 #: apps/register/templates/register/_history.html:8
+#: apps/selfservice/templates/selfservice/recent_changes.html:12
 msgid "When"
 msgstr "När"
 
 #: apps/register/templates/register/_history.html:9
+#: apps/selfservice/templates/selfservice/recent_changes.html:13
 msgid "Who"
 msgstr "Vem"
 
 #: apps/register/templates/register/_history.html:10
+#: apps/selfservice/templates/selfservice/recent_changes.html:14
 msgid "What"
 msgstr "Vad"
 
 #: apps/register/templates/register/_history.html:11
+#: apps/selfservice/templates/selfservice/recent_changes.html:15
 msgid "Changes"
 msgstr "Ändringar"
 
@@ -1206,9 +1234,8 @@ msgid ""
 "People already in the register are matched by email, or by phone when there "
 "is no email, and are not added twice."
 msgstr ""
-"Personer som redan finns i registret matchas via e-post, eller via "
-"telefon när det inte finns någon e-post, och läggs inte till två "
-"gånger."
+"Personer som redan finns i registret matchas via e-post, eller via telefon "
+"när det inte finns någon e-post, och läggs inte till två gånger."
 
 #: apps/register/templates/register/import_map.html:39
 msgid "Check the rows"
@@ -1250,8 +1277,8 @@ msgid ""
 "Nothing is imported while any row has errors. Correct the file and upload it "
 "again, or choose other columns."
 msgstr ""
-"Ingenting importeras så länge någon rad har fel. Korrigera filen och "
-"ladda upp den igen, eller välj andra kolumner."
+"Ingenting importeras så länge någon rad har fel. Korrigera filen och ladda "
+"upp den igen, eller välj andra kolumner."
 
 #: apps/register/templates/register/import_preview.html:23
 #, python-format
@@ -1301,9 +1328,9 @@ msgid ""
 "which column goes where in the next step, and see every row checked before "
 "anything is saved."
 msgstr ""
-"Varje rad blir en enhet, eventuellt med en kontaktperson. I nästa "
-"steg väljer du vilken kolumn som ska vart, och du ser att varje rad "
-"kontrolleras innan något sparas."
+"Varje rad blir en enhet, eventuellt med en kontaktperson. I nästa steg "
+"väljer du vilken kolumn som ska vart, och du ser att varje rad kontrolleras "
+"innan något sparas."
 
 #: apps/register/templates/register/import_upload.html:10
 msgid "Example for the water association setup:"
@@ -1315,8 +1342,8 @@ msgid ""
 "There are no unit types yet. An administrator must create one under Settings "
 "first."
 msgstr ""
-"Det finns inga enhetstyper ännu. En administratör måste först skapa "
-"en under Inställningar."
+"Det finns inga enhetstyper ännu. En administratör måste först skapa en under "
+"Inställningar."
 
 #: apps/register/templates/register/person_detail.html:12
 #: apps/register/templates/register/unit_detail.html:12
@@ -1425,8 +1452,8 @@ msgid ""
 "There are no unit types yet. An administrator must create a unit type first "
 "under"
 msgstr ""
-"Det finns inga enhetstyper ännu. En administratör måste först skapa "
-"en enhetstyp under"
+"Det finns inga enhetstyper ännu. En administratör måste först skapa en "
+"enhetstyp under"
 
 #: apps/register/templates/register/unit_type_choose.html:16
 #: templates/base.html:34
@@ -1457,11 +1484,390 @@ msgstr "Välj en person och en roll."
 msgid "Removed %(name)s."
 msgstr "%(name)s har tagits bort."
 
-#: config/settings.py:147
+#: apps/selfservice/apps.py:7
+msgid "Member self-service"
+msgstr "Medlemmars självbetjäning"
+
+#: apps/selfservice/forms.py:33
+msgid "We send you messages by email, so it cannot be empty."
+msgstr ""
+"Vi skickar meddelanden till dig via e-post, så fältet kan inte vara tomt."
+
+#: apps/selfservice/forms.py:35
+msgid "We send you messages by SMS, so it cannot be empty."
+msgstr "Vi skickar meddelanden till dig via sms, så fältet kan inte vara tomt."
+
+#: apps/selfservice/models.py:74
+msgid "expires"
+msgstr "går ut"
+
+#: apps/selfservice/models.py:75
+msgid "revoked"
+msgstr "stoppad"
+
+#: apps/selfservice/models.py:79
+msgid "created by"
+msgstr "skapad av"
+
+#: apps/selfservice/models.py:85
+msgid "last opened"
+msgstr "senast öppnad"
+
+#: apps/selfservice/models.py:91
+msgid "self-service link"
+msgstr "självbetjäningslänk"
+
+#: apps/selfservice/models.py:92
+msgid "self-service links"
+msgstr "självbetjäningslänkar"
+
+#: apps/selfservice/public.py:126
+msgid "Thank you. Your reading is saved."
+msgstr "Tack! Din avläsning är sparad."
+
+#: apps/selfservice/public.py:132
+msgid "Thank you. Your contact details are updated."
+msgstr "Tack! Dina kontaktuppgifter är uppdaterade."
+
+#: apps/selfservice/public.py:134
+msgid "Nothing was changed."
+msgstr "Inget ändrades."
+
+#: apps/selfservice/templates/selfservice/_errors.html:4
+msgid "Please check the form:"
+msgstr "Kontrollera formuläret:"
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:3
+msgid "Self-service"
+msgstr "Självbetjäning"
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:8
+#, python-format
+msgid "Link for %(person)s, works until %(date)s"
+msgstr "Länk för %(person)s, fungerar till %(date)s"
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:13
+#: apps/selfservice/templates/selfservice/round_links.html:57
+msgid "Stop link"
+msgstr "Stoppa länken"
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:20
+msgid "No working self-service link."
+msgstr "Ingen fungerande länk."
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:25
+msgid "Print self-service letter"
+msgstr "Skriv ut brev med länk"
+
+#: apps/selfservice/templates/selfservice/base.html:9
+#: apps/selfservice/templates/selfservice/base.html:16 templates/base.html:7
+#: templates/base.html:15
+msgid "Small Company Register"
+msgstr "Small Company Register"
+
+#: apps/selfservice/templates/selfservice/base.html:13 templates/base.html:12
+msgid "Skip to content"
+msgstr "Hoppa till innehållet"
+
+#: apps/selfservice/templates/selfservice/base.html:17 templates/base.html:19
+msgid "Language"
+msgstr "Språk"
+
+#: apps/selfservice/templates/selfservice/member.html:5
+#, python-format
+msgid "Hello %(name)s"
+msgstr "Hej %(name)s"
+
+#: apps/selfservice/templates/selfservice/member.html:14
+#, python-format
+msgid "Last time the reading was %(value)s."
+msgstr "Förra avläsningen var %(value)s."
+
+#: apps/selfservice/templates/selfservice/member.html:15
+#, python-format
+msgid "You have reported %(value)s. You can change it until %(closes)s."
+msgstr ""
+"Du har rapporterat %(value)s. Du kan ändra den till och med %(closes)s."
+
+#: apps/selfservice/templates/selfservice/member.html:15
+#, python-format
+msgid "Enter the number on the meter by %(closes)s."
+msgstr "Läs av mätarställningen och mata in den senast %(closes)s."
+
+#: apps/selfservice/templates/selfservice/member.html:22
+msgid "Change reading"
+msgstr "Ändra avläsning"
+
+#: apps/selfservice/templates/selfservice/member.html:22
+msgid "Save reading"
+msgstr "Spara avläsning"
+
+#: apps/selfservice/templates/selfservice/member.html:25
+#, python-format
+msgid "The reading %(value)s was registered on %(date)s."
+msgstr "Avläsningen %(value)s registrerades %(date)s."
+
+#: apps/selfservice/templates/selfservice/member.html:26
+msgid "The reading round is closed, so it can no longer be changed here."
+msgstr "Avläsningsomgången är stängd, så den kan inte längre ändras här."
+
+#: apps/selfservice/templates/selfservice/member.html:28
+msgid "The reading round is not open, so no reading can be entered here."
+msgstr ""
+"Avläsningsomgången är inte öppen, så du kan inte mata in någon avläsning här."
+
+#: apps/selfservice/templates/selfservice/member.html:34
+msgid "Your contact details"
+msgstr "Dina kontaktuppgifter"
+
+#: apps/selfservice/templates/selfservice/member.html:35
+msgid "Correct anything that is wrong or missing and save."
+msgstr "Rätta det som är fel eller saknas och spara."
+
+#: apps/selfservice/templates/selfservice/member.html:40
+msgid "Save contact details"
+msgstr "Spara kontaktuppgifter"
+
+#: apps/selfservice/templates/selfservice/member.html:46
+msgid "Others in your household"
+msgstr "Andra i ditt hushåll"
+
+#: apps/selfservice/templates/selfservice/member.html:56
+msgid "To change their details, use their own link or contact us."
+msgstr ""
+"För att ändra deras uppgifter använder du deras egen länk eller kontaktar "
+"oss."
+
+#: apps/selfservice/templates/selfservice/member.html:61
+msgid "This page is personal. Do not share the link."
+msgstr "Den här sidan är personlig. Dela inte länken."
+
+#: apps/selfservice/templates/selfservice/print.html:8
+msgid "Self-service letter"
+msgstr "Brev för självbetjäning"
+
+#: apps/selfservice/templates/selfservice/print.html:13
+#, python-format
+msgid "%(count)s link was made."
+msgid_plural "%(count)s links were made."
+msgstr[0] "%(count)s länk skapades."
+msgstr[1] "%(count)s länkar skapades."
+
+#: apps/selfservice/templates/selfservice/print.html:14
+msgid "Print this page now: the links are not shown again."
+msgstr "Skriv ut sidan nu. Länkarna visas inte igen."
+
+#: apps/selfservice/templates/selfservice/print.html:16
+msgid "These units have no contact person, so they got no link:"
+msgstr "Dessa enheter har ingen kontaktperson, så de fick ingen länk:"
+
+#: apps/selfservice/templates/selfservice/print.html:19
+msgid "Print"
+msgstr "Skriv ut"
+
+#: apps/selfservice/templates/selfservice/print.html:28
+msgid "Link"
+msgstr "Länk"
+
+#: apps/selfservice/templates/selfservice/print.html:29
+msgid "QR code"
+msgstr "QR-kod"
+
+#: apps/selfservice/templates/selfservice/print.html:58
+#, python-format
+msgid "%(what)s %(period)s: please report your reading"
+msgstr "%(what)s %(period)s: rapportera din avläsning"
+
+#: apps/selfservice/templates/selfservice/print.html:58
+msgid "Please check your contact details"
+msgstr "Kontrollera dina kontaktuppgifter"
+
+#: apps/selfservice/templates/selfservice/print.html:59
+#, python-format
+msgid "Hello %(name)s,"
+msgstr "Hej %(name)s,"
+
+#: apps/selfservice/templates/selfservice/print.html:61
+#, python-format
+msgid ""
+"Please read the meter at %(unit)s and report the number by %(date)s. You can "
+"also check that we have your correct contact details."
+msgstr ""
+"Läs av mätaren vid %(unit)s och rapportera siffrorna senast %(date)s. Du kan "
+"också kontrollera att vi har rätt kontaktuppgifter till dig."
+
+#: apps/selfservice/templates/selfservice/print.html:63
+#, python-format
+msgid ""
+"Please check that we have the correct contact details for you at %(unit)s."
+msgstr "Kontrollera att vi har rätt kontaktuppgifter till dig för %(unit)s."
+
+#: apps/selfservice/templates/selfservice/print.html:65
+msgid ""
+"Scan the QR code with your phone's camera, or type the address into a web "
+"browser:"
+msgstr ""
+"Skanna QR-koden med telefonens kamera, eller skriv in adressen i en "
+"webbläsare:"
+
+#: apps/selfservice/templates/selfservice/print.html:70
+#, python-format
+msgid ""
+"The link is personal and works until %(date)s. You do not need a password."
+msgstr ""
+"Länken är personlig och fungerar till %(date)s. Du behöver inget lösenord."
+
+#: apps/selfservice/templates/selfservice/print.html:72
+msgid "If you cannot use the link, contact us:"
+msgstr "Om du inte kan använda länken, kontakta oss:"
+
+#: apps/selfservice/templates/selfservice/recent_changes.html:6
+msgid ""
+"Readings and contact details members changed through their personal links, "
+"newest first."
+msgstr ""
+"Avläsningar och kontaktuppgifter som medlemmar har ändrat via sina "
+"personliga länkar, senast först."
+
+#: apps/selfservice/templates/selfservice/recent_changes.html:40
+msgid "No changes through self-service links yet."
+msgstr "Inga ändringar via självbetjäningslänkar ännu."
+
+#: apps/selfservice/templates/selfservice/round_links.html:3
+#: apps/selfservice/templates/selfservice/round_links.html:5
+#, python-format
+msgid "Self-service links for %(round)s"
+msgstr "Självbetjäningslänkar för %(round)s"
+
+#: apps/selfservice/templates/selfservice/round_links.html:7
+msgid ""
+"Each unit's contact gets a personal link to report the reading and check "
+"their contact details, without a password. A link works until the round "
+"closes. Making a new link for someone stops their earlier one."
+msgstr ""
+"Varje enhets kontaktperson får en personlig länk för att rapportera "
+"avläsningen och kontrollera sina kontaktuppgifter, utan lösenord. En länk "
+"fungerar till dess att omgången stängs. Om du skapar en ny länk för någon "
+"stoppas hens tidigare länk."
+
+#: apps/selfservice/templates/selfservice/round_links.html:10
+msgid "Print letters"
+msgstr "Skriv ut brev"
+
+#: apps/selfservice/templates/selfservice/round_links.html:14
+msgid "For"
+msgstr "För"
+
+#: apps/selfservice/templates/selfservice/round_links.html:20
+msgid "Layout"
+msgstr "Layout"
+
+#: apps/selfservice/templates/selfservice/round_links.html:22
+msgid "One letter per page"
+msgstr "Ett brev per sida"
+
+#: apps/selfservice/templates/selfservice/round_links.html:23
+msgid "A list with QR codes"
+msgstr "En lista med QR-koder"
+
+#: apps/selfservice/templates/selfservice/round_links.html:26
+msgid ""
+"The links are shown only once, on the page that opens. Print it straight "
+"away."
+msgstr "Länkarna visas bara en gång, på sidan som öppnas. Skriv ut den direkt."
+
+#: apps/selfservice/templates/selfservice/round_links.html:27
+msgid "Make links and print"
+msgstr "Skapa länkar och skriv ut"
+
+#: apps/selfservice/templates/selfservice/round_links.html:31
+#: apps/selfservice/templates/selfservice/round_links.html:33
+msgid "Links"
+msgstr "Länkar"
+
+#
+#: apps/selfservice/templates/selfservice/round_links.html:40
+msgid "Last opened"
+msgstr "Senast öppnad"
+
+#: apps/selfservice/templates/selfservice/round_links.html:52
+msgid "Stopped"
+msgstr "Stoppad"
+
+#: apps/selfservice/templates/selfservice/round_links.html:52
+msgid "Works"
+msgstr "Fungerar"
+
+#: apps/selfservice/templates/selfservice/round_links.html:52
+msgid "Expired"
+msgstr "Har gått ut"
+
+#: apps/selfservice/templates/selfservice/round_links.html:69
+msgid "Stop all links for this round"
+msgstr "Stoppa alla länkar för den här omgången"
+
+#: apps/selfservice/templates/selfservice/round_links.html:73
+msgid "No links yet."
+msgstr "Inga länkar ännu."
+
+#: apps/selfservice/templates/selfservice/too_many.html:3
+#: apps/selfservice/templates/selfservice/too_many.html:5
+msgid "Please wait a moment"
+msgstr "Vänta en stund"
+
+#: apps/selfservice/templates/selfservice/too_many.html:6
+msgid ""
+"There have been too many attempts from your connection. Try again in an hour."
+msgstr ""
+"Det har gjorts för många försök från din anslutning. Försök igen om en timme."
+
+#: apps/selfservice/templates/selfservice/unavailable.html:3
+#: apps/selfservice/templates/selfservice/unavailable.html:5
+msgid "This link does not work"
+msgstr "Den här länken fungerar inte"
+
+#: apps/selfservice/templates/selfservice/unavailable.html:6
+msgid ""
+"The link may be old or mistyped, or a newer letter or message may have "
+"replaced it."
+msgstr ""
+"Länken kan vara gammal eller felstavad, eller så kan ett nyare brev eller "
+"meddelande ha ersatt den."
+
+#: apps/selfservice/templates/selfservice/unavailable.html:7
+msgid ""
+"If you need to report a reading or change your details, contact the "
+"organisation that sent you the link."
+msgstr ""
+"Om du behöver rapportera en avläsning eller ändra dina uppgifter, kontakta "
+"organisationen som skickade länken till dig."
+
+#: apps/selfservice/views.py:24
+msgid "Units missing a reading"
+msgstr "Enheter som saknar avläsning"
+
+#: apps/selfservice/views.py:25
+msgid "Units whose contact has no phone or email"
+msgstr "Enheter vars kontaktperson saknar telefon eller e-post"
+
+#: apps/selfservice/views.py:110
+msgid "Add a contact person before printing a letter."
+msgstr "Lägg till en kontaktperson innan du skriver ut ett brev."
+
+#: apps/selfservice/views.py:123
+msgid "The link no longer works."
+msgstr "Länken fungerar inte längre."
+
+#: apps/selfservice/views.py:139
+#, python-format
+msgid "%(count)s links no longer work."
+msgstr "%(count)s länkar fungerar inte längre."
+
+#: config/settings.py:148
 msgid "Swedish"
 msgstr "Svenska"
 
-#: config/settings.py:148
+#: config/settings.py:149
 msgid "English"
 msgstr "Engelska"
 
@@ -1474,24 +1880,12 @@ msgid ""
 "Your role does not allow you to open this page. Ask an admin if you need "
 "access."
 msgstr ""
-"Din roll tillåter inte att du öppnar den här sidan. Fråga en "
-"administratör om du behöver åtkomst."
+"Din roll tillåter inte att du öppnar den här sidan. Fråga en administratör "
+"om du behöver åtkomst."
 
 #: templates/403.html:7
 msgid "Go to the start page"
 msgstr "Gå till startsidan"
-
-#: templates/base.html:7 templates/base.html:15
-msgid "Small Company Register"
-msgstr "Small Company Register"
-
-#: templates/base.html:12
-msgid "Skip to content"
-msgstr "Hoppa till innehållet"
-
-#: templates/base.html:19
-msgid "Language"
-msgstr "Språk"
 
 #: templates/base.html:26
 msgid "Change"

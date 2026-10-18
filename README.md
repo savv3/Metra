@@ -95,6 +95,40 @@ log, shown under the reading's **Details**, and **Export as CSV** downloads
 the round. Admin and Board can enter readings; Treasurer and Read-only can
 see them.
 
+## Member self-service
+
+Members never get a password. Instead the board gives each household's
+contact a personal link (`https://your-domain/m/…`). It opens a page, made
+for phones and screen readers, where the member:
+
+- enters the meter reading for the round, and can change it until the round
+  closes, and
+- sees their own and their household's contact details, and corrects their
+  own phone, email and address.
+
+Changes are saved straight away. They are in the audit log, marked with the
+link they came through, and listed under **Readings > Recent self-service
+changes**.
+
+On a round's page, **Self-service links** makes links for all units, those
+missing a reading, or those whose contact has no phone or email, and shows
+them as printable letters (one per page, with a QR code) or as a list. A
+unit page has **Print self-service letter** for one household. The links are
+shown only on that page: the database keeps only a hash of each link, so
+print straight away. Making a new link for a person stops their earlier one
+for the same round, and staff can stop links one by one or all at once.
+
+A link for a round works until the end of the round's closing day; other
+links work for `SCR_SELF_SERVICE_LINK_DAYS` (30) days. Unknown, expired and
+stopped links all show the same page. The member pages are rate-limited per
+visitor address, are kept out of search engines (`noindex`) and send no
+referrer. Letters use `SCR_BASE_URL` (by default `https://SCR_DOMAIN`) for
+the address.
+
+Links are personal data about the person they belong to: they are covered
+by the per-person export and erasure tools planned for phase 8, together
+with the person's other records.
+
 ## Develop locally
 
 Needs Python 3.13, [uv](https://docs.astral.sh/uv/) and GNU gettext.

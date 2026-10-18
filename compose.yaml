@@ -4,6 +4,9 @@ services:
     image: smallcompanyregister:latest
     command: web
     env_file: .env
+    environment:
+      # Caddy sets X-Forwarded-For; used to rate-limit the member pages.
+      SCR_TRUST_X_FORWARDED_FOR: "true"
     volumes:
       - data:/data
     restart: unless-stopped

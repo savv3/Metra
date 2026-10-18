@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Recent self-service changes" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "Recent self-service changes" %}</h1>
+  <p>{% translate "Readings and contact details members changed through their personal links, newest first." %}</p>
+  {% if changes %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Recent self-service changes' %}">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">{% translate "When" %}</th>
+            <th scope="col">{% translate "Who" %}</th>
+            <th scope="col">{% translate "What" %}</th>
+            <th scope="col">{% translate "Changes" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for change in changes %}
+            <tr>
+              <td>{{ change.entry.timestamp|date:"SHORT_DATETIME_FORMAT" }}</td>
+              <td>{% if change.link %}<a href="{{ change.link.person.get_absolute_url }}">{{ change.link.person.full_name }}</a><span class="help"><a href="{{ change.link.unit.get_absolute_url }}">{{ change.link.unit.name }}</a></span>{% endif %}</td>
+              <td>{{ change.entry.content_type.name|capfirst }}: {{ change.action|lower }}</td>
+              <td>
+                {% if change.fields %}
+                  <ul class="change-list">
+                    {% for label, old, new in change.fields %}
+                      <li><strong>{{ label|capfirst }}:</strong>
+                        {% if old is not None and new is not None %}{{ old }} &rarr; {{ new }}{% elif new is not None %}{{ new }}{% else %}{{ old }}{% endif %}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "No changes through self-service links yet." %}</p>
+  {% endif %}
+{% endblock %}

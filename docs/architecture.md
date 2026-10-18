@@ -209,6 +209,20 @@ one, or a usage more than three times the unit's average over its last three
 rounds, is saved but marked for a check. A round expects every active,
 non-archived unit of the type, plus any unit that has a reading in it.
 
+### Self-service links
+
+A link holds a random 256-bit token. Only its SHA-256 hash is stored, so the
+token exists only in the letter or message that carries it, and a copy of
+the database cannot open anyone's page. A link belongs to one unit, one
+person and optionally a round. It expires at the end of the round's closing
+day, or after `SCR_SELF_SERVICE_LINK_DAYS`, and can be stopped. Changes made
+through a link are applied directly and audit-logged with the link's id in
+`additional_data`. Links, and the audit entries they produce, are personal
+data of the person they belong to, so the export and erasure tools (module
+8) must include them. Member pages are rate-limited with Django's cache (files
+under `SCR_DATA_DIR`, no extra service), with stricter limits for unknown
+tokens.
+
 ## Plugins
 
 Organisations can extend the app without forking it.

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 12:44+0300\n"
+"POT-Creation-Date: 2026-10-18 12:58+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
-#: apps/accounts/middleware.py:25
+#: apps/accounts/middleware.py:26
 msgid "Set up two-factor login with an authenticator app before you continue."
 msgstr ""
 
@@ -245,6 +245,7 @@ msgid "status"
 msgstr ""
 
 #: apps/readings/models.py:78 apps/register/models.py:159
+#: apps/selfservice/models.py:76
 msgid "created"
 msgstr ""
 
@@ -252,7 +253,7 @@ msgstr ""
 msgid "updated"
 msgstr ""
 
-#: apps/readings/models.py:83
+#: apps/readings/models.py:83 apps/selfservice/models.py:68
 msgid "reading round"
 msgstr ""
 
@@ -277,7 +278,7 @@ msgid "round"
 msgstr ""
 
 #: apps/readings/models.py:137 apps/register/models.py:253
-#: apps/register/models.py:276
+#: apps/register/models.py:276 apps/selfservice/models.py:58
 msgid "unit"
 msgstr ""
 
@@ -293,24 +294,34 @@ msgstr ""
 msgid "entered by"
 msgstr ""
 
-#: apps/readings/models.py:151
+#: apps/readings/models.py:153
+msgid "reported by"
+msgstr ""
+
+#: apps/readings/models.py:158
+msgid "The member who reported it through a self-service link."
+msgstr ""
+
+#: apps/readings/models.py:160
 msgid "submitted"
 msgstr ""
 
-#: apps/readings/models.py:152
+#: apps/readings/models.py:161
 msgid "note"
 msgstr ""
 
-#: apps/readings/models.py:156
+#: apps/readings/models.py:165
 msgid "reading"
 msgstr ""
 
-#: apps/readings/models.py:157
+#: apps/readings/models.py:166
 msgid "readings"
 msgstr ""
 
 #: apps/readings/templates/readings/_round_results.html:7
 #: apps/readings/views.py:145 apps/register/models.py:78
+#: apps/selfservice/templates/selfservice/print.html:26
+#: apps/selfservice/templates/selfservice/round_links.html:37
 msgid "Unit"
 msgstr ""
 
@@ -330,7 +341,7 @@ msgstr ""
 #: apps/readings/templates/readings/_round_results.html:11
 #: apps/readings/templates/readings/_unit_readings.html:11
 #: apps/readings/templates/readings/reading_form.html:12
-#: apps/readings/templates/readings/round_list.html:22
+#: apps/readings/templates/readings/round_list.html:23
 #: apps/readings/views.py:154
 msgid "Submitted"
 msgstr ""
@@ -380,12 +391,13 @@ msgid "Check"
 msgstr ""
 
 #: apps/readings/templates/readings/_unit_readings.html:8
-#: apps/readings/templates/readings/round_list.html:18
+#: apps/readings/templates/readings/round_list.html:19
 msgid "Round"
 msgstr ""
 
 #: apps/readings/templates/readings/_unit_readings.html:12
 #: apps/register/templates/register/unit_detail.html:41
+#: apps/selfservice/templates/selfservice/round_links.html:42
 msgid "Actions"
 msgstr ""
 
@@ -406,12 +418,16 @@ msgid "Cancel"
 msgstr ""
 
 #: apps/readings/templates/readings/round_detail.html:8
+msgid "Self-service links"
+msgstr ""
+
+#: apps/readings/templates/readings/round_detail.html:9
 #: apps/register/templates/register/person_detail.html:9
 #: apps/register/templates/register/unit_detail.html:9
 msgid "Edit"
 msgstr ""
 
-#: apps/readings/templates/readings/round_detail.html:14
+#: apps/readings/templates/readings/round_detail.html:15
 #, python-format
 msgid "%(submitted)s of %(count)s unit has reported. %(missing)s missing."
 msgid_plural ""
@@ -419,30 +435,31 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/readings/templates/readings/round_detail.html:22
+#: apps/readings/templates/readings/round_detail.html:23
 #: apps/register/templates/register/person_list.html:13
 #: apps/register/templates/register/unit_list.html:17
 msgid "Search"
 msgstr ""
 
-#: apps/readings/templates/readings/round_detail.html:26
+#: apps/readings/templates/readings/round_detail.html:27
 #: apps/register/templates/register/_show_select.html:3
 msgid "Show"
 msgstr ""
 
-#: apps/readings/templates/readings/round_detail.html:28
+#: apps/readings/templates/readings/round_detail.html:29
+#: apps/selfservice/views.py:23
 msgid "All units"
 msgstr ""
 
-#: apps/readings/templates/readings/round_detail.html:29
+#: apps/readings/templates/readings/round_detail.html:30
 msgid "Missing a reading"
 msgstr ""
 
-#: apps/readings/templates/readings/round_detail.html:30
+#: apps/readings/templates/readings/round_detail.html:31
 msgid "Reported"
 msgstr ""
 
-#: apps/readings/templates/readings/round_detail.html:34
+#: apps/readings/templates/readings/round_detail.html:35
 #: apps/register/templates/register/person_list.html:25
 #: apps/register/templates/register/unit_list.html:43
 msgid "Filter"
@@ -473,35 +490,43 @@ msgstr ""
 
 #: apps/readings/templates/readings/round_list.html:3
 #: apps/readings/templates/readings/round_list.html:6
-#: apps/readings/templates/readings/round_list.html:14
+#: apps/readings/templates/readings/round_list.html:15
 msgid "Reading rounds"
 msgstr ""
 
 #: apps/readings/templates/readings/round_list.html:9
+#: apps/selfservice/templates/selfservice/recent_changes.html:3
+#: apps/selfservice/templates/selfservice/recent_changes.html:5
+#: apps/selfservice/templates/selfservice/recent_changes.html:8
+msgid "Recent self-service changes"
+msgstr ""
+
+#: apps/readings/templates/readings/round_list.html:10
 msgid "New round"
 msgstr ""
 
-#: apps/readings/templates/readings/round_list.html:19
+#: apps/readings/templates/readings/round_list.html:20
 msgid "Opens"
 msgstr ""
 
-#: apps/readings/templates/readings/round_list.html:20
+#: apps/readings/templates/readings/round_list.html:21
 msgid "Closes"
 msgstr ""
 
-#: apps/readings/templates/readings/round_list.html:21
+#: apps/readings/templates/readings/round_list.html:22
 #: apps/register/csv_io.py:467
 #: apps/register/templates/register/_unit_results.html:10
 #: apps/register/templates/register/unit_list.html:28
+#: apps/selfservice/templates/selfservice/round_links.html:41
 msgid "Status"
 msgstr ""
 
-#: apps/readings/templates/readings/round_list.html:32
+#: apps/readings/templates/readings/round_list.html:33
 #, python-format
 msgid "%(submitted)s of %(expected)s"
 msgstr ""
 
-#: apps/readings/templates/readings/round_list.html:39
+#: apps/readings/templates/readings/round_list.html:40
 msgid "No reading rounds yet."
 msgstr ""
 
@@ -554,7 +579,7 @@ msgstr ""
 msgid "Warnings"
 msgstr ""
 
-#: apps/readings/views.py:223
+#: apps/readings/views.py:224
 #, python-format
 msgid "Saved the reading for %(name)s."
 msgstr ""
@@ -756,32 +781,33 @@ msgstr ""
 msgid "This person already has that role on this unit."
 msgstr ""
 
-#: apps/register/history.py:57
+#: apps/register/history.py:63
+#: apps/selfservice/templates/selfservice/round_links.html:39
 msgid "Created"
 msgstr ""
 
-#: apps/register/history.py:58
+#: apps/register/history.py:64
 msgid "Changed"
 msgstr ""
 
-#: apps/register/history.py:59
+#: apps/register/history.py:65
 msgid "Deleted"
 msgstr ""
 
-#: apps/register/history.py:64
+#: apps/register/history.py:70
 msgid "Contact added"
 msgstr ""
 
-#: apps/register/history.py:65
+#: apps/register/history.py:71
 msgid "Contact removed"
 msgstr ""
 
-#: apps/register/history.py:93
+#: apps/register/history.py:99
 #, python-format
 msgid "added %(names)s"
 msgstr ""
 
-#: apps/register/history.py:95
+#: apps/register/history.py:101
 #, python-format
 msgid "removed %(names)s"
 msgstr ""
@@ -901,6 +927,8 @@ msgstr ""
 
 #: apps/register/models.py:79
 #: apps/register/templates/register/unit_detail.html:37
+#: apps/selfservice/templates/selfservice/print.html:27
+#: apps/selfservice/templates/selfservice/round_links.html:38
 msgid "Person"
 msgstr ""
 
@@ -1010,6 +1038,7 @@ msgid "notes"
 msgstr ""
 
 #: apps/register/models.py:214 apps/register/models.py:279
+#: apps/selfservice/models.py:62
 msgid "person"
 msgstr ""
 
@@ -1067,18 +1096,22 @@ msgid "History"
 msgstr ""
 
 #: apps/register/templates/register/_history.html:8
+#: apps/selfservice/templates/selfservice/recent_changes.html:12
 msgid "When"
 msgstr ""
 
 #: apps/register/templates/register/_history.html:9
+#: apps/selfservice/templates/selfservice/recent_changes.html:13
 msgid "Who"
 msgstr ""
 
 #: apps/register/templates/register/_history.html:10
+#: apps/selfservice/templates/selfservice/recent_changes.html:14
 msgid "What"
 msgstr ""
 
 #: apps/register/templates/register/_history.html:11
+#: apps/selfservice/templates/selfservice/recent_changes.html:15
 msgid "Changes"
 msgstr ""
 
@@ -1408,11 +1441,368 @@ msgstr ""
 msgid "Removed %(name)s."
 msgstr ""
 
-#: config/settings.py:147
-msgid "Swedish"
+#: apps/selfservice/apps.py:7
+msgid "Member self-service"
+msgstr ""
+
+#: apps/selfservice/forms.py:33
+msgid "We send you messages by email, so it cannot be empty."
+msgstr ""
+
+#: apps/selfservice/forms.py:35
+msgid "We send you messages by SMS, so it cannot be empty."
+msgstr ""
+
+#: apps/selfservice/models.py:74
+msgid "expires"
+msgstr ""
+
+#: apps/selfservice/models.py:75
+msgid "revoked"
+msgstr ""
+
+#: apps/selfservice/models.py:79
+msgid "created by"
+msgstr ""
+
+#: apps/selfservice/models.py:85
+msgid "last opened"
+msgstr ""
+
+#: apps/selfservice/models.py:91
+msgid "self-service link"
+msgstr ""
+
+#: apps/selfservice/models.py:92
+msgid "self-service links"
+msgstr ""
+
+#: apps/selfservice/public.py:126
+msgid "Thank you. Your reading is saved."
+msgstr ""
+
+#: apps/selfservice/public.py:132
+msgid "Thank you. Your contact details are updated."
+msgstr ""
+
+#: apps/selfservice/public.py:134
+msgid "Nothing was changed."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/_errors.html:4
+msgid "Please check the form:"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:3
+msgid "Self-service"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:8
+#, python-format
+msgid "Link for %(person)s, works until %(date)s"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:13
+#: apps/selfservice/templates/selfservice/round_links.html:57
+msgid "Stop link"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:20
+msgid "No working self-service link."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:25
+msgid "Print self-service letter"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/base.html:9
+#: apps/selfservice/templates/selfservice/base.html:16 templates/base.html:7
+#: templates/base.html:15
+msgid "Small Company Register"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/base.html:13 templates/base.html:12
+msgid "Skip to content"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/base.html:17 templates/base.html:19
+msgid "Language"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:5
+#, python-format
+msgid "Hello %(name)s"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:14
+#, python-format
+msgid "Last time the reading was %(value)s."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:15
+#, python-format
+msgid "You have reported %(value)s. You can change it until %(closes)s."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:15
+#, python-format
+msgid "Enter the number on the meter by %(closes)s."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:22
+msgid "Change reading"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:22
+msgid "Save reading"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:25
+#, python-format
+msgid "The reading %(value)s was registered on %(date)s."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:26
+msgid "The reading round is closed, so it can no longer be changed here."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:28
+msgid "The reading round is not open, so no reading can be entered here."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:34
+msgid "Your contact details"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:35
+msgid "Correct anything that is wrong or missing and save."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:40
+msgid "Save contact details"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:46
+msgid "Others in your household"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:56
+msgid "To change their details, use their own link or contact us."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:61
+msgid "This page is personal. Do not share the link."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/print.html:8
+msgid "Self-service letter"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/print.html:13
+#, python-format
+msgid "%(count)s link was made."
+msgid_plural "%(count)s links were made."
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/selfservice/templates/selfservice/print.html:14
+msgid "Print this page now: the links are not shown again."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/print.html:16
+msgid "These units have no contact person, so they got no link:"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/print.html:19
+msgid "Print"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/print.html:28
+msgid "Link"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/print.html:29
+msgid "QR code"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/print.html:58
+#, python-format
+msgid "%(what)s %(period)s: please report your reading"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/print.html:58
+msgid "Please check your contact details"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/print.html:59
+#, python-format
+msgid "Hello %(name)s,"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/print.html:61
+#, python-format
+msgid ""
+"Please read the meter at %(unit)s and report the number by %(date)s. You can "
+"also check that we have your correct contact details."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/print.html:63
+#, python-format
+msgid ""
+"Please check that we have the correct contact details for you at %(unit)s."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/print.html:65
+msgid ""
+"Scan the QR code with your phone's camera, or type the address into a web "
+"browser:"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/print.html:70
+#, python-format
+msgid ""
+"The link is personal and works until %(date)s. You do not need a password."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/print.html:72
+msgid "If you cannot use the link, contact us:"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/recent_changes.html:6
+msgid ""
+"Readings and contact details members changed through their personal links, "
+"newest first."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/recent_changes.html:40
+msgid "No changes through self-service links yet."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:3
+#: apps/selfservice/templates/selfservice/round_links.html:5
+#, python-format
+msgid "Self-service links for %(round)s"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:7
+msgid ""
+"Each unit's contact gets a personal link to report the reading and check "
+"their contact details, without a password. A link works until the round "
+"closes. Making a new link for someone stops their earlier one."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:10
+msgid "Print letters"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:14
+msgid "For"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:20
+msgid "Layout"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:22
+msgid "One letter per page"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:23
+msgid "A list with QR codes"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:26
+msgid ""
+"The links are shown only once, on the page that opens. Print it straight "
+"away."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:27
+msgid "Make links and print"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:31
+#: apps/selfservice/templates/selfservice/round_links.html:33
+msgid "Links"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:40
+msgid "Last opened"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:52
+msgid "Stopped"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:52
+msgid "Works"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:52
+msgid "Expired"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:69
+msgid "Stop all links for this round"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/round_links.html:73
+msgid "No links yet."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/too_many.html:3
+#: apps/selfservice/templates/selfservice/too_many.html:5
+msgid "Please wait a moment"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/too_many.html:6
+msgid ""
+"There have been too many attempts from your connection. Try again in an hour."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/unavailable.html:3
+#: apps/selfservice/templates/selfservice/unavailable.html:5
+msgid "This link does not work"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/unavailable.html:6
+msgid ""
+"The link may be old or mistyped, or a newer letter or message may have "
+"replaced it."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/unavailable.html:7
+msgid ""
+"If you need to report a reading or change your details, contact the "
+"organisation that sent you the link."
+msgstr ""
+
+#: apps/selfservice/views.py:24
+msgid "Units missing a reading"
+msgstr ""
+
+#: apps/selfservice/views.py:25
+msgid "Units whose contact has no phone or email"
+msgstr ""
+
+#: apps/selfservice/views.py:110
+msgid "Add a contact person before printing a letter."
+msgstr ""
+
+#: apps/selfservice/views.py:123
+msgid "The link no longer works."
+msgstr ""
+
+#: apps/selfservice/views.py:139
+#, python-format
+msgid "%(count)s links no longer work."
 msgstr ""
 
 #: config/settings.py:148
+msgid "Swedish"
+msgstr ""
+
+#: config/settings.py:149
 msgid "English"
 msgstr ""
 
@@ -1428,18 +1818,6 @@ msgstr ""
 
 #: templates/403.html:7
 msgid "Go to the start page"
-msgstr ""
-
-#: templates/base.html:7 templates/base.html:15
-msgid "Small Company Register"
-msgstr ""
-
-#: templates/base.html:12
-msgid "Skip to content"
-msgstr ""
-
-#: templates/base.html:19
-msgid "Language"
 msgstr ""
 
 #: templates/base.html:26
