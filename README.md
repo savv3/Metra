@@ -61,7 +61,7 @@ docker compose up -d --build
 ```
 
 - [INSTALL.md](INSTALL.md): installing, configuration, email and SMS,
-  backups, upgrading and local development
+  backups and local development
 - [User guide](docs/user-guide.md): how to use readings, self-service,
   messages, newsletters, invoicing, import and roles
 - [Several organisations on one server](docs/multiple-organisations.md)

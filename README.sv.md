@@ -66,7 +66,7 @@ docker compose up -d --build
 Den övriga dokumentationen finns på engelska:
 
 - [INSTALL.md](INSTALL.md): installation, inställningar, e-post och sms,
-  säkerhetskopior, uppgradering och utveckling
+  säkerhetskopior och utveckling
 - [Användarguide](docs/user-guide.md): avläsningar, självbetjäning,
   meddelanden, nyhetsbrev, fakturering, import och roller
 - [Flera organisationer på en server](docs/multiple-organisations.md)

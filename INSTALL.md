@@ -27,16 +27,6 @@ Create the first account with
 must set up two-factor login with an authenticator app on their first login;
 see [Users, roles and two-factor login](docs/user-guide.md#users-roles-and-two-factor-login).
 
-### Upgrading from SmallCompanyRegister
-
-Metra was called SmallCompanyRegister, and its settings were prefixed `SCR_`.
-An existing `.env` keeps working unchanged: every `SCR_` setting is still
-read, and a `METRA_` setting wins when both are set. Rename them at your own
-pace. The data volume, database and older `scr-backup-*` archives are used
-as before. The image is now tagged `metra:latest`; an install that loads a
-prebuilt image should tag it `metra:latest`, or set `METRA_IMAGE` to the old
-tag.
-
 ## Backup and restore
 
 Every night at 02:30 (`METRA_BACKUP_TIME`, local time) the worker makes a
