@@ -74,5 +74,5 @@ def add_person_panel(panel):
 
 
 def add_messaging_provider(provider_class):
-    """An SMS or email provider, chosen with SCR_SMS_PROVIDER by its ``name``."""
+    """An SMS or email provider, chosen with METRA_SMS_PROVIDER by its ``name``."""
     return registry.register(provider_class)

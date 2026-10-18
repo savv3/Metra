@@ -1,5 +1,5 @@
 #!/bin/sh
-# Set up a separate install of SmallCompanyRegister for one organisation.
+# Set up a separate install of Metra for one organisation.
 # See docs/multiple-organisations.md.
 #
 #   new-instance.sh NAME HOSTNAME PORT [FOLDER]
@@ -83,11 +83,11 @@ cp "$src/compose.yaml" "$dir/compose.yaml"
     echo "COMPOSE_PROJECT_NAME=$name"
     echo
     awk -v host="$host" -v secret="$secret" '
-        /^SCR_DOMAIN=/ { print "SCR_DOMAIN=" host; next }
-        /^SCR_SECRET_KEY=/ { print "SCR_SECRET_KEY=" secret; next }
-        /^SCR_DEBUG=/ { print "SCR_DEBUG=false"; next }
-        /^SCR_ALLOWED_HOSTS=/ { print "SCR_ALLOWED_HOSTS=" host; next }
-        /^SCR_CSRF_TRUSTED_ORIGINS=/ { print "SCR_CSRF_TRUSTED_ORIGINS=https://" host; next }
+        /^METRA_DOMAIN=/ { print "METRA_DOMAIN=" host; next }
+        /^METRA_SECRET_KEY=/ { print "METRA_SECRET_KEY=" secret; next }
+        /^METRA_DEBUG=/ { print "METRA_DEBUG=false"; next }
+        /^METRA_ALLOWED_HOSTS=/ { print "METRA_ALLOWED_HOSTS=" host; next }
+        /^METRA_CSRF_TRUSTED_ORIGINS=/ { print "METRA_CSRF_TRUSTED_ORIGINS=https://" host; next }
         /^# COMPOSE_PROJECT_NAME=/ { next }
         { print }
     ' "$src/.env.example"
@@ -107,7 +107,7 @@ Created $dir for $name.
 
 Next:
   1. Check $dir/.env (email, SMS, backups). If you send backups off the
-     server, give this install its own SCR_BACKUP_REMOTE_PATH and password.
+     server, give this install its own METRA_BACKUP_REMOTE_PATH and password.
   2. Start it:
        cd $dir && podman-compose up -d web worker
   3. In Cloudflare, add the public hostname $host with service

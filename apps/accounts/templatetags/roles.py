@@ -20,5 +20,5 @@ def should_set_up_two_factor(user):
 
 @register.filter
 def two_factor_not_required(user):
-    """Staff on an installation where SCR_REQUIRE_MFA is off: they should know."""
+    """Staff on an installation where METRA_REQUIRE_MFA is off: they should know."""
     return is_staff(user) and not requires_two_factor(user)

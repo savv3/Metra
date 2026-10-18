@@ -9,7 +9,7 @@ def is_staff(user):
 
 def requires_two_factor(user):
     """Staff and superusers can open Settings, so they must use two-factor login,
-    unless SCR_REQUIRE_MFA turns that off (the default in development)."""
+    unless METRA_REQUIRE_MFA turns that off (the default in development)."""
     return settings.REQUIRE_MFA and is_staff(user)
 
 

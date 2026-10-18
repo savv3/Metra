@@ -1,6 +1,6 @@
 # Example plugin
 
-The smallest useful SmallCompanyRegister plugin, used by the app's tests and
+The smallest useful Metra plugin, used by the app's tests and
 as a starting point for your own. It adds:
 
 - a menu item, **Example**, with a page listing the number of units;
@@ -11,7 +11,7 @@ Install and enable it:
 
 ```sh
 pip install ./plugins/example     # or uv pip install
-export SCR_PLUGINS=example
+export METRA_PLUGINS=example
 python manage.py check
 ```
 

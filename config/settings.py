@@ -1,7 +1,9 @@
-"""Django settings for SmallCompanyRegister.
+"""Django settings for Metra.
 
 Every value that differs between installations is read from an environment
-variable prefixed with ``SCR_``. See ``.env.example`` for the full list.
+variable prefixed with ``METRA_``. See ``.env.example`` for the full list.
+Installs from before the rename to Metra used the prefix ``SCR_``; those
+names still work, and a ``METRA_`` name wins when both are set.
 """
 
 import os
@@ -15,6 +17,16 @@ from config.plugins import enabled_apps
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+def adopt_legacy_names(environ=os.environ):
+    """Copy each ``SCR_X`` to ``METRA_X`` unless ``METRA_X`` is already set."""
+    for key, value in list(environ.items()):
+        if key.startswith("SCR_"):
+            environ.setdefault("METRA_" + key.removeprefix("SCR_"), value)
+
+
+adopt_legacy_names()
+
+
 def env_bool(name, default=False):
     return os.environ.get(name, str(default)).lower() in {"1", "true", "yes", "on"}
 
@@ -23,23 +35,25 @@ def env_list(name, default=""):
     return [item.strip() for item in os.environ.get(name, default).split(",") if item.strip()]
 
 
-DEBUG = env_bool("SCR_DEBUG")
+DEBUG = env_bool("METRA_DEBUG")
 
-SECRET_KEY = os.environ.get("SCR_SECRET_KEY", "")
+SECRET_KEY = os.environ.get("METRA_SECRET_KEY", "")
 if not SECRET_KEY:
     if not DEBUG:
-        raise ImproperlyConfigured("Set SCR_SECRET_KEY, or SCR_DEBUG=true for local development.")
+        raise ImproperlyConfigured(
+            "Set METRA_SECRET_KEY, or METRA_DEBUG=true for local development."
+        )
     SECRET_KEY = "insecure-development-key"
 elif not DEBUG and SECRET_KEY in {"change-me", "insecure-development-key"}:
     # The key signs sessions and password resets; a published one lets anyone forge them.
-    raise ImproperlyConfigured("SCR_SECRET_KEY is still the example value; generate a new one.")
+    raise ImproperlyConfigured("METRA_SECRET_KEY is still the example value; generate a new one.")
 
-ALLOWED_HOSTS = env_list("SCR_ALLOWED_HOSTS", "localhost,127.0.0.1")
-CSRF_TRUSTED_ORIGINS = env_list("SCR_CSRF_TRUSTED_ORIGINS")
+ALLOWED_HOSTS = env_list("METRA_ALLOWED_HOSTS", "localhost,127.0.0.1")
+CSRF_TRUSTED_ORIGINS = env_list("METRA_CSRF_TRUSTED_ORIGINS")
 
 # All persistent state (databases, uploads) lives in one directory, so a
 # backup or a Docker volume only has to cover this path.
-DATA_DIR = Path(os.environ.get("SCR_DATA_DIR", BASE_DIR / "data"))
+DATA_DIR = Path(os.environ.get("METRA_DATA_DIR", BASE_DIR / "data"))
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 INSTALLED_APPS = [
@@ -68,7 +82,7 @@ INSTALLED_APPS = [
 # Plugins: installed packages that are Django apps, enabled by name (see
 # docs/plugins.md). They come last, so they can override templates only by
 # their own names and never replace the app's.
-PLUGINS = env_list("SCR_PLUGINS")
+PLUGINS = env_list("METRA_PLUGINS")
 PLUGIN_APPS = enabled_apps(PLUGINS)
 INSTALLED_APPS += list(PLUGIN_APPS.values())
 
@@ -123,10 +137,10 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 MFA_ADAPTER = "apps.accounts.adapter.MFAAdapter"
 MFA_FORMS = {"activate_totp": "apps.accounts.forms.ActivateTOTPForm"}
 # Staff (who can open Settings) must use two-factor login. On by default in
-# production and off in development (SCR_DEBUG=true); an explicit value wins.
-REQUIRE_MFA = env_bool("SCR_REQUIRE_MFA", not DEBUG)
+# production and off in development (METRA_DEBUG=true); an explicit value wins.
+REQUIRE_MFA = env_bool("METRA_REQUIRE_MFA", not DEBUG)
 MFA_SUPPORTED_TYPES = ["totp", "recovery_codes"]
-MFA_TOTP_ISSUER = "Small Company Register"
+MFA_TOTP_ISSUER = "Metra"
 
 # The audit log records who changed or viewed register data. Changes are
 # stored as JSON so custom field values keep their structure.
@@ -169,7 +183,7 @@ LANGUAGES = [
     ("en", _("English")),
 ]
 LOCALE_PATHS = [BASE_DIR / "locale"]
-TIME_ZONE = os.environ.get("SCR_TIME_ZONE", "Europe/Helsinki")
+TIME_ZONE = os.environ.get("METRA_TIME_ZONE", "Europe/Helsinki")
 USE_I18N = True
 USE_TZ = True
 
@@ -187,9 +201,11 @@ MEDIA_URL = "media/"
 # and keep their queue in its own SQLite file next to the main database.
 HUEY = {
     "huey_class": "huey.SqliteHuey",
+    # The queue's name in huey.sqlite3; kept from before the rename so jobs
+    # already queued on an existing install still run.
     "name": "smallcompanyregister",
     "filename": str(DATA_DIR / "huey.sqlite3"),
-    "immediate": env_bool("SCR_HUEY_IMMEDIATE"),
+    "immediate": env_bool("METRA_HUEY_IMMEDIATE"),
     # Scheduled jobs (like the nightly backup) run at local time, not UTC.
     "utc": False,
 }
@@ -197,34 +213,34 @@ HUEY = {
 # Backups: a consistent copy of the database plus media, kept locally and,
 # when a remote is set, encrypted and uploaded with rclone. See README.
 BACKUP = {
-    "dir": Path(os.environ.get("SCR_BACKUP_DIR") or DATA_DIR / "backups"),
-    "keep": int(os.environ.get("SCR_BACKUP_KEEP") or 14),
-    "time": os.environ.get("SCR_BACKUP_TIME") or "02:30",
-    "remote_type": os.environ.get("SCR_BACKUP_REMOTE_TYPE", "").strip().lower(),
-    "remote_path": os.environ.get("SCR_BACKUP_REMOTE_PATH", ""),
-    "encryption_password": os.environ.get("SCR_BACKUP_ENCRYPTION_PASSWORD", ""),
-    "s3_provider": os.environ.get("SCR_BACKUP_S3_PROVIDER") or "Other",
-    "s3_endpoint": os.environ.get("SCR_BACKUP_S3_ENDPOINT", ""),
-    "s3_region": os.environ.get("SCR_BACKUP_S3_REGION", ""),
-    "s3_access_key_id": os.environ.get("SCR_BACKUP_S3_ACCESS_KEY_ID", ""),
-    "s3_secret_access_key": os.environ.get("SCR_BACKUP_S3_SECRET_ACCESS_KEY", ""),
-    "host": os.environ.get("SCR_BACKUP_HOST", ""),
-    "port": os.environ.get("SCR_BACKUP_PORT", ""),
-    "user": os.environ.get("SCR_BACKUP_USER", ""),
-    "password": os.environ.get("SCR_BACKUP_PASSWORD", ""),
-    "sftp_key_file": os.environ.get("SCR_BACKUP_SFTP_KEY_FILE", ""),
+    "dir": Path(os.environ.get("METRA_BACKUP_DIR") or DATA_DIR / "backups"),
+    "keep": int(os.environ.get("METRA_BACKUP_KEEP") or 14),
+    "time": os.environ.get("METRA_BACKUP_TIME") or "02:30",
+    "remote_type": os.environ.get("METRA_BACKUP_REMOTE_TYPE", "").strip().lower(),
+    "remote_path": os.environ.get("METRA_BACKUP_REMOTE_PATH", ""),
+    "encryption_password": os.environ.get("METRA_BACKUP_ENCRYPTION_PASSWORD", ""),
+    "s3_provider": os.environ.get("METRA_BACKUP_S3_PROVIDER") or "Other",
+    "s3_endpoint": os.environ.get("METRA_BACKUP_S3_ENDPOINT", ""),
+    "s3_region": os.environ.get("METRA_BACKUP_S3_REGION", ""),
+    "s3_access_key_id": os.environ.get("METRA_BACKUP_S3_ACCESS_KEY_ID", ""),
+    "s3_secret_access_key": os.environ.get("METRA_BACKUP_S3_SECRET_ACCESS_KEY", ""),
+    "host": os.environ.get("METRA_BACKUP_HOST", ""),
+    "port": os.environ.get("METRA_BACKUP_PORT", ""),
+    "user": os.environ.get("METRA_BACKUP_USER", ""),
+    "password": os.environ.get("METRA_BACKUP_PASSWORD", ""),
+    "sftp_key_file": os.environ.get("METRA_BACKUP_SFTP_KEY_FILE", ""),
 }
 
 # The address members and staff use, for links in letters, SMS and email.
-_domain = os.environ.get("SCR_DOMAIN", "").strip()
+_domain = os.environ.get("METRA_DOMAIN", "").strip()
 BASE_URL = (
-    os.environ.get("SCR_BASE_URL")
+    os.environ.get("METRA_BASE_URL")
     or (f"https://{_domain}" if _domain and _domain != "localhost" else "http://localhost:8000")
 ).rstrip("/")
 
 # Member self-service links: valid until the reading round closes, or this
 # many days when the link is not for a round.
-SELF_SERVICE_LINK_DAYS = int(os.environ.get("SCR_SELF_SERVICE_LINK_DAYS") or 30)
+SELF_SERVICE_LINK_DAYS = int(os.environ.get("METRA_SELF_SERVICE_LINK_DAYS") or 30)
 
 # Rate limits and other short-lived counters, shared by all web processes
 # through files in the data directory (no cache server needed).
@@ -237,25 +253,25 @@ CACHES = {
 
 # Caddy puts the visitor's address in X-Forwarded-For. Only trust it behind
 # a proxy that sets it, or anyone could pretend to be someone else.
-TRUST_X_FORWARDED_FOR = env_bool("SCR_TRUST_X_FORWARDED_FOR")
+TRUST_X_FORWARDED_FOR = env_bool("METRA_TRUST_X_FORWARDED_FOR")
 # The same for allauth's login and two-factor rate limits: without it every
 # visitor shares the proxy's address, so one person's failed logins would lock
 # out everyone.
 ALLAUTH_TRUSTED_PROXY_COUNT = 1 if TRUST_X_FORWARDED_FOR else 0
 
-# Email: SMTP when SCR_EMAIL_HOST is set, the console in development, or
+# Email: SMTP when METRA_EMAIL_HOST is set, the console in development, or
 # none (links then go by SMS or letter). See README, "Email and SMS".
-EMAIL_HOST = os.environ.get("SCR_EMAIL_HOST", "")
-EMAIL_PORT = int(os.environ.get("SCR_EMAIL_PORT") or 587)
-EMAIL_HOST_USER = os.environ.get("SCR_EMAIL_USER", "")
-EMAIL_HOST_PASSWORD = os.environ.get("SCR_EMAIL_PASSWORD", "")
-EMAIL_USE_TLS = env_bool("SCR_EMAIL_USE_TLS", True)
-EMAIL_USE_SSL = env_bool("SCR_EMAIL_USE_SSL")
+EMAIL_HOST = os.environ.get("METRA_EMAIL_HOST", "")
+EMAIL_PORT = int(os.environ.get("METRA_EMAIL_PORT") or 587)
+EMAIL_HOST_USER = os.environ.get("METRA_EMAIL_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("METRA_EMAIL_PASSWORD", "")
+EMAIL_USE_TLS = env_bool("METRA_EMAIL_USE_TLS", True)
+EMAIL_USE_SSL = env_bool("METRA_EMAIL_USE_SSL")
 if EMAIL_USE_SSL:
     EMAIL_USE_TLS = False
 EMAIL_TIMEOUT = 30
-DEFAULT_FROM_EMAIL = os.environ.get("SCR_EMAIL_FROM") or "register@localhost"
-_email_backend = os.environ.get("SCR_EMAIL_BACKEND", "").strip().lower() or (
+DEFAULT_FROM_EMAIL = os.environ.get("METRA_EMAIL_FROM") or "register@localhost"
+_email_backend = os.environ.get("METRA_EMAIL_BACKEND", "").strip().lower() or (
     "smtp" if EMAIL_HOST else ("console" if DEBUG else "none")
 )
 EMAIL_BACKEND = {
@@ -263,25 +279,25 @@ EMAIL_BACKEND = {
     "console": "django.core.mail.backends.console.EmailBackend",
 }.get(_email_backend, "django.core.mail.backends.dummy.EmailBackend")
 
-_elks_user = os.environ.get("SCR_ELKS_API_USER", "")
-_reminder_days = os.environ.get("SCR_READING_REMINDER_DAYS", "").strip()
+_elks_user = os.environ.get("METRA_ELKS_API_USER", "")
+_reminder_days = os.environ.get("METRA_READING_REMINDER_DAYS", "").strip()
 MESSAGING = {
     # Names in apps.messaging.registry; empty means the channel is not set up.
     "email_provider": "" if _email_backend == "none" else "django",
-    "sms_provider": os.environ.get("SCR_SMS_PROVIDER", "").strip().lower()
+    "sms_provider": os.environ.get("METRA_SMS_PROVIDER", "").strip().lower()
     or ("46elks" if _elks_user else ("console" if DEBUG else "")),
     "email_domain": DEFAULT_FROM_EMAIL.rpartition("@")[2] or "localhost",
-    "sms_sender": os.environ.get("SCR_SMS_SENDER", "") or "Register",
-    "sms_country_code": (os.environ.get("SCR_SMS_COUNTRY_CODE") or "358").lstrip("+"),
+    "sms_sender": os.environ.get("METRA_SMS_SENDER", "") or "Register",
+    "sms_country_code": (os.environ.get("METRA_SMS_COUNTRY_CODE") or "358").lstrip("+"),
     "elks_api_user": _elks_user,
-    "elks_api_password": os.environ.get("SCR_ELKS_API_PASSWORD", ""),
-    "elks_dry_run": env_bool("SCR_ELKS_DRY_RUN"),
+    "elks_api_password": os.environ.get("METRA_ELKS_API_PASSWORD", ""),
+    "elks_dry_run": env_bool("METRA_ELKS_DRY_RUN"),
     # Automatic reminders to units missing a reading, this many days before a
     # round closes. Off unless set.
     "reminder_days_before_close": int(_reminder_days) if _reminder_days else None,
     # Newsletters go out this many emails at a time, with a pause between.
-    "newsletter_batch_size": int(os.environ.get("SCR_NEWSLETTER_BATCH_SIZE") or 50),
-    "newsletter_pause_seconds": int(os.environ.get("SCR_NEWSLETTER_PAUSE_SECONDS") or 60),
+    "newsletter_batch_size": int(os.environ.get("METRA_NEWSLETTER_BATCH_SIZE") or 50),
+    "newsletter_pause_seconds": int(os.environ.get("METRA_NEWSLETTER_PAUSE_SECONDS") or 60),
 }
 if MESSAGING["sms_provider"] == "none":
     MESSAGING["sms_provider"] = ""

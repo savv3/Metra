@@ -17,7 +17,7 @@ class Command(BaseCommand):
             try:
                 target = remote()
                 if target is None:
-                    raise CommandError("No remote is configured (SCR_BACKUP_REMOTE_TYPE).")
+                    raise CommandError("No remote is configured (METRA_BACKUP_REMOTE_TYPE).")
                 for name in target.list():
                     self.stdout.write(name)
             except RcloneError as error:

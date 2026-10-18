@@ -28,7 +28,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "archive", help="A scr-backup-*.tar.gz file, or with --remote the name of one."
+            "archive", help="A metra-backup-*.tar.gz file, or with --remote the name of one."
         )
         parser.add_argument(
             "--remote", action="store_true", help="Download the archive from the remote first."
@@ -65,7 +65,7 @@ class Command(BaseCommand):
             return path
         target = remote()
         if target is None:
-            raise CommandError("No remote is configured (SCR_BACKUP_REMOTE_TYPE).")
+            raise CommandError("No remote is configured (METRA_BACKUP_REMOTE_TYPE).")
         path = tmp / Path(archive).name
         try:
             target.download(path.name, path)

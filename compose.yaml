@@ -4,13 +4,15 @@ services:
       context: .
       args:
         # Extra plugin packages to install into the image (see docs/plugins.md).
-        SCR_PLUGIN_PACKAGES: ${SCR_PLUGIN_PACKAGES:-}
-    image: ${SCR_IMAGE:-smallcompanyregister:latest}
+        # Each ${METRA_X:-${SCR_X:-...}} also reads an .env from before the
+        # rename to Metra, when the settings were called SCR_X.
+        METRA_PLUGIN_PACKAGES: ${METRA_PLUGIN_PACKAGES:-${SCR_PLUGIN_PACKAGES:-}}
+    image: ${METRA_IMAGE:-${SCR_IMAGE:-metra:latest}}
     command: web
     env_file: .env
     environment:
       # Caddy sets X-Forwarded-For; used to rate-limit the member pages.
-      SCR_TRUST_X_FORWARDED_FOR: "true"
+      METRA_TRUST_X_FORWARDED_FOR: "true"
     volumes:
       - data:/data
     restart: unless-stopped
@@ -22,7 +24,7 @@ services:
       start_period: 30s
 
   worker:
-    image: ${SCR_IMAGE:-smallcompanyregister:latest}
+    image: ${METRA_IMAGE:-${SCR_IMAGE:-metra:latest}}
     command: worker
     env_file: .env
     volumes:
@@ -40,7 +42,7 @@ services:
       - "443:443"
       - "443:443/udp"
     environment:
-      SCR_DOMAIN: ${SCR_DOMAIN:-localhost}
+      METRA_DOMAIN: ${METRA_DOMAIN:-${SCR_DOMAIN:-localhost}}
     volumes:
       - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data

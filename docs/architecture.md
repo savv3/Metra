@@ -1,6 +1,6 @@
 # Architecture
 
-Agreed plan for SmallCompanyRegister, October 2026. Changes to the decisions
+Agreed plan for Metra, October 2026. Changes to the decisions
 below need the maintainer's approval.
 
 ## Summary
@@ -197,7 +197,7 @@ four pull requests; the last one adds the plugin core (see
 | 7. Readings | Reading types set up by an admin (unit of measure, decimals, cumulative meter), reading rounds, one reading per unit and round; usage from the previous reading with warnings for values that look wrong; round progress with a filter for missing units; entry and correction from the round and the unit page; history from the audit log; CSV export | The board enters 50 households' meter readings for 2026 and exports the round |
 | 8. Self-service links | Personal links with a random token stored only as a hash, expiring and revocable; a public, mobile-first page where a member enters the reading and corrects their own contact details; changes logged with the link; printable letters with a QR code | A member opens the link on a phone, reports the meter, fixes their email, and the board sees it |
 | 9. Sending links and reminders | A messaging app with a provider interface (SMTP email, 46elks SMS, console for development), message records with delivery status, editable templates, sending a round's links and reminders to missing units through the worker | Links go out by SMS, falling back to email, falling back to the print list, and a reminder reaches only those who have not reported |
-| 10. Plugin core | Entry-point loader, `SCR_PLUGINS`, hook registry with the first extension points (navigation, unit and person panels, messaging providers), example plugin and docs | The example plugin, enabled with `SCR_PLUGINS`, adds a menu item, a unit panel and an SMS provider, and the tests load it |
+| 10. Plugin core | Entry-point loader, `METRA_PLUGINS`, hook registry with the first extension points (navigation, unit and person panels, messaging providers), example plugin and docs | The example plugin, enabled with `METRA_PLUGINS`, adds a menu item, a unit panel and an SMS provider, and the tests load it |
 
 ### Readings
 
@@ -215,12 +215,12 @@ A link holds a random 256-bit token. Only its SHA-256 hash is stored, so the
 token exists only in the letter or message that carries it, and a copy of
 the database cannot open anyone's page. A link belongs to one unit, one
 person and optionally a round. It expires at the end of the round's closing
-day, or after `SCR_SELF_SERVICE_LINK_DAYS`, and can be stopped. Changes made
+day, or after `METRA_SELF_SERVICE_LINK_DAYS`, and can be stopped. Changes made
 through a link are applied directly and audit-logged with the link's id in
 `additional_data`. Links, and the audit entries they produce, are personal
 data of the person they belong to, so the export and erasure tools (module
 8) must include them. Member pages are rate-limited with Django's cache (files
-under `SCR_DATA_DIR`, no extra service), with stricter limits for unknown
+under `METRA_DATA_DIR`, no extra service), with stricter limits for unknown
 tokens.
 
 ### Messaging
@@ -311,10 +311,10 @@ Organisations can extend the app without forking it.
 - **A plugin is a normal Python package** that can be installed with pip and
   is a Django app.
 - **Discovery and enabling.** Plugins are found through the Python entry
-  point group `scr.plugins` and enabled per installation with
-  `SCR_PLUGINS`, a comma-separated list. Nothing loads unless it is listed.
+  point group `metra.plugins` and enabled per installation with
+  `METRA_PLUGINS`, a comma-separated list. Nothing loads unless it is listed.
 - **Docker.** The image installs extra packages listed in
-  `SCR_PLUGIN_PACKAGES` at build time, or the user builds a derived image
+  `METRA_PLUGIN_PACKAGES` at build time, or the user builds a derived image
   `FROM` ours.
 - **Django integration.** Settings appends the enabled plugins to
   `INSTALLED_APPS`, so their migrations, templates, static files and

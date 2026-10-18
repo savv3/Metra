@@ -36,8 +36,8 @@ public host name and a free port. The script creates `~/scr/vatten/` with:
 
 - `compose.yaml`, a copy of the shared one;
 - `.env`, from `.env.example`, with `COMPOSE_PROJECT_NAME`, the host name,
-  `SCR_ALLOWED_HOSTS`, `SCR_CSRF_TRUSTED_ORIGINS` and a new random
-  `SCR_SECRET_KEY` filled in (readable only by you);
+  `METRA_ALLOWED_HOSTS`, `METRA_CSRF_TRUSTED_ORIGINS` and a new random
+  `METRA_SECRET_KEY` filled in (readable only by you);
 - `compose.override.yaml`, which publishes the app on `127.0.0.1:8001`.
 
 It refuses a name whose folder already exists and a port another install in
@@ -72,19 +72,19 @@ golf.example.com {
 
 ## Things that must differ per install
 
-- **Offsite backups.** Give each install its own `SCR_BACKUP_REMOTE_PATH`
-  (and its own `SCR_BACKUP_ENCRYPTION_PASSWORD`). The backup keeps only the
-  newest `SCR_BACKUP_KEEP` archives in that folder, so two installs sharing
+- **Offsite backups.** Give each install its own `METRA_BACKUP_REMOTE_PATH`
+  (and its own `METRA_BACKUP_ENCRYPTION_PASSWORD`). The backup keeps only the
+  newest `METRA_BACKUP_KEEP` archives in that folder, so two installs sharing
   one would delete each other's backups.
-- **Email and SMS senders.** `SCR_EMAIL_FROM` and `SCR_SMS_SENDER` should be
+- **Email and SMS senders.** `METRA_EMAIL_FROM` and `METRA_SMS_SENDER` should be
   the organisation's own, and each organisation should normally use its own
   46elks and mail accounts, so costs and bounces stay with it.
-- **Backup times.** Spread `SCR_BACKUP_TIME` (for example 02:30, 02:45) so
+- **Backup times.** Spread `METRA_BACKUP_TIME` (for example 02:30, 02:45) so
   the installs do not all back up at once.
 
 ## Upgrades
 
-All installs run `smallcompanyregister:latest` unless told otherwise. After
+All installs run `metra:latest` unless told otherwise. After
 `podman load` of a new image, upgrade each install with
 `podman-compose up -d web worker` in its folder (migrations run on start).
 Upgrade them all at once:
@@ -94,11 +94,11 @@ for d in ~/scr/*/; do (cd "$d" && podman-compose up -d web worker); done
 ```
 
 To upgrade one organisation first, tag the new image with a version and set
-`SCR_IMAGE` in that install's `.env`:
+`METRA_IMAGE` in that install's `.env`:
 
 ```sh
-podman tag smallcompanyregister:latest smallcompanyregister:2026-10-18
-# in ~/scr/vatten/.env: SCR_IMAGE=smallcompanyregister:2026-10-18
+podman tag metra:latest metra:2026-10-18
+# in ~/scr/vatten/.env: METRA_IMAGE=metra:2026-10-18
 ```
 
 When the shared `compose.yaml` changes, copy it into each install folder

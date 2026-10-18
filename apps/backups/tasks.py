@@ -11,7 +11,7 @@ def schedule_time(value):
     hour, _, minute = value.partition(":")
     hour, minute = int(hour), int(minute or 0)
     if not (0 <= hour < 24 and 0 <= minute < 60):
-        raise ValueError(f"SCR_BACKUP_TIME must be HH:MM, not {value!r}")
+        raise ValueError(f"METRA_BACKUP_TIME must be HH:MM, not {value!r}")
     return hour, minute
 
 

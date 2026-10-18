@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 @registry.register
 class DjangoEmail(Provider):
-    """Email through Django's mail settings: SMTP (SCR_EMAIL_*) or the console."""
+    """Email through Django's mail settings: SMTP (METRA_EMAIL_*) or the console."""
 
     channel = EMAIL
     name = "django"
@@ -84,7 +84,7 @@ class FortySixElks(Provider):
     def send(self, recipient, body, subject="", callback_url=None, headers=None):
         config = settings.MESSAGING
         if not (config["elks_api_user"] and config["elks_api_password"]):
-            raise ProviderError("Set SCR_ELKS_API_USER and SCR_ELKS_API_PASSWORD.")
+            raise ProviderError("Set METRA_ELKS_API_USER and METRA_ELKS_API_PASSWORD.")
         data = {
             "from": config["sms_sender"],
             "to": normalise_phone(recipient, config["sms_country_code"]),

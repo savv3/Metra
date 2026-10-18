@@ -1,5 +1,5 @@
 [project]
-name = "smallcompanyregister"
+name = "metra"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
@@ -19,12 +19,12 @@ dev = [
     "pytest>=9.1.1",
     "pytest-django>=4.14.0",
     "ruff>=0.17.1",
-    "scr-example-plugin",
+    "metra-example-plugin",
 ]
 
 [tool.uv.sources]
-# The example plugin, installed for the tests (SCR_PLUGINS=example there).
-scr-example-plugin = { path = "plugins/example", editable = true }
+# The example plugin, installed for the tests (METRA_PLUGINS=example there).
+metra-example-plugin = { path = "plugins/example", editable = true }
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.test_settings"
