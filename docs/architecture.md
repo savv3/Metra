@@ -212,7 +212,8 @@ next.
   status, and later plans and payment. Metra itself needs only small
   additions: a command that creates an organisation and its first admin
   (sent a one-time setup link), and a way to read version and health.
-- **Phase 11: Support plugin.** A plugin, in its own package, that lets
+- **Phase 11: Support plugin.** A plugin, the first in the plugins
+  repository (see [Plugins](#plugins)), that lets
   the maintainer help an organisation set up its install. The
   organisation's admin grants support access from a page in the app, for
   a limited time and with a role they choose; support signs in with their
@@ -396,6 +397,12 @@ Organisations can extend the app without forking it.
   (`plugins/example`) and is used in the tests.
 
 How to install, enable and write plugins is in [plugins.md](plugins.md).
+
+Official plugins that are not part of the core live in a separate
+plugins repository, one Python package per plugin, each installable with
+pip and tested against the current Metra release. The repository is
+created with the first such plugin, the support plugin in phase 11. The
+example plugin stays in this repository because the core tests use it.
 
 The plugin core ships in phase 2 (PR 10) with the first extension points:
 navigation, unit and person panels, and messaging providers. Every later
