@@ -92,6 +92,22 @@ class BillingSettings(models.Model):
         default="Dröjsmålsränta enligt räntelagen.",
     )
     footer = models.TextField(_("invoice footer"), blank=True)
+    reminder_fee = models.DecimalField(
+        _("reminder fee"),
+        max_digits=8,
+        decimal_places=2,
+        default=Decimal("5.00"),
+        validators=[MinValueValidator(0)],
+        help_text=_(
+            "Added to each payment reminder; 0 for none. For consumers the Finnish Debt "
+            "Collection Act allows at most 5 € per reminder."
+        ),
+    )
+    reminder_days = models.PositiveSmallIntegerField(
+        _("days to pay after a reminder"),
+        default=14,
+        help_text=_("A reminder gives at least 14 days before any further steps."),
+    )
 
     class Meta:
         verbose_name = _("invoice settings")
@@ -303,10 +319,18 @@ class InvoiceQuerySet(models.QuerySet):
         return self.exclude(status=Invoice.Status.DRAFT)
 
     def overdue(self):
-        return self.filter(
-            status=Invoice.Status.ISSUED,
-            kind=Invoice.Kind.INVOICE,
-            due_date__lt=timezone.localdate(),
+        """Issued, unpaid invoices past their due date (or a reminder's new one)."""
+        today = timezone.localdate()
+        latest = PaymentReminder.objects.filter(invoice=models.OuterRef("pk")).order_by(
+            "-created_at", "-pk"
+        )
+        return (
+            self.filter(status=Invoice.Status.ISSUED, kind=Invoice.Kind.INVOICE)
+            .annotate(reminded_due=models.Subquery(latest.values("new_due_date")[:1]))
+            .filter(
+                models.Q(reminded_due__isnull=True, due_date__lt=today)
+                | models.Q(reminded_due__lt=today)
+            )
         )
 
 
@@ -314,6 +338,7 @@ class Invoice(models.Model):
     class Status(models.TextChoices):
         DRAFT = "draft", _("Draft")
         ISSUED = "issued", _("Issued")
+        PAID = "paid", _("Paid")
         CREDITED = "credited", _("Credited")
 
     class Kind(models.TextChoices):
@@ -428,12 +453,16 @@ class Invoice(models.Model):
 
     @property
     def is_overdue(self):
-        return (
-            self.status == self.Status.ISSUED
-            and self.kind == self.Kind.INVOICE
-            and self.due_date is not None
-            and self.due_date < timezone.localdate()
-        )
+        if self.status != self.Status.ISSUED or self.kind != self.Kind.INVOICE:
+            return False
+        due = self.current_due_date
+        return due is not None and due < timezone.localdate()
+
+    @property
+    def current_due_date(self):
+        """The due date, or the latest reminder's new one."""
+        reminder = self.reminders.first() if self.pk else None
+        return reminder.new_due_date if reminder else self.due_date
 
     # Totals
 
@@ -489,6 +518,37 @@ class Invoice(models.Model):
     def total_from_lines(self):
         self.compute_totals()
         return self.total
+
+    # Payments
+
+    def credited_amount(self):
+        """Credit notes issued against this invoice (a negative sum)."""
+        return sum(
+            (note.total for note in self.credit_notes.exclude(status=self.Status.DRAFT)), ZERO
+        )
+
+    def paid_amount(self):
+        return self.payments.aggregate(total=models.Sum("amount"))["total"] or ZERO
+
+    def fees_amount(self):
+        return self.reminders.aggregate(total=models.Sum("fee"))["total"] or ZERO
+
+    def outstanding(self):
+        """What is still to pay: the invoice, less credit notes and payments,
+        plus reminder fees."""
+        if self.is_draft or self.kind != self.Kind.INVOICE:
+            return ZERO
+        return self.total + self.credited_amount() + self.fees_amount() - self.paid_amount()
+
+    def refresh_payment_status(self):
+        """Paid when nothing is outstanding, issued again if a payment is reversed.
+        A status change is the only update an issued invoice gets."""
+        if self.is_draft or self.kind != self.Kind.INVOICE or self.status == self.Status.CREDITED:
+            return
+        status = self.Status.PAID if self.outstanding() <= 0 else self.Status.ISSUED
+        if status != self.status:
+            Invoice.objects.filter(pk=self.pk).update(status=status)
+            self.status = status
 
     def creditable_amount(self):
         """How much of this invoice is not yet credited."""
@@ -572,6 +632,8 @@ class Invoice(models.Model):
             if self.credits.creditable_amount() <= 0:
                 # The one change an issued invoice gets: fully credited.
                 Invoice.objects.filter(pk=self.credits_id).update(status=self.Status.CREDITED)
+            else:
+                self.credits.refresh_payment_status()
         return self
 
     def make_credit_note(self, user=None):
@@ -687,6 +749,96 @@ class InvoiceDelivery(models.Model):
         return f"{self.invoice} – {self.get_channel_display()}"
 
 
+class LockedRecord(models.Model):
+    """Bookkeeping records that are written once and never changed or deleted;
+    a mistake is corrected with a new record (for a payment, a negative one)."""
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        if self.pk and not self._state.adding:
+            raise LockedError(f"{self._meta.verbose_name} records cannot change.")
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        raise LockedError(f"{self._meta.verbose_name} records cannot be deleted.")
+
+
+class Payment(LockedRecord):
+    invoice = models.ForeignKey(
+        Invoice, verbose_name=_("invoice"), on_delete=models.PROTECT, related_name="payments"
+    )
+    amount = models.DecimalField(
+        _("amount"),
+        max_digits=12,
+        decimal_places=2,
+        help_text=_("Negative to reverse a payment recorded by mistake."),
+    )
+    paid_on = models.DateField(_("paid on"))
+    reference = models.CharField(_("reference given"), max_length=40, blank=True)
+    note = models.CharField(_("note"), max_length=200, blank=True)
+    recorded_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_("recorded by"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="+",
+    )
+    recorded_at = models.DateTimeField(_("recorded"), default=timezone.now)
+
+    class Meta:
+        ordering = ["paid_on", "pk"]
+        verbose_name = _("payment")
+        verbose_name_plural = _("payments")
+
+    def __str__(self):
+        return f"{self.amount} € – {self.invoice}"
+
+    def clean(self):
+        if self.amount == 0:
+            raise ValidationError({"amount": _("Enter an amount other than zero.")})
+        if self.invoice_id and (self.invoice.is_draft or self.invoice.kind != Invoice.Kind.INVOICE):
+            raise ValidationError(_("Payments are recorded on issued invoices."))
+
+
+class PaymentReminder(LockedRecord):
+    """A reminder about an unpaid invoice, with its fee (if any)."""
+
+    invoice = models.ForeignKey(
+        Invoice, verbose_name=_("invoice"), on_delete=models.PROTECT, related_name="reminders"
+    )
+    fee = models.DecimalField(_("reminder fee"), max_digits=8, decimal_places=2, default=ZERO)
+    new_due_date = models.DateField(_("new due date"))
+    channel = models.CharField(_("channel"), max_length=10)
+    message = models.ForeignKey(
+        "messaging.Message",
+        verbose_name=_("message"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="payment_reminders",
+    )
+    sent_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_("sent by"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="+",
+    )
+    created_at = models.DateTimeField(_("sent"), default=timezone.now)
+
+    class Meta:
+        ordering = ["-created_at", "-pk"]
+        verbose_name = _("payment reminder")
+        verbose_name_plural = _("payment reminders")
+
+    def __str__(self):
+        return f"{self.invoice} – {self.created_at:%Y-%m-%d}"
+
+
 auditlog.register(BillingSettings)
 auditlog.register(FeePlan)
 auditlog.register(FeeLine)
@@ -694,3 +846,5 @@ auditlog.register(FeeTier)
 auditlog.register(InvoiceRun, m2m_fields={"plans", "rounds"})
 auditlog.register(Invoice, exclude_fields=["created_at"])
 auditlog.register(InvoiceLine)
+auditlog.register(Payment)
+auditlog.register(PaymentReminder)

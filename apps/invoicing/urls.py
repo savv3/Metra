@@ -7,6 +7,10 @@ app_name = "invoicing"
 urlpatterns = [
     path("invoices/", views.invoice_list, name="invoice_list"),
     path("invoices/runs/", views.run_list, name="run_list"),
+    path("invoices/overdue/", views.overdue_list, name="overdue_list"),
+    path("invoices/overdue/remind/", views.send_reminders, name="send_reminders"),
+    path("invoices/export/", views.export_invoices, name="export_invoices"),
+    path("invoices/export/payments/", views.export_payments, name="export_payments"),
     path("invoices/runs/new/", views.run_create, name="run_create"),
     path("invoices/runs/<int:pk>/", views.run_detail, name="run_detail"),
     path("invoices/runs/<int:pk>/rebuild/", views.run_rebuild, name="run_rebuild"),
@@ -20,4 +24,5 @@ urlpatterns = [
     path("invoices/<int:pk>/rebuild/", views.invoice_rebuild, name="invoice_rebuild"),
     path("invoices/<int:pk>/delete/", views.invoice_delete, name="invoice_delete"),
     path("invoices/<int:pk>/credit/", views.invoice_credit, name="invoice_credit"),
+    path("invoices/<int:pk>/pay/", views.invoice_pay, name="invoice_pay"),
 ]

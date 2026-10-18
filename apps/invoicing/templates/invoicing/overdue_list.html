@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Overdue invoices" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Overdue invoices" %}</h1>
+    <div class="actions"><a class="button" href="{% url 'invoicing:invoice_list' %}">{% translate "All invoices" %}</a></div>
+  </div>
+  {% if invoices %}
+    <form method="post" action="{% url 'invoicing:send_reminders' %}">
+      {% csrf_token %}
+      <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Overdue invoices' %}">
+        <table>
+          <thead><tr>
+            <th scope="col"><span class="visually-hidden">{% translate "Choose" %}</span></th>
+            <th scope="col">{% translate "Number" %}</th><th scope="col">{% translate "Unit" %}</th><th scope="col">{% translate "Recipient" %}</th>
+            <th scope="col">{% translate "Due" %}</th><th scope="col" class="num">{% translate "Days late" %}</th><th scope="col" class="num">{% translate "To pay" %}</th><th scope="col">{% translate "Reminders" %}</th>
+          </tr></thead>
+          <tbody>
+            {% for invoice in invoices %}
+              <tr>
+                <td><label class="visually-hidden" for="remind-{{ invoice.pk }}">{% blocktranslate with number=invoice.number %}Remind about {{ number }}{% endblocktranslate %}</label><input type="checkbox" name="invoices" value="{{ invoice.pk }}" id="remind-{{ invoice.pk }}" checked></td>
+                <th scope="row"><a href="{{ invoice.get_absolute_url }}">{{ invoice.number }}</a></th>
+                <td>{{ invoice.unit.name }}</td>
+                <td>{{ invoice.person.full_name }}<span class="help">{{ invoice.person.email|default:invoice.person.phone }}</span></td>
+                <td>{{ invoice.current_due_date|date:"SHORT_DATE_FORMAT" }}</td>
+                <td class="num">{{ invoice.days_late }}</td>
+                <td class="num">{{ invoice.to_pay|floatformat:2 }} €</td>
+                <td>{{ invoice.reminder_count }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% if perms.invoicing.add_paymentreminder %}
+        <p class="help">{% blocktranslate with fee=billing.reminder_fee|floatformat:2 days=billing.reminder_days %}Each reminder adds a fee of {{ fee }} € and gives {{ days }} days to pay. It goes by email with a PDF, else by SMS, else as a letter to print.{% endblocktranslate %}</p>
+        <button type="submit" class="button button--primary">{% translate "Send reminders to the chosen" %}</button>
+      {% endif %}
+    </form>
+  {% else %}
+    <p class="empty">{% translate "No overdue invoices." %}</p>
+  {% endif %}
+{% endblock %}

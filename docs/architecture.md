@@ -291,8 +291,13 @@ later. It ships as three pull requests.
   sequence.
 - **Immutability.** Issued invoices and their lines cannot change or be
   deleted; corrections are credit notes that refer to the original, and an
-  invoice is marked credited when it is fully credited. Payments (PR C) are
-  immutable too.
+  invoice is marked credited when it is fully credited. Payments are
+  immutable too: a payment recorded by mistake is reversed with a negative
+  one. An invoice's only later change is its status (paid, credited).
+- **Reminders.** A payment reminder carries a fee (5 € by default, the
+  consumer cap in the Debt Collection Act) and a new due date at least 14
+  days ahead; the amount still to pay is the invoice, less credit notes and
+  payments, plus reminder fees. Reminder fees are outside VAT.
 - **Retention.** Invoices, credit notes and payments are bookkeeping
   material, kept for the legal period (in Finland 6 years from the end of
   the financial year for vouchers, 10 for the books). They are excluded

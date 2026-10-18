@@ -277,6 +277,30 @@ the send-out page; **PDF of invoices for post** on the run page gives the
 same letters at any time. Members find their household's invoices as PDFs
 on their self-service page.
 
+### Payments, reminders and bookkeeping
+
+Payments are recorded by hand on the invoice page (**Record a payment**:
+amount, date, the reference the payer gave and a note), in full or in
+parts. An invoice is **Paid** when nothing is outstanding, counting credit
+notes and reminder fees. Payments are never changed or deleted; to undo
+one, record the same amount as a negative payment.
+
+**Invoices > Overdue** lists unpaid invoices past their due date, with the
+days late and the amount to pay. **Send reminders to the chosen** sends a
+payment reminder by email (with a reminder PDF that has the new amount,
+due date and barcode), else by SMS, else as a letter in a PDF to print.
+Each reminder adds the reminder fee (**Settings > Invoice settings**, 5 € by
+default; 0 for none) and gives at least 14 days to pay. In Finland the Debt
+Collection Act (laki saatavien perinnästä) caps a reminder fee to a consumer
+at 5 € and requires those 14 days before further collection steps; check
+the rules before charging more or reminding businesses differently. The
+texts are under **Settings > Message templates**, "Payment reminder".
+
+For the accountant, **Export as CSV** under the invoice list gives every
+issued invoice (or the filtered ones) with totals, VAT, credits, payments,
+fees and what is outstanding; **Export payments** gives payments and
+reminder fees for a date range.
+
 PDFs are made with [WeasyPrint](https://weasyprint.org), which the Docker
 image includes. For local development install its Pango library
 (`brew install pango` on a Mac, `apt install libpango-1.0-0
