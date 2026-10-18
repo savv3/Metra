@@ -84,6 +84,9 @@ def round_print(request, pk):
             for u in units
             if (person := primary_contact(u)) is not None and not (person.phone or person.email)
         ]
+    if chosen := request.POST.getlist("units"):
+        # Specific units, e.g. those a send-out could not reach.
+        units = [u for u in units if str(u.pk) in chosen]
     issued, skipped = issue_links(units, round_, request.user)
     return _print(request, issued, skipped, round_, request.POST.get("layout"))
 

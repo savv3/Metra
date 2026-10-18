@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 13:01+0300\n"
+"POT-Creation-Date: 2026-10-18 13:13+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,7 +74,7 @@ msgstr "Kommando"
 msgid "started"
 msgstr "startad"
 
-#: apps/backups/models.py:14
+#: apps/backups/models.py:14 apps/messaging/models.py:66
 msgid "finished"
 msgstr "klar"
 
@@ -101,7 +101,7 @@ msgid "target"
 msgstr "mål"
 
 #
-#: apps/backups/models.py:23
+#: apps/backups/models.py:23 apps/messaging/models.py:122
 msgid "error"
 msgstr "fel"
 
@@ -145,6 +145,333 @@ msgstr "Håll ordning på dina medlemmar och kunder på ett ställe."
 #: templates/account/login.html:5 templates/account/login.html:18
 msgid "Log in"
 msgstr "Logga in"
+
+#: apps/messaging/apps.py:7
+msgid "Messaging"
+msgstr "Meddelanden"
+
+#: apps/messaging/models.py:22 apps/register/models.py:198
+msgid "SMS"
+msgstr "SMS"
+
+#: apps/messaging/models.py:23 apps/register/csv_io.py:520
+#: apps/register/models.py:197
+#: apps/register/templates/register/_person_results.html:8
+#: apps/register/templates/register/person_detail.html:19
+#: apps/register/templates/register/unit_detail.html:39
+msgid "Email"
+msgstr "E-post"
+
+#: apps/messaging/models.py:24
+msgid "Letter"
+msgstr "Brev"
+
+#: apps/messaging/models.py:31
+#: apps/readings/templates/readings/round_detail.html:8
+msgid "Self-service links"
+msgstr "Självbetjäningslänkar"
+
+#: apps/messaging/models.py:32 apps/messaging/models.py:144
+msgid "Reminder"
+msgstr "Påminnelse"
+
+#: apps/messaging/models.py:33
+msgid "Automatic reminder"
+msgstr "Automatisk påminnelse"
+
+#: apps/messaging/models.py:36
+#: apps/readings/templates/readings/round_detail.html:31
+#: apps/selfservice/views.py:23
+msgid "All units"
+msgstr "Alla enheter"
+
+#: apps/messaging/models.py:37 apps/selfservice/views.py:24
+msgid "Units missing a reading"
+msgstr "Enheter som saknar avläsning"
+
+#: apps/messaging/models.py:40
+msgid "Waiting to be sent"
+msgstr "Väntar på att skickas"
+
+#: apps/messaging/models.py:41
+msgid "Sending"
+msgstr "Skickas"
+
+#: apps/messaging/models.py:42
+msgid "Done"
+msgstr "Klar"
+
+#: apps/messaging/models.py:44
+msgid "kind"
+msgstr "typ"
+
+#: apps/messaging/models.py:45
+msgid "to"
+msgstr "till"
+
+#: apps/messaging/models.py:48 apps/readings/models.py:83
+#: apps/selfservice/models.py:68
+msgid "reading round"
+msgstr "avläsningsomgång"
+
+#: apps/messaging/models.py:55 apps/messaging/models.py:118
+#: apps/readings/models.py:76 apps/register/models.py:240
+msgid "status"
+msgstr "status"
+
+#: apps/messaging/models.py:59
+msgid "sent by"
+msgstr "skickat av"
+
+#: apps/messaging/models.py:65 apps/messaging/models.py:123
+#: apps/readings/models.py:78 apps/register/models.py:159
+#: apps/selfservice/models.py:76
+msgid "created"
+msgstr "skapad"
+
+#: apps/messaging/models.py:70 apps/messaging/models.py:91
+msgid "send-out"
+msgstr "utskick"
+
+#: apps/messaging/models.py:71
+msgid "send-outs"
+msgstr "utskick"
+
+#: apps/messaging/models.py:83
+msgid "Queued"
+msgstr "I kö"
+
+#: apps/messaging/models.py:84
+msgid "Sent"
+msgstr "Skickat"
+
+#: apps/messaging/models.py:85
+msgid "Delivered"
+msgstr "Levererat"
+
+#: apps/messaging/models.py:86
+msgid "Failed"
+msgstr "Misslyckades"
+
+#: apps/messaging/models.py:87
+msgid "To print"
+msgstr "Ska skrivas ut"
+
+#: apps/messaging/models.py:99 apps/register/models.py:214
+#: apps/register/models.py:279 apps/selfservice/models.py:62
+msgid "person"
+msgstr "person"
+
+#: apps/messaging/models.py:107 apps/readings/models.py:137
+#: apps/register/models.py:253 apps/register/models.py:276
+#: apps/selfservice/models.py:58
+msgid "unit"
+msgstr "enhet"
+
+#: apps/messaging/models.py:113 apps/messaging/models.py:148
+msgid "channel"
+msgstr "kanal"
+
+#: apps/messaging/models.py:114
+msgid "recipient"
+msgstr "mottagare"
+
+#: apps/messaging/models.py:115 apps/messaging/models.py:152
+msgid "subject"
+msgstr "ämne"
+
+#: apps/messaging/models.py:116 apps/messaging/models.py:154
+msgid "text"
+msgstr "text"
+
+#: apps/messaging/models.py:120
+msgid "provider"
+msgstr "leverantör"
+
+#: apps/messaging/models.py:121
+msgid "provider's id"
+msgstr "leverantörens id"
+
+#: apps/messaging/models.py:124
+msgid "sent"
+msgstr "skickat"
+
+#: apps/messaging/models.py:125
+msgid "status changed"
+msgstr "status ändrad"
+
+#: apps/messaging/models.py:129
+msgid "message"
+msgstr "meddelande"
+
+#: apps/messaging/models.py:130
+msgid "messages"
+msgstr "meddelanden"
+
+#: apps/messaging/models.py:143
+msgid "Self-service link"
+msgstr "Självbetjäningslänk"
+
+#: apps/messaging/models.py:146
+msgid "purpose"
+msgstr "syfte"
+
+#: apps/messaging/models.py:152
+msgid "Email only."
+msgstr "Endast e-post."
+
+#: apps/messaging/models.py:156
+#, python-brace-format
+msgid ""
+"Placeholders: {name}, {first_name}, {link}, {closes}, {period}, "
+"{reading_type}, {unit} and {organisation}. Keep SMS short: about 160 "
+"characters is one message."
+msgstr ""
+"Platshållare: {name}, {first_name}, {link}, {closes}, {period}, "
+"{reading_type}, {unit} och {organisation}. Håll sms korta: ungefär 160 "
+"tecken är ett meddelande."
+
+#: apps/messaging/models.py:163
+msgid "message template"
+msgstr "meddelandemall"
+
+#: apps/messaging/models.py:164
+msgid "message templates"
+msgstr "meddelandemallar"
+
+#: apps/messaging/sending.py:37
+msgid "There is no message template for this. Add one under Settings."
+msgstr ""
+"Det finns ingen meddelandemall för det här. Lägg till en under Inställningar."
+
+#: apps/messaging/sending.py:94
+msgid "The unit has no contact person."
+msgstr "Enheten har ingen kontaktperson."
+
+#: apps/messaging/sending.py:127
+msgid "[personal link]"
+msgstr "[personlig länk]"
+
+#: apps/messaging/templates/messaging/_send_forms.html:5
+msgid "Send links"
+msgstr "Skicka länkar"
+
+#: apps/messaging/templates/messaging/_send_forms.html:7
+#, python-format
+msgid "SMS goes through %(provider)s."
+msgstr "Sms skickas via %(provider)s."
+
+#: apps/messaging/templates/messaging/_send_forms.html:7
+msgid "SMS is not set up, so links go by email."
+msgstr "Sms är inte inställt, så länkar skickas via e-post."
+
+#: apps/messaging/templates/messaging/_send_forms.html:8
+msgid "Email is not set up."
+msgstr "E-post är inte inställt."
+
+#: apps/messaging/templates/messaging/_send_forms.html:9
+msgid "Households without a working phone or email are listed for printing."
+msgstr "Hushåll utan fungerande telefon eller e-post visas för utskrift."
+
+#: apps/messaging/templates/messaging/_send_forms.html:16
+msgid "Send links to all units"
+msgstr "Skicka länkar till alla enheter"
+
+#: apps/messaging/templates/messaging/_send_forms.html:21
+msgid "Send reminder to units missing a reading"
+msgstr "Skicka påminnelse till enheter som saknar avläsning"
+
+#: apps/messaging/templates/messaging/batch_detail.html:14
+#, python-format
+msgid "%(count)s household needs a letter"
+msgid_plural "%(count)s households need a letter"
+msgstr[0] "%(count)s hushåll behöver ett brev"
+msgstr[1] "%(count)s hushåll behöver brev"
+
+#: apps/messaging/templates/messaging/batch_detail.html:15
+msgid "They have no phone number or email address that works, or prefer post."
+msgstr ""
+"De har inget fungerande telefonnummer eller e-postadress, eller vill hellre "
+"ha brev."
+
+#: apps/messaging/templates/messaging/batch_detail.html:20
+msgid "Print their letters"
+msgstr "Skriv ut deras brev"
+
+#: apps/messaging/templates/messaging/batch_detail.html:26
+#: apps/messaging/templates/messaging/batch_list.html:14
+msgid "Messages"
+msgstr "Meddelanden"
+
+#: apps/messaging/templates/messaging/batch_detail.html:30
+#: apps/readings/templates/readings/_round_results.html:7
+#: apps/readings/views.py:145 apps/register/models.py:78
+#: apps/selfservice/templates/selfservice/print.html:26
+#: apps/selfservice/templates/selfservice/round_links.html:39
+msgid "Unit"
+msgstr "Enhet"
+
+#: apps/messaging/templates/messaging/batch_detail.html:31
+#: apps/register/models.py:79
+#: apps/register/templates/register/unit_detail.html:37
+#: apps/selfservice/templates/selfservice/print.html:27
+#: apps/selfservice/templates/selfservice/round_links.html:40
+msgid "Person"
+msgstr "Person"
+
+#: apps/messaging/templates/messaging/batch_detail.html:32
+msgid "Channel"
+msgstr "Kanal"
+
+#: apps/messaging/templates/messaging/batch_detail.html:33
+#: apps/messaging/templates/messaging/batch_list.html:15
+#: apps/readings/templates/readings/round_list.html:22
+#: apps/register/csv_io.py:467
+#: apps/register/templates/register/_unit_results.html:10
+#: apps/register/templates/register/unit_list.html:28
+#: apps/selfservice/templates/selfservice/round_links.html:43
+msgid "Status"
+msgstr "Status"
+
+#: apps/messaging/templates/messaging/batch_detail.html:52
+msgid "Sending…"
+msgstr "Skickas…"
+
+#: apps/messaging/templates/messaging/batch_list.html:3
+#: apps/messaging/templates/messaging/batch_list.html:5
+#: apps/messaging/templates/messaging/batch_list.html:7 templates/base.html:34
+msgid "Send-outs"
+msgstr "Utskick"
+
+#: apps/messaging/templates/messaging/batch_list.html:11
+msgid "Send-out"
+msgstr "Utskick"
+
+#
+#: apps/messaging/templates/messaging/batch_list.html:12
+msgid "Started"
+msgstr "Startat"
+
+#: apps/messaging/templates/messaging/batch_list.html:13
+msgid "Sent by"
+msgstr "Skickat av"
+
+#: apps/messaging/templates/messaging/batch_list.html:23
+msgid "Automatic"
+msgstr "Automatiskt"
+
+#
+#: apps/messaging/templates/messaging/batch_list.html:32
+msgid "Nothing has been sent yet."
+msgstr "Inget har skickats ännu."
+
+#: apps/messaging/views.py:50
+msgid "Sending has started. This page shows how it goes."
+msgstr "Utskicket har startat. Den här sidan visar hur det går."
+
+#: apps/plugins/apps.py:7
+msgid "Plugins"
+msgstr "Insticksprogram"
 
 #: apps/readings/admin.py:20
 msgid "Archive selected reading types"
@@ -249,22 +576,9 @@ msgstr "öppnar"
 msgid "closes"
 msgstr "stänger"
 
-#: apps/readings/models.py:76 apps/register/models.py:240
-msgid "status"
-msgstr "status"
-
-#: apps/readings/models.py:78 apps/register/models.py:159
-#: apps/selfservice/models.py:76
-msgid "created"
-msgstr "skapad"
-
 #: apps/readings/models.py:79 apps/register/models.py:160
 msgid "updated"
 msgstr "uppdaterad"
-
-#: apps/readings/models.py:83 apps/selfservice/models.py:68
-msgid "reading round"
-msgstr "avläsningsomgång"
 
 #: apps/readings/models.py:84
 msgid "reading rounds"
@@ -285,11 +599,6 @@ msgstr "Medlem"
 #: apps/readings/models.py:134
 msgid "round"
 msgstr "omgång"
-
-#: apps/readings/models.py:137 apps/register/models.py:253
-#: apps/register/models.py:276 apps/selfservice/models.py:58
-msgid "unit"
-msgstr "enhet"
 
 #: apps/readings/models.py:139
 msgid "value"
@@ -327,13 +636,6 @@ msgstr "avläsning"
 #: apps/readings/models.py:166
 msgid "readings"
 msgstr "avläsningar"
-
-#: apps/readings/templates/readings/_round_results.html:7
-#: apps/readings/views.py:145 apps/register/models.py:78
-#: apps/selfservice/templates/selfservice/print.html:26
-#: apps/selfservice/templates/selfservice/round_links.html:37
-msgid "Unit"
-msgstr "Enhet"
 
 #: apps/readings/templates/readings/_round_results.html:8
 #: apps/readings/templates/readings/reading_form.html:9
@@ -407,7 +709,7 @@ msgstr "Omgång"
 
 #: apps/readings/templates/readings/_unit_readings.html:12
 #: apps/register/templates/register/unit_detail.html:41
-#: apps/selfservice/templates/selfservice/round_links.html:42
+#: apps/selfservice/templates/selfservice/round_links.html:44
 msgid "Actions"
 msgstr "Åtgärder"
 
@@ -427,10 +729,6 @@ msgstr "Mata in"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: apps/readings/templates/readings/round_detail.html:8
-msgid "Self-service links"
-msgstr "Självbetjäningslänkar"
-
 #: apps/readings/templates/readings/round_detail.html:9
 #: apps/register/templates/register/person_detail.html:9
 #: apps/register/templates/register/unit_detail.html:9
@@ -447,31 +745,26 @@ msgstr[0] ""
 msgstr[1] ""
 "%(submitted)s av %(count)s enheter har rapporterat. %(missing)s saknas."
 
-#: apps/readings/templates/readings/round_detail.html:23
+#: apps/readings/templates/readings/round_detail.html:25
 #: apps/register/templates/register/person_list.html:13
 #: apps/register/templates/register/unit_list.html:17
 msgid "Search"
 msgstr "Sök"
 
-#: apps/readings/templates/readings/round_detail.html:27
+#: apps/readings/templates/readings/round_detail.html:29
 #: apps/register/templates/register/_show_select.html:3
 msgid "Show"
 msgstr "Visa"
 
-#: apps/readings/templates/readings/round_detail.html:29
-#: apps/selfservice/views.py:23
-msgid "All units"
-msgstr "Alla enheter"
-
-#: apps/readings/templates/readings/round_detail.html:30
+#: apps/readings/templates/readings/round_detail.html:32
 msgid "Missing a reading"
 msgstr "Saknar avläsning"
 
-#: apps/readings/templates/readings/round_detail.html:31
+#: apps/readings/templates/readings/round_detail.html:33
 msgid "Reported"
 msgstr "Rapporterade"
 
-#: apps/readings/templates/readings/round_detail.html:35
+#: apps/readings/templates/readings/round_detail.html:37
 #: apps/register/templates/register/person_list.html:25
 #: apps/register/templates/register/unit_list.html:43
 msgid "Filter"
@@ -529,14 +822,6 @@ msgstr "Öppnar"
 #: apps/readings/templates/readings/round_list.html:21
 msgid "Closes"
 msgstr "Stänger"
-
-#: apps/readings/templates/readings/round_list.html:22
-#: apps/register/csv_io.py:467
-#: apps/register/templates/register/_unit_results.html:10
-#: apps/register/templates/register/unit_list.html:28
-#: apps/selfservice/templates/selfservice/round_links.html:41
-msgid "Status"
-msgstr "Status"
 
 #: apps/readings/templates/readings/round_list.html:33
 #, python-format
@@ -753,13 +1038,6 @@ msgstr "Förnamn"
 msgid "Last name"
 msgstr "Efternamn"
 
-#: apps/register/csv_io.py:520 apps/register/models.py:197
-#: apps/register/templates/register/_person_results.html:8
-#: apps/register/templates/register/person_detail.html:19
-#: apps/register/templates/register/unit_detail.html:39
-msgid "Email"
-msgstr "E-post"
-
 #: apps/register/csv_io.py:521
 #: apps/register/templates/register/_person_results.html:9
 #: apps/register/templates/register/person_detail.html:21
@@ -806,7 +1084,7 @@ msgid "This person already has that role on this unit."
 msgstr "Den här personen har redan den rollen för den här enheten."
 
 #: apps/register/history.py:63
-#: apps/selfservice/templates/selfservice/round_links.html:39
+#: apps/selfservice/templates/selfservice/round_links.html:41
 msgid "Created"
 msgstr "Skapad"
 
@@ -953,13 +1231,6 @@ msgstr "ordning"
 msgid "unit types"
 msgstr "enhetstyper"
 
-#: apps/register/models.py:79
-#: apps/register/templates/register/unit_detail.html:37
-#: apps/selfservice/templates/selfservice/print.html:27
-#: apps/selfservice/templates/selfservice/round_links.html:38
-msgid "Person"
-msgstr "Person"
-
 #: apps/register/models.py:82
 msgid "Text"
 msgstr "Text"
@@ -1042,10 +1313,6 @@ msgstr "Lägg till minst ett alternativ."
 msgid "archived"
 msgstr "arkiverad"
 
-#: apps/register/models.py:198
-msgid "SMS"
-msgstr "SMS"
-
 #: apps/register/models.py:199
 msgid "Post"
 msgstr "Post"
@@ -1065,11 +1332,6 @@ msgstr "önskad kanal"
 #: apps/register/models.py:208 apps/register/models.py:244
 msgid "notes"
 msgstr "anteckningar"
-
-#: apps/register/models.py:214 apps/register/models.py:279
-#: apps/selfservice/models.py:62
-msgid "person"
-msgstr "person"
 
 #: apps/register/models.py:215
 msgid "people"
@@ -1456,7 +1718,7 @@ msgstr ""
 "enhetstyp under"
 
 #: apps/register/templates/register/unit_type_choose.html:16
-#: templates/base.html:34
+#: templates/base.html:36
 msgid "Settings"
 msgstr "Inställningar"
 
@@ -1547,7 +1809,7 @@ msgid "Link for %(person)s, works until %(date)s"
 msgstr "Länk för %(person)s, fungerar till %(date)s"
 
 #: apps/selfservice/templates/selfservice/_unit_links.html:13
-#: apps/selfservice/templates/selfservice/round_links.html:57
+#: apps/selfservice/templates/selfservice/round_links.html:59
 msgid "Stop link"
 msgstr "Stoppa länken"
 
@@ -1750,63 +2012,63 @@ msgstr ""
 "fungerar till dess att omgången stängs. Om du skapar en ny länk för någon "
 "stoppas hens tidigare länk."
 
-#: apps/selfservice/templates/selfservice/round_links.html:10
+#: apps/selfservice/templates/selfservice/round_links.html:12
 msgid "Print letters"
 msgstr "Skriv ut brev"
 
-#: apps/selfservice/templates/selfservice/round_links.html:14
+#: apps/selfservice/templates/selfservice/round_links.html:16
 msgid "For"
 msgstr "För"
 
-#: apps/selfservice/templates/selfservice/round_links.html:20
+#: apps/selfservice/templates/selfservice/round_links.html:22
 msgid "Layout"
 msgstr "Layout"
 
-#: apps/selfservice/templates/selfservice/round_links.html:22
+#: apps/selfservice/templates/selfservice/round_links.html:24
 msgid "One letter per page"
 msgstr "Ett brev per sida"
 
-#: apps/selfservice/templates/selfservice/round_links.html:23
+#: apps/selfservice/templates/selfservice/round_links.html:25
 msgid "A list with QR codes"
 msgstr "En lista med QR-koder"
 
-#: apps/selfservice/templates/selfservice/round_links.html:26
+#: apps/selfservice/templates/selfservice/round_links.html:28
 msgid ""
 "The links are shown only once, on the page that opens. Print it straight "
 "away."
 msgstr "Länkarna visas bara en gång, på sidan som öppnas. Skriv ut den direkt."
 
-#: apps/selfservice/templates/selfservice/round_links.html:27
+#: apps/selfservice/templates/selfservice/round_links.html:29
 msgid "Make links and print"
 msgstr "Skapa länkar och skriv ut"
 
-#: apps/selfservice/templates/selfservice/round_links.html:31
 #: apps/selfservice/templates/selfservice/round_links.html:33
+#: apps/selfservice/templates/selfservice/round_links.html:35
 msgid "Links"
 msgstr "Länkar"
 
 #
-#: apps/selfservice/templates/selfservice/round_links.html:40
+#: apps/selfservice/templates/selfservice/round_links.html:42
 msgid "Last opened"
 msgstr "Senast öppnad"
 
-#: apps/selfservice/templates/selfservice/round_links.html:52
+#: apps/selfservice/templates/selfservice/round_links.html:54
 msgid "Stopped"
 msgstr "Stoppad"
 
-#: apps/selfservice/templates/selfservice/round_links.html:52
+#: apps/selfservice/templates/selfservice/round_links.html:54
 msgid "Works"
 msgstr "Fungerar"
 
-#: apps/selfservice/templates/selfservice/round_links.html:52
+#: apps/selfservice/templates/selfservice/round_links.html:54
 msgid "Expired"
 msgstr "Har gått ut"
 
-#: apps/selfservice/templates/selfservice/round_links.html:69
+#: apps/selfservice/templates/selfservice/round_links.html:71
 msgid "Stop all links for this round"
 msgstr "Stoppa alla länkar för den här omgången"
 
-#: apps/selfservice/templates/selfservice/round_links.html:73
+#: apps/selfservice/templates/selfservice/round_links.html:75
 msgid "No links yet."
 msgstr "Inga länkar ännu."
 
@@ -1842,32 +2104,28 @@ msgstr ""
 "Om du behöver rapportera en avläsning eller ändra dina uppgifter, kontakta "
 "organisationen som skickade länken till dig."
 
-#: apps/selfservice/views.py:24
-msgid "Units missing a reading"
-msgstr "Enheter som saknar avläsning"
-
 #: apps/selfservice/views.py:25
 msgid "Units whose contact has no phone or email"
 msgstr "Enheter vars kontaktperson saknar telefon eller e-post"
 
-#: apps/selfservice/views.py:110
+#: apps/selfservice/views.py:113
 msgid "Add a contact person before printing a letter."
 msgstr "Lägg till en kontaktperson innan du skriver ut ett brev."
 
-#: apps/selfservice/views.py:123
+#: apps/selfservice/views.py:126
 msgid "The link no longer works."
 msgstr "Länken fungerar inte längre."
 
-#: apps/selfservice/views.py:139
+#: apps/selfservice/views.py:142
 #, python-format
 msgid "%(count)s links no longer work."
 msgstr "%(count)s länkar fungerar inte längre."
 
-#: config/settings.py:148
+#: config/settings.py:159
 msgid "Swedish"
 msgstr "Svenska"
 
-#: config/settings.py:149
+#: config/settings.py:160
 msgid "English"
 msgstr "Engelska"
 
@@ -1895,10 +2153,10 @@ msgstr "Byt"
 msgid "Main"
 msgstr "Huvudnavigering"
 
-#: templates/base.html:35
+#: templates/base.html:37
 msgid "Two-factor login"
 msgstr "Tvåfaktorsinloggning"
 
-#: templates/base.html:39
+#: templates/base.html:41
 msgid "Log out"
 msgstr "Logga ut"
