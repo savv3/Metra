@@ -1,9 +1,12 @@
 """Audit history shown on unit and person pages, built on django-auditlog."""
 
+from decimal import Decimal, InvalidOperation
+
 from auditlog.models import LogEntry
 from auditlog.signals import accessed
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import FieldDoesNotExist
+from django.db.models import DecimalField
 from django.utils.translation import gettext as _
 
 from .models import UnitContact
@@ -35,6 +38,17 @@ def history(obj, contact_key):
     return {
         "changes": [_describe(entry, contact_type) for entry in changes],
         "views": views,
+    }
+
+
+def object_history(obj):
+    """Recent changes and views of one record, e.g. a reading."""
+    contact_type = ContentType.objects.get_for_model(UnitContact)
+    entries = LogEntry.objects.get_for_object(obj).select_related("actor", "content_type")
+    changes = entries.exclude(action=LogEntry.Action.ACCESS)[:CHANGES_SHOWN]
+    return {
+        "changes": [_describe(entry, contact_type) for entry in changes],
+        "views": entries.filter(action=LogEntry.Action.ACCESS)[:VIEWS_SHOWN],
     }
 
 
@@ -99,6 +113,12 @@ def _display(field, value):
         return str(choices[value])
     if value in ("", {}, []):
         return "–"
+    if isinstance(field, DecimalField):
+        try:
+            # The database keeps trailing zeros (10.000); show 10.
+            return format(Decimal(str(value)).normalize(), "f")
+        except InvalidOperation:
+            return str(value)
     if isinstance(value, dict):
         # Custom field values: show each key so a single changed field is easy to spot.
         return ", ".join(f"{key}: {item}" for key, item in value.items())

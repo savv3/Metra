@@ -230,3 +230,12 @@ tbody th { font-weight: 600; }
 .status-panel h2 { font-size: 1rem; margin: 0.25rem 0; }
 .status-panel p { margin: 0.25rem 0; }
 .status-panel--warning { border-left-color: var(--error); background: var(--error-bg); }
+
+/* Readings */
+.progress-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 0.5rem 1rem 1rem; margin-bottom: 1rem; }
+.progress-panel p { margin: 0.25rem 0 0.5rem; font-weight: 600; }
+.progress-panel progress { width: 100%; height: 1rem; accent-color: var(--success); }
+.reading-inline { display: flex; flex-wrap: wrap; gap: 0.25rem 0.5rem; align-items: center; margin: 0; }
+.reading-inline input { width: 8rem; }
+.reading-warning { margin: 0.25rem 0 0; font-size: 0.9rem; }
+th .help, td .help { display: block; font-weight: 400; }

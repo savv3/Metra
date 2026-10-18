@@ -1,0 +1,35 @@
+{% load i18n readings %}
+{% if show %}
+  <h2 id="readings">{% translate "Readings" %}</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="readings">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">{% translate "Round" %}</th>
+          <th scope="col">{% translate "Reading" %}</th>
+          <th scope="col">{% translate "Usage" %}</th>
+          <th scope="col">{% translate "Submitted" %}</th>
+          {% if can_enter %}<th scope="col"><span class="visually-hidden">{% translate "Actions" %}</span></th>{% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+          {% with reading=row.reading reading_type=row.round.reading_type %}
+            <tr>
+              <th scope="row"><a href="{{ row.round.get_absolute_url }}">{{ row.round }}</a></th>
+              <td>{% if reading %}{{ reading.value|reading_value:reading_type }}{% else %}<span class="status-skip">{% translate "Missing" %}</span>{% endif %}</td>
+              <td>
+                {{ row.assessment.usage|reading_value:reading_type|default:"–" }}
+                {% for warning in row.assessment.warnings %}<p class="reading-warning"><span class="badge">{% translate "Check" %}</span> {{ warning }}</p>{% endfor %}
+              </td>
+              <td>{% if reading %}{{ reading.submitted_at|date:"SHORT_DATE_FORMAT" }} <span class="help">{{ reading.get_source_display }}</span>{% else %}–{% endif %}</td>
+              {% if can_enter %}
+                <td><a class="button button--small" href="{% url 'readings:reading_entry' row.round.pk unit.pk %}?next=unit">{% if reading %}{% translate "Correct" %}{% else %}{% translate "Enter" %}{% endif %}<span class="visually-hidden"> {{ row.round }}</span></a></td>
+              {% endif %}
+            </tr>
+          {% endwith %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endif %}

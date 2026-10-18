@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n readings %}
+{% block title %}{% blocktranslate with name=unit.name %}Reading for {{ name }}{% endblocktranslate %}{% endblock %}
+{% block content %}
+  <h1>{% blocktranslate with name=unit.name %}Reading for {{ name }}{% endblocktranslate %}</h1>
+  <p class="subtitle"><a href="{{ round.get_absolute_url }}">{{ round }}</a> &middot; <a href="{{ unit.get_absolute_url }}">{{ unit.name }}</a></p>
+
+  <dl class="details-list">
+    <dt>{% translate "Previous reading" %}</dt><dd>{{ assessment.previous|reading_value:round.reading_type|default:"–" }}</dd>
+    {% if reading %}
+      <dt>{% translate "Usage" %}</dt><dd>{{ assessment.usage|reading_value:round.reading_type|default:"–" }}</dd>
+      <dt>{% translate "Submitted" %}</dt>
+      <dd>{{ reading.submitted_at|date:"SHORT_DATETIME_FORMAT" }} &middot; {{ reading.get_source_display }}{% if reading.submitted_by %}, {{ reading.submitted_by }}{% endif %}</dd>
+    {% endif %}
+  </dl>
+  {% for warning in assessment.warnings %}
+    <p class="message warning">{{ warning }}</p>
+  {% endfor %}
+
+  <form method="post" class="form form--narrow" novalidate>
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% if form.non_field_errors %}
+      <div class="errorlist-box" role="alert">{{ form.non_field_errors }}</div>
+    {% endif %}
+    {% for field in form %}
+      {% include "register/_field.html" %}
+    {% endfor %}
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+      <a class="button" href="{% if next == 'unit' %}{{ unit.get_absolute_url }}{% else %}{{ round.get_absolute_url }}{% endif %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+
+  {% if history %}{% include "register/_history.html" %}{% endif %}
+{% endblock %}

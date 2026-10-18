@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n readings %}
 {% block title %}{{ unit.name }}{% endblock %}
 {% block content %}
   <div class="page-head">
@@ -80,6 +80,8 @@
       <p><a class="button" href="{% url 'register:person_create' %}?unit={{ unit.pk }}">{% translate "Add new person" %}</a></p>
     {% endif %}
   {% endif %}
+
+  {% unit_readings unit %}
 
   {% if history %}{% include "register/_history.html" %}{% endif %}
 {% endblock %}

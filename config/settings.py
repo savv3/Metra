@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "apps.accounts",
     "apps.register",
     "apps.backups",
+    "apps.readings",
 ]
 
 MIDDLEWARE = [

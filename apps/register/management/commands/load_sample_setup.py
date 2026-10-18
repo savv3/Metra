@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
@@ -19,12 +20,14 @@ SAMPLES = {
             ),
         ],
         "tags": ["Styrelse"],
+        # (name, unit label, decimals, cumulative)
+        "reading_types": [("Vattenmätare", "m³", 0, True)],
     },
 }
 
 
 class Command(BaseCommand):
-    help = "Load a ready-made configuration (unit type, custom fields, tags)."
+    help = "Load a ready-made configuration (unit type, custom fields, tags, reading types)."
 
     def add_arguments(self, parser):
         parser.add_argument("sample", choices=sorted(SAMPLES))
@@ -50,4 +53,17 @@ class Command(BaseCommand):
             )
         for name in config["tags"]:
             Tag.objects.get_or_create(name=name)
+        if config.get("reading_types") and apps.is_installed("apps.readings"):
+            from apps.readings.models import ReadingType
+
+            for name, unit_label, decimals, cumulative in config["reading_types"]:
+                ReadingType.objects.get_or_create(
+                    name=name,
+                    defaults={
+                        "unit_type": unit_type,
+                        "unit_label": unit_label,
+                        "decimals": decimals,
+                        "cumulative": cumulative,
+                    },
+                )
         self.stdout.write(self.style.SUCCESS(f"Loaded the {sample} setup."))

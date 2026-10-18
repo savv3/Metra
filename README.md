@@ -10,7 +10,7 @@ a configurable register, annual readings with member self-service, SMS and
 email messaging, newsletters, invoicing, an API and offsite backups. See
 [docs/architecture.md](docs/architecture.md) for the plan.
 
-**Status:** early development (phase 1: register, roles, two-factor login, audit log, CSV import and export, backups).
+**Status:** early development. Phase 1 (register, roles, two-factor login, audit log, CSV import and export, backups) is done; phase 2 (annual readings and member self-service) is being built.
 
 ## Run it with Docker
 
@@ -75,6 +75,25 @@ over an install that is in use (for example to go back to last night).
 
 To copy a local backup off the server:
 `docker compose cp web:/data/backups/scr-backup-20261018-023000.tar.gz .`
+
+## Readings
+
+An admin sets up what is read under **Settings > Reading types**: a name,
+the unit type it applies to, the unit of measure (for example m³), the
+number of decimals, and whether it is a cumulative meter. The water setup
+(`load_sample_setup water`) adds "Vattenmätare" in whole m³. Reading types
+are archived, not deleted.
+
+Under **Readings** the board opens a round (for example "2026") with the
+dates members may report in. The round page shows how many units have
+reported, filters for those still missing, and lets the board type in values
+row by row; a unit page lists that unit's readings with **Enter** or
+**Correct**. For a cumulative meter the usage is the value minus the
+previous reading. A value lower than last time, or far above the unit's
+usual usage, is saved but marked **Check**. Every change is in the audit
+log, shown under the reading's **Details**, and **Export as CSV** downloads
+the round. Admin and Board can enter readings; Treasurer and Read-only can
+see them.
 
 ## Develop locally
 
