@@ -22,6 +22,15 @@ SAMPLES = {
         "tags": ["Styrelse"],
         # (name, unit label, decimals, cumulative)
         "reading_types": [("Vattenmätare", "m³", 0, True)],
+        # One base fee for every household, and a price per m³ (delete that
+        # line under Settings > Fee plans if usage is not charged).
+        "fee_plan": {
+            "name": "Kommunal vattenavgift",
+            "lines": [
+                ("fixed", "Grundavgift {period}", "120.00", None),
+                ("usage", "Vatten {period}", "1.50", "Vattenmätare"),
+            ],
+        },
     },
 }
 
@@ -66,4 +75,31 @@ class Command(BaseCommand):
                         "cumulative": cumulative,
                     },
                 )
+        if config.get("fee_plan") and apps.is_installed("apps.invoicing"):
+            self._fee_plan(config["fee_plan"], unit_type)
         self.stdout.write(self.style.SUCCESS(f"Loaded the {sample} setup."))
+
+    @staticmethod
+    def _fee_plan(config, unit_type):
+        from decimal import Decimal
+
+        from apps.invoicing.models import BillingSettings, FeeLine, FeePlan
+        from apps.readings.models import ReadingType
+
+        plan, created = FeePlan.objects.get_or_create(
+            name=config["name"], defaults={"unit_type": unit_type}
+        )
+        if not created:
+            return
+        rate = BillingSettings.current().default_vat_rate
+        for order, (kind, description, price, reading_type) in enumerate(config["lines"]):
+            FeeLine.objects.create(
+                plan=plan,
+                kind=kind,
+                description=description,
+                unit_price=Decimal(price),
+                unit_label="" if reading_type else "st",
+                vat_rate=rate,
+                reading_type=ReadingType.objects.get(name=reading_type) if reading_type else None,
+                order=order,
+            )

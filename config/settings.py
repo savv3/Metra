@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "apps.readings",
     "apps.selfservice",
     "apps.messaging",
+    "apps.invoicing",
     "apps.plugins",
 ]
 

@@ -32,6 +32,7 @@
         {% if perms.register.view_unit %}<a href="{% url 'register:unit_list' %}">{% translate "Units" %}</a>{% endif %}
         {% if perms.register.view_person %}<a href="{% url 'register:person_list' %}">{% translate "People" %}</a>{% endif %}
         {% if perms.readings.view_readinground %}<a href="{% url 'readings:round_list' %}">{% translate "Readings" %}</a>{% endif %}
+        {% if perms.invoicing.view_invoice %}<a href="{% url 'invoicing:invoice_list' %}">{% translate "Invoices" %}</a>{% endif %}
         {% if perms.messaging.view_messagebatch %}<a href="{% url 'messaging:batch_list' %}">{% translate "Send-outs" %}</a>{% endif %}
         {% plugin_navigation %}
         {% if user.is_staff %}<a href="{% url 'admin:index' %}">{% translate "Settings" %}</a>{% endif %}
