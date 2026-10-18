@@ -71,13 +71,16 @@ migration, with `api.grant_to_roles`:
 ```python
 from apps.plugins import api
 
+
 class Migration(migrations.Migration):
     dependencies = [("my_plugin", "0001_initial"), ("accounts", "0001_roles")]
     operations = [
-        api.grant_to_roles({
-            "Admin": ["my_plugin.view_thing", "my_plugin.change_thing"],
-            "Board": ["my_plugin.view_thing"],
-        }),
+        api.grant_to_roles(
+            {
+                "Admin": ["my_plugin.view_thing", "my_plugin.change_thing"],
+                "Board": ["my_plugin.view_thing"],
+            }
+        ),
     ]
 ```
 
@@ -126,9 +129,9 @@ database, so a receiver never sees a change that was rolled back:
 from django.dispatch import receiver
 from apps.plugins import api
 
+
 @receiver(api.events.invoice_issued)
-def on_invoice_issued(sender, invoice, **kwargs):
-    ...
+def on_invoice_issued(sender, invoice, **kwargs): ...
 ```
 
 Receivers run in the request or worker that made the change, so anything
