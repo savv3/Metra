@@ -7,4 +7,6 @@ class PluginsConfig(AppConfig):
     verbose_name = _("Plugins")
 
     def ready(self):
-        from . import checks  # noqa: F401
+        from . import checks, events  # noqa: F401
+
+        events.connect()

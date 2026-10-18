@@ -24,6 +24,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+from apps.plugins import events
 from apps.readings.models import ReadingRound, ReadingType
 from apps.register.models import Organisation, Person, Tag, Unit, UnitType
 
@@ -634,6 +635,7 @@ class Invoice(models.Model):
                 Invoice.objects.filter(pk=self.credits_id).update(status=self.Status.CREDITED)
             else:
                 self.credits.refresh_payment_status()
+        events.send_on_commit(events.invoice_issued, Invoice, invoice=self)
         return self
 
     def make_credit_note(self, user=None):

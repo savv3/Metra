@@ -1,5 +1,5 @@
 {% extends "admin/index.html" %}
-{% load i18n %}
+{% load i18n plugins %}
 {% block content %}
   {% if perms.setup.run_setup %}
     <div class="module" id="setup-wizard">
@@ -9,6 +9,20 @@
           <th scope="row">{% translate "Organisation, language, logo, units and fields, email and SMS, invoices and the board, step by step." %}</th>
           <td><a href="{% url 'setup:start' %}" class="addlink">{% translate "Run the setup wizard" %}</a></td>
         </tr>
+      </table>
+    </div>
+  {% endif %}
+  {% plugin_settings_links as plugin_links %}
+  {% if plugin_links %}
+    <div class="module" id="plugin-settings">
+      <table>
+        <caption>{% translate "Plugins" %}</caption>
+        {% for url, label, description in plugin_links %}
+          <tr>
+            <th scope="row"><a href="{{ url }}">{{ label }}</a></th>
+            <td>{{ description }}</td>
+          </tr>
+        {% endfor %}
       </table>
     </div>
   {% endif %}

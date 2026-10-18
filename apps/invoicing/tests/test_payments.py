@@ -240,3 +240,29 @@ def test_payments_export_with_dates_and_fees(treasurer_client, invoices):
     assert form.templates[0].name == "invoicing/export_payments.html"
     assert [row[1] for row in rows[1:]] == ["Payment", "Reminder fee"]
     assert rows[1][4] == "50,00"
+
+
+def test_plugins_hear_about_issued_invoices_and_payments(
+    invoices, django_capture_on_commit_callbacks
+):
+    from metra_example_plugin.apps import issued
+
+    from apps.plugins import api
+
+    payments = []
+
+    def on_payment(sender, payment, **kwargs):
+        payments.append(payment)
+
+    api.events.payment_recorded.connect(on_payment)
+    invoice = invoices["Bystigen 4"]
+    try:
+        with django_capture_on_commit_callbacks(execute=True):
+            payment = record_payment(invoice, D("10"), TODAY)
+            note = invoice.make_credit_note()
+            note.issue()
+    finally:
+        api.events.payment_recorded.disconnect(on_payment)
+
+    assert payments == [payment]
+    assert issued[-1] == note.number

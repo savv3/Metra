@@ -27,3 +27,20 @@ class ExamplePluginConfig(AppConfig):
             )
         )
         api.add_messaging_provider(LogSMS)
+        api.add_settings_link(
+            api.SettingsLink(
+                "Example plugin",
+                "metra_example_plugin:index",
+                "register.view_unit",
+                "What the example plugin adds.",
+            )
+        )
+        api.events.invoice_issued.connect(log_issued_invoice, dispatch_uid="example-plugin")
+
+
+# Invoice numbers the example plugin has seen being issued, for the tests.
+issued = []
+
+
+def log_issued_invoice(sender, invoice, **kwargs):
+    issued.append(invoice.number)

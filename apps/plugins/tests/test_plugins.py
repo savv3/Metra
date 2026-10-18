@@ -9,7 +9,7 @@ from django.urls import reverse
 from apps.messaging.registry import provider_for, registry
 from apps.plugins import api
 from apps.plugins.hooks import UNIT_PANELS, hooks
-from config.plugins import GROUP, app_for, available, enabled_apps
+from config.plugins import GROUP, app_for, available, enabled_apps, enabled_names
 
 
 def entry_point(name, value):
@@ -103,3 +103,88 @@ def test_plugins_must_declare_personal_data(monkeypatch, settings):
     monkeypatch.delattr(type(config), "personal_data")
 
     assert [w.id for w in run_checks()].count("plugins.W001") == 1
+
+
+def test_bundled_plugins_are_on_unless_disabled():
+    found = {"sms": entry_point("sms", "pkg_sms"), "extra": entry_point("extra", "pkg_x")}
+
+    assert enabled_names([], found=found, bundled=("sms",)) == ["sms"]
+    assert enabled_names(["extra", "sms"], found=found, bundled=("sms",)) == ["sms", "extra"]
+    assert enabled_names([], disabled=["sms"], found=found, bundled=("sms",)) == []
+    # A bundled plugin that is not installed is skipped, not an error.
+    assert enabled_names([], found={}, bundled=("sms",)) == []
+
+
+def test_events_are_sent_after_commit(django_capture_on_commit_callbacks, household):
+    from apps.register.models import Person, Unit
+
+    seen = []
+
+    def receiver(sender, **kwargs):
+        seen.append(kwargs)
+
+    api.events.unit_saved.connect(receiver)
+    api.events.person_saved.connect(receiver)
+    try:
+        with django_capture_on_commit_callbacks(execute=False) as callbacks:
+            unit = Unit.objects.create(unit_type=household, name="Byvägen 4")
+            assert seen == []  # nothing before the commit
+        for callback in callbacks:
+            callback()
+        with django_capture_on_commit_callbacks(execute=True):
+            person = Person.objects.create(first_name="Anna")
+            person.first_name = "Anne"
+            person.save()
+    finally:
+        api.events.unit_saved.disconnect(receiver)
+        api.events.person_saved.disconnect(receiver)
+
+    assert seen == [
+        {"unit": unit, "created": True, "signal": api.events.unit_saved},
+        {"person": person, "created": True, "signal": api.events.person_saved},
+        {"person": person, "created": False, "signal": api.events.person_saved},
+    ]
+
+
+def test_a_failing_receiver_does_not_break_the_change(
+    db, django_capture_on_commit_callbacks, caplog
+):
+    from apps.register.models import Person
+
+    def broken(sender, **kwargs):
+        raise RuntimeError("plugin bug")
+
+    api.events.person_saved.connect(broken)
+    try:
+        with django_capture_on_commit_callbacks(execute=True):
+            Person.objects.create(first_name="Anna")
+    finally:
+        api.events.person_saved.disconnect(broken)
+
+    assert Person.objects.count() == 1
+    assert "Plugin event receiver" in caplog.text
+
+
+def test_settings_page_lists_plugin_links(client, make_user, settings):
+    settings.REQUIRE_MFA = False
+    client.force_login(make_user("root", "Admin", is_staff=True))
+
+    page = client.get(reverse("admin:index")).content.decode()
+
+    assert 'href="/plugins/example/">Example plugin</a>' in page
+    assert "What the example plugin adds." in page
+
+
+def test_grant_to_roles_gives_and_takes_permissions(db):
+    from django.apps import apps as global_apps
+    from django.contrib.auth.models import Group, Permission
+
+    operation = api.grant_to_roles({"Read-only": ["register.change_unit"], "Nobody": ["x.y"]})
+    change_unit = Permission.objects.get(codename="change_unit")
+    readonly = Group.objects.get(name="Read-only")
+
+    operation.code(global_apps, None)
+    assert change_unit in readonly.permissions.all()
+
+    operation.reverse_code(global_apps, None)
+    assert change_unit not in readonly.permissions.all()

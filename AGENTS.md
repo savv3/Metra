@@ -76,7 +76,10 @@ docker compose up --build                       # full stack, needs a .env (see 
 ## Conventions
 
 - **Layout:** project settings in `config/`, Django apps in `apps/<name>/`,
-  shared templates in `templates/`, translations in `locale/`.
+  shared templates in `templates/`, translations in `locale/`. Integrations
+  and providers for outside services (SMS gateways, the REST API, webhooks)
+  are plugins in `plugins/<name>/` that use only `apps.plugins.api`, so they
+  can move to their own repository later; see `docs/plugins.md`.
 - **Configuration:** every per-installation value is an environment variable
   prefixed `METRA_` and documented in `.env.example`. No secrets in the repo.
 - **Data:** everything persistent lives under `METRA_DATA_DIR` (databases,

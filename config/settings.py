@@ -12,7 +12,7 @@ from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import gettext_lazy as _
 
-from config.plugins import enabled_apps
+from config.plugins import enabled_apps, enabled_names
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -83,7 +83,7 @@ INSTALLED_APPS = [
 # Plugins: installed packages that are Django apps, enabled by name (see
 # docs/plugins.md). They come last, so they can override templates only by
 # their own names and never replace the app's.
-PLUGINS = env_list("METRA_PLUGINS")
+PLUGINS = enabled_names(env_list("METRA_PLUGINS"), env_list("METRA_PLUGINS_DISABLED"))
 PLUGIN_APPS = enabled_apps(PLUGINS)
 INSTALLED_APPS += list(PLUGIN_APPS.values())
 

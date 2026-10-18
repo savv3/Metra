@@ -9,8 +9,9 @@ from collections import defaultdict
 NAVIGATION = "navigation"
 UNIT_PANELS = "unit_panels"
 PERSON_PANELS = "person_panels"
+SETTINGS_LINKS = "settings_links"
 
-KNOWN = {NAVIGATION, UNIT_PANELS, PERSON_PANELS}
+KNOWN = {NAVIGATION, UNIT_PANELS, PERSON_PANELS, SETTINGS_LINKS}
 
 
 class HookRegistry:

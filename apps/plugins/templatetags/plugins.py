@@ -7,7 +7,7 @@ from django.urls import NoReverseMatch, reverse
 from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 
-from ..hooks import NAVIGATION, PERSON_PANELS, UNIT_PANELS, hooks
+from ..hooks import NAVIGATION, PERSON_PANELS, SETTINGS_LINKS, UNIT_PANELS, hooks
 
 register = template.Library()
 logger = logging.getLogger(__name__)
@@ -60,3 +60,18 @@ def plugin_panels(context, kind, obj):
                 raise
             logger.exception("Plugin panel %s failed", panel.template)
     return mark_safe("\n".join(html))
+
+
+@register.simple_tag(takes_context=True)
+def plugin_settings_links(context):
+    """(url, label, description) for the plugins' links on the Settings page."""
+    user = context["request"].user
+    links = []
+    for link in hooks.get(SETTINGS_LINKS):
+        if not _allowed(user, link.permission):
+            continue
+        try:
+            links.append((reverse(link.url_name), link.label, link.description))
+        except NoReverseMatch:
+            logger.exception("Plugin settings link %r has no URL", link.label)
+    return links
