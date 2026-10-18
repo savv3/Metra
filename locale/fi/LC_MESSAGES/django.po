@@ -1,0 +1,4033 @@
+# Finnish translation of Metra.
+#
+# MACHINE TRANSLATED: this file was generated automatically and has not been
+# reviewed by a Finnish speaker. Pages in Finnish show a notice saying so
+# (MACHINE_TRANSLATED_LANGUAGES in config/settings.py). Corrections welcome.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-18 19:30+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps/accounts/admin.py:13 apps/register/models.py:349
+msgid "role"
+msgstr "rooli"
+
+#: apps/accounts/admin.py:28 apps/invoicing/models.py:142
+#: apps/readings/models.py:23 apps/register/models.py:57
+#: apps/register/models.py:115 apps/register/models.py:129
+#: apps/register/models.py:306
+msgid "name"
+msgstr "nimi"
+
+#: apps/accounts/apps.py:7
+msgid "Access"
+msgstr "Käyttöoikeudet"
+
+#: apps/accounts/middleware.py:28
+msgid "Set up two-factor login with an authenticator app before you continue."
+msgstr "Ota kaksivaiheinen tunnistautuminen käyttöön todennussovelluksella ennen kuin jatkat."
+
+#: apps/accounts/roles.py:12
+msgctxt "role"
+msgid "Admin"
+msgstr "Ylläpitäjä"
+
+#: apps/accounts/roles.py:13
+msgctxt "role"
+msgid "Board"
+msgstr "Hallitus"
+
+#: apps/accounts/roles.py:14
+msgctxt "role"
+msgid "Treasurer"
+msgstr "Rahastonhoitaja"
+
+#: apps/accounts/roles.py:15
+msgctxt "role"
+msgid "Read-only"
+msgstr "Vain luku"
+
+#: apps/accounts/templates/accounts/profile.html:3
+#: apps/accounts/templates/accounts/profile.html:7
+#: templates/allauth/layouts/base.html:9 templates/base.html:39
+msgid "My account"
+msgstr "Oma tili"
+
+#: apps/accounts/templates/accounts/profile.html:11
+#: apps/readings/templates/readings/_round_row.html:21
+#: apps/register/templates/register/person_form.html:28
+#: apps/register/templates/register/unit_form.html:19
+msgid "Details"
+msgstr "Tiedot"
+
+#: apps/accounts/templates/accounts/profile.html:13
+msgid "Username"
+msgstr "Käyttäjätunnus"
+
+#: apps/accounts/templates/accounts/profile.html:15 apps/register/csv_io.py:465
+#: apps/register/templates/register/_person_results.html:7
+#: apps/register/templates/register/_unit_results.html:7
+#: apps/register/templates/register/import_preview.html:36
+msgid "Name"
+msgstr "Nimi"
+
+#: apps/accounts/templates/accounts/profile.html:16
+#: apps/core/templates/core/_contact.html:14 apps/invoicing/models.py:726
+#: apps/messaging/models.py:25
+#: apps/messaging/templates/messaging/compose.html:20
+#: apps/register/csv_io.py:520 apps/register/models.py:265
+#: apps/register/templates/register/_person_results.html:8
+#: apps/register/templates/register/person_detail.html:19
+#: apps/register/templates/register/unit_detail.html:39
+msgid "Email"
+msgstr "Sähköposti"
+
+#: apps/accounts/templates/accounts/profile.html:18
+msgid "Roles"
+msgstr "Roolit"
+
+#: apps/accounts/templates/accounts/profile.html:24
+msgid "Login and security"
+msgstr "Kirjautuminen ja tietoturva"
+
+#: apps/accounts/templates/accounts/profile.html:27
+msgid "Two-factor login"
+msgstr "Kaksivaiheinen tunnistautuminen"
+
+#: apps/accounts/templates/accounts/profile.html:28
+msgid "On"
+msgstr "Käytössä"
+
+#: apps/accounts/templates/accounts/profile.html:28
+msgid "Off"
+msgstr "Pois käytöstä"
+
+#: apps/accounts/templates/accounts/profile.html:32
+msgid "You log in with your password and a code from your authenticator app."
+msgstr "Kirjaudut sisään salasanalla ja todennussovelluksen koodilla."
+
+#: apps/accounts/templates/accounts/profile.html:34
+msgid ""
+"Required for your account. Set it up with an authenticator app on your phone."
+msgstr "Pakollinen tilillesi. Ota se käyttöön puhelimen todennussovelluksella."
+
+#: apps/accounts/templates/accounts/profile.html:36
+msgid ""
+"Protect your account with a code from an authenticator app on your phone."
+msgstr "Suojaa tilisi puhelimen todennussovelluksen koodilla."
+
+#: apps/accounts/templates/accounts/profile.html:42
+msgid "Turn off"
+msgstr "Poista käytöstä"
+
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:70
+msgid "Turn on two-factor login"
+msgstr "Ota kaksivaiheinen tunnistautuminen käyttöön"
+
+#: apps/accounts/templates/accounts/profile.html:51
+msgid "Recovery codes"
+msgstr "Palautuskoodit"
+
+#: apps/accounts/templates/accounts/profile.html:54
+msgid "One-time codes for when you do not have your phone."
+msgstr "Kertakäyttökoodit sitä varten, ettei puhelin ole mukana."
+
+#: apps/accounts/templates/accounts/profile.html:56
+#, python-format
+msgid "%(count)s unused code left. Use one when you do not have your phone."
+msgid_plural ""
+"%(count)s unused codes left. Use one when you do not have your phone."
+msgstr[0] "%(count)s käyttämätön koodi jäljellä. Käytä yhtä, kun puhelin ei ole mukana."
+msgstr[1] "%(count)s käyttämätöntä koodia jäljellä. Käytä yhtä, kun puhelin ei ole mukana."
+
+#: apps/accounts/templates/accounts/profile.html:66
+msgid "Create codes"
+msgstr "Luo koodit"
+
+#: apps/accounts/templates/accounts/profile.html:68
+msgid "Show codes"
+msgstr "Näytä koodit"
+
+#: apps/accounts/templates/accounts/profile.html:75
+msgid "Password"
+msgstr "Salasana"
+
+#: apps/accounts/templates/accounts/profile.html:76
+msgid "Use a long password that you do not use anywhere else."
+msgstr "Käytä pitkää salasanaa, jota et käytä missään muualla."
+
+#: apps/accounts/templates/accounts/profile.html:79
+msgid "Change password"
+msgstr "Vaihda salasana"
+
+#: apps/backups/apps.py:7 apps/backups/templates/backups/_status.html:4
+msgid "Backups"
+msgstr "Varmuuskopiot"
+
+#: apps/backups/models.py:10
+msgid "Nightly schedule"
+msgstr "Yöajo"
+
+#: apps/backups/models.py:11
+msgid "Command"
+msgstr "Komento"
+
+#: apps/backups/models.py:13
+msgid "started"
+msgstr "alkoi"
+
+#: apps/backups/models.py:14 apps/messaging/models.py:81
+msgid "finished"
+msgstr "päättyi"
+
+#: apps/backups/models.py:16
+msgid "started by"
+msgstr "aloittaja"
+
+#: apps/backups/models.py:18
+msgid "succeeded"
+msgstr "onnistui"
+
+#: apps/backups/models.py:19
+msgid "archive"
+msgstr "arkisto"
+
+#: apps/backups/models.py:20
+msgid "size in bytes"
+msgstr "koko tavuina"
+
+#: apps/backups/models.py:22
+msgid "target"
+msgstr "kohde"
+
+#: apps/backups/models.py:23 apps/messaging/models.py:166
+msgid "error"
+msgstr "virhe"
+
+#: apps/backups/models.py:27
+msgid "backup"
+msgstr "varmuuskopio"
+
+#: apps/backups/models.py:28
+msgid "backups"
+msgstr "varmuuskopiot"
+
+#: apps/backups/templates/backups/_status.html:6
+#, python-format
+msgid "Last successful backup %(when)s (%(size)s) to %(target)s."
+msgstr "Viimeisin onnistunut varmuuskopio %(when)s (%(size)s) kohteeseen %(target)s."
+
+#: apps/backups/templates/backups/_status.html:10
+msgid "No backup has been made yet."
+msgstr "Varmuuskopiota ei ole vielä tehty."
+
+#: apps/backups/templates/backups/_status.html:13
+#, python-format
+msgid "The last backup failed %(when)s:"
+msgstr "Viimeisin varmuuskopiointi epäonnistui %(when)s:"
+
+#: apps/backups/templates/backups/_status.html:17
+msgid "The last successful backup is more than a day and a half old."
+msgstr "Viimeisin onnistunut varmuuskopio on yli puolitoista vuorokautta vanha."
+
+#: apps/core/apps.py:7
+msgid "General"
+msgstr "Yleinen"
+
+#: apps/core/models.py:20
+msgid "Information"
+msgstr "Tiedote"
+
+#: apps/core/models.py:21 apps/core/templates/core/_notices.html:4
+#: apps/messaging/templates/messaging/batch_detail.html:5
+#: apps/messaging/templates/messaging/compose.html:6
+msgid "Urgent"
+msgstr "Kiireellinen"
+
+#: apps/core/models.py:23 apps/messaging/models.py:85
+#: apps/messaging/models.py:160 apps/messaging/models.py:223
+msgid "text"
+msgstr "teksti"
+
+#: apps/core/models.py:24
+msgid "level"
+msgstr "taso"
+
+#: apps/core/models.py:25
+msgid "shown from"
+msgstr "näkyvissä alkaen"
+
+#: apps/core/models.py:27
+msgid "shown until"
+msgstr "näkyvissä asti"
+
+#: apps/core/models.py:27
+msgid "Empty: until it is removed."
+msgstr "Tyhjä: kunnes poistetaan."
+
+#: apps/core/models.py:31 apps/invoicing/models.py:297
+#: apps/selfservice/models.py:79
+msgid "created by"
+msgstr "luonut"
+
+#: apps/core/models.py:37 apps/invoicing/models.py:303
+#: apps/invoicing/models.py:401 apps/invoicing/models.py:741
+#: apps/messaging/models.py:80 apps/messaging/models.py:167
+#: apps/readings/models.py:78 apps/register/models.py:227
+#: apps/selfservice/models.py:76
+msgid "created"
+msgstr "luotu"
+
+#: apps/core/models.py:43 apps/messaging/models.py:92
+msgid "notice"
+msgstr "tiedote"
+
+#: apps/core/models.py:44
+msgid "notices"
+msgstr "tiedotteet"
+
+#: apps/core/templates/core/_contact.html:8
+msgid "Emergencies"
+msgstr "Hätätilanteet"
+
+#: apps/core/templates/core/_contact.html:13 apps/register/csv_io.py:521
+#: apps/register/templates/register/_person_results.html:9
+#: apps/register/templates/register/person_detail.html:21
+#: apps/register/templates/register/unit_detail.html:40
+msgid "Phone"
+msgstr "Puhelin"
+
+#: apps/core/templates/core/_contact.html:16 apps/readings/views.py:146
+#: apps/register/templates/register/_person_results.html:10
+#: apps/register/templates/register/_unit_results.html:9
+#: apps/register/templates/register/person_detail.html:23
+#: apps/register/templates/register/unit_detail.html:20
+msgid "Address"
+msgstr "Osoite"
+
+#: apps/core/templates/core/_contact.html:19
+msgid "Opening hours"
+msgstr "Aukioloajat"
+
+#: apps/core/templates/core/_contact.html:20
+msgid "Website"
+msgstr "Verkkosivusto"
+
+#: apps/core/templates/core/_notices.html:4
+msgid "Notice"
+msgstr "Tiedote"
+
+#: apps/core/templates/core/home.html:4
+msgid "Welcome"
+msgstr "Tervetuloa"
+
+#: apps/core/templates/core/home.html:5
+msgid "Keep track of your members and clients in one place."
+msgstr "Pidä jäsenet ja asiakkaat järjestyksessä yhdessä paikassa."
+
+#: apps/core/templates/core/home.html:7 templates/account/login.html:3
+#: templates/account/login.html:6 templates/account/login.html:19
+msgid "Log in"
+msgstr "Kirjaudu sisään"
+
+#: apps/core/templates/core/public.html:14
+msgid "Contact us"
+msgstr "Ota yhteyttä"
+
+#: apps/core/templates/core/public.html:18
+msgid ""
+"Members report readings and update their details through the personal link "
+"they get by SMS, email or letter."
+msgstr "Jäsenet ilmoittavat lukemat ja päivittävät tietonsa henkilökohtaisella linkillä, jonka he saavat tekstiviestillä, sähköpostilla tai kirjeellä."
+
+#: apps/core/templates/core/public.html:19
+msgid "Staff login"
+msgstr "Henkilökunnan kirjautuminen"
+
+#: apps/invoicing/admin.py:13 apps/invoicing/models.py:387
+#: apps/invoicing/templates/invoicing/invoice_detail.html:107
+#: apps/invoicing/templates/invoicing/invoice_detail.html:109
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:112
+#: apps/invoicing/views.py:439
+msgid "VAT"
+msgstr "ALV"
+
+#: apps/invoicing/admin.py:14
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:134
+#: apps/invoicing/views.py:502
+msgid "Payment"
+msgstr "Maksu"
+
+#: apps/invoicing/admin.py:15
+msgid "Numbering"
+msgstr "Numerointi"
+
+#: apps/invoicing/admin.py:16
+msgid "Invoice text"
+msgstr "Laskun teksti"
+
+#: apps/invoicing/admin.py:39 apps/invoicing/models.py:275
+msgid "price tiers"
+msgstr "hintaportaat"
+
+#: apps/invoicing/admin.py:46
+#, python-format
+msgid "Edit tiers (%(count)s)"
+msgstr "Muokkaa portaita (%(count)s)"
+
+#: apps/invoicing/apps.py:7
+msgid "Invoicing"
+msgstr "Laskutus"
+
+#: apps/invoicing/delivery.py:59
+msgid "credit-note"
+msgstr "hyvityslasku"
+
+#: apps/invoicing/delivery.py:59 apps/invoicing/models.py:407
+#: apps/invoicing/models.py:669 apps/invoicing/models.py:730
+#: apps/invoicing/models.py:770 apps/invoicing/models.py:810
+msgid "invoice"
+msgstr "lasku"
+
+#: apps/invoicing/delivery.py:112
+msgid "This email provider cannot attach the invoice PDF."
+msgstr "Tämä sähköpostipalvelu ei voi liittää laskun PDF-tiedostoa viestiin."
+
+#: apps/invoicing/forms.py:31
+msgid "Choose at most one round per reading type."
+msgstr "Valitse enintään yksi kierros lukematyyppiä kohden."
+
+#: apps/invoicing/forms.py:71
+msgid "Amount (€)"
+msgstr "Summa (€)"
+
+#: apps/invoicing/forms.py:74
+msgid "Paid on"
+msgstr "Maksupäivä"
+
+#: apps/invoicing/forms.py:76
+msgid "Reference given"
+msgstr "Annettu viite"
+
+#: apps/invoicing/forms.py:77 apps/invoicing/views.py:496
+#: apps/readings/views.py:155
+msgid "Note"
+msgstr "Huomautus"
+
+#: apps/invoicing/forms.py:82 apps/invoicing/models.py:801
+msgid "Enter an amount other than zero."
+msgstr "Anna summa, joka ei ole nolla."
+
+#: apps/invoicing/forms.py:88
+msgid "From"
+msgstr "Alkaen"
+
+#: apps/invoicing/forms.py:91
+#: apps/messaging/templates/messaging/batch_detail.html:8
+#: apps/messaging/templates/messaging/compose.html:17
+msgid "To"
+msgstr "Asti"
+
+#: apps/invoicing/models.py:44 apps/invoicing/models.py:383
+msgid "VAT registered"
+msgstr "ALV-velvollinen"
+
+#: apps/invoicing/models.py:47
+msgid ""
+"Untick if the organisation is not VAT registered (for example under the "
+"small-business limit): invoices then show no VAT and carry the text below."
+msgstr "Poista valinta, jos organisaatio ei ole ALV-velvollinen (esimerkiksi alle vähäisen toiminnan rajan): laskuissa ei silloin näy ALV:tä, ja niissä on alla oleva teksti."
+
+#: apps/invoicing/models.py:52
+msgid "text when not VAT registered"
+msgstr "teksti, kun ei ALV-velvollinen"
+
+#: apps/invoicing/models.py:57
+msgid "default VAT rate (%)"
+msgstr "oletus-ALV-prosentti (%)"
+
+#: apps/invoicing/models.py:63
+msgid "IBAN"
+msgstr "IBAN"
+
+#: apps/invoicing/models.py:64
+msgid "BIC"
+msgstr "BIC"
+
+#: apps/invoicing/models.py:65
+msgid "payment terms (days)"
+msgstr "maksuehto (päivää)"
+
+#: apps/invoicing/models.py:67
+msgid "invoice number prefix"
+msgstr "laskunumeron etuliite"
+
+#: apps/invoicing/models.py:70
+msgid "Optional, for example 2026-. Shown before the number."
+msgstr "Valinnainen, esimerkiksi 2026-. Näytetään numeron edessä."
+
+#: apps/invoicing/models.py:73
+msgid "next invoice number"
+msgstr "seuraava laskunumero"
+
+#: apps/invoicing/models.py:76
+msgid "The number the next issued invoice gets. Numbers never skip."
+msgstr "Numero, jonka seuraava lähetettävä lasku saa. Numeroita ei ohiteta."
+
+#: apps/invoicing/models.py:80
+msgid "Finnish reference number (viitenumero)"
+msgstr "Suomalainen viitenumero"
+
+#: apps/invoicing/models.py:81
+msgid "International RF creditor reference"
+msgstr "Kansainvälinen RF-viite"
+
+#: apps/invoicing/models.py:84 apps/invoicing/models.py:378
+msgid "payment reference"
+msgstr "maksuviite"
+
+#: apps/invoicing/models.py:90
+msgid "late payment interest"
+msgstr "viivästyskorko"
+
+#: apps/invoicing/models.py:94
+msgid "invoice footer"
+msgstr "laskun alatunniste"
+
+#: apps/invoicing/models.py:96 apps/invoicing/models.py:812
+msgid "reminder fee"
+msgstr "muistutusmaksu"
+
+#: apps/invoicing/models.py:102
+msgid ""
+"Added to each payment reminder; 0 for none. For consumers the Finnish Debt "
+"Collection Act allows at most 5 € per reminder."
+msgstr "Lisätään jokaiseen maksumuistutukseen; 0, jos ei veloiteta. Kuluttajilta perintälaki sallii enintään 5 € muistutukselta."
+
+#: apps/invoicing/models.py:107
+msgid "days to pay after a reminder"
+msgstr "maksuaika muistutuksen jälkeen (päivää)"
+
+#: apps/invoicing/models.py:109
+msgid "A reminder gives at least 14 days before any further steps."
+msgstr "Muistutus antaa vähintään 14 päivää aikaa ennen jatkotoimia."
+
+#: apps/invoicing/models.py:113 apps/invoicing/models.py:114
+msgid "invoice settings"
+msgstr "laskutusasetukset"
+
+#: apps/invoicing/models.py:117
+msgid "Invoice settings"
+msgstr "Laskutusasetukset"
+
+#: apps/invoicing/models.py:124
+#, python-format
+msgid "Number %(number)s is already used; numbers cannot repeat."
+msgstr "Numero %(number)s on jo käytössä; numerot eivät voi toistua."
+
+#: apps/invoicing/models.py:144 apps/readings/models.py:26
+#: apps/register/models.py:135 apps/register/models.py:159
+msgid "unit type"
+msgstr "yksikkötyyppi"
+
+#: apps/invoicing/models.py:148
+msgid "only units with tag"
+msgstr "vain yksiköt, joilla on tunniste"
+
+#: apps/invoicing/models.py:154
+msgid "in use"
+msgstr "käytössä"
+
+#: apps/invoicing/models.py:155 apps/invoicing/models.py:671
+#: apps/readings/models.py:45 apps/register/models.py:130
+msgid "description"
+msgstr "kuvaus"
+
+#: apps/invoicing/models.py:159 apps/invoicing/models.py:179
+msgid "fee plan"
+msgstr "maksusuunnitelma"
+
+#: apps/invoicing/models.py:160 apps/invoicing/models.py:287
+msgid "fee plans"
+msgstr "maksusuunnitelmat"
+
+#: apps/invoicing/models.py:175
+msgid "Fixed fee"
+msgstr "Kiinteä maksu"
+
+#: apps/invoicing/models.py:176
+#: apps/readings/templates/readings/_round_results.html:10
+#: apps/readings/templates/readings/_unit_readings.html:10
+#: apps/readings/templates/readings/reading_form.html:11
+#: apps/readings/views.py:150
+msgid "Usage"
+msgstr "Kulutus"
+
+#: apps/invoicing/models.py:181 apps/invoicing/models.py:348
+#: apps/messaging/models.py:59
+msgid "kind"
+msgstr "laji"
+
+#: apps/invoicing/models.py:183 apps/invoicing/models.py:400
+msgid "text on the invoice"
+msgstr "laskulla näkyvä teksti"
+
+#: apps/invoicing/models.py:185
+#, python-brace-format
+msgid "{period} becomes the period, for example Grundavgift {period}."
+msgstr "{period} korvataan jaksolla, esimerkiksi Grundavgift {period}."
+
+#: apps/invoicing/models.py:188 apps/invoicing/models.py:270
+msgid "price"
+msgstr "hinta"
+
+#: apps/invoicing/models.py:191
+msgid "Without VAT. For usage: the price per unit, for example per m³."
+msgstr "Ilman ALV:tä. Kulutukselle: yksikköhinta, esimerkiksi per m³."
+
+#: apps/invoicing/models.py:194 apps/invoicing/models.py:672
+msgid "quantity"
+msgstr "määrä"
+
+#: apps/invoicing/models.py:198
+msgid "Fixed fees only."
+msgstr "Vain kiinteille maksuille."
+
+#: apps/invoicing/models.py:201 apps/invoicing/models.py:361
+#: apps/invoicing/models.py:673 apps/messaging/models.py:151
+#: apps/readings/models.py:137 apps/register/models.py:321
+#: apps/register/models.py:344 apps/selfservice/models.py:58
+msgid "unit"
+msgstr "yksikkö"
+
+#: apps/invoicing/models.py:201
+msgid "For example pcs."
+msgstr "Esimerkiksi kpl."
+
+#: apps/invoicing/models.py:204 apps/invoicing/models.py:676
+msgid "VAT rate (%)"
+msgstr "ALV-prosentti (%)"
+
+#: apps/invoicing/models.py:212 apps/readings/models.py:49
+#: apps/readings/models.py:66
+msgid "reading type"
+msgstr "lukematyyppi"
+
+#: apps/invoicing/models.py:217
+msgid "Usage only: the reading the usage comes from."
+msgstr "Vain kulutus: lukema, josta kulutus lasketaan."
+
+#: apps/invoicing/models.py:220
+msgid "only when field"
+msgstr "vain kun kenttä"
+
+#: apps/invoicing/models.py:223
+msgid "Optional: a unit custom field key, for example connection."
+msgstr "Valinnainen: yksikön oman kentän avain, esimerkiksi connection."
+
+#: apps/invoicing/models.py:226
+msgid "has the value"
+msgstr "on arvo"
+
+#: apps/invoicing/models.py:226
+msgid "For example Sommar."
+msgstr "Esimerkiksi Sommar."
+
+#: apps/invoicing/models.py:228 apps/invoicing/models.py:690
+#: apps/register/models.py:131 apps/register/models.py:179
+msgid "order"
+msgstr "järjestys"
+
+#: apps/invoicing/models.py:232 apps/invoicing/models.py:260
+#: apps/invoicing/models.py:684
+msgid "fee line"
+msgstr "maksurivi"
+
+#: apps/invoicing/models.py:233
+msgid "fee lines"
+msgstr "maksurivit"
+
+#: apps/invoicing/models.py:240
+msgid "Choose the reading the usage comes from."
+msgstr "Valitse lukema, josta kulutus lasketaan."
+
+#: apps/invoicing/models.py:242
+msgid "Only usage fees come from a reading."
+msgstr "Vain kulutusmaksut perustuvat lukemaan."
+
+#: apps/invoicing/models.py:245
+msgid "Give both the field and the value, or neither."
+msgstr "Anna sekä kenttä että arvo, tai ei kumpaakaan."
+
+#: apps/invoicing/models.py:263
+msgid "up to"
+msgstr "asti"
+
+#: apps/invoicing/models.py:268
+msgid ""
+"Units of usage this tier covers up to, in total. Empty for the last tier."
+msgstr "Kulutusyksiköiden määrä, johon asti porras ulottuu yhteensä. Jätä tyhjäksi viimeisessä portaassa."
+
+#: apps/invoicing/models.py:274
+msgid "price tier"
+msgstr "hintaporras"
+
+#: apps/invoicing/models.py:285 apps/invoicing/models.py:374
+#: apps/readings/models.py:71
+msgid "period"
+msgstr "jakso"
+
+#: apps/invoicing/models.py:285
+msgid "Shown on the invoices, for example 2026."
+msgstr "Näytetään laskuilla, esimerkiksi 2026."
+
+#: apps/invoicing/models.py:290 apps/readings/models.py:84
+msgid "reading rounds"
+msgstr "lukemakierrokset"
+
+#: apps/invoicing/models.py:293
+msgid "Where usage fees take their readings from."
+msgstr "Mistä kulutusmaksut hakevat lukemansa."
+
+#: apps/invoicing/models.py:307 apps/invoicing/models.py:354
+msgid "invoice run"
+msgstr "laskutuskierros"
+
+#: apps/invoicing/models.py:308
+msgid "invoice runs"
+msgstr "laskutuskierrokset"
+
+#: apps/invoicing/models.py:311
+#, python-format
+msgid "Invoices %(period)s"
+msgstr "Laskut %(period)s"
+
+#: apps/invoicing/models.py:339
+#: apps/invoicing/templates/invoicing/_invoice_results.html:19
+#: apps/readings/models.py:60
+msgid "Draft"
+msgstr "Luonnos"
+
+#: apps/invoicing/models.py:340
+#: apps/invoicing/templates/invoicing/run_list.html:16
+msgid "Issued"
+msgstr "Laadittu"
+
+#: apps/invoicing/models.py:341
+#: apps/invoicing/templates/invoicing/invoice_list.html:24
+#: apps/invoicing/views.py:442
+msgid "Paid"
+msgstr "Maksettu"
+
+#: apps/invoicing/models.py:342
+#: apps/invoicing/templates/invoicing/invoice_list.html:26
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:121
+#: apps/invoicing/views.py:441
+msgid "Credited"
+msgstr "Hyvitetty"
+
+#: apps/invoicing/models.py:345
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:6
+#: apps/invoicing/views.py:493 apps/messaging/models.py:212
+msgid "Invoice"
+msgstr "Lasku"
+
+#: apps/invoicing/models.py:346
+#: apps/invoicing/templates/invoicing/_invoice_results.html:19
+msgid "Credit note"
+msgstr "Hyvityslasku"
+
+#: apps/invoicing/models.py:350 apps/messaging/models.py:70
+#: apps/messaging/models.py:162 apps/readings/models.py:76
+#: apps/register/models.py:308
+msgid "status"
+msgstr "tila"
+
+#: apps/invoicing/models.py:364 apps/messaging/models.py:158
+msgid "recipient"
+msgstr "vastaanottaja"
+
+#: apps/invoicing/models.py:368
+msgid "credits invoice"
+msgstr "hyvittää laskun"
+
+#: apps/invoicing/models.py:376
+msgid "sequence number"
+msgstr "järjestysnumero"
+
+#: apps/invoicing/models.py:377
+msgid "number"
+msgstr "numero"
+
+#: apps/invoicing/models.py:379
+msgid "invoice date"
+msgstr "laskupäivä"
+
+#: apps/invoicing/models.py:380
+msgid "due date"
+msgstr "eräpäivä"
+
+#: apps/invoicing/models.py:381
+msgid "seller"
+msgstr "myyjä"
+
+#: apps/invoicing/models.py:382
+msgid "buyer"
+msgstr "ostaja"
+
+#: apps/invoicing/models.py:385
+msgid "total without VAT"
+msgstr "yhteensä ilman ALV:tä"
+
+#: apps/invoicing/models.py:388
+msgid "total"
+msgstr "yhteensä"
+
+#: apps/invoicing/models.py:391
+msgid "issued by"
+msgstr "laatija"
+
+#: apps/invoicing/models.py:397
+msgid "issued"
+msgstr "laadittu"
+
+#: apps/invoicing/models.py:399
+msgid "to check"
+msgstr "tarkastettava"
+
+#: apps/invoicing/models.py:408
+msgid "invoices"
+msgstr "laskut"
+
+#: apps/invoicing/models.py:409
+msgid "Can issue invoices and credit notes"
+msgstr "Voi laatia laskuja ja hyvityslaskuja"
+
+#: apps/invoicing/models.py:494
+msgid "It is already issued."
+msgstr "Se on jo laadittu."
+
+#: apps/invoicing/models.py:496
+msgid "It has no lines."
+msgstr "Siinä ei ole rivejä."
+
+#: apps/invoicing/models.py:498
+msgid "The recipient has no address."
+msgstr "Vastaanottajalla ei ole osoitetta."
+
+#: apps/invoicing/models.py:504
+msgid ""
+"Fill in the organisation's name, address and business ID under Settings."
+msgstr "Täytä organisaation nimi, osoite ja Y-tunnus kohdassa Asetukset."
+
+#: apps/invoicing/models.py:507
+msgid "A VAT registered organisation needs its VAT number under Settings."
+msgstr "ALV-velvollinen organisaatio tarvitsee ALV-numeronsa kohdassa Asetukset."
+
+#: apps/invoicing/models.py:511
+msgid "A credit note's total must be negative."
+msgstr "Hyvityslaskun loppusumman on oltava negatiivinen."
+
+#: apps/invoicing/models.py:513
+msgid "It credits more than is left of the invoice."
+msgstr "Se hyvittää enemmän kuin laskusta on jäljellä."
+
+#: apps/invoicing/models.py:515
+msgid "An invoice's total cannot be negative; use a credit note."
+msgstr "Laskun loppusumma ei voi olla negatiivinen; käytä hyvityslaskua."
+
+#: apps/invoicing/models.py:643
+msgid "Only issued invoices can be credited."
+msgstr "Vain laadittuja laskuja voi hyvittää."
+
+#: apps/invoicing/models.py:650
+#, python-format
+msgid "Credit note for invoice %(number)s."
+msgstr "Hyvityslasku laskulle %(number)s."
+
+#: apps/invoicing/models.py:674
+msgid "unit price"
+msgstr "yksikköhinta"
+
+#: apps/invoicing/models.py:694
+msgid "invoice line"
+msgstr "laskurivi"
+
+#: apps/invoicing/models.py:695
+msgid "invoice lines"
+msgstr "laskurivit"
+
+#: apps/invoicing/models.py:727 apps/messaging/models.py:26
+msgid "Letter"
+msgstr "Kirje"
+
+#: apps/invoicing/models.py:732 apps/invoicing/models.py:814
+#: apps/messaging/models.py:157 apps/messaging/models.py:217
+msgid "channel"
+msgstr "kanava"
+
+#: apps/invoicing/models.py:735 apps/invoicing/models.py:817
+#: apps/messaging/models.py:173
+msgid "message"
+msgstr "viesti"
+
+#: apps/invoicing/models.py:745
+msgid "invoice delivery"
+msgstr "laskun toimitus"
+
+#: apps/invoicing/models.py:746
+msgid "invoice deliveries"
+msgstr "laskujen toimitukset"
+
+#: apps/invoicing/models.py:773
+msgid "amount"
+msgstr "summa"
+
+#: apps/invoicing/models.py:776
+msgid "Negative to reverse a payment recorded by mistake."
+msgstr "Negatiivinen summa kumoaa virheellisesti kirjatun maksun."
+
+#: apps/invoicing/models.py:778
+msgid "paid on"
+msgstr "maksupäivä"
+
+#: apps/invoicing/models.py:779
+msgid "reference given"
+msgstr "annettu viite"
+
+#: apps/invoicing/models.py:780 apps/messaging/models.py:273
+#: apps/readings/models.py:161
+msgid "note"
+msgstr "huomautus"
+
+#: apps/invoicing/models.py:783 apps/messaging/models.py:266
+msgid "recorded by"
+msgstr "kirjannut"
+
+#: apps/invoicing/models.py:789 apps/messaging/models.py:263
+msgid "recorded"
+msgstr "kirjattu"
+
+#: apps/invoicing/models.py:793
+msgid "payment"
+msgstr "maksu"
+
+#: apps/invoicing/models.py:794
+msgid "payments"
+msgstr "maksut"
+
+#: apps/invoicing/models.py:803
+msgid "Payments are recorded on issued invoices."
+msgstr "Maksut kirjataan laadituille laskuille."
+
+#: apps/invoicing/models.py:813
+msgid "new due date"
+msgstr "uusi eräpäivä"
+
+#: apps/invoicing/models.py:825 apps/messaging/models.py:74
+msgid "sent by"
+msgstr "lähettänyt"
+
+#: apps/invoicing/models.py:831 apps/messaging/models.py:168
+msgid "sent"
+msgstr "lähetetty"
+
+#: apps/invoicing/models.py:835
+msgid "payment reminder"
+msgstr "maksumuistutus"
+
+#: apps/invoicing/models.py:836
+msgid "payment reminders"
+msgstr "maksumuistutukset"
+
+#: apps/invoicing/payments.py:122 apps/messaging/sending.py:39
+msgid "There is no message template for this. Add one under Settings."
+msgstr "Tälle ei ole viestipohjaa. Lisää sellainen kohdassa Asetukset."
+
+#: apps/invoicing/runs.py:62
+#, python-format
+msgid "over %(start)s"
+msgstr "yli %(start)s"
+
+#: apps/invoicing/runs.py:70
+#, python-format
+msgid "No reading round chosen for %(type)s."
+msgstr "Lajille %(type)s ei ole valittu lukemakierrosta."
+
+#: apps/invoicing/runs.py:73
+#, python-format
+msgid "No %(type)s reading in %(round)s."
+msgstr "Ei lajin %(type)s lukemaa kierroksella %(round)s."
+
+#: apps/invoicing/runs.py:80
+#, python-format
+msgid "No earlier %(type)s reading to count usage from."
+msgstr "Ei aiempaa lajin %(type)s lukemaa, josta kulutus voitaisiin laskea."
+
+#: apps/invoicing/runs.py:82
+#, python-format
+msgid "%(type)s is lower than the previous reading."
+msgstr "%(type)s on pienempi kuin edellinen lukema."
+
+#: apps/invoicing/templates/invoicing/_invoice_results.html:3
+#: apps/invoicing/templates/invoicing/invoice_list.html:3
+#: apps/invoicing/templates/invoicing/invoice_list.html:6
+#: apps/invoicing/templates/invoicing/run_detail.html:31
+#: apps/messaging/models.py:39 templates/base.html:24
+msgid "Invoices"
+msgstr "Laskut"
+
+#: apps/invoicing/templates/invoicing/_invoice_results.html:7
+#: apps/invoicing/templates/invoicing/overdue_list.html:16
+#: apps/invoicing/templates/invoicing/run_detail.html:33
+#: apps/invoicing/views.py:431 apps/register/models.py:151
+msgid "Number"
+msgstr "Numero"
+
+#: apps/invoicing/templates/invoicing/_invoice_results.html:8
+#: apps/invoicing/templates/invoicing/invoice_detail.html:49
+#: apps/invoicing/templates/invoicing/invoice_detail.html:65
+#: apps/invoicing/templates/invoicing/overdue_list.html:16
+#: apps/invoicing/templates/invoicing/run_detail.html:33
+#: apps/invoicing/views.py:436
+#: apps/messaging/templates/messaging/batch_detail.html:61
+#: apps/readings/templates/readings/_round_results.html:7
+#: apps/readings/views.py:145 apps/register/models.py:146
+#: apps/selfservice/templates/selfservice/print.html:26
+#: apps/selfservice/templates/selfservice/round_links.html:39
+msgid "Unit"
+msgstr "Yksikkö"
+
+#: apps/invoicing/templates/invoicing/_invoice_results.html:9
+#: apps/invoicing/templates/invoicing/invoice_detail.html:46
+#: apps/invoicing/templates/invoicing/overdue_list.html:16
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:137
+#: apps/invoicing/templates/invoicing/run_detail.html:33
+#: apps/invoicing/views.py:435
+msgid "Recipient"
+msgstr "Vastaanottaja"
+
+#: apps/invoicing/templates/invoicing/_invoice_results.html:10
+#: apps/invoicing/views.py:491 apps/register/models.py:152
+msgid "Date"
+msgstr "Päivämäärä"
+
+#: apps/invoicing/templates/invoicing/_invoice_results.html:11
+#: apps/invoicing/templates/invoicing/overdue_list.html:17
+msgid "Due"
+msgstr "Eräpäivä"
+
+#: apps/invoicing/templates/invoicing/_invoice_results.html:12
+#: apps/invoicing/templates/invoicing/invoice_detail.html:100
+#: apps/invoicing/templates/invoicing/run_detail.html:33
+#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/views.py:440
+msgid "Total"
+msgstr "Yhteensä"
+
+#: apps/invoicing/templates/invoicing/_invoice_results.html:13
+#: apps/invoicing/templates/invoicing/run_detail.html:33
+#: apps/invoicing/views.py:445
+#: apps/messaging/templates/messaging/batch_detail.html:64
+#: apps/messaging/templates/messaging/batch_list.html:25
+#: apps/readings/templates/readings/round_list.html:22
+#: apps/register/csv_io.py:467
+#: apps/register/templates/register/_unit_results.html:10
+#: apps/register/templates/register/unit_list.html:28
+#: apps/selfservice/templates/selfservice/round_links.html:43
+msgid "Status"
+msgstr "Tila"
+
+#: apps/invoicing/templates/invoicing/_invoice_results.html:25
+#: apps/invoicing/templates/invoicing/invoice_detail.html:6
+#: apps/invoicing/templates/invoicing/invoice_list.html:8
+#: apps/invoicing/templates/invoicing/invoice_list.html:25
+msgid "Overdue"
+msgstr "Erääntynyt"
+
+#: apps/invoicing/templates/invoicing/_invoice_results.html:25
+#: apps/invoicing/templates/invoicing/run_detail.html:36
+#: apps/readings/templates/readings/_round_row.html:33
+#: apps/readings/templates/readings/_unit_readings.html:23
+msgid "Check"
+msgstr "Tarkista"
+
+#: apps/invoicing/templates/invoicing/_invoice_results.html:31
+#: apps/readings/templates/readings/_round_results.html:20
+msgid "Export as CSV"
+msgstr "Vie CSV-tiedostona"
+
+#: apps/invoicing/templates/invoicing/_invoice_results.html:32
+#, python-format
+msgid "%(count)s invoice, %(total)s € in total"
+msgid_plural "%(count)s invoices, %(total)s € in total"
+msgstr[0] "%(count)s lasku, yhteensä %(total)s €"
+msgstr[1] "%(count)s laskua, yhteensä %(total)s €"
+
+#: apps/invoicing/templates/invoicing/_invoice_results.html:35
+msgid "No invoices found."
+msgstr "Laskuja ei löytynyt."
+
+#: apps/invoicing/templates/invoicing/export_payments.html:3
+#: apps/invoicing/templates/invoicing/export_payments.html:5
+#: apps/invoicing/templates/invoicing/invoice_list.html:10
+msgid "Export payments"
+msgstr "Vie maksut"
+
+#: apps/invoicing/templates/invoicing/export_payments.html:6
+msgid ""
+"Payments and reminder fees as a CSV file for the bookkeeping. Leave a date "
+"empty for no limit."
+msgstr "Maksut ja muistutusmaksut CSV-tiedostona kirjanpitoa varten. Jätä päivämäärä tyhjäksi, jos et halua rajata."
+
+#: apps/invoicing/templates/invoicing/export_payments.html:10
+msgid "Download CSV"
+msgstr "Lataa CSV"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:8
+msgid "Preview PDF"
+msgstr "Esikatsele PDF"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:13
+msgid "Issue credit note"
+msgstr "Laadi hyvityslasku"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:13
+msgid "Issue invoice"
+msgstr "Laadi lasku"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:19
+msgid "Rebuild from fee plans"
+msgstr "Muodosta uudelleen maksusuunnitelmista"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:25
+msgid "Delete draft"
+msgstr "Poista luonnos"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:31
+msgid "Make a credit note"
+msgstr "Tee hyvityslasku"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:36
+msgid "Credits"
+msgstr "Hyvitykset"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:40
+msgid "Check before issuing"
+msgstr "Tarkista ennen laatimista"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:50
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:74
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:140
+#: apps/invoicing/views.py:437 apps/invoicing/views.py:494
+#: apps/selfservice/templates/selfservice/member.html:54
+msgid "Reference"
+msgstr "Viite"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:51
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:71
+#: apps/invoicing/views.py:433
+msgid "Invoice date"
+msgstr "Laskun päivämäärä"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:52
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:73
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:141
+#: apps/invoicing/views.py:434
+msgid "Due date"
+msgstr "Eräpäivä"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:53
+msgid "Issued by"
+msgstr "Laatija"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:56
+#: apps/invoicing/templates/invoicing/invoice_detail.html:62
+#: apps/invoicing/templates/invoicing/invoice_detail.html:84
+msgid "Lines"
+msgstr "Rivit"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:65
+#: apps/invoicing/templates/invoicing/invoice_detail.html:87
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:86
+msgid "Description"
+msgstr "Kuvaus"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:65
+#: apps/invoicing/templates/invoicing/invoice_detail.html:87
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:87
+msgid "Quantity"
+msgstr "Määrä"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:66
+#: apps/invoicing/templates/invoicing/invoice_detail.html:88
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:88
+msgid "Unit price"
+msgstr "Yksikköhinta"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:66
+#: apps/invoicing/templates/invoicing/invoice_detail.html:88
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:89
+#, python-format
+msgid "VAT %%"
+msgstr "ALV %%"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:66
+#: apps/invoicing/templates/invoicing/invoice_detail.html:72
+#: apps/register/templates/register/unit_detail.html:55
+msgid "Remove"
+msgstr "Poista"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:81
+msgid "Save the draft"
+msgstr "Tallenna luonnos"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:88
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:90
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:142
+#: apps/invoicing/views.py:495
+msgid "Amount"
+msgstr "Summa"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:104
+#, python-format
+msgid "VAT %(rate)s %%"
+msgstr "ALV %(rate)s %%"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:104
+#, python-format
+msgid "%(vat)s € on %(base)s €"
+msgstr "%(vat)s € summasta %(base)s €"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:106
+#: apps/invoicing/views.py:438
+msgid "Without VAT"
+msgstr "Ilman ALV:ia"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:109
+msgid "Not VAT registered"
+msgstr "Ei ALV-velvollinen"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:111
+#: apps/invoicing/templates/invoicing/overdue_list.html:17
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:119
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:121
+msgid "To pay"
+msgstr "Maksettava"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:115
+msgid "Payments"
+msgstr "Maksut"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:117
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:115
+msgid "Invoice total"
+msgstr "Laskun loppusumma"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:119
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:116
+#, python-format
+msgid "Paid %(date)s"
+msgstr "Maksettu %(date)s"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:120
+#, python-format
+msgid "Reminder %(date)s"
+msgstr "Muistutus %(date)s"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:120
+#, python-format
+msgid "new due date %(date)s"
+msgstr "uusi eräpäivä %(date)s"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:121
+#: apps/invoicing/views.py:444
+msgid "Outstanding"
+msgstr "Maksamatta"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:124
+msgid "Record a payment"
+msgstr "Kirjaa maksu"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:128
+msgid ""
+"Payments cannot be changed. To undo one, record the same amount as negative."
+msgstr "Maksuja ei voi muuttaa. Kumoa maksu kirjaamalla sama summa negatiivisena."
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:129
+msgid "Record payment"
+msgstr "Kirjaa maksu"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:135
+#: apps/messaging/models.py:128
+msgid "Sent"
+msgstr "Lähetetty"
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:140
+#: apps/invoicing/templates/invoicing/invoice_list.html:27
+msgid "Credit notes"
+msgstr "Hyvityslaskut"
+
+#: apps/invoicing/templates/invoicing/invoice_list.html:9
+#: apps/invoicing/templates/invoicing/run_list.html:3
+#: apps/invoicing/templates/invoicing/run_list.html:6
+#: apps/invoicing/templates/invoicing/run_list.html:14
+msgid "Invoice runs"
+msgstr "Laskutuskierrokset"
+
+#: apps/invoicing/templates/invoicing/invoice_list.html:15
+#: apps/readings/templates/readings/round_detail.html:25
+#: apps/register/templates/register/person_list.html:13
+#: apps/register/templates/register/unit_list.html:17
+msgid "Search"
+msgstr "Hae"
+
+#: apps/invoicing/templates/invoicing/invoice_list.html:19
+#: apps/readings/templates/readings/round_detail.html:29
+#: apps/register/templates/register/_show_select.html:3
+msgid "Show"
+msgstr "Näytä"
+
+#: apps/invoicing/templates/invoicing/invoice_list.html:21
+#: apps/register/templates/register/_show_select.html:7
+msgid "All"
+msgstr "Kaikki"
+
+#: apps/invoicing/templates/invoicing/invoice_list.html:22
+#: apps/invoicing/templates/invoicing/run_list.html:16
+msgid "Drafts"
+msgstr "Luonnokset"
+
+#: apps/invoicing/templates/invoicing/invoice_list.html:23
+msgid "Unpaid"
+msgstr "Maksamattomat"
+
+#: apps/invoicing/templates/invoicing/invoice_list.html:31
+msgid "Invoice run"
+msgstr "Laskutuskierros"
+
+#: apps/invoicing/templates/invoicing/invoice_list.html:33
+msgid "All runs"
+msgstr "Kaikki kierrokset"
+
+#: apps/invoicing/templates/invoicing/invoice_list.html:37
+#: apps/readings/templates/readings/round_detail.html:37
+#: apps/register/templates/register/person_list.html:25
+#: apps/register/templates/register/unit_list.html:43
+msgid "Filter"
+msgstr "Suodata"
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:3
+#: apps/invoicing/templates/invoicing/overdue_list.html:6
+#: apps/invoicing/templates/invoicing/overdue_list.html:12
+msgid "Overdue invoices"
+msgstr "Erääntyneet laskut"
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:7
+#: apps/invoicing/templates/invoicing/run_list.html:8
+msgid "All invoices"
+msgstr "Kaikki laskut"
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:15
+msgid "Choose"
+msgstr "Valitse"
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:17
+msgid "Days late"
+msgstr "Myöhässä (päivää)"
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:17
+msgid "Reminders"
+msgstr "Muistutukset"
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:22
+#, python-format
+msgid "Remind about %(number)s"
+msgstr "Muistuta laskusta %(number)s"
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:36
+#, python-format
+msgid "Each reminder adds a fee of %(fee)s € and gives %(days)s days to pay."
+msgstr "Jokaisesta muistutuksesta peritään %(fee)s € muistutusmaksu, ja maksuaikaa annetaan %(days)s päivää."
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:36
+#, python-format
+msgid ""
+"Reminders have no fee (see Settings > Invoice settings) and give %(days)s "
+"days to pay."
+msgstr "Muistutuksista ei peritä maksua (katso Asetukset > Laskutusasetukset), ja maksuaikaa annetaan %(days)s päivää."
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:37
+msgid ""
+"A reminder goes by email with a PDF, else by SMS, else as a letter to print."
+msgstr "Muistutus lähetetään sähköpostilla PDF-tiedoston kera, muuten tekstiviestillä, muuten tulostettavana kirjeenä."
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:38
+msgid "Send reminders to the chosen"
+msgstr "Lähetä muistutukset valituille"
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:42
+msgid "No overdue invoices."
+msgstr "Ei erääntyneitä laskuja."
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:50
+msgid "DRAFT"
+msgstr "LUONNOS"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:56
+msgid "Business ID"
+msgstr "Y-tunnus"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:57
+#: apps/register/models.py:59
+msgid "VAT number"
+msgstr "ALV-numero"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:60
+msgid "PAYMENT REMINDER"
+msgstr "MAKSUMUISTUTUS"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:60
+msgid "CREDIT NOTE"
+msgstr "HYVITYSLASKU"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:60
+msgid "INVOICE"
+msgstr "LASKU"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:70
+msgid "Invoice number"
+msgstr "Laskun numero"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:76
+#: apps/invoicing/views.py:446
+msgid "Credits invoice"
+msgstr "Hyvittää laskun"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:78
+msgid "Customer"
+msgstr "Asiakas"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:79
+#: apps/readings/views.py:147
+msgid "Period"
+msgstr "Ajanjakso"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:90
+msgid "Amount excl. VAT"
+msgstr "Summa ilman ALV:ia"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:109
+#, python-format
+msgid "VAT %(rate)s %% on %(base)s €"
+msgstr "ALV %(rate)s %% summasta %(base)s €"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:111
+msgid "Total excl. VAT"
+msgstr "Yhteensä ilman ALV:ia"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:117
+#, python-format
+msgid "Credit note %(number)s"
+msgstr "Hyvityslasku %(number)s"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:118
+#, python-format
+msgid "Reminder fee %(date)s"
+msgstr "Muistutusmaksu %(date)s"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:124
+#, python-format
+msgid ""
+"We have not received payment for this invoice, which was due on %(due)s. "
+"Please pay by %(new)s. If you have already paid, you can ignore this "
+"reminder."
+msgstr "Emme ole saaneet maksua tästä laskusta, jonka eräpäivä oli %(due)s. Maksathan viimeistään %(new)s. Jos olet jo maksanut, voit jättää tämän muistutuksen huomiotta."
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:138
+msgid "Account (IBAN)"
+msgstr "Tili (IBAN)"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:144
+msgid "Payment QR code"
+msgstr "Maksun QR-koodi"
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:149
+msgid "Virtual barcode"
+msgstr "Virtuaaliviivakoodi"
+
+#: apps/invoicing/templates/invoicing/run_detail.html:9
+msgid "Rebuild drafts"
+msgstr "Muodosta luonnokset uudelleen"
+
+#: apps/invoicing/templates/invoicing/run_detail.html:12
+#, python-format
+msgid "Send %(count)s invoice"
+msgid_plural "Send %(count)s invoices"
+msgstr[0] "Lähetä %(count)s lasku"
+msgstr[1] "Lähetä %(count)s laskua"
+
+#: apps/invoicing/templates/invoicing/run_detail.html:14
+msgid "PDF of invoices for post"
+msgstr "Postitettavien laskujen PDF"
+
+#: apps/invoicing/templates/invoicing/run_detail.html:16
+msgid "Issue all checked drafts"
+msgstr "Laadi kaikki tarkistetut luonnokset"
+
+#: apps/invoicing/templates/invoicing/run_detail.html:20
+msgid ""
+"Issued invoices go by email with the PDF attached. Recipients without email, "
+"or who prefer post, are listed for printing."
+msgstr "Laaditut laskut lähetetään sähköpostilla PDF-liitteenä. Vastaanottajat, joilla ei ole sähköpostia tai jotka haluavat paperilaskun, listataan tulostusta varten."
+
+#: apps/invoicing/templates/invoicing/run_detail.html:22
+#, python-format
+msgid "%(count)s invoice, %(total)s € in total."
+msgid_plural "%(count)s invoices, %(total)s € in total."
+msgstr[0] "%(count)s lasku, yhteensä %(total)s €."
+msgstr[1] "%(count)s laskua, yhteensä %(total)s €."
+
+#: apps/invoicing/templates/invoicing/run_detail.html:23
+#, python-format
+msgid "%(count)s is still a draft."
+msgid_plural "%(count)s are still drafts."
+msgstr[0] "%(count)s on vielä luonnoksena."
+msgstr[1] "%(count)s on vielä luonnoksena."
+
+#: apps/invoicing/templates/invoicing/run_detail.html:26
+#, python-format
+msgid "%(count)s draft to check"
+msgid_plural "%(count)s drafts to check"
+msgstr[0] "%(count)s luonnos tarkistettavana"
+msgstr[1] "%(count)s luonnosta tarkistettavana"
+
+#: apps/invoicing/templates/invoicing/run_detail.html:27
+msgid ""
+"These are not issued with the others. Enter the missing reading or fix the "
+"lines, then rebuild or save the draft."
+msgstr "Näitä ei laadita muiden mukana. Syötä puuttuva lukema tai korjaa rivit ja muodosta luonnos uudelleen tai tallenna se."
+
+#: apps/invoicing/templates/invoicing/run_form.html:3
+#: apps/invoicing/templates/invoicing/run_form.html:5
+#: apps/invoicing/templates/invoicing/run_list.html:9
+msgid "New invoice run"
+msgstr "Uusi laskutuskierros"
+
+#: apps/invoicing/templates/invoicing/run_form.html:6
+msgid ""
+"Makes a draft invoice for every active unit the chosen fee plans apply to. "
+"Nothing is sent or numbered until you issue the drafts."
+msgstr "Tekee luonnoslaskun jokaiselle aktiiviselle yksikölle, johon valitut maksusuunnitelmat pätevät. Mitään ei lähetetä eikä numeroida, ennen kuin laadit luonnokset."
+
+#: apps/invoicing/templates/invoicing/run_form.html:12
+msgid "Make draft invoices"
+msgstr "Tee luonnoslaskut"
+
+#: apps/invoicing/templates/invoicing/run_form.html:13
+#: apps/messaging/templates/messaging/compose.html:82
+#: apps/messaging/templates/messaging/newsletter_compose.html:31
+#: apps/readings/templates/readings/reading_form.html:31
+#: apps/readings/templates/readings/round_form.html:20
+#: apps/register/templates/register/import_upload.html:20
+#: apps/register/templates/register/person_form.html:38
+#: apps/register/templates/register/unit_form.html:29
+msgid "Cancel"
+msgstr "Peruuta"
+
+#: apps/invoicing/templates/invoicing/run_list.html:12
+msgid ""
+"Fill in the invoice settings (IBAN, payment terms, VAT) under Settings > "
+"Invoice settings before issuing invoices."
+msgstr "Täytä laskutusasetukset (IBAN, maksuehdot, ALV) kohdassa Asetukset > Laskutusasetukset ennen laskujen laatimista."
+
+#: apps/invoicing/templates/invoicing/run_list.html:16
+msgid "Run"
+msgstr "Kierros"
+
+#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/register/history.py:63
+#: apps/selfservice/templates/selfservice/round_links.html:41
+msgid "Created"
+msgstr "Luotu"
+
+#: apps/invoicing/templates/invoicing/run_list.html:25
+msgid "No invoice runs yet."
+msgstr "Ei vielä laskutuskierroksia."
+
+#: apps/invoicing/views.py:97
+msgid "Saved the draft."
+msgstr "Luonnos tallennettu."
+
+#: apps/invoicing/views.py:125
+#, python-format
+msgid "Issued %(invoice)s."
+msgstr "Laadittu %(invoice)s."
+
+#: apps/invoicing/views.py:135
+msgid "Rebuilt the draft from the fee plans and readings."
+msgstr "Luonnos muodostettiin uudelleen maksusuunnitelmista ja lukemista."
+
+#: apps/invoicing/views.py:146
+msgid "Deleted the draft."
+msgstr "Luonnos poistettu."
+
+#: apps/invoicing/views.py:161
+msgid ""
+"A draft credit note was made. Change it to credit only part, then issue it."
+msgstr "Hyvityslaskuluonnos tehtiin. Muokkaa sitä hyvittääksesi vain osan ja laadi se sitten."
+
+#: apps/invoicing/views.py:194
+#, python-format
+msgid "Made %(count)s draft invoices."
+msgstr "Tehtiin %(count)s luonnoslaskua."
+
+#: apps/invoicing/views.py:197
+#, python-format
+msgid "%(unit)s has no contact person, so no invoice."
+msgstr "Yksiköllä %(unit)s ei ole yhteyshenkilöä, joten laskua ei luotu."
+
+#: apps/invoicing/views.py:228
+#, python-format
+msgid "Rebuilt %(rebuilt)s drafts and made %(created)s new ones."
+msgstr "Muodostettiin uudelleen %(rebuilt)s luonnosta ja tehtiin %(created)s uutta."
+
+#: apps/invoicing/views.py:247
+#, python-format
+msgid "Issued %(count)s invoices."
+msgstr "Laadittiin %(count)s laskua."
+
+#: apps/invoicing/views.py:251
+#, python-format
+msgid "%(count)s drafts were not issued: check them first."
+msgstr "%(count)s luonnosta ei laadittu: tarkista ne ensin."
+
+#: apps/invoicing/views.py:296
+msgid "No invoices in this run go by post."
+msgstr "Mikään tämän kierroksen lasku ei mene postitse."
+
+#: apps/invoicing/views.py:325
+msgid "There is nothing to print in this send-out."
+msgstr "Tässä lähetyksessä ei ole mitään tulostettavaa."
+
+#: apps/invoicing/views.py:344
+msgid "All issued invoices of this run have been sent."
+msgstr "Kaikki tämän kierroksen laaditut laskut on lähetetty."
+
+#: apps/invoicing/views.py:353 apps/invoicing/views.py:416
+#: apps/messaging/views.py:54 apps/messaging/views.py:145
+#: apps/messaging/views.py:211
+msgid "Sending has started. This page shows how it goes."
+msgstr "Lähetys on alkanut. Tällä sivulla näkyy, miten se etenee."
+
+#: apps/invoicing/views.py:372
+msgid "Recorded the payment."
+msgstr "Maksu kirjattu."
+
+#: apps/invoicing/views.py:407
+msgid "Choose at least one overdue invoice."
+msgstr "Valitse vähintään yksi erääntynyt lasku."
+
+#: apps/invoicing/views.py:412
+#, python-format
+msgid "%(count)s overdue invoices"
+msgstr "%(count)s erääntynyttä laskua"
+
+#: apps/invoicing/views.py:432 apps/invoicing/views.py:492
+msgid "Kind"
+msgstr "Laji"
+
+#: apps/invoicing/views.py:443
+msgid "Reminder fees"
+msgstr "Muistutusmaksut"
+
+#: apps/invoicing/views.py:497
+msgid "Recorded by"
+msgstr "Kirjannut"
+
+#: apps/invoicing/views.py:513
+msgid "Reminder fee"
+msgstr "Muistutusmaksu"
+
+#: apps/messaging/apps.py:7
+msgid "Messaging"
+msgstr "Viestintä"
+
+#: apps/messaging/broadcast.py:152
+msgid "No phone number or email address to send to."
+msgstr "Ei puhelinnumeroa tai sähköpostiosoitetta, johon lähettää."
+
+#: apps/messaging/forms.py:11
+msgid "Everyone"
+msgstr "Kaikki"
+
+#: apps/messaging/forms.py:12
+msgid "Units with a tag"
+msgstr "Yksiköt, joilla on tunniste"
+
+#: apps/messaging/forms.py:13
+msgid "Units of a type"
+msgstr "Tietyn tyyppiset yksiköt"
+
+#: apps/messaging/forms.py:14
+msgid "The units in the filtered list"
+msgstr "Suodatetun luettelon yksiköt"
+
+#: apps/messaging/forms.py:17
+msgid "All contacts of each unit"
+msgstr "Kunkin yksikön kaikki yhteyshenkilöt"
+
+#: apps/messaging/forms.py:18
+msgid "Only each unit's main contact"
+msgstr "Vain kunkin yksikön pääyhteyshenkilö"
+
+#: apps/messaging/forms.py:21
+#, python-brace-format
+msgid ""
+"You can use {first_name}, {name}, {unit}, {organisation}, "
+"{organisation_phone}, {organisation_email}, {organisation_website} and "
+"{emergency_phone}."
+msgstr "Voit käyttää tunnisteita {first_name}, {name}, {unit}, {organisation}, {organisation_phone}, {organisation_email}, {organisation_website} ja {emergency_phone}."
+
+#: apps/messaging/forms.py:30 apps/messaging/models.py:37
+#: apps/messaging/templates/messaging/batch_list.html:12
+#: apps/messaging/templates/messaging/compose.html:3
+#: apps/messaging/templates/messaging/compose.html:6
+msgid "Urgent alert"
+msgstr "Kiireellinen varoitus"
+
+#: apps/messaging/forms.py:32
+msgid "For disruptions such as a water leak. Sent to everyone at once."
+msgstr "Häiriötilanteisiin, esimerkiksi vesivuotoon. Lähetetään kaikille kerralla."
+
+#: apps/messaging/forms.py:34
+msgid "Send to"
+msgstr "Vastaanottajat"
+
+#: apps/messaging/forms.py:35
+#: apps/register/templates/register/person_list.html:17
+#: apps/register/templates/register/unit_list.html:35
+msgid "Tag"
+msgstr "Tunniste"
+
+#: apps/messaging/forms.py:37 apps/register/import_views.py:24
+msgid "Unit type"
+msgstr "Yksikkötyyppi"
+
+#: apps/messaging/forms.py:41
+msgid "Who in each unit"
+msgstr "Kuka kussakin yksikössä"
+
+#: apps/messaging/forms.py:47
+#: apps/messaging/templates/messaging/batch_detail.html:9
+#: apps/messaging/templates/messaging/compose.html:18
+msgid "Send by"
+msgstr "Lähetystapa"
+
+#: apps/messaging/forms.py:53 apps/messaging/models.py:36
+#: apps/messaging/templates/messaging/batch_detail.html:10
+#: apps/messaging/templates/messaging/compose.html:26
+msgid "Message"
+msgstr "Viesti"
+
+#: apps/messaging/forms.py:59
+#: apps/messaging/templates/messaging/batch_detail.html:11
+msgid "Email subject"
+msgstr "Sähköpostin aihe"
+
+#: apps/messaging/forms.py:62
+msgid "Needed when the message goes by email."
+msgstr "Tarvitaan, kun viesti lähetetään sähköpostilla."
+
+#: apps/messaging/forms.py:65
+msgid "Longer text for email"
+msgstr "Pidempi teksti sähköpostiin"
+
+#: apps/messaging/forms.py:68
+msgid "Optional. Without it, the email has the same text as the SMS."
+msgstr "Valinnainen. Ilman tätä sähköpostin teksti on sama kuin tekstiviestin."
+
+#: apps/messaging/forms.py:72
+msgid "Also show as a notice on the public page"
+msgstr "Näytä myös tiedotteena julkisella sivulla"
+
+#: apps/messaging/forms.py:74
+msgid "Anyone can see it there and on members' pages, so no personal details."
+msgstr "Sen näkevät kaikki julkisella sivulla ja jäsenten sivuilla, joten älä kirjoita henkilötietoja."
+
+#: apps/messaging/forms.py:77
+msgid "Notice text"
+msgstr "Tiedotteen teksti"
+
+#: apps/messaging/forms.py:81
+msgid "Empty: the message text."
+msgstr "Tyhjä: viestin teksti."
+
+#: apps/messaging/forms.py:84
+msgid "Show the notice until"
+msgstr "Näytä tiedote asti"
+
+#: apps/messaging/forms.py:88
+msgid "Empty: until you remove it."
+msgstr "Tyhjä: näkyy, kunnes poistat sen."
+
+#: apps/messaging/forms.py:107
+msgid "Choose a tag."
+msgstr "Valitse tunniste."
+
+#: apps/messaging/forms.py:109
+msgid "Choose a unit type."
+msgstr "Valitse yksikkötyyppi."
+
+#: apps/messaging/forms.py:111
+msgid "Add a subject for the email."
+msgstr "Lisää sähköpostille aihe."
+
+#: apps/messaging/forms.py:117
+msgid "Write the notice without personal placeholders."
+msgstr "Kirjoita tiedote ilman henkilökohtaisia paikkamerkkejä."
+
+#: apps/messaging/forms.py:141
+msgid "Subject"
+msgstr "Aihe"
+
+#: apps/messaging/forms.py:143 apps/register/models.py:150
+msgid "Text"
+msgstr "Teksti"
+
+#: apps/messaging/forms.py:146
+#, python-brace-format
+msgid ""
+"Plain text. You can use {first_name}, {name} and {organisation}. An "
+"unsubscribe link is added at the end of every email."
+msgstr "Pelkkää tekstiä. Voit käyttää tunnisteita {first_name}, {name} ja {organisation}. Jokaisen sähköpostin loppuun lisätään peruutuslinkki."
+
+#: apps/messaging/forms.py:156 apps/messaging/models.py:38
+#: apps/messaging/templates/messaging/_person_newsletter.html:3
+#: apps/messaging/templates/messaging/unsubscribe.html:3
+#: apps/selfservice/templates/selfservice/member.html:62
+msgid "Newsletter"
+msgstr "Uutiskirje"
+
+#: apps/messaging/forms.py:157
+#: apps/messaging/templates/messaging/_person_newsletter.html:6
+msgid "Wants the newsletter"
+msgstr "Haluaa uutiskirjeen"
+
+#: apps/messaging/forms.py:157
+msgid "Does not want it"
+msgstr "Ei halua sitä"
+
+#: apps/messaging/forms.py:162
+msgid "How it was given"
+msgstr "Miten suostumus annettiin"
+
+#: apps/messaging/forms.py:165
+msgid "For example: signed form at the annual meeting."
+msgstr "Esimerkiksi: allekirjoitettu lomake vuosikokouksessa."
+
+#: apps/messaging/models.py:24
+#: apps/messaging/templates/messaging/compose.html:19
+#: apps/register/models.py:266
+msgid "SMS"
+msgstr "SMS"
+
+#: apps/messaging/models.py:33
+#: apps/readings/templates/readings/round_detail.html:8
+msgid "Self-service links"
+msgstr "Itsepalvelulinkit"
+
+#: apps/messaging/models.py:34 apps/messaging/models.py:211
+msgid "Reminder"
+msgstr "Muistutus"
+
+#: apps/messaging/models.py:35
+msgid "Automatic reminder"
+msgstr "Automaattinen muistutus"
+
+#: apps/messaging/models.py:40
+msgid "Payment reminders"
+msgstr "Maksumuistutukset"
+
+#: apps/messaging/models.py:43
+#: apps/readings/templates/readings/round_detail.html:31
+#: apps/selfservice/views.py:23
+msgid "All units"
+msgstr "Kaikki yksiköt"
+
+#: apps/messaging/models.py:44 apps/selfservice/views.py:24
+msgid "Units missing a reading"
+msgstr "Yksiköt, joilta puuttuu lukema"
+
+#: apps/messaging/models.py:49
+msgid "SMS only"
+msgstr "Vain SMS"
+
+#: apps/messaging/models.py:50
+msgid "Email only"
+msgstr "Vain sähköposti"
+
+#: apps/messaging/models.py:51
+msgid "SMS, or email for those without a phone"
+msgstr "SMS tai sähköposti niille, joilla ei ole puhelinta"
+
+#: apps/messaging/models.py:52
+msgid "Both SMS and email"
+msgstr "Sekä SMS että sähköposti"
+
+#: apps/messaging/models.py:55
+msgid "Waiting to be sent"
+msgstr "Odottaa lähetystä"
+
+#: apps/messaging/models.py:56
+msgid "Sending"
+msgstr "Lähetetään"
+
+#: apps/messaging/models.py:57
+msgid "Done"
+msgstr "Valmis"
+
+#: apps/messaging/models.py:60
+msgid "to"
+msgstr "vastaanottaja"
+
+#: apps/messaging/models.py:63 apps/readings/models.py:83
+#: apps/selfservice/models.py:68
+msgid "reading round"
+msgstr "lukemakierros"
+
+#: apps/messaging/models.py:83
+msgid "channels"
+msgstr "kanavat"
+
+#: apps/messaging/models.py:84
+msgid "email subject"
+msgstr "sähköpostin aihe"
+
+#: apps/messaging/models.py:86
+msgid "email text"
+msgstr "sähköpostin teksti"
+
+#: apps/messaging/models.py:87
+msgid "recipients"
+msgstr "vastaanottajat"
+
+#: apps/messaging/models.py:101 apps/messaging/models.py:135
+msgid "send-out"
+msgstr "lähetys"
+
+#: apps/messaging/models.py:102
+msgid "send-outs"
+msgstr "lähetykset"
+
+#: apps/messaging/models.py:104
+msgid "Can send messages and alerts to everyone"
+msgstr "Voi lähettää viestejä ja varoituksia kaikille"
+
+#: apps/messaging/models.py:105
+msgid "Can send newsletters"
+msgstr "Voi lähettää uutiskirjeitä"
+
+#: apps/messaging/models.py:127
+msgid "Queued"
+msgstr "Jonossa"
+
+#: apps/messaging/models.py:129
+msgid "Delivered"
+msgstr "Toimitettu"
+
+#: apps/messaging/models.py:130
+msgid "Failed"
+msgstr "Epäonnistui"
+
+#: apps/messaging/models.py:131
+msgid "To print"
+msgstr "Tulostettava"
+
+#: apps/messaging/models.py:143 apps/messaging/models.py:259
+#: apps/register/models.py:282 apps/register/models.py:347
+#: apps/selfservice/models.py:62
+msgid "person"
+msgstr "henkilö"
+
+#: apps/messaging/models.py:159 apps/messaging/models.py:221
+msgid "subject"
+msgstr "aihe"
+
+#: apps/messaging/models.py:164
+msgid "provider"
+msgstr "palveluntarjoaja"
+
+#: apps/messaging/models.py:165
+msgid "provider's id"
+msgstr "palveluntarjoajan tunnus"
+
+#: apps/messaging/models.py:169
+msgid "status changed"
+msgstr "tila muuttunut"
+
+#: apps/messaging/models.py:174
+msgid "messages"
+msgstr "viestit"
+
+#: apps/messaging/models.py:210
+msgid "Self-service link"
+msgstr "Itsepalvelulinkki"
+
+#: apps/messaging/models.py:213
+msgid "Payment reminder"
+msgstr "Maksumuistutus"
+
+#: apps/messaging/models.py:215
+msgid "purpose"
+msgstr "tarkoitus"
+
+#: apps/messaging/models.py:221
+msgid "Email only."
+msgstr "Vain sähköposti."
+
+#: apps/messaging/models.py:225
+#, python-brace-format
+msgid ""
+"Placeholders: {name}, {first_name}, {link}, {closes}, {period}, "
+"{reading_type}, {unit}, {organisation}, {organisation_phone}, "
+"{organisation_email}, {organisation_website} and {emergency_phone}. Keep SMS "
+"short: about 160 characters is one message."
+msgstr "Paikkamerkit: {name}, {first_name}, {link}, {closes}, {period}, {reading_type}, {unit}, {organisation}, {organisation_phone}, {organisation_email}, {organisation_website} ja {emergency_phone}. Pidä SMS lyhyenä: noin 160 merkkiä on yksi viesti."
+
+#: apps/messaging/models.py:234
+msgid "message template"
+msgstr "viestipohja"
+
+#: apps/messaging/models.py:235
+msgid "message templates"
+msgstr "viestipohjat"
+
+#: apps/messaging/models.py:254
+msgid "Self-service page"
+msgstr "Itsepalvelusivu"
+
+#: apps/messaging/models.py:255
+msgid "Entered by staff"
+msgstr "Henkilökunnan syöttämä"
+
+#: apps/messaging/models.py:256
+msgid "Unsubscribe link"
+msgstr "Peruutuslinkki"
+
+#: apps/messaging/models.py:261
+msgid "wants the newsletter"
+msgstr "haluaa uutiskirjeen"
+
+#: apps/messaging/models.py:262 apps/readings/models.py:141
+msgid "source"
+msgstr "lähde"
+
+#: apps/messaging/models.py:273
+msgid "For example: signed form, 3 May."
+msgstr "Esimerkiksi: allekirjoitettu lomake, 3. toukokuuta."
+
+#: apps/messaging/models.py:278
+msgid "newsletter consent"
+msgstr "uutiskirjeen suostumus"
+
+#: apps/messaging/models.py:279
+msgid "newsletter consents"
+msgstr "uutiskirjeen suostumukset"
+
+#: apps/messaging/models.py:282
+#: apps/messaging/templates/messaging/_person_newsletter.html:24
+msgid "yes"
+msgstr "kyllä"
+
+#: apps/messaging/models.py:282
+#: apps/messaging/templates/messaging/_person_newsletter.html:24
+msgid "no"
+msgstr "ei"
+
+#: apps/messaging/newsletter.py:52
+#, python-format
+msgid "You get this because you subscribed. Unsubscribe: %(url)s"
+msgstr "Saat tämän, koska olet tilannut uutiskirjeen. Peruuta tilaus: %(url)s"
+
+#: apps/messaging/newsletter.py:80
+msgid "Unsubscribed before it was sent."
+msgstr "Tilaus peruutettiin ennen lähetystä."
+
+#: apps/messaging/newsletter.py:110
+#: apps/messaging/templates/messaging/_send_forms.html:8
+msgid "Email is not set up."
+msgstr "Sähköpostia ei ole otettu käyttöön."
+
+#: apps/messaging/sending.py:101
+msgid "The unit has no contact person."
+msgstr "Yksiköllä ei ole yhteyshenkilöä."
+
+#: apps/messaging/sending.py:134
+msgid "[personal link]"
+msgstr "[henkilökohtainen linkki]"
+
+#: apps/messaging/templates/messaging/_person_newsletter.html:6
+msgid "Does not want the newsletter"
+msgstr "Ei halua uutiskirjettä"
+
+#: apps/messaging/templates/messaging/_person_newsletter.html:9
+msgid "Has not been asked. Without a yes, no newsletter is sent."
+msgstr "Ei kysytty. Ilman myöntävää vastausta uutiskirjettä ei lähetetä."
+
+#: apps/messaging/templates/messaging/_person_newsletter.html:12
+msgid "Newsletters go by email, and this person has no email address."
+msgstr "Uutiskirjeet lähetetään sähköpostilla, eikä tällä henkilöllä ole sähköpostiosoitetta."
+
+#: apps/messaging/templates/messaging/_person_newsletter.html:17
+msgid "Save the newsletter choice"
+msgstr "Tallenna uutiskirjeen valinta"
+
+#: apps/messaging/templates/messaging/_person_newsletter.html:22
+msgid "Earlier answers"
+msgstr "Aiemmat vastaukset"
+
+#: apps/messaging/templates/messaging/_send_forms.html:5
+msgid "Send links"
+msgstr "Lähetä linkit"
+
+#: apps/messaging/templates/messaging/_send_forms.html:7
+#, python-format
+msgid "SMS goes through %(provider)s."
+msgstr "SMS lähetetään palvelun %(provider)s kautta."
+
+#: apps/messaging/templates/messaging/_send_forms.html:7
+msgid "SMS is not set up, so links go by email."
+msgstr "SMS ei ole käytössä, joten linkit lähetetään sähköpostilla."
+
+#: apps/messaging/templates/messaging/_send_forms.html:9
+msgid "Households without a working phone or email are listed for printing."
+msgstr "Taloudet, joilla ei ole toimivaa puhelinta tai sähköpostia, näytetään tulostusta varten."
+
+#: apps/messaging/templates/messaging/_send_forms.html:16
+msgid "Send links to all units"
+msgstr "Lähetä linkit kaikille yksiköille"
+
+#: apps/messaging/templates/messaging/_send_forms.html:21
+msgid "Send reminder to units missing a reading"
+msgstr "Lähetä muistutus yksiköille, joilta puuttuu lukema"
+
+#: apps/messaging/templates/messaging/_sms_count.html:1
+#, python-format
+msgid "%(count)s SMS (%(used)s characters, %(per_sms)s per SMS)"
+msgid_plural "%(count)s SMS each (%(used)s characters, %(per_sms)s per SMS)"
+msgstr[0] "%(count)s SMS (%(used)s merkkiä, %(per_sms)s per SMS)"
+msgstr[1] "%(count)s SMS kullekin (%(used)s merkkiä, %(per_sms)s per SMS)"
+
+#: apps/messaging/templates/messaging/batch_detail.html:13
+#: apps/messaging/templates/messaging/compose.html:74
+msgid "Public notice"
+msgstr "Julkinen tiedote"
+
+#: apps/messaging/templates/messaging/batch_detail.html:17
+#: apps/messaging/templates/messaging/compose.html:24
+#, python-format
+msgid "Shown until %(until)s"
+msgstr "Näkyvillä %(until)s asti"
+
+#: apps/messaging/templates/messaging/batch_detail.html:17
+msgid "Shown until you remove it"
+msgstr "Näkyvillä, kunnes poistat sen"
+
+#: apps/messaging/templates/messaging/batch_detail.html:21
+msgid "Remove the notice"
+msgstr "Poista tiedote"
+
+#: apps/messaging/templates/messaging/batch_detail.html:25
+msgid "No longer shown"
+msgstr "Ei enää näkyvillä"
+
+#: apps/messaging/templates/messaging/batch_detail.html:39
+#, python-format
+msgid "%(count)s invoice goes by post"
+msgid_plural "%(count)s invoices go by post"
+msgstr[0] "%(count)s lasku lähetetään postitse"
+msgstr[1] "%(count)s laskua lähetetään postitse"
+
+#: apps/messaging/templates/messaging/batch_detail.html:39
+#, python-format
+msgid "%(count)s reminder goes by post"
+msgid_plural "%(count)s reminders go by post"
+msgstr[0] "%(count)s muistutus lähetetään postitse"
+msgstr[1] "%(count)s muistutusta lähetetään postitse"
+
+#: apps/messaging/templates/messaging/batch_detail.html:40
+msgid "PDF to print"
+msgstr "Tulostettava PDF"
+
+#: apps/messaging/templates/messaging/batch_detail.html:45
+#, python-format
+msgid "%(count)s household needs a letter"
+msgid_plural "%(count)s households need a letter"
+msgstr[0] "%(count)s talous tarvitsee kirjeen"
+msgstr[1] "%(count)s taloutta tarvitsee kirjeen"
+
+#: apps/messaging/templates/messaging/batch_detail.html:46
+msgid "They have no phone number or email address that works, or prefer post."
+msgstr "Heillä ei ole toimivaa puhelinnumeroa tai sähköpostiosoitetta, tai he haluavat kirjeen postitse."
+
+#: apps/messaging/templates/messaging/batch_detail.html:51
+msgid "Print their letters"
+msgstr "Tulosta heidän kirjeensä"
+
+#: apps/messaging/templates/messaging/batch_detail.html:57
+#: apps/messaging/templates/messaging/batch_list.html:24
+msgid "Messages"
+msgstr "Viestit"
+
+#: apps/messaging/templates/messaging/batch_detail.html:62
+#: apps/register/models.py:147
+#: apps/register/templates/register/unit_detail.html:37
+#: apps/selfservice/templates/selfservice/print.html:27
+#: apps/selfservice/templates/selfservice/round_links.html:40
+msgid "Person"
+msgstr "Henkilö"
+
+#: apps/messaging/templates/messaging/batch_detail.html:63
+msgid "Channel"
+msgstr "Kanava"
+
+#: apps/messaging/templates/messaging/batch_detail.html:83
+msgid "Sending…"
+msgstr "Lähetetään…"
+
+#: apps/messaging/templates/messaging/batch_list.html:3
+#: apps/messaging/templates/messaging/batch_list.html:6
+#: apps/messaging/templates/messaging/batch_list.html:17 templates/base.html:25
+msgid "Send-outs"
+msgstr "Lähetykset"
+
+#: apps/messaging/templates/messaging/batch_list.html:9
+#: apps/messaging/templates/messaging/newsletter_compose.html:3
+#: apps/messaging/templates/messaging/newsletter_compose.html:5
+msgid "New newsletter"
+msgstr "Uusi uutiskirje"
+
+#: apps/messaging/templates/messaging/batch_list.html:11
+#: apps/messaging/templates/messaging/compose.html:3
+#: apps/messaging/templates/messaging/compose.html:6
+msgid "New message"
+msgstr "Uusi viesti"
+
+#: apps/messaging/templates/messaging/batch_list.html:21
+msgid "Send-out"
+msgstr "Lähetys"
+
+#: apps/messaging/templates/messaging/batch_list.html:22
+msgid "Started"
+msgstr "Aloitettu"
+
+#: apps/messaging/templates/messaging/batch_list.html:23
+msgid "Sent by"
+msgstr "Lähettäjä"
+
+#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:44
+msgid "Automatic"
+msgstr "Automaattinen"
+
+#: apps/messaging/templates/messaging/batch_list.html:42
+msgid "Nothing has been sent yet."
+msgstr "Mitään ei ole vielä lähetetty."
+
+#: apps/messaging/templates/messaging/compose.html:9
+msgid "SMS is not set up, so nobody gets an SMS."
+msgstr "SMS ei ole käytössä, joten kukaan ei saa SMS-viestiä."
+
+#: apps/messaging/templates/messaging/compose.html:10
+msgid "Email is not set up, so nobody gets an email."
+msgstr "Sähköposti ei ole käytössä, joten kukaan ei saa sähköpostia."
+
+#: apps/messaging/templates/messaging/compose.html:15
+#: apps/messaging/templates/messaging/newsletter_compose.html:11
+msgid "Check before sending"
+msgstr "Tarkista ennen lähettämistä"
+
+#: apps/messaging/templates/messaging/compose.html:19
+#: apps/messaging/templates/messaging/compose.html:20
+#, python-format
+msgid "%(count)s person"
+msgid_plural "%(count)s people"
+msgstr[0] "%(count)s henkilö"
+msgstr[1] "%(count)s henkilöä"
+
+#: apps/messaging/templates/messaging/compose.html:19
+#, python-format
+msgid "%(count)s SMS in total"
+msgid_plural "%(count)s SMS in total"
+msgstr[0] "%(count)s SMS yhteensä"
+msgstr[1] "%(count)s SMS yhteensä"
+
+#: apps/messaging/templates/messaging/compose.html:19
+#, python-format
+msgid "up to %(sms_per_person)s per person"
+msgstr "enintään %(sms_per_person)s henkilöä kohti"
+
+#: apps/messaging/templates/messaging/compose.html:23
+msgid "Notice on the public page"
+msgstr "Tiedote julkisella sivulla"
+
+#: apps/messaging/templates/messaging/compose.html:26
+#, python-format
+msgid "The message, as %(name)s gets it"
+msgstr "Viesti sellaisena kuin %(name)s sen saa"
+
+#: apps/messaging/templates/messaging/compose.html:31
+#, python-format
+msgid "%(count)s person cannot be reached this way"
+msgid_plural "%(count)s people cannot be reached this way"
+msgstr[0] "%(count)s henkilöä ei tavoiteta tällä tavalla"
+msgstr[1] "%(count)s henkilöä ei tavoiteta tällä tavalla"
+
+#: apps/messaging/templates/messaging/compose.html:32
+msgid "Call or visit them:"
+msgstr "Soita tai käy heidän luonaan:"
+
+#: apps/messaging/templates/messaging/compose.html:46
+#, python-format
+msgid "Send now to %(count)s person"
+msgid_plural "Send now to %(count)s people"
+msgstr[0] "Lähetä nyt %(count)s henkilölle"
+msgstr[1] "Lähetä nyt %(count)s henkilölle"
+
+#: apps/messaging/templates/messaging/compose.html:47
+msgid "Change the message"
+msgstr "Muokkaa viestiä"
+
+#: apps/messaging/templates/messaging/compose.html:81
+msgid "Check recipients"
+msgstr "Tarkista vastaanottajat"
+
+#: apps/messaging/templates/messaging/compose.html:84
+msgid "Nothing is sent until you have checked the recipients and confirmed."
+msgstr "Mitään ei lähetetä, ennen kuin olet tarkistanut vastaanottajat ja vahvistanut lähetyksen."
+
+#: apps/messaging/templates/messaging/newsletter_compose.html:6
+#, python-format
+msgid "%(count)s person wants the newsletter and has an email address."
+msgid_plural "%(count)s people want the newsletter and have an email address."
+msgstr[0] "%(count)s henkilö haluaa uutiskirjeen ja hänellä on sähköpostiosoite."
+msgstr[1] "%(count)s henkilöä haluaa uutiskirjeen ja heillä on sähköpostiosoite."
+
+#: apps/messaging/templates/messaging/newsletter_compose.html:7
+msgid ""
+"Only they get it: a newsletter needs each person's consent, given on their "
+"self-service page or recorded by staff."
+msgstr "Vain he saavat sen: uutiskirje edellyttää jokaisen henkilön suostumuksen, joka annetaan itsepalvelusivulla tai jonka henkilökunta kirjaa."
+
+#: apps/messaging/templates/messaging/newsletter_compose.html:8
+msgid "Email is not set up, so a newsletter cannot be sent."
+msgstr "Sähköposti ei ole käytössä, joten uutiskirjettä ei voi lähettää."
+
+#: apps/messaging/templates/messaging/newsletter_compose.html:12
+#, python-format
+msgid "The newsletter, as %(name)s gets it"
+msgstr "Uutiskirje sellaisena kuin %(name)s sen saa"
+
+#: apps/messaging/templates/messaging/newsletter_compose.html:20
+#, python-format
+msgid "Send to %(count)s person"
+msgid_plural "Send to %(count)s people"
+msgstr[0] "Lähetä %(count)s henkilölle"
+msgstr[1] "Lähetä %(count)s henkilölle"
+
+#: apps/messaging/templates/messaging/newsletter_compose.html:21
+msgid "Change the newsletter"
+msgstr "Muokkaa uutiskirjettä"
+
+#: apps/messaging/templates/messaging/newsletter_compose.html:30
+msgid "Preview"
+msgstr "Esikatsele"
+
+#: apps/messaging/templates/messaging/unsubscribe.html:6
+#: apps/selfservice/templates/selfservice/unavailable.html:3
+#: apps/selfservice/templates/selfservice/unavailable.html:5
+msgid "This link does not work"
+msgstr "Tämä linkki ei toimi"
+
+#: apps/messaging/templates/messaging/unsubscribe.html:7
+msgid ""
+"If you want to stop getting the newsletter, contact the organisation that "
+"sends it."
+msgstr "Jos haluat lopettaa uutiskirjeen saamisen, ota yhteyttä sen lähettävään organisaatioon."
+
+#: apps/messaging/templates/messaging/unsubscribe.html:9
+msgid "You are unsubscribed"
+msgstr "Tilauksesi on peruutettu"
+
+#: apps/messaging/templates/messaging/unsubscribe.html:10
+msgid ""
+"You will not get the newsletter any more. Messages about the service itself, "
+"such as disruptions, still reach you."
+msgstr "Et saa enää uutiskirjettä. Palvelua koskevat viestit, kuten häiriötiedotteet, tavoittavat sinut edelleen."
+
+#: apps/messaging/templates/messaging/unsubscribe.html:12
+msgid "Unsubscribe from the newsletter?"
+msgstr "Peruutetaanko uutiskirjeen tilaus?"
+
+#: apps/messaging/templates/messaging/unsubscribe.html:13
+#, python-format
+msgid "The newsletter is sent to %(name)s."
+msgstr "Uutiskirje lähetetään henkilölle %(name)s."
+
+#: apps/messaging/templates/messaging/unsubscribe.html:15
+msgid "Unsubscribe"
+msgstr "Peruuta tilaus"
+
+#: apps/messaging/views.py:124
+msgid "Nobody can be reached with these choices."
+msgstr "Näillä valinnoilla ei tavoiteta ketään."
+
+#: apps/messaging/views.py:185
+msgid "The notice is no longer shown."
+msgstr "Tiedote ei ole enää näkyvillä."
+
+#: apps/messaging/views.py:206
+msgid "Everyone who wants the newsletter"
+msgstr "Kaikki, jotka haluavat uutiskirjeen"
+
+#: apps/messaging/views.py:241
+msgid "Saved the newsletter choice."
+msgstr "Uutiskirjeen valinta tallennettu."
+
+#: apps/plugins/apps.py:7
+msgid "Plugins"
+msgstr "Lisäosat"
+
+#: apps/readings/admin.py:20
+msgid "Archive selected reading types"
+msgstr "Arkistoi valitut lukematyypit"
+
+#: apps/readings/admin.py:24
+msgid "Archived."
+msgstr "Arkistoitu."
+
+#: apps/readings/admin.py:26
+msgid "Restore selected reading types"
+msgstr "Palauta valitut lukematyypit"
+
+#: apps/readings/admin.py:30
+msgid "Restored."
+msgstr "Palautettu."
+
+#: apps/readings/apps.py:7
+#: apps/readings/templates/readings/_round_results.html:3
+#: apps/readings/templates/readings/_unit_readings.html:3
+#: templates/base.html:23
+msgid "Readings"
+msgstr "Lukemat"
+
+#: apps/readings/forms.py:29
+#: apps/readings/templates/readings/_round_results.html:9
+#: apps/readings/templates/readings/_unit_readings.html:9
+#: apps/readings/views.py:149
+msgid "Reading"
+msgstr "Lukema"
+
+#: apps/readings/models.py:29
+msgid "The kind of unit that reports this reading."
+msgstr "Yksikön tyyppi, joka ilmoittaa tämän lukeman."
+
+#: apps/readings/models.py:32
+msgid "unit of measure"
+msgstr "mittayksikkö"
+
+#: apps/readings/models.py:32
+msgid "For example m³ or kWh."
+msgstr "Esimerkiksi m³ tai kWh."
+
+#: apps/readings/models.py:35
+msgid "decimals"
+msgstr "desimaalit"
+
+#: apps/readings/models.py:38
+msgid "cumulative meter"
+msgstr "kumulatiivinen mittari"
+
+#: apps/readings/models.py:41
+msgid ""
+"The value is a meter position that only grows. Usage is the value minus the "
+"previous reading."
+msgstr "Arvo on mittarilukema, joka vain kasvaa. Kulutus on arvo miinus edellinen lukema."
+
+#: apps/readings/models.py:50
+msgid "reading types"
+msgstr "lukematyypit"
+
+#: apps/readings/models.py:61
+msgid "Open"
+msgstr "Avoin"
+
+#: apps/readings/models.py:62
+msgid "Closed"
+msgstr "Suljettu"
+
+#: apps/readings/models.py:71
+msgid "Shown to members, for example 2026."
+msgstr "Näytetään jäsenille, esimerkiksi 2026."
+
+#: apps/readings/models.py:73
+msgid "opens"
+msgstr "aukeaa"
+
+#: apps/readings/models.py:74
+msgid "closes"
+msgstr "sulkeutuu"
+
+#: apps/readings/models.py:79 apps/register/models.py:228
+msgid "updated"
+msgstr "päivitetty"
+
+#: apps/readings/models.py:99
+msgid "The round closes before it opens."
+msgstr "Kierros sulkeutuu ennen kuin se aukeaa."
+
+#: apps/readings/models.py:130
+msgid "Staff"
+msgstr "Henkilökunta"
+
+#: apps/readings/models.py:131
+msgid "Member"
+msgstr "Jäsen"
+
+#: apps/readings/models.py:134
+msgid "round"
+msgstr "kierros"
+
+#: apps/readings/models.py:139
+msgid "value"
+msgstr "arvo"
+
+#: apps/readings/models.py:145
+msgid "entered by"
+msgstr "syöttänyt"
+
+#: apps/readings/models.py:153
+msgid "reported by"
+msgstr "ilmoittanut"
+
+#: apps/readings/models.py:158
+msgid "The member who reported it through a self-service link."
+msgstr "Jäsen, joka ilmoitti lukeman itsepalvelulinkin kautta."
+
+#: apps/readings/models.py:160
+msgid "submitted"
+msgstr "lähetetty"
+
+#: apps/readings/models.py:165
+msgid "reading"
+msgstr "lukema"
+
+#: apps/readings/models.py:166
+msgid "readings"
+msgstr "lukemat"
+
+#: apps/readings/templates/readings/_round_results.html:8
+#: apps/readings/templates/readings/reading_form.html:9
+#: apps/readings/views.py:148
+msgid "Previous reading"
+msgstr "Edellinen lukema"
+
+#: apps/readings/templates/readings/_round_results.html:11
+#: apps/readings/templates/readings/_unit_readings.html:11
+#: apps/readings/templates/readings/reading_form.html:12
+#: apps/readings/templates/readings/round_list.html:23
+#: apps/readings/views.py:154
+msgid "Submitted"
+msgstr "Lähetetty"
+
+#: apps/readings/templates/readings/_round_results.html:23
+#: apps/register/templates/register/_unit_results.html:36
+msgid "No units found."
+msgstr "Yksiköitä ei löytynyt."
+
+#: apps/readings/templates/readings/_round_row.html:15
+#: apps/readings/templates/readings/reading_form.html:3
+#: apps/readings/templates/readings/reading_form.html:5
+#, python-format
+msgid "Reading for %(name)s"
+msgstr "Lukema: %(name)s"
+
+#: apps/readings/templates/readings/_round_row.html:20
+#: apps/readings/templates/readings/reading_form.html:30
+#: apps/readings/templates/readings/round_form.html:19
+#: apps/register/templates/register/person_form.html:37
+#: apps/register/templates/register/unit_form.html:28
+msgid "Save"
+msgstr "Tallenna"
+
+#: apps/readings/templates/readings/_round_row.html:24
+msgid "Saved"
+msgstr "Tallennettu"
+
+#: apps/readings/templates/readings/_round_row.html:28
+#: apps/readings/templates/readings/_unit_readings.html:20
+msgid "Missing"
+msgstr "Puuttuu"
+
+#: apps/readings/templates/readings/_unit_readings.html:8
+#: apps/readings/templates/readings/round_list.html:19
+msgid "Round"
+msgstr "Kierros"
+
+#: apps/readings/templates/readings/_unit_readings.html:12
+#: apps/register/templates/register/unit_detail.html:41
+#: apps/selfservice/templates/selfservice/round_links.html:44
+msgid "Actions"
+msgstr "Toiminnot"
+
+#: apps/readings/templates/readings/_unit_readings.html:27
+msgid "Correct"
+msgstr "Korjaa"
+
+#: apps/readings/templates/readings/_unit_readings.html:27
+msgid "Enter"
+msgstr "Syötä"
+
+#: apps/readings/templates/readings/round_detail.html:9
+#: apps/register/templates/register/person_detail.html:9
+#: apps/register/templates/register/unit_detail.html:9
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: apps/readings/templates/readings/round_detail.html:15
+#, python-format
+msgid "%(submitted)s of %(count)s unit has reported. %(missing)s missing."
+msgid_plural ""
+"%(submitted)s of %(count)s units have reported. %(missing)s missing."
+msgstr[0] "%(submitted)s / %(count)s yksiköstä on ilmoittanut. %(missing)s puuttuu."
+msgstr[1] "%(submitted)s / %(count)s yksiköstä on ilmoittanut. %(missing)s puuttuu."
+
+#: apps/readings/templates/readings/round_detail.html:32
+msgid "Missing a reading"
+msgstr "Lukema puuttuu"
+
+#: apps/readings/templates/readings/round_detail.html:33
+msgid "Reported"
+msgstr "Ilmoittaneet"
+
+#: apps/readings/templates/readings/round_form.html:3
+#: apps/readings/templates/readings/round_form.html:5
+#, python-format
+msgid "Edit %(round)s"
+msgstr "Muokkaa: %(round)s"
+
+#: apps/readings/templates/readings/round_form.html:3
+#: apps/readings/templates/readings/round_form.html:5
+msgid "New reading round"
+msgstr "Uusi lukemakierros"
+
+#: apps/readings/templates/readings/round_form.html:7
+msgid ""
+"There are no reading types yet. An admin adds them under Settings > Reading "
+"types."
+msgstr "Lukematyyppejä ei ole vielä. Ylläpitäjä lisää ne kohdassa Asetukset > Lukematyypit."
+
+#: apps/readings/templates/readings/round_form.html:17
+msgid ""
+"Members can submit readings while the round is open, from the day it opens "
+"until the day it closes."
+msgstr "Jäsenet voivat lähettää lukemia kierroksen ollessa avoinna, sen aukeamispäivästä sulkeutumispäivään asti."
+
+#: apps/readings/templates/readings/round_list.html:3
+#: apps/readings/templates/readings/round_list.html:6
+#: apps/readings/templates/readings/round_list.html:15
+msgid "Reading rounds"
+msgstr "Lukemakierrokset"
+
+#: apps/readings/templates/readings/round_list.html:9
+#: apps/selfservice/templates/selfservice/recent_changes.html:3
+#: apps/selfservice/templates/selfservice/recent_changes.html:5
+#: apps/selfservice/templates/selfservice/recent_changes.html:8
+msgid "Recent self-service changes"
+msgstr "Viimeisimmät itsepalvelumuutokset"
+
+#: apps/readings/templates/readings/round_list.html:10
+msgid "New round"
+msgstr "Uusi kierros"
+
+#: apps/readings/templates/readings/round_list.html:20
+msgid "Opens"
+msgstr "Aukeaa"
+
+#: apps/readings/templates/readings/round_list.html:21
+msgid "Closes"
+msgstr "Sulkeutuu"
+
+#: apps/readings/templates/readings/round_list.html:33
+#, python-format
+msgid "%(submitted)s of %(expected)s"
+msgstr "%(submitted)s / %(expected)s"
+
+#: apps/readings/templates/readings/round_list.html:40
+msgid "No reading rounds yet."
+msgstr "Ei vielä lukemakierroksia."
+
+#: apps/readings/usage.py:55
+#, python-format
+msgid "Lower than the previous reading (%(previous)s). Was the meter replaced?"
+msgstr "Pienempi kuin edellinen lukema (%(previous)s). Vaihdettiinko mittari?"
+
+#: apps/readings/usage.py:68
+#, python-format
+msgid "Much higher than usual (about %(usual)s %(unit)s)."
+msgstr "Paljon tavallista suurempi (noin %(usual)s %(unit)s)."
+
+#: apps/readings/views.py:47 apps/readings/views.py:59
+#: apps/register/views.py:122 apps/register/views.py:154
+#: apps/register/views.py:264 apps/register/views.py:302
+#, python-format
+msgid "Saved %(name)s."
+msgstr "Tallennettu: %(name)s."
+
+#: apps/readings/views.py:151
+msgid "Unit of measure"
+msgstr "Mittayksikkö"
+
+#: apps/readings/views.py:152
+msgid "Source"
+msgstr "Lähde"
+
+#: apps/readings/views.py:153
+msgid "Entered by"
+msgstr "Syöttänyt"
+
+#: apps/readings/views.py:156
+msgid "Warnings"
+msgstr "Varoitukset"
+
+#: apps/readings/views.py:224
+#, python-format
+msgid "Saved the reading for %(name)s."
+msgstr "Lukema tallennettu: %(name)s."
+
+#: apps/register/admin.py:42
+msgid "Public page and contact details"
+msgstr "Julkinen sivu ja yhteystiedot"
+
+#: apps/register/admin.py:45
+msgid ""
+"Shown to anyone on the public page, on members' pages and in letters, "
+"together with the email, phone and address above."
+msgstr "Näytetään kaikille julkisella sivulla, jäsenten sivuilla ja kirjeissä sekä yllä olevan sähköpostiosoitteen, puhelinnumeron ja osoitteen yhteydessä."
+
+#: apps/register/apps.py:7
+msgid "Register"
+msgstr "Rekisteri"
+
+#: apps/register/csv_io.py:41
+msgid "The file is larger than 2 MB. Split it into smaller files."
+msgstr "Tiedosto on suurempi kuin 2 Mt. Jaa se pienempiin tiedostoihin."
+
+#: apps/register/csv_io.py:45
+msgid "The file is not UTF-8. In Excel, save it as “CSV UTF-8”."
+msgstr "Tiedosto ei ole UTF-8-muodossa. Tallenna se Excelissä muodossa “CSV UTF-8”."
+
+#: apps/register/csv_io.py:50
+msgid "The file needs a header row and at least one row of data."
+msgstr "Tiedostossa on oltava otsikkorivi ja vähintään yksi tietorivi."
+
+#: apps/register/csv_io.py:52
+#, python-format
+msgid "The file has more than %(max)s rows."
+msgstr "Tiedostossa on yli %(max)s riviä."
+
+#: apps/register/csv_io.py:93 apps/register/models.py:341
+#: apps/register/templates/register/import_preview.html:38
+msgid "Contact"
+msgstr "Yhteyshenkilö"
+
+#: apps/register/csv_io.py:218
+#, python-format
+msgid "Tags: “%(name)s” does not exist. Add it under Settings first."
+msgstr "Tunnisteet: “%(name)s” ei ole olemassa. Lisää se ensin asetuksissa."
+
+#: apps/register/csv_io.py:244
+#, python-format
+msgid "%(label)s: write yes or no, not “%(value)s”."
+msgstr "%(label)s: kirjoita kyllä tai ei, ei “%(value)s”."
+
+#: apps/register/csv_io.py:327
+msgid "The row has more values than the header has columns."
+msgstr "Rivillä on enemmän arvoja kuin otsikkorivillä on sarakkeita."
+
+#: apps/register/csv_io.py:335
+#, python-format
+msgid "The name is also used on line %(line)s."
+msgstr "Nimi on käytössä myös rivillä %(line)s."
+
+#: apps/register/csv_io.py:351
+#, python-format
+msgid "Same person as line %(line)s"
+msgstr "Sama henkilö kuin rivillä %(line)s"
+
+#: apps/register/csv_io.py:355
+msgid "A role is given but no contact details."
+msgstr "Rooli on annettu, mutta yhteystietoja ei."
+
+#: apps/register/csv_io.py:366
+#, python-format
+msgid "Role: “%(value)s” is not one of owner, billing contact or contact."
+msgstr "Rooli: “%(value)s” ei ole omistaja, laskutusyhteyshenkilö tai yhteyshenkilö."
+
+#: apps/register/csv_io.py:372
+#, python-format
+msgid "Existing person: %(name)s"
+msgstr "Olemassa oleva henkilö: %(name)s"
+
+#: apps/register/csv_io.py:383
+#, python-format
+msgid "New person: %(name)s"
+msgstr "Uusi henkilö: %(name)s"
+
+#: apps/register/csv_io.py:466
+#: apps/register/templates/register/_unit_results.html:8
+#: apps/register/templates/register/unit_list.html:21
+msgid "Type"
+msgstr "Tyyppi"
+
+#: apps/register/csv_io.py:468 apps/register/csv_io.py:523
+msgid "Street address"
+msgstr "Katuosoite"
+
+#: apps/register/csv_io.py:469 apps/register/csv_io.py:524
+msgid "Postal code"
+msgstr "Postinumero"
+
+#: apps/register/csv_io.py:470 apps/register/csv_io.py:525
+msgid "City"
+msgstr "Postitoimipaikka"
+
+#: apps/register/csv_io.py:471 apps/register/csv_io.py:526
+msgid "Country"
+msgstr "Maa"
+
+#: apps/register/csv_io.py:472
+#: apps/register/templates/register/unit_detail.html:21
+msgid "Start date"
+msgstr "Alkamispäivä"
+
+#: apps/register/csv_io.py:473
+#: apps/register/templates/register/unit_detail.html:22
+msgid "End date"
+msgstr "Päättymispäivä"
+
+#: apps/register/csv_io.py:474 apps/register/csv_io.py:527
+#: apps/register/templates/register/_person_results.html:11
+#: apps/register/templates/register/_unit_results.html:11
+#: apps/register/templates/register/person_detail.html:24
+#: apps/register/templates/register/unit_detail.html:23
+msgid "Tags"
+msgstr "Tunnisteet"
+
+#: apps/register/csv_io.py:475 apps/register/csv_io.py:528
+#: apps/register/templates/register/person_detail.html:26
+#: apps/register/templates/register/unit_detail.html:25
+msgid "Notes"
+msgstr "Muistiinpanot"
+
+#: apps/register/csv_io.py:476 apps/register/csv_io.py:529
+#: apps/register/templates/register/_person_results.html:18
+#: apps/register/templates/register/_show_select.html:6
+#: apps/register/templates/register/_unit_results.html:18
+#: apps/register/templates/register/person_detail.html:6
+#: apps/register/templates/register/unit_detail.html:6
+msgid "Archived"
+msgstr "Arkistoitu"
+
+#: apps/register/csv_io.py:478
+#: apps/register/templates/register/unit_detail.html:31
+#: apps/register/templates/register/unit_detail.html:33
+msgid "Contacts"
+msgstr "Yhteyshenkilöt"
+
+#: apps/register/csv_io.py:518
+msgid "First name"
+msgstr "Etunimi"
+
+#: apps/register/csv_io.py:519
+msgid "Last name"
+msgstr "Sukunimi"
+
+#: apps/register/csv_io.py:522
+#: apps/register/templates/register/person_detail.html:22
+msgid "Preferred channel"
+msgstr "Ensisijainen kanava"
+
+#: apps/register/csv_io.py:531
+#: apps/register/templates/register/_unit_results.html:3
+#: apps/register/templates/register/person_detail.html:32
+#: apps/register/templates/register/unit_list.html:3
+#: apps/register/templates/register/unit_list.html:6 templates/base.html:21
+msgid "Units"
+msgstr "Yksiköt"
+
+#: apps/register/csv_io.py:564
+#, python-format
+msgid "CSV export of %(count)s %(things)s"
+msgstr "CSV-vienti: %(count)s %(things)s"
+
+#: apps/register/custom_fields.py:60
+msgid "Yes"
+msgstr "Kyllä"
+
+#: apps/register/custom_fields.py:60
+msgid "No"
+msgstr "Ei"
+
+#: apps/register/forms.py:71
+msgid "Add an email address, or choose another channel."
+msgstr "Lisää sähköpostiosoite tai valitse toinen kanava."
+
+#: apps/register/forms.py:73
+msgid "Add a phone number, or choose another channel."
+msgstr "Lisää puhelinnumero tai valitse toinen kanava."
+
+#: apps/register/forms.py:98
+msgid "This person already has that role on this unit."
+msgstr "Tällä henkilöllä on jo tämä rooli tässä yksikössä."
+
+#: apps/register/history.py:64
+msgid "Changed"
+msgstr "Muutettu"
+
+#: apps/register/history.py:65
+msgid "Deleted"
+msgstr "Poistettu"
+
+#: apps/register/history.py:70
+msgid "Contact added"
+msgstr "Yhteyshenkilö lisätty"
+
+#: apps/register/history.py:71
+msgid "Contact removed"
+msgstr "Yhteyshenkilö poistettu"
+
+#: apps/register/history.py:99
+#, python-format
+msgid "added %(names)s"
+msgstr "lisättiin %(names)s"
+
+#: apps/register/history.py:101
+#, python-format
+msgid "removed %(names)s"
+msgstr "poistettiin %(names)s"
+
+#: apps/register/import_views.py:27
+msgid "CSV file"
+msgstr "CSV-tiedosto"
+
+#: apps/register/import_views.py:29
+msgid ""
+"UTF-8, with semicolons or commas between the columns and one header row."
+msgstr "UTF-8, sarakkeet erotettu puolipisteillä tai pilkuilla ja yksi otsikkorivi."
+
+#: apps/register/import_views.py:33
+msgid "Skip rows whose unit name is already in the register"
+msgstr "Ohita rivit, joiden yksikön nimi on jo rekisterissä"
+
+#: apps/register/import_views.py:52
+msgid "Not in the file"
+msgstr "Ei tiedostossa"
+
+#: apps/register/import_views.py:53
+#, python-format
+msgid "Column %(number)s"
+msgstr "Sarake %(number)s"
+
+#: apps/register/import_views.py:61
+msgid "Role for contacts without one"
+msgstr "Rooli yhteyshenkilöille, joilla ei ole roolia"
+
+#: apps/register/import_views.py:151
+#, python-format
+msgid ""
+"Imported %(units)s units and %(people)s new people; skipped %(skipped)s."
+msgstr "Tuotiin %(units)s yksikköä ja %(people)s uutta henkilöä; ohitettiin %(skipped)s."
+
+#: apps/register/models.py:14
+msgid "Finland"
+msgstr "Suomi"
+
+#: apps/register/models.py:15
+msgid "Åland"
+msgstr "Ahvenanmaa"
+
+#: apps/register/models.py:16
+msgid "Sweden"
+msgstr "Ruotsi"
+
+#: apps/register/models.py:17
+msgid "Norway"
+msgstr "Norja"
+
+#: apps/register/models.py:18
+msgid "Denmark"
+msgstr "Tanska"
+
+#: apps/register/models.py:19
+msgid "Iceland"
+msgstr "Islanti"
+
+#: apps/register/models.py:37
+msgid "Upload a PNG, JPEG or WebP image."
+msgstr "Lataa PNG-, JPEG- tai WebP-kuva."
+
+#: apps/register/models.py:39
+msgid "The image is larger than 1 MB."
+msgstr "Kuva on suurempi kuin 1 Mt."
+
+#: apps/register/models.py:47
+msgid "The file is not a PNG, JPEG or WebP image."
+msgstr "Tiedosto ei ole PNG-, JPEG- tai WebP-kuva."
+
+#: apps/register/models.py:58
+msgid "business ID"
+msgstr "Y-tunnus"
+
+#: apps/register/models.py:60 apps/register/models.py:271
+msgid "email"
+msgstr "sähköposti"
+
+#: apps/register/models.py:61 apps/register/models.py:272
+msgid "phone"
+msgstr "puhelin"
+
+#: apps/register/models.py:62 apps/register/models.py:249
+msgid "street address"
+msgstr "katuosoite"
+
+#: apps/register/models.py:63 apps/register/models.py:250
+msgid "postal code"
+msgstr "postinumero"
+
+#: apps/register/models.py:64 apps/register/models.py:251
+msgid "city"
+msgstr "postitoimipaikka"
+
+#: apps/register/models.py:65 apps/register/models.py:252
+msgid "country"
+msgstr "maa"
+
+#: apps/register/models.py:68
+msgid "show the public page"
+msgstr "näytä julkinen sivu"
+
+#: apps/register/models.py:70
+msgid "A page at the site's address with the details below, for anyone to see."
+msgstr "Sivu sivuston osoitteessa, jossa alla olevat tiedot ovat kenen tahansa nähtävillä."
+
+#: apps/register/models.py:73
+msgid "public name"
+msgstr "julkinen nimi"
+
+#: apps/register/models.py:73
+msgid "If different from the name."
+msgstr "Jos poikkeaa nimestä."
+
+#: apps/register/models.py:76
+msgid "short description"
+msgstr "lyhyt kuvaus"
+
+#: apps/register/models.py:76
+msgid "A few sentences about what you do."
+msgstr "Muutama lause toiminnastanne."
+
+#: apps/register/models.py:78
+msgid "website"
+msgstr "verkkosivusto"
+
+#: apps/register/models.py:80
+msgid "emergency phone"
+msgstr "hätäpuhelin"
+
+#: apps/register/models.py:83
+msgid "For urgent matters, also outside opening hours."
+msgstr "Kiireellisiin asioihin, myös aukioloaikojen ulkopuolella."
+
+#: apps/register/models.py:86
+msgid "opening hours or availability"
+msgstr "aukioloajat tai tavoitettavuus"
+
+#: apps/register/models.py:88
+msgid "For example: Weekdays 9–16. Calls answered evenings in emergencies."
+msgstr "Esimerkiksi: arkisin 9–16. Hätätapauksissa puheluihin vastataan iltaisin."
+
+#: apps/register/models.py:91
+msgid "logo"
+msgstr "logo"
+
+#: apps/register/models.py:95
+msgid "PNG, JPEG or WebP, up to 1 MB."
+msgstr "PNG, JPEG tai WebP, enintään 1 Mt."
+
+#: apps/register/models.py:99 apps/register/models.py:100
+msgid "organisation"
+msgstr "organisaatio"
+
+#: apps/register/models.py:119
+msgid "tag"
+msgstr "tunniste"
+
+#: apps/register/models.py:120 apps/register/models.py:278
+#: apps/register/models.py:314
+msgid "tags"
+msgstr "tunnisteet"
+
+#: apps/register/models.py:136
+msgid "unit types"
+msgstr "yksikkötyypit"
+
+#: apps/register/models.py:153
+msgid "Choice"
+msgstr "Valinta"
+
+#: apps/register/models.py:154
+msgid "Yes/no"
+msgstr "Kyllä/ei"
+
+#: apps/register/models.py:156
+msgid "applies to"
+msgstr "koskee"
+
+#: apps/register/models.py:166
+msgid "key"
+msgstr "avain"
+
+#: apps/register/models.py:168
+msgid "Short identifier used in CSV files and the API, e.g. meter_number."
+msgstr "Lyhyt tunniste, jota käytetään CSV-tiedostoissa ja API:ssa, esim. meter_number."
+
+#: apps/register/models.py:170
+msgid "label"
+msgstr "nimike"
+
+#: apps/register/models.py:172
+msgid "field type"
+msgstr "kenttätyyppi"
+
+#: apps/register/models.py:175
+msgid "choices"
+msgstr "vaihtoehdot"
+
+#: apps/register/models.py:175
+msgid "For choice fields: one option per line."
+msgstr "Valintakentille: yksi vaihtoehto riville."
+
+#: apps/register/models.py:177
+msgid "required"
+msgstr "pakollinen"
+
+#: apps/register/models.py:178
+msgid "help text"
+msgstr "ohjeteksti"
+
+#: apps/register/models.py:183
+msgid "custom field"
+msgstr "oma kenttä"
+
+#: apps/register/models.py:184 apps/register/models.py:277
+#: apps/register/models.py:313
+msgid "custom fields"
+msgstr "omat kentät"
+
+#: apps/register/models.py:203
+msgid "Choose the unit type this field belongs to."
+msgstr "Valitse yksikkötyyppi, johon tämä kenttä kuuluu."
+
+#: apps/register/models.py:205
+msgid "Person fields apply to everyone."
+msgstr "Henkilökentät koskevat kaikkia."
+
+#: apps/register/models.py:207
+msgid "Add at least one option."
+msgstr "Lisää vähintään yksi vaihtoehto."
+
+#: apps/register/models.py:226
+msgid "archived"
+msgstr "arkistoitu"
+
+#: apps/register/models.py:267
+msgid "Post"
+msgstr "Posti"
+
+#: apps/register/models.py:269
+msgid "first name"
+msgstr "etunimi"
+
+#: apps/register/models.py:270
+msgid "last name"
+msgstr "sukunimi"
+
+#: apps/register/models.py:274
+msgid "preferred channel"
+msgstr "ensisijainen kanava"
+
+#: apps/register/models.py:276 apps/register/models.py:312
+msgid "notes"
+msgstr "muistiinpanot"
+
+#: apps/register/models.py:283
+msgid "people"
+msgstr "henkilöt"
+
+#: apps/register/models.py:300
+#: apps/register/templates/register/_show_select.html:5
+msgid "Active"
+msgstr "Aktiivinen"
+
+#: apps/register/models.py:301
+msgid "Inactive"
+msgstr "Ei aktiivinen"
+
+#: apps/register/models.py:304
+msgid "type"
+msgstr "tyyppi"
+
+#: apps/register/models.py:310
+msgid "start date"
+msgstr "alkamispäivä"
+
+#: apps/register/models.py:311
+msgid "end date"
+msgstr "päättymispäivä"
+
+#: apps/register/models.py:316 apps/register/models.py:354
+msgid "contacts"
+msgstr "yhteyshenkilöt"
+
+#: apps/register/models.py:322
+msgid "units"
+msgstr "yksiköt"
+
+#: apps/register/models.py:332
+msgid "The end date is before the start date."
+msgstr "Päättymispäivä on ennen alkamispäivää."
+
+#: apps/register/models.py:339
+msgid "Owner"
+msgstr "Omistaja"
+
+#: apps/register/models.py:340
+msgid "Billing contact"
+msgstr "Laskutusyhteyshenkilö"
+
+#: apps/register/models.py:353
+msgid "contact"
+msgstr "yhteyshenkilö"
+
+#: apps/register/templates/register/_history.html:2
+msgid "History"
+msgstr "Historia"
+
+#: apps/register/templates/register/_history.html:8
+#: apps/selfservice/templates/selfservice/recent_changes.html:12
+msgid "When"
+msgstr "Milloin"
+
+#: apps/register/templates/register/_history.html:9
+#: apps/selfservice/templates/selfservice/recent_changes.html:13
+msgid "Who"
+msgstr "Kuka"
+
+#: apps/register/templates/register/_history.html:10
+#: apps/selfservice/templates/selfservice/recent_changes.html:14
+msgid "What"
+msgstr "Mitä"
+
+#: apps/register/templates/register/_history.html:11
+#: apps/selfservice/templates/selfservice/recent_changes.html:15
+msgid "Changes"
+msgstr "Muutokset"
+
+#: apps/register/templates/register/_history.html:18
+#: apps/register/templates/register/_history.html:44
+msgid "System"
+msgstr "Järjestelmä"
+
+#: apps/register/templates/register/_history.html:37
+msgid "No changes recorded yet."
+msgstr "Muutoksia ei ole vielä kirjattu."
+
+#: apps/register/templates/register/_history.html:40
+msgid "Recently viewed by"
+msgstr "Viimeksi katsonut"
+
+#: apps/register/templates/register/_history.html:48
+msgid "No views recorded yet."
+msgstr "Katseluja ei ole vielä kirjattu."
+
+#: apps/register/templates/register/_pagination.html:3
+msgid "Pagination"
+msgstr "Sivutus"
+
+#: apps/register/templates/register/_pagination.html:5
+msgid "Previous"
+msgstr "Edellinen"
+
+#: apps/register/templates/register/_pagination.html:7
+#, python-format
+msgid "Page %(number)s of %(total)s"
+msgstr "Sivu %(number)s / %(total)s"
+
+#: apps/register/templates/register/_pagination.html:9
+#: apps/register/templates/register/import_upload.html:19
+msgid "Next"
+msgstr "Seuraava"
+
+#: apps/register/templates/register/_person_results.html:3
+#: apps/register/templates/register/person_list.html:3
+#: apps/register/templates/register/person_list.html:6 templates/base.html:22
+msgid "People"
+msgstr "Henkilöt"
+
+#: apps/register/templates/register/_person_results.html:29
+#, python-format
+msgid "Export %(count)s person as CSV"
+msgid_plural "Export %(count)s people as CSV"
+msgstr[0] "Vie %(count)s henkilö CSV-tiedostoon"
+msgstr[1] "Vie %(count)s henkilöä CSV-tiedostoon"
+
+#: apps/register/templates/register/_person_results.html:31
+msgid "No people found."
+msgstr "Henkilöitä ei löytynyt."
+
+#: apps/register/templates/register/_unit_results.html:30
+msgid "Send a message to these units"
+msgstr "Lähetä viesti näille yksiköille"
+
+#: apps/register/templates/register/_unit_results.html:33
+#, python-format
+msgid "Export %(count)s unit as CSV"
+msgid_plural "Export %(count)s units as CSV"
+msgstr[0] "Vie %(count)s yksikkö CSV-tiedostoon"
+msgstr[1] "Vie %(count)s yksikköä CSV-tiedostoon"
+
+#: apps/register/templates/register/import_map.html:3
+#: apps/register/templates/register/import_map.html:5
+msgid "Choose columns"
+msgstr "Valitse sarakkeet"
+
+#: apps/register/templates/register/import_map.html:6
+#, python-format
+msgid "%(filename)s: %(count)s row, imported as %(unit_type)s"
+msgid_plural "%(filename)s: %(count)s rows, imported as %(unit_type)s"
+msgstr[0] "%(filename)s: %(count)s rivi, tuodaan tyypillä %(unit_type)s"
+msgstr[1] "%(filename)s: %(count)s riviä, tuodaan tyypillä %(unit_type)s"
+
+#: apps/register/templates/register/import_map.html:12
+#: apps/register/templates/register/import_map.html:13
+msgid "First rows of the file"
+msgstr "Tiedoston ensimmäiset rivit"
+
+#: apps/register/templates/register/import_map.html:31
+msgid "Contact person"
+msgstr "Yhteyshenkilö"
+
+#: apps/register/templates/register/import_map.html:32
+msgid ""
+"People already in the register are matched by email, or by phone when there "
+"is no email, and are not added twice."
+msgstr "Rekisterissä jo olevat henkilöt tunnistetaan sähköpostiosoitteen tai, jos sitä ei ole, puhelinnumeron perusteella, eikä heitä lisätä kahteen kertaan."
+
+#: apps/register/templates/register/import_map.html:39
+msgid "Check the rows"
+msgstr "Tarkista rivit"
+
+#: apps/register/templates/register/import_map.html:40
+#: apps/register/templates/register/import_preview.html:27
+msgid "Choose another file"
+msgstr "Valitse toinen tiedosto"
+
+#: apps/register/templates/register/import_preview.html:3
+#: apps/register/templates/register/import_preview.html:5
+msgid "Check the import"
+msgstr "Tarkista tuonti"
+
+#: apps/register/templates/register/import_preview.html:8
+#, python-format
+msgid "%(count)s row will be imported"
+msgid_plural "%(count)s rows will be imported"
+msgstr[0] "%(count)s rivi tuodaan"
+msgstr[1] "%(count)s riviä tuodaan"
+
+#: apps/register/templates/register/import_preview.html:9
+#, python-format
+msgid "%(count)s row is skipped because the unit already exists"
+msgid_plural "%(count)s rows are skipped because the units already exist"
+msgstr[0] "%(count)s rivi ohitetaan, koska yksikkö on jo olemassa"
+msgstr[1] "%(count)s riviä ohitetaan, koska yksiköt ovat jo olemassa"
+
+#: apps/register/templates/register/import_preview.html:10
+#, python-format
+msgid "%(count)s row has errors"
+msgid_plural "%(count)s rows have errors"
+msgstr[0] "%(count)s rivillä on virheitä"
+msgstr[1] "%(count)s rivillä on virheitä"
+
+#: apps/register/templates/register/import_preview.html:15
+msgid ""
+"Nothing is imported while any row has errors. Correct the file and upload it "
+"again, or choose other columns."
+msgstr "Mitään ei tuoda, jos jollakin rivillä on virheitä. Korjaa tiedosto ja lähetä se uudelleen tai valitse muut sarakkeet."
+
+#: apps/register/templates/register/import_preview.html:23
+#, python-format
+msgid "Import %(count)s unit"
+msgid_plural "Import %(count)s units"
+msgstr[0] "Tuo %(count)s yksikkö"
+msgstr[1] "Tuo %(count)s yksikköä"
+
+#: apps/register/templates/register/import_preview.html:26
+msgid "Change columns"
+msgstr "Vaihda sarakkeita"
+
+#: apps/register/templates/register/import_preview.html:30
+#: apps/register/templates/register/import_preview.html:31
+msgid "Rows"
+msgstr "Rivit"
+
+#: apps/register/templates/register/import_preview.html:35
+msgid "Line"
+msgstr "Rivi"
+
+#: apps/register/templates/register/import_preview.html:37
+msgid "Result"
+msgstr "Tulos"
+
+#: apps/register/templates/register/import_preview.html:47
+msgid "OK"
+msgstr "OK"
+
+#: apps/register/templates/register/import_preview.html:48
+msgid "Skipped: already in the register"
+msgstr "Ohitettu: on jo rekisterissä"
+
+#: apps/register/templates/register/import_preview.html:50
+msgid "Errors"
+msgstr "Virheet"
+
+#: apps/register/templates/register/import_upload.html:3
+#: apps/register/templates/register/import_upload.html:5
+msgid "Import units from CSV"
+msgstr "Tuo yksiköt CSV-tiedostosta"
+
+#: apps/register/templates/register/import_upload.html:6
+msgid ""
+"Each row becomes one unit, optionally with one contact person. You choose "
+"which column goes where in the next step, and see every row checked before "
+"anything is saved."
+msgstr "Jokaisesta rivistä tulee yksi yksikkö ja tarvittaessa yksi yhteyshenkilö. Valitset seuraavassa vaiheessa, mikä sarake mihinkin kuuluu, ja näet kaikki rivit tarkistettuina ennen tallennusta."
+
+#: apps/register/templates/register/import_upload.html:10
+msgid "Example for the water association setup:"
+msgstr "Esimerkki vesiosuuskunnan asetuksista:"
+
+#: apps/register/templates/register/import_upload.html:24
+msgid ""
+"There are no unit types yet. An administrator must create one under Settings "
+"first."
+msgstr "Yksikkötyyppejä ei ole vielä. Ylläpitäjän on ensin luotava sellainen kohdassa Asetukset."
+
+#: apps/register/templates/register/person_detail.html:12
+#: apps/register/templates/register/unit_detail.html:12
+msgid "Restore"
+msgstr "Palauta"
+
+#: apps/register/templates/register/person_detail.html:12
+#: apps/register/templates/register/unit_detail.html:12
+msgid "Archive"
+msgstr "Arkistoi"
+
+#: apps/register/templates/register/person_detail.html:40
+msgid "Not linked to any unit."
+msgstr "Ei liitetty mihinkään yksikköön."
+
+#: apps/register/templates/register/person_form.html:3
+#: apps/register/templates/register/person_form.html:5
+#, python-format
+msgid "Edit %(name)s"
+msgstr "Muokkaa: %(name)s"
+
+#: apps/register/templates/register/person_form.html:3
+#: apps/register/templates/register/person_form.html:5
+msgid "New person"
+msgstr "Uusi henkilö"
+
+#: apps/register/templates/register/person_form.html:9
+#, python-format
+msgid "This person will be added to %(for_unit)s"
+msgstr "Tämä henkilö lisätään kohteeseen %(for_unit)s"
+
+#: apps/register/templates/register/person_form.html:12
+#: apps/register/templates/register/unit_detail.html:38
+msgid "Role"
+msgstr "Rooli"
+
+#: apps/register/templates/register/person_list.html:7
+msgid "Add person"
+msgstr "Lisää henkilö"
+
+#: apps/register/templates/register/person_list.html:19
+#: apps/register/templates/register/unit_list.html:37
+msgid "All tags"
+msgstr "Kaikki tunnisteet"
+
+#: apps/register/templates/register/unit_detail.html:65
+msgid "No contacts yet."
+msgstr "Ei yhteyshenkilöitä vielä."
+
+#: apps/register/templates/register/unit_detail.html:69
+msgid "Add existing person"
+msgstr "Lisää olemassa oleva henkilö"
+
+#: apps/register/templates/register/unit_detail.html:76
+msgid "Add"
+msgstr "Lisää"
+
+#: apps/register/templates/register/unit_detail.html:80
+msgid "Add new person"
+msgstr "Lisää uusi henkilö"
+
+#: apps/register/templates/register/unit_form.html:3
+#: apps/register/templates/register/unit_form.html:5
+#, python-format
+msgid "Edit %(unit)s"
+msgstr "Muokkaa: %(unit)s"
+
+#: apps/register/templates/register/unit_form.html:3
+#: apps/register/templates/register/unit_form.html:5
+#, python-format
+msgid "New %(unit_type)s"
+msgstr "Uusi %(unit_type)s"
+
+#: apps/register/templates/register/unit_list.html:8
+msgid "Import CSV"
+msgstr "Tuo CSV"
+
+#: apps/register/templates/register/unit_list.html:9
+#: apps/register/templates/register/unit_type_choose.html:3
+msgid "Add unit"
+msgstr "Lisää yksikkö"
+
+#: apps/register/templates/register/unit_list.html:23
+msgid "All types"
+msgstr "Kaikki tyypit"
+
+#: apps/register/templates/register/unit_list.html:30
+msgid "All statuses"
+msgstr "Kaikki tilat"
+
+#: apps/register/templates/register/unit_type_choose.html:5
+msgid "What kind of unit do you want to add?"
+msgstr "Minkä tyyppisen yksikön haluat lisätä?"
+
+#: apps/register/templates/register/unit_type_choose.html:14
+msgid ""
+"There are no unit types yet. An administrator must create a unit type first "
+"under"
+msgstr "Yksikkötyyppejä ei ole vielä. Ylläpitäjän on ensin luotava yksikkötyyppi kohdassa"
+
+#: apps/register/templates/register/unit_type_choose.html:16
+#: templates/base.html:27
+msgid "Settings"
+msgstr "Asetukset"
+
+#: apps/register/views.py:170 apps/register/views.py:318
+#, python-format
+msgid "Restored %(name)s."
+msgstr "Palautettu: %(name)s."
+
+#: apps/register/views.py:173 apps/register/views.py:321
+#, python-format
+msgid "Archived %(name)s."
+msgstr "Arkistoitu: %(name)s."
+
+#: apps/register/views.py:185
+#, python-format
+msgid "Added %(name)s."
+msgstr "Lisätty: %(name)s."
+
+#: apps/register/views.py:187
+msgid "Choose a person and a role."
+msgstr "Valitse henkilö ja rooli."
+
+#: apps/register/views.py:198
+#, python-format
+msgid "Removed %(name)s."
+msgstr "Poistettu: %(name)s."
+
+#: apps/selfservice/apps.py:7
+msgid "Member self-service"
+msgstr "Jäsenen itsepalvelu"
+
+#: apps/selfservice/forms.py:33
+msgid "We send you messages by email, so it cannot be empty."
+msgstr "Lähetämme sinulle viestit sähköpostitse, joten kenttä ei voi olla tyhjä."
+
+#: apps/selfservice/forms.py:35
+msgid "We send you messages by SMS, so it cannot be empty."
+msgstr "Lähetämme sinulle viestit tekstiviestillä, joten kenttä ei voi olla tyhjä."
+
+#: apps/selfservice/models.py:74
+msgid "expires"
+msgstr "vanhenee"
+
+#: apps/selfservice/models.py:75
+msgid "revoked"
+msgstr "peruutettu"
+
+#: apps/selfservice/models.py:85
+msgid "last opened"
+msgstr "viimeksi avattu"
+
+#: apps/selfservice/models.py:91
+msgid "self-service link"
+msgstr "itsepalvelulinkki"
+
+#: apps/selfservice/models.py:92
+msgid "self-service links"
+msgstr "itsepalvelulinkit"
+
+#: apps/selfservice/public.py:108
+msgid "Thank you. Your reading is saved."
+msgstr "Kiitos. Lukemasi on tallennettu."
+
+#: apps/selfservice/public.py:115
+msgid "Thank you. You will get the newsletter."
+msgstr "Kiitos. Saat uutiskirjeen."
+
+#: apps/selfservice/public.py:117
+msgid "You will not get the newsletter."
+msgstr "Et saa uutiskirjettä."
+
+#: apps/selfservice/public.py:123
+msgid "Thank you. Your contact details are updated."
+msgstr "Kiitos. Yhteystietosi on päivitetty."
+
+#: apps/selfservice/public.py:125
+msgid "Nothing was changed."
+msgstr "Mitään ei muutettu."
+
+#: apps/selfservice/templates/selfservice/_errors.html:4
+msgid "Please check the form:"
+msgstr "Tarkista lomake:"
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:3
+msgid "Self-service"
+msgstr "Itsepalvelu"
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:8
+#, python-format
+msgid "Link for %(person)s, works until %(date)s"
+msgstr "Linkki henkilölle %(person)s, voimassa %(date)s asti"
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:13
+#: apps/selfservice/templates/selfservice/round_links.html:59
+msgid "Stop link"
+msgstr "Pysäytä linkki"
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:20
+msgid "No working self-service link."
+msgstr "Ei toimivaa itsepalvelulinkkiä."
+
+#: apps/selfservice/templates/selfservice/_unit_links.html:25
+msgid "Print self-service letter"
+msgstr "Tulosta itsepalvelukirje"
+
+#: apps/selfservice/templates/selfservice/base.html:9
+#: apps/selfservice/templates/selfservice/base.html:18 templates/base.html:7
+#: templates/base.html:18
+msgid "Metra"
+msgstr "Metra"
+
+#: apps/selfservice/templates/selfservice/base.html:15 templates/base.html:15
+msgid "Skip to content"
+msgstr "Siirry sisältöön"
+
+#: apps/selfservice/templates/selfservice/base.html:19
+#: templates/_language_form.html:5
+msgid "Language"
+msgstr "Kieli"
+
+#: apps/selfservice/templates/selfservice/member.html:6
+#, python-format
+msgid "Hello %(name)s"
+msgstr "Hei %(name)s"
+
+#: apps/selfservice/templates/selfservice/member.html:15
+#, python-format
+msgid "Last time the reading was %(value)s."
+msgstr "Edellinen lukema oli %(value)s."
+
+#: apps/selfservice/templates/selfservice/member.html:16
+#, python-format
+msgid "You have reported %(value)s. You can change it until %(closes)s."
+msgstr "Olet ilmoittanut lukeman %(value)s. Voit muuttaa sitä %(closes)s asti."
+
+#: apps/selfservice/templates/selfservice/member.html:16
+#, python-format
+msgid "Enter the number on the meter by %(closes)s."
+msgstr "Syötä mittarin lukema %(closes)s mennessä."
+
+#: apps/selfservice/templates/selfservice/member.html:24
+msgid "Change reading"
+msgstr "Muuta lukemaa"
+
+#: apps/selfservice/templates/selfservice/member.html:24
+msgid "Save reading"
+msgstr "Tallenna lukema"
+
+#: apps/selfservice/templates/selfservice/member.html:27
+#, python-format
+msgid "The reading %(value)s was registered on %(date)s."
+msgstr "Lukema %(value)s kirjattiin %(date)s."
+
+#: apps/selfservice/templates/selfservice/member.html:28
+msgid "The reading round is closed, so it can no longer be changed here."
+msgstr "Lukemakierros on päättynyt, joten lukemaa ei voi enää muuttaa täällä."
+
+#: apps/selfservice/templates/selfservice/member.html:30
+msgid "The reading round is not open, so no reading can be entered here."
+msgstr "Lukemakierros ei ole auki, joten lukemaa ei voi syöttää täällä."
+
+#: apps/selfservice/templates/selfservice/member.html:36
+msgid "Your contact details"
+msgstr "Yhteystietosi"
+
+#: apps/selfservice/templates/selfservice/member.html:37
+msgid "Correct anything that is wrong or missing and save."
+msgstr "Korjaa virheelliset tai puuttuvat tiedot ja tallenna."
+
+#: apps/selfservice/templates/selfservice/member.html:43
+msgid "Save contact details"
+msgstr "Tallenna yhteystiedot"
+
+#: apps/selfservice/templates/selfservice/member.html:49
+msgid "Your invoices"
+msgstr "Laskusi"
+
+#: apps/selfservice/templates/selfservice/member.html:54
+#, python-format
+msgid "due %(date)s"
+msgstr "eräpäivä %(date)s"
+
+#: apps/selfservice/templates/selfservice/member.html:63
+msgid ""
+"We sometimes send a newsletter by email about what is going on. Messages "
+"about the service itself, such as disruptions, reach you either way."
+msgstr "Lähetämme joskus sähköpostitse uutiskirjeen ajankohtaisista asioista. Palvelua koskevat viestit, kuten häiriötiedotteet, tavoittavat sinut joka tapauksessa."
+
+#: apps/selfservice/templates/selfservice/member.html:68
+msgid "Do you want the newsletter?"
+msgstr "Haluatko uutiskirjeen?"
+
+#: apps/selfservice/templates/selfservice/member.html:70
+msgid "Yes, send me the newsletter by email"
+msgstr "Kyllä, lähettäkää minulle uutiskirje sähköpostitse"
+
+#: apps/selfservice/templates/selfservice/member.html:71
+msgid "No, thank you"
+msgstr "Ei kiitos"
+
+#: apps/selfservice/templates/selfservice/member.html:74
+msgid "Add your email address above to get it."
+msgstr "Lisää sähköpostiosoitteesi yllä saadaksesi sen."
+
+#: apps/selfservice/templates/selfservice/member.html:75
+msgid "Save my choice"
+msgstr "Tallenna valintani"
+
+#: apps/selfservice/templates/selfservice/member.html:81
+msgid "Others in your household"
+msgstr "Muut taloudessasi"
+
+#: apps/selfservice/templates/selfservice/member.html:87
+msgid "To change their details, use their own link or contact us."
+msgstr "Käytä muutoksiin heidän omaa linkkiään tai ota meihin yhteyttä."
+
+#: apps/selfservice/templates/selfservice/member.html:93
+#, python-format
+msgid "Contact %(name)s"
+msgstr "Ota yhteyttä: %(name)s"
+
+#: apps/selfservice/templates/selfservice/member.html:98
+msgid "This page is personal. Do not share the link."
+msgstr "Tämä sivu on henkilökohtainen. Älä jaa linkkiä."
+
+#: apps/selfservice/templates/selfservice/print.html:8
+msgid "Self-service letter"
+msgstr "Itsepalvelukirje"
+
+#: apps/selfservice/templates/selfservice/print.html:13
+#, python-format
+msgid "%(count)s link was made."
+msgid_plural "%(count)s links were made."
+msgstr[0] "%(count)s linkki luotiin."
+msgstr[1] "%(count)s linkkiä luotiin."
+
+#: apps/selfservice/templates/selfservice/print.html:14
+msgid "Print this page now: the links are not shown again."
+msgstr "Tulosta tämä sivu nyt: linkkejä ei näytetä uudelleen."
+
+#: apps/selfservice/templates/selfservice/print.html:16
+msgid "These units have no contact person, so they got no link:"
+msgstr "Näillä yksiköillä ei ole yhteyshenkilöä, joten ne eivät saaneet linkkiä:"
+
+#: apps/selfservice/templates/selfservice/print.html:19
+msgid "Print"
+msgstr "Tulosta"
+
+#: apps/selfservice/templates/selfservice/print.html:28
+msgid "Link"
+msgstr "Linkki"
+
+#: apps/selfservice/templates/selfservice/print.html:29
+msgid "QR code"
+msgstr "QR-koodi"
+
+#: apps/selfservice/templates/selfservice/print.html:58
+#, python-format
+msgid "%(what)s %(period)s: please report your reading"
+msgstr "%(what)s %(period)s: ilmoita lukemasi"
+
+#: apps/selfservice/templates/selfservice/print.html:58
+msgid "Please check your contact details"
+msgstr "Tarkista yhteystietosi"
+
+#: apps/selfservice/templates/selfservice/print.html:59
+#, python-format
+msgid "Hello %(name)s,"
+msgstr "Hei %(name)s,"
+
+#: apps/selfservice/templates/selfservice/print.html:61
+#, python-format
+msgid ""
+"Please read the meter at %(unit)s and report the number by %(date)s. You can "
+"also check that we have your correct contact details."
+msgstr "Lue mittari kohteessa %(unit)s ja ilmoita lukema %(date)s mennessä. Voit samalla tarkistaa, että meillä on oikeat yhteystietosi."
+
+#: apps/selfservice/templates/selfservice/print.html:63
+#, python-format
+msgid ""
+"Please check that we have the correct contact details for you at %(unit)s."
+msgstr "Tarkista, että meillä on oikeat yhteystietosi kohteessa %(unit)s."
+
+#: apps/selfservice/templates/selfservice/print.html:65
+msgid ""
+"Scan the QR code with your phone's camera, or type the address into a web "
+"browser:"
+msgstr "Skannaa QR-koodi puhelimen kameralla tai kirjoita osoite selaimeen:"
+
+#: apps/selfservice/templates/selfservice/print.html:70
+#, python-format
+msgid ""
+"The link is personal and works until %(date)s. You do not need a password."
+msgstr "Linkki on henkilökohtainen ja toimii %(date)s asti. Salasanaa ei tarvita."
+
+#: apps/selfservice/templates/selfservice/print.html:73
+msgid "If you cannot use the link, contact us:"
+msgstr "Jos et voi käyttää linkkiä, ota yhteyttä:"
+
+#: apps/selfservice/templates/selfservice/recent_changes.html:6
+msgid ""
+"Readings and contact details members changed through their personal links, "
+"newest first."
+msgstr "Jäsenten henkilökohtaisten linkkien kautta tekemät lukemien ja yhteystietojen muutokset, uusimmat ensin."
+
+#: apps/selfservice/templates/selfservice/recent_changes.html:40
+msgid "No changes through self-service links yet."
+msgstr "Itsepalvelulinkkien kautta ei ole vielä tehty muutoksia."
+
+#: apps/selfservice/templates/selfservice/round_links.html:3
+#: apps/selfservice/templates/selfservice/round_links.html:5
+#, python-format
+msgid "Self-service links for %(round)s"
+msgstr "Itsepalvelulinkit: %(round)s"
+
+#: apps/selfservice/templates/selfservice/round_links.html:7
+msgid ""
+"Each unit's contact gets a personal link to report the reading and check "
+"their contact details, without a password. A link works until the round "
+"closes. Making a new link for someone stops their earlier one."
+msgstr "Jokaisen yksikön yhteyshenkilö saa henkilökohtaisen linkin, jolla voi ilmoittaa lukeman ja tarkistaa yhteystiedot ilman salasanaa. Linkki toimii, kunnes kierros päättyy. Uuden linkin luominen henkilölle pysäyttää hänen aiemman linkkinsä."
+
+#: apps/selfservice/templates/selfservice/round_links.html:12
+msgid "Print letters"
+msgstr "Tulosta kirjeet"
+
+#: apps/selfservice/templates/selfservice/round_links.html:16
+msgid "For"
+msgstr "Kohde"
+
+#: apps/selfservice/templates/selfservice/round_links.html:22
+msgid "Layout"
+msgstr "Asettelu"
+
+#: apps/selfservice/templates/selfservice/round_links.html:24
+msgid "One letter per page"
+msgstr "Yksi kirje per sivu"
+
+#: apps/selfservice/templates/selfservice/round_links.html:25
+msgid "A list with QR codes"
+msgstr "Luettelo QR-koodeineen"
+
+#: apps/selfservice/templates/selfservice/round_links.html:28
+msgid ""
+"The links are shown only once, on the page that opens. Print it straight "
+"away."
+msgstr "Linkit näytetään vain kerran, avautuvalla sivulla. Tulosta se heti."
+
+#: apps/selfservice/templates/selfservice/round_links.html:29
+msgid "Make links and print"
+msgstr "Luo linkit ja tulosta"
+
+#: apps/selfservice/templates/selfservice/round_links.html:33
+#: apps/selfservice/templates/selfservice/round_links.html:35
+msgid "Links"
+msgstr "Linkit"
+
+#: apps/selfservice/templates/selfservice/round_links.html:42
+msgid "Last opened"
+msgstr "Viimeksi avattu"
+
+#: apps/selfservice/templates/selfservice/round_links.html:54
+msgid "Stopped"
+msgstr "Pysäytetty"
+
+#: apps/selfservice/templates/selfservice/round_links.html:54
+msgid "Works"
+msgstr "Toimii"
+
+#: apps/selfservice/templates/selfservice/round_links.html:54
+msgid "Expired"
+msgstr "Vanhentunut"
+
+#: apps/selfservice/templates/selfservice/round_links.html:71
+msgid "Stop all links for this round"
+msgstr "Pysäytä kaikki tämän kierroksen linkit"
+
+#: apps/selfservice/templates/selfservice/round_links.html:75
+msgid "No links yet."
+msgstr "Ei linkkejä vielä."
+
+#: apps/selfservice/templates/selfservice/too_many.html:3
+#: apps/selfservice/templates/selfservice/too_many.html:5
+msgid "Please wait a moment"
+msgstr "Odota hetki"
+
+#: apps/selfservice/templates/selfservice/too_many.html:6
+msgid ""
+"There have been too many attempts from your connection. Try again in an hour."
+msgstr "Yhteydestäsi on tehty liian monta yritystä. Yritä uudelleen tunnin kuluttua."
+
+#: apps/selfservice/templates/selfservice/unavailable.html:6
+msgid ""
+"The link may be old or mistyped, or a newer letter or message may have "
+"replaced it."
+msgstr "Linkki voi olla vanha tai kirjoitettu väärin, tai uudempi kirje tai viesti on voinut korvata sen."
+
+#: apps/selfservice/templates/selfservice/unavailable.html:7
+msgid ""
+"If you need to report a reading or change your details, contact the "
+"organisation that sent you the link."
+msgstr "Jos haluat ilmoittaa lukeman tai muuttaa tietojasi, ota yhteyttä linkin lähettäneeseen organisaatioon."
+
+#: apps/selfservice/views.py:25
+msgid "Units whose contact has no phone or email"
+msgstr "Yksiköt, joiden yhteyshenkilöllä ei ole puhelinnumeroa eikä sähköpostiosoitetta"
+
+#: apps/selfservice/views.py:113
+msgid "Add a contact person before printing a letter."
+msgstr "Lisää yhteyshenkilö ennen kirjeen tulostamista."
+
+#: apps/selfservice/views.py:126
+msgid "The link no longer works."
+msgstr "Linkki ei enää toimi."
+
+#: apps/selfservice/views.py:142
+#, python-format
+msgid "%(count)s links no longer work."
+msgstr "%(count)s linkkiä ei enää toimi."
+
+#: config/settings.py:183
+msgid "Swedish"
+msgstr "Ruotsi"
+
+#: config/settings.py:184
+msgid "English"
+msgstr "Englanti"
+
+#: config/settings.py:185
+msgid "Finnish (machine translated)"
+msgstr "Suomi (konekäännös)"
+
+#: templates/403.html:3 templates/403.html:5
+msgid "No access"
+msgstr "Ei käyttöoikeutta"
+
+#: templates/403.html:6
+msgid ""
+"Your role does not allow you to open this page. Ask an admin if you need "
+"access."
+msgstr "Roolisi ei salli tämän sivun avaamista. Pyydä tarvittaessa käyttöoikeutta ylläpitäjältä."
+
+#: templates/403.html:7
+msgid "Go to the start page"
+msgstr "Siirry aloitussivulle"
+
+#: templates/_language_form.html:12
+msgid "Change"
+msgstr "Muuta"
+
+#: templates/_machine_translation_notice.html:2
+msgid ""
+"This translation was generated automatically and has not been reviewed. Some "
+"wording may be wrong."
+msgstr "Tämä käännös on luotu automaattisesti, eikä sitä ole tarkistettu. Joissakin sanamuodoissa voi olla virheitä."
+
+#: templates/base.html:20
+msgid "Main"
+msgstr "Päävalikko"
+
+#: templates/base.html:42
+msgid "Theme"
+msgstr "Teema"
+
+#: templates/base.html:45
+msgid "Light"
+msgstr "Vaalea"
+
+#: templates/base.html:46
+msgid "Dark"
+msgstr "Tumma"
+
+#: templates/base.html:51
+msgid "Log out"
+msgstr "Kirjaudu ulos"
+
+#: templates/base.html:64
+msgid ""
+"Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
+"off). Turn it on before real data goes in."
+msgstr "Kaksivaiheista tunnistautumista ei vaadita tässä asennuksessa (METRA_REQUIRE_MFA on pois päältä). Ota se käyttöön ennen kuin järjestelmään syötetään oikeita tietoja."
+
+#: templates/base.html:69
+msgid ""
+"Protect your account with two-factor login. It takes a minute with an "
+"authenticator app on your phone."
+msgstr "Suojaa tilisi kaksivaiheisella tunnistautumisella. Se vie minuutin todennussovelluksella puhelimellasi."

@@ -60,7 +60,9 @@ tavoittaa kaikki nopeasti. Se tehtiin ensin vesiosuuskunnalle, jossa on noin
   maksun QR-koodilla, hyvityslaskuilla ja maksumuistutuksilla
 - Öiset varmuuskopiot, salattuina ja kopioituina S3:een, SFTP:hen tai
   FTPS:ään
-- Laajennukset (pluginit) sekä ruotsi ja englanti sovelluksessa
+- Laajennukset (pluginit) sekä ruotsi, englanti ja suomi sovelluksessa
+  (suomenkielinen käännös on konekäännös, jota ei ole tarkistettu, ja
+  sovellus kertoo sen)
 
 **Tila:** varhainen kehitysvaihe. Rekisteri, lukemat, itsepalvelu,
 viestit, uutiskirjeet ja laskutus ovat valmiina; suunnitelma ja tulevat

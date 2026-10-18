@@ -49,7 +49,8 @@ först för ett vattenandelslag med ungefär 50 hushåll. Andra som passar bra:
   betalning, kreditnotor och betalningspåminnelser
 - Säkerhetskopior varje natt, krypterade och kopierade till S3, SFTP eller
   FTPS
-- Tillägg (plugins), och svenska och engelska i appen
+- Tillägg (plugins), och svenska, engelska och finska i appen (den finska
+  är maskinöversatt och ogranskad, och appen säger det)
 
 **Status:** tidig utveckling. Registret, avläsningar, självbetjäning,
 meddelanden, nyhetsbrev och fakturering finns; se

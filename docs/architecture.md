@@ -12,7 +12,7 @@ provider charges per message.
 
 Django gives us, well tested and for free: login with roles and two-factor,
 an admin interface, database migrations, translations (Swedish and English
-first, others later) and a mature REST API toolkit. That leaves our effort
+first, then a machine-translated Finnish, others later) and a mature REST API toolkit. That leaves our effort
 for what makes the product useful: configurable records, annual readings,
 invoicing and messaging.
 

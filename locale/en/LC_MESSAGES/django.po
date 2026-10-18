@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 18:43+0300\n"
+"POT-Creation-Date: 2026-10-18 19:30+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,7 +130,7 @@ msgstr ""
 msgid "Turn off"
 msgstr ""
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:69
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:70
 msgid "Turn on two-factor login"
 msgstr ""
 
@@ -3964,12 +3964,16 @@ msgstr ""
 msgid "%(count)s links no longer work."
 msgstr ""
 
-#: config/settings.py:168
+#: config/settings.py:183
 msgid "Swedish"
 msgstr ""
 
-#: config/settings.py:169
+#: config/settings.py:184
 msgid "English"
+msgstr ""
+
+#: config/settings.py:185
+msgid "Finnish (machine translated)"
 msgstr ""
 
 #: templates/403.html:3 templates/403.html:5
@@ -3988,6 +3992,12 @@ msgstr ""
 
 #: templates/_language_form.html:12
 msgid "Change"
+msgstr ""
+
+#: templates/_machine_translation_notice.html:2
+msgid ""
+"This translation was generated automatically and has not been reviewed. Some "
+"wording may be wrong."
 msgstr ""
 
 #: templates/base.html:20
@@ -4010,13 +4020,13 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: templates/base.html:63
+#: templates/base.html:64
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
 msgstr ""
 
-#: templates/base.html:68
+#: templates/base.html:69
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."

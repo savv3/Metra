@@ -47,7 +47,8 @@ first for a water association with about 50 households. Other good fits:
 - Invoicing with Finnish reference numbers, bank barcodes, payment QR codes,
   credit notes and payment reminders
 - Nightly backups, encrypted and copied to S3, SFTP or FTPS
-- Plugins, and Swedish and English in the app
+- Plugins, and Swedish, English and Finnish in the app (the Finnish is
+  machine translated and unreviewed, and the app says so)
 
 **Status:** early development. The register, readings, self-service,
 messaging, newsletters and invoicing are in place; see

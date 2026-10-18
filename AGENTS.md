@@ -31,7 +31,7 @@ Do not revisit these without the maintainer asking.
 | Background jobs | Huey with SQLite storage, run as `manage.py run_huey` |
 | Deployment | Docker Compose: `web`, `worker`, `caddy` sharing one data volume |
 | Licence | MIT |
-| Languages | Swedish (default) and English |
+| Languages | Swedish (default), English and Finnish (machine translated, flagged in the UI) |
 | First country rules | Finland including Åland (Åland is outside the EU VAT area) |
 | Member self-service | Yes, through expiring personal links, no member passwords |
 | SMS provider | 46elks, behind a provider interface so others can be added |
@@ -83,7 +83,10 @@ docker compose up --build                       # full stack, needs a .env (see 
   uploads), so one directory is all a backup needs.
 - **Translations:** every user-facing string goes through `gettext` /
   `{% translate %}`. Add the Swedish translation in
-  `locale/sv/LC_MESSAGES/django.po` in the same PR. Compiled `.mo` files are
+  `locale/sv/LC_MESSAGES/django.po` and the Finnish one in
+  `locale/fi/LC_MESSAGES/django.po` in the same PR. The maintainer proofreads
+  Swedish and English but not Finnish, which is machine translated: keep it
+  in `MACHINE_TRANSLATED_LANGUAGES` so pages show a notice saying so. Compiled `.mo` files are
   not committed.
 - **Privacy (GDPR):** store only fields with a clear purpose, log changes to
   personal data, and make sure new personal data is covered by the
