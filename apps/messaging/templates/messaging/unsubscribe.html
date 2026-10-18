@@ -1,0 +1,18 @@
+{% extends "selfservice/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Newsletter" %}{% endblock %}
+{% block content %}
+  {% if person is None %}
+    <h1>{% translate "This link does not work" %}</h1>
+    <p>{% translate "If you want to stop getting the newsletter, contact the organisation that sends it." %}</p>
+  {% elif done %}
+    <h1>{% translate "You are unsubscribed" %}</h1>
+    <p>{% translate "You will not get the newsletter any more. Messages about the service itself, such as disruptions, still reach you." %}</p>
+  {% else %}
+    <h1>{% translate "Unsubscribe from the newsletter?" %}</h1>
+    <p>{% blocktranslate with name=person.full_name %}The newsletter is sent to {{ name }}.{% endblocktranslate %}</p>
+    <form method="post">
+      <button type="submit" class="button button--primary">{% translate "Unsubscribe" %}</button>
+    </form>
+  {% endif %}
+{% endblock %}

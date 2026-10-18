@@ -13,9 +13,9 @@ from django.views.decorators.http import require_POST
 from apps.core.models import Notice
 from apps.readings.models import ReadingRound
 
-from . import broadcast
-from .forms import MessageForm
-from .models import Message, MessageBatch, MessageTemplate
+from . import broadcast, newsletter
+from .forms import ConsentForm, MessageForm, NewsletterForm
+from .models import ConsentRecord, Message, MessageBatch, MessageTemplate
 from .providers import elks_callback_secret
 from .registry import EMAIL, SMS, provider_for
 from .sms import segments
@@ -185,3 +185,79 @@ def notice_end(request, pk):
     messages.success(request, _("The notice is no longer shown."))
     batch = notice.batches.first()
     return redirect(batch or "messaging:batch_list")
+
+
+@login_required
+@permission_required("messaging.send_newsletter", raise_exception=True)
+def newsletter_compose(request):
+    """Write a newsletter, see who gets it, and send it to those who said yes."""
+    form = NewsletterForm(request.POST or None)
+    people = list(newsletter.recipients())
+    context = {"form": form, "count": len(people), "email": channel_status()["email"]}
+    if request.method == "POST" and form.is_valid():
+        data = form.cleaned_data
+        if request.POST.get("step") == "confirm" and "edit" not in request.POST and people:
+            batch = MessageBatch.objects.create(
+                kind=MessageBatch.Kind.NEWSLETTER,
+                channels=MessageBatch.Channels.EMAIL,
+                subject=data["subject"],
+                body=data["subject"],
+                email_body=data["body"],
+                audience=_("Everyone who wants the newsletter"),
+                recipients=[[person.pk, None] for person in people],
+                created_by=request.user,
+            )
+            send_batch_task(batch.pk)
+            messages.success(request, _("Sending has started. This page shows how it goes."))
+            return redirect(batch)
+        if "edit" not in request.POST:
+            first = people[0] if people else None
+            values = broadcast.placeholders(first)
+            context |= {
+                "step": "confirm",
+                "example_for": first,
+                "example": MessageTemplate.fill(data["body"], values)
+                + (newsletter.footer(first) if first else ""),
+            }
+    return render(request, "messaging/newsletter_compose.html", context)
+
+
+@login_required
+@permission_required("register.change_person", raise_exception=True)
+@require_POST
+def person_consent(request, pk):
+    from apps.register.models import Person
+
+    person = get_object_or_404(Person, pk=pk)
+    form = ConsentForm(request.POST)
+    if form.is_valid():
+        ConsentRecord.record(
+            person,
+            form.cleaned_data["subscribed"],
+            ConsentRecord.Source.STAFF,
+            by=request.user,
+            note=form.cleaned_data["note"],
+        )
+        messages.success(request, _("Saved the newsletter choice."))
+    return redirect(person.get_absolute_url() + "#newsletter")
+
+
+@csrf_exempt
+def unsubscribe(request, token):
+    """The link at the end of every newsletter. Opening it asks for a click (so
+    mail scanners that open links do not unsubscribe anyone); mail programs'
+    one-click unsubscribe posts here directly (RFC 8058), without a CSRF token."""
+    from apps.core.language import switch_language
+    from apps.register.models import Organisation
+
+    if switched := switch_language(request):
+        return switched
+    person = newsletter.person_for_token(token)
+    context = {"organisation": Organisation.current(), "person": person, "done": False}
+    if person is not None and request.method == "POST":
+        ConsentRecord.record(person, False, ConsentRecord.Source.UNSUBSCRIBE_LINK)
+        context["done"] = True
+    status = 200 if person is not None else 404
+    response = render(request, "messaging/unsubscribe.html", context, status=status)
+    response["Referrer-Policy"] = "same-origin"
+    return response

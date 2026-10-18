@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 17:28+0300\n"
+"POT-Creation-Date: 2026-10-18 17:33+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,7 +72,7 @@ msgstr ""
 msgid "started"
 msgstr ""
 
-#: apps/backups/models.py:14 apps/messaging/models.py:77
+#: apps/backups/models.py:14 apps/messaging/models.py:79
 msgid "finished"
 msgstr ""
 
@@ -96,7 +96,7 @@ msgstr ""
 msgid "target"
 msgstr ""
 
-#: apps/backups/models.py:23 apps/messaging/models.py:159
+#: apps/backups/models.py:23 apps/messaging/models.py:164
 msgid "error"
 msgstr ""
 
@@ -140,8 +140,8 @@ msgstr ""
 msgid "Urgent"
 msgstr ""
 
-#: apps/core/models.py:23 apps/messaging/models.py:81
-#: apps/messaging/models.py:153 apps/messaging/models.py:214
+#: apps/core/models.py:23 apps/messaging/models.py:83
+#: apps/messaging/models.py:158 apps/messaging/models.py:219
 msgid "text"
 msgstr ""
 
@@ -165,13 +165,13 @@ msgstr ""
 msgid "created by"
 msgstr ""
 
-#: apps/core/models.py:37 apps/messaging/models.py:76
-#: apps/messaging/models.py:160 apps/readings/models.py:78
+#: apps/core/models.py:37 apps/messaging/models.py:78
+#: apps/messaging/models.py:165 apps/readings/models.py:78
 #: apps/register/models.py:227 apps/selfservice/models.py:76
 msgid "created"
 msgstr ""
 
-#: apps/core/models.py:43 apps/messaging/models.py:88
+#: apps/core/models.py:43 apps/messaging/models.py:90
 msgid "notice"
 msgstr ""
 
@@ -190,7 +190,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: apps/core/templates/core/_contact.html:14 apps/messaging/models.py:24
+#: apps/core/templates/core/_contact.html:14 apps/messaging/models.py:25
 #: apps/messaging/templates/messaging/compose.html:20
 #: apps/register/csv_io.py:520 apps/register/models.py:265
 #: apps/register/templates/register/_person_results.html:8
@@ -286,8 +286,8 @@ msgid ""
 "{emergency_phone}."
 msgstr ""
 
-#: apps/messaging/forms.py:30 apps/messaging/models.py:36
-#: apps/messaging/templates/messaging/batch_list.html:10
+#: apps/messaging/forms.py:30 apps/messaging/models.py:37
+#: apps/messaging/templates/messaging/batch_list.html:12
 #: apps/messaging/templates/messaging/compose.html:3
 #: apps/messaging/templates/messaging/compose.html:6
 msgid "Urgent alert"
@@ -321,7 +321,7 @@ msgstr ""
 msgid "Send by"
 msgstr ""
 
-#: apps/messaging/forms.py:53 apps/messaging/models.py:35
+#: apps/messaging/forms.py:53 apps/messaging/models.py:36
 #: apps/messaging/templates/messaging/batch_detail.html:10
 #: apps/messaging/templates/messaging/compose.html:26
 msgid "Message"
@@ -384,197 +384,241 @@ msgstr ""
 msgid "Write the notice without personal placeholders."
 msgstr ""
 
-#: apps/messaging/models.py:23
+#: apps/messaging/forms.py:141
+msgid "Subject"
+msgstr ""
+
+#: apps/messaging/forms.py:143 apps/register/models.py:150
+msgid "Text"
+msgstr ""
+
+#: apps/messaging/forms.py:146
+#, python-brace-format
+msgid ""
+"Plain text. You can use {first_name}, {name} and {organisation}. An "
+"unsubscribe link is added at the end of every email."
+msgstr ""
+
+#: apps/messaging/forms.py:156 apps/messaging/models.py:38
+#: apps/messaging/templates/messaging/_person_newsletter.html:3
+#: apps/messaging/templates/messaging/unsubscribe.html:3
+#: apps/selfservice/templates/selfservice/member.html:48
+msgid "Newsletter"
+msgstr ""
+
+#: apps/messaging/forms.py:157
+#: apps/messaging/templates/messaging/_person_newsletter.html:6
+msgid "Wants the newsletter"
+msgstr ""
+
+#: apps/messaging/forms.py:157
+msgid "Does not want it"
+msgstr ""
+
+#: apps/messaging/forms.py:162
+msgid "How it was given"
+msgstr ""
+
+#: apps/messaging/forms.py:165
+msgid "For example: signed form at the annual meeting."
+msgstr ""
+
+#: apps/messaging/models.py:24
 #: apps/messaging/templates/messaging/compose.html:19
 #: apps/register/models.py:266
 msgid "SMS"
 msgstr ""
 
-#: apps/messaging/models.py:25
+#: apps/messaging/models.py:26
 msgid "Letter"
 msgstr ""
 
-#: apps/messaging/models.py:32
+#: apps/messaging/models.py:33
 #: apps/readings/templates/readings/round_detail.html:8
 msgid "Self-service links"
 msgstr ""
 
-#: apps/messaging/models.py:33 apps/messaging/models.py:204
+#: apps/messaging/models.py:34 apps/messaging/models.py:209
 msgid "Reminder"
 msgstr ""
 
-#: apps/messaging/models.py:34
+#: apps/messaging/models.py:35
 msgid "Automatic reminder"
 msgstr ""
 
-#: apps/messaging/models.py:39
+#: apps/messaging/models.py:41
 #: apps/readings/templates/readings/round_detail.html:31
 #: apps/selfservice/views.py:23
 msgid "All units"
 msgstr ""
 
-#: apps/messaging/models.py:40 apps/selfservice/views.py:24
+#: apps/messaging/models.py:42 apps/selfservice/views.py:24
 msgid "Units missing a reading"
 msgstr ""
 
-#: apps/messaging/models.py:45
+#: apps/messaging/models.py:47
 msgid "SMS only"
 msgstr ""
 
-#: apps/messaging/models.py:46
+#: apps/messaging/models.py:48
 msgid "Email only"
 msgstr ""
 
-#: apps/messaging/models.py:47
+#: apps/messaging/models.py:49
 msgid "SMS, or email for those without a phone"
 msgstr ""
 
-#: apps/messaging/models.py:48
+#: apps/messaging/models.py:50
 msgid "Both SMS and email"
 msgstr ""
 
-#: apps/messaging/models.py:51
+#: apps/messaging/models.py:53
 msgid "Waiting to be sent"
 msgstr ""
 
-#: apps/messaging/models.py:52
+#: apps/messaging/models.py:54
 msgid "Sending"
 msgstr ""
 
-#: apps/messaging/models.py:53
+#: apps/messaging/models.py:55
 msgid "Done"
 msgstr ""
 
-#: apps/messaging/models.py:55
+#: apps/messaging/models.py:57
 msgid "kind"
 msgstr ""
 
-#: apps/messaging/models.py:56
+#: apps/messaging/models.py:58
 msgid "to"
 msgstr ""
 
-#: apps/messaging/models.py:59 apps/readings/models.py:83
+#: apps/messaging/models.py:61 apps/readings/models.py:83
 #: apps/selfservice/models.py:68
 msgid "reading round"
 msgstr ""
 
-#: apps/messaging/models.py:66 apps/messaging/models.py:155
+#: apps/messaging/models.py:68 apps/messaging/models.py:160
 #: apps/readings/models.py:76 apps/register/models.py:308
 msgid "status"
 msgstr ""
 
-#: apps/messaging/models.py:70
+#: apps/messaging/models.py:72
 msgid "sent by"
 msgstr ""
 
-#: apps/messaging/models.py:79
+#: apps/messaging/models.py:81
 msgid "channels"
 msgstr ""
 
-#: apps/messaging/models.py:80
+#: apps/messaging/models.py:82
 msgid "email subject"
 msgstr ""
 
-#: apps/messaging/models.py:82
+#: apps/messaging/models.py:84
 msgid "email text"
 msgstr ""
 
-#: apps/messaging/models.py:83
+#: apps/messaging/models.py:85
 msgid "recipients"
 msgstr ""
 
-#: apps/messaging/models.py:97 apps/messaging/models.py:128
+#: apps/messaging/models.py:99 apps/messaging/models.py:133
 msgid "send-out"
 msgstr ""
 
-#: apps/messaging/models.py:98
+#: apps/messaging/models.py:100
 msgid "send-outs"
 msgstr ""
 
-#: apps/messaging/models.py:99
+#: apps/messaging/models.py:102
 msgid "Can send messages and alerts to everyone"
 msgstr ""
 
-#: apps/messaging/models.py:120
+#: apps/messaging/models.py:103
+msgid "Can send newsletters"
+msgstr ""
+
+#: apps/messaging/models.py:125
 msgid "Queued"
 msgstr ""
 
-#: apps/messaging/models.py:121
+#: apps/messaging/models.py:126
 msgid "Sent"
 msgstr ""
 
-#: apps/messaging/models.py:122
+#: apps/messaging/models.py:127
 msgid "Delivered"
 msgstr ""
 
-#: apps/messaging/models.py:123
+#: apps/messaging/models.py:128
 msgid "Failed"
 msgstr ""
 
-#: apps/messaging/models.py:124
+#: apps/messaging/models.py:129
 msgid "To print"
 msgstr ""
 
-#: apps/messaging/models.py:136 apps/register/models.py:282
-#: apps/register/models.py:347 apps/selfservice/models.py:62
+#: apps/messaging/models.py:141 apps/messaging/models.py:255
+#: apps/register/models.py:282 apps/register/models.py:347
+#: apps/selfservice/models.py:62
 msgid "person"
 msgstr ""
 
-#: apps/messaging/models.py:144 apps/readings/models.py:137
+#: apps/messaging/models.py:149 apps/readings/models.py:137
 #: apps/register/models.py:321 apps/register/models.py:344
 #: apps/selfservice/models.py:58
 msgid "unit"
 msgstr ""
 
-#: apps/messaging/models.py:150 apps/messaging/models.py:208
+#: apps/messaging/models.py:155 apps/messaging/models.py:213
 msgid "channel"
 msgstr ""
 
-#: apps/messaging/models.py:151
+#: apps/messaging/models.py:156
 msgid "recipient"
 msgstr ""
 
-#: apps/messaging/models.py:152 apps/messaging/models.py:212
+#: apps/messaging/models.py:157 apps/messaging/models.py:217
 msgid "subject"
 msgstr ""
 
-#: apps/messaging/models.py:157
+#: apps/messaging/models.py:162
 msgid "provider"
 msgstr ""
 
-#: apps/messaging/models.py:158
+#: apps/messaging/models.py:163
 msgid "provider's id"
 msgstr ""
 
-#: apps/messaging/models.py:161
+#: apps/messaging/models.py:166
 msgid "sent"
 msgstr ""
 
-#: apps/messaging/models.py:162
+#: apps/messaging/models.py:167
 msgid "status changed"
 msgstr ""
 
-#: apps/messaging/models.py:166
+#: apps/messaging/models.py:171
 msgid "message"
 msgstr ""
 
-#: apps/messaging/models.py:167
+#: apps/messaging/models.py:172
 msgid "messages"
 msgstr ""
 
-#: apps/messaging/models.py:203
+#: apps/messaging/models.py:208
 msgid "Self-service link"
 msgstr ""
 
-#: apps/messaging/models.py:206
+#: apps/messaging/models.py:211
 msgid "purpose"
 msgstr ""
 
-#: apps/messaging/models.py:212
+#: apps/messaging/models.py:217
 msgid "Email only."
 msgstr ""
 
-#: apps/messaging/models.py:216
+#: apps/messaging/models.py:221
 #, python-brace-format
 msgid ""
 "Placeholders: {name}, {first_name}, {link}, {closes}, {period}, "
@@ -583,12 +627,80 @@ msgid ""
 "short: about 160 characters is one message."
 msgstr ""
 
-#: apps/messaging/models.py:225
+#: apps/messaging/models.py:230
 msgid "message template"
 msgstr ""
 
-#: apps/messaging/models.py:226
+#: apps/messaging/models.py:231
 msgid "message templates"
+msgstr ""
+
+#: apps/messaging/models.py:250
+msgid "Self-service page"
+msgstr ""
+
+#: apps/messaging/models.py:251
+msgid "Entered by staff"
+msgstr ""
+
+#: apps/messaging/models.py:252
+msgid "Unsubscribe link"
+msgstr ""
+
+#: apps/messaging/models.py:257
+msgid "wants the newsletter"
+msgstr ""
+
+#: apps/messaging/models.py:258 apps/readings/models.py:141
+msgid "source"
+msgstr ""
+
+#: apps/messaging/models.py:259
+msgid "recorded"
+msgstr ""
+
+#: apps/messaging/models.py:262
+msgid "recorded by"
+msgstr ""
+
+#: apps/messaging/models.py:269 apps/readings/models.py:161
+msgid "note"
+msgstr ""
+
+#: apps/messaging/models.py:269
+msgid "For example: signed form, 3 May."
+msgstr ""
+
+#: apps/messaging/models.py:274
+msgid "newsletter consent"
+msgstr ""
+
+#: apps/messaging/models.py:275
+msgid "newsletter consents"
+msgstr ""
+
+#: apps/messaging/models.py:278
+#: apps/messaging/templates/messaging/_person_newsletter.html:24
+msgid "yes"
+msgstr ""
+
+#: apps/messaging/models.py:278
+#: apps/messaging/templates/messaging/_person_newsletter.html:24
+msgid "no"
+msgstr ""
+
+#: apps/messaging/newsletter.py:52
+#, python-format
+msgid "You get this because you subscribed. Unsubscribe: %(url)s"
+msgstr ""
+
+#: apps/messaging/newsletter.py:80
+msgid "Unsubscribed before it was sent."
+msgstr ""
+
+#: apps/messaging/newsletter.py:110
+#: apps/messaging/templates/messaging/_send_forms.html:8
+msgid "Email is not set up."
 msgstr ""
 
 #: apps/messaging/sending.py:39
@@ -603,6 +715,26 @@ msgstr ""
 msgid "[personal link]"
 msgstr ""
 
+#: apps/messaging/templates/messaging/_person_newsletter.html:6
+msgid "Does not want the newsletter"
+msgstr ""
+
+#: apps/messaging/templates/messaging/_person_newsletter.html:9
+msgid "Has not been asked. Without a yes, no newsletter is sent."
+msgstr ""
+
+#: apps/messaging/templates/messaging/_person_newsletter.html:12
+msgid "Newsletters go by email, and this person has no email address."
+msgstr ""
+
+#: apps/messaging/templates/messaging/_person_newsletter.html:17
+msgid "Save the newsletter choice"
+msgstr ""
+
+#: apps/messaging/templates/messaging/_person_newsletter.html:22
+msgid "Earlier answers"
+msgstr ""
+
 #: apps/messaging/templates/messaging/_send_forms.html:5
 msgid "Send links"
 msgstr ""
@@ -614,10 +746,6 @@ msgstr ""
 
 #: apps/messaging/templates/messaging/_send_forms.html:7
 msgid "SMS is not set up, so links go by email."
-msgstr ""
-
-#: apps/messaging/templates/messaging/_send_forms.html:8
-msgid "Email is not set up."
 msgstr ""
 
 #: apps/messaging/templates/messaging/_send_forms.html:9
@@ -683,7 +811,7 @@ msgid "Print their letters"
 msgstr ""
 
 #: apps/messaging/templates/messaging/batch_detail.html:51
-#: apps/messaging/templates/messaging/batch_list.html:22
+#: apps/messaging/templates/messaging/batch_list.html:24
 msgid "Messages"
 msgstr ""
 
@@ -708,7 +836,7 @@ msgid "Channel"
 msgstr ""
 
 #: apps/messaging/templates/messaging/batch_detail.html:58
-#: apps/messaging/templates/messaging/batch_list.html:23
+#: apps/messaging/templates/messaging/batch_list.html:25
 #: apps/readings/templates/readings/round_list.html:22
 #: apps/register/csv_io.py:467
 #: apps/register/templates/register/_unit_results.html:10
@@ -723,33 +851,39 @@ msgstr ""
 
 #: apps/messaging/templates/messaging/batch_list.html:3
 #: apps/messaging/templates/messaging/batch_list.html:6
-#: apps/messaging/templates/messaging/batch_list.html:15 templates/base.html:34
+#: apps/messaging/templates/messaging/batch_list.html:17 templates/base.html:34
 msgid "Send-outs"
 msgstr ""
 
 #: apps/messaging/templates/messaging/batch_list.html:9
+#: apps/messaging/templates/messaging/newsletter_compose.html:3
+#: apps/messaging/templates/messaging/newsletter_compose.html:5
+msgid "New newsletter"
+msgstr ""
+
+#: apps/messaging/templates/messaging/batch_list.html:11
 #: apps/messaging/templates/messaging/compose.html:3
 #: apps/messaging/templates/messaging/compose.html:6
 msgid "New message"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_list.html:19
+#: apps/messaging/templates/messaging/batch_list.html:21
 msgid "Send-out"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_list.html:20
+#: apps/messaging/templates/messaging/batch_list.html:22
 msgid "Started"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_list.html:21
+#: apps/messaging/templates/messaging/batch_list.html:23
 msgid "Sent by"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_list.html:31
+#: apps/messaging/templates/messaging/batch_list.html:33
 msgid "Automatic"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_list.html:40
+#: apps/messaging/templates/messaging/batch_list.html:42
 msgid "Nothing has been sent yet."
 msgstr ""
 
@@ -762,6 +896,7 @@ msgid "Email is not set up, so nobody gets an email."
 msgstr ""
 
 #: apps/messaging/templates/messaging/compose.html:15
+#: apps/messaging/templates/messaging/newsletter_compose.html:11
 msgid "Check before sending"
 msgstr ""
 
@@ -821,6 +956,7 @@ msgid "Check recipients"
 msgstr ""
 
 #: apps/messaging/templates/messaging/compose.html:82
+#: apps/messaging/templates/messaging/newsletter_compose.html:31
 #: apps/readings/templates/readings/reading_form.html:31
 #: apps/readings/templates/readings/round_form.html:20
 #: apps/register/templates/register/import_upload.html:20
@@ -833,7 +969,80 @@ msgstr ""
 msgid "Nothing is sent until you have checked the recipients and confirmed."
 msgstr ""
 
+#: apps/messaging/templates/messaging/newsletter_compose.html:6
+#, python-format
+msgid "%(count)s person wants the newsletter and has an email address."
+msgid_plural "%(count)s people want the newsletter and have an email address."
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/messaging/templates/messaging/newsletter_compose.html:7
+msgid ""
+"Only they get it: a newsletter needs each person's consent, given on their "
+"self-service page or recorded by staff."
+msgstr ""
+
+#: apps/messaging/templates/messaging/newsletter_compose.html:8
+msgid "Email is not set up, so a newsletter cannot be sent."
+msgstr ""
+
+#: apps/messaging/templates/messaging/newsletter_compose.html:12
+#, python-format
+msgid "The newsletter, as %(name)s gets it"
+msgstr ""
+
+#: apps/messaging/templates/messaging/newsletter_compose.html:20
+#, python-format
+msgid "Send to %(count)s person"
+msgid_plural "Send to %(count)s people"
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/messaging/templates/messaging/newsletter_compose.html:21
+msgid "Change the newsletter"
+msgstr ""
+
+#: apps/messaging/templates/messaging/newsletter_compose.html:30
+msgid "Preview"
+msgstr ""
+
+#: apps/messaging/templates/messaging/unsubscribe.html:6
+#: apps/selfservice/templates/selfservice/unavailable.html:3
+#: apps/selfservice/templates/selfservice/unavailable.html:5
+msgid "This link does not work"
+msgstr ""
+
+#: apps/messaging/templates/messaging/unsubscribe.html:7
+msgid ""
+"If you want to stop getting the newsletter, contact the organisation that "
+"sends it."
+msgstr ""
+
+#: apps/messaging/templates/messaging/unsubscribe.html:9
+msgid "You are unsubscribed"
+msgstr ""
+
+#: apps/messaging/templates/messaging/unsubscribe.html:10
+msgid ""
+"You will not get the newsletter any more. Messages about the service itself, "
+"such as disruptions, still reach you."
+msgstr ""
+
+#: apps/messaging/templates/messaging/unsubscribe.html:12
+msgid "Unsubscribe from the newsletter?"
+msgstr ""
+
+#: apps/messaging/templates/messaging/unsubscribe.html:13
+#, python-format
+msgid "The newsletter is sent to %(name)s."
+msgstr ""
+
+#: apps/messaging/templates/messaging/unsubscribe.html:15
+msgid "Unsubscribe"
+msgstr ""
+
 #: apps/messaging/views.py:54 apps/messaging/views.py:145
+#: apps/messaging/views.py:211
 msgid "Sending has started. This page shows how it goes."
 msgstr ""
 
@@ -843,6 +1052,14 @@ msgstr ""
 
 #: apps/messaging/views.py:185
 msgid "The notice is no longer shown."
+msgstr ""
+
+#: apps/messaging/views.py:206
+msgid "Everyone who wants the newsletter"
+msgstr ""
+
+#: apps/messaging/views.py:241
+msgid "Saved the newsletter choice."
 msgstr ""
 
 #: apps/plugins/apps.py:7
@@ -978,10 +1195,6 @@ msgstr ""
 msgid "value"
 msgstr ""
 
-#: apps/readings/models.py:141
-msgid "source"
-msgstr ""
-
 #: apps/readings/models.py:145
 msgid "entered by"
 msgstr ""
@@ -996,10 +1209,6 @@ msgstr ""
 
 #: apps/readings/models.py:160
 msgid "submitted"
-msgstr ""
-
-#: apps/readings/models.py:161
-msgid "note"
 msgstr ""
 
 #: apps/readings/models.py:165
@@ -1633,10 +1842,6 @@ msgstr ""
 msgid "unit types"
 msgstr ""
 
-#: apps/register/models.py:150
-msgid "Text"
-msgstr ""
-
 #: apps/register/models.py:151
 msgid "Number"
 msgstr ""
@@ -2164,15 +2369,23 @@ msgstr ""
 msgid "self-service links"
 msgstr ""
 
-#: apps/selfservice/public.py:106
+#: apps/selfservice/public.py:107
 msgid "Thank you. Your reading is saved."
 msgstr ""
 
-#: apps/selfservice/public.py:112
+#: apps/selfservice/public.py:114
+msgid "Thank you. You will get the newsletter."
+msgstr ""
+
+#: apps/selfservice/public.py:116
+msgid "You will not get the newsletter."
+msgstr ""
+
+#: apps/selfservice/public.py:122
 msgid "Thank you. Your contact details are updated."
 msgstr ""
 
-#: apps/selfservice/public.py:114
+#: apps/selfservice/public.py:124
 msgid "Nothing was changed."
 msgstr ""
 
@@ -2270,19 +2483,45 @@ msgid "Save contact details"
 msgstr ""
 
 #: apps/selfservice/templates/selfservice/member.html:49
-msgid "Others in your household"
+msgid ""
+"We sometimes send a newsletter by email about what is going on. Messages "
+"about the service itself, such as disruptions, reach you either way."
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:55
-msgid "To change their details, use their own link or contact us."
+#: apps/selfservice/templates/selfservice/member.html:54
+msgid "Do you want the newsletter?"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:56
+msgid "Yes, send me the newsletter by email"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:57
+msgid "No, thank you"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:60
+msgid "Add your email address above to get it."
 msgstr ""
 
 #: apps/selfservice/templates/selfservice/member.html:61
+msgid "Save my choice"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:67
+msgid "Others in your household"
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:73
+msgid "To change their details, use their own link or contact us."
+msgstr ""
+
+#: apps/selfservice/templates/selfservice/member.html:79
 #, python-format
 msgid "Contact %(name)s"
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:66
+#: apps/selfservice/templates/selfservice/member.html:84
 msgid "This page is personal. Do not share the link."
 msgstr ""
 
@@ -2450,11 +2689,6 @@ msgstr ""
 #: apps/selfservice/templates/selfservice/too_many.html:6
 msgid ""
 "There have been too many attempts from your connection. Try again in an hour."
-msgstr ""
-
-#: apps/selfservice/templates/selfservice/unavailable.html:3
-#: apps/selfservice/templates/selfservice/unavailable.html:5
-msgid "This link does not work"
 msgstr ""
 
 #: apps/selfservice/templates/selfservice/unavailable.html:6

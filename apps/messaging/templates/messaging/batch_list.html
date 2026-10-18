@@ -4,10 +4,12 @@
 {% block content %}
   <div class="page-head">
     <h1>{% translate "Send-outs" %}</h1>
-    {% if perms.messaging.send_broadcast %}
+    {% if perms.messaging.send_broadcast or perms.messaging.send_newsletter %}
       <div class="actions">
+        {% if perms.messaging.send_newsletter %}<a class="button" href="{% url 'messaging:newsletter_compose' %}">{% translate "New newsletter" %}</a>{% endif %}
+        {% if perms.messaging.send_broadcast %}
         <a class="button" href="{% url 'messaging:compose' %}">{% translate "New message" %}</a>
-        <a class="button button--danger" href="{% url 'messaging:compose' %}?urgent=1">{% translate "Urgent alert" %}</a>
+        <a class="button button--danger" href="{% url 'messaging:compose' %}?urgent=1">{% translate "Urgent alert" %}</a>{% endif %}
       </div>
     {% endif %}
   </div>

@@ -10,6 +10,7 @@ from django.views.decorators.cache import never_cache
 
 from apps.core.language import switch_language
 from apps.core.models import Notice
+from apps.messaging.models import ConsentRecord
 from apps.readings.models import Reading
 from apps.readings.usage import earlier_values
 from apps.register.models import Organisation
@@ -105,6 +106,15 @@ def member_page(request, token):
                 reading.save()
             messages.success(request, _("Thank you. Your reading is saved."))
             return _private(redirect(request.path + "#reading"))
+        if action == "newsletter":
+            wanted = request.POST.get("subscribed") == "1"
+            with _log_context(request, link):
+                ConsentRecord.record(link.person, wanted, ConsentRecord.Source.SELF_SERVICE)
+            if wanted:
+                messages.success(request, _("Thank you. You will get the newsletter."))
+            else:
+                messages.success(request, _("You will not get the newsletter."))
+            return _private(redirect(request.path + "#newsletter"))
         if action == "contact" and contact_form.is_valid():
             if contact_form.has_changed():
                 with _log_context(request, link):
@@ -133,5 +143,6 @@ def member_page(request, token):
         "household": household,
         "organisation": Organisation.current(),
         "notices": Notice.objects.current(),
+        "consent": ConsentRecord.current(link.person),
     }
     return _private(render(request, "selfservice/member.html", context))

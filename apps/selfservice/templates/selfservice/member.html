@@ -44,6 +44,24 @@
     </form>
   </section>
 
+  <section class="member-section" aria-labelledby="newsletter">
+    <h2 id="newsletter">{% translate "Newsletter" %}</h2>
+    <p>{% translate "We sometimes send a newsletter by email about what is going on. Messages about the service itself, such as disruptions, reach you either way." %}</p>
+    <form method="post" action="{{ request.path }}#newsletter" class="form">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="newsletter">
+      <fieldset>
+        <legend>{% translate "Do you want the newsletter?" %}</legend>
+        <ul>
+          <li><label><input type="radio" name="subscribed" value="1"{% if consent.subscribed %} checked{% endif %}> {% translate "Yes, send me the newsletter by email" %}</label></li>
+          <li><label><input type="radio" name="subscribed" value="0"{% if not consent.subscribed %} checked{% endif %}> {% translate "No, thank you" %}</label></li>
+        </ul>
+      </fieldset>
+      {% if not person.email %}<p class="help">{% translate "Add your email address above to get it." %}</p>{% endif %}
+      <button type="submit" class="button button--primary">{% translate "Save my choice" %}</button>
+    </form>
+  </section>
+
   {% if household %}
     <section class="member-section" aria-labelledby="household">
       <h2 id="household">{% translate "Others in your household" %}</h2>

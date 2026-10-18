@@ -7,6 +7,7 @@ from huey.contrib.djhuey import db_periodic_task, db_task
 
 from apps.readings.models import ReadingRound
 
+from . import newsletter
 from .models import MessageBatch
 from .sending import send_batch
 
@@ -14,8 +15,16 @@ from .sending import send_batch
 @db_task()
 def send_batch_task(batch_id):
     batch = MessageBatch.objects.filter(pk=batch_id).first()
-    if batch is not None:
-        send_batch(batch)
+    if batch is None:
+        return
+    if batch.kind == MessageBatch.Kind.NEWSLETTER:
+        if newsletter.send_part(batch):
+            # More to send: the next part after a pause, to spare the mail server.
+            send_batch_task.schedule(
+                (batch_id,), delay=settings.MESSAGING["newsletter_pause_seconds"]
+            )
+        return
+    send_batch(batch)
 
 
 @db_periodic_task(crontab(hour="10", minute="0"))
