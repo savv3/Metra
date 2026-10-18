@@ -289,8 +289,8 @@ one, record the same amount as a negative payment.
 days late and the amount to pay. **Send reminders to the chosen** sends a
 payment reminder by email (with a reminder PDF that has the new amount,
 due date and barcode), else by SMS, else as a letter in a PDF to print.
-Each reminder adds the reminder fee (**Settings > Invoice settings**, 5 € by
-default; 0 for none) and gives at least 14 days to pay. In Finland the Debt
+Each reminder adds the reminder fee if one is set (**Settings > Invoice
+settings**; none by default) and gives at least 14 days to pay. In Finland the Debt
 Collection Act (laki saatavien perinnästä) caps a reminder fee to a consumer
 at 5 € and requires those 14 days before further collection steps; check
 the rules before charging more or reminding businesses differently. The

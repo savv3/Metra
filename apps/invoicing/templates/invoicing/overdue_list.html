@@ -33,7 +33,8 @@
         </table>
       </div>
       {% if perms.invoicing.add_paymentreminder %}
-        <p class="help">{% blocktranslate with fee=billing.reminder_fee|floatformat:2 days=billing.reminder_days %}Each reminder adds a fee of {{ fee }} € and gives {{ days }} days to pay. It goes by email with a PDF, else by SMS, else as a letter to print.{% endblocktranslate %}</p>
+        <p class="help">{% if billing.reminder_fee %}{% blocktranslate with fee=billing.reminder_fee|floatformat:2 days=billing.reminder_days %}Each reminder adds a fee of {{ fee }} € and gives {{ days }} days to pay.{% endblocktranslate %}{% else %}{% blocktranslate with days=billing.reminder_days %}Reminders have no fee (see Settings > Invoice settings) and give {{ days }} days to pay.{% endblocktranslate %}{% endif %}
+          {% translate "A reminder goes by email with a PDF, else by SMS, else as a letter to print." %}</p>
         <button type="submit" class="button button--primary">{% translate "Send reminders to the chosen" %}</button>
       {% endif %}
     </form>

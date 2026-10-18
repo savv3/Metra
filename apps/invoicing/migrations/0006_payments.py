@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
             name="reminder_fee",
             field=models.DecimalField(
                 decimal_places=2,
-                default=Decimal("5.00"),
+                default=Decimal("0.00"),
                 help_text="Added to each payment reminder; 0 for none. For consumers the Finnish Debt Collection Act allows at most 5 € per reminder.",
                 max_digits=8,
                 validators=[django.core.validators.MinValueValidator(0)],

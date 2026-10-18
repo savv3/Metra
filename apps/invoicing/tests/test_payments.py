@@ -96,7 +96,15 @@ def test_credit_note_and_payment_together_settle_an_invoice(invoices):
     assert invoice.status == "paid"
 
 
-def test_reminders_go_by_email_sms_or_letter_with_fee(invoices):
+def test_reminder_fee_is_off_by_default():
+    from apps.invoicing.models import BillingSettings
+
+    assert BillingSettings().reminder_fee == 0
+
+
+def test_reminders_go_by_email_sms_or_letter_with_fee(invoices, billing):
+    billing.reminder_fee = D("5")
+    billing.save()
     batch = MessageBatch.objects.create(kind=MessageBatch.Kind.PAYMENT_REMINDERS)
 
     send_reminders(batch, Invoice.objects.order_by("sequence"))
@@ -125,9 +133,7 @@ def test_paid_invoices_get_no_reminder(invoices):
     assert PaymentReminder.objects.count() == 2
 
 
-def test_reminder_fee_can_be_off(invoices, billing):
-    billing.reminder_fee = D("0")
-    billing.save()
+def test_no_fee_by_default(invoices):
     batch = MessageBatch.objects.create(kind=MessageBatch.Kind.PAYMENT_REMINDERS)
 
     send_reminders(batch, Invoice.objects.filter(unit__name="Bystigen 6"))

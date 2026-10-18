@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 18:30+0300\n"
+"POT-Creation-Date: 2026-10-18 18:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -422,7 +422,10 @@ msgstr "påminnelseavgift"
 msgid ""
 "Added to each payment reminder; 0 for none. For consumers the Finnish Debt "
 "Collection Act allows at most 5 € per reminder."
-msgstr "Läggs till för varje betalningspåminnelse; 0 för ingen. För konsumenter tillåter indrivningslagen (lagen om indrivning av fordringar) högst 5 € per påminnelse."
+msgstr ""
+"Läggs till för varje betalningspåminnelse; 0 för ingen. För konsumenter "
+"tillåter indrivningslagen (lagen om indrivning av fordringar) högst 5 € per "
+"påminnelse."
 
 #: apps/invoicing/models.py:107
 msgid "days to pay after a reminder"
@@ -430,7 +433,8 @@ msgstr "betalningstid efter påminnelse (dagar)"
 
 #: apps/invoicing/models.py:109
 msgid "A reminder gives at least 14 days before any further steps."
-msgstr "En påminnelse ger minst 14 dagar innan några ytterligare åtgärder vidtas."
+msgstr ""
+"En påminnelse ger minst 14 dagar innan några ytterligare åtgärder vidtas."
 
 #: apps/invoicing/models.py:113 apps/invoicing/models.py:114
 msgid "invoice settings"
@@ -1004,7 +1008,9 @@ msgstr "Exportera betalningar"
 msgid ""
 "Payments and reminder fees as a CSV file for the bookkeeping. Leave a date "
 "empty for no limit."
-msgstr "Betalningar och påminnelseavgifter som en CSV-fil för bokföringen. Lämna ett datum tomt för ingen gräns."
+msgstr ""
+"Betalningar och påminnelseavgifter som en CSV-fil för bokföringen. Lämna ett "
+"datum tomt för ingen gräns."
 
 #: apps/invoicing/templates/invoicing/export_payments.html:10
 msgid "Download CSV"
@@ -1181,7 +1187,9 @@ msgstr "Registrera en betalning"
 #: apps/invoicing/templates/invoicing/invoice_detail.html:128
 msgid ""
 "Payments cannot be changed. To undo one, record the same amount as negative."
-msgstr "Betalningar kan inte ändras. För att ångra en, registrera samma belopp som negativt."
+msgstr ""
+"Betalningar kan inte ändras. För att ångra en, registrera samma belopp som "
+"negativt."
 
 #: apps/invoicing/templates/invoicing/invoice_detail.html:129
 msgid "Record payment"
@@ -1276,16 +1284,30 @@ msgstr "Påminn om %(number)s"
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:36
 #, python-format
+msgid "Each reminder adds a fee of %(fee)s € and gives %(days)s days to pay."
+msgstr "Varje påminnelse lägger till en avgift på %(fee)s € och ger %(days)s dagar att betala."
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:36
+#, python-format
 msgid ""
-"Each reminder adds a fee of %(fee)s € and gives %(days)s days to pay. It "
-"goes by email with a PDF, else by SMS, else as a letter to print."
-msgstr "Varje påminnelse lägger till en avgift på %(fee)s € och ger %(days)s dagar att betala. Den skickas via e-post med PDF, annars via sms, annars som brev att skriva ut."
+"Reminders have no fee (see Settings > Invoice settings) and give %(days)s "
+"days to pay."
+msgstr ""
+"Påminnelser har ingen avgift (se Inställningar > Faktureringsinställningar) "
+"och ger %(days)s dagar att betala."
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:37
+msgid ""
+"A reminder goes by email with a PDF, else by SMS, else as a letter to print."
+msgstr ""
+"En påminnelse skickas via e-post med PDF, annars via sms, annars som brev att "
+"skriva ut."
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:38
 msgid "Send reminders to the chosen"
 msgstr "Skicka påminnelser till de valda"
 
-#: apps/invoicing/templates/invoicing/overdue_list.html:41
+#: apps/invoicing/templates/invoicing/overdue_list.html:42
 msgid "No overdue invoices."
 msgstr "Inga förfallna fakturor."
 
@@ -1361,7 +1383,10 @@ msgid ""
 "We have not received payment for this invoice, which was due on %(due)s. "
 "Please pay by %(new)s. If you have already paid, you can ignore this "
 "reminder."
-msgstr "Vi har inte fått betalning för den här fakturan, som förföll %(due)s. Betala senast %(new)s. Om du redan har betalat kan du bortse från den här påminnelsen."
+msgstr ""
+"Vi har inte fått betalning för den här fakturan, som förföll %(due)s. Betala "
+"senast %(new)s. Om du redan har betalat kan du bortse från den här "
+"påminnelsen."
 
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:138
 msgid "Account (IBAN)"

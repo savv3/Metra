@@ -96,7 +96,7 @@ class BillingSettings(models.Model):
         _("reminder fee"),
         max_digits=8,
         decimal_places=2,
-        default=Decimal("5.00"),
+        default=Decimal("0.00"),
         validators=[MinValueValidator(0)],
         help_text=_(
             "Added to each payment reminder; 0 for none. For consumers the Finnish Debt "

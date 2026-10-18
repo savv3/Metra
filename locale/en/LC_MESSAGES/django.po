@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 18:30+0300\n"
+"POT-Creation-Date: 2026-10-18 18:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1254,16 +1254,26 @@ msgstr ""
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:36
 #, python-format
+msgid "Each reminder adds a fee of %(fee)s € and gives %(days)s days to pay."
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:36
+#, python-format
 msgid ""
-"Each reminder adds a fee of %(fee)s € and gives %(days)s days to pay. It "
-"goes by email with a PDF, else by SMS, else as a letter to print."
+"Reminders have no fee (see Settings > Invoice settings) and give %(days)s "
+"days to pay."
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:37
+msgid ""
+"A reminder goes by email with a PDF, else by SMS, else as a letter to print."
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:38
 msgid "Send reminders to the chosen"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/overdue_list.html:41
+#: apps/invoicing/templates/invoicing/overdue_list.html:42
 msgid "No overdue invoices."
 msgstr ""
 

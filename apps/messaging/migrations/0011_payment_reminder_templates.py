@@ -16,8 +16,8 @@ TEMPLATES = [
         "Betalningspåminnelse: faktura {number}",
         "Hej {first_name},\n\n"
         "vi har inte fått betalning för faktura {number}, som förföll {due_date}. "
-        "Att betala är {amount} € (inklusive en påminnelseavgift på {fee} €). Betala "
-        "senast {new_due_date} till kontot {iban} med referensnumret {reference}.\n\n"
+        "Att betala är {amount} €. Betala senast {new_due_date} till kontot {iban} "
+        "med referensnumret {reference}.\n\n"
         "Påminnelsen finns som PDF i det här meddelandet. Om du redan har betalat kan "
         "du bortse från den.\n\n"
         "Hälsningar\n{organisation}",
