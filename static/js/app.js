@@ -27,3 +27,14 @@ document.querySelectorAll("[data-theme-select]").forEach((select) => {
     }
   });
 });
+
+// New message form: show the tag or unit type choice only for its scope.
+document.querySelectorAll("select[name=scope]").forEach((select) => {
+  const show = () => {
+    select.form.querySelectorAll("[data-scope-only]").forEach((part) => {
+      part.hidden = part.dataset.scopeOnly !== select.value;
+    });
+  };
+  select.addEventListener("change", show);
+  show();
+});
