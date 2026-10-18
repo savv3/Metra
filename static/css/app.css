@@ -223,3 +223,9 @@ tbody th { font-weight: 600; }
 }
 
 .htmx-request #results, #results.htmx-request { opacity: 0.6; }
+
+/* Status panels */
+.status-panel { background: var(--surface); border: 1px solid var(--border); border-left: 6px solid var(--success); border-radius: 4px; padding: 0.5rem 1rem; margin-bottom: 1rem; }
+.status-panel h2 { font-size: 1rem; margin: 0.25rem 0; }
+.status-panel p { margin: 0.25rem 0; }
+.status-panel--warning { border-left-color: var(--error); background: var(--error-bg); }
