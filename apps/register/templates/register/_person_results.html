@@ -26,6 +26,7 @@
     </table>
   </div>
   {% include "register/_pagination.html" %}
+  <p class="export-link"><a href="{% url 'register:person_export' %}{% if query %}?{{ query }}{% endif %}" download>{% blocktranslate count count=page.paginator.count %}Export {{ count }} person as CSV{% plural %}Export {{ count }} people as CSV{% endblocktranslate %}</a></p>
 {% else %}
   <p class="empty">{% translate "No people found." %}</p>
 {% endif %}
