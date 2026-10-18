@@ -10,7 +10,7 @@ a configurable register, annual readings with member self-service, SMS and
 email messaging, newsletters, invoicing, an API and offsite backups. See
 [docs/architecture.md](docs/architecture.md) for the plan.
 
-**Status:** early development (phase 1: register, roles, two-factor login, audit log, CSV import and export).
+**Status:** early development (phase 1: register, roles, two-factor login, audit log, CSV import and export, backups).
 
 ## Run it with Docker
 
@@ -21,6 +21,60 @@ docker compose up -d --build
 
 Caddy serves the app on your domain with automatic HTTPS. All data lives in
 the `data` Docker volume.
+
+## Backup and restore
+
+Every night at 02:30 (`SCR_BACKUP_TIME`, local time) the worker makes a
+backup: a consistent copy of the database, taken with SQLite's online backup
+while the app runs, and all uploaded files, in one
+`scr-backup-YYYYMMDD-HHMMSS.tar.gz` archive. The newest 14
+(`SCR_BACKUP_KEEP`) are kept in `/data/backups`. Admins see the last backup,
+its size and any error at the top of the Units page; every run is also listed
+under **Settings > Backups**.
+
+Those local copies are on the same disk as the data, so also set a remote in
+`.env` (see `.env.example`): `SCR_BACKUP_REMOTE_TYPE` is `s3`, `sftp` or
+`ftps`, with its address, credentials and `SCR_BACKUP_REMOTE_PATH`. Archives
+are encrypted with `SCR_BACKUP_ENCRYPTION_PASSWORD` (rclone crypt) before
+they leave the server, and the remote also keeps the newest
+`SCR_BACKUP_KEEP`. **Keep a copy of the encryption password somewhere other
+than the server**: without it the remote backups cannot be read.
+
+Make a backup now, or list the ones on the remote:
+
+```sh
+docker compose exec web python manage.py backup
+docker compose exec web python manage.py backup --list-remote
+```
+
+### Restore onto a fresh install
+
+1. Install as in [Run it with Docker](#run-it-with-docker), with a `.env`
+   that has the same `SCR_BACKUP_*` settings (including the encryption
+   password), and start it once: `docker compose up -d --build`.
+2. Stop the app so nothing writes during the restore:
+   `docker compose stop web worker`
+3. Restore the backup you want, from the remote:
+
+   ```sh
+   docker compose run --rm web python manage.py restore --remote scr-backup-20261018-023000.tar.gz
+   ```
+
+   or from an archive file on the host:
+
+   ```sh
+   docker compose run --rm -v "$PWD/scr-backup-20261018-023000.tar.gz:/tmp/restore.tar.gz:ro" web python manage.py restore /tmp/restore.tar.gz
+   ```
+
+4. Start again: `docker compose up -d`, and log in as before.
+
+`restore` replaces the database and all uploaded files with the backup's,
+then brings the database up to date with `migrate`. It refuses to run when
+the database already has users or register data; add `--force` to restore
+over an install that is in use (for example to go back to last night).
+
+To copy a local backup off the server:
+`docker compose cp web:/data/backups/scr-backup-20261018-023000.tar.gz .`
 
 ## Develop locally
 

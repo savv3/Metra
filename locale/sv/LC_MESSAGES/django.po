@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 12:20+0300\n"
+"POT-Creation-Date: 2026-10-18 12:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,6 +55,81 @@ msgstr "Kassör"
 msgctxt "role"
 msgid "Read-only"
 msgstr "Läsbehörighet"
+
+#: apps/backups/apps.py:7 apps/backups/templates/backups/_status.html:4
+msgid "Backups"
+msgstr "Säkerhetskopior"
+
+#: apps/backups/models.py:10
+msgid "Nightly schedule"
+msgstr "Nattlig körning"
+
+#: apps/backups/models.py:11
+msgid "Command"
+msgstr "Kommando"
+
+#: apps/backups/models.py:13
+#
+msgid "started"
+msgstr "startad"
+
+#: apps/backups/models.py:14
+msgid "finished"
+msgstr "klar"
+
+#: apps/backups/models.py:16
+#
+msgid "started by"
+msgstr "startad av"
+
+#: apps/backups/models.py:18
+msgid "succeeded"
+msgstr "lyckades"
+
+#: apps/backups/models.py:19
+#
+msgid "archive"
+msgstr "arkiv"
+
+#: apps/backups/models.py:20
+msgid "size in bytes"
+msgstr "storlek i byte"
+
+#: apps/backups/models.py:22
+msgid "target"
+msgstr "mål"
+
+#: apps/backups/models.py:23
+#
+msgid "error"
+msgstr "fel"
+
+#: apps/backups/models.py:27
+msgid "backup"
+msgstr "säkerhetskopia"
+
+#: apps/backups/models.py:28
+msgid "backups"
+msgstr "säkerhetskopior"
+
+#: apps/backups/templates/backups/_status.html:6
+#, python-format
+msgid "Last successful backup %(when)s (%(size)s) to %(target)s."
+msgstr "Senaste lyckade säkerhetskopia %(when)s (%(size)s) till %(target)s."
+
+#: apps/backups/templates/backups/_status.html:10
+#
+msgid "No backup has been made yet."
+msgstr "Ingen säkerhetskopia har gjorts ännu."
+
+#: apps/backups/templates/backups/_status.html:13
+#, python-format
+msgid "The last backup failed %(when)s:"
+msgstr "Den senaste säkerhetskopieringen misslyckades %(when)s:"
+
+#: apps/backups/templates/backups/_status.html:17
+msgid "The last successful backup is more than a day and a half old."
+msgstr "Den senaste lyckade säkerhetskopian är över ett och ett halvt dygn gammal."
 
 #: apps/core/templates/core/home.html:4
 msgid "Welcome"
@@ -148,13 +223,13 @@ msgstr "Namn"
 
 #: apps/register/csv_io.py:466
 #: apps/register/templates/register/_unit_results.html:8
-#: apps/register/templates/register/unit_list.html:20
+#: apps/register/templates/register/unit_list.html:21
 msgid "Type"
 msgstr "Typ"
 
 #: apps/register/csv_io.py:467
 #: apps/register/templates/register/_unit_results.html:10
-#: apps/register/templates/register/unit_list.html:27
+#: apps/register/templates/register/unit_list.html:28
 msgid "Status"
 msgstr "Status"
 
@@ -914,22 +989,22 @@ msgid "Add person"
 msgstr "Lägg till person"
 
 #: apps/register/templates/register/person_list.html:13
-#: apps/register/templates/register/unit_list.html:16
+#: apps/register/templates/register/unit_list.html:17
 msgid "Search"
 msgstr "Sök"
 
 #: apps/register/templates/register/person_list.html:17
-#: apps/register/templates/register/unit_list.html:34
+#: apps/register/templates/register/unit_list.html:35
 msgid "Tag"
 msgstr "Tagg"
 
 #: apps/register/templates/register/person_list.html:19
-#: apps/register/templates/register/unit_list.html:36
+#: apps/register/templates/register/unit_list.html:37
 msgid "All tags"
 msgstr "Alla taggar"
 
 #: apps/register/templates/register/person_list.html:25
-#: apps/register/templates/register/unit_list.html:42
+#: apps/register/templates/register/unit_list.html:43
 msgid "Filter"
 msgstr "Filtrera"
 
@@ -978,11 +1053,11 @@ msgstr "Importera CSV"
 msgid "Add unit"
 msgstr "Lägg till enhet"
 
-#: apps/register/templates/register/unit_list.html:22
+#: apps/register/templates/register/unit_list.html:23
 msgid "All types"
 msgstr "Alla typer"
 
-#: apps/register/templates/register/unit_list.html:29
+#: apps/register/templates/register/unit_list.html:30
 msgid "All statuses"
 msgstr "Alla statusar"
 
@@ -1033,11 +1108,11 @@ msgstr "Välj en person och en roll."
 msgid "Removed %(name)s."
 msgstr "%(name)s har tagits bort."
 
-#: config/settings.py:145
+#: config/settings.py:146
 msgid "Swedish"
 msgstr "Svenska"
 
-#: config/settings.py:146
+#: config/settings.py:147
 msgid "English"
 msgstr "Engelska"
 

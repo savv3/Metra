@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 12:20+0300\n"
+"POT-Creation-Date: 2026-10-18 12:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,6 +54,76 @@ msgstr ""
 #: apps/accounts/roles.py:15
 msgctxt "role"
 msgid "Read-only"
+msgstr ""
+
+#: apps/backups/apps.py:7 apps/backups/templates/backups/_status.html:4
+msgid "Backups"
+msgstr ""
+
+#: apps/backups/models.py:10
+msgid "Nightly schedule"
+msgstr ""
+
+#: apps/backups/models.py:11
+msgid "Command"
+msgstr ""
+
+#: apps/backups/models.py:13
+msgid "started"
+msgstr ""
+
+#: apps/backups/models.py:14
+msgid "finished"
+msgstr ""
+
+#: apps/backups/models.py:16
+msgid "started by"
+msgstr ""
+
+#: apps/backups/models.py:18
+msgid "succeeded"
+msgstr ""
+
+#: apps/backups/models.py:19
+msgid "archive"
+msgstr ""
+
+#: apps/backups/models.py:20
+msgid "size in bytes"
+msgstr ""
+
+#: apps/backups/models.py:22
+msgid "target"
+msgstr ""
+
+#: apps/backups/models.py:23
+msgid "error"
+msgstr ""
+
+#: apps/backups/models.py:27
+msgid "backup"
+msgstr ""
+
+#: apps/backups/models.py:28
+msgid "backups"
+msgstr ""
+
+#: apps/backups/templates/backups/_status.html:6
+#, python-format
+msgid "Last successful backup %(when)s (%(size)s) to %(target)s."
+msgstr ""
+
+#: apps/backups/templates/backups/_status.html:10
+msgid "No backup has been made yet."
+msgstr ""
+
+#: apps/backups/templates/backups/_status.html:13
+#, python-format
+msgid "The last backup failed %(when)s:"
+msgstr ""
+
+#: apps/backups/templates/backups/_status.html:17
+msgid "The last successful backup is more than a day and a half old."
 msgstr ""
 
 #: apps/core/templates/core/home.html:4
@@ -147,13 +217,13 @@ msgstr ""
 
 #: apps/register/csv_io.py:466
 #: apps/register/templates/register/_unit_results.html:8
-#: apps/register/templates/register/unit_list.html:20
+#: apps/register/templates/register/unit_list.html:21
 msgid "Type"
 msgstr ""
 
 #: apps/register/csv_io.py:467
 #: apps/register/templates/register/_unit_results.html:10
-#: apps/register/templates/register/unit_list.html:27
+#: apps/register/templates/register/unit_list.html:28
 msgid "Status"
 msgstr ""
 
@@ -891,22 +961,22 @@ msgid "Add person"
 msgstr ""
 
 #: apps/register/templates/register/person_list.html:13
-#: apps/register/templates/register/unit_list.html:16
+#: apps/register/templates/register/unit_list.html:17
 msgid "Search"
 msgstr ""
 
 #: apps/register/templates/register/person_list.html:17
-#: apps/register/templates/register/unit_list.html:34
+#: apps/register/templates/register/unit_list.html:35
 msgid "Tag"
 msgstr ""
 
 #: apps/register/templates/register/person_list.html:19
-#: apps/register/templates/register/unit_list.html:36
+#: apps/register/templates/register/unit_list.html:37
 msgid "All tags"
 msgstr ""
 
 #: apps/register/templates/register/person_list.html:25
-#: apps/register/templates/register/unit_list.html:42
+#: apps/register/templates/register/unit_list.html:43
 msgid "Filter"
 msgstr ""
 
@@ -955,11 +1025,11 @@ msgstr ""
 msgid "Add unit"
 msgstr ""
 
-#: apps/register/templates/register/unit_list.html:22
+#: apps/register/templates/register/unit_list.html:23
 msgid "All types"
 msgstr ""
 
-#: apps/register/templates/register/unit_list.html:29
+#: apps/register/templates/register/unit_list.html:30
 msgid "All statuses"
 msgstr ""
 
@@ -1008,11 +1078,11 @@ msgstr ""
 msgid "Removed %(name)s."
 msgstr ""
 
-#: config/settings.py:145
+#: config/settings.py:146
 msgid "Swedish"
 msgstr ""
 
-#: config/settings.py:146
+#: config/settings.py:147
 msgid "English"
 msgstr ""
 

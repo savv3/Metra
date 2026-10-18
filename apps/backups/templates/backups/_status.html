@@ -1,0 +1,20 @@
+{% load i18n %}
+{% if show %}
+  <section class="status-panel{% if failed or stale %} status-panel--warning{% endif %}" aria-labelledby="backup-status">
+    <h2 id="backup-status">{% translate "Backups" %}</h2>
+    {% if last_success %}
+      <p>{% blocktranslate with when=last_success.finished_at|date:"SHORT_DATETIME_FORMAT" size=last_success.size|filesizeformat target=last_success.target trimmed %}
+        Last successful backup {{ when }} ({{ size }}) to {{ target }}.
+      {% endblocktranslate %}</p>
+    {% else %}
+      <p>{% translate "No backup has been made yet." %}</p>
+    {% endif %}
+    {% if failed %}
+      <p class="status-error">{% blocktranslate with when=last.finished_at|date:"SHORT_DATETIME_FORMAT" trimmed %}
+        The last backup failed {{ when }}:
+      {% endblocktranslate %} {{ last.error }}</p>
+    {% elif stale and last_success %}
+      <p class="status-error">{% translate "The last successful backup is more than a day and a half old." %}</p>
+    {% endif %}
+  </section>
+{% endif %}

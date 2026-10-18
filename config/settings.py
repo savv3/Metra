@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "apps.core",
     "apps.accounts",
     "apps.register",
+    "apps.backups",
 ]
 
 MIDDLEWARE = [
@@ -167,6 +168,29 @@ HUEY = {
     "name": "smallcompanyregister",
     "filename": str(DATA_DIR / "huey.sqlite3"),
     "immediate": env_bool("SCR_HUEY_IMMEDIATE"),
+    # Scheduled jobs (like the nightly backup) run at local time, not UTC.
+    "utc": False,
+}
+
+# Backups: a consistent copy of the database plus media, kept locally and,
+# when a remote is set, encrypted and uploaded with rclone. See README.
+BACKUP = {
+    "dir": Path(os.environ.get("SCR_BACKUP_DIR") or DATA_DIR / "backups"),
+    "keep": int(os.environ.get("SCR_BACKUP_KEEP") or 14),
+    "time": os.environ.get("SCR_BACKUP_TIME") or "02:30",
+    "remote_type": os.environ.get("SCR_BACKUP_REMOTE_TYPE", "").strip().lower(),
+    "remote_path": os.environ.get("SCR_BACKUP_REMOTE_PATH", ""),
+    "encryption_password": os.environ.get("SCR_BACKUP_ENCRYPTION_PASSWORD", ""),
+    "s3_provider": os.environ.get("SCR_BACKUP_S3_PROVIDER") or "Other",
+    "s3_endpoint": os.environ.get("SCR_BACKUP_S3_ENDPOINT", ""),
+    "s3_region": os.environ.get("SCR_BACKUP_S3_REGION", ""),
+    "s3_access_key_id": os.environ.get("SCR_BACKUP_S3_ACCESS_KEY_ID", ""),
+    "s3_secret_access_key": os.environ.get("SCR_BACKUP_S3_SECRET_ACCESS_KEY", ""),
+    "host": os.environ.get("SCR_BACKUP_HOST", ""),
+    "port": os.environ.get("SCR_BACKUP_PORT", ""),
+    "user": os.environ.get("SCR_BACKUP_USER", ""),
+    "password": os.environ.get("SCR_BACKUP_PASSWORD", ""),
+    "sftp_key_file": os.environ.get("SCR_BACKUP_SFTP_KEY_FILE", ""),
 }
 
 # Behind Caddy, the original scheme arrives in X-Forwarded-Proto.
