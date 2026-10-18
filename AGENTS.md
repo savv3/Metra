@@ -91,7 +91,20 @@ docker compose up --build                       # full stack, needs a .env (see 
   party except through a configured, documented provider.
 - **Bookkeeping data:** sent invoices and payments are immutable; correct
   them with credit notes, not edits.
-- **Tests:** pytest with pytest-django. New behaviour comes with tests; CI
-  runs ruff, the migration check and pytest.
+- **Access:** every view checks a model permission (`permission_required`
+  with `raise_exception=True`, so refusals are a 403 page) and templates hide
+  buttons with `perms`. Roles are the groups created in
+  `apps/accounts/migrations/0001_roles.py`; a new model or permission needs a
+  migration that adds it to the right roles. Staff must use two-factor login
+  (`apps/accounts/middleware.py`); keep every login path going through
+  django-allauth.
+- **Audit log:** register models are registered with django-auditlog in
+  `apps/register/models.py`; register new models holding personal or
+  business data the same way, and log views of detail pages with
+  `history.log_view`.
+- **Tests:** pytest with pytest-django. Shared fixtures (`make_user`,
+  `role_client`, `board_client`, `unit`, `person`) are in `conftest.py`.
+  New behaviour comes with tests; CI runs ruff, the migration check and
+  pytest.
 - **Dependencies:** prefer Django's built-ins and well-maintained, free
   packages. Add new runtime dependencies only when they save real work.

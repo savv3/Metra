@@ -1,5 +1,6 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
+from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
@@ -8,6 +9,7 @@ from django.views.decorators.http import require_POST
 
 from .custom_fields import custom_values
 from .forms import PersonForm, UnitContactForm, UnitForm
+from .history import history, log_view
 from .models import CustomField, Person, Tag, Unit, UnitContact, UnitType
 
 PAGE_SIZE = 50
@@ -36,6 +38,7 @@ def _archive_filter(queryset, value):
 
 
 @login_required
+@permission_required("register.view_unit", raise_exception=True)
 def unit_list(request):
     filters = {
         "q": request.GET.get("q", "").strip(),
@@ -74,6 +77,7 @@ def unit_list(request):
 
 
 @login_required
+@permission_required("register.add_unit", raise_exception=True)
 def unit_create(request):
     unit_types = UnitType.objects.all()
     type_id = request.GET.get("type") or request.POST.get("unit_type")
@@ -95,6 +99,7 @@ def unit_create(request):
 
 
 @login_required
+@permission_required("register.view_unit", raise_exception=True)
 def unit_detail(request, pk):
     unit = get_object_or_404(Unit.objects.select_related("unit_type"), pk=pk)
     context = {
@@ -103,10 +108,14 @@ def unit_detail(request, pk):
         "unit_contacts": unit.unit_contacts.select_related("person"),
         "contact_form": UnitContactForm(unit=unit),
     }
+    log_view(unit)
+    if request.user.has_perm("auditlog.view_logentry"):
+        context["history"] = history(unit, "unit_id")
     return render(request, "register/unit_detail.html", context)
 
 
 @login_required
+@permission_required("register.change_unit", raise_exception=True)
 def unit_edit(request, pk):
     unit = get_object_or_404(Unit.objects.select_related("unit_type"), pk=pk)
     form = UnitForm(request.POST or None, instance=unit, unit_type=unit.unit_type)
@@ -122,6 +131,7 @@ def unit_edit(request, pk):
 
 
 @login_required
+@permission_required("register.change_unit", raise_exception=True)
 @require_POST
 def unit_archive(request, pk):
     unit = get_object_or_404(Unit, pk=pk)
@@ -135,6 +145,7 @@ def unit_archive(request, pk):
 
 
 @login_required
+@permission_required("register.add_unitcontact", raise_exception=True)
 @require_POST
 def unit_contact_add(request, pk):
     unit = get_object_or_404(Unit, pk=pk)
@@ -149,6 +160,7 @@ def unit_contact_add(request, pk):
 
 
 @login_required
+@permission_required("register.delete_unitcontact", raise_exception=True)
 @require_POST
 def unit_contact_remove(request, pk, contact_pk):
     contact = get_object_or_404(UnitContact, pk=contact_pk, unit_id=pk)
@@ -161,6 +173,7 @@ def unit_contact_remove(request, pk, contact_pk):
 
 
 @login_required
+@permission_required("register.view_person", raise_exception=True)
 def person_list(request):
     filters = {
         "q": request.GET.get("q", "").strip(),
@@ -187,10 +200,13 @@ def person_list(request):
 
 
 @login_required
+@permission_required("register.add_person", raise_exception=True)
 def person_create(request):
     form = PersonForm(request.POST or None)
     unit = None
     if unit_id := request.GET.get("unit") or request.POST.get("for_unit"):
+        if not request.user.has_perm("register.add_unitcontact"):
+            raise PermissionDenied
         unit = get_object_or_404(Unit, pk=unit_id)
     if request.method == "POST" and form.is_valid():
         person = form.save()
@@ -210,6 +226,7 @@ def person_create(request):
 
 
 @login_required
+@permission_required("register.view_person", raise_exception=True)
 def person_detail(request, pk):
     person = get_object_or_404(Person, pk=pk)
     definitions = CustomField.objects.filter(target=CustomField.Target.PERSON)
@@ -218,10 +235,14 @@ def person_detail(request, pk):
         "custom_values": custom_values(definitions, person.custom_data),
         "unit_contacts": person.unit_contacts.select_related("unit", "unit__unit_type"),
     }
+    log_view(person)
+    if request.user.has_perm("auditlog.view_logentry"):
+        context["history"] = history(person, "person_id")
     return render(request, "register/person_detail.html", context)
 
 
 @login_required
+@permission_required("register.change_person", raise_exception=True)
 def person_edit(request, pk):
     person = get_object_or_404(Person, pk=pk)
     form = PersonForm(request.POST or None, instance=person)
@@ -237,6 +258,7 @@ def person_edit(request, pk):
 
 
 @login_required
+@permission_required("register.change_person", raise_exception=True)
 @require_POST
 def person_archive(request, pk):
     person = get_object_or_404(Person, pk=pk)

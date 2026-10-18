@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 11:41+0300\n"
+"POT-Creation-Date: 2026-10-18 12:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: apps/accounts/apps.py:7
+msgid "Access"
+msgstr ""
+
+#: apps/accounts/middleware.py:25
+msgid "Set up two-factor login with an authenticator app before you continue."
+msgstr ""
+
 #: apps/core/templates/core/home.html:4
 msgid "Welcome"
 msgstr ""
@@ -26,8 +34,8 @@ msgstr ""
 msgid "Keep track of your members and clients in one place."
 msgstr ""
 
-#: apps/core/templates/core/home.html:7 templates/registration/login.html:3
-#: templates/registration/login.html:5 templates/registration/login.html:17
+#: apps/core/templates/core/home.html:7 templates/account/login.html:3
+#: templates/account/login.html:5 templates/account/login.html:18
 msgid "Log in"
 msgstr ""
 
@@ -55,292 +63,359 @@ msgstr ""
 msgid "This person already has that role on this unit."
 msgstr ""
 
-#: apps/register/models.py:11
-msgid "Finland"
+#: apps/register/history.py:43
+msgid "Created"
+msgstr ""
+
+#: apps/register/history.py:44
+msgid "Changed"
+msgstr ""
+
+#: apps/register/history.py:45
+msgid "Deleted"
+msgstr ""
+
+#: apps/register/history.py:50
+msgid "Contact added"
+msgstr ""
+
+#: apps/register/history.py:51
+msgid "Contact removed"
+msgstr ""
+
+#: apps/register/history.py:79
+#, python-format
+msgid "added %(names)s"
+msgstr ""
+
+#: apps/register/history.py:81
+#, python-format
+msgid "removed %(names)s"
 msgstr ""
 
 #: apps/register/models.py:12
-msgid "Åland"
+msgid "Finland"
 msgstr ""
 
 #: apps/register/models.py:13
-msgid "Sweden"
+msgid "Åland"
 msgstr ""
 
 #: apps/register/models.py:14
-msgid "Norway"
+msgid "Sweden"
 msgstr ""
 
 #: apps/register/models.py:15
-msgid "Denmark"
+msgid "Norway"
 msgstr ""
 
 #: apps/register/models.py:16
+msgid "Denmark"
+msgstr ""
+
+#: apps/register/models.py:17
 msgid "Iceland"
 msgstr ""
 
-#: apps/register/models.py:23 apps/register/models.py:46
-#: apps/register/models.py:60 apps/register/models.py:237
+#: apps/register/models.py:24 apps/register/models.py:47
+#: apps/register/models.py:61 apps/register/models.py:238
 msgid "name"
 msgstr ""
 
-#: apps/register/models.py:24
+#: apps/register/models.py:25
 msgid "business ID"
 msgstr ""
 
-#: apps/register/models.py:25
+#: apps/register/models.py:26
 msgid "VAT number"
 msgstr ""
 
-#: apps/register/models.py:26 apps/register/models.py:202
+#: apps/register/models.py:27 apps/register/models.py:203
 msgid "email"
 msgstr ""
 
-#: apps/register/models.py:27 apps/register/models.py:203
+#: apps/register/models.py:28 apps/register/models.py:204
 msgid "phone"
 msgstr ""
 
-#: apps/register/models.py:28 apps/register/models.py:180
+#: apps/register/models.py:29 apps/register/models.py:181
 msgid "street address"
 msgstr ""
 
-#: apps/register/models.py:29 apps/register/models.py:181
+#: apps/register/models.py:30 apps/register/models.py:182
 msgid "postal code"
 msgstr ""
 
-#: apps/register/models.py:30 apps/register/models.py:182
+#: apps/register/models.py:31 apps/register/models.py:183
 msgid "city"
 msgstr ""
 
-#: apps/register/models.py:31 apps/register/models.py:183
+#: apps/register/models.py:32 apps/register/models.py:184
 msgid "country"
 msgstr ""
 
-#: apps/register/models.py:34 apps/register/models.py:35
+#: apps/register/models.py:35 apps/register/models.py:36
 msgid "organisation"
 msgstr ""
 
-#: apps/register/models.py:50
+#: apps/register/models.py:51
 msgid "tag"
 msgstr ""
 
-#: apps/register/models.py:51 apps/register/models.py:209
-#: apps/register/models.py:245
+#: apps/register/models.py:52 apps/register/models.py:210
+#: apps/register/models.py:246
 msgid "tags"
 msgstr ""
 
-#: apps/register/models.py:61
+#: apps/register/models.py:62
 msgid "description"
 msgstr ""
 
-#: apps/register/models.py:62 apps/register/models.py:110
+#: apps/register/models.py:63 apps/register/models.py:111
 msgid "order"
 msgstr ""
 
-#: apps/register/models.py:66 apps/register/models.py:90
+#: apps/register/models.py:67 apps/register/models.py:91
 msgid "unit type"
 msgstr ""
 
-#: apps/register/models.py:67
+#: apps/register/models.py:68
 msgid "unit types"
 msgstr ""
 
-#: apps/register/models.py:77
+#: apps/register/models.py:78
 msgid "Unit"
 msgstr ""
 
-#: apps/register/models.py:78
-#: apps/register/templates/register/unit_detail.html:35
+#: apps/register/models.py:79
+#: apps/register/templates/register/unit_detail.html:37
 msgid "Person"
 msgstr ""
 
-#: apps/register/models.py:81
+#: apps/register/models.py:82
 msgid "Text"
 msgstr ""
 
-#: apps/register/models.py:82
+#: apps/register/models.py:83
 msgid "Number"
 msgstr ""
 
-#: apps/register/models.py:83
+#: apps/register/models.py:84
 msgid "Date"
 msgstr ""
 
-#: apps/register/models.py:84
+#: apps/register/models.py:85
 msgid "Choice"
 msgstr ""
 
-#: apps/register/models.py:85
+#: apps/register/models.py:86
 msgid "Yes/no"
 msgstr ""
 
-#: apps/register/models.py:87
+#: apps/register/models.py:88
 msgid "applies to"
 msgstr ""
 
-#: apps/register/models.py:97
+#: apps/register/models.py:98
 msgid "key"
 msgstr ""
 
-#: apps/register/models.py:99
+#: apps/register/models.py:100
 msgid "Short identifier used in CSV files and the API, e.g. meter_number."
 msgstr ""
 
-#: apps/register/models.py:101
+#: apps/register/models.py:102
 msgid "label"
 msgstr ""
 
-#: apps/register/models.py:103
+#: apps/register/models.py:104
 msgid "field type"
 msgstr ""
 
-#: apps/register/models.py:106
+#: apps/register/models.py:107
 msgid "choices"
 msgstr ""
 
-#: apps/register/models.py:106
+#: apps/register/models.py:107
 msgid "For choice fields: one option per line."
 msgstr ""
 
-#: apps/register/models.py:108
+#: apps/register/models.py:109
 msgid "required"
 msgstr ""
 
-#: apps/register/models.py:109
+#: apps/register/models.py:110
 msgid "help text"
 msgstr ""
 
-#: apps/register/models.py:114
+#: apps/register/models.py:115
 msgid "custom field"
 msgstr ""
 
-#: apps/register/models.py:115 apps/register/models.py:208
-#: apps/register/models.py:244
+#: apps/register/models.py:116 apps/register/models.py:209
+#: apps/register/models.py:245
 msgid "custom fields"
 msgstr ""
 
-#: apps/register/models.py:134
+#: apps/register/models.py:135
 msgid "Choose the unit type this field belongs to."
 msgstr ""
 
-#: apps/register/models.py:136
+#: apps/register/models.py:137
 msgid "Person fields apply to everyone."
 msgstr ""
 
-#: apps/register/models.py:138
+#: apps/register/models.py:139
 msgid "Add at least one option."
 msgstr ""
 
-#: apps/register/models.py:157
+#: apps/register/models.py:158
 msgid "archived"
 msgstr ""
 
-#: apps/register/models.py:158
+#: apps/register/models.py:159
 msgid "created"
 msgstr ""
 
-#: apps/register/models.py:159
+#: apps/register/models.py:160
 msgid "updated"
 msgstr ""
 
-#: apps/register/models.py:196
+#: apps/register/models.py:197
 #: apps/register/templates/register/_person_results.html:8
-#: apps/register/templates/register/person_detail.html:17
-#: apps/register/templates/register/unit_detail.html:37
+#: apps/register/templates/register/person_detail.html:19
+#: apps/register/templates/register/unit_detail.html:39
 msgid "Email"
 msgstr ""
 
-#: apps/register/models.py:197
+#: apps/register/models.py:198
 msgid "SMS"
 msgstr ""
 
-#: apps/register/models.py:198
+#: apps/register/models.py:199
 msgid "Post"
 msgstr ""
 
-#: apps/register/models.py:200
+#: apps/register/models.py:201
 msgid "first name"
 msgstr ""
 
-#: apps/register/models.py:201
+#: apps/register/models.py:202
 msgid "last name"
 msgstr ""
 
-#: apps/register/models.py:205
+#: apps/register/models.py:206
 msgid "preferred channel"
 msgstr ""
 
-#: apps/register/models.py:207 apps/register/models.py:243
+#: apps/register/models.py:208 apps/register/models.py:244
 msgid "notes"
 msgstr ""
 
-#: apps/register/models.py:213 apps/register/models.py:278
+#: apps/register/models.py:214 apps/register/models.py:279
 msgid "person"
 msgstr ""
 
-#: apps/register/models.py:214
+#: apps/register/models.py:215
 msgid "people"
 msgstr ""
 
-#: apps/register/models.py:231
+#: apps/register/models.py:232
 #: apps/register/templates/register/_show_select.html:5
 msgid "Active"
 msgstr ""
 
-#: apps/register/models.py:232
+#: apps/register/models.py:233
 msgid "Inactive"
 msgstr ""
 
-#: apps/register/models.py:235
+#: apps/register/models.py:236
 msgid "type"
 msgstr ""
 
-#: apps/register/models.py:239
+#: apps/register/models.py:240
 msgid "status"
 msgstr ""
 
-#: apps/register/models.py:241
+#: apps/register/models.py:242
 msgid "start date"
 msgstr ""
 
-#: apps/register/models.py:242
+#: apps/register/models.py:243
 msgid "end date"
 msgstr ""
 
-#: apps/register/models.py:247 apps/register/models.py:285
+#: apps/register/models.py:248 apps/register/models.py:286
 msgid "contacts"
 msgstr ""
 
-#: apps/register/models.py:252 apps/register/models.py:275
+#: apps/register/models.py:253 apps/register/models.py:276
 msgid "unit"
 msgstr ""
 
-#: apps/register/models.py:253
+#: apps/register/models.py:254
 msgid "units"
 msgstr ""
 
-#: apps/register/models.py:263
+#: apps/register/models.py:264
 msgid "The end date is before the start date."
 msgstr ""
 
-#: apps/register/models.py:270
+#: apps/register/models.py:271
 msgid "Owner"
 msgstr ""
 
-#: apps/register/models.py:271
+#: apps/register/models.py:272
 msgid "Billing contact"
 msgstr ""
 
-#: apps/register/models.py:272
+#: apps/register/models.py:273
 msgid "Contact"
 msgstr ""
 
-#: apps/register/models.py:280
+#: apps/register/models.py:281
 msgid "role"
 msgstr ""
 
-#: apps/register/models.py:284
+#: apps/register/models.py:285
 msgid "contact"
+msgstr ""
+
+#: apps/register/templates/register/_history.html:2
+msgid "History"
+msgstr ""
+
+#: apps/register/templates/register/_history.html:8
+msgid "When"
+msgstr ""
+
+#: apps/register/templates/register/_history.html:9
+msgid "Who"
+msgstr ""
+
+#: apps/register/templates/register/_history.html:10
+msgid "What"
+msgstr ""
+
+#: apps/register/templates/register/_history.html:11
+msgid "Changes"
+msgstr ""
+
+#: apps/register/templates/register/_history.html:18
+#: apps/register/templates/register/_history.html:44
+msgid "System"
+msgstr ""
+
+#: apps/register/templates/register/_history.html:37
+msgid "No changes recorded yet."
+msgstr ""
+
+#: apps/register/templates/register/_history.html:40
+msgid "Recently viewed by"
+msgstr ""
+
+#: apps/register/templates/register/_history.html:48
+msgid "No views recorded yet."
 msgstr ""
 
 #: apps/register/templates/register/_pagination.html:3
@@ -372,22 +447,22 @@ msgid "Name"
 msgstr ""
 
 #: apps/register/templates/register/_person_results.html:9
-#: apps/register/templates/register/person_detail.html:19
-#: apps/register/templates/register/unit_detail.html:38
+#: apps/register/templates/register/person_detail.html:21
+#: apps/register/templates/register/unit_detail.html:40
 msgid "Phone"
 msgstr ""
 
 #: apps/register/templates/register/_person_results.html:10
 #: apps/register/templates/register/_unit_results.html:9
-#: apps/register/templates/register/person_detail.html:21
-#: apps/register/templates/register/unit_detail.html:18
+#: apps/register/templates/register/person_detail.html:23
+#: apps/register/templates/register/unit_detail.html:20
 msgid "Address"
 msgstr ""
 
 #: apps/register/templates/register/_person_results.html:11
 #: apps/register/templates/register/_unit_results.html:11
-#: apps/register/templates/register/person_detail.html:22
-#: apps/register/templates/register/unit_detail.html:21
+#: apps/register/templates/register/person_detail.html:24
+#: apps/register/templates/register/unit_detail.html:23
 msgid "Tags"
 msgstr ""
 
@@ -412,7 +487,7 @@ msgid "All"
 msgstr ""
 
 #: apps/register/templates/register/_unit_results.html:3
-#: apps/register/templates/register/person_detail.html:30
+#: apps/register/templates/register/person_detail.html:32
 #: apps/register/templates/register/unit_list.html:3
 #: apps/register/templates/register/unit_list.html:6 templates/base.html:31
 msgid "Units"
@@ -432,31 +507,31 @@ msgstr ""
 msgid "No units found."
 msgstr ""
 
-#: apps/register/templates/register/person_detail.html:8
-#: apps/register/templates/register/unit_detail.html:8
+#: apps/register/templates/register/person_detail.html:9
+#: apps/register/templates/register/unit_detail.html:9
 msgid "Edit"
 msgstr ""
 
-#: apps/register/templates/register/person_detail.html:11
-#: apps/register/templates/register/unit_detail.html:11
+#: apps/register/templates/register/person_detail.html:12
+#: apps/register/templates/register/unit_detail.html:12
 msgid "Restore"
 msgstr ""
 
-#: apps/register/templates/register/person_detail.html:11
-#: apps/register/templates/register/unit_detail.html:11
+#: apps/register/templates/register/person_detail.html:12
+#: apps/register/templates/register/unit_detail.html:12
 msgid "Archive"
 msgstr ""
 
-#: apps/register/templates/register/person_detail.html:20
+#: apps/register/templates/register/person_detail.html:22
 msgid "Preferred channel"
 msgstr ""
 
-#: apps/register/templates/register/person_detail.html:24
-#: apps/register/templates/register/unit_detail.html:23
+#: apps/register/templates/register/person_detail.html:26
+#: apps/register/templates/register/unit_detail.html:25
 msgid "Notes"
 msgstr ""
 
-#: apps/register/templates/register/person_detail.html:38
+#: apps/register/templates/register/person_detail.html:40
 msgid "Not linked to any unit."
 msgstr ""
 
@@ -477,7 +552,7 @@ msgid "This person will be added to %(for_unit)s"
 msgstr ""
 
 #: apps/register/templates/register/person_form.html:12
-#: apps/register/templates/register/unit_detail.html:36
+#: apps/register/templates/register/unit_detail.html:38
 msgid "Role"
 msgstr ""
 
@@ -520,40 +595,40 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
-#: apps/register/templates/register/unit_detail.html:19
+#: apps/register/templates/register/unit_detail.html:21
 msgid "Start date"
 msgstr ""
 
-#: apps/register/templates/register/unit_detail.html:20
+#: apps/register/templates/register/unit_detail.html:22
 msgid "End date"
 msgstr ""
 
-#: apps/register/templates/register/unit_detail.html:29
 #: apps/register/templates/register/unit_detail.html:31
+#: apps/register/templates/register/unit_detail.html:33
 msgid "Contacts"
 msgstr ""
 
-#: apps/register/templates/register/unit_detail.html:39
+#: apps/register/templates/register/unit_detail.html:41
 msgid "Actions"
 msgstr ""
 
-#: apps/register/templates/register/unit_detail.html:52
+#: apps/register/templates/register/unit_detail.html:55
 msgid "Remove"
 msgstr ""
 
-#: apps/register/templates/register/unit_detail.html:61
+#: apps/register/templates/register/unit_detail.html:65
 msgid "No contacts yet."
 msgstr ""
 
-#: apps/register/templates/register/unit_detail.html:64
+#: apps/register/templates/register/unit_detail.html:69
 msgid "Add existing person"
 msgstr ""
 
-#: apps/register/templates/register/unit_detail.html:71
+#: apps/register/templates/register/unit_detail.html:76
 msgid "Add"
 msgstr ""
 
-#: apps/register/templates/register/unit_detail.html:74
+#: apps/register/templates/register/unit_detail.html:80
 msgid "Add new person"
 msgstr ""
 
@@ -597,42 +672,56 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: apps/register/views.py:88 apps/register/views.py:115
-#: apps/register/views.py:197 apps/register/views.py:230
+#: apps/register/views.py:92 apps/register/views.py:124
+#: apps/register/views.py:213 apps/register/views.py:251
 #, python-format
 msgid "Saved %(name)s."
 msgstr ""
 
-#: apps/register/views.py:130 apps/register/views.py:245
+#: apps/register/views.py:140 apps/register/views.py:267
 #, python-format
 msgid "Restored %(name)s."
 msgstr ""
 
-#: apps/register/views.py:133 apps/register/views.py:248
+#: apps/register/views.py:143 apps/register/views.py:270
 #, python-format
 msgid "Archived %(name)s."
 msgstr ""
 
-#: apps/register/views.py:144
+#: apps/register/views.py:155
 #, python-format
 msgid "Added %(name)s."
 msgstr ""
 
-#: apps/register/views.py:146
+#: apps/register/views.py:157
 msgid "Choose a person and a role."
 msgstr ""
 
-#: apps/register/views.py:156
+#: apps/register/views.py:168
 #, python-format
 msgid "Removed %(name)s."
 msgstr ""
 
-#: config/settings.py:118
+#: config/settings.py:145
 msgid "Swedish"
 msgstr ""
 
-#: config/settings.py:119
+#: config/settings.py:146
 msgid "English"
+msgstr ""
+
+#: templates/403.html:3 templates/403.html:5
+msgid "No access"
+msgstr ""
+
+#: templates/403.html:6
+msgid ""
+"Your role does not allow you to open this page. Ask an admin if you need "
+"access."
+msgstr ""
+
+#: templates/403.html:7
+msgid "Go to the start page"
 msgstr ""
 
 #: templates/base.html:7 templates/base.html:15
@@ -655,6 +744,10 @@ msgstr ""
 msgid "Main"
 msgstr ""
 
-#: templates/base.html:36
+#: templates/base.html:34
+msgid "Two-factor login"
+msgstr ""
+
+#: templates/base.html:37
 msgid "Log out"
 msgstr ""

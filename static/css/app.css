@@ -207,6 +207,7 @@ tbody th { font-weight: 600; }
 .details-list dt { font-weight: 600; }
 .details-list dd { margin: 0; overflow-wrap: anywhere; }
 .plain-list, .choice-list { list-style: none; padding: 0; }
+.change-list { margin: 0; padding-left: 1.1rem; }
 .choice-list li { margin-bottom: 0.75rem; }
 .choice-list .help { display: block; }
 

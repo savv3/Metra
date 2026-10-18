@@ -4,13 +4,15 @@
 {% block content %}
   <div class="page-head">
     <h1>{{ person.full_name }}{% if person.is_archived %} <span class="badge">{% translate "Archived" %}</span>{% endif %}</h1>
-    <div class="actions">
-      <a class="button" href="{% url 'register:person_edit' person.pk %}">{% translate "Edit" %}</a>
-      <form method="post" action="{% url 'register:person_archive' person.pk %}" class="inline-form">
-        {% csrf_token %}
-        <button type="submit" class="button">{% if person.is_archived %}{% translate "Restore" %}{% else %}{% translate "Archive" %}{% endif %}</button>
-      </form>
-    </div>
+    {% if perms.register.change_person %}
+      <div class="actions">
+        <a class="button" href="{% url 'register:person_edit' person.pk %}">{% translate "Edit" %}</a>
+        <form method="post" action="{% url 'register:person_archive' person.pk %}" class="inline-form">
+          {% csrf_token %}
+          <button type="submit" class="button">{% if person.is_archived %}{% translate "Restore" %}{% else %}{% translate "Archive" %}{% endif %}</button>
+        </form>
+      </div>
+    {% endif %}
   </div>
 
   <dl class="details-list">
@@ -37,4 +39,6 @@
   {% else %}
     <p class="empty">{% translate "Not linked to any unit." %}</p>
   {% endif %}
+
+  {% if history %}{% include "register/_history.html" %}{% endif %}
 {% endblock %}

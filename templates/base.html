@@ -28,10 +28,11 @@
     </div>
     {% if user.is_authenticated %}
       <nav class="main-nav" aria-label="{% translate 'Main' %}">
-        <a href="{% url 'register:unit_list' %}">{% translate "Units" %}</a>
-        <a href="{% url 'register:person_list' %}">{% translate "People" %}</a>
+        {% if perms.register.view_unit %}<a href="{% url 'register:unit_list' %}">{% translate "Units" %}</a>{% endif %}
+        {% if perms.register.view_person %}<a href="{% url 'register:person_list' %}">{% translate "People" %}</a>{% endif %}
         {% if user.is_staff %}<a href="{% url 'admin:index' %}">{% translate "Settings" %}</a>{% endif %}
-        <form class="logout-form" action="{% url 'logout' %}" method="post">
+        <a href="{% url 'mfa_index' %}">{% translate "Two-factor login" %}</a>
+        <form class="logout-form" action="{% url 'account_logout' %}" method="post">
           {% csrf_token %}
           <button type="submit" class="button button--link">{% translate "Log out" %}</button>
         </form>

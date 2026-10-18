@@ -4,7 +4,7 @@
 {% block content %}
   <div class="page-head">
     <h1>{% translate "Units" %}</h1>
-    <a class="button button--primary" href="{% url 'register:unit_create' %}">{% translate "Add unit" %}</a>
+    {% if perms.register.add_unit %}<a class="button button--primary" href="{% url 'register:unit_create' %}">{% translate "Add unit" %}</a>{% endif %}
   </div>
   <form class="filters" method="get" action="{% url 'register:unit_list' %}" role="search"
         hx-get="{% url 'register:unit_list' %}" hx-target="#results" hx-push-url="true"

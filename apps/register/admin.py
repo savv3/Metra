@@ -1,3 +1,4 @@
+from auditlog.mixins import AuditlogHistoryAdminMixin
 from django.contrib import admin
 
 from .models import CustomField, Organisation, Person, Tag, Unit, UnitContact, UnitType
@@ -13,7 +14,8 @@ class UnitCustomFieldInline(admin.TabularInline):
 
 
 @admin.register(Organisation)
-class OrganisationAdmin(admin.ModelAdmin):
+class OrganisationAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
+    show_auditlog_history_link = True
     list_display = ["name", "business_id", "country"]
 
     def has_add_permission(self, request):
@@ -22,7 +24,8 @@ class OrganisationAdmin(admin.ModelAdmin):
 
 
 @admin.register(UnitType)
-class UnitTypeAdmin(admin.ModelAdmin):
+class UnitTypeAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
+    show_auditlog_history_link = True
     list_display = ["name", "order"]
     inlines = [UnitCustomFieldInline]
 
@@ -35,13 +38,15 @@ class UnitTypeAdmin(admin.ModelAdmin):
 
 
 @admin.register(CustomField)
-class CustomFieldAdmin(admin.ModelAdmin):
+class CustomFieldAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
+    show_auditlog_history_link = True
     list_display = ["label", "key", "target", "unit_type", "field_type", "required", "order"]
     list_filter = ["target", "unit_type"]
 
 
 @admin.register(Tag)
-class TagAdmin(admin.ModelAdmin):
+class TagAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
+    show_auditlog_history_link = True
     search_fields = ["name"]
 
 
@@ -52,7 +57,8 @@ class UnitContactInline(admin.TabularInline):
 
 
 @admin.register(Unit)
-class UnitAdmin(admin.ModelAdmin):
+class UnitAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
+    show_auditlog_history_link = True
     list_display = ["name", "unit_type", "status", "city", "archived_at"]
     list_filter = ["unit_type", "status", "tags"]
     search_fields = ["name", "street_address", "city"]
@@ -60,7 +66,8 @@ class UnitAdmin(admin.ModelAdmin):
 
 
 @admin.register(Person)
-class PersonAdmin(admin.ModelAdmin):
+class PersonAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
+    show_auditlog_history_link = True
     list_display = ["first_name", "last_name", "email", "phone", "archived_at"]
     list_filter = ["tags", "preferred_channel"]
     search_fields = ["first_name", "last_name", "email", "phone"]
