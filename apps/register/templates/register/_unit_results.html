@@ -18,7 +18,7 @@
               {% if unit.is_archived %}<span class="badge">{% translate "Archived" %}</span>{% endif %}</th>
             <td>{{ unit.unit_type }}</td>
             <td>{{ unit.address_line }}</td>
-            <td>{{ unit.get_status_display }}</td>
+            <td><span class="pill{% if unit.status == "active" %} pill--ok{% endif %}">{{ unit.get_status_display }}</span></td>
             <td>{% for tag in unit.tags.all %}{{ tag }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
           </tr>
         {% endfor %}

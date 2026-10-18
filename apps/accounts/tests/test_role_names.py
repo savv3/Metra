@@ -40,14 +40,14 @@ def test_custom_groups_keep_their_name():
         assert role_label(group) == "Kören"
 
 
-def test_nav_shows_the_users_role(role_client):
+def test_account_menu_shows_the_users_role(role_client):
     client = role_client("Treasurer")
 
     swedish = client.get(reverse("register:unit_list")).content.decode()
     english = client.get(reverse("register:unit_list"), HTTP_ACCEPT_LANGUAGE="en")
 
-    assert "treasurer (Kassör)" in swedish
-    assert "treasurer (Treasurer)" in english.content.decode()
+    assert "<span>Kassör</span>" in swedish
+    assert "<span>Treasurer</span>" in english.content.decode()
 
 
 @pytest.mark.parametrize("language, expected", [("sv", "Läsbehörighet"), ("en", "Read-only")])
