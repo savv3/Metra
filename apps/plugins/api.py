@@ -52,7 +52,11 @@ __all__ = [
     "add_webhook_event",
     "events",
     "grant_to_roles",
+    "normalise_phone",
     "on_webhook_event",
+    "record_delivery",
+    "sms_country_code",
+    "sms_sender",
     "webhook_events",
 ]
 
@@ -144,3 +148,35 @@ def on_webhook_event(listener):
     """Call ``listener(event)`` for each ``WebhookEvent`` registered from now on,
     so a sender of webhooks also sees events of plugins that load after it."""
     hooks.subscribe(WEBHOOK_EVENTS, listener)
+
+
+# For SMS provider plugins.
+
+
+def sms_sender():
+    """The sender name or number SMS are sent from (METRA_SMS_SENDER)."""
+    from django.conf import settings
+
+    return settings.MESSAGING["sms_sender"]
+
+
+def sms_country_code():
+    """The country code for numbers written without one (METRA_SMS_COUNTRY_CODE)."""
+    from django.conf import settings
+
+    return settings.MESSAGING["sms_country_code"]
+
+
+def normalise_phone(number, country_code=None):
+    """+358401234567 from "040 123 4567" and the like; ProviderError if it is not a number."""
+    from apps.messaging.providers import normalise_phone
+
+    return normalise_phone(number, country_code or sms_country_code())
+
+
+def record_delivery(provider, provider_id, delivered):
+    """A provider reported whether the SMS it calls ``provider_id`` arrived.
+    For a provider plugin's delivery-report view; unknown ids are ignored."""
+    from apps.messaging.delivery_reports import record
+
+    return record(provider, provider_id, delivered)
