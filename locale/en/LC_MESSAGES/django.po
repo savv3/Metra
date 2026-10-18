@@ -59,7 +59,7 @@ msgstr ""
 
 #: apps/accounts/templates/accounts/profile.html:3
 #: apps/accounts/templates/accounts/profile.html:7
-#: templates/allauth/layouts/base.html:9 templates/base.html:38
+#: templates/allauth/layouts/base.html:9 templates/base.html:39
 msgid "My account"
 msgstr ""
 
@@ -130,7 +130,7 @@ msgstr ""
 msgid "Turn off"
 msgstr ""
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:60
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:69
 msgid "Turn on two-factor login"
 msgstr ""
 
@@ -983,7 +983,7 @@ msgstr ""
 #: apps/invoicing/templates/invoicing/invoice_list.html:3
 #: apps/invoicing/templates/invoicing/invoice_list.html:6
 #: apps/invoicing/templates/invoicing/run_detail.html:31
-#: apps/messaging/models.py:39 templates/base.html:23
+#: apps/messaging/models.py:39 templates/base.html:24
 msgid "Invoices"
 msgstr ""
 
@@ -2208,7 +2208,7 @@ msgstr ""
 
 #: apps/messaging/templates/messaging/batch_list.html:3
 #: apps/messaging/templates/messaging/batch_list.html:6
-#: apps/messaging/templates/messaging/batch_list.html:17 templates/base.html:24
+#: apps/messaging/templates/messaging/batch_list.html:17 templates/base.html:25
 msgid "Send-outs"
 msgstr ""
 
@@ -2236,7 +2236,7 @@ msgstr ""
 msgid "Sent by"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_list.html:33
+#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:44
 msgid "Automatic"
 msgstr ""
 
@@ -2427,7 +2427,7 @@ msgstr ""
 #: apps/readings/apps.py:7
 #: apps/readings/templates/readings/_round_results.html:3
 #: apps/readings/templates/readings/_unit_readings.html:3
-#: templates/base.html:22
+#: templates/base.html:23
 msgid "Readings"
 msgstr ""
 
@@ -2872,7 +2872,7 @@ msgstr ""
 #: apps/register/templates/register/_unit_results.html:3
 #: apps/register/templates/register/person_detail.html:32
 #: apps/register/templates/register/unit_list.html:3
-#: apps/register/templates/register/unit_list.html:6 templates/base.html:20
+#: apps/register/templates/register/unit_list.html:6 templates/base.html:21
 msgid "Units"
 msgstr ""
 
@@ -3291,7 +3291,7 @@ msgstr ""
 
 #: apps/register/templates/register/_person_results.html:3
 #: apps/register/templates/register/person_list.html:3
-#: apps/register/templates/register/person_list.html:6 templates/base.html:21
+#: apps/register/templates/register/person_list.html:6 templates/base.html:22
 msgid "People"
 msgstr ""
 
@@ -3543,7 +3543,7 @@ msgid ""
 msgstr ""
 
 #: apps/register/templates/register/unit_type_choose.html:16
-#: templates/base.html:26
+#: templates/base.html:27
 msgid "Settings"
 msgstr ""
 
@@ -3650,16 +3650,16 @@ msgid "Print self-service letter"
 msgstr ""
 
 #: apps/selfservice/templates/selfservice/base.html:9
-#: apps/selfservice/templates/selfservice/base.html:17 templates/base.html:7
-#: templates/base.html:17
+#: apps/selfservice/templates/selfservice/base.html:18 templates/base.html:7
+#: templates/base.html:18
 msgid "Small Company Register"
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/base.html:14 templates/base.html:14
+#: apps/selfservice/templates/selfservice/base.html:15 templates/base.html:15
 msgid "Skip to content"
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/base.html:18
+#: apps/selfservice/templates/selfservice/base.html:19
 #: templates/_language_form.html:5
 msgid "Language"
 msgstr ""
@@ -3990,21 +3990,33 @@ msgstr ""
 msgid "Change"
 msgstr ""
 
-#: templates/base.html:19
+#: templates/base.html:20
 msgid "Main"
 msgstr ""
 
 #: templates/base.html:42
+msgid "Theme"
+msgstr ""
+
+#: templates/base.html:45
+msgid "Light"
+msgstr ""
+
+#: templates/base.html:46
+msgid "Dark"
+msgstr ""
+
+#: templates/base.html:51
 msgid "Log out"
 msgstr ""
 
-#: templates/base.html:54
+#: templates/base.html:63
 msgid ""
 "Two-factor login is not required on this installation (SCR_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
 msgstr ""
 
-#: templates/base.html:59
+#: templates/base.html:68
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."

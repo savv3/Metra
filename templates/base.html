@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% translate "Small Company Register" %}{% endblock %}</title>
   <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+  <script src="{% static 'js/theme.js' %}"></script>
   <link rel="stylesheet" href="{% static 'css/app.css' %}">
   <script src="{% static 'vendor/htmx-2.0.4.min.js' %}" defer></script>
   <script src="{% static 'js/app.js' %}" defer></script>
@@ -37,6 +38,14 @@
             </p>
             <a href="{% url 'accounts:profile' %}">{% translate "My account" %}</a>
             {% include "_language_form.html" with suffix="-menu" %}
+            <div class="lang-form theme-form">
+              <label for="theme">{% translate "Theme" %}</label>
+              <select id="theme" data-theme-select>
+                <option value="auto">{% translate "Automatic" %}</option>
+                <option value="light">{% translate "Light" %}</option>
+                <option value="dark">{% translate "Dark" %}</option>
+              </select>
+            </div>
             <form class="logout-form" action="{% url 'account_logout' %}" method="post">
               {% csrf_token %}
               <button type="submit" class="button button--link">{% translate "Log out" %}</button>

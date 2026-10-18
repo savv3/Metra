@@ -22,6 +22,77 @@
   --success-bg: #e6f4ea;
   --info-bg: #e8f0fb;
   --warning-bg: #fff4d6;
+  --warning-text: #5a2e00;
+  --neutral-bg: #eceef0;
+  --neutral-text: #3d434a;
+  --danger: #a4141c;
+  --danger-hover: #7f0f15;
+  --danger-text: #fff;
+  color-scheme: light;
+}
+
+/* Dark theme: follows the device setting unless the user picked light or
+   dark in the account menu (stored in the browser, see js/theme.js).
+   Printing always uses the light colours. */
+@media screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1419;
+    --surface: #171c23;
+    --surface-muted: #1f262f;
+    --text: #e6e9ee;
+    --muted: #a3acb8;
+    --border: #2d3540;
+    --input-border: #5f6977;
+    --primary: #7cb0ff;
+    --primary-hover: #9cc3ff;
+    --primary-soft: rgb(124 176 255 / 15%);
+    --primary-text: #0b1220;
+    --shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 1px 3px rgb(0 0 0 / 30%);
+    --shadow-raised: 0 8px 24px rgb(0 0 0 / 50%);
+    --focus: #ffb35c;
+    --error: #ff8f8f;
+    --error-bg: #3a1d20;
+    --success: #74d68d;
+    --success-bg: #173322;
+    --info-bg: #182638;
+    --warning-bg: #352a12;
+    --warning-text: #ffd894;
+    --neutral-bg: #29313b;
+    --neutral-text: #c9d1db;
+    --danger: #c9363f;
+    --danger-hover: #e04b54;
+    color-scheme: dark;
+  }
+}
+@media screen {
+  :root[data-theme="dark"] {
+    --bg: #0f1419;
+    --surface: #171c23;
+    --surface-muted: #1f262f;
+    --text: #e6e9ee;
+    --muted: #a3acb8;
+    --border: #2d3540;
+    --input-border: #5f6977;
+    --primary: #7cb0ff;
+    --primary-hover: #9cc3ff;
+    --primary-soft: rgb(124 176 255 / 15%);
+    --primary-text: #0b1220;
+    --shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 1px 3px rgb(0 0 0 / 30%);
+    --shadow-raised: 0 8px 24px rgb(0 0 0 / 50%);
+    --focus: #ffb35c;
+    --error: #ff8f8f;
+    --error-bg: #3a1d20;
+    --success: #74d68d;
+    --success-bg: #173322;
+    --info-bg: #182638;
+    --warning-bg: #352a12;
+    --warning-text: #ffd894;
+    --neutral-bg: #29313b;
+    --neutral-text: #c9d1db;
+    --danger: #c9363f;
+    --danger-hover: #e04b54;
+    color-scheme: dark;
+  }
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -301,7 +372,7 @@ tbody th { font-weight: 600; }
   border-radius: 999px;
   background: var(--warning-bg);
   border: 1px solid var(--focus);
-  color: #5a2e00;
+  color: var(--warning-text);
   vertical-align: middle;
 }
 
@@ -313,13 +384,13 @@ tbody th { font-weight: 600; }
   border-radius: 999px;
   font-size: 0.85rem;
   font-weight: 600;
-  background: #eceef0;
-  color: #3d434a;
+  background: var(--neutral-bg);
+  color: var(--neutral-text);
   vertical-align: middle;
   white-space: nowrap;
 }
 .pill--ok { background: var(--success-bg); color: var(--success); }
-.pill--warn { background: var(--warning-bg); color: #7a3d00; }
+.pill--warn { background: var(--warning-bg); color: var(--warning-text); }
 .pill--bad { background: var(--error-bg); color: var(--error); }
 
 /* Cards: a white panel that groups a section of a page. */
@@ -391,9 +462,9 @@ th .help, td .help { display: block; font-weight: 400; }
 .status-counts { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
 
 /* Messages and urgent alerts */
-.button--danger { background: var(--error); border-color: var(--error); color: #fff; font-weight: 600; }
-.button--danger:hover { background: #7f0f15; border-color: #7f0f15; }
-.alert-badge { display: inline-block; background: var(--error); color: #fff; font-size: 0.8em; padding: 0.1rem 0.6rem; border-radius: var(--radius); vertical-align: middle; }
+.button--danger { background: var(--danger); border-color: var(--danger); color: var(--danger-text); font-weight: 600; }
+.button--danger:hover { background: var(--danger-hover); border-color: var(--danger-hover); }
+.alert-badge { display: inline-block; background: var(--danger); color: var(--danger-text); font-size: 0.8em; padding: 0.1rem 0.6rem; border-radius: var(--radius); vertical-align: middle; }
 .alert-compose { border-left: 6px solid var(--error); padding-left: 1rem; }
 .message-preview { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin: 0 0 1rem; padding: 0.75rem 1rem; white-space: normal; }
 

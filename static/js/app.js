@@ -11,3 +11,19 @@ document.addEventListener("keydown", (event) => {
     menu.querySelector("summary").focus();
   });
 });
+
+// Theme picker in the account menu: auto (device setting), light or dark.
+document.querySelectorAll("[data-theme-select]").forEach((select) => {
+  select.value = document.documentElement.dataset.theme || "auto";
+  select.addEventListener("change", () => {
+    const theme = select.value;
+    if (theme === "auto") delete document.documentElement.dataset.theme;
+    else document.documentElement.dataset.theme = theme;
+    try {
+      if (theme === "auto") localStorage.removeItem("theme");
+      else localStorage.setItem("theme", theme);
+    } catch (e) {
+      // Storage blocked: the choice lasts until the page is left.
+    }
+  });
+});

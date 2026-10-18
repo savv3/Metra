@@ -53,6 +53,7 @@ def test_menu_links_to_the_account_page_instead_of_two_factor(client, board_user
     content = response.content.decode()
     assert reverse("accounts:profile") in content
     assert f'href="{reverse("mfa_index")}"' not in content
+    assert "data-theme-select" in content
     assert f'<a href="{reverse("register:unit_list")}" aria-current="page">' in content
 
 
