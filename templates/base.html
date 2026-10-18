@@ -1,4 +1,4 @@
-{% load i18n static %}<!doctype html>
+{% load i18n roles static %}<!doctype html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -32,6 +32,7 @@
         {% if perms.register.view_person %}<a href="{% url 'register:person_list' %}">{% translate "People" %}</a>{% endif %}
         {% if user.is_staff %}<a href="{% url 'admin:index' %}">{% translate "Settings" %}</a>{% endif %}
         <a href="{% url 'mfa_index' %}">{% translate "Two-factor login" %}</a>
+        <span class="nav-user">{{ user.get_username }}{% with roles=user|role_names %}{% if roles %} ({{ roles }}){% endif %}{% endwith %}</span>
         <form class="logout-form" action="{% url 'account_logout' %}" method="post">
           {% csrf_token %}
           <button type="submit" class="button button--link">{% translate "Log out" %}</button>

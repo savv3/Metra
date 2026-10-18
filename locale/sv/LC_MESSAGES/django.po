@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 12:13+0300\n"
+"POT-Creation-Date: 2026-10-18 12:20+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: apps/accounts/admin.py:13 apps/register/models.py:281
+msgid "role"
+msgstr "roll"
+
+#: apps/accounts/admin.py:28 apps/register/models.py:24
+#: apps/register/models.py:47 apps/register/models.py:61
+#: apps/register/models.py:238
+msgid "name"
+msgstr "namn"
+
 #: apps/accounts/apps.py:7
 msgid "Access"
 msgstr "Åtkomst"
@@ -25,6 +35,26 @@ msgstr "Åtkomst"
 msgid "Set up two-factor login with an authenticator app before you continue."
 msgstr ""
 "Ställ in tvåfaktorsinloggning med en autentiseringsapp innan du fortsätter."
+
+#: apps/accounts/roles.py:12
+msgctxt "role"
+msgid "Admin"
+msgstr "Admin"
+
+#: apps/accounts/roles.py:13
+msgctxt "role"
+msgid "Board"
+msgstr "Styrelse"
+
+#: apps/accounts/roles.py:14
+msgctxt "role"
+msgid "Treasurer"
+msgstr "Kassör"
+
+#: apps/accounts/roles.py:15
+msgctxt "role"
+msgid "Read-only"
+msgstr "Läsbehörighet"
 
 #: apps/core/templates/core/home.html:4
 msgid "Welcome"
@@ -68,7 +98,8 @@ msgstr "Kontakt"
 #: apps/register/csv_io.py:218
 #, python-format
 msgid "Tags: “%(name)s” does not exist. Add it under Settings first."
-msgstr "Taggar: ”%(name)s” finns inte. Lägg först till den under Inställningar."
+msgstr ""
+"Taggar: ”%(name)s” finns inte. Lägg först till den under Inställningar."
 
 #: apps/register/csv_io.py:244
 #, python-format
@@ -127,13 +158,13 @@ msgstr "Typ"
 msgid "Status"
 msgstr "Status"
 
-#: apps/register/csv_io.py:468 apps/register/csv_io.py:523
 #
+#: apps/register/csv_io.py:468 apps/register/csv_io.py:523
 msgid "Street address"
 msgstr "Gatuadress"
 
-#: apps/register/csv_io.py:469 apps/register/csv_io.py:524
 #
+#: apps/register/csv_io.py:469 apps/register/csv_io.py:524
 msgid "Postal code"
 msgstr "Postnummer"
 
@@ -141,8 +172,8 @@ msgstr "Postnummer"
 msgid "City"
 msgstr "Ort"
 
-#: apps/register/csv_io.py:471 apps/register/csv_io.py:526
 #
+#: apps/register/csv_io.py:471 apps/register/csv_io.py:526
 msgid "Country"
 msgstr "Land"
 
@@ -185,13 +216,13 @@ msgstr "Arkiverad"
 msgid "Contacts"
 msgstr "Kontakter"
 
-#: apps/register/csv_io.py:518
 #
+#: apps/register/csv_io.py:518
 msgid "First name"
 msgstr "Förnamn"
 
-#: apps/register/csv_io.py:519
 #
+#: apps/register/csv_io.py:519
 msgid "Last name"
 msgstr "Efternamn"
 
@@ -277,8 +308,8 @@ msgstr "lade till %(names)s"
 msgid "removed %(names)s"
 msgstr "tog bort %(names)s"
 
-#: apps/register/import_views.py:24
 #
+#: apps/register/import_views.py:24
 msgid "Unit type"
 msgstr "Enhetstyp"
 
@@ -289,7 +320,8 @@ msgstr "CSV-fil"
 #: apps/register/import_views.py:29
 msgid ""
 "UTF-8, with semicolons or commas between the columns and one header row."
-msgstr "UTF-8, med semikolon eller kommatecken mellan kolumnerna och en rubrikrad."
+msgstr ""
+"UTF-8, med semikolon eller kommatecken mellan kolumnerna och en rubrikrad."
 
 #: apps/register/import_views.py:33
 msgid "Skip rows whose unit name is already in the register"
@@ -312,7 +344,9 @@ msgstr "Roll för kontakter som saknar roll"
 #, python-format
 msgid ""
 "Imported %(units)s units and %(people)s new people; skipped %(skipped)s."
-msgstr "Importerade %(units)s enheter och %(people)s nya personer; hoppade över %(skipped)s."
+msgstr ""
+"Importerade %(units)s enheter och %(people)s nya personer; hoppade över "
+"%(skipped)s."
 
 #: apps/register/models.py:12
 msgid "Finland"
@@ -337,11 +371,6 @@ msgstr "Danmark"
 #: apps/register/models.py:17
 msgid "Iceland"
 msgstr "Island"
-
-#: apps/register/models.py:24 apps/register/models.py:47
-#: apps/register/models.py:61 apps/register/models.py:238
-msgid "name"
-msgstr "namn"
 
 #: apps/register/models.py:25
 msgid "business ID"
@@ -584,10 +613,6 @@ msgstr "Ägare"
 msgid "Billing contact"
 msgstr "Faktureringskontakt"
 
-#: apps/register/models.py:281
-msgid "role"
-msgstr "roll"
-
 #: apps/register/models.py:285
 msgid "contact"
 msgstr "kontakt"
@@ -707,8 +732,8 @@ msgstr[1] "%(filename)s: %(count)s rader, importeras som %(unit_type)s"
 msgid "First rows of the file"
 msgstr "Filens första rader"
 
-#: apps/register/templates/register/import_map.html:31
 #
+#: apps/register/templates/register/import_map.html:31
 msgid "Contact person"
 msgstr "Kontaktperson"
 
@@ -716,7 +741,9 @@ msgstr "Kontaktperson"
 msgid ""
 "People already in the register are matched by email, or by phone when there "
 "is no email, and are not added twice."
-msgstr "Personer som redan finns i registret känns igen på e-postadressen, eller på telefonnumret om e-post saknas, och läggs inte till två gånger."
+msgstr ""
+"Personer som redan finns i registret känns igen på e-postadressen, eller på "
+"telefonnumret om e-post saknas, och läggs inte till två gånger."
 
 #: apps/register/templates/register/import_map.html:39
 msgid "Check the rows"
@@ -757,7 +784,9 @@ msgstr[1] "%(count)s rader har fel"
 msgid ""
 "Nothing is imported while any row has errors. Correct the file and upload it "
 "again, or choose other columns."
-msgstr "Ingenting importeras så länge någon rad har fel. Rätta filen och ladda upp den igen, eller välj andra kolumner."
+msgstr ""
+"Ingenting importeras så länge någon rad har fel. Rätta filen och ladda upp "
+"den igen, eller välj andra kolumner."
 
 #: apps/register/templates/register/import_preview.html:23
 #, python-format
@@ -766,8 +795,8 @@ msgid_plural "Import %(count)s units"
 msgstr[0] "Importera %(count)s enhet"
 msgstr[1] "Importera %(count)s enheter"
 
-#: apps/register/templates/register/import_preview.html:26
 #
+#: apps/register/templates/register/import_preview.html:26
 msgid "Change columns"
 msgstr "Ändra kolumner"
 
@@ -806,7 +835,10 @@ msgid ""
 "Each row becomes one unit, optionally with one contact person. You choose "
 "which column goes where in the next step, and see every row checked before "
 "anything is saved."
-msgstr "Varje rad blir en enhet, med eller utan en kontaktperson. I nästa steg väljer du vilken kolumn som hör till vilket fält, och du ser varje rad kontrollerad innan något sparas."
+msgstr ""
+"Varje rad blir en enhet, med eller utan en kontaktperson. I nästa steg "
+"väljer du vilken kolumn som hör till vilket fält, och du ser varje rad "
+"kontrollerad innan något sparas."
 
 #: apps/register/templates/register/import_upload.html:10
 msgid "Example for the water association setup:"
@@ -818,12 +850,14 @@ msgstr "Exempel för vattenandelslagets uppsättning:"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: apps/register/templates/register/import_upload.html:24
 #
+#: apps/register/templates/register/import_upload.html:24
 msgid ""
 "There are no unit types yet. An administrator must create one under Settings "
 "first."
-msgstr "Det finns inga enhetstyper ännu. En administratör måste först skapa en under Inställningar."
+msgstr ""
+"Det finns inga enhetstyper ännu. En administratör måste först skapa en under "
+"Inställningar."
 
 #: apps/register/templates/register/person_detail.html:9
 #: apps/register/templates/register/unit_detail.html:9
@@ -1047,6 +1081,6 @@ msgstr "Huvudnavigering"
 msgid "Two-factor login"
 msgstr "Tvåfaktorsinloggning"
 
-#: templates/base.html:37
+#: templates/base.html:38
 msgid "Log out"
 msgstr "Logga ut"

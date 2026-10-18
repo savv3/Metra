@@ -91,7 +91,8 @@ a:hover { text-decoration-thickness: 2px; }
   padding: 0.5rem 0.25rem;
   font-weight: 600;
 }
-.logout-form { margin: 0 0 0 auto; }
+.nav-user { margin-left: auto; color: var(--muted); font-size: 0.9rem; }
+.logout-form { margin: 0; }
 
 /* Messages */
 .messages { list-style: none; margin: 0 0 1rem; padding: 0; }
@@ -219,7 +220,7 @@ tbody th { font-weight: 600; }
 @media (max-width: 36rem) {
   .details-list { grid-template-columns: 1fr; gap: 0; }
   .details-list dd { margin-bottom: 0.75rem; }
-  .logout-form { margin-left: 0; }
+  .nav-user { margin-left: 0; }
 }
 
 .htmx-request #results, #results.htmx-request { opacity: 0.6; }
