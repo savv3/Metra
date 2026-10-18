@@ -3,4 +3,7 @@
 {% block content %}
   <h1>{% translate "Welcome" %}</h1>
   <p>{% translate "Keep track of your members and clients in one place." %}</p>
+  {% if not user.is_authenticated %}
+    <p><a class="button button--primary" href="{% url 'login' %}">{% translate "Log in" %}</a></p>
+  {% endif %}
 {% endblock %}

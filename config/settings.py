@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "huey.contrib.djhuey",
     "apps.core",
+    "apps.register",
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
+
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "register:unit_list"
+LOGOUT_REDIRECT_URL = "login"
 
 # SQLite in WAL mode lets the web app and the worker read while one writes.
 # IMMEDIATE transactions take the write lock up front, which avoids

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if person %}{% blocktranslate with name=person.full_name %}Edit {{ name }}{% endblocktranslate %}{% else %}{% translate "New person" %}{% endif %}{% endblock %}
+{% block content %}
+  <h1>{% if person %}{% blocktranslate with name=person.full_name %}Edit {{ name }}{% endblocktranslate %}{% else %}{% translate "New person" %}{% endif %}</h1>
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    {% if for_unit %}
+      <p class="notice">{% blocktranslate %}This person will be added to {{ for_unit }}{% endblocktranslate %}</p>
+      <input type="hidden" name="for_unit" value="{{ for_unit.pk }}">
+      <div class="field">
+        <label for="id_role">{% translate "Role" %}</label>
+        <select id="id_role" name="role">
+          {% for value, label in roles %}<option value="{{ value }}"{% if value == "contact" %} selected{% endif %}>{{ label }}</option>{% endfor %}
+        </select>
+      </div>
+    {% endif %}
+    {% if form.non_field_errors %}
+      <div class="errorlist-box" role="alert">{{ form.non_field_errors }}</div>
+    {% endif %}
+    {% for field in form %}
+      {% if field.name|slice:":8" != "custom__" %}
+        {% include "register/_field.html" %}
+      {% endif %}
+    {% endfor %}
+    {% if form.custom_definitions %}
+      <fieldset class="details">
+        <legend>{% translate "Details" %}</legend>
+        {% for field in form %}
+          {% if field.name|slice:":8" == "custom__" %}
+            {% include "register/_field.html" %}
+          {% endif %}
+        {% endfor %}
+      </fieldset>
+    {% endif %}
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+      <a class="button" href="{% if person %}{{ person.get_absolute_url }}{% elif for_unit %}{{ for_unit.get_absolute_url }}{% else %}{% url 'register:person_list' %}{% endif %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+{% endblock %}

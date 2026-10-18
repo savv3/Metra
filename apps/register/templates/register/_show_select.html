@@ -1,0 +1,9 @@
+{% load i18n %}
+<div class="field">
+  <label for="f-show">{% translate "Show" %}</label>
+  <select id="f-show" name="show">
+    <option value="active"{% if filters.show == "active" or not filters.show %} selected{% endif %}>{% translate "Active" %}</option>
+    <option value="archived"{% if filters.show == "archived" %} selected{% endif %}>{% translate "Archived" %}</option>
+    <option value="all"{% if filters.show == "all" %} selected{% endif %}>{% translate "All" %}</option>
+  </select>
+</div>
