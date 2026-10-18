@@ -1,0 +1,45 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-18 11:27+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: apps/core/templates/core/home.html:4
+msgid "Welcome"
+msgstr "Välkommen"
+
+#: apps/core/templates/core/home.html:5
+msgid "Keep track of your members and clients in one place."
+msgstr "Håll ordning på dina medlemmar och kunder på ett ställe."
+
+#: config/settings.py:113
+msgid "Swedish"
+msgstr "Svenska"
+
+#: config/settings.py:114
+msgid "English"
+msgstr "Engelska"
+
+#: templates/base.html:7 templates/base.html:11
+msgid "Small Company Register"
+msgstr "Small Company Register"
+
+#: templates/base.html:15
+msgid "Language"
+msgstr "Språk"
+
+#: templates/base.html:22
+msgid "Change"
+msgstr "Byt"
