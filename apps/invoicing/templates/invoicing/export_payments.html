@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Export payments" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "Export payments" %}</h1>
+  <p>{% translate "Payments and reminder fees as a CSV file for the bookkeeping. Leave a date empty for no limit." %}</p>
+  <form method="get" class="form form--narrow">
+    {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+    <input type="hidden" name="go" value="1">
+    <button type="submit" class="button button--primary">{% translate "Download CSV" %}</button>
+  </form>
+{% endblock %}

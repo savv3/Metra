@@ -28,6 +28,7 @@
       </tbody>
     </table>
   </div>
+  <p class="export-link"><a href="{% url 'invoicing:export_invoices' %}?{{ request.GET.urlencode }}" download>{% translate "Export as CSV" %}</a></p>
   <p class="export-link">{% blocktranslate count count=totals.count with total=totals.total|floatformat:2 %}{{ count }} invoice, {{ total }} € in total{% plural %}{{ count }} invoices, {{ total }} € in total{% endblocktranslate %}</p>
   {% include "register/_pagination.html" %}
 {% else %}

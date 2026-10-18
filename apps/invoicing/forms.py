@@ -64,3 +64,29 @@ class LineForm(forms.ModelForm):
 LineFormSet = forms.inlineformset_factory(
     Invoice, InvoiceLine, form=LineForm, extra=1, can_delete=True
 )
+
+
+class PaymentForm(forms.Form):
+    amount = forms.DecimalField(
+        label=_("Amount (€)"), max_digits=12, decimal_places=2, localize=True
+    )
+    paid_on = forms.DateField(
+        label=_("Paid on"), widget=forms.DateInput(attrs={"type": "date"}, format="%Y-%m-%d")
+    )
+    reference = forms.CharField(label=_("Reference given"), max_length=40, required=False)
+    note = forms.CharField(label=_("Note"), max_length=200, required=False)
+
+    def clean_amount(self):
+        amount = self.cleaned_data["amount"]
+        if amount == 0:
+            raise forms.ValidationError(_("Enter an amount other than zero."))
+        return amount
+
+
+class PaymentsExportForm(forms.Form):
+    start = forms.DateField(
+        label=_("From"), required=False, widget=forms.DateInput(attrs={"type": "date"})
+    )
+    end = forms.DateField(
+        label=_("To"), required=False, widget=forms.DateInput(attrs={"type": "date"})
+    )
