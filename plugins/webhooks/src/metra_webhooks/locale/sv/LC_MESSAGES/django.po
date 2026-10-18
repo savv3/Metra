@@ -115,7 +115,7 @@ msgstr "Misslyckades, försöker igen"
 
 #: models.py:59
 msgid "Given up"
-msgstr "Uppgiven"
+msgstr "Avbruten"
 
 #: models.py:64
 msgid "endpoint"
