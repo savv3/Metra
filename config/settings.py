@@ -216,7 +216,7 @@ HUEY = {
 }
 
 # Backups: a consistent copy of the database plus media, kept locally and,
-# when a remote is set, encrypted and uploaded with rclone. See README.
+# when a remote is set, encrypted and uploaded with rclone. See INSTALL.md.
 BACKUP = {
     "dir": Path(os.environ.get("METRA_BACKUP_DIR") or DATA_DIR / "backups"),
     "keep": int(os.environ.get("METRA_BACKUP_KEEP") or 14),
@@ -265,7 +265,7 @@ TRUST_X_FORWARDED_FOR = env_bool("METRA_TRUST_X_FORWARDED_FOR")
 ALLAUTH_TRUSTED_PROXY_COUNT = 1 if TRUST_X_FORWARDED_FOR else 0
 
 # Email: SMTP when METRA_EMAIL_HOST is set, the console in development, or
-# none (links then go by SMS or letter). See README, "Email and SMS".
+# none (links then go by SMS or letter). See INSTALL.md, "Email and SMS".
 EMAIL_HOST = os.environ.get("METRA_EMAIL_HOST", "")
 EMAIL_PORT = int(os.environ.get("METRA_EMAIL_PORT") or 587)
 EMAIL_HOST_USER = os.environ.get("METRA_EMAIL_USER", "")
