@@ -8,4 +8,4 @@ class MessagingConfig(AppConfig):
 
     def ready(self):
         # Register the built-in SMS and email providers.
-        from . import providers  # noqa: F401
+        from . import checks, providers  # noqa: F401

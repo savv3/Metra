@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 23:12+0300\n"
+"POT-Creation-Date: 2026-10-18 23:27+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1669,8 +1669,8 @@ msgid "All issued invoices of this run have been sent."
 msgstr "Alla utfärdade fakturor i den här omgången har skickats."
 
 #: apps/invoicing/views.py:353 apps/invoicing/views.py:416
-#: apps/messaging/views.py:57 apps/messaging/views.py:174
-#: apps/messaging/views.py:248
+#: apps/messaging/views.py:53 apps/messaging/views.py:152
+#: apps/messaging/views.py:226
 msgid "Sending has started. This page shows how it goes."
 msgstr "Utskicket har startat. Den här sidan visar hur det går."
 
@@ -2613,19 +2613,19 @@ msgstr "Nyhetsbrevet skickas till %(name)s."
 msgid "Unsubscribe"
 msgstr "Avsluta prenumerationen"
 
-#: apps/messaging/views.py:150
+#: apps/messaging/views.py:128
 msgid "Nobody can be reached with these choices."
 msgstr "Ingen kan nås med de här valen."
 
-#: apps/messaging/views.py:219
+#: apps/messaging/views.py:197
 msgid "The notice is no longer shown."
 msgstr "Anslaget visas inte längre."
 
-#: apps/messaging/views.py:242
+#: apps/messaging/views.py:220
 msgid "Everyone who wants the newsletter"
 msgstr "Alla som vill ha nyhetsbrevet"
 
-#: apps/messaging/views.py:278
+#: apps/messaging/views.py:256
 msgid "Saved the newsletter choice."
 msgstr "Valet för nyhetsbrevet är sparat."
 

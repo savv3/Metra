@@ -39,7 +39,7 @@ def test_file_link_tokens_stay_out_of_the_access_log():
 
 
 def test_delivery_report_secret_stays_out_of_the_access_log():
-    atoms = _atoms("/messaging/46elks/delivery/abc123/", "-")
+    atoms = _atoms("/plugins/46elks/delivery/abc123/", "-")
 
     assert "abc123" not in atoms["r"]
 

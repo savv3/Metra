@@ -21,7 +21,7 @@ GROUP = "metra.plugins"
 # The group's name before the rename to Metra; plugins using it still load.
 LEGACY_GROUP = "scr.plugins"
 # Official plugins that ship with Metra and are on by default, in load order.
-BUNDLED = ()
+BUNDLED = ("46elks",)
 
 
 def available():

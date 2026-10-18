@@ -22,5 +22,4 @@ urlpatterns = [
     path("people/<int:pk>/newsletter/", views.person_consent, name="person_consent"),
     path("unsubscribe/<str:token>/", views.unsubscribe, name="unsubscribe"),
     path("messages/notices/<int:pk>/end/", views.notice_end, name="notice_end"),
-    path("messaging/46elks/delivery/<str:secret>/", views.elks_delivery, name="elks_delivery"),
 ]

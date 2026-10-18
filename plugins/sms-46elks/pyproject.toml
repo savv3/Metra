@@ -1,0 +1,18 @@
+[project]
+name = "metra-sms-46elks"
+version = "0.1.0"
+description = "Send Metra's SMS through 46elks (https://46elks.com), with delivery reports."
+requires-python = ">=3.13"
+license = "MIT"
+dependencies = []
+
+# On by default in Metra (config.plugins.BUNDLED); METRA_PLUGINS_DISABLED=46elks turns it off.
+[project.entry-points."metra.plugins"]
+46elks = "metra_sms_46elks"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/metra_sms_46elks"]
