@@ -36,6 +36,7 @@ class MessageBatch(models.Model):
         BROADCAST = "broadcast", _("Message")
         ALERT = "alert", _("Urgent alert")
         NEWSLETTER = "newsletter", _("Newsletter")
+        INVOICES = "invoices", _("Invoices")
 
     class Scope(models.TextChoices):
         ALL = "all", _("All units")
@@ -207,6 +208,7 @@ class MessageTemplate(models.Model):
     class Purpose(models.TextChoices):
         LINK = "link", _("Self-service link")
         REMINDER = "reminder", _("Reminder")
+        INVOICE = "invoice", _("Invoice")
 
     purpose = models.CharField(_("purpose"), max_length=20, choices=Purpose.choices)
     channel = models.CharField(

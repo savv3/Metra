@@ -6,6 +6,7 @@ app_name = "selfservice"
 
 urlpatterns = [
     path("m/<str:token>/", public.member_page, name="member"),
+    path("m/<str:token>/invoices/<int:pk>/", public.member_invoice, name="member_invoice"),
     path("readings/<int:pk>/links/", views.round_links, name="round_links"),
     path("readings/<int:pk>/links/print/", views.round_print, name="round_print"),
     path("readings/<int:pk>/links/revoke/", views.round_revoke, name="round_revoke"),

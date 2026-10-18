@@ -44,6 +44,20 @@
     </form>
   </section>
 
+  {% if invoices %}
+    <section class="member-section" aria-labelledby="invoices">
+      <h2 id="invoices">{% translate "Your invoices" %}</h2>
+      <ul class="plain-list member-invoices">
+        {% for invoice in invoices %}
+          <li>
+            <a href="{% url 'selfservice:member_invoice' request.resolver_match.kwargs.token invoice.pk %}">{{ invoice }} (PDF)</a><br>
+            {{ invoice.issue_date|date:"DATE_FORMAT" }} &middot; {{ invoice.total|floatformat:2 }} €{% if invoice.due_date %} &middot; {% blocktranslate with date=invoice.due_date|date:"DATE_FORMAT" %}due {{ date }}{% endblocktranslate %}{% endif %}{% if invoice.reference %}<br>{% translate "Reference" %} {{ invoice.reference_display }}{% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
   <section class="member-section" aria-labelledby="newsletter">
     <h2 id="newsletter">{% translate "Newsletter" %}</h2>
     <p>{% translate "We sometimes send a newsletter by email about what is going on. Messages about the service itself, such as disruptions, reach you either way." %}</p>
