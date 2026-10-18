@@ -159,50 +159,52 @@ flowchart TD
     gate{{Pilot with the water association}}
     p3[Phase 3: Messaging<br/>SMS and email to groups, newsletters with consent]
     p4[Phase 4: Invoicing<br/>fee plans, usage lines, numbered PDF invoices, email and print]
-    p5[Phase 5: Integrations<br/>public REST API, webhooks, bookkeeping export]
-    p6[Phase 6: Bank file import<br/>match payments by reference number]
-    p7[Phase 7: E-invoicing<br/>Finvoice, Peppol later]
-    p8[Phase 8: Privacy automation<br/>retention rules that run on a schedule]
-    p9[Phase 9: Sweden<br/>Bankgiro with OCR references, Swish, Swedish rules]
-    p10[Phase 10: Orchestrator<br/>separate tool: self-service sign-up, many installs]
-    p11[Phase 11: Support plugin<br/>time-limited, audited access to help with setup]
-    p1 --> p2 --> gate --> p3 --> p4 --> p5 --> p6 --> p7 --> p8 --> p9 --> p10 --> p11
+    p5[Phase 5: Messaging and setup<br/>email a unit, attachments, setup wizard, deliverability]
+    p6[Phase 6: Integrations<br/>public REST API, webhooks, bookkeeping export]
+    p7[Phase 7: Bank file import<br/>match payments by reference number]
+    p8[Phase 8: E-invoicing<br/>Finvoice, Peppol later]
+    p9[Phase 9: Privacy automation<br/>retention rules that run on a schedule]
+    p10[Phase 10: Sweden<br/>Bankgiro with OCR references, Swish, Swedish rules]
+    p11[Phase 11: Orchestrator<br/>separate tool: self-service sign-up, many installs]
+    p12[Phase 12: Support plugin<br/>time-limited, audited access to help with setup]
+    p1 --> p2 --> gate --> p3 --> p4 --> p5 --> p6 --> p7 --> p8 --> p9 --> p10 --> p11 --> p12
 ```
 
 The API is built into every phase, since pages and API share models and
-permissions; phase 5 opens it to outside systems.
+permissions; phase 6 opens it to outside systems.
 
 | Phase | Status |
 | --- | --- |
 | 1 to 4 | Done. Alongside them: alerts, a public page, Finnish, the rename to Metra, a new layout with a dark theme, and READMEs in three languages |
-| 5 to 11 | Planned. Each phase gets a build plan with one row per pull request before work starts |
+| 5 | Next. Build plan below |
+| 6 to 12 | Planned. Each phase gets a build plan with one row per pull request before work starts |
 
 ## Later phases
 
 Outlines only; each becomes a build plan like the ones below when it is
 next.
 
-- **Phase 6: Bank file import.** Import the bank's ISO 20022 statement
+- **Phase 7: Bank file import.** Import the bank's ISO 20022 statement
   files (camt.054 for incoming reference payments, camt.053 as a fallback)
   and match payments to open invoices by reference number, Finnish or RF.
   Unmatched and partial payments land in a review list for the treasurer.
   Importing the same file twice is safe. Bank formats sit behind an
   importer interface, open to plugins.
-- **Phase 7: E-invoicing.** Send invoices as Finvoice to business clients
+- **Phase 8: E-invoicing.** Send invoices as Finvoice to business clients
   and members who ask for it, through an operator behind a provider
   interface, chosen per unit. Peppol follows when a client needs it.
   Households keep getting PDFs.
-- **Phase 8: Privacy automation.** Admin-set retention rules per kind of
+- **Phase 9: Privacy automation.** Admin-set retention rules per kind of
   data (archived people, old messages, readings, audit entries) run on a
   schedule in the worker, with a preview of what the next run removes and
   a log of what it did. Bookkeeping material keeps its legal period and is
   never removed early.
-- **Phase 9: Sweden.** Country rules become a setting per organisation:
+- **Phase 10: Sweden.** Country rules become a setting per organisation:
   Swedish VAT and invoice details, Bankgiro and OCR references, Swish
   payment requests and QR codes, and Swedish bookkeeping retention (7
   years). This proves the country layer so further countries are mostly
   configuration.
-- **Phase 10: Orchestrator.** A separate tool in its own repository that
+- **Phase 11: Orchestrator.** A separate tool in its own repository that
   runs many Metra installations, so an organisation can sign up and get
   its own install without the maintainer's help, and so hosting can later
   be sold. Each customer keeps a separate install with its own data
@@ -212,7 +214,7 @@ next.
   status, and later plans and payment. Metra itself needs only small
   additions: a command that creates an organisation and its first admin
   (sent a one-time setup link), and a way to read version and health.
-- **Phase 11: Support plugin.** A plugin, the first in the plugins
+- **Phase 12: Support plugin.** A plugin, the first in the plugins
   repository (see [Plugins](#plugins)), that lets
   the maintainer help an organisation set up its install. The
   organisation's admin grants support access from a page in the app, for
@@ -362,6 +364,20 @@ later. It ships as three pull requests.
   from erasure: erasing a person anonymises them in the register, while
   their invoices stay as issued.
 
+## Phase 5 build plan
+
+Phase 5 is done when the board can email one unit from its page, attach a
+file such as the annual meeting's agenda to a send-out, set up a new
+install through a wizard, and trust that their email reaches inboxes. It
+ships as four pull requests, with deliverability last.
+
+| PR | Contents | Done when |
+| --- | --- | --- |
+| A. Email a unit | A "Send message" button on the unit page that opens the message form with that unit as the only recipient, sent to the unit's contacts with email (SMS as an option); the message shows on the unit's history. Also fixes the New message form, which shows the tag and type dropdowns even when Everyone is selected | A board member writes to one household from its page and the message appears in its history |
+| B. Attachments | Files attached to messages and newsletters (PDF, images and office documents, with a size limit per file and per message), stored under `METRA_DATA_DIR`, sent as email attachments; SMS recipients get a short self-service link to the file instead; files are kept with the message and covered by the retention rules in phase 9 | The agenda for the annual meeting goes out as a PDF to every household |
+| C. Setup wizard | A step-by-step wizard after the first admin's first login: organisation name and contact details, language, logo, unit and person types with their fields (with the water association as a ready-made example), email and SMS settings with a test message, invoice settings, and inviting the board. Steps can be skipped; admins can start it again from Settings, and it changes nothing until each step is saved | A new install is ready to use without the Django admin, and an admin can rerun the wizard later |
+| D. Email deliverability | Research first, then build what it recommends. Options to compare: sending through the organisation's own mail account (SMTP with their domain), a transactional provider on a sending subdomain (for example `mail.example.fi`), and a shared Metra sending domain for hosted installs. Whichever wins, the app checks SPF, DKIM and DMARC for the sending domain and shows what to fix, sets a proper From and Reply-To, keeps List-Unsubscribe on newsletters, throttles batches, and records bounces | A test send to Gmail, Outlook and a Finnish ISP lands in the inbox, and the settings page shows the domain's DNS as correct |
+
 ## Plugins
 
 Organisations can extend the app without forking it.
@@ -387,7 +403,7 @@ Organisations can extend the app without forking it.
   - CSV import and export formats
   - reading validators
   - invoice line generators (phase 4)
-  - API routes and webhook events (phase 5)
+  - API routes and webhook events (phase 6)
 
   For model events, plugins use ordinary Django signals.
 - **Trust.** Plugins run with full trust, like any other installed code.
@@ -401,7 +417,7 @@ How to install, enable and write plugins is in [plugins.md](plugins.md).
 Official plugins that are not part of the core live in a separate
 plugins repository, one Python package per plugin, each installable with
 pip and tested against the current Metra release. The repository is
-created with the first such plugin, the support plugin in phase 11. The
+created with the first such plugin, the support plugin in phase 12. The
 example plugin stays in this repository because the core tests use it.
 
 The plugin core ships in phase 2 (PR 10) with the first extension points:
