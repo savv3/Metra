@@ -269,7 +269,7 @@ later. It ships as three pull requests.
 | --- | --- | --- |
 | A. Fee plans and invoices | Invoice settings (VAT status, IBAN and BIC, payment terms, numbering, late interest and footer text); fee plans with fixed fees and usage fees per reading type (optional price tiers and per-field conditions, VAT rate per line); invoice runs that build draft invoices from the plans and a period's readings; draft review and editing; issuing with gapless numbering and a locked copy of seller and buyer; credit notes; invoice, run and detail pages | The 2026 run gives every household a correct draft, and the treasurer issues them with numbers 1 to 50 |
 | B. Delivery | PDF invoices (WeasyPrint) with every required detail, the organisation's logo and contact block, the Finnish reference number (viitenumero, RF as an option), the bank barcode (virtuaaliviivakoodi) and payment details; sending by email with the PDF attached, as messages; a print batch for post; members download their invoices from the self-service page | Households with email get their invoice in their inbox and the rest come out of the printer in one PDF |
-| C. Payments and follow-up | Manual payments (full or partial), paid and overdue status, overdue list, payment reminders by SMS or email with an optional reminder fee (€5 by default, the consumer cap), CSV export of invoices and payments for bookkeeping | The treasurer marks the payments, reminds the late payers and hands the year to the accountant |
+| C. Payments and follow-up | Manual payments (full or partial), paid and overdue status, overdue list, payment reminders by SMS or email with an optional reminder fee (none by default, at most €5 for consumers), CSV export of invoices and payments for bookkeeping | The treasurer marks the payments, reminds the late payers and hands the year to the accountant |
 
 ### Invoicing rules
 
@@ -291,8 +291,13 @@ later. It ships as three pull requests.
   sequence.
 - **Immutability.** Issued invoices and their lines cannot change or be
   deleted; corrections are credit notes that refer to the original, and an
-  invoice is marked credited when it is fully credited. Payments (PR C) are
-  immutable too.
+  invoice is marked credited when it is fully credited. Payments are
+  immutable too: a payment recorded by mistake is reversed with a negative
+  one. An invoice's only later change is its status (paid, credited).
+- **Reminders.** A payment reminder carries a fee if one is set (none by
+  default; at most 5 € for consumers under the Debt Collection Act) and a
+  new due date at least 14 days ahead; the amount still to pay is the invoice, less credit notes and
+  payments, plus reminder fees. Reminder fees are outside VAT.
 - **Retention.** Invoices, credit notes and payments are bookkeeping
   material, kept for the legal period (in Finland 6 years from the end of
   the financial year for vouchers, 10 for the books). They are excluded

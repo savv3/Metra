@@ -57,7 +57,7 @@
       {% if seller.vat_number and invoice.effective_vat_registered %}{% translate "VAT number" %} {{ seller.vat_number }}{% endif %}
     </div>
     <div>
-      <h1>{% if invoice.kind == "credit_note" %}{% translate "CREDIT NOTE" %}{% else %}{% translate "INVOICE" %}{% endif %}</h1>
+      <h1>{% if p.reminder %}{% translate "PAYMENT REMINDER" %}{% elif invoice.kind == "credit_note" %}{% translate "CREDIT NOTE" %}{% else %}{% translate "INVOICE" %}{% endif %}</h1>
     </div>
   </header>
 
@@ -111,8 +111,17 @@
       <tr><th>{% translate "Total excl. VAT" %}</th><td>{{ invoice.total_net|floatformat:2 }} €</td></tr>
       <tr><th>{% translate "VAT" %}</th><td>{{ invoice.total_vat|floatformat:2 }} €</td></tr>
     {% endif %}
-    <tr class="grand"><th>{% if invoice.kind == "credit_note" %}{% translate "Credited" %}{% else %}{% translate "To pay" %}{% endif %}</th><td>{{ invoice.total|floatformat:2 }} €</td></tr>
+    {% if p.reminder %}
+      <tr><th>{% translate "Invoice total" %}</th><td>{{ invoice.total|floatformat:2 }} €</td></tr>
+      {% for payment in invoice.payments.all %}<tr><th>{% blocktranslate with date=payment.paid_on|date:"j.n.Y" %}Paid {{ date }}{% endblocktranslate %}</th><td>−{{ payment.amount|floatformat:2 }} €</td></tr>{% endfor %}
+      {% for note in invoice.credit_notes.all %}{% if not note.is_draft %}<tr><th>{% blocktranslate with number=note.number %}Credit note {{ number }}{% endblocktranslate %}</th><td>{{ note.total|floatformat:2 }} €</td></tr>{% endif %}{% endfor %}
+      {% for earlier in invoice.reminders.all %}{% if earlier.fee %}<tr><th>{% blocktranslate with date=earlier.created_at|date:"j.n.Y" %}Reminder fee {{ date }}{% endblocktranslate %}</th><td>{{ earlier.fee|floatformat:2 }} €</td></tr>{% endif %}{% endfor %}
+      <tr class="grand"><th>{% translate "To pay" %}</th><td>{{ p.amount|floatformat:2 }} €</td></tr>
+    {% else %}
+      <tr class="grand"><th>{% if invoice.kind == "credit_note" %}{% translate "Credited" %}{% else %}{% translate "To pay" %}{% endif %}</th><td>{{ invoice.total|floatformat:2 }} €</td></tr>
+    {% endif %}
   </table>
+  {% if p.reminder %}<p class="note"><strong>{% blocktranslate with due=invoice.due_date|date:"j.n.Y" new=p.due|date:"j.n.Y" %}We have not received payment for this invoice, which was due on {{ due }}. Please pay by {{ new }}. If you have already paid, you can ignore this reminder.{% endblocktranslate %}</strong></p>{% endif %}
 
   {% if invoice.note %}<p class="note">{{ invoice.note|linebreaksbr }}</p>{% endif %}
   <div class="texts">
@@ -129,8 +138,8 @@
           <tr><th>{% translate "Account (IBAN)" %}</th><td>{{ seller.iban }}</td></tr>
           {% if seller.bic %}<tr><th>BIC</th><td>{{ seller.bic }}</td></tr>{% endif %}
           <tr><th>{% translate "Reference" %}</th><td>{{ invoice.reference_display|default:"–" }}</td></tr>
-          <tr><th>{% translate "Due date" %}</th><td>{{ invoice.due_date|date:"j.n.Y"|default:"–" }}</td></tr>
-          <tr><th>{% translate "Amount" %}</th><td>{{ invoice.total|floatformat:2 }} €</td></tr>
+          <tr><th>{% translate "Due date" %}</th><td>{{ p.due|date:"j.n.Y"|default:"–" }}</td></tr>
+          <tr><th>{% translate "Amount" %}</th><td>{{ p.amount|floatformat:2 }} €</td></tr>
         </table>
         {% if p.qr %}<div class="qr"><img src="{{ p.qr }}" alt="{% translate 'Payment QR code' %}"></div>{% endif %}
       </div>

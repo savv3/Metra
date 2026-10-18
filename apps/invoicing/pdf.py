@@ -17,7 +17,7 @@ from django.utils import translation
 
 from apps.register.models import Organisation
 
-from .reference import rf_reference
+from .reference import rf_reference, virtual_barcode
 
 
 class PDFUnavailable(RuntimeError):
@@ -41,10 +41,11 @@ def barcode_svg(digits):
     return _data_uri(out.getvalue(), "image/svg+xml")
 
 
-def payment_qr(invoice):
+def payment_qr(invoice, amount=None):
     """A SEPA payment QR code (EPC069-12), which Finnish bank apps read."""
+    amount = invoice.total if amount is None else amount
     iban = invoice.seller.get("iban", "").replace(" ", "")
-    if not (invoice.reference and iban and invoice.total > 0):
+    if not (invoice.reference and iban and amount > 0):
         return ""
     reference = invoice.reference
     if not reference.upper().startswith("RF"):
@@ -52,7 +53,7 @@ def payment_qr(invoice):
     qr = segno.helpers.make_epc_qr(
         name=invoice.seller.get("name", "")[:70],
         iban=iban,
-        amount=invoice.total,
+        amount=amount,
         reference=reference,
         bic=invoice.seller.get("bic") or None,
     )
@@ -67,19 +68,33 @@ def logo_uri(organisation):
     return _data_uri(content, mimetypes.guess_type(organisation.logo.name)[0] or "image/png")
 
 
-def invoice_html(invoices, preview=False):
-    """One HTML document with a page (or more) per invoice."""
+def invoice_html(invoices, preview=False, reminders=None):
+    """One HTML document with a page (or more) per invoice. ``reminders`` maps
+    invoice ids to a PaymentReminder: those pages become payment reminders,
+    with the fee, the amount still to pay and the new due date."""
     organisation = Organisation.current()
+    reminders = reminders or {}
     pages = []
     for invoice in invoices:
+        reminder = reminders.get(invoice.pk)
+        due = reminder.new_due_date if reminder else invoice.due_date
+        amount = invoice.outstanding() if reminder else invoice.total
+        code = (
+            virtual_barcode(invoice.seller.get("iban", ""), amount, invoice.reference, due)
+            if reminder and invoice.reference
+            else invoice.barcode
+        )
         pages.append(
             {
                 "invoice": invoice,
                 "lines": list(invoice.lines.all()),
                 "breakdown": invoice.vat_breakdown(),
-                "barcode": invoice.barcode,
-                "barcode_svg": barcode_svg(invoice.barcode),
-                "qr": payment_qr(invoice),
+                "barcode": code,
+                "barcode_svg": barcode_svg(code),
+                "qr": payment_qr(invoice, amount),
+                "reminder": reminder,
+                "due": due,
+                "amount": amount,
                 "seller": invoice.seller or _draft_seller(invoice, organisation),
                 "buyer": invoice.buyer or invoice.buyer_from_register(),
             }
@@ -117,7 +132,7 @@ def _draft_seller(invoice, organisation):
     }
 
 
-def render_pdf(invoices, preview=False, language=None):
+def render_pdf(invoices, preview=False, language=None, reminders=None):
     """PDF bytes for one or more invoices (a print batch is many)."""
     try:
         from weasyprint import HTML
@@ -126,5 +141,5 @@ def render_pdf(invoices, preview=False, language=None):
             "Making PDFs needs WeasyPrint and the Pango library (see README)."
         ) from error
     with translation.override(language or translation.get_language()):
-        html = invoice_html(invoices, preview=preview)
+        html = invoice_html(invoices, preview=preview, reminders=reminders)
     return HTML(string=html).write_pdf()

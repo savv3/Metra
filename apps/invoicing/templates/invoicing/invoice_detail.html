@@ -111,6 +111,26 @@
     <dt>{% translate "To pay" %}</dt><dd><strong>{{ invoice.total|floatformat:2 }} €</strong></dd>
   </dl>
 
+  {% if invoice.kind == "invoice" and not invoice.is_draft %}
+    <h2 id="payments">{% translate "Payments" %}</h2>
+    <dl class="details-list totals">
+      <dt>{% translate "Invoice total" %}</dt><dd>{{ invoice.total|floatformat:2 }} €</dd>
+      {% for note in credit_notes %}{% if not note.is_draft %}<dt>{{ note }}</dt><dd>{{ note.total|floatformat:2 }} €</dd>{% endif %}{% endfor %}
+      {% for payment in payments %}<dt>{% blocktranslate with date=payment.paid_on|date:"SHORT_DATE_FORMAT" %}Paid {{ date }}{% endblocktranslate %}</dt><dd>{{ payment.amount|floatformat:2 }} €{% if payment.note %} <span class="help">{{ payment.note }}</span>{% endif %}</dd>{% endfor %}
+      {% for reminder in reminders %}<dt>{% blocktranslate with date=reminder.created_at|date:"SHORT_DATE_FORMAT" %}Reminder {{ date }}{% endblocktranslate %}</dt><dd>{% if reminder.fee %}{{ reminder.fee|floatformat:2 }} € {% endif %}<span class="help">{% blocktranslate with date=reminder.new_due_date|date:"SHORT_DATE_FORMAT" %}new due date {{ date }}{% endblocktranslate %}{% if reminder.message %} &middot; {{ reminder.message.get_channel_display }}, {{ reminder.message.get_status_display }}{% endif %}</span></dd>{% endfor %}
+      <dt>{% translate "Outstanding" %}</dt><dd><strong>{{ outstanding|floatformat:2 }} €</strong></dd>
+    </dl>
+    {% if payment_form and perms.invoicing.add_payment %}
+      <h3>{% translate "Record a payment" %}</h3>
+      <form method="post" action="{% url 'invoicing:invoice_pay' invoice.pk %}" class="form form--inline">
+        {% csrf_token %}
+        {% for field in payment_form %}{% include "register/_field.html" %}{% endfor %}
+        <p class="help">{% translate "Payments cannot be changed. To undo one, record the same amount as negative." %}</p>
+        <button type="submit" class="button button--primary">{% translate "Record payment" %}</button>
+      </form>
+    {% endif %}
+  {% endif %}
+
   {% if deliveries %}
     <h2>{% translate "Sent" %}</h2>
     <ul class="plain-list">{% for delivery in deliveries %}<li>{{ delivery.created_at|date:"SHORT_DATETIME_FORMAT" }} &middot; {{ delivery.get_channel_display }}{% if delivery.message %} &middot; {{ delivery.message.recipient }} &middot; {{ delivery.message.get_status_display }}{% endif %}</li>{% endfor %}</ul>
