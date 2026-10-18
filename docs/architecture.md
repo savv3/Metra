@@ -165,7 +165,8 @@ flowchart TD
     p8[Phase 8: Privacy automation<br/>retention rules that run on a schedule]
     p9[Phase 9: Sweden<br/>Bankgiro with OCR references, Swish, Swedish rules]
     p10[Phase 10: Orchestrator<br/>separate tool: self-service sign-up, many installs]
-    p1 --> p2 --> gate --> p3 --> p4 --> p5 --> p6 --> p7 --> p8 --> p9 --> p10
+    p11[Phase 11: Support plugin<br/>time-limited, audited access to help with setup]
+    p1 --> p2 --> gate --> p3 --> p4 --> p5 --> p6 --> p7 --> p8 --> p9 --> p10 --> p11
 ```
 
 The API is built into every phase, since pages and API share models and
@@ -174,7 +175,7 @@ permissions; phase 5 opens it to outside systems.
 | Phase | Status |
 | --- | --- |
 | 1 to 4 | Done. Alongside them: alerts, a public page, Finnish, the rename to Metra, a new layout with a dark theme, and READMEs in three languages |
-| 5 to 10 | Planned. Each phase gets a build plan with one row per pull request before work starts |
+| 5 to 11 | Planned. Each phase gets a build plan with one row per pull request before work starts |
 
 ## Later phases
 
@@ -211,6 +212,16 @@ next.
   status, and later plans and payment. Metra itself needs only small
   additions: a command that creates an organisation and its first admin
   (sent a one-time setup link), and a way to read version and health.
+- **Phase 11: Support plugin.** A plugin, in its own package, that lets
+  the maintainer help an organisation set up its install. The
+  organisation's admin grants support access from a page in the app, for
+  a limited time and with a role they choose; support signs in with their
+  own account and two-factor login, never a shared password, and access
+  ends by itself or when the admin revokes it. Everything support does is
+  in the audit log under their name, and a banner shows staff when
+  support access is open. Admins can also send a help request with the
+  page they were on. It works on a standalone install and through the
+  orchestrator, which can list the installs that have granted access.
 
 ## Phase 1 build plan
 
