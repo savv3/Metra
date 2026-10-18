@@ -2,9 +2,17 @@
 {% load i18n %}
 {% block title %}{{ batch }}{% endblock %}
 {% block content %}
-  <h1>{{ batch }}</h1>
+  <h1>{% if batch.kind == "alert" %}<span class="alert-badge">{% translate "Urgent" %}</span> {% endif %}{{ batch.get_kind_display }}{% if batch.round %}: {{ batch.round }}{% endif %}</h1>
+  {% if batch.is_written %}
+    <dl class="details-list">
+      <dt>{% translate "To" %}</dt><dd>{{ batch.audience }}</dd>
+      <dt>{% translate "Send by" %}</dt><dd>{{ batch.get_channels_display }}</dd>
+      <dt>{% translate "Message" %}</dt><dd>{{ batch.body|linebreaksbr }}</dd>
+      {% if batch.subject %}<dt>{% translate "Email subject" %}</dt><dd>{{ batch.subject }}</dd>{% endif %}
+    </dl>
+  {% endif %}
   <div id="batch-status"{% if batch.status != "done" %} hx-get="{{ batch.get_absolute_url }}" hx-trigger="every 3s" hx-select="#batch-status" hx-swap="outerHTML"{% endif %}>
-    <p class="subtitle">{{ batch.get_scope_display }} &middot; {{ batch.get_status_display }} &middot; {{ batch.created_at|date:"SHORT_DATETIME_FORMAT" }}{% if batch.created_by %} &middot; {{ batch.created_by }}{% endif %}</p>
+    <p class="subtitle">{% if not batch.is_written %}{{ batch.get_scope_display }} &middot; {% endif %}{{ batch.get_status_display }} &middot; {{ batch.created_at|date:"SHORT_DATETIME_FORMAT" }}{% if batch.created_by %} &middot; {{ batch.created_by }}{% endif %}</p>
     <ul class="plain-list status-counts" aria-live="polite">
       {% for label, count in counts %}{% if count %}<li><strong>{{ count }}</strong> {{ label|lower }}</li>{% endif %}{% endfor %}
     </ul>

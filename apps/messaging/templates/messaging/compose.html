@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if form.urgent.value %}{% translate "Urgent alert" %}{% else %}{% translate "New message" %}{% endif %}{% endblock %}
+{% block content %}
+  <div class="{% if form.urgent.value %}alert-compose{% endif %}">
+  <h1>{% if form.urgent.value %}<span class="alert-badge">{% translate "Urgent" %}</span> {% translate "Urgent alert" %}{% else %}{% translate "New message" %}{% endif %}</h1>
+  {% if not channels_set_up.sms or not channels_set_up.email %}
+    <p class="notice">
+      {% if not channels_set_up.sms %}{% translate "SMS is not set up, so nobody gets an SMS." %}{% endif %}
+      {% if not channels_set_up.email %}{% translate "Email is not set up, so nobody gets an email." %}{% endif %}
+    </p>
+  {% endif %}
+
+  {% if step == "confirm" %}
+    <h2>{% translate "Check before sending" %}</h2>
+    <dl class="details-list">
+      <dt>{% translate "To" %}</dt><dd>{{ audience }}</dd>
+      <dt>{% translate "Send by" %}</dt><dd>{% for value, label in form.fields.channels.choices %}{% if value == form.cleaned_data.channels %}{{ label }}{% endif %}{% endfor %}</dd>
+      <dt>{% translate "SMS" %}</dt><dd>{% blocktranslate count count=sms_count %}{{ count }} person{% plural %}{{ count }} people{% endblocktranslate %}{% if sms_count %}, {% blocktranslate count count=sms_total %}{{ count }} SMS in total{% plural %}{{ count }} SMS in total{% endblocktranslate %}{% if sms_per_person > 1 %} ({% blocktranslate %}up to {{ sms_per_person }} per person{% endblocktranslate %}){% endif %}{% endif %}</dd>
+      <dt>{% translate "Email" %}</dt><dd>{% blocktranslate count count=email_count %}{{ count }} person{% plural %}{{ count }} people{% endblocktranslate %}</dd>
+    </dl>
+    <h3>{% if example_for %}{% blocktranslate with name=example_for.full_name %}The message, as {{ name }} gets it{% endblocktranslate %}{% else %}{% translate "Message" %}{% endif %}</h3>
+    <blockquote class="message-preview">{{ example|linebreaksbr }}</blockquote>
+
+    {% if plan.unreachable %}
+      <div class="status-panel status-panel--warning">
+        <h3>{% blocktranslate count count=plan.unreachable|length %}{{ count }} person cannot be reached this way{% plural %}{{ count }} people cannot be reached this way{% endblocktranslate %}</h3>
+        <p>{% translate "Call or visit them:" %}</p>
+        <ul class="plain-list">
+          {% for r in plan.unreachable %}
+            <li><a href="{{ r.person.get_absolute_url }}">{{ r.person.full_name }}</a>, {{ r.unit.name }}{% if r.person.phone %} &middot; {{ r.person.phone }}{% endif %}{% if r.unit.address_line and r.unit.address_line != r.unit.name %} &middot; {{ r.unit.address_line }}{% endif %}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <form method="post" class="form">
+      {% csrf_token %}
+      {% for field in form %}{{ field.as_hidden }}{% endfor %}
+      <input type="hidden" name="step" value="confirm">
+      <div class="actions">
+        {% if plan.recipients %}<button type="submit" class="button {% if form.cleaned_data.urgent %}button--danger{% else %}button--primary{% endif %}">{% blocktranslate count count=plan.recipients|length %}Send now to {{ count }} person{% plural %}Send now to {{ count }} people{% endblocktranslate %}</button>{% endif %}
+        <button type="submit" name="edit" value="1" class="button">{% translate "Change the message" %}</button>
+      </div>
+    </form>
+  {% else %}
+    <form method="post" class="form" novalidate>
+      {% csrf_token %}
+      <input type="hidden" name="step" value="preview">
+      {% if form.non_field_errors %}<div class="errorlist-box" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+      {% include "register/_field.html" with field=form.urgent %}
+      {% include "register/_field.html" with field=form.scope %}
+      {% include "register/_field.html" with field=form.tag %}
+      {% include "register/_field.html" with field=form.unit_type %}
+      {{ form.filters }}
+      {% include "register/_field.html" with field=form.contacts %}
+      {% include "register/_field.html" with field=form.channels %}
+      <div class="field{% if form.body.errors %} field--error{% endif %}">
+        <label for="{{ form.body.id_for_label }}">{{ form.body.label }} <span class="required" aria-hidden="true">*</span></label>
+        <textarea name="body" id="{{ form.body.id_for_label }}" rows="4" maxlength="1600" aria-describedby="sms-count body-help"
+                  hx-get="{% url 'messaging:sms_count' %}" hx-trigger="input changed delay:300ms, load" hx-target="#sms-count">{{ form.body.value|default:"" }}</textarea>
+        <p class="help" id="sms-count" aria-live="polite"></p>
+        <p class="help" id="body-help">{{ form.body.help_text }}</p>
+        {% if form.body.errors %}<ul class="errorlist">{% for e in form.body.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+      </div>
+      {% include "register/_field.html" with field=form.subject %}
+      {% include "register/_field.html" with field=form.email_body %}
+      <div class="actions">
+        <button type="submit" class="button button--primary">{% translate "Check recipients" %}</button>
+        <a class="button" href="{% url 'messaging:batch_list' %}">{% translate "Cancel" %}</a>
+      </div>
+      <p class="help">{% translate "Nothing is sent until you have checked the recipients and confirmed." %}</p>
+    </form>
+  {% endif %}
+  </div>
+{% endblock %}

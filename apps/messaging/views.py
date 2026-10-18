@@ -12,9 +12,12 @@ from django.views.decorators.http import require_POST
 
 from apps.readings.models import ReadingRound
 
-from .models import Message, MessageBatch
+from . import broadcast
+from .forms import MessageForm
+from .models import Message, MessageBatch, MessageTemplate
 from .providers import elks_callback_secret
 from .registry import EMAIL, SMS, provider_for
+from .sms import segments
 from .tasks import send_batch_task
 
 
@@ -94,3 +97,65 @@ def elks_delivery(request, secret):
         )
     # 46elks retries anything but 200, so unknown ids are acknowledged too.
     return HttpResponse("")
+
+
+@login_required
+@permission_required("messaging.send_broadcast", raise_exception=True)
+def compose(request):
+    """Write a message to many people: edit, then check who gets what, then send."""
+    urgent = request.GET.get("urgent") == "1"
+    initial = {"filters": request.GET.get("filters", "")}
+    if initial["filters"]:
+        initial["scope"] = broadcast.FILTERED
+    form = MessageForm(request.POST or None, initial=initial, urgent=urgent)
+    context = {"form": form, "channels_set_up": channel_status(), "step": "edit"}
+    if request.method == "POST" and form.is_valid():
+        data = form.cleaned_data
+        pairs = broadcast.people_for(form.units(), data["contacts"])
+        plan = broadcast.plan(pairs, data["channels"])
+        if request.POST.get("step") == "confirm" and "edit" not in request.POST:
+            if not plan.recipients:
+                messages.error(request, _("Nobody can be reached with these choices."))
+            else:
+                batch = MessageBatch.objects.create(
+                    kind=MessageBatch.Kind.ALERT if data["urgent"] else MessageBatch.Kind.BROADCAST,
+                    channels=data["channels"],
+                    subject=data["subject"],
+                    body=data["body"],
+                    email_body=data["email_body"],
+                    audience=form.audience_label(),
+                    recipients=[[p.pk, u.pk] for p, u in pairs],
+                    created_by=request.user,
+                )
+                send_batch_task(batch.pk)
+                messages.success(request, _("Sending has started. This page shows how it goes."))
+                return redirect(batch)
+        if "edit" not in request.POST:
+            per_person, total = broadcast.sms_estimate(data["body"], plan)
+            first = plan.recipients[0] if plan.recipients else None
+            values = broadcast.placeholders(first and first.person, first and first.unit)
+            context |= {
+                "example": MessageTemplate.fill(data["body"], values),
+                "example_for": first.person if first else None,
+                "step": "confirm",
+                "plan": plan,
+                "sms_count": plan.count(SMS),
+                "email_count": plan.count(EMAIL),
+                "sms_per_person": per_person,
+                "sms_total": total,
+                "audience": form.audience_label(),
+            }
+    return render(request, "messaging/compose.html", context)
+
+
+@login_required
+@permission_required("messaging.send_broadcast", raise_exception=True)
+def sms_count(request):
+    """The live "1 SMS, 42 of 160 characters" line under the message box (HTMX)."""
+    text = MessageTemplate.fill(request.GET.get("body", ""), broadcast.placeholders())
+    count, used, per_sms = segments(text)
+    return render(
+        request,
+        "messaging/_sms_count.html",
+        {"count": count, "used": used, "per_sms": per_sms},
+    )

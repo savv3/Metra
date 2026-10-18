@@ -1,0 +1,1 @@
+{% load i18n %}{% if count %}{% blocktranslate count count=count %}{{ count }} SMS ({{ used }} characters, {{ per_sms }} per SMS){% plural %}{{ count }} SMS each ({{ used }} characters, {{ per_sms }} per SMS){% endblocktranslate %}{% endif %}

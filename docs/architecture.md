@@ -237,6 +237,22 @@ stored copy has a placeholder. Messages are personal data of their
 recipient and are covered by the export and erasure tools. Phase 3 builds
 group messaging on the same records and providers.
 
+## Phase 3 build plan
+
+Phase 3 is done when an admin can send an urgent alert to every household
+in a minute, visitors find the organisation's contact details on its public
+page, and members can subscribe to newsletters and unsubscribe from them.
+
+| PR | Contents | Done when |
+| --- | --- | --- |
+| 11. Messages and urgent alerts | Staff write one message to everyone, a tag, a unit type or the filtered unit list (all contacts or main contact only) by SMS, email or both; recipient and SMS counts and a confirmation step; urgent alert mode on both channels with a list of who cannot be reached; live delivery status | A water-leak alert reaches every household with a phone or email, and the board knows whom to call |
+| 12. Public organisation page | Public contact fields and logo in organisation settings; a translated, mobile-first landing page at `/` (can be switched off, the only page search engines may index); a notice banner an alert can publish; the contact block on member pages, in letters and as message placeholders | A visitor on a phone finds the emergency number and the current notice |
+| 13. Newsletters with consent | Per-person consent with time and source, changeable on the self-service page; newsletters by email to consenting people only, with an unsubscribe link in every one | A newsletter reaches only those who said yes, and one click unsubscribes |
+
+Messages and alerts in PR 11 are service messages about the organisation's
+own service, sent on the basis of membership, so they need no marketing
+consent. Newsletters (PR 13) do.
+
 ## Plugins
 
 Organisations can extend the app without forking it.

@@ -154,6 +154,34 @@ Automatic reminders are off by default. Set `SCR_READING_REMINDER_DAYS`
 (for example `7`) to remind units still missing a reading that many days
 before an open round closes, at 10:00, once per round.
 
+## Messages and urgent alerts
+
+Admins can write one message to many households under **Send-outs > New
+message**. It can go to everyone, to units with a tag or of a type, or to
+the units in the current unit list (the **Send a message to these units**
+link under the list), and to all contacts of each unit or only its main
+contact. Choose SMS only, email only, SMS (or email for those without a
+phone), or both. The text can use `{first_name}`, `{name}`, `{unit}`,
+`{organisation}` and `{organisation_phone}`; a live counter shows how many
+SMS it takes.
+
+Before anything is sent, a check page shows how many people get an SMS and
+how many an email, the total number of SMS, and who cannot be reached, so
+someone can call or visit them. Each person gets the message once, even if
+they are a contact of several units.
+
+**Urgent alert** (red button) is for disruptions such as a water leak: it
+starts with SMS and email to every contact of every active unit, and sends
+on both channels to everyone who has them, whatever their preferred
+channel. The send-out page shows each recipient's delivery status as it
+goes.
+
+These are service messages about the organisation's own service, sent on
+the basis of membership, so they do not need newsletter consent; use them
+for operational information, not marketing. Only the Admin role may send
+them; an admin can give the "Can send messages and alerts to everyone"
+permission to Board under **Settings > Groups**.
+
 ### Email and SMS
 
 **Email** goes out over SMTP when `SCR_EMAIL_HOST` is set, with
