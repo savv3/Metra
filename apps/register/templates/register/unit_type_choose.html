@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Add unit" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "What kind of unit do you want to add?" %}</h1>
+  {% if unit_types %}
+    <ul class="choice-list">
+      {% for t in unit_types %}
+        <li><a class="button" href="{% url 'register:unit_create' %}?type={{ t.pk }}">{{ t.name }}</a>
+          {% if t.description %}<span class="help">{{ t.description }}</span>{% endif %}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">{% blocktranslate trimmed %}
+      There are no unit types yet. An administrator must create a unit type first under
+    {% endblocktranslate %} <a href="{% url 'admin:index' %}">{% translate "Settings" %}</a>.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% load i18n %}
+{% if page.object_list %}
+  <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'People' %}">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">{% translate "Name" %}</th>
+          <th scope="col">{% translate "Email" %}</th>
+          <th scope="col">{% translate "Phone" %}</th>
+          <th scope="col">{% translate "Address" %}</th>
+          <th scope="col">{% translate "Tags" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for person in page.object_list %}
+          <tr>
+            <th scope="row"><a href="{{ person.get_absolute_url }}">{{ person.full_name }}</a>
+              {% if person.is_archived %}<span class="badge">{% translate "Archived" %}</span>{% endif %}</th>
+            <td>{{ person.email }}</td>
+            <td>{{ person.phone }}</td>
+            <td>{{ person.address_line }}</td>
+            <td>{% for tag in person.tags.all %}{{ tag }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% include "register/_pagination.html" %}
+{% else %}
+  <p class="empty">{% translate "No people found." %}</p>
+{% endif %}

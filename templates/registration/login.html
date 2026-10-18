@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Log in" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "Log in" %}</h1>
+  <form method="post" class="form form--narrow">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+      <div class="errorlist-box" role="alert">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+    {% include "register/_field.html" with field=form.username %}
+    {% include "register/_field.html" with field=form.password %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Log in" %}</button>
+    </div>
+  </form>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Units" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Units" %}</h1>
+    <a class="button button--primary" href="{% url 'register:unit_create' %}">{% translate "Add unit" %}</a>
+  </div>
+  <form class="filters" method="get" action="{% url 'register:unit_list' %}" role="search"
+        hx-get="{% url 'register:unit_list' %}" hx-target="#results" hx-push-url="true"
+        hx-trigger="input delay:300ms from:#f-q, change, submit">
+    <div class="field">
+      <label for="f-q">{% translate "Search" %}</label>
+      <input type="search" id="f-q" name="q" value="{{ filters.q }}">
+    </div>
+    <div class="field">
+      <label for="f-type">{% translate "Type" %}</label>
+      <select id="f-type" name="type">
+        <option value="">{% translate "All types" %}</option>
+        {% for t in unit_types %}<option value="{{ t.pk }}"{% if filters.type == t.pk|stringformat:"d" %} selected{% endif %}>{{ t.name }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="f-status">{% translate "Status" %}</label>
+      <select id="f-status" name="status">
+        <option value="">{% translate "All statuses" %}</option>
+        {% for value, label in statuses %}<option value="{{ value }}"{% if filters.status == value %} selected{% endif %}>{{ label }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="f-tag">{% translate "Tag" %}</label>
+      <select id="f-tag" name="tag">
+        <option value="">{% translate "All tags" %}</option>
+        {% for t in tags %}<option value="{{ t.pk }}"{% if filters.tag == t.pk|stringformat:"d" %} selected{% endif %}>{{ t.name }}</option>{% endfor %}
+      </select>
+    </div>
+    {% include "register/_show_select.html" %}
+    <div class="field field--submit">
+      <button type="submit" class="button">{% translate "Filter" %}</button>
+    </div>
+  </form>
+  <div id="results" aria-live="polite">
+    {% include "register/_unit_results.html" %}
+  </div>
+{% endblock %}
