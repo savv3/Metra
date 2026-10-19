@@ -81,10 +81,15 @@ case $arch in
     aarch64 | arm64) platform=linux/arm64 ;;
     *) echo "Unknown server CPU $arch." >&2; exit 1 ;;
 esac
-ssh $ssh_opts "$host" test -f "$dir/compose.yaml" -a -f "$dir/.env" || {
+if ssh $ssh_opts "$host" test -f "$dir/compose.yaml" -a -f "$dir/.env"; then
+    :
+elif [ $? -eq 255 ]; then
+    echo "Lost the SSH connection to $host." >&2
+    exit 1
+else
     echo "$host:$dir has no compose.yaml and .env; set up the install first (docs/deploying.md)." >&2
     exit 1
-}
+fi
 
 git archive "$tag" | tar -x -C "$work/" -f -
 image=metra:$version
