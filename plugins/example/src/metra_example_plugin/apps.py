@@ -9,6 +9,8 @@ class ExamplePluginConfig(AppConfig):
     # The plugin stores no personal data. A plugin that does lists it here,
     # for example ["Person: shoe size"], so the export and erasure tools cover it.
     personal_data = []
+    # The plugin API versions (apps.plugins.api.API_VERSION) this plugin works with.
+    metra_api = [1]
 
     def ready(self):
         from apps.plugins import api

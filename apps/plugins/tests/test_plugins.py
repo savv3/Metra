@@ -105,6 +105,33 @@ def test_plugins_must_declare_personal_data(monkeypatch, settings):
     assert [w.id for w in run_checks()].count("plugins.W001") == 1
 
 
+def test_plugins_must_declare_the_api_versions_they_work_with(monkeypatch):
+    config = apps.get_app_config("metra_example_plugin")
+    assert "plugins.W002" not in [w.id for w in run_checks()]
+
+    monkeypatch.delattr(type(config), "metra_api")
+
+    assert [w.id for w in run_checks()].count("plugins.W002") == 1
+
+
+def test_a_plugin_for_another_api_version_stops_the_app(monkeypatch):
+    config = apps.get_app_config("metra_example_plugin")
+    monkeypatch.setattr(type(config), "metra_api", [api.API_VERSION + 1])
+
+    errors = [e for e in run_checks() if e.id == "plugins.E001"]
+
+    assert len(errors) == 1
+    assert errors[0].is_serious()
+    assert "metra_example_plugin" in errors[0].msg
+
+
+def test_a_plugin_supporting_several_api_versions_loads(monkeypatch):
+    config = apps.get_app_config("metra_example_plugin")
+    monkeypatch.setattr(type(config), "metra_api", [api.API_VERSION, api.API_VERSION + 1])
+
+    assert "plugins.E001" not in [e.id for e in run_checks()]
+
+
 def test_bundled_plugins_are_on_unless_disabled():
     found = {"sms": entry_point("sms", "pkg_sms"), "extra": entry_point("extra", "pkg_x")}
 

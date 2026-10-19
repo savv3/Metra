@@ -10,6 +10,8 @@ class ApiConfig(AppConfig):
     # Clients are systems, not people: the plugin stores their name and who
     # created them. The personal data the API serves is Metra's own.
     personal_data = []
+    # The plugin API versions (apps.plugins.api.API_VERSION) this plugin works with.
+    metra_api = [1]
 
     def ready(self):
         from apps.plugins import api

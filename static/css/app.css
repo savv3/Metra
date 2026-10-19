@@ -238,6 +238,7 @@ td a:hover, th a:hover { text-decoration: underline; }
 }
 .user-menu__who { margin: 0; padding: 0.5rem 0.75rem 0.75rem; border-bottom: 1px solid var(--border); }
 .user-menu__who span { display: block; color: var(--muted); font-size: 0.9rem; }
+.user-menu__version { margin: 0; padding: 0.5rem 0.75rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
 .user-menu__panel > a, .user-menu__panel .button--link {
   display: block;
   width: 100%;

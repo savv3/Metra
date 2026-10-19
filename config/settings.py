@@ -7,6 +7,7 @@ names still work, and a ``METRA_`` name wins when both are set.
 """
 
 import os
+import tomllib
 from pathlib import Path
 
 from django.core.exceptions import ImproperlyConfigured
@@ -15,6 +16,10 @@ from django.utils.translation import gettext_lazy as _
 from config.plugins import enabled_apps, enabled_names
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# The release version. pyproject.toml is its only source; see docs/releasing.md.
+with open(BASE_DIR / "pyproject.toml", "rb") as pyproject:
+    METRA_VERSION = tomllib.load(pyproject)["project"]["version"]
 
 
 def adopt_legacy_names(environ=os.environ):

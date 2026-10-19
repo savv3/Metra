@@ -50,6 +50,7 @@
               {% csrf_token %}
               <button type="submit" class="button button--link">{% translate "Log out" %}</button>
             </form>
+            <p class="user-menu__version">Metra {{ METRA_VERSION }}</p>
           </div>
         </details>
       {% else %}

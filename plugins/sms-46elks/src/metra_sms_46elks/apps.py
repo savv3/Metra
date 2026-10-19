@@ -9,6 +9,8 @@ class FortySixElksConfig(AppConfig):
 
     # Messages and their delivery status are stored by Metra, not here.
     personal_data = []
+    # The plugin API versions (apps.plugins.api.API_VERSION) this plugin works with.
+    metra_api = [1]
 
     def ready(self):
         from apps.plugins import api
