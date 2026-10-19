@@ -29,11 +29,9 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 # Plugins: extra pip packages (names, URLs or paths) installed into the app's
 # environment. Enable them at run time with METRA_PLUGINS. See docs/plugins.md.
-# SCR_PLUGIN_PACKAGES is the name from before the rename to Metra.
 ARG METRA_PLUGIN_PACKAGES=""
-ARG SCR_PLUGIN_PACKAGES=""
 RUN --mount=type=cache,target=/root/.cache/uv \
-    packages="${METRA_PLUGIN_PACKAGES:-$SCR_PLUGIN_PACKAGES}"; \
+    packages="$METRA_PLUGIN_PACKAGES"; \
     if [ -n "$packages" ]; then \
         uv pip install --python /app/.venv/bin/python $packages; \
     fi

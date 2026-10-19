@@ -120,23 +120,6 @@ unit and person pages, or SMS and email providers. Install them through
 trust, so install only ones you trust. See [docs/plugins.md](docs/plugins.md)
 and the [example plugin](plugins/example).
 
-## Upgrading from SmallCompanyRegister
-
-Metra was first called SmallCompanyRegister (SCR). An install from then
-upgrades like any other, and these older names keep working for now;
-`manage.py check` warns about each one still in use:
-
-- Settings with the prefix `SCR_` (deprecated): rename them to `METRA_` in
-  `.env`. When both are set, the `METRA_` one wins.
-- Plugins declaring the entry point group `scr.plugins`: change it to
-  `metra.plugins` in the plugin's `pyproject.toml`.
-- Backups named `scr-backup-*` are listed, kept and restored as before.
-
-Docker Compose names an install's containers and its `data` volume after the
-folder it is in (or `COMPOSE_PROJECT_NAME`). If you rename the folder, for
-example from `~/scr` to `~/metra`, set `COMPOSE_PROJECT_NAME` to the old
-folder name in `.env` first, or the install starts with a new, empty volume.
-
 ## Develop locally
 
 Needs Python 3.13, [uv](https://docs.astral.sh/uv/) and GNU gettext, and

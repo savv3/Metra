@@ -2,8 +2,6 @@
 
 Every value that differs between installations is read from an environment
 variable prefixed with ``METRA_``. See ``.env.example`` for the full list.
-Installs from before the rename to Metra used the prefix ``SCR_``; those
-names still work, and a ``METRA_`` name wins when both are set.
 """
 
 import os
@@ -20,20 +18,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # The release version. pyproject.toml is its only source; see docs/releasing.md.
 with open(BASE_DIR / "pyproject.toml", "rb") as pyproject:
     METRA_VERSION = tomllib.load(pyproject)["project"]["version"]
-
-
-def adopt_legacy_names(environ=os.environ):
-    """Copy each ``SCR_X`` to ``METRA_X`` unless ``METRA_X`` is already set.
-    Returns the old names found, which ``manage.py check`` warns about."""
-    found = []
-    for key, value in list(environ.items()):
-        if key.startswith("SCR_"):
-            environ.setdefault("METRA_" + key.removeprefix("SCR_"), value)
-            found.append(key)
-    return sorted(found)
-
-
-LEGACY_SETTING_NAMES = adopt_legacy_names()
 
 
 def env_bool(name, default=False):
@@ -216,9 +200,7 @@ MEDIA_URL = "media/"
 # and keep their queue in its own SQLite file next to the main database.
 HUEY = {
     "huey_class": "huey.SqliteHuey",
-    # The queue's name in huey.sqlite3; kept from before the rename so jobs
-    # already queued on an existing install still run.
-    "name": "smallcompanyregister",
+    "name": "metra",
     "filename": str(DATA_DIR / "huey.sqlite3"),
     "immediate": env_bool("METRA_HUEY_IMMEDIATE"),
     # Scheduled jobs (like the nightly backup) run at local time, not UTC.

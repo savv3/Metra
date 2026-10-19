@@ -60,31 +60,3 @@ def plugins_match_the_api_version(app_configs, **kwargs):
                 )
             )
     return problems
-
-
-@register()
-def names_from_before_the_rename(app_configs, **kwargs):
-    """Old SCR_ settings and plugins in the old "scr.plugins" group still work,
-    but should be renamed before support for them is removed."""
-    from config.plugins import LEGACY_GROUP, legacy_plugins
-
-    warnings = []
-    if names := getattr(settings, "LEGACY_SETTING_NAMES", []):
-        warnings.append(
-            Warning(
-                f"Settings with the old SCR_ prefix are in use: {', '.join(names)}.",
-                hint="Rename them to METRA_ in .env (for example SCR_DOMAIN to METRA_DOMAIN). "
-                "They still work for now.",
-                id="core.W001",
-            )
-        )
-    if names := legacy_plugins():
-        warnings.append(
-            Warning(
-                f"Plugins declare the old entry point group {LEGACY_GROUP!r}: {', '.join(names)}.",
-                hint='Change [project.entry-points."scr.plugins"] to '
-                '[project.entry-points."metra.plugins"] in the plugin\'s pyproject.toml.',
-                id="plugins.W003",
-            )
-        )
-    return warnings

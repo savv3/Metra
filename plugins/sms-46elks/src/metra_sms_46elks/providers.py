@@ -26,15 +26,9 @@ def config():
     }
 
 
-def callback_secret(salt="metra.messaging.46elks"):
+def callback_secret():
     """Part of the delivery-report address, so only 46elks (who knows it) can post there."""
-    return salted_hmac(salt, "delivery").hexdigest()[:32]
-
-
-def accepted_secrets():
-    """The current secret, and the one used before the rename to Metra, which
-    46elks still reports to for SMS sent before an upgrade."""
-    return [callback_secret(), callback_secret("scr.messaging.46elks")]
+    return salted_hmac("metra.messaging.46elks", "delivery").hexdigest()[:32]
 
 
 class FortySixElks(api.Provider):

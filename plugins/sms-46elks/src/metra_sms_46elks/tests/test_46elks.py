@@ -124,22 +124,3 @@ def test_delivery_report_with_wrong_secret_is_refused(client, db):
     message.refresh_from_db()
     assert response.status_code == 404
     assert message.status == "queued"
-
-
-def test_reports_to_the_address_from_before_the_rename_still_count(client, db):
-    from django.utils.crypto import salted_hmac
-
-    from apps.messaging.models import Message
-
-    old_secret = salted_hmac("scr.messaging.46elks", "delivery").hexdigest()[:32]
-    assert old_secret != callback_secret()
-    message = Message.objects.create(
-        channel="sms", provider="46elks", provider_id="s1", status="sent"
-    )
-
-    client.post(
-        reverse("metra_sms_46elks:delivery", args=[old_secret]), {"id": "s1", "status": "delivered"}
-    )
-
-    message.refresh_from_db()
-    assert message.status == "delivered"

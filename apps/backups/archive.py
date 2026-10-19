@@ -14,8 +14,6 @@ import tempfile
 from pathlib import Path
 
 PREFIX = "metra-backup-"
-# Archives made before the rename to Metra; still listed, restored and pruned.
-LEGACY_PREFIX = "scr-backup-"
 SUFFIX = ".tar.gz"
 FORMAT = 1
 DB_NAME = "db.sqlite3"
@@ -32,12 +30,12 @@ def archive_name(moment):
 
 
 def is_archive_name(name):
-    return name.startswith((PREFIX, LEGACY_PREFIX)) and name.endswith(SUFFIX)
+    return name.startswith(PREFIX) and name.endswith(SUFFIX)
 
 
 def archive_time(name):
     """The time stamp in an archive name; sorts archives oldest first."""
-    return name.removeprefix(PREFIX).removeprefix(LEGACY_PREFIX)
+    return name.removeprefix(PREFIX)
 
 
 def copy_database(source, destination):

@@ -20,9 +20,6 @@ from .models import ConsentRecord, Message, MessageBatch, MessageTemplate, organ
 from .registry import EMAIL, ProviderError, provider_for
 
 SALT = "metra.messaging.unsubscribe"
-# Links in newsletters sent before the rename to Metra were signed with this
-# salt; they keep working, since an unsubscribe link must never stop working.
-LEGACY_SALT = "scr.messaging.unsubscribe"
 
 
 def unsubscribe_token(person):
@@ -31,13 +28,11 @@ def unsubscribe_token(person):
 
 
 def person_for_token(token):
-    for salt in (SALT, LEGACY_SALT):
-        try:
-            person_id = signing.loads(token, salt=salt)
-        except signing.BadSignature:
-            continue
-        return Person.objects.filter(pk=person_id).first()
-    return None
+    try:
+        person_id = signing.loads(token, salt=SALT)
+    except signing.BadSignature:
+        return None
+    return Person.objects.filter(pk=person_id).first()
 
 
 def unsubscribe_url(person):

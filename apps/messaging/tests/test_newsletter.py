@@ -206,14 +206,3 @@ def test_read_only_cannot_record_consent(role_client, db):
 
     assert response.status_code == 403
     assert ConsentRecord.current(anna) is None
-
-
-def test_unsubscribe_links_from_before_the_rename_still_work(db):
-    from django.core import signing
-
-    reader = person("Anna", "anna@example.com")
-    old_token = signing.dumps(reader.pk, salt="scr.messaging.unsubscribe")
-
-    assert newsletter.person_for_token(old_token) == reader
-    assert newsletter.person_for_token(newsletter.unsubscribe_token(reader)) == reader
-    assert newsletter.unsubscribe_token(reader) != old_token

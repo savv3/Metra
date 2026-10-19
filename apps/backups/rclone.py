@@ -12,8 +12,8 @@ import subprocess
 
 from .archive import archive_time, is_archive_name
 
-BASE = "SCRREMOTE"
-CRYPT = "scrcrypt"
+BASE = "METRAREMOTE"
+CRYPT = "metracrypt"
 TIMEOUT = 60 * 60
 TYPES = {"s3", "sftp", "ftps"}
 
@@ -92,7 +92,7 @@ class Remote:
         env = {
             key: value
             for key, value in os.environ.items()
-            if not key.startswith(("RCLONE_", "METRA_BACKUP_", "SCR_BACKUP_"))
+            if not key.startswith(("RCLONE_", "METRA_BACKUP_"))
         }
         env.update({f"RCLONE_CONFIG_{BASE}_{k}": v for k, v in options.items() if v})
         env.update(
