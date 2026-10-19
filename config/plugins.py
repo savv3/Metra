@@ -18,17 +18,13 @@ from importlib.metadata import entry_points
 from django.core.exceptions import ImproperlyConfigured
 
 GROUP = "metra.plugins"
-# The group's name before the rename to Metra; plugins using it still load.
-LEGACY_GROUP = "scr.plugins"
 # Official plugins that ship with Metra and are on by default, in load order.
 BUNDLED = ("46elks",)
 
 
 def available():
     """{name: entry point} for every installed plugin."""
-    found = {entry_point.name: entry_point for entry_point in entry_points(group=LEGACY_GROUP)}
-    found.update((entry_point.name, entry_point) for entry_point in entry_points(group=GROUP))
-    return found
+    return {entry_point.name: entry_point for entry_point in entry_points(group=GROUP)}
 
 
 def app_for(entry_point):

@@ -124,9 +124,3 @@ def test_delivery_report_with_wrong_secret_is_refused(client, db):
     message.refresh_from_db()
     assert response.status_code == 404
     assert message.status == "queued"
-
-
-def test_the_secret_did_not_change_with_the_move():
-    from django.utils.crypto import salted_hmac
-
-    assert callback_secret() == salted_hmac("scr.messaging.46elks", "delivery").hexdigest()[:32]

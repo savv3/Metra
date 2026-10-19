@@ -4,10 +4,8 @@ services:
       context: .
       args:
         # Extra plugin packages to install into the image (see docs/plugins.md).
-        # Each ${METRA_X:-${SCR_X:-...}} also reads an .env from before the
-        # rename to Metra, when the settings were called SCR_X.
-        METRA_PLUGIN_PACKAGES: ${METRA_PLUGIN_PACKAGES:-${SCR_PLUGIN_PACKAGES:-}}
-    image: ${METRA_IMAGE:-${SCR_IMAGE:-metra:latest}}
+        METRA_PLUGIN_PACKAGES: ${METRA_PLUGIN_PACKAGES:-}
+    image: ${METRA_IMAGE:-metra:latest}
     command: web
     env_file: .env
     environment:
@@ -24,7 +22,7 @@ services:
       start_period: 30s
 
   worker:
-    image: ${METRA_IMAGE:-${SCR_IMAGE:-metra:latest}}
+    image: ${METRA_IMAGE:-metra:latest}
     command: worker
     env_file: .env
     volumes:
@@ -42,7 +40,7 @@ services:
       - "443:443"
       - "443:443/udp"
     environment:
-      METRA_DOMAIN: ${METRA_DOMAIN:-${SCR_DOMAIN:-localhost}}
+      METRA_DOMAIN: ${METRA_DOMAIN:-localhost}
     volumes:
       - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data

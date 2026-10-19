@@ -18,7 +18,7 @@ class BackupRun(models.Model):
     success = models.BooleanField(_("succeeded"), default=False)
     archive_name = models.CharField(_("archive"), max_length=100, blank=True)
     size = models.BigIntegerField(_("size in bytes"), null=True, blank=True)
-    # Where the backup went, e.g. "S3 s3.example.com bucket/scr"; never credentials.
+    # Where the backup went, e.g. "S3 s3.example.com bucket/metra"; never credentials.
     target = models.CharField(_("target"), max_length=300, blank=True)
     error = models.TextField(_("error"), blank=True)
 

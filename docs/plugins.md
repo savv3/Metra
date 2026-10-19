@@ -12,7 +12,7 @@ and change everything in the register. Install only plugins you trust.
 1. Install the package into the app's environment.
    - With Docker, list it in `METRA_PLUGIN_PACKAGES` in `.env`. Use pip names,
      URLs or paths, separated by spaces, for example
-     `METRA_PLUGIN_PACKAGES="scr-something==1.2 git+https://example.org/x.git"`.
+     `METRA_PLUGIN_PACKAGES="metra-something==1.2 git+https://example.org/x.git"`.
      Then rebuild with `docker compose up -d --build`. You can also build
      your own image `FROM metra:latest` and `pip install`
      into `/app/.venv`.

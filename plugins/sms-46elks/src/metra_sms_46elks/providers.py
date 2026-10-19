@@ -27,9 +27,8 @@ def config():
 
 
 def callback_secret():
-    """Part of the delivery-report address, so only 46elks (who knows it) can post there.
-    The same value as before 46elks became a plugin."""
-    return salted_hmac("scr.messaging.46elks", "delivery").hexdigest()[:32]
+    """Part of the delivery-report address, so only 46elks (who knows it) can post there."""
+    return salted_hmac("metra.messaging.46elks", "delivery").hexdigest()[:32]
 
 
 class FortySixElks(api.Provider):

@@ -20,7 +20,7 @@ MOMENT = datetime.datetime(2026, 10, 18, 2, 30, tzinfo=datetime.UTC)
 SECRET = "very-secret-crypt-password"
 REMOTE = {
     "remote_type": "s3",
-    "remote_path": "bucket/scr",
+    "remote_path": "bucket/metra",
     "encryption_password": SECRET,
     "s3_provider": "Other",
     "s3_endpoint": "s3.example.com",
@@ -183,25 +183,6 @@ def test_local_retention_keeps_the_newest(tmp_path):
     ]
 
 
-def test_archives_from_before_the_rename_sort_by_time(tmp_path):
-    for name in (
-        "scr-backup-20261001-023000.tar.gz",
-        "metra-backup-20261002-023000.tar.gz",
-        "scr-backup-20261003-023000.tar.gz",
-    ):
-        (tmp_path / name).write_bytes(b"x")
-
-    removed = archive.prune_local(tmp_path, keep=1)
-
-    assert [p.name for p in removed] == [
-        "scr-backup-20261001-023000.tar.gz",
-        "metra-backup-20261002-023000.tar.gz",
-    ]
-
-
-# rclone
-
-
 def test_rclone_is_configured_through_the_environment_only():
     runner = FakeRclone()
     remote = Remote(REMOTE, runner)
@@ -215,31 +196,31 @@ def test_rclone_is_configured_through_the_environment_only():
         "rclone",
         "copyto",
         "/data/backups/metra-backup-20261018-023000.tar.gz",
-        "scrcrypt:metra-backup-20261018-023000.tar.gz",
+        "metracrypt:metra-backup-20261018-023000.tar.gz",
     ]
     env = upload["env"]
-    assert env["RCLONE_CONFIG_SCRREMOTE_TYPE"] == "s3"
-    assert env["RCLONE_CONFIG_SCRREMOTE_ENDPOINT"] == "s3.example.com"
-    assert env["RCLONE_CONFIG_SCRREMOTE_SECRET_ACCESS_KEY"] == "s3-secret-value"
-    assert env["RCLONE_CONFIG_SCRCRYPT_TYPE"] == "crypt"
-    assert env["RCLONE_CONFIG_SCRCRYPT_REMOTE"] == "scrremote:bucket/scr"
-    assert env["RCLONE_CONFIG_SCRCRYPT_PASSWORD"] == f"obscured({SECRET})"
+    assert env["RCLONE_CONFIG_METRAREMOTE_TYPE"] == "s3"
+    assert env["RCLONE_CONFIG_METRAREMOTE_ENDPOINT"] == "s3.example.com"
+    assert env["RCLONE_CONFIG_METRAREMOTE_SECRET_ACCESS_KEY"] == "s3-secret-value"
+    assert env["RCLONE_CONFIG_METRACRYPT_TYPE"] == "crypt"
+    assert env["RCLONE_CONFIG_METRACRYPT_REMOTE"] == "metraremote:bucket/metra"
+    assert env["RCLONE_CONFIG_METRACRYPT_PASSWORD"] == f"obscured({SECRET})"
     for call in runner.calls:
         assert not any(secret in " ".join(call["command"]) for secret in remote.secrets())
 
 
 @pytest.mark.parametrize("kind, rclone_type", [("sftp", "sftp"), ("ftps", "ftp")])
 def test_sftp_and_ftps_remotes(kind, rclone_type):
-    config = dict(REMOTE, remote_type=kind, host="backup.example.com", user="scr", password="pw")
+    config = dict(REMOTE, remote_type=kind, host="backup.example.com", user="metra", password="pw")
     runner = FakeRclone()
 
-    Remote(config, runner).run("lsf", "scrcrypt:")
+    Remote(config, runner).run("lsf", "metracrypt:")
 
     env = runner.calls[-1]["env"]
-    assert env["RCLONE_CONFIG_SCRREMOTE_TYPE"] == rclone_type
-    assert env["RCLONE_CONFIG_SCRREMOTE_HOST"] == "backup.example.com"
-    assert env["RCLONE_CONFIG_SCRREMOTE_PASS"] == "obscured(pw)"
-    assert (env.get("RCLONE_CONFIG_SCRREMOTE_EXPLICIT_TLS") == "true") == (kind == "ftps")
+    assert env["RCLONE_CONFIG_METRAREMOTE_TYPE"] == rclone_type
+    assert env["RCLONE_CONFIG_METRAREMOTE_HOST"] == "backup.example.com"
+    assert env["RCLONE_CONFIG_METRAREMOTE_PASS"] == "obscured(pw)"
+    assert (env.get("RCLONE_CONFIG_METRAREMOTE_EXPLICIT_TLS") == "true") == (kind == "ftps")
 
 
 def test_remote_retention_deletes_the_oldest():
@@ -250,15 +231,7 @@ def test_remote_retention_deletes_the_oldest():
 
     assert removed == ["metra-backup-20261001-023000.tar.gz", "metra-backup-20261002-023000.tar.gz"]
     deletes = [c["command"] for c in runner.calls if c["command"][1] == "deletefile"]
-    assert deletes == [["rclone", "deletefile", f"scrcrypt:{name}"] for name in removed]
-
-
-def test_remote_lists_archives_from_before_the_rename():
-    listing = "metra-backup-20261020-023000.tar.gz\nscr-backup-20261019-023000.tar.gz\n"
-
-    names = Remote(REMOTE, FakeRclone(listing=listing)).list()
-
-    assert names == ["scr-backup-20261019-023000.tar.gz", "metra-backup-20261020-023000.tar.gz"]
+    assert deletes == [["rclone", "deletefile", f"metracrypt:{name}"] for name in removed]
 
 
 def test_remote_needs_an_encryption_password():
@@ -309,7 +282,7 @@ def test_backup_uploads_and_prunes_when_a_remote_is_set(live_db, settings):
 
     assert run.success
     assert runner.verbs() == ["obscure", "copyto", "lsf"]
-    assert "S3 s3.example.com bucket/scr (encrypted)" in run.target
+    assert "S3 s3.example.com bucket/metra (encrypted)" in run.target
 
 
 @pytest.mark.django_db

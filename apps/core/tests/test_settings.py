@@ -10,12 +10,12 @@ def test_sqlite_enforces_foreign_keys():
 
 
 def _load_settings(**env):
-    """Import config.settings in a fresh interpreter with only these METRA_ or SCR_ values."""
+    """Import config.settings in a fresh interpreter with only these METRA_ values."""
     import os
     import subprocess
     import sys
 
-    clean = {k: v for k, v in os.environ.items() if not k.startswith(("METRA_", "SCR_"))}
+    clean = {k: v for k, v in os.environ.items() if not k.startswith("METRA_")}
     return subprocess.run(
         [sys.executable, "-c", "import config.settings as s; print(s.ALLAUTH_TRUSTED_PROXY_COUNT)"],
         env={**clean, "METRA_DATA_DIR": env.pop("data_dir"), **env},
@@ -48,7 +48,7 @@ def _require_mfa(tmp_path, **env):
     import subprocess
     import sys
 
-    clean = {k: v for k, v in os.environ.items() if not k.startswith(("METRA_", "SCR_"))}
+    clean = {k: v for k, v in os.environ.items() if not k.startswith("METRA_")}
     result = subprocess.run(
         [sys.executable, "-c", "import config.settings as s; print(s.REQUIRE_MFA)"],
         env={**clean, "METRA_DATA_DIR": str(tmp_path), **env},
@@ -65,13 +65,3 @@ def test_two_factor_is_required_in_production_and_optional_in_development(tmp_pa
     assert _require_mfa(tmp_path, METRA_DEBUG="true") == "False"
     assert _require_mfa(tmp_path, METRA_DEBUG="true", METRA_REQUIRE_MFA="true") == "True"
     assert _require_mfa(tmp_path, METRA_SECRET_KEY=key, METRA_REQUIRE_MFA="false") == "False"
-
-
-def test_settings_from_before_the_rename_still_work(tmp_path):
-    key = "a-real-secret-key-for-this-test-only"
-
-    assert _require_mfa(tmp_path, SCR_SECRET_KEY=key, SCR_REQUIRE_MFA="false") == "False"
-    assert _require_mfa(tmp_path, SCR_DEBUG="true") == "False"
-    # The new name wins when an install sets both.
-    both = {"METRA_REQUIRE_MFA": "true", "SCR_REQUIRE_MFA": "false"}
-    assert _require_mfa(tmp_path, METRA_SECRET_KEY=key, **both) == "True"

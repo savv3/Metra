@@ -19,7 +19,7 @@ from . import attachments
 from .models import ConsentRecord, Message, MessageBatch, MessageTemplate, organisation_placeholders
 from .registry import EMAIL, ProviderError, provider_for
 
-SALT = "scr.messaging.unsubscribe"
+SALT = "metra.messaging.unsubscribe"
 
 
 def unsubscribe_token(person):
