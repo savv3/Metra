@@ -67,19 +67,25 @@ tagged=$(git show "$tag:pyproject.toml" | sed -n 's/^version = "\(.*\)"$/\1/p' |
     exit 1
 }
 
-arch=$(ssh "$host" uname -m)
+work=$(mktemp -d)
+sockets=$(mktemp -d)
+# All SSH and scp calls share one connection, so a deploy logs in once.
+# Several logins in a row can look like an SSH scan to a firewall's IPS,
+# which then blocks the laptop.
+ssh_opts="-o ControlMaster=auto -o ControlPath=$sockets/ssh -o ControlPersist=600"
+trap 'ssh $ssh_opts -O exit "$host" 2>/dev/null; rm -rf "$work" "$sockets"' EXIT
+
+arch=$(ssh $ssh_opts "$host" uname -m)
 case $arch in
     x86_64) platform=linux/amd64 ;;
     aarch64 | arm64) platform=linux/arm64 ;;
     *) echo "Unknown server CPU $arch." >&2; exit 1 ;;
 esac
-ssh "$host" test -f "$dir/compose.yaml" -a -f "$dir/.env" || {
+ssh $ssh_opts "$host" test -f "$dir/compose.yaml" -a -f "$dir/.env" || {
     echo "$host:$dir has no compose.yaml and .env; set up the install first (docs/deploying.md)." >&2
     exit 1
 }
 
-work=$(mktemp -d)
-trap 'rm -rf "$work"' EXIT
 git archive "$tag" | tar -x -C "$work/" -f -
 image=metra:$version
 file=metra-$version.tar.gz
@@ -90,10 +96,10 @@ run "$docker" build --platform "$platform" \
     -t "$image" "$work"
 echo "+ $docker save $image | gzip >$work/$file"
 [ -n "$dry_run" ] || "$docker" save "$image" | gzip >"$work/$file"
-run ssh "$host" mkdir -p "$dir/images"
-run scp "$work/$file" "$work/docker/upgrade.sh" "$host:$dir/images/"
-run ssh "$host" sh "$dir/images/upgrade.sh" "$version" "$dir/images/$file" "$dir"
-run ssh "$host" rm -f "$dir/images/$file"
+run ssh $ssh_opts "$host" mkdir -p "$dir/images"
+run scp $ssh_opts "$work/$file" "$work/docker/upgrade.sh" "$host:$dir/images/"
+run ssh $ssh_opts "$host" sh "$dir/images/upgrade.sh" "$version" "$dir/images/$file" "$dir"
+run ssh $ssh_opts "$host" rm -f "$dir/images/$file"
 if [ -n "$dry_run" ]; then
     echo "Dry run: nothing was changed."
 else

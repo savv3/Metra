@@ -12,6 +12,12 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+### Fixed
+
+- `scripts/deploy.sh` logs in to the server once and reuses that SSH
+  connection, so a firewall's intrusion prevention no longer mistakes a
+  deploy for an SSH scan and blocks the laptop.
+
 ## [0.2.0] - 2026-10-19
 
 ### Added
