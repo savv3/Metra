@@ -6,6 +6,7 @@ the same API_VERSION; anything else in the app may change.
     class MyConfig(AppConfig):
         name = "my_plugin"
         personal_data = []  # what personal data the plugin stores, see docs
+        metra_api = [1]  # the API_VERSIONs the plugin works with
 
         def ready(self):
             api.add_navigation(api.NavItem("My page", "my_plugin:index", "register.view_unit"))
@@ -37,7 +38,11 @@ from . import events
 from .hooks import NAVIGATION, PERSON_PANELS, SETTINGS_LINKS, UNIT_PANELS, WEBHOOK_EVENTS, hooks
 from .roles import grant_to_roles
 
+# Bump API_VERSION only for a breaking change; additions keep it. The previous
+# version stays in SUPPORTED_API_VERSIONS for one more major release, so
+# plugins have time to catch up. See docs/releasing.md.
 API_VERSION = 1
+SUPPORTED_API_VERSIONS = (1,)
 
 # Records: name -> module. A plugin reads and changes Metra's data through
 # these, so it never imports app modules whose layout may change.
@@ -84,6 +89,7 @@ def __getattr__(name):
 
 __all__ = [
     "API_VERSION",
+    "SUPPORTED_API_VERSIONS",
     "EMAIL",
     "SMS",
     "NavItem",

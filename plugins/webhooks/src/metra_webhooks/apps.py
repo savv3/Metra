@@ -10,6 +10,8 @@ class WebhooksConfig(AppConfig):
     # Payloads carry ids and non-personal facts only, and endpoints are
     # addresses of systems, not of people.
     personal_data = []
+    # The plugin API versions (apps.plugins.api.API_VERSION) this plugin works with.
+    metra_api = [1]
 
     def ready(self):
         from apps.plugins import api

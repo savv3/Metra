@@ -115,5 +115,10 @@ docker compose up --build                       # full stack, needs a .env (see 
   `role_client`, `board_client`, `unit`, `person`) are in `conftest.py`.
   New behaviour comes with tests; CI runs ruff, the migration check and
   pytest.
+- **Versions and changelog:** the app version lives only in
+  `pyproject.toml`; see [docs/releasing.md](docs/releasing.md). Add a line
+  under **Unreleased** in `CHANGELOG.md` in every PR that changes something
+  users, admins or plugin authors notice. A breaking change to
+  `apps/plugins/api.py` bumps `API_VERSION`; additions do not.
 - **Dependencies:** prefer Django's built-ins and well-maintained, free
   packages. Add new runtime dependencies only when they save real work.

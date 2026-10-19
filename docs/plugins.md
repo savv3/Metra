@@ -27,7 +27,7 @@ and change everything in the register. Install only plugins you trust.
 ## Writing a plugin
 
 Start from [plugins/example](../plugins/example), which the tests load. A
-plugin needs three things.
+plugin needs four things.
 
 **An entry point** in the `metra.plugins` group, whose value is the Django app
 (a module, or `module:AppConfig`):
@@ -45,6 +45,20 @@ it, `manage.py check` warns (`plugins.W001`).
 class ExamplePluginConfig(AppConfig):
     name = "metra_example_plugin"
     personal_data = ["Person: membership card number"]
+```
+
+**An AppConfig that names the plugin API versions it works with**, in
+`metra_api`. When none of them is one this Metra release supports
+(`api.SUPPORTED_API_VERSIONS`), the app refuses to start with a clear
+error (`plugins.E001`) instead of breaking later. Without it, `manage.py
+check` warns (`plugins.W002`). How the API version changes is in
+[releasing.md](releasing.md#the-plugin-api).
+
+```python
+class ExamplePluginConfig(AppConfig):
+    name = "metra_example_plugin"
+    personal_data = []
+    metra_api = [1]
 ```
 
 **Registrations in `ready()`**, through `apps.plugins.api`. Only that module

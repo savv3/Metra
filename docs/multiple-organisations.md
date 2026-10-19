@@ -93,12 +93,13 @@ Upgrade them all at once:
 for d in ~/scr/*/; do (cd "$d" && podman-compose up -d web worker); done
 ```
 
-To upgrade one organisation first, tag the new image with a version and set
-`METRA_IMAGE` in that install's `.env`:
+To upgrade one organisation first, tag the new image with its release
+version (see [releasing.md](releasing.md)) and set `METRA_IMAGE` in that
+install's `.env`:
 
 ```sh
-podman tag metra:latest metra:2026-10-18
-# in ~/scr/vatten/.env: METRA_IMAGE=metra:2026-10-18
+podman tag metra:latest metra:0.2.0
+# in ~/scr/vatten/.env: METRA_IMAGE=metra:0.2.0
 ```
 
 When the shared `compose.yaml` changes, copy it into each install folder
