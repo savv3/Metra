@@ -17,6 +17,8 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 - `scripts/deploy.sh` logs in to the server once and reuses that SSH
   connection, so a firewall's intrusion prevention no longer mistakes a
   deploy for an SSH scan and blocks the laptop.
+- The web container no longer logs "Permission denied: '/app/.gunicorn'" at
+  start; gunicorn's control socket, which Metra does not use, is turned off.
 
 ## [0.2.0] - 2026-10-19
 

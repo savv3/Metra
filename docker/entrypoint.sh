@@ -10,6 +10,7 @@ case "$role" in
       --bind 0.0.0.0:8000 \
       --workers "${GUNICORN_WORKERS:-3}" \
       --access-logfile - \
+      --no-control-socket \
       --logger-class config.gunicorn_logging.RedactingLogger
     ;;
   worker)
