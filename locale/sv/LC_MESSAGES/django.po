@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 23:27+0300\n"
+"POT-Creation-Date: 2026-10-19 20:40+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,7 +133,7 @@ msgstr "Skydda ditt konto med en kod från en autentiseringsapp i telefonen."
 msgid "Turn off"
 msgstr "Stäng av"
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:70
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:71
 msgid "Turn on two-factor login"
 msgstr "Slå på tvåfaktorsinloggning"
 
@@ -1575,7 +1575,7 @@ msgid "Make draft invoices"
 msgstr "Skapa fakturautkast"
 
 #: apps/invoicing/templates/invoicing/run_form.html:13
-#: apps/messaging/templates/messaging/compose.html:95
+#: apps/messaging/templates/messaging/compose.html:98
 #: apps/messaging/templates/messaging/newsletter_compose.html:36
 #: apps/readings/templates/readings/reading_form.html:31
 #: apps/readings/templates/readings/round_form.html:20
@@ -1670,7 +1670,7 @@ msgstr "Alla utfärdade fakturor i den här omgången har skickats."
 
 #: apps/invoicing/views.py:353 apps/invoicing/views.py:416
 #: apps/messaging/views.py:53 apps/messaging/views.py:152
-#: apps/messaging/views.py:226
+#: apps/messaging/views.py:227
 msgid "Sending has started. This page shows how it goes."
 msgstr "Utskicket har startat. Den här sidan visar hur det går."
 
@@ -1832,81 +1832,94 @@ msgstr "Vem i varje enhet"
 msgid "Send by"
 msgstr "Skicka via"
 
-#: apps/messaging/forms.py:121 apps/messaging/models.py:40
+#: apps/messaging/forms.py:123 apps/messaging/models.py:40
 #: apps/messaging/templates/messaging/_unit_messages.html:13
 #: apps/messaging/templates/messaging/batch_detail.html:10
 #: apps/messaging/templates/messaging/compose.html:26
 msgid "Message"
 msgstr "Meddelande"
 
-#: apps/messaging/forms.py:127
+#: apps/messaging/forms.py:130
 #: apps/messaging/templates/messaging/batch_detail.html:11
 msgid "Email subject"
 msgstr "E-postens ämne"
 
-#: apps/messaging/forms.py:130
+#: apps/messaging/forms.py:133
 msgid "Needed when the message goes by email."
 msgstr "Behövs när meddelandet skickas via e-post."
 
-#: apps/messaging/forms.py:133
+#: apps/messaging/forms.py:136
 msgid "Longer text for email"
 msgstr "Längre text för e-post"
 
-#: apps/messaging/forms.py:136
-msgid "Optional. Without it, the email has the same text as the SMS."
-msgstr "Valfritt. Utan den får e-postmeddelandet samma text som SMS:et."
-
 #: apps/messaging/forms.py:140
+#
+msgid ""
+"Needed when the message goes by email only. Otherwise optional: without it, "
+"the email has the same text as the SMS."
+msgstr "Behövs när meddelandet bara skickas med e-post. Annars valfri: utan den får e-postmeddelandet samma text som sms:et."
+
+#: apps/messaging/forms.py:146
 msgid "Also show as a notice on the public page"
 msgstr "Visa också som anslag på den offentliga sidan"
 
-#: apps/messaging/forms.py:142
+#: apps/messaging/forms.py:148
 msgid "Anyone can see it there and on members' pages, so no personal details."
 msgstr ""
 "Vem som helst kan se det där och på medlemmarnas sidor, så skriv inga "
 "personuppgifter."
 
-#: apps/messaging/forms.py:145
+#: apps/messaging/forms.py:151
 msgid "Notice text"
 msgstr "Anslagets text"
 
-#: apps/messaging/forms.py:149
+#: apps/messaging/forms.py:155
 msgid "Empty: the message text."
 msgstr "Tomt: meddelandets text."
 
-#: apps/messaging/forms.py:152
+#: apps/messaging/forms.py:158
 msgid "Show the notice until"
 msgstr "Visa anslaget till"
 
-#: apps/messaging/forms.py:156
+#: apps/messaging/forms.py:162
 msgid "Empty: until you remove it."
 msgstr "Tomt: visas tills du tar bort det."
 
-#: apps/messaging/forms.py:187
+#: apps/messaging/forms.py:193
 msgid "Choose a tag."
 msgstr "Välj en tagg."
 
-#: apps/messaging/forms.py:189
+#: apps/messaging/forms.py:195
 msgid "Choose a unit type."
 msgstr "Välj en enhetstyp."
 
-#: apps/messaging/forms.py:191
+#: apps/messaging/forms.py:198
 msgid "Add a subject for the email."
 msgstr "Lägg till ett ämne för e-postmeddelandet."
 
-#: apps/messaging/forms.py:197
+#: apps/messaging/forms.py:200
+#
+msgid "Write the message."
+msgstr "Skriv meddelandet."
+
+#: apps/messaging/forms.py:204
+#
+msgid "Write the text of the email."
+msgstr "Skriv texten i e-postmeddelandet."
+
+#: apps/messaging/forms.py:210
 msgid "Write the notice without personal placeholders."
 msgstr "Skriv anslaget utan personliga platshållare."
 
-#: apps/messaging/forms.py:225
+#: apps/messaging/forms.py:246
 msgid "Subject"
 msgstr "Ämne"
 
-#: apps/messaging/forms.py:227 apps/register/models.py:150
+#: apps/messaging/forms.py:248 apps/register/models.py:150
 msgid "Text"
 msgstr "Text"
 
-#: apps/messaging/forms.py:230
+#: apps/messaging/forms.py:251
 #, python-brace-format
 msgid ""
 "Plain text. You can use {first_name}, {name} and {organisation}. An "
@@ -1915,27 +1928,27 @@ msgstr ""
 "Ren text. Du kan använda {first_name}, {name} och {organisation}. En "
 "avregistreringslänk läggs till i slutet av varje e-post."
 
-#: apps/messaging/forms.py:244 apps/messaging/models.py:42
+#: apps/messaging/forms.py:265 apps/messaging/models.py:42
 #: apps/messaging/templates/messaging/_person_newsletter.html:3
 #: apps/messaging/templates/messaging/unsubscribe.html:3
 #: apps/selfservice/templates/selfservice/member.html:62
 msgid "Newsletter"
 msgstr "Nyhetsbrev"
 
-#: apps/messaging/forms.py:245
+#: apps/messaging/forms.py:266
 #: apps/messaging/templates/messaging/_person_newsletter.html:6
 msgid "Wants the newsletter"
 msgstr "Vill ha nyhetsbrevet"
 
-#: apps/messaging/forms.py:245
+#: apps/messaging/forms.py:266
 msgid "Does not want it"
 msgstr "Vill inte ha det"
 
-#: apps/messaging/forms.py:250
+#: apps/messaging/forms.py:271
 msgid "How it was given"
 msgstr "Hur det gavs"
 
-#: apps/messaging/forms.py:253
+#: apps/messaging/forms.py:274
 msgid "For example: signed form at the annual meeting."
 msgstr "Till exempel: underskriven blankett vid årsmötet."
 
@@ -2320,7 +2333,7 @@ msgid "No messages yet."
 msgstr "Inga meddelanden än."
 
 #: apps/messaging/templates/messaging/batch_detail.html:17
-#: apps/messaging/templates/messaging/compose.html:87
+#: apps/messaging/templates/messaging/compose.html:90
 msgid "Public notice"
 msgstr "Offentligt anslag"
 
@@ -2498,11 +2511,11 @@ msgstr "Till kontakterna för %(name)s."
 msgid "Back to the unit"
 msgstr "Tillbaka till enheten"
 
-#: apps/messaging/templates/messaging/compose.html:94
+#: apps/messaging/templates/messaging/compose.html:97
 msgid "Check recipients"
 msgstr "Kontrollera mottagare"
 
-#: apps/messaging/templates/messaging/compose.html:97
+#: apps/messaging/templates/messaging/compose.html:100
 msgid "Nothing is sent until you have checked the recipients and confirmed."
 msgstr "Ingenting skickas förrän du har kontrollerat mottagarna och bekräftat."
 
@@ -2617,15 +2630,15 @@ msgstr "Avsluta prenumerationen"
 msgid "Nobody can be reached with these choices."
 msgstr "Ingen kan nås med de här valen."
 
-#: apps/messaging/views.py:197
+#: apps/messaging/views.py:198
 msgid "The notice is no longer shown."
 msgstr "Anslaget visas inte längre."
 
-#: apps/messaging/views.py:220
+#: apps/messaging/views.py:221
 msgid "Everyone who wants the newsletter"
 msgstr "Alla som vill ha nyhetsbrevet"
 
-#: apps/messaging/views.py:256
+#: apps/messaging/views.py:257
 msgid "Saved the newsletter choice."
 msgstr "Valet för nyhetsbrevet är sparat."
 
@@ -4708,15 +4721,15 @@ msgstr "Inbjudan skickad till %(email)s."
 msgid "Setup is done. You can run it again from Settings."
 msgstr "Inställningen är klar. Du kan köra den igen från Inställningar."
 
-#: config/settings.py:184
+#: config/settings.py:177
 msgid "Swedish"
 msgstr "Svenska"
 
-#: config/settings.py:185
+#: config/settings.py:178
 msgid "English"
 msgstr "Engelska"
 
-#: config/settings.py:186
+#: config/settings.py:179
 msgid "Finnish (machine translated)"
 msgstr "Finska (maskinöversatt)"
 
@@ -4768,7 +4781,7 @@ msgstr "Mörkt"
 msgid "Log out"
 msgstr "Logga ut"
 
-#: templates/base.html:64
+#: templates/base.html:65
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
@@ -4776,7 +4789,7 @@ msgstr ""
 "Tvåfaktorsinloggning krävs inte i den här installationen (METRA_REQUIRE_MFA "
 "är avstängd). Slå på den innan riktiga uppgifter läggs in."
 
-#: templates/base.html:69
+#: templates/base.html:70
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."

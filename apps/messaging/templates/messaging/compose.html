@@ -70,16 +70,19 @@
       {% endif %}
       {% include "register/_field.html" with field=form.contacts %}
       {% include "register/_field.html" with field=form.channels %}
-      <div class="field{% if form.body.errors %} field--error{% endif %}">
-        <label for="{{ form.body.id_for_label }}">{{ form.body.label }} <span class="required" aria-hidden="true">*</span></label>
+      {# Only the texts the chosen channels need are shown; app.js switches them as the choice changes. #}
+      <div class="field{% if form.body.errors %} field--error{% endif %}" data-channels="sms sms_or_email sms_and_email"{% if form.channels.value == "email" %} hidden{% endif %}>
+        <label for="{{ form.body.id_for_label }}">{{ form.body.label }}</label>
         <textarea name="body" id="{{ form.body.id_for_label }}" rows="4" maxlength="1600" aria-describedby="sms-count body-help"
                   hx-get="{% url 'messaging:sms_count' %}" hx-trigger="input changed delay:300ms, load" hx-target="#sms-count">{{ form.body.value|default:"" }}</textarea>
         <p class="help" id="sms-count" aria-live="polite"></p>
         <p class="help" id="body-help">{{ form.body.help_text }}</p>
         {% if form.body.errors %}<ul class="errorlist">{% for e in form.body.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
       </div>
-      {% include "register/_field.html" with field=form.subject %}
-      {% include "register/_field.html" with field=form.email_body %}
+      <div data-channels="email sms_or_email sms_and_email"{% if form.channels.value == "sms" %} hidden{% endif %}>
+        {% include "register/_field.html" with field=form.subject %}
+        {% include "register/_field.html" with field=form.email_body %}
+      </div>
       {% if form.attachments.field.queryset %}{% include "register/_field.html" with field=form.attachments %}{% endif %}
       {% include "register/_field.html" with field=form.files %}
       {% if form.notice %}
