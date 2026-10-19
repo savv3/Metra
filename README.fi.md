@@ -84,6 +84,7 @@ Muu dokumentaatio on englanniksi:
   uutiskirjeet, laskutus, tuonti ja roolit
 - [Useita organisaatioita yhdellä palvelimella](docs/multiple-organisations.md)
 - [Laajennukset](docs/plugins.md)
+- [REST-rajapinta](docs/api.md): `api`-laajennus muille järjestelmille tunnisteilla
 - [AGENTS.md](AGENTS.md): ohjeet koodia kehittäville
 
 ## Lisenssi

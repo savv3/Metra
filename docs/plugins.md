@@ -98,6 +98,7 @@ is official but off by default: it is installed in the Docker image, and
 | Plugin | Name | What it does |
 | --- | --- | --- |
 | [metra-sms-46elks](../plugins/sms-46elks) | `46elks` | SMS through 46elks, with delivery reports. Bundled, on by default |
+| [metra-api](../plugins/api) | `api` | The REST API ([docs](api.md)). Off until `METRA_PLUGINS=api` |
 | [metra-webhooks](../plugins/webhooks) | `webhooks` | Signed webhooks to outside systems ([docs](webhooks.md)). Off until `METRA_PLUGINS=webhooks` |
 
 So that each can later move to its own repository, a plugin in plugins/:
@@ -105,10 +106,11 @@ So that each can later move to its own repository, a plugin in plugins/:
 - imports only `apps.plugins.api` from Metra, never other app modules;
 - keeps its tests inside its package (`src/<package>/tests/`), using the
   shared fixtures in the root `conftest.py`;
-- keeps its translations in its own `locale/` folder, made with
-  `uv run django-admin makemessages -l sv -l fi -l en` from the Python package
-  folder (`plugins/<name>/src/<package>`, next to its `locale/`; no settings
-  needed, GNU gettext must be installed);
+- keeps its translations in its own `locale/` folder, made from the package
+  folder (for example `plugins/api/src/metra_api`) with
+  `METRA_DEBUG=true DJANGO_SETTINGS_MODULE=config.settings PYTHONPATH=<repository root> uv run django-admin makemessages -l sv -l fi -l en`
+  (the app's own `makemessages` from the repository root also finds a
+  plugin's `locale/` folder and fills it);
 - declares its own dependencies in its `pyproject.toml`.
 
 ## Extension points
@@ -121,6 +123,24 @@ So that each can later move to its own repository, a plugin in plugins/:
 | SMS and email providers | `api.add_messaging_provider(ProviderClass)` | An `api.Provider` subclass with `channel` (`api.SMS` or `api.EMAIL`), `name` and `send()`. Chosen with `METRA_SMS_PROVIDER=<name>`, or automatically when `is_configured()` returns true. `api.sms_sender()`, `api.sms_country_code()`, `api.normalise_phone()` and `api.record_delivery()` help SMS providers |
 | Settings links | `api.add_settings_link(SettingsLink(label, url_name, permission, description))` | A link on the Settings page to the plugin's own settings or tools |
 | Webhook events | `api.add_webhook_event(WebhookEvent(name, label, signal, payload))` | An event that webhook endpoints can subscribe to. `signal` is a Django signal sent after commit; `payload(**signal_kwargs)` returns a dict of ids and non-personal facts (never names, emails, phones or addresses). Works whether or not the webhooks plugin is enabled, and whichever plugin loads first. A plugin that sends webhooks reads them with `api.webhook_events()` and `api.on_webhook_event(listener)` |
+
+## Records
+
+A plugin that reads or changes Metra's data uses the models, forms and
+helpers in `api.RECORDS`, never `apps.*` modules:
+
+| Name | What it is |
+| --- | --- |
+| `api.Unit`, `api.Person`, `api.UnitContact`, `api.UnitType`, `api.CustomField`, `api.Tag` | The register's models |
+| `api.ReadingType`, `api.ReadingRound`, `api.Reading` | Readings |
+| `api.Invoice`, `api.InvoiceLine`, `api.Payment` | Invoicing. Issued invoices and payments never change: only read them |
+| `api.UnitForm`, `api.PersonForm`, `api.UnitContactForm`, `api.ReadingForm` | The forms staff use. Check data from outside with them, so a plugin never stores what the web pages would refuse (custom fields included) |
+| `api.log_view(obj)` | Record in the audit log that the current user opened a unit or person, as its page does |
+
+They load on first use, so `from apps.plugins import api` stays safe at
+import time; use them in `ready()`, views and serializers, not at the top of a
+plugin's `models.py`. Changes made through the models are in the audit log;
+outside a web request, set the actor with `auditlog.context.set_actor`.
 
 ## Events
 
@@ -153,4 +173,4 @@ A panel that raises an error is left out of the page and logged. With
 
 More extension points come with the features they hook into: custom field
 types, backup targets, CSV import and export formats, reading validators,
-invoice line generators, and API routes (phase 6).
+invoice line generators. The REST API is a plugin itself; see [api.md](api.md).

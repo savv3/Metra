@@ -18,10 +18,16 @@ the same API_VERSION; anything else in the app may change.
 
     @receiver(api.events.invoice_issued)
     def on_issue(sender, invoice, **kwargs): ...
+
+Records: Metra's models, forms and helpers a plugin may use, such as
+``api.Unit`` or ``api.PersonForm`` (see RECORDS below). They are loaded on
+first use, so import this module freely; use them once apps are loaded (in
+``ready()``, views, serializers), not at the top of a plugin's models.py.
 """
 
 from collections.abc import Callable
 from dataclasses import dataclass, field
+from importlib import import_module
 
 from django.dispatch import Signal
 
@@ -32,6 +38,49 @@ from .hooks import NAVIGATION, PERSON_PANELS, SETTINGS_LINKS, UNIT_PANELS, WEBHO
 from .roles import grant_to_roles
 
 API_VERSION = 1
+
+# Records: name -> module. A plugin reads and changes Metra's data through
+# these, so it never imports app modules whose layout may change.
+RECORDS = {
+    # The register (apps/register/models.py)
+    "Tag": "apps.register.models",
+    "UnitType": "apps.register.models",
+    "CustomField": "apps.register.models",
+    "Unit": "apps.register.models",
+    "Person": "apps.register.models",
+    "UnitContact": "apps.register.models",
+    # The forms staff use. Validate data from outside through them, so a
+    # plugin cannot store what the web pages would refuse, custom fields
+    # included. UnitForm(data, instance=..., unit_type=...), PersonForm(data,
+    # instance=...), UnitContactForm(data, unit=...), ReadingForm(data,
+    # instance=..., round_=..., unit=...).
+    "UnitForm": "apps.register.forms",
+    "PersonForm": "apps.register.forms",
+    "UnitContactForm": "apps.register.forms",
+    "ReadingForm": "apps.readings.forms",
+    # log_view(obj): record in the audit log that the current user opened a
+    # unit or person, as the detail pages do.
+    "log_view": "apps.register.history",
+    # Readings (apps/readings/models.py)
+    "ReadingType": "apps.readings.models",
+    "ReadingRound": "apps.readings.models",
+    "Reading": "apps.readings.models",
+    # Invoicing (apps/invoicing/models.py). Issued invoices and payments
+    # never change: read them, do not edit them.
+    "Invoice": "apps.invoicing.models",
+    "InvoiceLine": "apps.invoicing.models",
+    "Payment": "apps.invoicing.models",
+}
+
+
+def __getattr__(name):
+    """Load a record (see RECORDS) on first use, avoiding import cycles."""
+    if name in RECORDS:
+        value = getattr(import_module(RECORDS[name]), name)
+        globals()[name] = value
+        return value
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
 
 __all__ = [
     "API_VERSION",
@@ -52,6 +101,7 @@ __all__ = [
     "add_webhook_event",
     "events",
     "grant_to_roles",
+    *RECORDS,
     "normalise_phone",
     "on_webhook_event",
     "record_delivery",

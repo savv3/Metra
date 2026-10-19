@@ -72,6 +72,7 @@ Den övriga dokumentationen finns på engelska:
   meddelanden, nyhetsbrev, fakturering, import och roller
 - [Flera organisationer på en server](docs/multiple-organisations.md)
 - [Tillägg](docs/plugins.md)
+- [REST-API](docs/api.md): tillägget `api`, för andra system med tokens
 - [AGENTS.md](AGENTS.md): regler för den som bidrar med kod
 
 ## Licens

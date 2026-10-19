@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "API clients" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "API clients" %}</h1>
+    <div class="actions">
+      <a class="button" href="{% url 'metra_api:docs' %}">{% translate "Endpoints" %}</a>
+      {% if perms.metra_api.add_apiclient %}<a class="button button--primary" href="{% url 'metra_api:client_create' %}">{% translate "New client" %}</a>{% endif %}
+    </div>
+  </div>
+  <p class="help">{% translate "Each client is another system with its own token. It may do what its role allows, and every change it makes is logged under its name." %}</p>
+  {% if clients %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'API clients' %}">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">{% translate "Client" %}</th>
+            <th scope="col">{% translate "Role" %}</th>
+            <th scope="col">{% translate "Token" %}</th>
+            <th scope="col">{% translate "Last used" %}</th>
+            <th scope="col">{% translate "Expires" %}</th>
+            <th scope="col">{% translate "Status" %}</th>
+            {% if perms.metra_api.change_apiclient %}<th scope="col"><span class="visually-hidden">{% translate "Actions" %}</span></th>{% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for client in clients %}
+            <tr>
+              <th scope="row">{{ client.name }}
+                {% if client.description %}<span class="help">{{ client.description }}</span>{% endif %}
+                <span class="help">{% blocktranslate with user=client.user.get_username created=client.created_at|date:"SHORT_DATE_FORMAT" by=client.created_by|default:"–" trimmed %}
+                  Acts as {{ user }}. Created {{ created }} by {{ by }}.
+                {% endblocktranslate %}</span>
+              </th>
+              <td>{{ client.get_role_display }}{% if client.read_only %}<span class="help">{% translate "Read only" %}</span>{% endif %}</td>
+              <td><code>{{ client.token_prefix }}…</code></td>
+              <td>{{ client.last_used_at|date:"SHORT_DATETIME_FORMAT"|default:"–" }}</td>
+              <td>{{ client.expires_at|date:"SHORT_DATETIME_FORMAT"|default:"–" }}</td>
+              <td>
+                {% if client.is_revoked %}<span class="pill pill--bad">{% translate "Revoked" %}</span>
+                {% elif client.is_expired %}<span class="pill pill--warn">{% translate "Expired" %}</span>
+                {% else %}<span class="pill pill--ok">{% translate "Active" %}</span>{% endif %}
+              </td>
+              {% if perms.metra_api.change_apiclient %}
+                <td>
+                  {% if not client.is_revoked %}
+                    <div class="actions">
+                      <form method="post" action="{% url 'metra_api:client_rotate' client.pk %}">
+                        {% csrf_token %}
+                        <button type="submit" class="button">{% translate "New token" %}</button>
+                      </form>
+                      <form method="post" action="{% url 'metra_api:client_revoke' client.pk %}">
+                        {% csrf_token %}
+                        <button type="submit" class="button button--danger">{% translate "Revoke" %}</button>
+                      </form>
+                    </div>
+                  {% endif %}
+                </td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "No API clients yet." %}</p>
+  {% endif %}
+{% endblock %}
