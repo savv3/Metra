@@ -75,3 +75,13 @@ def test_settings_from_before_the_rename_still_work(tmp_path):
     # The new name wins when an install sets both.
     both = {"METRA_REQUIRE_MFA": "true", "SCR_REQUIRE_MFA": "false"}
     assert _require_mfa(tmp_path, METRA_SECRET_KEY=key, **both) == "True"
+
+
+def test_old_setting_names_are_copied_and_reported():
+    from config.settings import adopt_legacy_names
+
+    environ = {"SCR_DOMAIN": "old.example", "SCR_DEBUG": "true", "METRA_DEBUG": "false"}
+
+    assert adopt_legacy_names(environ) == ["SCR_DEBUG", "SCR_DOMAIN"]
+    assert environ["METRA_DOMAIN"] == "old.example"
+    assert environ["METRA_DEBUG"] == "false"  # the METRA_ name wins

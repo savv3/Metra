@@ -215,3 +215,24 @@ def test_grant_to_roles_gives_and_takes_permissions(db):
 
     operation.reverse_code(global_apps, None)
     assert change_unit not in readonly.permissions.all()
+
+
+def test_old_names_from_before_the_rename_get_a_warning(settings, monkeypatch):
+    from django.core.checks import run_checks
+
+    import config.plugins
+
+    settings.LEGACY_SETTING_NAMES = ["SCR_DOMAIN"]
+    monkeypatch.setattr(config.plugins, "legacy_plugins", lambda: ["old"])
+
+    ids = [message.id for message in run_checks()]
+
+    assert "core.W001" in ids and "plugins.W003" in ids
+
+
+def test_no_warning_without_old_names(settings):
+    from django.core.checks import run_checks
+
+    settings.LEGACY_SETTING_NAMES = []
+
+    assert "core.W001" not in [message.id for message in run_checks()]

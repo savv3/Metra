@@ -24,6 +24,11 @@ LEGACY_GROUP = "scr.plugins"
 BUNDLED = ("46elks",)
 
 
+def legacy_plugins():
+    """Names of installed plugins that still declare the pre-Metra group."""
+    return sorted(entry_point.name for entry_point in entry_points(group=LEGACY_GROUP))
+
+
 def available():
     """{name: entry point} for every installed plugin."""
     found = {entry_point.name: entry_point for entry_point in entry_points(group=LEGACY_GROUP)}

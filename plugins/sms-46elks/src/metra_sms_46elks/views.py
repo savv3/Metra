@@ -5,7 +5,7 @@ from django.views.decorators.http import require_POST
 
 from apps.plugins import api
 
-from .providers import FortySixElks, callback_secret
+from .providers import FortySixElks, accepted_secrets
 
 
 @csrf_exempt
@@ -13,7 +13,7 @@ from .providers import FortySixElks, callback_secret
 def delivery(request, secret):
     """46elks reports here whether an SMS was delivered (the "whendelivered" URL).
     No login: the secret in the address is the check."""
-    if not constant_time_compare(secret, callback_secret()):
+    if not any(constant_time_compare(secret, known) for known in accepted_secrets()):
         raise Http404
     status = request.POST.get("status", "")
     if status in ("delivered", "failed"):

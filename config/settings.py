@@ -23,13 +23,17 @@ with open(BASE_DIR / "pyproject.toml", "rb") as pyproject:
 
 
 def adopt_legacy_names(environ=os.environ):
-    """Copy each ``SCR_X`` to ``METRA_X`` unless ``METRA_X`` is already set."""
+    """Copy each ``SCR_X`` to ``METRA_X`` unless ``METRA_X`` is already set.
+    Returns the old names found, which ``manage.py check`` warns about."""
+    found = []
     for key, value in list(environ.items()):
         if key.startswith("SCR_"):
             environ.setdefault("METRA_" + key.removeprefix("SCR_"), value)
+            found.append(key)
+    return sorted(found)
 
 
-adopt_legacy_names()
+LEGACY_SETTING_NAMES = adopt_legacy_names()
 
 
 def env_bool(name, default=False):

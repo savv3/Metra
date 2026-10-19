@@ -10,8 +10,8 @@ each can be backed up, upgraded, restored or removed on its own.
 
 Docker Compose and podman-compose name every container and volume after the
 *project*, which is `COMPOSE_PROJECT_NAME` from `.env`, or else the folder
-name. An install in `~/scr/vatten` therefore runs `vatten-web-1` and
-`vatten-worker-1` on the volume `vatten_data`, and one in `~/scr/golf` uses
+name. An install in `~/metra/vatten` therefore runs `vatten-web-1` and
+`vatten-worker-1` on the volume `vatten_data`, and one in `~/metra/golf` uses
 `golf_data`. All of an install's data is in that one volume (`/data`).
 
 The only thing two installs would fight over is the host port, so each one
@@ -23,16 +23,16 @@ publishes its web container on its own port on `127.0.0.1`, and the tunnel
 This assumes the setup in the offline Fedora server guide: Podman,
 podman-compose, the image loaded with `podman load`, and a Cloudflare
 Tunnel in front. Copy `docker/new-instance.sh` to the server once, next to
-`compose.yaml` and `.env.example` (for example in `~/scr/`), then for each
+`compose.yaml` and `.env.example` (for example in `~/metra/`), then for each
 organisation:
 
 ```sh
-cd ~/scr
+cd ~/metra
 ./new-instance.sh vatten register.vattenlag.ax 8001
 ```
 
 The arguments are a short name (lower-case letters, digits, `-` or `_`), the
-public host name and a free port. The script creates `~/scr/vatten/` with:
+public host name and a free port. The script creates `~/metra/vatten/` with:
 
 - `compose.yaml`, a copy of the shared one;
 - `.env`, from `.env.example`, with `COMPOSE_PROJECT_NAME`, the host name,
@@ -44,7 +44,7 @@ It refuses a name whose folder already exists and a port another install in
 the same parent folder already uses. Then:
 
 ```sh
-cd ~/scr/vatten
+cd ~/metra/vatten
 # edit .env: email, SMS, backups, time zone
 podman-compose up -d web worker
 podman-compose exec web python manage.py createsuperuser
@@ -90,7 +90,7 @@ All installs run `metra:latest` unless told otherwise. After
 Upgrade them all at once:
 
 ```sh
-for d in ~/scr/*/; do (cd "$d" && podman-compose up -d web worker); done
+for d in ~/metra/*/; do (cd "$d" && podman-compose up -d web worker); done
 ```
 
 To upgrade one organisation first, tag the new image with its release
@@ -99,7 +99,7 @@ install's `.env`:
 
 ```sh
 podman tag metra:latest metra:0.2.0
-# in ~/scr/vatten/.env: METRA_IMAGE=metra:0.2.0
+# in ~/metra/vatten/.env: METRA_IMAGE=metra:0.2.0
 ```
 
 When the shared `compose.yaml` changes, copy it into each install folder
@@ -121,6 +121,6 @@ affected.
 
 ## An existing single install
 
-An install made before this, such as one in `~/scr/` itself, keeps working
-as it is (project `scr`, volume `scr_data`, port 8000). New installs can sit
+An install made before this, such as one in `~/metra/` itself, keeps working
+as it is (project `metra`, volume `metra_data`, port 8000). New installs can sit
 next to it in subfolders, as long as they use other ports.
