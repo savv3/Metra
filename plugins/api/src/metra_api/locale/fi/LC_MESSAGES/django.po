@@ -1,0 +1,377 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-18 23:43+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps.py:7
+msgid "API"
+msgstr "API"
+
+#: apps.py:19 models.py:78 templates/metra_api/client_list.html:3
+#: templates/metra_api/client_list.html:6
+#: templates/metra_api/client_list.html:14 templates/metra_api/docs.html:9
+msgid "API clients"
+msgstr "API-asiakkaat"
+
+#: apps.py:22
+msgid "Tokens for other systems that read or change the register."
+msgstr "Tunnisteet muille järjestelmille, jotka lukevat tai muuttavat rekisteriä."
+"Tunnisteet muille järjestelmille, jotka lukevat tai muuttavat rekisteriä."
+
+#: auth.py:28
+msgid "Give the token after Bearer, without spaces."
+msgstr "Anna tunniste Bearer-sanan jälkeen ilman välilyöntejä."
+
+#: auth.py:32 auth.py:41
+msgid "The token is not valid."
+msgstr "Tunniste ei ole kelvollinen."
+
+#: auth.py:43
+msgid "The token has been revoked or has expired."
+msgstr "Tunniste on peruttu tai vanhentunut."
+
+#: forms.py:33
+msgid "Expires after"
+msgstr "Voimassa asti"
+
+#: forms.py:36
+msgid "Optional. The token stops working when this day is over."
+msgstr "Valinnainen. Tunniste lakkaa toimimasta, kun tämä päivä päättyy."
+
+#: forms.py:45
+msgid ""
+"The client may do what a user with this role may. Choose the narrowest role "
+"that does the job."
+msgstr "Asiakas saa tehdä sen, mitä tämän roolin käyttäjä saa. Valitse suppein rooli, joka riittää."
+
+#: forms.py:57
+msgid "Choose today or a later day."
+msgstr "Valitse tämä päivä tai myöhempi päivä."
+
+#: models.py:25
+msgid "Admin"
+msgstr "Ylläpitäjä"
+
+#: models.py:26
+msgid "Board"
+msgstr "Hallitus"
+
+#: models.py:27
+msgid "Treasurer"
+msgstr "Rahastonhoitaja"
+
+#: models.py:28
+msgid "Read-only"
+msgstr "Vain luku"
+
+#: models.py:43
+msgid "name"
+msgstr "nimi"
+
+#: models.py:45
+msgid "description"
+msgstr "kuvaus"
+
+#: models.py:45
+msgid "What the client is and who runs it."
+msgstr "Mikä asiakas on ja kuka sitä ylläpitää."
+
+#: models.py:49
+msgid "user"
+msgstr "käyttäjä"
+
+#: models.py:54
+msgid "role"
+msgstr "rooli"
+
+#: models.py:56 templates/metra_api/client_token.html:17
+msgid "read only"
+msgstr "vain luku"
+
+#: models.py:58
+msgid "Refuse every change, whatever the role allows."
+msgstr "Estä kaikki muutokset riippumatta siitä, mitä rooli sallii."
+
+#: models.py:61
+msgid "token starts with"
+msgstr "tunnisteen alku"
+
+#: models.py:64
+msgid "created by"
+msgstr "luonut"
+
+#: models.py:70
+msgid "created"
+msgstr "luotu"
+
+#: models.py:71
+msgid "last used"
+msgstr "viimeksi käytetty"
+
+#: models.py:72
+msgid "expires"
+msgstr "vanhenee"
+
+#: models.py:73
+msgid "revoked"
+msgstr "peruttu"
+
+#: models.py:77
+msgid "API client"
+msgstr "API-asiakas"
+
+#: serializers.py:52
+msgid "There is no such field."
+msgstr "Tällaista kenttää ei ole."
+
+#: serializers.py:57
+msgid "Give a single value."
+msgstr "Anna yksi arvo."
+
+#: serializers.py:153
+msgid "A unit's type cannot change."
+msgstr "Yksikön tyyppiä ei voi muuttaa."
+
+#: serializers.py:157 serializers.py:245
+msgid "This field is required."
+msgstr "Tämä kenttä vaaditaan."
+
+#: serializers.py:239
+msgid "A reading cannot move; enter a new one instead."
+msgstr "Lukemaa ei voi siirtää; syötä sen sijaan uusi."
+
+#: serializers.py:253
+msgid "This round is not read from units of this type."
+msgstr "Tätä kierrosta ei lueta tämän tyyppisiltä yksiköiltä."
+
+#: serializers.py:257
+msgid "This unit already has a reading in this round; change it."
+msgstr "Yksiköllä on jo lukema tällä kierroksella; muuta sitä."
+
+#: templates/metra_api/client_form.html:3
+#: templates/metra_api/client_form.html:5
+msgid "New API client"
+msgstr "Uusi API-asiakas"
+
+#: templates/metra_api/client_form.html:28
+msgid "Create client"
+msgstr "Luo asiakas"
+
+#: templates/metra_api/client_form.html:29
+msgid "Cancel"
+msgstr "Peruuta"
+
+#: templates/metra_api/client_list.html:8
+#: templates/metra_api/client_token.html:23
+msgid "Endpoints"
+msgstr "Rajapinnan osoitteet"
+
+#: templates/metra_api/client_list.html:9
+msgid "New client"
+msgstr "Uusi asiakas"
+
+#: templates/metra_api/client_list.html:12
+msgid ""
+"Each client is another system with its own token. It may do what its role "
+"allows, and every change it makes is logged under its name."
+msgstr "Jokainen asiakas on toinen järjestelmä, jolla on oma tunniste. Se saa tehdä sen, mitä sen rooli sallii, ja jokainen sen tekemä muutos kirjataan sen nimellä."
+"Jokainen asiakas on toinen järjestelmä, jolla on oma tunniste. Se saa tehdä "
+"sen, mitä sen rooli sallii, ja jokainen sen tekemä muutos kirjataan sen "
+"nimellä."
+
+#: templates/metra_api/client_list.html:18
+msgid "Client"
+msgstr "Asiakas"
+
+#: templates/metra_api/client_list.html:19
+#: templates/metra_api/client_token.html:16
+msgid "Role"
+msgstr "Rooli"
+
+#: templates/metra_api/client_list.html:20
+#: templates/metra_api/client_token.html:12
+msgid "Token"
+msgstr "Tunniste"
+
+#: templates/metra_api/client_list.html:21
+msgid "Last used"
+msgstr "Viimeksi käytetty"
+
+#: templates/metra_api/client_list.html:22
+msgid "Expires"
+msgstr "Vanhenee"
+
+#: templates/metra_api/client_list.html:23
+msgid "Status"
+msgstr "Tila"
+
+#: templates/metra_api/client_list.html:24
+msgid "Actions"
+msgstr "Toiminnot"
+
+#: templates/metra_api/client_list.html:32
+#, python-format
+msgid "Acts as %(user)s. Created %(created)s by %(by)s."
+msgstr "Toimii käyttäjänä %(user)s. Luotu %(created)s, luonut %(by)s."
+
+#: templates/metra_api/client_list.html:36
+msgid "Read only"
+msgstr "Vain luku"
+
+#: templates/metra_api/client_list.html:41
+msgid "Revoked"
+msgstr "Peruttu"
+
+#: templates/metra_api/client_list.html:42
+msgid "Expired"
+msgstr "Vanhentunut"
+
+#: templates/metra_api/client_list.html:43
+msgid "Active"
+msgstr "Aktiivinen"
+
+#: templates/metra_api/client_list.html:51
+msgid "New token"
+msgstr "Uusi tunniste"
+
+#: templates/metra_api/client_list.html:55
+msgid "Revoke"
+msgstr "Peru"
+
+#: templates/metra_api/client_list.html:67
+msgid "No API clients yet."
+msgstr "API-asiakkaita ei vielä ole."
+
+#: templates/metra_api/client_token.html:3
+#: templates/metra_api/client_token.html:6
+#, python-format
+msgid "Token for %(name)s"
+msgstr "Tunniste: %(name)s"
+
+#: templates/metra_api/client_token.html:9
+msgid "Copy the token now"
+msgstr "Kopioi tunniste nyt"
+
+#: templates/metra_api/client_token.html:10
+msgid ""
+"This is the only time the token is shown. Metra keeps only a fingerprint of "
+"it. If it is lost, make a new one."
+msgstr "Tunniste näytetään vain tämän kerran. Metra tallentaa siitä vain sormenjäljen. Jos se katoaa, luo uusi."
+"Tunniste näytetään vain tämän kerran. Metra tallentaa siitä vain "
+"sormenjäljen. Jos se katoaa, luo uusi."
+
+#: templates/metra_api/client_token.html:14
+msgid "Header"
+msgstr "Otsake"
+
+#: templates/metra_api/client_token.html:19
+msgid ""
+"Store it in the other system's settings or a password manager, never in "
+"email or chat."
+msgstr "Tallenna se toisen järjestelmän asetuksiin tai salasanojen hallintaan, ei koskaan sähköpostiin tai chattiin."
+"Tallenna se toisen järjestelmän asetuksiin tai salasanojen hallintaan, ei "
+"koskaan sähköpostiin tai chattiin."
+
+#: templates/metra_api/client_token.html:22
+msgid "Done"
+msgstr "Valmis"
+
+#: templates/metra_api/docs.html:3 templates/metra_api/docs.html:6
+#: templates/metra_api/docs.html:23
+msgid "API endpoints"
+msgstr "API-osoitteet"
+
+#: templates/metra_api/docs.html:8
+msgid "OpenAPI schema (JSON)"
+msgstr "OpenAPI-skeema (JSON)"
+
+#: templates/metra_api/docs.html:13
+msgid "How to call the API"
+msgstr "Näin kutsut rajapintaa"
+
+#: templates/metra_api/docs.html:14
+msgid ""
+"Send the client's token in every request as <code>Authorization: Bearer "
+"&lt;token&gt;</code>. Requests and answers are JSON. Lists come in pages: "
+"<code>?page=2&amp;page_size=100</code> (at most 200)."
+msgstr "Lähetä asiakkaan tunniste jokaisessa pyynnössä muodossa <code>Authorization: Bearer &lt;token&gt;</code>. Pyynnöt ja vastaukset ovat JSONia. Luettelot tulevat sivuina: <code>?page=2&amp;page_size=100</code> (enintään 200)."
+"Lähetä asiakkaan tunniste jokaisessa pyynnössä muodossa <code>Authorization: "
+"Bearer &lt;token&gt;</code>. Pyynnöt ja vastaukset ovat JSONia. Luettelot "
+"tulevat sivuina: <code>?page=2&amp;page_size=100</code> (enintään 200)."
+
+#: templates/metra_api/docs.html:18
+msgid ""
+"Units and people are never deleted: DELETE archives them. Custom fields are "
+"in <code>custom_fields</code>, keyed by the field's key, and are checked as "
+"on the web pages."
+msgstr "Yksiköitä ja henkilöitä ei koskaan poisteta: DELETE arkistoi ne. Omat kentät ovat kohdassa <code>custom_fields</code> kentän avaimella, ja ne tarkistetaan kuten verkkosivuilla."
+"Yksiköitä ja henkilöitä ei koskaan poisteta: DELETE arkistoi ne. Omat kentät "
+"ovat kohdassa <code>custom_fields</code> kentän avaimella, ja ne "
+"tarkistetaan kuten verkkosivuilla."
+
+#: templates/metra_api/docs.html:27
+msgid "Path"
+msgstr "Polku"
+
+#: templates/metra_api/docs.html:28
+msgid "Methods"
+msgstr "Metodit"
+
+#: templates/metra_api/docs.html:29
+msgid "What it is"
+msgstr "Mikä se on"
+
+#: views.py:65
+#, python-format
+msgid "Revoked %(name)s. Its token no longer works."
+msgstr "%(name)s on peruttu. Sen tunniste ei enää toimi."
+
+#: views.py:72
+msgid "Units: list, read, add, change; DELETE archives."
+msgstr "Yksiköt: luettelo, luku, lisäys, muutos; DELETE arkistoi."
+
+#: views.py:73
+msgid "People: list, read, add, change; DELETE archives."
+msgstr "Henkilöt: luettelo, luku, lisäys, muutos; DELETE arkistoi."
+
+#: views.py:74
+msgid "Who is linked to which unit, and in what role."
+msgstr "Kuka on liitetty mihinkin yksikköön ja missä roolissa."
+
+#: views.py:75
+msgid "Unit types and their custom fields. Read only."
+msgstr "Yksikkötyypit ja niiden omat kentät. Vain luku."
+
+#: views.py:76
+msgid "The custom fields people have. Read only."
+msgstr "Henkilöiden omat kentät. Vain luku."
+
+#: views.py:77
+msgid "Reading rounds. Read only."
+msgstr "Lukemakierrokset. Vain luku."
+
+#: views.py:78
+msgid "Readings: list, read, enter and correct."
+msgstr "Lukemat: luettelo, luku, syöttö ja korjaus."
+
+#: views.py:79
+msgid "Invoices and credit notes, with their lines. Read only."
+msgstr "Laskut ja hyvityslaskut riveineen. Vain luku."
+
+#: views.py:80
+msgid "Payments recorded on invoices. Read only."
+msgstr "Laskuille kirjatut maksut. Vain luku."

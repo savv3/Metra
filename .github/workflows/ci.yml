@@ -18,7 +18,8 @@ jobs:
       - run: uv run ruff check .
       - run: uv run ruff format --check .
       - run: uv run python manage.py compilemessages --ignore=.venv
-      - run: uv run python manage.py makemigrations --check --dry-run
+      # With the test settings, so plugins that are off by default are checked too.
+      - run: uv run python manage.py makemigrations --check --dry-run --settings=config.test_settings
       - run: uv run pytest
 
   docker:

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "API endpoints" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "API endpoints" %}</h1>
+    <div class="actions">
+      <a class="button" href="{% url 'metra_api:schema' %}">{% translate "OpenAPI schema (JSON)" %}</a>
+      <a class="button" href="{% url 'metra_api:client_list' %}">{% translate "API clients" %}</a>
+    </div>
+  </div>
+  <section class="card" aria-labelledby="api-use">
+    <h2 id="api-use">{% translate "How to call the API" %}</h2>
+    <p>{% blocktranslate trimmed %}
+      Send the client's token in every request as <code>Authorization: Bearer &lt;token&gt;</code>.
+      Requests and answers are JSON. Lists come in pages: <code>?page=2&amp;page_size=100</code> (at most 200).
+    {% endblocktranslate %}</p>
+    <p>{% blocktranslate trimmed %}
+      Units and people are never deleted: DELETE archives them. Custom fields are in
+      <code>custom_fields</code>, keyed by the field's key, and are checked as on the web pages.
+    {% endblocktranslate %}</p>
+  </section>
+  <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'API endpoints' %}">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">{% translate "Path" %}</th>
+          <th scope="col">{% translate "Methods" %}</th>
+          <th scope="col">{% translate "What it is" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for endpoint in endpoints %}
+          <tr>
+            <th scope="row"><code>{{ endpoint.path }}</code></th>
+            <td>{{ endpoint.methods|join:", " }}</td>
+            <td>{{ endpoint.description }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
