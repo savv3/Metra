@@ -1,3 +1,4 @@
+import pytest
 from django.core import mail
 from django.urls import reverse
 
@@ -235,3 +236,62 @@ def test_notice_option_needs_the_permission(client, make_user):
     form = client.get(URL).context["form"]
 
     assert "notice" not in form.fields
+
+
+def test_email_only_needs_no_sms_text(admin_client, make_household):
+    make_household("A", first_name="Anna", phone="0401234567", email="a@example.com")
+
+    response = compose(
+        admin_client, step="confirm", channels="email", body="", email_body="Hej {first_name}!"
+    )
+
+    batch = MessageBatch.objects.get()
+    assert response.url == batch.get_absolute_url()
+    assert [m.body for m in mail.outbox] == ["Hej Anna!"]
+    assert providers.outbox == []
+    assert "Hej {first_name}!" in str(batch)
+
+
+def test_email_only_shows_the_email_text_in_the_preview(admin_client, make_household):
+    make_household("A", first_name="Anna", email="a@example.com")
+
+    page = compose(admin_client, channels="email", body="", email_body="Hej {first_name}!")
+
+    assert "Hej Anna!" in page.content.decode()
+
+
+def test_sms_only_needs_no_email_fields(admin_client, make_household):
+    make_household("A", first_name="Anna", phone="0401234567", email="a@example.com")
+
+    compose(admin_client, step="confirm", channels="sms", subject="", email_body="")
+
+    assert len(providers.outbox) == 1
+    assert mail.outbox == []
+
+
+@pytest.mark.parametrize(
+    "channels, missing, field",
+    [
+        ("email", {"body": "", "email_body": ""}, "email_body"),
+        ("sms", {"body": ""}, "body"),
+        ("sms_or_email", {"body": ""}, "body"),
+        ("sms_and_email", {"body": ""}, "body"),
+    ],
+)
+def test_the_chosen_channels_text_is_needed(admin_client, make_household, channels, missing, field):
+    make_household("A", first_name="Anna", phone="0401234567", email="a@example.com")
+
+    response = compose(admin_client, step="confirm", channels=channels, **missing)
+
+    assert response.status_code == 200
+    assert response.context["form"].errors[field]
+    assert not MessageBatch.objects.exists()
+
+
+def test_the_form_shows_only_the_chosen_channels_fields(admin_client):
+    page = admin_client.get(URL + "?urgent=1").content.decode()
+    assert 'data-channels="sms sms_or_email sms_and_email">' in page  # both shown
+
+    page = compose(admin_client, channels="email", body="", email_body="").content.decode()
+    assert 'data-channels="sms sms_or_email sms_and_email" hidden>' in page
+    assert 'data-channels="email sms_or_email sms_and_email">' in page

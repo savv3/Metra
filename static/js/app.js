@@ -38,3 +38,19 @@ document.querySelectorAll("select[name=scope]").forEach((select) => {
   select.addEventListener("change", show);
   show();
 });
+
+// Message form: show the SMS text and the email fields only for the channels
+// that use them.
+document.querySelectorAll("form").forEach((form) => {
+  const radios = form.querySelectorAll("input[type=radio][name=channels]");
+  if (!radios.length) return;
+  const show = () => {
+    const chosen = form.querySelector("input[name=channels]:checked");
+    if (!chosen) return;
+    form.querySelectorAll("[data-channels]").forEach((part) => {
+      part.hidden = !part.dataset.channels.split(" ").includes(chosen.value);
+    });
+  };
+  radios.forEach((radio) => radio.addEventListener("change", show));
+  show();
+});

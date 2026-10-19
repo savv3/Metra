@@ -117,9 +117,12 @@ class MessageForm(AttachmentsMixin, forms.Form):
         initial=MessageBatch.Channels.SMS_OR_EMAIL,
         widget=forms.RadioSelect,
     )
+    # The SMS text, and the email's text too unless email_body is given.
+    # Which texts are needed depends on the channels; see clean().
     body = forms.CharField(
         label=_("Message"),
         max_length=1600,
+        required=False,
         widget=forms.Textarea(attrs={"rows": 4}),
         help_text=PLACEHOLDER_HELP,
     )
@@ -133,7 +136,10 @@ class MessageForm(AttachmentsMixin, forms.Form):
         label=_("Longer text for email"),
         required=False,
         widget=forms.Textarea(attrs={"rows": 6}),
-        help_text=_("Optional. Without it, the email has the same text as the SMS."),
+        help_text=_(
+            "Needed when the message goes by email only. Otherwise optional: without it, "
+            "the email has the same text as the SMS."
+        ),
     )
 
     notice = forms.BooleanField(
@@ -187,10 +193,17 @@ class MessageForm(AttachmentsMixin, forms.Form):
             self.add_error("tag", _("Choose a tag."))
         if scope == broadcast.UNIT_TYPE and not cleaned.get("unit_type"):
             self.add_error("unit_type", _("Choose a unit type."))
-        if cleaned.get("channels") != MessageBatch.Channels.SMS and not cleaned.get("subject"):
+        channels = cleaned.get("channels")
+        if channels != MessageBatch.Channels.SMS and not cleaned.get("subject"):
             self.add_error("subject", _("Add a subject for the email."))
+        if channels and channels != MessageBatch.Channels.EMAIL and not cleaned.get("body"):
+            self.add_error("body", _("Write the message."))
+        if channels == MessageBatch.Channels.EMAIL and not (
+            cleaned.get("email_body") or cleaned.get("body")
+        ):
+            self.add_error("email_body", _("Write the text of the email."))
         if cleaned.get("notice") and not cleaned.get("notice_text"):
-            body = cleaned.get("body", "")
+            body = cleaned.get("body") or cleaned.get("email_body", "")
             text = MessageTemplate.fill(body, organisation_placeholders())
             if PLACEHOLDER.search(text):
                 # {first_name} and the like have no value on a public page.
@@ -198,6 +211,14 @@ class MessageForm(AttachmentsMixin, forms.Form):
             else:
                 cleaned["notice_text"] = text
         return cleaned
+
+    def main_text(self):
+        """The text recipients read: the SMS text, or the email's text when
+        the message goes by email only."""
+        data = self.cleaned_data
+        if data["channels"] == MessageBatch.Channels.EMAIL:
+            return data["email_body"] or data["body"]
+        return data["body"]
 
     def units(self):
         if self.unit is not None:

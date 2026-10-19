@@ -14,6 +14,9 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Fixed
 
+- New message and Message to one unit no longer ask for an SMS text when the
+  message goes by email only: the form shows only the texts the chosen
+  channels need, and checks only those.
 - `scripts/deploy.sh` logs in to the server once and reuses that SSH
   connection, so a firewall's intrusion prevention no longer mistakes a
   deploy for an SSH scan and blocks the laptop.

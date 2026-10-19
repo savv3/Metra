@@ -118,8 +118,8 @@ class MessageBatch(models.Model):
         label = self.get_kind_display()
         if self.round_id:
             return f"{label}: {self.round}"
-        if self.is_written and self.body:
-            return f"{label}: {Truncator(self.body).chars(40)}"
+        if self.is_written and (self.body or self.email_body):
+            return f"{label}: {Truncator(self.body or self.email_body).chars(40)}"
         return label
 
     def get_absolute_url(self):

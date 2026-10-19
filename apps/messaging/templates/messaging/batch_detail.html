@@ -7,7 +7,7 @@
     <dl class="details-list">
       <dt>{% translate "To" %}</dt><dd>{{ batch.audience }}</dd>
       <dt>{% translate "Send by" %}</dt><dd>{{ batch.get_channels_display }}</dd>
-      <dt>{% translate "Message" %}</dt><dd>{{ batch.body|linebreaksbr }}</dd>
+      <dt>{% translate "Message" %}</dt><dd>{{ batch.body|default:batch.email_body|linebreaksbr }}</dd>
       {% if batch.subject %}<dt>{% translate "Email subject" %}</dt><dd>{{ batch.subject }}</dd>{% endif %}
       {% with files=batch.attachments.all %}{% if files %}
         <dt>{% translate "Attached files" %}</dt>
