@@ -91,12 +91,15 @@ folder, as members of a uv workspace: `uv sync` installs them all for
 development, and CI runs their tests with the app's. The official ones are
 listed in `BUNDLED` in `config/plugins.py`, installed in the Docker image and
 on by default; `METRA_PLUGINS_DISABLED` turns one off. The example plugin is
-installed only for development and tests.
+installed only for development and tests. The [webhooks plugin](webhooks.md)
+is official but off by default: it is installed in the Docker image, and
+`METRA_PLUGINS=webhooks` turns it on.
 
 | Plugin | Name | What it does |
 | --- | --- | --- |
 | [metra-sms-46elks](../plugins/sms-46elks) | `46elks` | SMS through 46elks, with delivery reports. Bundled, on by default |
 | [metra-api](../plugins/api) | `api` | The REST API ([docs](api.md)). Off until `METRA_PLUGINS=api` |
+| [metra-webhooks](../plugins/webhooks) | `webhooks` | Signed webhooks to outside systems ([docs](webhooks.md)). Off until `METRA_PLUGINS=webhooks` |
 
 So that each can later move to its own repository, a plugin in plugins/:
 
@@ -119,6 +122,7 @@ So that each can later move to its own repository, a plugin in plugins/:
 | Person panels | `api.add_person_panel(Panel(...))` | The same, on person pages |
 | SMS and email providers | `api.add_messaging_provider(ProviderClass)` | An `api.Provider` subclass with `channel` (`api.SMS` or `api.EMAIL`), `name` and `send()`. Chosen with `METRA_SMS_PROVIDER=<name>`, or automatically when `is_configured()` returns true. `api.sms_sender()`, `api.sms_country_code()`, `api.normalise_phone()` and `api.record_delivery()` help SMS providers |
 | Settings links | `api.add_settings_link(SettingsLink(label, url_name, permission, description))` | A link on the Settings page to the plugin's own settings or tools |
+| Webhook events | `api.add_webhook_event(WebhookEvent(name, label, signal, payload))` | An event that webhook endpoints can subscribe to. `signal` is a Django signal sent after commit; `payload(**signal_kwargs)` returns a dict of ids and non-personal facts (never names, emails, phones or addresses). Works whether or not the webhooks plugin is enabled, and whichever plugin loads first. A plugin that sends webhooks reads them with `api.webhook_events()` and `api.on_webhook_event(listener)` |
 
 ## Records
 
@@ -169,5 +173,4 @@ A panel that raises an error is left out of the page and logged. With
 
 More extension points come with the features they hook into: custom field
 types, backup targets, CSV import and export formats, reading validators,
-invoice line generators, and webhook events (phase 6). The REST API is a
-plugin itself; see [api.md](api.md).
+invoice line generators. The REST API is a plugin itself; see [api.md](api.md).

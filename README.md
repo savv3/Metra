@@ -68,6 +68,7 @@ docker compose up -d --build
 - [Several organisations on one server](docs/multiple-organisations.md)
 - [Plugins](docs/plugins.md)
 - [REST API](docs/api.md): the `api` plugin, for other systems with tokens
+- [Webhooks](docs/webhooks.md): tell outside systems when something changes
 - [AGENTS.md](AGENTS.md): conventions for contributors
 
 ## Licence

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if endpoint %}{% translate "Edit endpoint" %}{% else %}{% translate "Add an endpoint" %}{% endif %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% if endpoint %}{% translate "Edit endpoint" %}{% else %}{% translate "Add an endpoint" %}{% endif %}</h1>
+  </div>
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% include "register/_field.html" with field=form.url %}
+    {% include "register/_field.html" with field=form.description %}
+    {% include "register/_field.html" with field=form.events %}
+    {% include "register/_field.html" with field=form.active %}
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+      <a class="button" href="{% url 'metra_webhooks:endpoint_list' %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+
+  {% if endpoint %}
+    <section class="card" aria-labelledby="webhook-secret">
+      <h2 id="webhook-secret">{% translate "Secret" %}</h2>
+      <p class="help">{% translate "The receiver uses this to check that a request came from Metra. Keep it private." %}</p>
+      <p><code>{{ endpoint.secret }}</code></p>
+      <form method="post" action="{% url 'metra_webhooks:endpoint_rotate' endpoint.pk %}" class="inline-form">
+        {% csrf_token %}
+        <button type="submit" class="button">{% translate "Make a new secret" %}</button>
+      </form>
+    </section>
+    <section class="card" aria-labelledby="webhook-more">
+      <h2 id="webhook-more">{% translate "Deliveries" %}</h2>
+      <div class="actions">
+        <a class="button" href="{% url 'metra_webhooks:delivery_list' endpoint.pk %}">{% translate "Show deliveries" %}</a>
+        <form method="post" action="{% url 'metra_webhooks:endpoint_test' endpoint.pk %}" class="inline-form">
+          {% csrf_token %}
+          <button type="submit" class="button">{% translate "Send a test event" %}</button>
+        </form>
+        {% if perms.metra_webhooks.delete_webhookendpoint %}
+          <a class="button button--danger" href="{% url 'metra_webhooks:endpoint_delete' endpoint.pk %}">{% translate "Delete" %}</a>
+        {% endif %}
+      </div>
+    </section>
+  {% endif %}
+{% endblock %}

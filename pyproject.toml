@@ -16,6 +16,7 @@ dependencies = [
     # are on by default (config.plugins.BUNDLED); the rest need METRA_PLUGINS.
     "metra-api",
     "metra-sms-46elks",
+    "metra-webhooks",
 ]
 
 [dependency-groups]
@@ -36,6 +37,7 @@ members = ["plugins/*"]
 metra-example-plugin = { workspace = true }
 metra-api = { workspace = true }
 metra-sms-46elks = { workspace = true }
+metra-webhooks = { workspace = true }
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.test_settings"

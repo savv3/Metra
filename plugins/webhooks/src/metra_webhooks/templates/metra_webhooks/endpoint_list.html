@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Webhooks" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Webhooks" %}</h1>
+    {% if perms.metra_webhooks.add_webhookendpoint %}
+      <a class="button button--primary" href="{% url 'metra_webhooks:endpoint_create' %}">{% translate "Add an endpoint" %}</a>
+    {% endif %}
+  </div>
+  <p class="help">{% translate "An endpoint is an address that Metra tells when something changes. Only ids are sent, never names or contact details." %}</p>
+  {% if endpoints %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Endpoints' %}">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">{% translate "Endpoint" %}</th>
+            <th scope="col">{% translate "Events" %}</th>
+            <th scope="col">{% translate "Status" %}</th>
+            <th scope="col">{% translate "Last delivery" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for endpoint in endpoints %}
+            <tr>
+              <th scope="row">
+                {% if perms.metra_webhooks.change_webhookendpoint %}<a href="{{ endpoint.get_absolute_url }}">{{ endpoint }}</a>{% else %}{{ endpoint }}{% endif %}
+                {% if endpoint.description %}<span class="help">{{ endpoint.url }}</span>{% endif %}
+              </th>
+              <td>{{ endpoint.events|join:", "|default:"–" }}</td>
+              <td>{% if endpoint.active %}<span class="pill pill--ok">{% translate "Active" %}</span>{% else %}<span class="pill pill--warn">{% translate "Off" %}</span>{% endif %}</td>
+              <td>
+                {% if endpoint.last_status %}
+                  <a href="{% url 'metra_webhooks:delivery_list' endpoint.pk %}"><span class="{% if endpoint.last_status == 'delivered' %}status-ok{% elif endpoint.last_status == 'pending' %}status-skip{% else %}status-error{% endif %}">{{ endpoint.last_status_label }}</span></a>
+                  <span class="help">{{ endpoint.last_at|date:"SHORT_DATETIME_FORMAT" }}</span>
+                {% else %}
+                  <a href="{% url 'metra_webhooks:delivery_list' endpoint.pk %}">{% translate "None yet" %}</a>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "No endpoints yet." %}</p>
+  {% endif %}
+{% endblock %}

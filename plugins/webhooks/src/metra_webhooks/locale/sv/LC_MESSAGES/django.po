@@ -1,0 +1,375 @@
+# Swedish translation of the Metra webhooks plugin.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-18 23:29+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: apps.py:7 apps.py:23 templates/metra_webhooks/endpoint_list.html:3
+#: templates/metra_webhooks/endpoint_list.html:6
+msgid "Webhooks"
+msgstr "Webhooks"
+
+#: apps.py:26
+msgid "Tell outside systems when something changes in Metra."
+msgstr "Berätta för externa system när något ändras i Metra."
+
+#: events.py:71
+msgid "A unit was added or changed"
+msgstr "En enhet lades till eller ändrades"
+
+#: events.py:72
+msgid "A person was added or changed"
+msgstr "En person lades till eller ändrades"
+
+#: events.py:75
+msgid "A reading was entered or corrected"
+msgstr "En avläsning matades in eller rättades"
+
+#: events.py:79
+msgid "An invoice was issued"
+msgstr "En faktura utfärdades"
+
+#: events.py:82
+msgid "A payment was recorded"
+msgstr "En betalning registrerades"
+
+#: forms.py:10 templates/metra_webhooks/endpoint_list.html:18
+msgid "Events"
+msgstr "Händelser"
+
+#: forms.py:13
+msgid "The endpoint gets nothing until at least one event is ticked."
+msgstr "Mottagaren får ingenting förrän minst en händelse har bockats i."
+
+#: forms.py:17
+msgid "Address"
+msgstr "Adress"
+
+#: forms.py:20
+msgid "Where Metra sends the events. Must start with https://."
+msgstr "Dit Metra skickar händelserna. Måste börja med https://."
+
+#: forms.py:27
+msgid "What the receiver is, for your own reference."
+msgstr "Vad mottagaren är, för eget bruk."
+
+#: models.py:19
+msgid "address"
+msgstr "adress"
+
+#: models.py:20
+msgid "description"
+msgstr "beskrivning"
+
+#: models.py:22
+msgid "events"
+msgstr "händelser"
+
+#: models.py:24
+msgid "secret"
+msgstr "hemlighet"
+
+#: models.py:25
+msgid "active"
+msgstr "aktiv"
+
+#: models.py:28
+msgid "created by"
+msgstr "skapad av"
+
+#: models.py:34 models.py:81
+msgid "created"
+msgstr "skapad"
+
+#: models.py:38
+msgid "webhook endpoint"
+msgstr "webhook-mottagare"
+
+#: models.py:39
+msgid "webhook endpoints"
+msgstr "webhook-mottagare"
+
+#: models.py:56
+msgid "Waiting"
+msgstr "Väntar"
+
+#: models.py:57
+msgid "Delivered"
+msgstr "Levererad"
+
+#: models.py:58
+msgid "Failed, will retry"
+msgstr "Misslyckades, försöker igen"
+
+#: models.py:59
+msgid "Given up"
+msgstr "Avbruten"
+
+#: models.py:64
+msgid "endpoint"
+msgstr "mottagare"
+
+#: models.py:68
+msgid "event"
+msgstr "händelse"
+
+#: models.py:71
+msgid "payload"
+msgstr "innehåll"
+
+#: models.py:73
+msgid "status"
+msgstr "status"
+
+#: models.py:75
+msgid "attempts"
+msgstr "försök"
+
+#: models.py:76
+msgid "next attempt"
+msgstr "nästa försök"
+
+#: models.py:77
+msgid "last attempt"
+msgstr "senaste försök"
+
+#: models.py:78
+msgid "response code"
+msgstr "svarskod"
+
+#: models.py:79
+msgid "response"
+msgstr "svar"
+
+#: models.py:80
+msgid "error"
+msgstr "fel"
+
+#: models.py:82
+msgid "delivered"
+msgstr "levererad"
+
+#: models.py:86
+msgid "webhook delivery"
+msgstr "webhook-leverans"
+
+#: models.py:87
+msgid "webhook deliveries"
+msgstr "webhook-leveranser"
+
+#: service.py:64
+msgid "The address must start with https://."
+msgstr "Adressen måste börja med https://."
+
+#: service.py:66
+msgid "The address must start with https:// or http://."
+msgstr "Adressen måste börja med https:// eller http://."
+
+#: service.py:69
+msgid "The address must not contain a user name or password."
+msgstr "Adressen får inte innehålla användarnamn eller lösenord."
+
+#: service.py:89 service.py:92
+#, python-format
+msgid "The address %(host)s could not be found."
+msgstr "Adressen %(host)s hittades inte."
+
+#: service.py:97
+#, python-format
+msgid "%(host)s points to an internal address, which is not allowed."
+msgstr "%(host)s pekar på en intern adress, vilket inte är tillåtet."
+
+#: service.py:239
+msgid "The endpoint is switched off."
+msgstr "Mottagaren är avstängd."
+
+#: service.py:256
+#, python-format
+msgid "The receiver answered %(status)s."
+msgstr "Mottagaren svarade %(status)s."
+
+#: templates/metra_webhooks/delivery_list.html:3
+#: templates/metra_webhooks/delivery_list.html:6
+#, python-format
+msgid "Deliveries to %(name)s"
+msgstr "Leveranser till %(name)s"
+
+#: templates/metra_webhooks/delivery_list.html:10
+#: templates/metra_webhooks/endpoint_form.html:37
+msgid "Send a test event"
+msgstr "Skicka en testhändelse"
+
+#: templates/metra_webhooks/delivery_list.html:14
+msgid "All endpoints"
+msgstr "Alla mottagare"
+
+#: templates/metra_webhooks/delivery_list.html:15
+msgid "The latest 100. Older deliveries are removed after a while."
+msgstr "De senaste 100. Äldre leveranser tas bort efter en tid."
+
+#: templates/metra_webhooks/delivery_list.html:17
+#: templates/metra_webhooks/endpoint_form.html:32
+msgid "Deliveries"
+msgstr "Leveranser"
+
+#: templates/metra_webhooks/delivery_list.html:21
+msgid "Event"
+msgstr "Händelse"
+
+#: templates/metra_webhooks/delivery_list.html:22
+msgid "Created"
+msgstr "Skapad"
+
+#: templates/metra_webhooks/delivery_list.html:23
+#: templates/metra_webhooks/endpoint_list.html:19
+msgid "Status"
+msgstr "Status"
+
+#: templates/metra_webhooks/delivery_list.html:24
+msgid "Attempts"
+msgstr "Försök"
+
+#: templates/metra_webhooks/delivery_list.html:25
+msgid "Response code"
+msgstr "Svarskod"
+
+#: templates/metra_webhooks/delivery_list.html:26
+msgid "Error"
+msgstr "Fel"
+
+#: templates/metra_webhooks/delivery_list.html:37
+#, python-format
+msgid "Next try %(when)s"
+msgstr "Nästa försök %(when)s"
+
+#: templates/metra_webhooks/delivery_list.html:46
+msgid "Retry now"
+msgstr "Försök igen nu"
+
+#: templates/metra_webhooks/delivery_list.html:56
+msgid "Nothing has been sent to this endpoint yet."
+msgstr "Inget har ännu skickats till den här mottagaren."
+
+#: templates/metra_webhooks/endpoint_confirm_delete.html:3
+#: templates/metra_webhooks/endpoint_confirm_delete.html:5
+msgid "Delete endpoint"
+msgstr "Radera mottagare"
+
+#: templates/metra_webhooks/endpoint_confirm_delete.html:6
+#, python-format
+msgid "Delete %(name)s and its delivery history? Nothing more is sent to it."
+msgstr "Radera %(name)s och dess leveranshistorik? Inget mer skickas dit."
+
+#: templates/metra_webhooks/endpoint_confirm_delete.html:10
+#: templates/metra_webhooks/endpoint_form.html:40
+msgid "Delete"
+msgstr "Radera"
+
+#: templates/metra_webhooks/endpoint_confirm_delete.html:11
+#: templates/metra_webhooks/endpoint_form.html:17
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: templates/metra_webhooks/endpoint_form.html:3
+#: templates/metra_webhooks/endpoint_form.html:6
+msgid "Edit endpoint"
+msgstr "Redigera mottagare"
+
+#: templates/metra_webhooks/endpoint_form.html:3
+#: templates/metra_webhooks/endpoint_form.html:6
+#: templates/metra_webhooks/endpoint_list.html:8
+msgid "Add an endpoint"
+msgstr "Lägg till en mottagare"
+
+#: templates/metra_webhooks/endpoint_form.html:16
+msgid "Save"
+msgstr "Spara"
+
+#: templates/metra_webhooks/endpoint_form.html:23
+msgid "Secret"
+msgstr "Hemlighet"
+
+#: templates/metra_webhooks/endpoint_form.html:24
+msgid ""
+"The receiver uses this to check that a request came from Metra. Keep it "
+"private."
+msgstr "Mottagaren använder den för att kontrollera att en begäran kommer från Metra. Håll den hemlig."
+
+#: templates/metra_webhooks/endpoint_form.html:28
+msgid "Make a new secret"
+msgstr "Skapa en ny hemlighet"
+
+#: templates/metra_webhooks/endpoint_form.html:34
+msgid "Show deliveries"
+msgstr "Visa leveranser"
+
+#: templates/metra_webhooks/endpoint_list.html:11
+msgid ""
+"An endpoint is an address that Metra tells when something changes. Only ids "
+"are sent, never names or contact details."
+msgstr "En mottagare är en adress som Metra meddelar när något ändras. Endast id-nummer skickas, aldrig namn eller kontaktuppgifter."
+
+#: templates/metra_webhooks/endpoint_list.html:13
+msgid "Endpoints"
+msgstr "Mottagare"
+
+#: templates/metra_webhooks/endpoint_list.html:17
+msgid "Endpoint"
+msgstr "Mottagare"
+
+#: templates/metra_webhooks/endpoint_list.html:20
+msgid "Last delivery"
+msgstr "Senaste leverans"
+
+#: templates/metra_webhooks/endpoint_list.html:31
+msgid "Active"
+msgstr "Aktiv"
+
+#: templates/metra_webhooks/endpoint_list.html:31
+msgid "Off"
+msgstr "Av"
+
+#: templates/metra_webhooks/endpoint_list.html:37
+msgid "None yet"
+msgstr "Inga ännu"
+
+#: templates/metra_webhooks/endpoint_list.html:46
+msgid "No endpoints yet."
+msgstr "Inga mottagare ännu."
+
+#: views.py:37
+msgid "The endpoint was added. Copy its secret to the receiver."
+msgstr "Mottagaren lades till. Kopiera dess hemlighet till mottagaren."
+
+#: views.py:49
+msgid "The endpoint was saved."
+msgstr "Mottagaren sparades."
+
+#: views.py:63
+msgid ""
+"A new secret was made. Give it to the receiver; the old one no longer works."
+msgstr "En ny hemlighet skapades. Ge den till mottagaren; den gamla fungerar inte längre."
+
+#: views.py:74
+msgid "A test event was sent. The result is on this page."
+msgstr "En testhändelse skickades. Resultatet visas på den här sidan."
+
+#: views.py:84
+msgid "The endpoint was deleted."
+msgstr "Mottagaren raderades."
+
+#: views.py:112
+msgid "The delivery was sent again."
+msgstr "Leveransen skickades på nytt."

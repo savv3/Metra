@@ -8,6 +8,7 @@ members = [
     "metra-api",
     "metra-example-plugin",
     "metra-sms-46elks",
+    "metra-webhooks",
 ]
 
 [[package]]
@@ -453,6 +454,7 @@ dependencies = [
     { name = "huey" },
     { name = "metra-api" },
     { name = "metra-sms-46elks" },
+    { name = "metra-webhooks" },
     { name = "python-barcode" },
     { name = "segno" },
     { name = "weasyprint" },
@@ -476,6 +478,7 @@ requires-dist = [
     { name = "huey", specifier = ">=3.4.0" },
     { name = "metra-api", editable = "plugins/api" },
     { name = "metra-sms-46elks", editable = "plugins/sms-46elks" },
+    { name = "metra-webhooks", editable = "plugins/webhooks" },
     { name = "python-barcode", specifier = ">=0.16.1" },
     { name = "segno", specifier = ">=1.6.6" },
     { name = "weasyprint", specifier = ">=70.0" },
@@ -514,6 +517,11 @@ source = { editable = "plugins/example" }
 name = "metra-sms-46elks"
 version = "0.1.0"
 source = { editable = "plugins/sms-46elks" }
+
+[[package]]
+name = "metra-webhooks"
+version = "0.1.0"
+source = { editable = "plugins/webhooks" }
 
 [[package]]
 name = "packaging"

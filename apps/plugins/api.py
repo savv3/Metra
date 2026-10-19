@@ -12,6 +12,9 @@ the same API_VERSION; anything else in the app may change.
             api.add_unit_panel(api.Panel("my_plugin/panel.html", title="Mine"))
             api.add_messaging_provider(MySMSProvider)
             api.add_settings_link(api.SettingsLink("My settings", "my_plugin:settings"))
+            api.add_webhook_event(
+                api.WebhookEvent("thing.saved", "A thing was saved", thing_saved, thing_payload)
+            )
 
     @receiver(api.events.invoice_issued)
     def on_issue(sender, invoice, **kwargs): ...
@@ -26,10 +29,12 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from importlib import import_module
 
+from django.dispatch import Signal
+
 from apps.messaging.registry import EMAIL, SMS, Provider, ProviderError, SendResult, registry
 
 from . import events
-from .hooks import NAVIGATION, PERSON_PANELS, SETTINGS_LINKS, UNIT_PANELS, hooks
+from .hooks import NAVIGATION, PERSON_PANELS, SETTINGS_LINKS, UNIT_PANELS, WEBHOOK_EVENTS, hooks
 from .roles import grant_to_roles
 
 API_VERSION = 1
@@ -87,18 +92,22 @@ __all__ = [
     "ProviderError",
     "SendResult",
     "SettingsLink",
+    "WebhookEvent",
     "add_messaging_provider",
     "add_navigation",
     "add_person_panel",
     "add_settings_link",
     "add_unit_panel",
+    "add_webhook_event",
     "events",
     "grant_to_roles",
     *RECORDS,
     "normalise_phone",
+    "on_webhook_event",
     "record_delivery",
     "sms_country_code",
     "sms_sender",
+    "webhook_events",
 ]
 
 
@@ -154,6 +163,41 @@ class SettingsLink:
 
 def add_settings_link(link):
     return hooks.register(SETTINGS_LINKS, link)
+
+
+@dataclass
+class WebhookEvent:
+    """An event that webhook endpoints can subscribe to (see the webhooks plugin).
+
+    ``name`` is what receivers see, like "invoice.issued"; ``label`` is shown to
+    staff choosing events. ``signal`` is a Django signal, sent after the change
+    is committed (see ``events.send_on_commit``). ``payload(**signal_kwargs)``
+    returns the event's data as a JSON-serialisable dict. Webhooks go to
+    outside systems, so return ids and non-personal facts only, never names,
+    email addresses, phone numbers or addresses.
+    """
+
+    name: str
+    label: str
+    signal: Signal
+    payload: Callable[..., dict]
+
+
+def add_webhook_event(event):
+    """Make an event available as a webhook. It works with any plugin that
+    sends webhooks and does not depend on one."""
+    return hooks.register(WEBHOOK_EVENTS, event)
+
+
+def webhook_events():
+    """Every registered ``WebhookEvent``. For plugins that send webhooks."""
+    return hooks.get(WEBHOOK_EVENTS)
+
+
+def on_webhook_event(listener):
+    """Call ``listener(event)`` for each ``WebhookEvent`` registered from now on,
+    so a sender of webhooks also sees events of plugins that load after it."""
+    hooks.subscribe(WEBHOOK_EVENTS, listener)
 
 
 # For SMS provider plugins.

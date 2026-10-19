@@ -10,19 +10,28 @@ NAVIGATION = "navigation"
 UNIT_PANELS = "unit_panels"
 PERSON_PANELS = "person_panels"
 SETTINGS_LINKS = "settings_links"
+WEBHOOK_EVENTS = "webhook_events"
 
-KNOWN = {NAVIGATION, UNIT_PANELS, PERSON_PANELS, SETTINGS_LINKS}
+KNOWN = {NAVIGATION, UNIT_PANELS, PERSON_PANELS, SETTINGS_LINKS, WEBHOOK_EVENTS}
 
 
 class HookRegistry:
     def __init__(self):
         self._items = defaultdict(list)
+        self._listeners = defaultdict(list)
 
     def register(self, hook, item):
         if hook not in KNOWN:
             raise ValueError(f"Unknown extension point {hook!r}; known: {', '.join(sorted(KNOWN))}")
         self._items[hook].append(item)
+        for listener in self._listeners[hook]:
+            listener(item)
         return item
+
+    def subscribe(self, hook, listener):
+        """Call ``listener(item)`` for every item registered to ``hook`` from now
+        on, so a plugin can react to items added by plugins that load after it."""
+        self._listeners[hook].append(listener)
 
     def get(self, hook):
         return list(self._items[hook])
