@@ -19,6 +19,9 @@ the `data` Docker volume.
 
 To host several organisations on one server, each as its own separate
 install, see [docs/multiple-organisations.md](docs/multiple-organisations.md).
+For a server without internet access (behind a Cloudflare Tunnel, for
+example), build the image elsewhere and deploy it over SSH with
+`scripts/deploy.sh`, as [docs/deploying.md](docs/deploying.md) describes.
 
 ### First login
 
