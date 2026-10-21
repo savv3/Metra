@@ -21,5 +21,6 @@ urlpatterns = [
     path("messages/newsletter/new/", views.newsletter_compose, name="newsletter_compose"),
     path("people/<int:pk>/newsletter/", views.person_consent, name="person_consent"),
     path("unsubscribe/<str:token>/", views.unsubscribe, name="unsubscribe"),
+    path("settings/email/", views.email_settings, name="email_settings"),
     path("messages/notices/<int:pk>/end/", views.notice_end, name="notice_end"),
 ]

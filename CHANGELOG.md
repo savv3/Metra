@@ -14,6 +14,13 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- Settings > Email (admins only, and a step of the setup wizard): choose how
+  email is sent (SMTP or an add-on's sending service) and set the server,
+  password, from address and the new Reply-To address, then send a test.
+  Login codes, password links and invitations now go the same way as
+  messages. The password is stored encrypted. `METRA_EMAIL_*` variables
+  still work and win over the page, and the new `METRA_EMAIL_REPLY_TO` sets
+  Reply-To from the environment.
 - Settings > Add-ons: admins see the installed plugins with their version
   and turn each one on or off without a restart. A plugin that is off
   disappears from menus, pages, panels, help and the provider lists, and its

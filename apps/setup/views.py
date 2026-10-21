@@ -17,7 +17,9 @@ from django.utils.translation import gettext_lazy
 from django.views.decorators.http import require_POST
 
 from apps.invoicing.models import BillingSettings
+from apps.messaging.email_forms import EmailSettingsForm
 from apps.messaging.registry import EMAIL, SMS, ProviderError, provider_for
+from apps.messaging.views import send_test_email
 from apps.register.models import CustomField, Organisation, UnitType
 
 from . import examples
@@ -173,34 +175,48 @@ def types_step(request, name):
 
 
 def messaging_step(request, name):
-    """Email and SMS are set in the environment (METRA_EMAIL_*, METRA_SMS_*);
-    this step shows what is set up and sends a test."""
-    email, sms = provider_for(EMAIL), provider_for(SMS)
+    """Email settings as a form, what is set up for SMS (46elks settings are
+    in the environment), and a test message for each."""
+    form = EmailSettingsForm(request.POST if request.POST.get("action") == "save" else None)
     if request.method == "POST":
-        form = TestMessageForm(request.POST)
-        if form.is_valid():
-            channel, to = form.cleaned_data["channel"], form.cleaned_data["to"]
-            provider = email if channel == "email" else sms
-            text = _("This is a test message from Metra. If you got it, sending works.")
-            try:
-                if provider is None:
-                    raise ProviderError(_("This channel is not set up."))
-                provider.send(to, text, subject=_("Test message from Metra"))
-            except ProviderError as error:
-                messages.error(request, _("The test failed: %(error)s") % {"error": error})
-            else:
-                messages.success(request, _("Test sent to %(to)s.") % {"to": to})
-                SetupState.current().mark_saved(name)
+        if request.POST.get("action") == "save":
+            if form.is_valid():
+                form.save()
+                return _saved(request, name, stay=True, message=_("Saved the email settings."))
+        else:
+            test = TestMessageForm(request.POST)
+            if test.is_valid():
+                channel, to = test.cleaned_data["channel"], test.cleaned_data["to"]
+                if channel == "email":
+                    sent = send_test_email(request, to)
+                else:
+                    sent = _send_test_sms(request, to)
+                if sent:
+                    SetupState.current().mark_saved(name)
             return redirect("setup:step", name)
+    sms = provider_for(SMS)
     context = {
-        "email": email,
+        "form": form,
+        "email": provider_for(EMAIL),
         "sms": sms,
         "sms_label": sms.label() if sms else "",
-        "from_email": settings.DEFAULT_FROM_EMAIL,
         "sms_sender": settings.MESSAGING["sms_sender"],
         "email_to": request.user.email,
     }
     return _render(request, name, context)
+
+
+def _send_test_sms(request, to):
+    provider = provider_for(SMS)
+    try:
+        if provider is None:
+            raise ProviderError(_("This channel is not set up."))
+        provider.send(to, _("This is a test message from Metra. If you got it, sending works."))
+    except ProviderError as error:
+        messages.error(request, _("The test failed: %(error)s") % {"error": error})
+        return False
+    messages.success(request, _("Test sent to %(to)s.") % {"to": to})
+    return True
 
 
 def invoicing_step(request, name):

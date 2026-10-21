@@ -5,11 +5,11 @@ the bundled 46elks plugin in plugins/sms-46elks."""
 import logging
 import re
 
-from django.conf import settings
 from django.core.mail import EmailMessage
 from django.core.mail.message import make_msgid
 from django.utils.translation import gettext_lazy as _
 
+from . import email_config
 from .registry import EMAIL, SMS, Provider, ProviderError, SendResult, registry
 
 logger = logging.getLogger(__name__)
@@ -17,18 +17,22 @@ logger = logging.getLogger(__name__)
 
 @registry.register
 class DjangoEmail(Provider):
-    """Email through Django's mail settings: SMTP (METRA_EMAIL_*) or the console."""
+    """Email through Django's mail: SMTP or the console, as the email settings
+    say (see apps.messaging.email_config)."""
 
     channel = EMAIL
     name = "django"
+    description = _("SMTP (your own mail server or account)")
 
     def send(self, recipient, body, subject="", callback_url=None, headers=None, attachments=None):
-        message_id = make_msgid(domain=settings.MESSAGING["email_domain"])
+        config = email_config.current()
+        message_id = make_msgid(domain=config.domain)
         email = EmailMessage(
             subject=subject,
             body=body,
-            from_email=settings.DEFAULT_FROM_EMAIL,
+            from_email=config.from_email,
             to=[recipient],
+            reply_to=[config.reply_to] if config.reply_to else None,
             headers={"Message-ID": message_id, **(headers or {})},
         )
         for filename, content, mimetype in attachments or []:

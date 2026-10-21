@@ -25,8 +25,8 @@ def test_normalise_phone_rejects_nonsense():
         normalise_phone("12", "358")
 
 
-def test_email_provider_uses_django_mail(settings):
-    settings.DEFAULT_FROM_EMAIL = "styrelsen@example.com"
+def test_email_provider_uses_django_mail(monkeypatch, db):
+    monkeypatch.setenv("METRA_EMAIL_FROM", "styrelsen@example.com")
 
     result = DjangoEmail().send("anna@example.com", "Text", subject="Ämne")
 

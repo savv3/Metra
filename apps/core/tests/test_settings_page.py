@@ -119,7 +119,7 @@ def test_admin_entries_need_staff_status(client, make_user):
     page = get(client, make_user("admin", "Admin")).content.decode()
 
     assert "admin/" not in page.split('<main id="main">')[1]
-    assert groups(page) == ["integrations", "backups", "setup"]
+    assert groups(page) == ["messages", "integrations", "backups", "setup"]
 
 
 @pytest.mark.parametrize("role", ["Read-only", "Board"])

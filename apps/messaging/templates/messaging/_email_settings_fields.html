@@ -1,0 +1,14 @@
+{% load i18n %}
+{% include "register/_field.html" with field=form.provider %}
+<fieldset>
+  <legend>{% translate "SMTP" %}</legend>
+  <p class="help">{% translate "Only used when email goes through SMTP. Your email provider or IT support can tell you these." %}</p>
+  {% include "register/_field.html" with field=form.host %}
+  {% include "register/_field.html" with field=form.port %}
+  {% include "register/_field.html" with field=form.security %}
+  {% include "register/_field.html" with field=form.user %}
+  {% include "register/_field.html" with field=form.password %}
+  {% if form.clear_password %}{% include "register/_field.html" with field=form.clear_password %}{% endif %}
+</fieldset>
+{% include "register/_field.html" with field=form.from_email %}
+{% include "register/_field.html" with field=form.reply_to %}

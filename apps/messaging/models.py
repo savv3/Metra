@@ -11,7 +11,7 @@ import secrets
 
 from auditlog.registry import auditlog
 from django.conf import settings
-from django.db import models
+from django.db import DatabaseError, models
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 from django.template.defaultfilters import filesizeformat
@@ -361,7 +361,52 @@ def _delete_attachment_file(sender, instance, **kwargs):
     instance.file.delete(save=False)
 
 
+class EmailSettings(models.Model):
+    """How email is sent, set on the Email settings page. Values in the
+    server environment (METRA_EMAIL_*) win over these; see
+    apps.messaging.email_config."""
+
+    class Security(models.TextChoices):
+        STARTTLS = "tls", _("STARTTLS (usually port 587)")
+        SSL = "ssl", _("SSL/TLS (usually port 465)")
+        NONE = "none", _("None")
+
+    provider = models.CharField(_("send email through"), max_length=50, blank=True)
+    host = models.CharField(_("mail server"), max_length=200, blank=True)
+    port = models.PositiveIntegerField(_("port"), default=587)
+    user = models.CharField(_("user name"), max_length=200, blank=True)
+    # Encrypted with apps.plugins.secrets; never shown again once saved.
+    password = models.TextField(_("password"), blank=True)
+    security = models.CharField(
+        _("encryption"), max_length=4, choices=Security.choices, default=Security.STARTTLS
+    )
+    from_email = models.EmailField(_("from address"), blank=True)
+    reply_to = models.EmailField(
+        _("Reply-To address"),
+        blank=True,
+        help_text=_("Where replies go, if not to the from address."),
+    )
+    changed_at = models.DateTimeField(_("changed"), auto_now=True)
+
+    class Meta:
+        verbose_name = _("email settings")
+        verbose_name_plural = _("email settings")
+
+    def __str__(self):
+        return str(_("Email settings"))
+
+    @classmethod
+    def current(cls):
+        """The saved settings, or None when there are none (or no database)."""
+        try:
+            return cls.objects.order_by("pk").first()
+        except DatabaseError:
+            return None
+
+
 auditlog.register(MessageTemplate)
 auditlog.register(ConsentRecord)
 auditlog.register(MessageBatch, exclude_fields=["finished_at", "recipients", "files_token_hash"])
 auditlog.register(Attachment)
+# The log says what changed and when, never the password.
+auditlog.register(EmailSettings, exclude_fields=["password"])

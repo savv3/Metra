@@ -1,5 +1,19 @@
 # Viestit ja uutiskirjeet
 
+## Sähköpostiasetukset
+
+Ylläpitäjä päättää, miten sähköposti lähetetään, kohdassa **Asetukset >
+Sähköposti**, joka on myös yksi käyttöönoton vaiheista. Valitse **SMTP**, jos
+haluat lähettää yhdistyksen oman sähköpostitilin kautta: anna
+**Sähköpostipalvelin**, **Portti**, **Salaus**, **Käyttäjätunnus** ja
+**Salasana**, jotka saat sähköpostin tarjoajaltasi. Lisäosa voi tarjota
+sen sijaan lähetyspalvelun. Aseta **Lähettäjän osoite**, jonka jäsenet näkevät,
+ja **Vastausosoite**, jos vastausten pitää mennä muualle. Kaikki Metran
+sähköposti lähetetään näin, myös kirjautumiskoodit ja kutsut. **Lähetä
+testisähköposti** tarkistaa, että lähetys toimii. Tallennettua salasanaa ei
+näytetä enää koskaan: jätä kenttä tyhjäksi, jos haluat säilyttää sen. Harmaa
+kenttä on asetettu palvelimella, eikä sitä voi muuttaa sovelluksessa.
+
 ## Viestin lähettäminen usealle taloudelle
 
 **Lähetykset > Uusi viesti** kirjoittaa yhden viestin kaikille, tunnisteella

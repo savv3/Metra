@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Email settings" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Email settings" %}</h1>
+    <div class="actions"><a class="button" href="{% url 'core:settings' %}">{% translate "Settings" %}</a></div>
+  </div>
+  <p>{% blocktranslate trimmed %}
+    All email from Metra goes this way: messages, newsletters, invoices and reminders, and
+    login codes and invitations.
+  {% endblocktranslate %}</p>
+  <form method="post" class="form form--narrow" novalidate autocomplete="off">
+    {% csrf_token %}
+    {% include "messaging/_email_settings_fields.html" %}
+    <div class="actions"><button type="submit" class="button button--primary">{% translate "Save" %}</button></div>
+  </form>
+  {% if email_set_up %}
+    <h2>{% translate "Send a test" %}</h2>
+    <form method="post" class="form form--inline">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="test">
+      <div class="field"><label for="test-email">{% translate "Send a test email to" %}</label><input type="email" id="test-email" name="to" value="{{ user.email }}" required></div>
+      <button type="submit" class="button">{% translate "Send test email" %}</button>
+    </form>
+  {% endif %}
+{% endblock %}
