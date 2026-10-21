@@ -24,6 +24,13 @@ and change everything in the register. Install only plugins you trust.
    they are on by default, and `METRA_PLUGINS_DISABLED` turns one off.
 3. Restart. The web container runs the plugin's migrations on start.
 
+Installed plugins can then be turned on and off by an admin under
+**Settings > Add-ons**, without a restart. While a plugin is off, its menu
+items, panels, settings links, help articles, notification kinds, webhook
+events, messaging providers, event receivers and pages under
+`/plugins/<name>/` are left out, and its data is kept. Each process reads
+the on/off states again within two seconds of a change.
+
 ## Writing a plugin
 
 Start from [plugins/example](../plugins/example), which the tests load. A
@@ -74,9 +81,41 @@ def ready(self):
     api.add_messaging_provider(MySMSProvider)
 ```
 
+Everything a plugin registers belongs to it, worked out from the module
+that calls `api`, so it disappears while an admin has the plugin turned off.
+Event receivers count as the plugin's when their function is in the
+plugin's package.
+
 A plugin's `urls.py`, if it has one, is mounted at `/plugins/<name>/`.
 Views must check a permission, as the app's own do (see AGENTS.md). To react
 to changes, listen to the events below rather than to Metra's models.
+
+**Settings.** A plugin lists its settings in `metra_settings` on its
+AppConfig, and Metra makes a settings page for it under **Settings >
+Add-ons** (admins only). Each `api.Setting(key, label, kind, help, default,
+choices, env, required)` has a kind: `Setting.TEXT`, `NUMBER`, `CHOICE`,
+`BOOL` or `SECRET`. Secrets (API keys, passwords) are stored encrypted with
+`METRA_SETTINGS_KEY` (or a key derived from `METRA_SECRET_KEY`), are never
+shown again once saved, only replaced or removed, and the audit log records
+which setting changed but not its value. A setting with `env` takes the
+value of that environment variable when it is set, and the page shows it as
+locked. Read values with `api.plugin_settings("name").get("key")`, or
+`api.plugin_settings()` from the plugin's own code:
+
+```python
+class ExamplePluginConfig(AppConfig):
+    metra_settings = [
+        api.Setting("api_user", "API user", env="METRA_THING_USER"),
+        api.Setting("api_key", "API key", kind=api.Setting.SECRET),
+        api.Setting(
+            "region",
+            "Region",
+            kind=api.Setting.CHOICE,
+            choices=[("eu", "EU"), ("us", "US")],
+            default="eu",
+        ),
+    ]
+```
 
 **Permissions for roles.** A plugin with its own models gives their
 permissions to Metra's roles (Admin, Board, Treasurer, Read-only) in a

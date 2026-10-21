@@ -186,7 +186,19 @@ def _groups():
                 ),
             ],
         ),
-        Group("integrations", _("Integrations")),
+        Group(
+            "integrations",
+            _("Integrations"),
+            [
+                Entry(
+                    _("Add-ons"),
+                    _("Turn add-ons on or off, and their settings."),
+                    "plugins:list",
+                    "plugins.change_pluginstate",
+                    admins_only=True,
+                ),
+            ],
+        ),
         Group(
             "backups",
             _("Backups"),

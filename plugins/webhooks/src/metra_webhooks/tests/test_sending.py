@@ -83,7 +83,7 @@ def test_secret_is_random_and_rotates(endpoint):
     assert endpoint.secret != first
 
 
-def test_builtin_payloads_have_no_personal_data():
+def test_builtin_payloads_have_no_personal_data(db):
     unit = SimpleNamespace(pk=1, unit_type_id=2, status="active", archived_at=None, name="Anna")
     person = SimpleNamespace(pk=3, archived_at=timezone.now(), first_name="Anna", email="a@b.fi")
     reading = SimpleNamespace(pk=4, unit_id=1, round_id=9)

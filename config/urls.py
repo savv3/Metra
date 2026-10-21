@@ -22,6 +22,7 @@ urlpatterns = [
     path("", include("apps.backups.urls")),
     path("", include("apps.help.urls")),
     path("", include("apps.notifications.urls")),
+    path("", include("apps.plugins.urls")),
     path("", include("apps.core.urls")),
 ]
 

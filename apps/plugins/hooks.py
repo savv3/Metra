@@ -6,6 +6,8 @@ documented in docs/plugins.md, together with what it expects.
 
 from collections import defaultdict
 
+from . import state
+
 NAVIGATION = "navigation"
 UNIT_PANELS = "unit_panels"
 PERSON_PANELS = "person_panels"
@@ -32,11 +34,15 @@ class HookRegistry:
     def __init__(self):
         self._items = defaultdict(list)
         self._listeners = defaultdict(list)
+        self._owners = {}  # id(item): the plugin that added it
 
-    def register(self, hook, item):
+    def register(self, hook, item, owner=None):
+        """Add ``item`` to ``hook``. It belongs to ``owner``, by default the
+        plugin whose code is calling, and is left out while that plugin is off."""
         if hook not in KNOWN:
             raise ValueError(f"Unknown extension point {hook!r}; known: {', '.join(sorted(KNOWN))}")
         self._items[hook].append(item)
+        self._owners[id(item)] = owner or state.calling_plugin()
         for listener in self._listeners[hook]:
             listener(item)
         return item
@@ -46,8 +52,16 @@ class HookRegistry:
         on, so a plugin can react to items added by plugins that load after it."""
         self._listeners[hook].append(listener)
 
-    def get(self, hook):
-        return list(self._items[hook])
+    def get(self, hook, everything=False):
+        """The items of a hook whose plugins are on (all of them with ``everything``)."""
+        items = list(self._items[hook])
+        if everything:
+            return items
+        return [item for item in items if state.is_enabled(self.owner(item))]
+
+    def owner(self, item):
+        """The plugin that added ``item``, or None for Metra itself."""
+        return self._owners.get(id(item))
 
     def clear(self, hook=None):
         """For tests."""

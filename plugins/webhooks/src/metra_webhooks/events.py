@@ -114,6 +114,6 @@ def connect(event):
 
 
 def connect_all():
-    for event in api.webhook_events():
+    for event in api.webhook_events(everything=True):
         connect(event)
     api.on_webhook_event(connect)

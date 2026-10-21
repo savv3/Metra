@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 18:08+0300\n"
+"POT-Creation-Date: 2026-10-21 19:02+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,7 +96,7 @@ msgid "Email"
 msgstr "Sähköposti"
 
 #: apps/accounts/templates/accounts/profile.html:18
-#: apps/core/settings_page.py:178
+#: apps/core/settings_page.py:181
 msgid "Roles"
 msgstr "Roolit"
 
@@ -109,10 +109,12 @@ msgid "Two-factor login"
 msgstr "Kaksivaiheinen tunnistautuminen"
 
 #: apps/accounts/templates/accounts/profile.html:28
+#: apps/plugins/templates/plugins/plugin_list.html:29
 msgid "On"
 msgstr "Käytössä"
 
 #: apps/accounts/templates/accounts/profile.html:28
+#: apps/plugins/templates/plugins/plugin_list.html:29
 msgid "Off"
 msgstr "Pois käytöstä"
 
@@ -180,7 +182,7 @@ msgstr "Vaihda salasana"
 
 #: apps/backups/apps.py:7 apps/backups/templates/backups/backup_list.html:3
 #: apps/backups/templates/backups/backup_list.html:6
-#: apps/core/settings_page.py:189 apps/core/settings_page.py:192
+#: apps/core/settings_page.py:204 apps/core/settings_page.py:207
 msgid "Backups"
 msgstr "Varmuuskopiot"
 
@@ -397,6 +399,7 @@ msgstr "Syy"
 
 #: apps/backups/templates/backups/backup_list.html:47
 #: apps/backups/templates/backups/restore.html:9
+#: apps/plugins/templates/plugins/plugin_list.html:21
 msgid "Version"
 msgstr "Versio"
 
@@ -409,6 +412,7 @@ msgid "Where"
 msgstr "Sijainti"
 
 #: apps/backups/templates/backups/backup_list.html:50
+#: apps/plugins/templates/plugins/plugin_list.html:22
 #: apps/readings/templates/readings/_unit_readings.html:12
 #: apps/register/templates/register/unit_detail.html:41
 #: apps/selfservice/templates/selfservice/round_links.html:44
@@ -529,7 +533,7 @@ msgid "People"
 msgstr "Henkilöt"
 
 #: apps/backups/templates/backups/restore.html:32
-#: apps/core/settings_page.py:108 apps/readings/apps.py:7
+#: apps/core/settings_page.py:111 apps/readings/apps.py:7
 #: apps/readings/templates/readings/_round_results.html:3
 #: apps/readings/templates/readings/_unit_readings.html:3
 #: templates/base.html:23
@@ -537,7 +541,7 @@ msgid "Readings"
 msgstr "Lukemat"
 
 #: apps/backups/templates/backups/restore.html:32
-#: apps/core/settings_page.py:141
+#: apps/core/settings_page.py:144
 #: apps/messaging/templates/messaging/_unit_messages.html:4
 #: apps/messaging/templates/messaging/batch_detail.html:61
 #: apps/messaging/templates/messaging/batch_list.html:24
@@ -600,6 +604,7 @@ msgstr "Palauta tämä tilannevedos"
 #: apps/invoicing/templates/invoicing/run_form.html:14
 #: apps/messaging/templates/messaging/compose.html:114
 #: apps/messaging/templates/messaging/newsletter_compose.html:36
+#: apps/plugins/templates/plugins/plugin_settings.html:15
 #: apps/readings/templates/readings/reading_form.html:31
 #: apps/readings/templates/readings/round_form.html:20
 #: apps/register/templates/register/import_upload.html:20
@@ -699,44 +704,44 @@ msgid "notices"
 msgstr "tiedotteet"
 
 #
-#: apps/core/settings_page.py:68 apps/setup/views.py:39
+#: apps/core/settings_page.py:71 apps/setup/views.py:39
 msgid "Organisation"
 msgstr "Organisaatio"
 
 #
 #
-#: apps/core/settings_page.py:71
+#: apps/core/settings_page.py:74
 msgid "Organisation details"
 msgstr "Organisaation tiedot"
 
-#: apps/core/settings_page.py:72
+#: apps/core/settings_page.py:75
 msgid "Name, business ID, contact details, logo and the public page."
 msgstr "Nimi, Y-tunnus, yhteystiedot, logo ja julkinen sivu."
 
-#: apps/core/settings_page.py:81 apps/register/apps.py:7
+#: apps/core/settings_page.py:84 apps/register/apps.py:7
 msgid "Register"
 msgstr "Rekisteri"
 
 #
-#: apps/core/settings_page.py:84
+#: apps/core/settings_page.py:87
 msgid "Unit types and their fields"
 msgstr "Yksikkötyypit ja niiden kentät"
 
 #
-#: apps/core/settings_page.py:85
+#: apps/core/settings_page.py:88
 msgid "The kinds of units in the register and the fields each one has."
 msgstr "Rekisterin yksiköiden lajit ja kunkin lajin kentät."
 
 #
-#: apps/core/settings_page.py:91
+#: apps/core/settings_page.py:94
 msgid "Person fields"
 msgstr "Henkilöiden kentät"
 
-#: apps/core/settings_page.py:92
+#: apps/core/settings_page.py:95
 msgid "Extra fields on every person, besides name and contact details."
 msgstr "Lisäkentät jokaiselle henkilölle nimen ja yhteystietojen lisäksi."
 
-#: apps/core/settings_page.py:98 apps/register/csv_io.py:475
+#: apps/core/settings_page.py:101 apps/register/csv_io.py:475
 #: apps/register/csv_io.py:528
 #: apps/register/templates/register/_person_results.html:11
 #: apps/register/templates/register/_unit_results.html:11
@@ -745,109 +750,121 @@ msgstr "Lisäkentät jokaiselle henkilölle nimen ja yhteystietojen lisäksi."
 msgid "Tags"
 msgstr "Tunnisteet"
 
-#: apps/core/settings_page.py:99
+#: apps/core/settings_page.py:102
 msgid "Labels for grouping units and people, for example for send-outs."
 msgstr ""
 "Tunnisteet yksiköiden ja henkilöiden ryhmittelyyn, esimerkiksi lähetyksiä "
 "varten."
 
 #
-#: apps/core/settings_page.py:111
+#: apps/core/settings_page.py:114
 msgid "Reading types"
 msgstr "Lukematyypit"
 
-#: apps/core/settings_page.py:112
+#: apps/core/settings_page.py:115
 msgid "What is read, for which unit type, and in which unit."
 msgstr "Mitä luetaan, mille yksikkötyypille ja missä mittayksikössä."
 
-#: apps/core/settings_page.py:121 apps/invoicing/apps.py:7
+#: apps/core/settings_page.py:124 apps/invoicing/apps.py:7
 msgid "Invoicing"
 msgstr "Laskutus"
 
-#: apps/core/settings_page.py:124 apps/invoicing/models.py:118
+#: apps/core/settings_page.py:127 apps/invoicing/models.py:118
 msgid "Invoice settings"
 msgstr "Laskutusasetukset"
 
-#: apps/core/settings_page.py:125
+#: apps/core/settings_page.py:128
 msgid "Bank account, payment terms, VAT, numbering and reminders."
 msgstr "Pankkitili, maksuehdot, ALV, numerointi ja maksumuistutukset."
 
-#: apps/core/settings_page.py:131
+#: apps/core/settings_page.py:134
 #: apps/invoicing/templates/invoicing/run_list.html:9
 msgid "Fee plans"
 msgstr "Maksusuunnitelmat"
 
-#: apps/core/settings_page.py:132
+#: apps/core/settings_page.py:135
 msgid "What units pay: fixed fees and usage fees, with their fee lines."
 msgstr ""
 "Mitä yksiköt maksavat: kiinteät maksut ja kulutusmaksut maksuriveineen."
 
 #
-#: apps/core/settings_page.py:144
+#: apps/core/settings_page.py:147
 msgid "Message templates"
 msgstr "Viestipohjat"
 
-#: apps/core/settings_page.py:145
+#: apps/core/settings_page.py:148
 msgid "The texts of invoices, reminders, reading requests and other messages."
 msgstr "Laskujen, muistutusten, lukemapyyntöjen ja muiden viestien tekstit."
 
 #
-#: apps/core/settings_page.py:151
+#: apps/core/settings_page.py:154
 msgid "Notices"
 msgstr "Ilmoitukset"
 
 #
-#: apps/core/settings_page.py:152
+#: apps/core/settings_page.py:155
 msgid "Short notices on the public page and members' pages."
 msgstr "Lyhyet ilmoitukset julkisella sivulla ja jäsenten sivuilla."
 
 #
-#: apps/core/settings_page.py:158
+#: apps/core/settings_page.py:161
 msgid "Newsletter consents"
 msgstr "Uutiskirjeen suostumukset"
 
 #
-#: apps/core/settings_page.py:159
+#: apps/core/settings_page.py:162
 msgid "The record of who subscribed to or unsubscribed from the newsletter."
 msgstr "Tiedot siitä, kuka on tilannut uutiskirjeen tai perunut tilauksen."
 
 #
-#: apps/core/settings_page.py:168
+#: apps/core/settings_page.py:171
 msgid "Users and roles"
 msgstr "Käyttäjät ja roolit"
 
 #
-#: apps/core/settings_page.py:171
+#: apps/core/settings_page.py:174
 msgid "Users"
 msgstr "Käyttäjät"
 
-#: apps/core/settings_page.py:172
+#: apps/core/settings_page.py:175
 msgid "Who can log in, and the role each one has."
 msgstr "Kuka voi kirjautua sisään ja mikä rooli kullakin on."
 
-#: apps/core/settings_page.py:179
+#: apps/core/settings_page.py:182
 msgid "What each role may see and do."
 msgstr "Mitä kukin rooli saa nähdä ja tehdä."
 
 #
-#: apps/core/settings_page.py:186
+#: apps/core/settings_page.py:191
 msgid "Integrations"
 msgstr "Integraatiot"
 
+#: apps/core/settings_page.py:194 apps/plugins/apps.py:7
+#: apps/plugins/templates/plugins/plugin_list.html:3
+#: apps/plugins/templates/plugins/plugin_list.html:6
+#: apps/plugins/templates/plugins/plugin_list.html:18
+#: apps/plugins/templates/plugins/plugin_settings.html:7
+msgid "Add-ons"
+msgstr "Lisäosat"
+
+#: apps/core/settings_page.py:195
+msgid "Turn add-ons on or off, and their settings."
+msgstr "Ota lisäosat käyttöön tai pois käytöstä ja muuta niiden asetuksia."
+
 #
-#: apps/core/settings_page.py:193
+#: apps/core/settings_page.py:208
 msgid "Snapshots of the register, here and offsite, and restoring one."
 msgstr "Rekisterin varmuuskopiot täällä ja muualla sekä niiden palauttaminen."
 
-#: apps/core/settings_page.py:201
+#: apps/core/settings_page.py:216
 msgid "Setup wizard"
 msgstr "Käyttöönotto"
 
-#: apps/core/settings_page.py:204
+#: apps/core/settings_page.py:219
 msgid "Run the setup wizard"
 msgstr "Käynnistä käyttöönotto"
 
-#: apps/core/settings_page.py:206
+#: apps/core/settings_page.py:221
 msgid ""
 "Organisation, language, logo, units and fields, email and SMS, invoices and "
 "the board, step by step."
@@ -855,16 +872,16 @@ msgstr ""
 "Organisaatio, kieli, logo, yksiköt ja kentät, sähköposti ja tekstiviestit, "
 "laskut ja hallitus vaihe vaiheelta."
 
-#: apps/core/settings_page.py:216
+#: apps/core/settings_page.py:231
 msgid "Advanced"
 msgstr "Lisäasetukset"
 
 #
-#: apps/core/settings_page.py:219
+#: apps/core/settings_page.py:234
 msgid "All data tables"
 msgstr "Kaikki tietotaulut"
 
-#: apps/core/settings_page.py:220
+#: apps/core/settings_page.py:235
 msgid "The full Django admin, with every table. For technical changes."
 msgstr "Koko Django-ylläpito kaikkine tauluineen. Teknisiä muutoksia varten."
 
@@ -930,6 +947,7 @@ msgstr "Henkilökunnan kirjautuminen"
 
 #: apps/core/templates/core/settings.html:3
 #: apps/core/templates/core/settings.html:6
+#: apps/plugins/templates/plugins/plugin_list.html:7
 #: apps/register/templates/register/unit_type_choose.html:16
 #: templates/base.html:27
 msgid "Settings"
@@ -1672,6 +1690,7 @@ msgstr "Yhteensä"
 #: apps/messaging/templates/messaging/_unit_messages.html:16
 #: apps/messaging/templates/messaging/batch_detail.html:68
 #: apps/messaging/templates/messaging/batch_list.html:25
+#: apps/plugins/templates/plugins/plugin_list.html:22
 #: apps/readings/templates/readings/round_list.html:22
 #: apps/register/csv_io.py:468
 #: apps/register/templates/register/_unit_results.html:10
@@ -2345,7 +2364,7 @@ msgstr ""
 msgid "This email provider cannot send attachments."
 msgstr "Tämä sähköpostipalvelu ei voi lähettää liitteitä."
 
-#: apps/messaging/attachments.py:160 apps/messaging/attachments.py:166
+#: apps/messaging/attachments.py:160
 msgid "Files:"
 msgstr "Tiedostot:"
 
@@ -3425,7 +3444,7 @@ msgstr "ilmoituksen vastaanottaja"
 msgid "notification recipients"
 msgstr "ilmoitusten vastaanottajat"
 
-#: apps/notifications/models.py:105
+#: apps/notifications/models.py:105 apps/plugins/models.py:12
 msgid "on"
 msgstr "päällä"
 
@@ -3500,6 +3519,7 @@ msgid "Notify me when"
 msgstr "Ilmoita minulle, kun"
 
 #: apps/notifications/templates/notifications/settings.html:19
+#: apps/plugins/templates/plugins/plugin_settings.html:14
 #: apps/readings/templates/readings/_round_row.html:20
 #: apps/readings/templates/readings/reading_form.html:30
 #: apps/readings/templates/readings/round_form.html:19
@@ -3523,6 +3543,118 @@ msgstr "Kaikki ilmoitukset on merkitty luetuiksi."
 #: apps/notifications/views.py:142
 msgid "Your notification settings are saved."
 msgstr "Ilmoitusasetuksesi on tallennettu."
+
+#: apps/plugins/models.py:11 apps/plugins/models.py:25
+#: apps/plugins/models.py:36
+msgid "add-on"
+msgstr "lisäosa"
+
+#: apps/plugins/models.py:13 apps/plugins/models.py:39
+msgid "changed"
+msgstr "muutettu"
+
+#: apps/plugins/models.py:16 apps/plugins/models.py:42
+msgid "changed by"
+msgstr "muuttaja"
+
+#: apps/plugins/models.py:26
+msgid "add-ons"
+msgstr "lisäosat"
+
+#: apps/plugins/models.py:37
+msgid "setting"
+msgstr "asetus"
+
+#: apps/plugins/models.py:38 apps/readings/models.py:202
+msgid "value"
+msgstr "arvo"
+
+#: apps/plugins/models.py:51
+msgid "add-on setting"
+msgstr "lisäosan asetus"
+
+#: apps/plugins/models.py:52
+msgid "add-on settings"
+msgstr "lisäosan asetukset"
+
+#: apps/plugins/templates/plugins/plugin_list.html:9
+msgid ""
+"Add-ons add features to Metra. Turning one off hides its pages, menu items "
+"and sections at once, and its data is kept for when it is turned on again."
+msgstr "Lisäosat tuovat Metraan uusia toimintoja. Kun lisäosa poistetaan käytöstä, sen sivut, valikkokohdat ja osiot piilotetaan heti, ja sen tiedot säilyvät, kunnes se otetaan taas käyttöön."
+
+#: apps/plugins/templates/plugins/plugin_list.html:13
+msgid ""
+"This list shows the add-ons installed on this server. Installing another one "
+"is done on the server, with METRA_PLUGINS."
+msgstr "Luettelossa näkyvät palvelimelle asennetut lisäosat. Uusi lisäosa asennetaan palvelimella METRA_PLUGINS-asetuksella."
+
+#: apps/plugins/templates/plugins/plugin_list.html:21
+msgid "Add-on"
+msgstr "Lisäosa"
+
+#: apps/plugins/templates/plugins/plugin_list.html:35
+#, python-format
+msgid "Turn off<span class=\"visually-hidden\"> %(plugin)s</span>"
+msgstr "Poista käytöstä<span class=\"visually-hidden\"> %(plugin)s</span>"
+
+#: apps/plugins/templates/plugins/plugin_list.html:38
+#, python-format
+msgid "Turn on<span class=\"visually-hidden\"> %(plugin)s</span>"
+msgstr "Ota käyttöön<span class=\"visually-hidden\"> %(plugin)s</span>"
+
+#: apps/plugins/templates/plugins/plugin_list.html:41
+#, python-format
+msgid "Settings<span class=\"visually-hidden\"> for %(plugin)s</span>"
+msgstr "Asetukset<span class=\"visually-hidden\">: %(plugin)s</span>"
+
+#: apps/plugins/templates/plugins/plugin_list.html:49
+msgid "No add-ons are installed."
+msgstr "Lisäosia ei ole asennettu."
+
+#: apps/plugins/templates/plugins/plugin_settings.html:3
+#: apps/plugins/templates/plugins/plugin_settings.html:6
+#, python-format
+msgid "Settings: %(plugin)s"
+msgstr "Asetukset: %(plugin)s"
+
+#: apps/plugins/templates/plugins/plugin_settings.html:9
+msgid ""
+"This add-on is off. Its settings are kept and apply when it is turned on."
+msgstr "Lisäosa ei ole käytössä. Sen asetukset säilyvät ja tulevat voimaan, kun se otetaan käyttöön."
+
+#: apps/plugins/views.py:82
+#, python-format
+msgid "%(plugin)s is on."
+msgstr "%(plugin)s on käytössä."
+
+#: apps/plugins/views.py:84
+#, python-format
+msgid "%(plugin)s is off. Its data is kept."
+msgstr "%(plugin)s ei ole käytössä. Sen tiedot säilyvät."
+
+#: apps/plugins/views.py:97
+#, python-format
+msgid "Remove the saved %(setting)s"
+msgstr "Poista tallennettu %(setting)s"
+
+#: apps/plugins/views.py:108
+#, python-format
+msgid ""
+"Set in the server environment (%(variable)s), so it cannot be changed here."
+msgstr "Asetettu palvelimen ympäristössä (%(variable)s), joten sitä ei voi muuttaa täällä."
+
+#: apps/plugins/views.py:131
+msgid "The saved value cannot be read with this server's key; enter it again."
+msgstr "Tallennettua arvoa ei voi lukea palvelimen avaimella. Anna se uudelleen."
+
+#: apps/plugins/views.py:133
+msgid "A value is saved. Leave this empty to keep it."
+msgstr "Arvo on tallennettu. Jätä kenttä tyhjäksi, jos haluat säilyttää sen."
+
+#: apps/plugins/views.py:169
+msgid "Saved the settings."
+msgstr "Asetukset tallennettu."
 
 #: apps/readings/admin.py:20
 msgid "Archive selected reading types"
@@ -3641,10 +3773,6 @@ msgstr "Jäsen"
 #: apps/readings/models.py:197
 msgid "round"
 msgstr "kierros"
-
-#: apps/readings/models.py:202
-msgid "value"
-msgstr "arvo"
 
 #: apps/readings/models.py:208
 msgid "entered by"
@@ -5593,15 +5721,15 @@ msgid "Setup is done. You can run it again from Settings."
 msgstr ""
 "Käyttöönotto on valmis. Voit käynnistää sen uudelleen kohdasta Asetukset."
 
-#: config/settings.py:181
+#: config/settings.py:185
 msgid "Swedish"
 msgstr "Ruotsi"
 
-#: config/settings.py:182
+#: config/settings.py:186
 msgid "English"
 msgstr "Englanti"
 
-#: config/settings.py:183
+#: config/settings.py:187
 msgid "Finnish (machine translated)"
 msgstr "Suomi (konekäännös)"
 
@@ -5675,9 +5803,6 @@ msgstr ""
 
 #~ msgid "Snapshots and backups"
 #~ msgstr "Tilannevedokset ja varmuuskopiot"
-
-#~ msgid "Plugins"
-#~ msgstr "Lisäosat"
 
 #, python-format
 #~ msgid "New %(unit_type)s"

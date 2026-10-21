@@ -14,6 +14,16 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- Settings > Add-ons: admins see the installed plugins with their version
+  and turn each one on or off without a restart. A plugin that is off
+  disappears from menus, pages, panels, help and the provider lists, and its
+  data is kept.
+- Plugin settings: a plugin lists its settings with `api.Setting` in
+  `metra_settings` and gets a settings page under Settings > Add-ons; read
+  them with `api.plugin_settings()`. Secrets are stored encrypted with the
+  new `METRA_SETTINGS_KEY` (derived from `METRA_SECRET_KEY` when not set),
+  never shown again and kept out of the audit log. A value set in the
+  environment wins and is shown as locked.
 - A Settings page of Metra's own at /settings/, grouped by task:
   Organisation, Register, Readings, Invoicing, Messages, Users and roles,
   Integrations, Backups and the Setup wizard, each entry with a short

@@ -40,7 +40,7 @@ def test_staff_pages_need_permission(board_client, admin, endpoint):
         )
 
 
-def test_anonymous_is_sent_to_login(client):
+def test_anonymous_is_sent_to_login(client, db):
     response = client.get(reverse("metra_webhooks:endpoint_list"))
 
     assert response.status_code == 302 and "login" in response["Location"]

@@ -40,6 +40,9 @@ if not SECRET_KEY:
 elif not DEBUG and SECRET_KEY in {"change-me", "insecure-development-key"}:
     # The key signs sessions and password resets; a published one lets anyone forge them.
     raise ImproperlyConfigured("METRA_SECRET_KEY is still the example value; generate a new one.")
+# Encrypts secrets saved in the app, such as plugins' API keys. Derived from
+# the secret key when not set; keep it when moving to another server.
+SETTINGS_KEY = os.environ.get("METRA_SETTINGS_KEY", "")
 
 ALLOWED_HOSTS = env_list("METRA_ALLOWED_HOSTS", "localhost,127.0.0.1")
 CSRF_TRUSTED_ORIGINS = env_list("METRA_CSRF_TRUSTED_ORIGINS")
@@ -89,6 +92,7 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "apps.plugins.middleware.PluginOffMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "allauth.account.middleware.AccountMiddleware",

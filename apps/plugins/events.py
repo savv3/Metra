@@ -9,16 +9,34 @@ database, so a receiver never sees a change that was rolled back.
 
 Receivers run in the request or worker that made the change; anything slow
 belongs in a background task. An error in a receiver is logged and does not
-undo the change.
+undo the change. Receivers in a plugin that an admin has turned off are
+skipped.
 """
 
 import logging
 
 from django.db import transaction
 from django.db.models.signals import post_save
-from django.dispatch import Signal
+from django.dispatch import Signal as DjangoSignal
 
 logger = logging.getLogger(__name__)
+
+
+class Signal(DjangoSignal):
+    """A signal whose receivers from a turned-off plugin are skipped."""
+
+    def _live_receivers(self, sender):
+        # Django's (private) hook for the receivers a send reaches; it returns
+        # the sync and the async ones.
+        sync, async_ = super()._live_receivers(sender)
+        return [r for r in sync if _on(r)], [r for r in async_ if _on(r)]
+
+
+def _on(receiver):
+    from . import state
+
+    return state.is_enabled(state.owner_of(getattr(receiver, "__module__", "")))
+
 
 # unit, created: a unit was added or changed (archiving is a change).
 unit_saved = Signal()

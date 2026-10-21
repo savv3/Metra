@@ -82,6 +82,15 @@ docker compose up --build                       # full stack, needs a .env (see 
   can move to their own repository later; see `docs/plugins.md`.
 - **Configuration:** every per-installation value is an environment variable
   prefixed `METRA_` and documented in `.env.example`. No secrets in the repo.
+  Settings an admin changes in the app (plugins' settings, `api.Setting`)
+  keep an environment variable that wins when set, and secrets saved in the
+  database are encrypted with `apps.plugins.secrets`, never shown again and
+  kept out of the audit log.
+- **Plugins on and off:** admins turn installed plugins on and off in the
+  app (`apps.plugins.state`). Anything a plugin adds through
+  `apps.plugins.api` is left out while it is off, so new extension points go
+  through `hooks.register`/`hooks.get` (or check `state.is_enabled`). In the
+  interface plugins are called add-ons (Tillägg, Lisäosat), never plugins.
 - **Data:** everything persistent lives under `METRA_DATA_DIR` (databases,
   uploads), so one directory is all a backup needs.
 - **Translations:** every user-facing string goes through `gettext` /

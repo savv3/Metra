@@ -78,7 +78,7 @@ def test_needs_credentials(monkeypatch):
         FortySixElks().send("0401234567", "Hej")
 
 
-def test_auto_uses_46elks_once_it_has_credentials(elks, settings):
+def test_auto_uses_46elks_once_it_has_credentials(elks, settings, db):
     from apps.messaging.registry import SMS, provider_for
 
     settings.MESSAGING = {**settings.MESSAGING, "sms_provider": "auto"}

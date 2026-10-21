@@ -33,6 +33,8 @@ class Provider:
 
     channel = ""
     name = ""
+    # The plugin that added the provider (set when it is registered), or None.
+    plugin = None
     # A short human description for pages that show the provider; empty means
     # the name is shown. Translatable.
     description = ""
@@ -58,28 +60,44 @@ class Provider:
 
 
 class ProviderRegistry:
+    """Providers by channel and name. A provider a plugin added is left out
+    while that plugin is turned off (see apps.plugins.state)."""
+
     def __init__(self):
         self._providers = {SMS: {}, EMAIL: {}}
 
     def register(self, provider_class):
         """Register a Provider subclass under its channel and name. Usable as a decorator."""
+        from apps.plugins import state
+
         if provider_class.channel not in self._providers:
             raise ValueError(f"Unknown channel {provider_class.channel!r}")
+        provider_class.plugin = state.owner_of(provider_class.__module__)
         self._providers[provider_class.channel][provider_class.name] = provider_class
         return provider_class
 
-    def names(self, channel):
-        return sorted(self._providers[channel])
+    def _available(self, channel):
+        from apps.plugins import state
+
+        return {
+            name: provider_class
+            for name, provider_class in self._providers[channel].items()
+            if state.is_enabled(getattr(provider_class, "plugin", None))
+        }
+
+    def names(self, channel, everything=False):
+        """The providers' names; with ``everything``, also those of plugins that are off."""
+        return sorted(self._providers[channel] if everything else self._available(channel))
 
     def get(self, channel, name):
         try:
-            return self._providers[channel][name]()
+            return self._available(channel)[name]()
         except KeyError:
             raise ProviderError(f"No {channel} provider called {name!r}") from None
 
     def configured(self, channel):
         """The first registered provider of the channel that is configured, or None."""
-        for provider_class in self._providers[channel].values():
+        for provider_class in self._available(channel).values():
             if provider_class.is_configured():
                 return provider_class()
         return None

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% blocktranslate with plugin=plugin.label %}Settings: {{ plugin }}{% endblocktranslate %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% blocktranslate with plugin=plugin.label %}Settings: {{ plugin }}{% endblocktranslate %}</h1>
+    <div class="actions"><a class="button" href="{% url 'plugins:list' %}">{% translate "Add-ons" %}</a></div>
+  </div>
+  {% if not plugin.enabled %}<p class="notice">{% translate "This add-on is off. Its settings are kept and apply when it is turned on." %}</p>{% endif %}
+  <form method="post" class="form form--narrow" novalidate autocomplete="off">
+    {% csrf_token %}
+    {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+      <a class="button" href="{% url 'plugins:list' %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+{% endblock %}
