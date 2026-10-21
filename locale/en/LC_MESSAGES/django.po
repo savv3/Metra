@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 17:13+0000\n"
+"POT-Creation-Date: 2026-10-21 17:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,19 +82,19 @@ msgid "Name"
 msgstr ""
 
 #: apps/accounts/templates/accounts/profile.html:16
-#: apps/core/templates/core/_contact.html:14 apps/invoicing/models.py:728
-#: apps/messaging/models.py:29
+#: apps/core/settings_page.py:147 apps/core/templates/core/_contact.html:14
+#: apps/invoicing/models.py:728 apps/messaging/models.py:29
 #: apps/messaging/templates/messaging/compose.html:20
 #: apps/register/csv_io.py:521 apps/register/models.py:274
 #: apps/register/templates/register/_person_results.html:8
 #: apps/register/templates/register/person_detail.html:19
 #: apps/register/templates/register/unit_detail.html:39 apps/setup/forms.py:142
-#: apps/setup/templates/setup/messaging.html:6
+#: apps/setup/templates/setup/messaging.html:4
 msgid "Email"
 msgstr ""
 
 #: apps/accounts/templates/accounts/profile.html:18
-#: apps/core/settings_page.py:181
+#: apps/core/settings_page.py:187
 msgid "Roles"
 msgstr ""
 
@@ -164,6 +164,7 @@ msgid "Show codes"
 msgstr ""
 
 #: apps/accounts/templates/accounts/profile.html:75
+#: apps/messaging/email_forms.py:42
 msgid "Password"
 msgstr ""
 
@@ -177,7 +178,7 @@ msgstr ""
 
 #: apps/backups/apps.py:7 apps/backups/templates/backups/backup_list.html:3
 #: apps/backups/templates/backups/backup_list.html:6
-#: apps/core/settings_page.py:204 apps/core/settings_page.py:207
+#: apps/core/settings_page.py:210 apps/core/settings_page.py:213
 msgid "Backups"
 msgstr ""
 
@@ -650,7 +651,7 @@ msgstr ""
 msgid "notices"
 msgstr ""
 
-#: apps/core/settings_page.py:71 apps/setup/views.py:39
+#: apps/core/settings_page.py:71 apps/setup/views.py:41
 msgid "Organisation"
 msgstr ""
 
@@ -724,51 +725,55 @@ msgstr ""
 msgid "What units pay: fixed fees and usage fees, with their fee lines."
 msgstr ""
 
-#: apps/core/settings_page.py:147
+#: apps/core/settings_page.py:148
+msgid "How email is sent: the mail server or service, and the from address."
+msgstr ""
+
+#: apps/core/settings_page.py:153
 msgid "Message templates"
 msgstr ""
 
-#: apps/core/settings_page.py:148
+#: apps/core/settings_page.py:154
 msgid "The texts of invoices, reminders, reading requests and other messages."
 msgstr ""
 
-#: apps/core/settings_page.py:154
+#: apps/core/settings_page.py:160
 msgid "Notices"
 msgstr ""
 
-#: apps/core/settings_page.py:155
+#: apps/core/settings_page.py:161
 msgid "Short notices on the public page and members' pages."
 msgstr ""
 
-#: apps/core/settings_page.py:161
+#: apps/core/settings_page.py:167
 msgid "Newsletter consents"
 msgstr ""
 
-#: apps/core/settings_page.py:162
+#: apps/core/settings_page.py:168
 msgid "The record of who subscribed to or unsubscribed from the newsletter."
 msgstr ""
 
-#: apps/core/settings_page.py:171
+#: apps/core/settings_page.py:177
 msgid "Users and roles"
 msgstr ""
 
-#: apps/core/settings_page.py:174
+#: apps/core/settings_page.py:180
 msgid "Users"
 msgstr ""
 
-#: apps/core/settings_page.py:175
+#: apps/core/settings_page.py:181
 msgid "Who can log in, and the role each one has."
 msgstr ""
 
-#: apps/core/settings_page.py:182
+#: apps/core/settings_page.py:188
 msgid "What each role may see and do."
 msgstr ""
 
-#: apps/core/settings_page.py:191
+#: apps/core/settings_page.py:197
 msgid "Integrations"
 msgstr ""
 
-#: apps/core/settings_page.py:194 apps/plugins/apps.py:7
+#: apps/core/settings_page.py:200 apps/plugins/apps.py:7
 #: apps/plugins/templates/plugins/plugin_list.html:3
 #: apps/plugins/templates/plugins/plugin_list.html:6
 #: apps/plugins/templates/plugins/plugin_list.html:18
@@ -776,37 +781,37 @@ msgstr ""
 msgid "Add-ons"
 msgstr ""
 
-#: apps/core/settings_page.py:195
+#: apps/core/settings_page.py:201
 msgid "Turn add-ons on or off, and their settings."
 msgstr ""
 
-#: apps/core/settings_page.py:208
+#: apps/core/settings_page.py:214
 msgid "Snapshots of the register, here and offsite, and restoring one."
 msgstr ""
 
-#: apps/core/settings_page.py:216
+#: apps/core/settings_page.py:222
 msgid "Setup wizard"
 msgstr ""
 
-#: apps/core/settings_page.py:219
+#: apps/core/settings_page.py:225
 msgid "Run the setup wizard"
 msgstr ""
 
-#: apps/core/settings_page.py:221
+#: apps/core/settings_page.py:227
 msgid ""
 "Organisation, language, logo, units and fields, email and SMS, invoices and "
 "the board, step by step."
 msgstr ""
 
-#: apps/core/settings_page.py:231
+#: apps/core/settings_page.py:237
 msgid "Advanced"
 msgstr ""
 
-#: apps/core/settings_page.py:234
+#: apps/core/settings_page.py:240
 msgid "All data tables"
 msgstr ""
 
-#: apps/core/settings_page.py:235
+#: apps/core/settings_page.py:241
 msgid "The full Django admin, with every table. For technical changes."
 msgstr ""
 
@@ -870,6 +875,7 @@ msgstr ""
 
 #: apps/core/templates/core/settings.html:3
 #: apps/core/templates/core/settings.html:6
+#: apps/messaging/templates/messaging/email_settings.html:7
 #: apps/plugins/templates/plugins/plugin_list.html:7
 #: apps/register/templates/register/unit_type_choose.html:16
 #: templates/base.html:27
@@ -1541,7 +1547,7 @@ msgstr ""
 #: apps/invoicing/templates/invoicing/invoice_list.html:3
 #: apps/invoicing/templates/invoicing/invoice_list.html:6
 #: apps/invoicing/templates/invoicing/run_detail.html:31
-#: apps/messaging/models.py:43 apps/setup/views.py:44 templates/base.html:24
+#: apps/messaging/models.py:43 apps/setup/views.py:46 templates/base.html:24
 msgid "Invoices"
 msgstr ""
 
@@ -2185,8 +2191,8 @@ msgid "All issued invoices of this run have been sent."
 msgstr ""
 
 #: apps/invoicing/views.py:353 apps/invoicing/views.py:416
-#: apps/messaging/views.py:53 apps/messaging/views.py:155
-#: apps/messaging/views.py:232
+#: apps/messaging/views.py:54 apps/messaging/views.py:156
+#: apps/messaging/views.py:233
 msgid "Sending has started. This page shows how it goes."
 msgstr ""
 
@@ -2248,6 +2254,86 @@ msgstr ""
 
 #: apps/messaging/broadcast.py:161
 msgid "No phone number or email address to send to."
+msgstr ""
+
+#: apps/messaging/email_forms.py:17
+#: apps/setup/templates/setup/messaging.html:23
+msgid "Not set up"
+msgstr ""
+
+#: apps/messaging/email_forms.py:17 apps/messaging/providers.py:25
+msgid "SMTP (your own mail server or account)"
+msgstr ""
+
+#: apps/messaging/email_forms.py:19
+msgid "The server log (development)"
+msgstr ""
+
+#: apps/messaging/email_forms.py:30
+msgid "Send email through"
+msgstr ""
+
+#: apps/messaging/email_forms.py:32
+msgid "Mail server"
+msgstr ""
+
+#: apps/messaging/email_forms.py:34
+msgid "For example smtp.example.fi."
+msgstr ""
+
+#: apps/messaging/email_forms.py:36
+msgid "Port"
+msgstr ""
+
+#: apps/messaging/email_forms.py:38
+msgid "Encryption"
+msgstr ""
+
+#: apps/messaging/email_forms.py:40
+msgid "User name"
+msgstr ""
+
+#: apps/messaging/email_forms.py:47
+msgid "Remove the saved password"
+msgstr ""
+
+#: apps/messaging/email_forms.py:50
+msgid "From address"
+msgstr ""
+
+#: apps/messaging/email_forms.py:52
+msgid "The address members see the email come from."
+msgstr ""
+
+#: apps/messaging/email_forms.py:55 apps/messaging/models.py:385
+msgid "Reply-To address"
+msgstr ""
+
+#: apps/messaging/email_forms.py:57 apps/messaging/models.py:387
+msgid "Where replies go, if not to the from address."
+msgstr ""
+
+#: apps/messaging/email_forms.py:83
+msgid ""
+"The saved password cannot be read with this server's key; enter it again."
+msgstr ""
+
+#: apps/messaging/email_forms.py:85
+msgid "A password is saved. Leave this empty to keep it."
+msgstr ""
+
+#: apps/messaging/email_forms.py:103 apps/plugins/views.py:108
+#, python-format
+msgid ""
+"Set in the server environment (%(variable)s), so it cannot be changed here."
+msgstr ""
+
+#: apps/messaging/email_forms.py:112
+msgid "Enter the mail server to send through SMTP."
+msgstr ""
+
+#: apps/messaging/email_forms.py:116
+msgid "Enter the address email is sent from."
 msgstr ""
 
 #: apps/messaging/forms.py:18
@@ -2460,7 +2546,8 @@ msgstr ""
 
 #: apps/messaging/models.py:28
 #: apps/messaging/templates/messaging/compose.html:19
-#: apps/register/models.py:275 apps/setup/templates/setup/messaging.html:8
+#: apps/register/models.py:275 apps/setup/templates/setup/messaging.html:20
+#: apps/setup/templates/setup/messaging.html:22
 msgid "SMS"
 msgstr ""
 
@@ -2714,6 +2801,61 @@ msgstr ""
 msgid "attachments"
 msgstr ""
 
+#: apps/messaging/models.py:370
+msgid "STARTTLS (usually port 587)"
+msgstr ""
+
+#: apps/messaging/models.py:371
+msgid "SSL/TLS (usually port 465)"
+msgstr ""
+
+#: apps/messaging/models.py:372
+msgid "None"
+msgstr ""
+
+#: apps/messaging/models.py:374
+msgid "send email through"
+msgstr ""
+
+#: apps/messaging/models.py:375
+msgid "mail server"
+msgstr ""
+
+#: apps/messaging/models.py:376
+msgid "port"
+msgstr ""
+
+#: apps/messaging/models.py:377
+msgid "user name"
+msgstr ""
+
+#: apps/messaging/models.py:379
+msgid "password"
+msgstr ""
+
+#: apps/messaging/models.py:381
+msgid "encryption"
+msgstr ""
+
+#: apps/messaging/models.py:383
+msgid "from address"
+msgstr ""
+
+#: apps/messaging/models.py:389 apps/plugins/models.py:13
+#: apps/plugins/models.py:39
+msgid "changed"
+msgstr ""
+
+#: apps/messaging/models.py:392 apps/messaging/models.py:393
+msgid "email settings"
+msgstr ""
+
+#: apps/messaging/models.py:396
+#: apps/messaging/templates/messaging/email_settings.html:3
+#: apps/messaging/templates/messaging/email_settings.html:6
+msgid "Email settings"
+msgstr ""
+
 #: apps/messaging/newsletter.py:54
 #, python-format
 msgid "You get this because you subscribed. Unsubscribe: %(url)s"
@@ -2725,14 +2867,15 @@ msgstr ""
 
 #: apps/messaging/newsletter.py:118
 #: apps/messaging/templates/messaging/_send_forms.html:8
+#: apps/messaging/views.py:346
 msgid "Email is not set up."
 msgstr ""
 
-#: apps/messaging/providers.py:66
+#: apps/messaging/providers.py:70
 msgid "Shown in the server log (development)"
 msgstr ""
 
-#: apps/messaging/providers.py:83
+#: apps/messaging/providers.py:87
 msgid "Kept in memory, nothing is sent (tests)"
 msgstr ""
 
@@ -2746,6 +2889,16 @@ msgstr ""
 
 #: apps/messaging/templates/messaging/_attachments.html:8
 msgid "SMS recipients get a link to the files at the end of the SMS."
+msgstr ""
+
+#: apps/messaging/templates/messaging/_email_settings_fields.html:4
+msgid "SMTP"
+msgstr ""
+
+#: apps/messaging/templates/messaging/_email_settings_fields.html:5
+msgid ""
+"Only used when email goes through SMTP. Your email provider or IT support "
+"can tell you these."
 msgstr ""
 
 #: apps/messaging/templates/messaging/_person_newsletter.html:6
@@ -3017,6 +3170,37 @@ msgstr ""
 msgid "Nothing is sent until you have checked the recipients and confirmed."
 msgstr ""
 
+#: apps/messaging/templates/messaging/email_settings.html:9
+msgid ""
+"All email from Metra goes this way: messages, newsletters, invoices and "
+"reminders, and login codes and invitations."
+msgstr ""
+
+#: apps/messaging/templates/messaging/email_settings.html:16
+#: apps/notifications/templates/notifications/settings.html:19
+#: apps/plugins/templates/plugins/plugin_settings.html:14
+#: apps/readings/templates/readings/_round_row.html:20
+#: apps/readings/templates/readings/reading_form.html:30
+#: apps/readings/templates/readings/round_form.html:19
+#: apps/register/templates/register/person_form.html:37
+#: apps/register/templates/register/unit_form.html:28
+msgid "Save"
+msgstr ""
+
+#: apps/messaging/templates/messaging/email_settings.html:19
+msgid "Send a test"
+msgstr ""
+
+#: apps/messaging/templates/messaging/email_settings.html:23
+#: apps/setup/templates/setup/messaging.html:16
+msgid "Send a test email to"
+msgstr ""
+
+#: apps/messaging/templates/messaging/email_settings.html:24
+#: apps/setup/templates/setup/messaging.html:17
+msgid "Send test email"
+msgstr ""
+
 #: apps/messaging/templates/messaging/files.html:3
 #: apps/messaging/templates/messaging/files.html:5
 msgid "Files"
@@ -3117,20 +3301,42 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr ""
 
-#: apps/messaging/views.py:131
+#: apps/messaging/views.py:132
 msgid "Nobody can be reached with these choices."
 msgstr ""
 
-#: apps/messaging/views.py:203
+#: apps/messaging/views.py:204
 msgid "The notice is no longer shown."
 msgstr ""
 
-#: apps/messaging/views.py:226
+#: apps/messaging/views.py:227
 msgid "Everyone who wants the newsletter"
 msgstr ""
 
-#: apps/messaging/views.py:262
+#: apps/messaging/views.py:263
 msgid "Saved the newsletter choice."
+msgstr ""
+
+#: apps/messaging/views.py:349 apps/setup/views.py:214
+msgid "This is a test message from Metra. If you got it, sending works."
+msgstr ""
+
+#: apps/messaging/views.py:350
+msgid "Test message from Metra"
+msgstr ""
+
+#: apps/messaging/views.py:353 apps/setup/views.py:216
+#, python-format
+msgid "The test failed: %(error)s"
+msgstr ""
+
+#: apps/messaging/views.py:355 apps/setup/views.py:218
+#, python-format
+msgid "Test sent to %(to)s."
+msgstr ""
+
+#: apps/messaging/views.py:368 apps/setup/views.py:185
+msgid "Saved the email settings."
 msgstr ""
 
 #: apps/notifications/apps.py:7
@@ -3338,16 +3544,6 @@ msgstr ""
 msgid "Notify me when"
 msgstr ""
 
-#: apps/notifications/templates/notifications/settings.html:19
-#: apps/plugins/templates/plugins/plugin_settings.html:14
-#: apps/readings/templates/readings/_round_row.html:20
-#: apps/readings/templates/readings/reading_form.html:30
-#: apps/readings/templates/readings/round_form.html:19
-#: apps/register/templates/register/person_form.html:37
-#: apps/register/templates/register/unit_form.html:28
-msgid "Save"
-msgstr ""
-
 #: apps/notifications/templates/notifications/settings.html:22
 msgid "There are no notifications for your role."
 msgstr ""
@@ -3367,10 +3563,6 @@ msgstr ""
 #: apps/plugins/models.py:11 apps/plugins/models.py:25
 #: apps/plugins/models.py:36
 msgid "add-on"
-msgstr ""
-
-#: apps/plugins/models.py:13 apps/plugins/models.py:39
-msgid "changed"
 msgstr ""
 
 #: apps/plugins/models.py:16 apps/plugins/models.py:42
@@ -3456,12 +3648,6 @@ msgstr ""
 #: apps/plugins/views.py:97
 #, python-format
 msgid "Remove the saved %(setting)s"
-msgstr ""
-
-#: apps/plugins/views.py:108
-#, python-format
-msgid ""
-"Set in the server environment (%(variable)s), so it cannot be changed here."
 msgstr ""
 
 #: apps/plugins/views.py:131
@@ -4706,7 +4892,7 @@ msgid "Print self-service letter"
 msgstr ""
 
 #: apps/selfservice/templates/selfservice/base.html:9
-#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:263
+#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:279
 #: templates/base.html:7 templates/base.html:18
 msgid "Metra"
 msgstr ""
@@ -4715,7 +4901,7 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/base.html:19 apps/setup/views.py:40
+#: apps/selfservice/templates/selfservice/base.html:19 apps/setup/views.py:42
 #: templates/_language_form.html:5
 msgid "Language"
 msgstr ""
@@ -5174,7 +5360,7 @@ msgid ""
 msgstr ""
 
 #: apps/setup/templates/setup/board.html:21
-#: apps/setup/templates/setup/messaging.html:28
+#: apps/setup/templates/setup/messaging.html:33
 #: apps/setup/templates/setup/types.html:39
 msgid "Continue"
 msgstr ""
@@ -5221,61 +5407,43 @@ msgstr ""
 msgid "Remove the logo"
 msgstr ""
 
-#: apps/setup/templates/setup/logo.html:15 apps/setup/views.py:132
+#: apps/setup/templates/setup/logo.html:15 apps/setup/views.py:134
 msgid "Fill in the organisation first; the logo belongs to it."
 msgstr ""
 
-#: apps/setup/templates/setup/messaging.html:4
+#: apps/setup/templates/setup/messaging.html:5
 msgid ""
-"Email and SMS are set by whoever installed Metra, in the server's settings "
-"file (.env). Here you can see what is set up and send yourself a test."
+"All email from Metra goes this way: messages, newsletters, invoices and "
+"reminders, and login codes and invitations. You can change it later under "
+"Settings > Email."
 msgstr ""
 
-#: apps/setup/templates/setup/messaging.html:7
-#: apps/setup/templates/setup/messaging.html:9
+#: apps/setup/templates/setup/messaging.html:10
+msgid "Save email settings"
+msgstr ""
+
+#: apps/setup/templates/setup/messaging.html:23
 msgid "Set up"
 msgstr ""
 
-#: apps/setup/templates/setup/messaging.html:7
-#, python-format
-msgid "Sent from %(sender)s"
-msgstr ""
-
-#: apps/setup/templates/setup/messaging.html:7
-#: apps/setup/templates/setup/messaging.html:9
-msgid "Not set up"
-msgstr ""
-
-#: apps/setup/templates/setup/messaging.html:9
+#: apps/setup/templates/setup/messaging.html:23
 #, python-format
 msgid "Sender %(sender)s"
 msgstr ""
 
-#: apps/setup/templates/setup/messaging.html:9
+#: apps/setup/templates/setup/messaging.html:23
 #, python-format
 msgid ""
 "Turn on an SMS add-on and enter its details under <a "
 "href=\"%(addons)s\">Settings &rsaquo; Add-ons</a>."
 msgstr ""
 
-#: apps/setup/templates/setup/messaging.html:15
-msgid "Send a test email to"
-msgstr ""
-
-#: apps/setup/templates/setup/messaging.html:16
-msgid "Send test email"
-msgstr ""
-
-#: apps/setup/templates/setup/messaging.html:23
+#: apps/setup/templates/setup/messaging.html:29
 msgid "Send a test SMS to"
 msgstr ""
 
-#: apps/setup/templates/setup/messaging.html:24
+#: apps/setup/templates/setup/messaging.html:30
 msgid "Send test SMS"
-msgstr ""
-
-#: apps/setup/templates/setup/messaging.html:27
-msgid "How to set them is described in INSTALL.md, under Email and SMS."
 msgstr ""
 
 #: apps/setup/templates/setup/organisation.html:4
@@ -5330,69 +5498,51 @@ msgstr ""
 msgid "Add field"
 msgstr ""
 
-#: apps/setup/views.py:41
+#: apps/setup/views.py:43
 msgid "Logo"
 msgstr ""
 
-#: apps/setup/views.py:42
+#: apps/setup/views.py:44
 msgid "Units and fields"
 msgstr ""
 
-#: apps/setup/views.py:43
+#: apps/setup/views.py:45
 msgid "Email and SMS"
 msgstr ""
 
-#: apps/setup/views.py:45
+#: apps/setup/views.py:47
 msgid "Invite the board"
 msgstr ""
 
-#: apps/setup/views.py:75
+#: apps/setup/views.py:77
 msgid "Saved."
 msgstr ""
 
-#: apps/setup/views.py:136
+#: apps/setup/views.py:138
 msgid "The logo was removed."
 msgstr ""
 
-#: apps/setup/views.py:153
+#: apps/setup/views.py:155
 #, python-format
 msgid "Added %(name)s with its fields and a water meter."
 msgstr ""
 
-#: apps/setup/views.py:184
-msgid "This is a test message from Metra. If you got it, sending works."
-msgstr ""
-
-#: apps/setup/views.py:187
+#: apps/setup/views.py:213
 msgid "This channel is not set up."
 msgstr ""
 
-#: apps/setup/views.py:188
-msgid "Test message from Metra"
-msgstr ""
-
-#: apps/setup/views.py:190
-#, python-format
-msgid "The test failed: %(error)s"
-msgstr ""
-
-#: apps/setup/views.py:192
-#, python-format
-msgid "Test sent to %(to)s."
-msgstr ""
-
-#: apps/setup/views.py:237
+#: apps/setup/views.py:253
 msgid ""
 "Email is not set up, so no invitation can be sent. Add the person under "
 "Settings."
 msgstr ""
 
-#: apps/setup/views.py:268
+#: apps/setup/views.py:284
 #, python-format
 msgid "Your account for %(organisation)s"
 msgstr ""
 
-#: apps/setup/views.py:271
+#: apps/setup/views.py:287
 #, python-format
 msgid ""
 "Hello %(name)s,\n"
@@ -5406,17 +5556,17 @@ msgid ""
 "The link works for a few days."
 msgstr ""
 
-#: apps/setup/views.py:281
+#: apps/setup/views.py:297
 #, python-format
 msgid "The invitation could not be sent: %(error)s"
 msgstr ""
 
-#: apps/setup/views.py:283
+#: apps/setup/views.py:299
 #, python-format
 msgid "Invitation sent to %(email)s."
 msgstr ""
 
-#: apps/setup/views.py:304
+#: apps/setup/views.py:320
 msgid "Setup is done. You can run it again from Settings."
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 17:13+0000\n"
+"POT-Creation-Date: 2026-10-21 17:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,19 +84,19 @@ msgid "Name"
 msgstr "Nimi"
 
 #: apps/accounts/templates/accounts/profile.html:16
-#: apps/core/templates/core/_contact.html:14 apps/invoicing/models.py:728
-#: apps/messaging/models.py:29
+#: apps/core/settings_page.py:147 apps/core/templates/core/_contact.html:14
+#: apps/invoicing/models.py:728 apps/messaging/models.py:29
 #: apps/messaging/templates/messaging/compose.html:20
 #: apps/register/csv_io.py:521 apps/register/models.py:274
 #: apps/register/templates/register/_person_results.html:8
 #: apps/register/templates/register/person_detail.html:19
 #: apps/register/templates/register/unit_detail.html:39 apps/setup/forms.py:142
-#: apps/setup/templates/setup/messaging.html:6
+#: apps/setup/templates/setup/messaging.html:4
 msgid "Email"
 msgstr "Sähköposti"
 
 #: apps/accounts/templates/accounts/profile.html:18
-#: apps/core/settings_page.py:181
+#: apps/core/settings_page.py:187
 msgid "Roles"
 msgstr "Roolit"
 
@@ -169,6 +169,7 @@ msgid "Show codes"
 msgstr "Näytä koodit"
 
 #: apps/accounts/templates/accounts/profile.html:75
+#: apps/messaging/email_forms.py:42
 msgid "Password"
 msgstr "Salasana"
 
@@ -182,7 +183,7 @@ msgstr "Vaihda salasana"
 
 #: apps/backups/apps.py:7 apps/backups/templates/backups/backup_list.html:3
 #: apps/backups/templates/backups/backup_list.html:6
-#: apps/core/settings_page.py:204 apps/core/settings_page.py:207
+#: apps/core/settings_page.py:210 apps/core/settings_page.py:213
 msgid "Backups"
 msgstr "Varmuuskopiot"
 
@@ -704,7 +705,7 @@ msgid "notices"
 msgstr "tiedotteet"
 
 #
-#: apps/core/settings_page.py:71 apps/setup/views.py:39
+#: apps/core/settings_page.py:71 apps/setup/views.py:41
 msgid "Organisation"
 msgstr "Organisaatio"
 
@@ -787,59 +788,65 @@ msgid "What units pay: fixed fees and usage fees, with their fee lines."
 msgstr ""
 "Mitä yksiköt maksavat: kiinteät maksut ja kulutusmaksut maksuriveineen."
 
+#: apps/core/settings_page.py:148
+msgid "How email is sent: the mail server or service, and the from address."
+msgstr ""
+"Miten sähköposti lähetetään: sähköpostipalvelin tai palvelu ja lähettäjän "
+"osoite."
+
 #
-#: apps/core/settings_page.py:147
+#: apps/core/settings_page.py:153
 msgid "Message templates"
 msgstr "Viestipohjat"
 
-#: apps/core/settings_page.py:148
+#: apps/core/settings_page.py:154
 msgid "The texts of invoices, reminders, reading requests and other messages."
 msgstr "Laskujen, muistutusten, lukemapyyntöjen ja muiden viestien tekstit."
 
 #
-#: apps/core/settings_page.py:154
+#: apps/core/settings_page.py:160
 msgid "Notices"
 msgstr "Ilmoitukset"
 
 #
-#: apps/core/settings_page.py:155
+#: apps/core/settings_page.py:161
 msgid "Short notices on the public page and members' pages."
 msgstr "Lyhyet ilmoitukset julkisella sivulla ja jäsenten sivuilla."
 
 #
-#: apps/core/settings_page.py:161
+#: apps/core/settings_page.py:167
 msgid "Newsletter consents"
 msgstr "Uutiskirjeen suostumukset"
 
 #
-#: apps/core/settings_page.py:162
+#: apps/core/settings_page.py:168
 msgid "The record of who subscribed to or unsubscribed from the newsletter."
 msgstr "Tiedot siitä, kuka on tilannut uutiskirjeen tai perunut tilauksen."
 
 #
-#: apps/core/settings_page.py:171
+#: apps/core/settings_page.py:177
 msgid "Users and roles"
 msgstr "Käyttäjät ja roolit"
 
 #
-#: apps/core/settings_page.py:174
+#: apps/core/settings_page.py:180
 msgid "Users"
 msgstr "Käyttäjät"
 
-#: apps/core/settings_page.py:175
+#: apps/core/settings_page.py:181
 msgid "Who can log in, and the role each one has."
 msgstr "Kuka voi kirjautua sisään ja mikä rooli kullakin on."
 
-#: apps/core/settings_page.py:182
+#: apps/core/settings_page.py:188
 msgid "What each role may see and do."
 msgstr "Mitä kukin rooli saa nähdä ja tehdä."
 
 #
-#: apps/core/settings_page.py:191
+#: apps/core/settings_page.py:197
 msgid "Integrations"
 msgstr "Integraatiot"
 
-#: apps/core/settings_page.py:194 apps/plugins/apps.py:7
+#: apps/core/settings_page.py:200 apps/plugins/apps.py:7
 #: apps/plugins/templates/plugins/plugin_list.html:3
 #: apps/plugins/templates/plugins/plugin_list.html:6
 #: apps/plugins/templates/plugins/plugin_list.html:18
@@ -847,24 +854,24 @@ msgstr "Integraatiot"
 msgid "Add-ons"
 msgstr "Lisäosat"
 
-#: apps/core/settings_page.py:195
+#: apps/core/settings_page.py:201
 msgid "Turn add-ons on or off, and their settings."
 msgstr "Ota lisäosat käyttöön tai pois käytöstä ja muuta niiden asetuksia."
 
 #
-#: apps/core/settings_page.py:208
+#: apps/core/settings_page.py:214
 msgid "Snapshots of the register, here and offsite, and restoring one."
 msgstr "Rekisterin varmuuskopiot täällä ja muualla sekä niiden palauttaminen."
 
-#: apps/core/settings_page.py:216
+#: apps/core/settings_page.py:222
 msgid "Setup wizard"
 msgstr "Käyttöönotto"
 
-#: apps/core/settings_page.py:219
+#: apps/core/settings_page.py:225
 msgid "Run the setup wizard"
 msgstr "Käynnistä käyttöönotto"
 
-#: apps/core/settings_page.py:221
+#: apps/core/settings_page.py:227
 msgid ""
 "Organisation, language, logo, units and fields, email and SMS, invoices and "
 "the board, step by step."
@@ -872,16 +879,16 @@ msgstr ""
 "Organisaatio, kieli, logo, yksiköt ja kentät, sähköposti ja tekstiviestit, "
 "laskut ja hallitus vaihe vaiheelta."
 
-#: apps/core/settings_page.py:231
+#: apps/core/settings_page.py:237
 msgid "Advanced"
 msgstr "Lisäasetukset"
 
 #
-#: apps/core/settings_page.py:234
+#: apps/core/settings_page.py:240
 msgid "All data tables"
 msgstr "Kaikki tietotaulut"
 
-#: apps/core/settings_page.py:235
+#: apps/core/settings_page.py:241
 msgid "The full Django admin, with every table. For technical changes."
 msgstr "Koko Django-ylläpito kaikkine tauluineen. Teknisiä muutoksia varten."
 
@@ -947,6 +954,7 @@ msgstr "Henkilökunnan kirjautuminen"
 
 #: apps/core/templates/core/settings.html:3
 #: apps/core/templates/core/settings.html:6
+#: apps/messaging/templates/messaging/email_settings.html:7
 #: apps/plugins/templates/plugins/plugin_list.html:7
 #: apps/register/templates/register/unit_type_choose.html:16
 #: templates/base.html:27
@@ -1631,7 +1639,7 @@ msgstr "%(type)s on pienempi kuin edellinen lukema."
 #: apps/invoicing/templates/invoicing/invoice_list.html:3
 #: apps/invoicing/templates/invoicing/invoice_list.html:6
 #: apps/invoicing/templates/invoicing/run_detail.html:31
-#: apps/messaging/models.py:43 apps/setup/views.py:44 templates/base.html:24
+#: apps/messaging/models.py:43 apps/setup/views.py:46 templates/base.html:24
 msgid "Invoices"
 msgstr "Laskut"
 
@@ -2305,8 +2313,8 @@ msgid "All issued invoices of this run have been sent."
 msgstr "Kaikki tämän kierroksen laaditut laskut on lähetetty."
 
 #: apps/invoicing/views.py:353 apps/invoicing/views.py:416
-#: apps/messaging/views.py:53 apps/messaging/views.py:155
-#: apps/messaging/views.py:232
+#: apps/messaging/views.py:54 apps/messaging/views.py:156
+#: apps/messaging/views.py:233
 msgid "Sending has started. This page shows how it goes."
 msgstr "Lähetys on alkanut. Tällä sivulla näkyy, miten se etenee."
 
@@ -2371,6 +2379,91 @@ msgstr "Tiedostot:"
 #: apps/messaging/broadcast.py:161
 msgid "No phone number or email address to send to."
 msgstr "Ei puhelinnumeroa tai sähköpostiosoitetta, johon lähettää."
+
+#
+#: apps/messaging/email_forms.py:17
+#: apps/setup/templates/setup/messaging.html:23
+msgid "Not set up"
+msgstr "Ei määritetty"
+
+#: apps/messaging/email_forms.py:17 apps/messaging/providers.py:25
+msgid "SMTP (your own mail server or account)"
+msgstr "SMTP (oma sähköpostipalvelin tai -tili)"
+
+#: apps/messaging/email_forms.py:19
+msgid "The server log (development)"
+msgstr "Palvelimen loki (kehitys)"
+
+#: apps/messaging/email_forms.py:30
+msgid "Send email through"
+msgstr "Lähetä sähköposti käyttäen"
+
+#: apps/messaging/email_forms.py:32
+msgid "Mail server"
+msgstr "Sähköpostipalvelin"
+
+#: apps/messaging/email_forms.py:34
+msgid "For example smtp.example.fi."
+msgstr "Esimerkiksi smtp.example.fi."
+
+#: apps/messaging/email_forms.py:36
+msgid "Port"
+msgstr "Portti"
+
+#: apps/messaging/email_forms.py:38
+msgid "Encryption"
+msgstr "Salaus"
+
+#: apps/messaging/email_forms.py:40
+msgid "User name"
+msgstr "Käyttäjätunnus"
+
+#: apps/messaging/email_forms.py:47
+msgid "Remove the saved password"
+msgstr "Poista tallennettu salasana"
+
+#: apps/messaging/email_forms.py:50
+msgid "From address"
+msgstr "Lähettäjän osoite"
+
+#: apps/messaging/email_forms.py:52
+msgid "The address members see the email come from."
+msgstr "Osoite, josta jäsenet näkevät sähköpostin tulevan."
+
+#: apps/messaging/email_forms.py:55 apps/messaging/models.py:385
+msgid "Reply-To address"
+msgstr "Vastausosoite"
+
+#: apps/messaging/email_forms.py:57 apps/messaging/models.py:387
+msgid "Where replies go, if not to the from address."
+msgstr "Minne vastaukset menevät, jos ei lähettäjän osoitteeseen."
+
+#: apps/messaging/email_forms.py:83
+msgid ""
+"The saved password cannot be read with this server's key; enter it again."
+msgstr ""
+"Tallennettua salasanaa ei voi lukea palvelimen avaimella. Anna se uudelleen."
+
+#: apps/messaging/email_forms.py:85
+msgid "A password is saved. Leave this empty to keep it."
+msgstr ""
+"Salasana on tallennettu. Jätä kenttä tyhjäksi, jos haluat säilyttää sen."
+
+#: apps/messaging/email_forms.py:103 apps/plugins/views.py:108
+#, python-format
+msgid ""
+"Set in the server environment (%(variable)s), so it cannot be changed here."
+msgstr ""
+"Asetettu palvelimen ympäristössä (%(variable)s), joten sitä ei voi muuttaa "
+"täällä."
+
+#: apps/messaging/email_forms.py:112
+msgid "Enter the mail server to send through SMTP."
+msgstr "Anna sähköpostipalvelin, jonka kautta SMTP-lähetys tehdään."
+
+#: apps/messaging/email_forms.py:116
+msgid "Enter the address email is sent from."
+msgstr "Anna osoite, josta sähköposti lähetetään."
 
 #: apps/messaging/forms.py:18
 msgid "Everyone"
@@ -2602,7 +2695,8 @@ msgstr "Esimerkiksi: allekirjoitettu lomake vuosikokouksessa."
 
 #: apps/messaging/models.py:28
 #: apps/messaging/templates/messaging/compose.html:19
-#: apps/register/models.py:275 apps/setup/templates/setup/messaging.html:8
+#: apps/register/models.py:275 apps/setup/templates/setup/messaging.html:20
+#: apps/setup/templates/setup/messaging.html:22
 msgid "SMS"
 msgstr "SMS"
 
@@ -2865,6 +2959,61 @@ msgstr "liite"
 msgid "attachments"
 msgstr "liitteet"
 
+#: apps/messaging/models.py:370
+msgid "STARTTLS (usually port 587)"
+msgstr "STARTTLS (yleensä portti 587)"
+
+#: apps/messaging/models.py:371
+msgid "SSL/TLS (usually port 465)"
+msgstr "SSL/TLS (yleensä portti 465)"
+
+#: apps/messaging/models.py:372
+msgid "None"
+msgstr "Ei mitään"
+
+#: apps/messaging/models.py:374
+msgid "send email through"
+msgstr "lähetä sähköposti käyttäen"
+
+#: apps/messaging/models.py:375
+msgid "mail server"
+msgstr "sähköpostipalvelin"
+
+#: apps/messaging/models.py:376
+msgid "port"
+msgstr "portti"
+
+#: apps/messaging/models.py:377
+msgid "user name"
+msgstr "käyttäjätunnus"
+
+#: apps/messaging/models.py:379
+msgid "password"
+msgstr "salasana"
+
+#: apps/messaging/models.py:381
+msgid "encryption"
+msgstr "salaus"
+
+#: apps/messaging/models.py:383
+msgid "from address"
+msgstr "lähettäjän osoite"
+
+#: apps/messaging/models.py:389 apps/plugins/models.py:13
+#: apps/plugins/models.py:39
+msgid "changed"
+msgstr "muutettu"
+
+#: apps/messaging/models.py:392 apps/messaging/models.py:393
+msgid "email settings"
+msgstr "sähköpostiasetukset"
+
+#: apps/messaging/models.py:396
+#: apps/messaging/templates/messaging/email_settings.html:3
+#: apps/messaging/templates/messaging/email_settings.html:6
+msgid "Email settings"
+msgstr "Sähköpostiasetukset"
+
 #: apps/messaging/newsletter.py:54
 #, python-format
 msgid "You get this because you subscribed. Unsubscribe: %(url)s"
@@ -2876,14 +3025,15 @@ msgstr "Tilaus peruutettiin ennen lähetystä."
 
 #: apps/messaging/newsletter.py:118
 #: apps/messaging/templates/messaging/_send_forms.html:8
+#: apps/messaging/views.py:346
 msgid "Email is not set up."
 msgstr "Sähköpostia ei ole otettu käyttöön."
 
-#: apps/messaging/providers.py:66
+#: apps/messaging/providers.py:70
 msgid "Shown in the server log (development)"
 msgstr "Näkyy palvelimen lokissa (kehitys)"
 
-#: apps/messaging/providers.py:83
+#: apps/messaging/providers.py:87
 msgid "Kept in memory, nothing is sent (tests)"
 msgstr "Tallennetaan muistiin, mitään ei lähetetä (testit)"
 
@@ -2899,6 +3049,18 @@ msgstr "[henkilökohtainen linkki]"
 msgid "SMS recipients get a link to the files at the end of the SMS."
 msgstr ""
 "Tekstiviestin vastaanottajat saavat linkin tiedostoihin viestin lopussa."
+
+#: apps/messaging/templates/messaging/_email_settings_fields.html:4
+msgid "SMTP"
+msgstr "SMTP"
+
+#: apps/messaging/templates/messaging/_email_settings_fields.html:5
+msgid ""
+"Only used when email goes through SMTP. Your email provider or IT support "
+"can tell you these."
+msgstr ""
+"Käytössä vain, kun sähköposti lähetetään SMTP:n kautta. Sähköpostin "
+"tarjoajasi tai IT-tukesi osaa kertoa nämä."
 
 #: apps/messaging/templates/messaging/_person_newsletter.html:6
 msgid "Does not want the newsletter"
@@ -3179,6 +3341,41 @@ msgstr ""
 "Mitään ei lähetetä, ennen kuin olet tarkistanut vastaanottajat ja "
 "vahvistanut lähetyksen."
 
+#: apps/messaging/templates/messaging/email_settings.html:9
+msgid ""
+"All email from Metra goes this way: messages, newsletters, invoices and "
+"reminders, and login codes and invitations."
+msgstr ""
+"Kaikki Metran sähköposti lähetetään näin: viestit, uutiskirjeet, laskut ja "
+"muistutukset sekä kirjautumiskoodit ja kutsut."
+
+#: apps/messaging/templates/messaging/email_settings.html:16
+#: apps/notifications/templates/notifications/settings.html:19
+#: apps/plugins/templates/plugins/plugin_settings.html:14
+#: apps/readings/templates/readings/_round_row.html:20
+#: apps/readings/templates/readings/reading_form.html:30
+#: apps/readings/templates/readings/round_form.html:19
+#: apps/register/templates/register/person_form.html:37
+#: apps/register/templates/register/unit_form.html:28
+msgid "Save"
+msgstr "Tallenna"
+
+#
+#: apps/messaging/templates/messaging/email_settings.html:19
+msgid "Send a test"
+msgstr "Lähetä testi"
+
+#: apps/messaging/templates/messaging/email_settings.html:23
+#: apps/setup/templates/setup/messaging.html:16
+msgid "Send a test email to"
+msgstr "Lähetä testisähköposti osoitteeseen"
+
+#
+#: apps/messaging/templates/messaging/email_settings.html:24
+#: apps/setup/templates/setup/messaging.html:17
+msgid "Send test email"
+msgstr "Lähetä testisähköposti"
+
 #: apps/messaging/templates/messaging/files.html:3
 #: apps/messaging/templates/messaging/files.html:5
 msgid "Files"
@@ -3289,21 +3486,43 @@ msgstr "Uutiskirje lähetetään henkilölle %(name)s."
 msgid "Unsubscribe"
 msgstr "Peruuta tilaus"
 
-#: apps/messaging/views.py:131
+#: apps/messaging/views.py:132
 msgid "Nobody can be reached with these choices."
 msgstr "Näillä valinnoilla ei tavoiteta ketään."
 
-#: apps/messaging/views.py:203
+#: apps/messaging/views.py:204
 msgid "The notice is no longer shown."
 msgstr "Tiedote ei ole enää näkyvillä."
 
-#: apps/messaging/views.py:226
+#: apps/messaging/views.py:227
 msgid "Everyone who wants the newsletter"
 msgstr "Kaikki, jotka haluavat uutiskirjeen"
 
-#: apps/messaging/views.py:262
+#: apps/messaging/views.py:263
 msgid "Saved the newsletter choice."
 msgstr "Uutiskirjeen valinta tallennettu."
+
+#: apps/messaging/views.py:349 apps/setup/views.py:214
+msgid "This is a test message from Metra. If you got it, sending works."
+msgstr "Tämä on Metran testiviesti. Jos sait sen, lähettäminen toimii."
+
+#: apps/messaging/views.py:350
+msgid "Test message from Metra"
+msgstr "Testiviesti Metrasta"
+
+#: apps/messaging/views.py:353 apps/setup/views.py:216
+#, python-format
+msgid "The test failed: %(error)s"
+msgstr "Testi epäonnistui: %(error)s"
+
+#: apps/messaging/views.py:355 apps/setup/views.py:218
+#, python-format
+msgid "Test sent to %(to)s."
+msgstr "Testi lähetetty: %(to)s."
+
+#: apps/messaging/views.py:368 apps/setup/views.py:185
+msgid "Saved the email settings."
+msgstr "Sähköpostiasetukset tallennettu."
 
 #: apps/notifications/apps.py:7
 #: apps/notifications/templates/notifications/_bell.html:2
@@ -3518,16 +3737,6 @@ msgstr ""
 msgid "Notify me when"
 msgstr "Ilmoita minulle, kun"
 
-#: apps/notifications/templates/notifications/settings.html:19
-#: apps/plugins/templates/plugins/plugin_settings.html:14
-#: apps/readings/templates/readings/_round_row.html:20
-#: apps/readings/templates/readings/reading_form.html:30
-#: apps/readings/templates/readings/round_form.html:19
-#: apps/register/templates/register/person_form.html:37
-#: apps/register/templates/register/unit_form.html:28
-msgid "Save"
-msgstr "Tallenna"
-
 #: apps/notifications/templates/notifications/settings.html:22
 msgid "There are no notifications for your role."
 msgstr "Roolillesi ei ole ilmoituksia."
@@ -3548,10 +3757,6 @@ msgstr "Ilmoitusasetuksesi on tallennettu."
 #: apps/plugins/models.py:36
 msgid "add-on"
 msgstr "lisäosa"
-
-#: apps/plugins/models.py:13 apps/plugins/models.py:39
-msgid "changed"
-msgstr "muutettu"
 
 #: apps/plugins/models.py:16 apps/plugins/models.py:42
 msgid "changed by"
@@ -3644,14 +3849,6 @@ msgstr "%(plugin)s ei ole käytössä. Sen tiedot säilyvät."
 #, python-format
 msgid "Remove the saved %(setting)s"
 msgstr "Poista tallennettu %(setting)s"
-
-#: apps/plugins/views.py:108
-#, python-format
-msgid ""
-"Set in the server environment (%(variable)s), so it cannot be changed here."
-msgstr ""
-"Asetettu palvelimen ympäristössä (%(variable)s), joten sitä ei voi muuttaa "
-"täällä."
 
 #: apps/plugins/views.py:131
 msgid "The saved value cannot be read with this server's key; enter it again."
@@ -4935,7 +5132,7 @@ msgid "Print self-service letter"
 msgstr "Tulosta itsepalvelukirje"
 
 #: apps/selfservice/templates/selfservice/base.html:9
-#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:263
+#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:279
 #: templates/base.html:7 templates/base.html:18
 msgid "Metra"
 msgstr "Metra"
@@ -4944,7 +5141,7 @@ msgstr "Metra"
 msgid "Skip to content"
 msgstr "Siirry sisältöön"
 
-#: apps/selfservice/templates/selfservice/base.html:19 apps/setup/views.py:40
+#: apps/selfservice/templates/selfservice/base.html:19 apps/setup/views.py:42
 #: templates/_language_form.html:5
 msgid "Language"
 msgstr "Kieli"
@@ -5446,7 +5643,7 @@ msgstr ""
 "sen sijaan kohdassa Asetukset."
 
 #: apps/setup/templates/setup/board.html:21
-#: apps/setup/templates/setup/messaging.html:28
+#: apps/setup/templates/setup/messaging.html:33
 #: apps/setup/templates/setup/types.html:39
 msgid "Continue"
 msgstr "Jatka"
@@ -5501,69 +5698,48 @@ msgstr "Nykyinen logo"
 msgid "Remove the logo"
 msgstr "Poista logo"
 
-#: apps/setup/templates/setup/logo.html:15 apps/setup/views.py:132
+#: apps/setup/templates/setup/logo.html:15 apps/setup/views.py:134
 msgid "Fill in the organisation first; the logo belongs to it."
 msgstr "Täytä ensin organisaation tiedot; logo kuuluu niihin."
 
-#: apps/setup/templates/setup/messaging.html:4
+#: apps/setup/templates/setup/messaging.html:5
 msgid ""
-"Email and SMS are set by whoever installed Metra, in the server's settings "
-"file (.env). Here you can see what is set up and send yourself a test."
+"All email from Metra goes this way: messages, newsletters, invoices and "
+"reminders, and login codes and invitations. You can change it later under "
+"Settings > Email."
 msgstr ""
-"Sähköpostin ja tekstiviestit määrittää Metran asentaja palvelimen "
-"asetustiedostossa (.env). Tässä näet, mitä on määritetty, ja voit lähettää "
-"itsellesi testin."
+"Kaikki Metran sähköposti lähetetään näin: viestit, uutiskirjeet, laskut ja "
+"muistutukset sekä kirjautumiskoodit ja kutsut. Voit muuttaa tätä myöhemmin "
+"kohdassa Asetukset > Sähköposti."
 
-#: apps/setup/templates/setup/messaging.html:7
-#: apps/setup/templates/setup/messaging.html:9
+#: apps/setup/templates/setup/messaging.html:10
+msgid "Save email settings"
+msgstr "Tallenna sähköpostiasetukset"
+
+#: apps/setup/templates/setup/messaging.html:23
 msgid "Set up"
 msgstr "Määritetty"
 
-#: apps/setup/templates/setup/messaging.html:7
-#, python-format
-msgid "Sent from %(sender)s"
-msgstr "Lähettäjäosoite %(sender)s"
-
-#
-#: apps/setup/templates/setup/messaging.html:7
-#: apps/setup/templates/setup/messaging.html:9
-msgid "Not set up"
-msgstr "Ei määritetty"
-
-#: apps/setup/templates/setup/messaging.html:9
+#: apps/setup/templates/setup/messaging.html:23
 #, python-format
 msgid "Sender %(sender)s"
 msgstr "Lähettäjä %(sender)s"
 
-#: apps/setup/templates/setup/messaging.html:9
+#: apps/setup/templates/setup/messaging.html:23
 #, python-format
 msgid ""
 "Turn on an SMS add-on and enter its details under <a "
 "href=\"%(addons)s\">Settings &rsaquo; Add-ons</a>."
 msgstr "Ota tekstiviestilisäosa käyttöön ja anna sen tiedot kohdassa <a href=\"%(addons)s\">Asetukset &rsaquo; Lisäosat</a>."
 
-#: apps/setup/templates/setup/messaging.html:15
-msgid "Send a test email to"
-msgstr "Lähetä testisähköposti osoitteeseen"
-
-#
-#: apps/setup/templates/setup/messaging.html:16
-msgid "Send test email"
-msgstr "Lähetä testisähköposti"
-
-#: apps/setup/templates/setup/messaging.html:23
+#: apps/setup/templates/setup/messaging.html:29
 msgid "Send a test SMS to"
 msgstr "Lähetä testiviesti numeroon"
 
 #
-#: apps/setup/templates/setup/messaging.html:24
+#: apps/setup/templates/setup/messaging.html:30
 msgid "Send test SMS"
 msgstr "Lähetä testiviesti"
-
-#: apps/setup/templates/setup/messaging.html:27
-msgid "How to set them is described in INSTALL.md, under Email and SMS."
-msgstr ""
-"Määrittäminen on kuvattu tiedostossa INSTALL.md, kohdassa Email and SMS."
 
 #
 #: apps/setup/templates/setup/organisation.html:4
@@ -5632,62 +5808,44 @@ msgstr "Lisää kenttä"
 msgid "Add field"
 msgstr "Lisää kenttä"
 
-#: apps/setup/views.py:41
+#: apps/setup/views.py:43
 msgid "Logo"
 msgstr "Logo"
 
-#: apps/setup/views.py:42
+#: apps/setup/views.py:44
 msgid "Units and fields"
 msgstr "Yksiköt ja kentät"
 
 #
-#: apps/setup/views.py:43
+#: apps/setup/views.py:45
 msgid "Email and SMS"
 msgstr "Sähköposti ja tekstiviestit"
 
-#: apps/setup/views.py:45
+#: apps/setup/views.py:47
 msgid "Invite the board"
 msgstr "Kutsu hallitus"
 
 #
-#: apps/setup/views.py:75
+#: apps/setup/views.py:77
 msgid "Saved."
 msgstr "Tallennettu."
 
-#: apps/setup/views.py:136
+#: apps/setup/views.py:138
 msgid "The logo was removed."
 msgstr "Logo poistettiin."
 
-#: apps/setup/views.py:153
+#: apps/setup/views.py:155
 #, python-format
 msgid "Added %(name)s with its fields and a water meter."
 msgstr "Lisättiin %(name)s kenttineen ja vesimittari."
 
-#: apps/setup/views.py:184
-msgid "This is a test message from Metra. If you got it, sending works."
-msgstr "Tämä on Metran testiviesti. Jos sait sen, lähettäminen toimii."
-
 #
-#: apps/setup/views.py:187
+#: apps/setup/views.py:213
 msgid "This channel is not set up."
 msgstr "Tätä kanavaa ei ole määritetty."
 
-#: apps/setup/views.py:188
-msgid "Test message from Metra"
-msgstr "Testiviesti Metrasta"
-
-#: apps/setup/views.py:190
-#, python-format
-msgid "The test failed: %(error)s"
-msgstr "Testi epäonnistui: %(error)s"
-
-#: apps/setup/views.py:192
-#, python-format
-msgid "Test sent to %(to)s."
-msgstr "Testi lähetetty: %(to)s."
-
 #
-#: apps/setup/views.py:237
+#: apps/setup/views.py:253
 msgid ""
 "Email is not set up, so no invitation can be sent. Add the person under "
 "Settings."
@@ -5695,12 +5853,12 @@ msgstr ""
 "Sähköpostia ei ole määritetty, joten kutsua ei voi lähettää. Lisää henkilö "
 "kohdassa Asetukset."
 
-#: apps/setup/views.py:268
+#: apps/setup/views.py:284
 #, python-format
 msgid "Your account for %(organisation)s"
 msgstr "Käyttäjätilisi: %(organisation)s"
 
-#: apps/setup/views.py:271
+#: apps/setup/views.py:287
 #, python-format
 msgid ""
 "Hello %(name)s,\n"
@@ -5723,17 +5881,17 @@ msgstr ""
 "\n"
 "Linkki toimii muutaman päivän."
 
-#: apps/setup/views.py:281
+#: apps/setup/views.py:297
 #, python-format
 msgid "The invitation could not be sent: %(error)s"
 msgstr "Kutsua ei voitu lähettää: %(error)s"
 
-#: apps/setup/views.py:283
+#: apps/setup/views.py:299
 #, python-format
 msgid "Invitation sent to %(email)s."
 msgstr "Kutsu lähetetty osoitteeseen %(email)s."
 
-#: apps/setup/views.py:304
+#: apps/setup/views.py:320
 msgid "Setup is done. You can run it again from Settings."
 msgstr ""
 "Käyttöönotto on valmis. Voit käynnistää sen uudelleen kohdasta Asetukset."
@@ -5814,6 +5972,24 @@ msgid ""
 msgstr ""
 "Suojaa tilisi kaksivaiheisella tunnistautumisella. Se vie minuutin "
 "todennussovelluksella puhelimellasi."
+
+#~ msgid "SMS settings are described in INSTALL.md, under Email and SMS."
+#~ msgstr ""
+#~ "Tekstiviestiasetukset on kuvattu tiedostossa INSTALL.md, kohdassa Email "
+#~ "and SMS."
+
+#~ msgid ""
+#~ "Email and SMS are set by whoever installed Metra, in the server's "
+#~ "settings file (.env). Here you can see what is set up and send yourself a "
+#~ "test."
+#~ msgstr ""
+#~ "Sähköpostin ja tekstiviestit määrittää Metran asentaja palvelimen "
+#~ "asetustiedostossa (.env). Tässä näet, mitä on määritetty, ja voit "
+#~ "lähettää itsellesi testin."
+
+#, python-format
+#~ msgid "Sent from %(sender)s"
+#~ msgstr "Lähettäjäosoite %(sender)s"
 
 #~ msgid "Snapshots of the register, here and offsite."
 #~ msgstr "Rekisterin tilannevedokset, täällä ja ulkoisessa säilössä."

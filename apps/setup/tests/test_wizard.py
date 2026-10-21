@@ -172,6 +172,28 @@ def test_test_messages(admin_client):
     assert "messaging" in SetupState.current().saved_steps
 
 
+def test_messaging_step_saves_the_email_settings(admin_client, settings):
+    from apps.messaging import email_config
+
+    settings.MESSAGING = {**settings.MESSAGING, "email_provider": None}
+
+    admin_client.post(
+        url("messaging"),
+        {
+            "action": "save",
+            "provider": "smtp",
+            "host": "smtp.example.fi",
+            "port": "465",
+            "security": "ssl",
+            "from_email": "styrelsen@example.fi",
+        },
+    )
+
+    config = email_config.current()
+    assert (config.host, config.port, config.security) == ("smtp.example.fi", 465, "ssl")
+    assert "messaging" in SetupState.current().saved_steps
+
+
 def test_invoicing_step(admin_client):
     admin_client.post(
         url("invoicing"),

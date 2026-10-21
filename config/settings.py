@@ -269,35 +269,33 @@ TRUST_X_FORWARDED_FOR = env_bool("METRA_TRUST_X_FORWARDED_FOR")
 # out everyone.
 ALLAUTH_TRUSTED_PROXY_COUNT = 1 if TRUST_X_FORWARDED_FOR else 0
 
-# Email: SMTP when METRA_EMAIL_HOST is set, the console in development, or
-# none (links then go by SMS or letter). See INSTALL.md, "Email and SMS".
+# Email is set on the Email settings page (apps.messaging.email_config).
+# The METRA_EMAIL_* variables still work and win over the page, field by
+# field; METRA_EMAIL_BACKEND or METRA_EMAIL_HOST also decide the provider, as
+# before. See INSTALL.md, "Email and SMS".
 EMAIL_HOST = os.environ.get("METRA_EMAIL_HOST", "")
-EMAIL_PORT = int(os.environ.get("METRA_EMAIL_PORT") or 587)
-EMAIL_HOST_USER = os.environ.get("METRA_EMAIL_USER", "")
-EMAIL_HOST_PASSWORD = os.environ.get("METRA_EMAIL_PASSWORD", "")
-EMAIL_USE_TLS = env_bool("METRA_EMAIL_USE_TLS", True)
-EMAIL_USE_SSL = env_bool("METRA_EMAIL_USE_SSL")
-if EMAIL_USE_SSL:
-    EMAIL_USE_TLS = False
 EMAIL_TIMEOUT = 30
+# The address the app's own mail starts from; the email settings replace it.
 DEFAULT_FROM_EMAIL = os.environ.get("METRA_EMAIL_FROM") or "register@localhost"
 _email_backend = os.environ.get("METRA_EMAIL_BACKEND", "").strip().lower() or (
-    "smtp" if EMAIL_HOST else ("console" if DEBUG else "none")
+    "smtp" if EMAIL_HOST else ""
 )
-EMAIL_BACKEND = {
-    "smtp": "django.core.mail.backends.smtp.EmailBackend",
-    "console": "django.core.mail.backends.console.EmailBackend",
-}.get(_email_backend, "django.core.mail.backends.dummy.EmailBackend")
+# Routes the app's own mail (login codes, password links) the same way.
+EMAIL_BACKEND = "apps.messaging.email_config.ConfiguredBackend"
 
 _reminder_days = os.environ.get("METRA_READING_REMINDER_DAYS", "").strip()
 MESSAGING = {
     # Names in apps.messaging.registry; empty means the channel is not set up.
-    "email_provider": "" if _email_backend == "none" else "django",
+    # Email: None lets the Email settings page choose; the environment
+    # decides when it sets METRA_EMAIL_BACKEND or METRA_EMAIL_HOST.
+    "email_provider": None
+    if not _email_backend
+    else ("" if _email_backend == "none" else "django"),
+    "email_transport": "console" if _email_backend == "console" else "smtp",
     # SMS: a provider's name, "none", or "auto" (the default): the first
     # provider that is configured (the bundled 46elks plugin is when its
     # METRA_ELKS_* settings are set), else the console in development.
     "sms_provider": os.environ.get("METRA_SMS_PROVIDER", "").strip().lower() or "auto",
-    "email_domain": DEFAULT_FROM_EMAIL.rpartition("@")[2] or "localhost",
     "sms_sender": os.environ.get("METRA_SMS_SENDER", "") or "Register",
     "sms_country_code": (os.environ.get("METRA_SMS_COUNTRY_CODE") or "358").lstrip("+"),
     # Automatic reminders to units missing a reading, this many days before a

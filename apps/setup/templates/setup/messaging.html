@@ -1,13 +1,14 @@
 {% extends "setup/base.html" %}
 {% load i18n %}
 {% block step %}
-  <p>{% translate "Email and SMS are set by whoever installed Metra, in the server's settings file (.env). Here you can see what is set up and send yourself a test." %}</p>
-  <dl class="details-list">
-    <dt>{% translate "Email" %}</dt>
-    <dd>{% if email %}<span class="pill pill--ok">{% translate "Set up" %}</span> {% blocktranslate with sender=from_email %}Sent from {{ sender }}{% endblocktranslate %}{% else %}<span class="pill pill--warn">{% translate "Not set up" %}</span> <span class="help">METRA_EMAIL_HOST, METRA_EMAIL_USER, METRA_EMAIL_PASSWORD, METRA_EMAIL_FROM</span>{% endif %}</dd>
-    <dt>{% translate "SMS" %}</dt>
-    <dd>{% if sms %}<span class="pill pill--ok">{% translate "Set up" %}</span> {{ sms_label }} &middot; {% blocktranslate with sender=sms_sender %}Sender {{ sender }}{% endblocktranslate %}{% else %}<span class="pill pill--warn">{% translate "Not set up" %}</span> <span class="help">{% url 'plugins:list' as addons %}{% blocktranslate %}Turn on an SMS add-on and enter its details under <a href="{{ addons }}">Settings &rsaquo; Add-ons</a>.{% endblocktranslate %}</span>{% endif %}</dd>
-  </dl>
+  <h2>{% translate "Email" %}</h2>
+  <p>{% translate "All email from Metra goes this way: messages, newsletters, invoices and reminders, and login codes and invitations. You can change it later under Settings > Email." %}</p>
+  <form method="post" class="form form--narrow" novalidate autocomplete="off">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="save">
+    {% include "messaging/_email_settings_fields.html" %}
+    <div class="actions"><button type="submit" class="button">{% translate "Save email settings" %}</button></div>
+  </form>
   {% if email %}
     <form method="post" class="form form--inline">
       {% csrf_token %}
@@ -16,6 +17,11 @@
       <button type="submit" class="button">{% translate "Send test email" %}</button>
     </form>
   {% endif %}
+  <h2>{% translate "SMS" %}</h2>
+  <dl class="details-list">
+    <dt>{% translate "SMS" %}</dt>
+    <dd>{% if sms %}<span class="pill pill--ok">{% translate "Set up" %}</span> {{ sms_label }} &middot; {% blocktranslate with sender=sms_sender %}Sender {{ sender }}{% endblocktranslate %}{% else %}<span class="pill pill--warn">{% translate "Not set up" %}</span> <span class="help">{% url 'plugins:list' as addons %}{% blocktranslate %}Turn on an SMS add-on and enter its details under <a href="{{ addons }}">Settings &rsaquo; Add-ons</a>.{% endblocktranslate %}</span>{% endif %}</dd>
+  </dl>
   {% if sms %}
     <form method="post" class="form form--inline">
       {% csrf_token %}
@@ -24,6 +30,5 @@
       <button type="submit" class="button">{% translate "Send test SMS" %}</button>
     </form>
   {% endif %}
-  <p class="help">{% translate "How to set them is described in INSTALL.md, under Email and SMS." %}</p>
   <div class="actions"><a class="button button--primary" href="{{ next_url }}">{% translate "Continue" %}</a></div>
 {% endblock %}

@@ -14,9 +14,10 @@ from apps.readings.models import ReadingRound
 from apps.register.models import Unit
 
 from . import attachments, broadcast, drafts, newsletter
+from .email_forms import EmailSettingsForm
 from .forms import ConsentForm, MessageForm, NewsletterForm
 from .models import Attachment, ConsentRecord, Message, MessageBatch, MessageTemplate
-from .registry import EMAIL, SMS, provider_for
+from .registry import EMAIL, SMS, ProviderError, provider_for
 from .sms import segments
 from .tasks import send_batch_task
 
@@ -332,3 +333,42 @@ def file_download(request, token, pk):
     if batch is None:
         raise Http404
     return _download(get_object_or_404(Attachment, pk=pk, batch=batch))
+
+
+# Email settings
+
+
+def send_test_email(request, to):
+    """Send a test email through the email settings in effect; True when it went."""
+    provider = provider_for(EMAIL)
+    try:
+        if provider is None:
+            raise ProviderError(_("Email is not set up."))
+        provider.send(
+            to,
+            _("This is a test message from Metra. If you got it, sending works."),
+            subject=_("Test message from Metra"),
+        )
+    except ProviderError as error:
+        messages.error(request, _("The test failed: %(error)s") % {"error": error})
+        return False
+    messages.success(request, _("Test sent to %(to)s.") % {"to": to})
+    return True
+
+
+@login_required
+@permission_required("messaging.change_emailsettings", raise_exception=True)
+def email_settings(request):
+    if request.method == "POST" and request.POST.get("action") == "test":
+        send_test_email(request, request.POST.get("to", "").strip())
+        return redirect("messaging:email_settings")
+    form = EmailSettingsForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, _("Saved the email settings."))
+        return redirect("messaging:email_settings")
+    return render(
+        request,
+        "messaging/email_settings.html",
+        {"form": form, "email_set_up": provider_for(EMAIL) is not None},
+    )
