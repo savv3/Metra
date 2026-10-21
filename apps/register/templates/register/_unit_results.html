@@ -1,11 +1,11 @@
 {% load i18n %}
 {% if page.object_list %}
-  <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Units' %}">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="{{ unit_word_plural }}">
     <table>
       <thead>
         <tr>
           <th scope="col">{% translate "Name" %}</th>
-          <th scope="col">{% translate "Type" %}</th>
+          {% if not single_unit_type %}<th scope="col">{% translate "Type" %}</th>{% endif %}
           <th scope="col">{% translate "Address" %}</th>
           <th scope="col">{% translate "Status" %}</th>
           <th scope="col">{% translate "Tags" %}</th>
@@ -16,7 +16,7 @@
           <tr>
             <th scope="row"><a href="{{ unit.get_absolute_url }}">{{ unit.name }}</a>
               {% if unit.is_archived %}<span class="badge">{% translate "Archived" %}</span>{% endif %}</th>
-            <td>{{ unit.unit_type }}</td>
+            {% if not single_unit_type %}<td>{{ unit.unit_type }}</td>{% endif %}
             <td>{{ unit.address_line }}</td>
             <td><span class="pill{% if unit.status == "active" %} pill--ok{% endif %}">{{ unit.get_status_display }}</span></td>
             <td>{% for tag in unit.tags.all %}{{ tag }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
@@ -30,7 +30,7 @@
     <p class="export-link"><a href="{% url 'messaging:compose' %}?filters={{ query|urlencode }}">{% translate "Send a message to these units" %}</a></p>
   {% endif %}
   {% if perms.register.view_person %}
-    <p class="export-link"><a href="{% url 'register:unit_export' %}{% if query %}?{{ query }}{% endif %}" download>{% blocktranslate count count=page.paginator.count %}Export {{ count }} unit as CSV{% plural %}Export {{ count }} units as CSV{% endblocktranslate %}</a></p>
+    <p class="export-link"><a href="{% url 'register:unit_export' %}{% if query %}?{{ query }}{% endif %}" download>{% if single_unit_type %}{% blocktranslate with count=page.paginator.count word=unit_word_plural %}Export CSV: {{ count }} {{ word }}{% endblocktranslate %}{% else %}{% blocktranslate count count=page.paginator.count %}Export {{ count }} unit as CSV{% plural %}Export {{ count }} units as CSV{% endblocktranslate %}{% endif %}</a></p>
   {% endif %}
 {% else %}
   <p class="empty">{% translate "No units found." %}</p>

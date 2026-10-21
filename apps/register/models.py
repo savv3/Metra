@@ -127,6 +127,15 @@ class UnitType(models.Model):
     """A kind of record an organisation keeps, such as "Household" or "Member"."""
 
     name = models.CharField(_("name"), max_length=100, unique=True)
+    name_plural = models.CharField(
+        _("plural name"),
+        max_length=100,
+        blank=True,
+        help_text=_(
+            'For example "Households". Used in the menu and headings when this is '
+            "the only unit type. Empty means the general word for units is used."
+        ),
+    )
     description = models.TextField(_("description"), blank=True)
     order = models.PositiveIntegerField(_("order"), default=0)
 

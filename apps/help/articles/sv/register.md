@@ -13,6 +13,11 @@ mätarnummer. Fält kan också läggas till för alla personer. När en enhetsty
 eller ett fält tas bort tas först en säkerhetskopia, eftersom uppgifterna då
 försvinner från alla enheter.
 
+Ge enhetstypen också ett pluralnamn (till exempel "Stuga" och "Stugor"). Om
+ni bara har en enhetstyp används dess eget namn i menyn, i rubrikerna och på
+knapparna i stället för "Enheter", och listan saknar typfilter och typkolumn.
+Med flera typer behålls de allmänna orden.
+
 ## Att arbeta med enheter och personer
 
 - **Enheter** och **Personer** visar registret. Sök och filtrera listan och använd sedan **Exportera som CSV** för att ladda ner det du ser.
