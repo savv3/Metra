@@ -133,6 +133,14 @@ def prune_local(out_dir, policy, now):
     return old
 
 
+def manifest_version(workdir):
+    """The Metra version an unpacked snapshot was taken with ("" if unknown)."""
+    try:
+        return json.loads((Path(workdir) / MANIFEST_NAME).read_text()).get("version", "")
+    except (OSError, ValueError):
+        return ""
+
+
 def extract_archive(path, workdir):
     """Unpack an archive into ``workdir``; return (database path, media dir or None)."""
     try:

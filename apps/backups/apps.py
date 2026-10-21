@@ -9,6 +9,7 @@ class BackupsConfig(AppConfig):
     def ready(self):
         from auditlog.registry import auditlog
 
-        from .models import BackupRun
+        from .models import BackupRun, Restore
 
         auditlog.register(BackupRun)
+        auditlog.register(Restore)

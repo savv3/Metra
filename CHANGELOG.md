@@ -14,6 +14,11 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- Admins can restore a snapshot from the Backups page, after confirming
+  their login again. They see what the restore would remove, confirm
+  separately when invoices or payments would be removed, and the site shows
+  a "back in a moment" page while the worker restores. A snapshot of the
+  data just before is taken first and put back if the restore fails.
 - A Help section with short guides in Swedish, English and Finnish: getting
   started, the register, readings, messages and newsletters, invoicing,
   backups, and roles and two-factor login. Every page has a Help link to the

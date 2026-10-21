@@ -69,6 +69,21 @@ docker compose exec web python manage.py snapshot
 docker compose exec web python manage.py snapshot --list-remote
 ```
 
+### Restore from the app
+
+An admin can restore a snapshot from **Settings > Backups**: **Restore…**
+next to a snapshot asks for the password (or the two-factor code) again and
+shows what the snapshot holds and how many units, people, readings, messages,
+invoices and payments differ from now. Invoices issued and payments recorded
+since the snapshot are listed and need an extra confirmation, as they may
+already be in the bookkeeping. On confirmation Metra takes a snapshot of the
+data as it is, shows a short "back in a moment" page to everyone, and the
+worker restores the database and uploads, brings an older snapshot up to
+date and records the restore (listed on the Backups page and in the audit
+log). If anything goes wrong, the data from just before is put back. An
+offsite snapshot is downloaded first; a snapshot taken by a newer version of
+Metra is refused. Only Admin may restore ("Can restore a snapshot").
+
 ### Restore onto a fresh install
 
 1. Install as in [Run it with Docker](#run-it-with-docker), with a `.env`
