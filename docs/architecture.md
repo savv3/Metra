@@ -161,7 +161,7 @@ flowchart TD
     p4[Phase 4: Invoicing<br/>fee plans, usage lines, numbered PDF invoices, email and print]
     p5[Phase 5: Messaging and setup<br/>email a unit, attachments, setup wizard, deliverability]
     p6[Phase 6: Integrations as plugins<br/>REST API, webhooks;<br/>46elks SMS moves to a plugin]
-    p7[Phase 7: Restore, help and meetings<br/>restore from backups in the app, help pages,<br/>meeting protocols plugin]
+    p7[Phase 7: Restore, help and meetings<br/>restore from backups in the app, help pages,<br/>meeting protocols plugin, notifications]
     p8[Phase 8: Bank file import<br/>match payments by reference number]
     p9[Phase 9: Bookkeeping plugin<br/>simple double-entry books for small associations]
     p10[Phase 10: E-invoicing<br/>Finvoice, Peppol later]
@@ -422,7 +422,7 @@ phase 9 covers associations that keep their own books.
 Phase 7 is done when an admin can undo a big mistake by restoring a
 backup from inside the app, every page links to help in Swedish, English
 and Finnish, and an association can keep its meeting protocols in Metra.
-It ships as four pull requests, starting with backups.
+Staff also get a notification centre. It ships as five pull requests, starting with backups.
 
 | PR | Contents | Done when |
 | --- | --- | --- |
@@ -430,6 +430,7 @@ It ships as four pull requests, starting with backups.
 | B. Restore in the app | An admin with the new restore permission (admins only, after a fresh two-factor check) picks a snapshot and sees what it holds and what the restore would remove; invoices and payments recorded since the snapshot need an extra confirmation. The app takes a safety snapshot and switches to maintenance mode, then the worker restores the database and uploads, runs migrations for older snapshots and brings the site back. People erased after the snapshot are erased again, so a restore never brings back erased personal data. Offsite snapshots are downloaded first, and snapshots from a newer version are refused. The restore is in the audit log, and the `restore` command stays for an install that will not start | An admin deletes a unit type by mistake, restores the morning's snapshot from the Backups page, and the units are back |
 | C. Help pages | A Help section with short articles on how to do things: getting started, the register, readings, messages and newsletters, invoicing, backups and restore, roles and two-factor login. Articles are Markdown files per language in the repository, shown in the app with search. Each page links to the article that fits it, Finnish articles carry the machine-translation notice, and plugins can add their own articles through a hook | Every main page has a help link that opens the right article in the user's language |
 | D. Meeting protocols plugin | `metra-meetings` under `plugins/`, off by default. Meetings (annual, extraordinary, board) with date, place and agenda; the notice of meeting sent as a message with the agenda attached; attendance from the register, with votes per unit where the rules say so; minutes per agenda item with decisions, the chair, the secretary and the minute checkers; a PDF of the minutes that the checkers approve in the app; approved minutes published to members on the self-service page. Attendance is covered by the per-person export, and approved minutes are kept as the association's records | The annual meeting is called, held and minuted in Metra, and members can read the approved minutes |
+| E. Notifications | A notification service in the core: a bell icon next to the account menu with the number of unread notifications, and a Notifications page listing them newest first. Each notification can be opened (it links to what it is about), marked as read or unread, or dismissed, and there is "mark all as read". Notifications go to a user or to everyone in a role, for example a failed or finished backup, a restore, SMS or email that could not be delivered, a reading or contact change sent in through self-service, an invoice becoming overdue, and a failed webhook. Each user chooses which kinds they get; plugins send their own through `apps.plugins.api`. Read and dismissed notifications are removed after 90 days | A failed backup shows up under the bell for every admin, and an admin marks it as read and dismisses it |
 
 ## Plugins
 
