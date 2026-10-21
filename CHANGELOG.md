@@ -14,6 +14,10 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- 46elks SMS settings in the app: the API username and password, sender and
+  test mode are entered under Settings > Add-ons > 46elks SMS. The
+  `METRA_ELKS_*` and `METRA_SMS_SENDER` variables still work and win when
+  set. The setup wizard shows the sender 46elks actually uses.
 - Settings > Add-ons: admins see the installed plugins with their version
   and turn each one on or off without a restart. A plugin that is off
   disappears from menus, pages, panels, help and the provider lists, and its

@@ -2,7 +2,6 @@
 
 import base64
 import json
-import os
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -14,15 +13,19 @@ from django.utils.crypto import salted_hmac
 from apps.plugins import api
 
 API_URL = "https://api.46elks.com/a1/sms"
+# The plugin's name in METRA_PLUGINS and under Settings > Add-ons.
+NAME = "46elks"
 
 
 def config():
-    """The plugin's settings, read from the environment (METRA_ELKS_*)."""
+    """The plugin's settings: from its settings page under Settings > Add-ons,
+    or from the environment (METRA_ELKS_*, METRA_SMS_SENDER), which wins."""
+    values = api.plugin_settings(NAME)
     return {
-        "api_user": os.environ.get("METRA_ELKS_API_USER", ""),
-        "api_password": os.environ.get("METRA_ELKS_API_PASSWORD", ""),
-        "dry_run": os.environ.get("METRA_ELKS_DRY_RUN", "").strip().lower()
-        in ("1", "true", "yes", "on"),
+        "api_user": values.get("api_user") or "",
+        "api_password": values.get("api_password") or "",
+        "sender": values.get("sender") or api.sms_sender(),
+        "dry_run": bool(values.get("dry_run")),
     }
 
 
@@ -40,6 +43,9 @@ class FortySixElks(api.Provider):
         settings_ = config()
         return bool(settings_["api_user"] and settings_["api_password"])
 
+    def sender(self):
+        return config()["sender"]
+
     def delivery_callback_url(self):
         # 46elks can only report to a public HTTPS address.
         if not settings.BASE_URL.startswith("https://"):
@@ -49,9 +55,11 @@ class FortySixElks(api.Provider):
     def send(self, recipient, body, subject="", callback_url=None, headers=None):
         settings_ = config()
         if not (settings_["api_user"] and settings_["api_password"]):
-            raise api.ProviderError("Set METRA_ELKS_API_USER and METRA_ELKS_API_PASSWORD.")
+            raise api.ProviderError(
+                "Enter the 46elks API user and password under Settings > Add-ons > 46elks SMS."
+            )
         data = {
-            "from": api.sms_sender(),
+            "from": settings_["sender"],
             "to": api.normalise_phone(recipient),
             "message": body,
         }

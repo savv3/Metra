@@ -197,7 +197,7 @@ def messaging_step(request, name):
         "sms": sms,
         "sms_label": sms.label() if sms else "",
         "from_email": settings.DEFAULT_FROM_EMAIL,
-        "sms_sender": settings.MESSAGING["sms_sender"],
+        "sms_sender": sms.sender() if sms else "",
         "email_to": request.user.email,
     }
     return _render(request, name, context)

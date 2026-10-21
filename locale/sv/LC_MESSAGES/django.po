@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 19:02+0300\n"
+"POT-Creation-Date: 2026-10-21 17:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3578,13 +3578,18 @@ msgstr "inställningar för tillägg"
 msgid ""
 "Add-ons add features to Metra. Turning one off hides its pages, menu items "
 "and sections at once, and its data is kept for when it is turned on again."
-msgstr "Tillägg ger Metra fler funktioner. När du slår av ett tillägg försvinner dess sidor, menyval och avsnitt direkt, och dess data sparas till nästa gång det slås på."
+msgstr ""
+"Tillägg ger Metra fler funktioner. När du slår av ett tillägg försvinner "
+"dess sidor, menyval och avsnitt direkt, och dess data sparas till nästa gång "
+"det slås på."
 
 #: apps/plugins/templates/plugins/plugin_list.html:13
 msgid ""
 "This list shows the add-ons installed on this server. Installing another one "
 "is done on the server, with METRA_PLUGINS."
-msgstr "Listan visar tilläggen som är installerade på servern. Nya tillägg installeras på servern, med METRA_PLUGINS."
+msgstr ""
+"Listan visar tilläggen som är installerade på servern. Nya tillägg "
+"installeras på servern, med METRA_PLUGINS."
 
 #: apps/plugins/templates/plugins/plugin_list.html:21
 msgid "Add-on"
@@ -3618,7 +3623,8 @@ msgstr "Inställningar: %(plugin)s"
 #: apps/plugins/templates/plugins/plugin_settings.html:9
 msgid ""
 "This add-on is off. Its settings are kept and apply when it is turned on."
-msgstr "Tillägget är avslaget. Inställningarna sparas och gäller när det slås på."
+msgstr ""
+"Tillägget är avslaget. Inställningarna sparas och gäller när det slås på."
 
 #: apps/plugins/views.py:82
 #, python-format
@@ -3643,7 +3649,8 @@ msgstr "Anges i serverns miljö (%(variable)s) och kan därför inte ändras hä
 
 #: apps/plugins/views.py:131
 msgid "The saved value cannot be read with this server's key; enter it again."
-msgstr "Det sparade värdet kan inte läsas med serverns nyckel. Skriv in det igen."
+msgstr ""
+"Det sparade värdet kan inte läsas med serverns nyckel. Skriv in det igen."
 
 #: apps/plugins/views.py:133
 msgid "A value is saved. Leave this empty to keep it."
@@ -5520,6 +5527,13 @@ msgstr "Inte inställt"
 #, python-format
 msgid "Sender %(sender)s"
 msgstr "Avsändare %(sender)s"
+
+#: apps/setup/templates/setup/messaging.html:9
+#, python-format
+msgid ""
+"Turn on an SMS add-on and enter its details under <a "
+"href=\"%(addons)s\">Settings &rsaquo; Add-ons</a>."
+msgstr "Slå på ett SMS-tillägg och fyll i dess uppgifter under <a href=\"%(addons)s\">Inställningar &rsaquo; Tillägg</a>."
 
 #: apps/setup/templates/setup/messaging.html:15
 msgid "Send a test email to"

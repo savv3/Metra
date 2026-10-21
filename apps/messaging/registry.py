@@ -54,6 +54,11 @@ class Provider:
         bytes, mimetype)], e.g. an invoice PDF) to the message; SMS ignore them."""
         raise NotImplementedError
 
+    def sender(self):
+        """The name or number an SMS is sent from; providers with their own
+        setting override this."""
+        return settings.MESSAGING["sms_sender"]
+
     def delivery_callback_url(self):
         """Where the provider reports delivery, or None if it does not."""
         return None

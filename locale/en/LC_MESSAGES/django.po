@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 19:02+0300\n"
+"POT-Creation-Date: 2026-10-21 17:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5249,6 +5249,13 @@ msgstr ""
 #: apps/setup/templates/setup/messaging.html:9
 #, python-format
 msgid "Sender %(sender)s"
+msgstr ""
+
+#: apps/setup/templates/setup/messaging.html:9
+#, python-format
+msgid ""
+"Turn on an SMS add-on and enter its details under <a "
+"href=\"%(addons)s\">Settings &rsaquo; Add-ons</a>."
 msgstr ""
 
 #: apps/setup/templates/setup/messaging.html:15
