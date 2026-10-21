@@ -162,14 +162,15 @@ flowchart TD
     p5[Phase 5: Messaging and setup<br/>email a unit, attachments, setup wizard, deliverability]
     p6[Phase 6: Integrations as plugins<br/>REST API, webhooks;<br/>46elks SMS moves to a plugin]
     p7[Phase 7: Restore, help and meetings<br/>restore from backups in the app, help pages,<br/>meeting protocols plugin, notifications]
-    p8[Phase 8: Bank file import<br/>match payments by reference number]
-    p9[Phase 9: Bookkeeping plugin<br/>simple double-entry books for small associations]
-    p10[Phase 10: E-invoicing<br/>Finvoice, Peppol later]
-    p11[Phase 11: Privacy automation<br/>retention rules that run on a schedule]
-    p12[Phase 12: Sweden<br/>Bankgiro with OCR references, Swish, Swedish rules]
-    p13[Phase 13: Orchestrator<br/>separate tool: self-service sign-up, many installs]
-    p14[Phase 14: Support plugin<br/>time-limited, audited access to help with setup]
-    p1 --> p2 --> gate --> p3 --> p4 --> p5 --> p6 --> p7 --> p8 --> p9 --> p10 --> p11 --> p12 --> p13 --> p14
+    p8[Phase 8: Plugins and sending in the app<br/>plugin chooser, email and SMS settings,<br/>Mailgun plugin]
+    p9[Phase 9: Bank file import<br/>match payments by reference number]
+    p10[Phase 10: Bookkeeping plugin<br/>simple double-entry books for small associations]
+    p11[Phase 11: E-invoicing<br/>Finvoice, Peppol later]
+    p12[Phase 12: Privacy automation<br/>retention rules that run on a schedule]
+    p13[Phase 13: Sweden<br/>Bankgiro with OCR references, Swish, Swedish rules]
+    p14[Phase 14: Orchestrator<br/>separate tool: self-service sign-up, many installs]
+    p15[Phase 15: Support plugin<br/>time-limited, audited access to help with setup]
+    p1 --> p2 --> gate --> p3 --> p4 --> p5 --> p6 --> p7 --> p8 --> p9 --> p10 --> p11 --> p12 --> p13 --> p14 --> p15
 ```
 
 The API is built into every phase, since pages and API share models and
@@ -178,29 +179,30 @@ permissions; phase 6 opens it to outside systems.
 | Phase | Status |
 | --- | --- |
 | 1 to 4 | Done. Alongside them: alerts, a public page, Finnish, the rename to Metra, a new layout with a dark theme, and READMEs in three languages |
-| 5 | A to C done (email a unit, attachments, setup wizard). D, email deliverability, is paused |
+| 5 | A to C done (email a unit, attachments, setup wizard). D, email deliverability, is replaced by phase 8 |
 | 6 | Done: plugin groundwork, 46elks SMS, REST API and webhooks as plugins (release 0.2.0) |
-| 7 | Next: restore, help pages and meeting protocols. Build plan below |
-| 8 to 14 | Planned. Each phase gets a build plan with one row per pull request before work starts |
+| 7 | Done: snapshots, restore in the app, help pages, meeting protocols plugin, notifications |
+| 8 | Next: plugin chooser, email and SMS settings in the app, Mailgun. Build plan below |
+| 9 to 15 | Planned. Each phase gets a build plan with one row per pull request before work starts |
 
 ## Later phases
 
 Outlines only; each becomes a build plan like the ones below when it is
 next.
 
-- **Phase 8: Bank file import.** Import the bank's ISO 20022 statement
+- **Phase 9: Bank file import.** Import the bank's ISO 20022 statement
   files (camt.054 for incoming reference payments, camt.053 as a fallback)
   and match payments to open invoices by reference number, Finnish or RF.
   Unmatched and partial payments land in a review list for the treasurer.
   Importing the same file twice is safe. Bank formats sit behind an
   importer interface, open to plugins.
-- **Phase 9: Bookkeeping plugin.** `metra-bookkeeping` under `plugins/`,
+- **Phase 10: Bookkeeping plugin.** `metra-bookkeeping` under `plugins/`,
   off by default, for associations that keep their own books. Simple to
   use but complete: double-entry books with a ready chart of accounts for
   a small Finnish association (editable, and per country later); invoices,
   credit notes, payments and reminder fees from Metra posted
   automatically; other income and expenses entered as numbered vouchers
-  with the receipt attached; bank statement lines from phase 8 matched to
+  with the receipt attached; bank statement lines from phase 9 matched to
   vouchers; VAT only when the organisation is registered for it. Reports:
   journal and general ledger (as the Accounting Act requires), income
   statement, balance sheet, and budget against actual per account. A
@@ -209,21 +211,21 @@ next.
   year and produces the papers the auditor (toiminnantarkastaja) needs.
   Exports as CSV and SIE, so an accountant can take over. Vouchers are
   kept for the legal period and are excluded from erasure.
-- **Phase 10: E-invoicing.** Send invoices as Finvoice to business clients
+- **Phase 11: E-invoicing.** Send invoices as Finvoice to business clients
   and members who ask for it, through an operator behind a provider
   interface, chosen per unit. Peppol follows when a client needs it.
   Households keep getting PDFs.
-- **Phase 11: Privacy automation.** Admin-set retention rules per kind of
+- **Phase 12: Privacy automation.** Admin-set retention rules per kind of
   data (archived people, old messages, readings, audit entries) run on a
   schedule in the worker, with a preview of what the next run removes and
   a log of what it did. Bookkeeping material keeps its legal period and is
   never removed early.
-- **Phase 12: Sweden.** Country rules become a setting per organisation:
+- **Phase 13: Sweden.** Country rules become a setting per organisation:
   Swedish VAT and invoice details, Bankgiro and OCR references, Swish
   payment requests and QR codes, and Swedish bookkeeping retention (7
   years). This proves the country layer so further countries are mostly
   configuration.
-- **Phase 13: Orchestrator.** A separate tool in its own repository that
+- **Phase 14: Orchestrator.** A separate tool in its own repository that
   runs many Metra installations, so an organisation can sign up and get
   its own install without the maintainer's help, and so hosting can later
   be sold. Each customer keeps a separate install with its own data
@@ -233,7 +235,7 @@ next.
   status, and later plans and payment. Metra itself needs only small
   additions: a command that creates an organisation and its first admin
   (sent a one-time setup link), and a way to read version and health.
-- **Phase 14: Support plugin.** A plugin, the first in the plugins
+- **Phase 15: Support plugin.** A plugin, the first in the plugins
   repository (see [Plugins](#plugins)), that lets
   the maintainer help an organisation set up its install. The
   organisation's admin grants support access from a page in the app, for
@@ -393,9 +395,9 @@ ships as four pull requests, with deliverability last.
 | PR | Contents | Done when |
 | --- | --- | --- |
 | A. Email a unit | A "Send message" button on the unit page that opens the message form with that unit as the only recipient, sent to the unit's contacts with email (SMS as an option); the message shows on the unit's history. Also fixes the New message form, which shows the tag and type dropdowns even when Everyone is selected | A board member writes to one household from its page and the message appears in its history |
-| B. Attachments | Files attached to messages and newsletters (PDF, images and office documents, with a size limit per file and per message), stored under `METRA_DATA_DIR`, sent as email attachments; SMS recipients get a short self-service link to the file instead; files are kept with the message and covered by the retention rules in phase 11 | The agenda for the annual meeting goes out as a PDF to every household |
+| B. Attachments | Files attached to messages and newsletters (PDF, images and office documents, with a size limit per file and per message), stored under `METRA_DATA_DIR`, sent as email attachments; SMS recipients get a short self-service link to the file instead; files are kept with the message and covered by the retention rules in phase 12 | The agenda for the annual meeting goes out as a PDF to every household |
 | C. Setup wizard | A step-by-step wizard after the first admin's first login: organisation name and contact details, language, logo, unit and person types with their fields (with the water association as a ready-made example), email and SMS settings with a test message, invoice settings, and inviting the board. Steps can be skipped; admins can start it again from Settings, and it changes nothing until each step is saved | A new install is ready to use without the Django admin, and an admin can rerun the wizard later |
-| D. Email deliverability (paused) | Research first, then build what it recommends. Options to compare: sending through the organisation's own mail account (SMTP with their domain), a transactional provider on a sending subdomain (for example `mail.example.fi`), and a shared Metra sending domain for hosted installs. Whichever wins, the app checks SPF, DKIM and DMARC for the sending domain and shows what to fix, sets a proper From and Reply-To, keeps List-Unsubscribe on newsletters, throttles batches, and records bounces | A test send to Gmail, Outlook and a Finnish ISP lands in the inbox, and the settings page shows the domain's DNS as correct |
+| D. Email deliverability (replaced by phase 8) | Research first, then build what it recommends. Options to compare: sending through the organisation's own mail account (SMTP with their domain), a transactional provider on a sending subdomain (for example `mail.example.fi`), and a shared Metra sending domain for hosted installs. Whichever wins, the app checks SPF, DKIM and DMARC for the sending domain and shows what to fix, sets a proper From and Reply-To, keeps List-Unsubscribe on newsletters, throttles batches, and records bounces | A test send to Gmail, Outlook and a Finnish ISP lands in the inbox, and the settings page shows the domain's DNS as correct |
 
 ## Phase 6 build plan
 
@@ -415,7 +417,7 @@ audit log. It ships as four pull requests.
 
 SMTP email stays in the core. A bookkeeping export for outside accounting
 software is left out until one is needed; the bookkeeping plugin in
-phase 9 covers associations that keep their own books.
+phase 10 covers associations that keep their own books.
 
 ## Phase 7 build plan
 
@@ -431,6 +433,23 @@ Staff also get a notification centre. It ships as five pull requests, starting w
 | C. Help pages | A Help section with short articles on how to do things: getting started, the register, readings, messages and newsletters, invoicing, backups and restore, roles and two-factor login. Articles are Markdown files per language in the repository, shown in the app with search. Each page links to the article that fits it, Finnish articles carry the machine-translation notice, and plugins can add their own articles through a hook | Every main page has a help link that opens the right article in the user's language |
 | D. Meeting protocols plugin | `metra-meetings` under `plugins/`, off by default. Meetings (annual, extraordinary, board) with date, place and agenda; the notice of meeting sent as a message with the agenda attached; attendance from the register, with votes per unit where the rules say so; minutes per agenda item with decisions, the chair, the secretary and the minute checkers; a PDF of the minutes that the checkers approve in the app; approved minutes published to members on the self-service page. Attendance is covered by the per-person export, and approved minutes are kept as the association's records | The annual meeting is called, held and minuted in Metra, and members can read the approved minutes |
 | E. Notifications | A notification service in the core: a bell icon next to the account menu with the number of unread notifications, and a Notifications page listing them newest first. Each notification can be opened (it links to what it is about), marked as read or unread, or dismissed, and there is "mark all as read". Notifications go to a user or to everyone in a role, for example a failed or finished backup, a restore, SMS or email that could not be delivered, a reading or contact change sent in through self-service, an invoice becoming overdue, and a failed webhook. Each user chooses which kinds they get; plugins send their own through `apps.plugins.api`. Read and dismissed notifications are removed after 90 days | A failed backup shows up under the bell for every admin, and an admin marks it as read and dismisses it |
+
+## Phase 8 build plan
+
+Phase 8 is done when an admin can turn plugins on and off, and set up
+email (SMTP or Mailgun) and SMS (46elks) in the app, without editing the
+server's environment. It ships as four pull requests.
+
+| PR | Contents | Done when |
+| --- | --- | --- |
+| A. Plugin chooser and plugin settings | A Plugins page under Settings lists the installed plugins with their description and version, and an admin turns each on or off. Installed plugins stay loaded, so turning one on or off needs no restart; while it is off, its pages, menu items, panels, events, API routes and providers are hidden, and its data is kept. `METRA_PLUGINS` still decides what is installed. Plugins declare their settings (text, number, choice, on/off and secret fields) through `apps.plugins.api` and get a settings page without writing their own. Secrets are stored encrypted with a key from the environment (`METRA_SETTINGS_KEY`, falling back to one derived from the secret key), are never shown again once saved, only replaced, and changes are in the audit log without the values. A value set in the environment wins and shows as locked. Admins only | An admin turns the meetings plugin off and on from Settings, and its menu item goes and comes back |
+| B. Email settings in the app | An Email page under Settings: choose the email provider among the enabled ones, with SMTP built in (host, port, user, password, TLS or SSL, From address and Reply-To). Login codes, invites and other system mail go through the same provider. The setup wizard's messaging step becomes a form, and the test message button stays. Existing `METRA_EMAIL_*` settings keep working | An admin switches from the console to SMTP in the app and the test message arrives |
+| C. Mailgun plugin | `metra-email-mailgun` under `plugins/`: sends through the Mailgun API, EU region by default (domain, API key and region as plugin settings), with attachments, List-Unsubscribe and a tag per send-out. Mailgun's signed event webhooks (delivered, bounced, complained) are recorded on the message, and a bounced address is flagged on the person | A newsletter goes out through Mailgun, and a bounce shows on the message and on the person |
+| D. 46elks settings in the app | The 46elks plugin's API user, password, sender name and dry-run flag move to its plugin settings page; the `METRA_ELKS_*` variables still win | An admin sets up SMS in the app and a test SMS arrives |
+
+Restoring a snapshot on another server needs the same `METRA_SETTINGS_KEY`;
+without it the saved secrets cannot be read and have to be entered again.
+The restore guide says so.
 
 ## Plugins
 
@@ -477,7 +496,7 @@ without changes. Phase 6 starts this: the API (`metra-api`) and webhooks
 (`metra-webhooks`) are built as plugins, and the 46elks SMS provider moves out of the core
 into a plugin too. The core keeps the provider interface, the console
 and dummy providers, and SMTP email.
-Plugins import only `apps.plugins.api`. The support plugin in phase 14 is
+Plugins import only `apps.plugins.api`. The support plugin in phase 15 is
 built the same way. The example plugin stays here because the core
 tests use it.
 
