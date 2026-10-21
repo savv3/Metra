@@ -26,6 +26,15 @@ class MeetingsConfig(AppConfig):
         api.add_navigation(
             api.NavItem(_("Meetings"), "metra_meetings:meeting_list", "metra_meetings.view_meeting")
         )
+        api.add_settings_link(
+            api.SettingsLink(
+                _("Agenda templates"),
+                "metra_meetings:template_list",
+                "metra_meetings.change_agendatemplate",
+                _("The usual agenda of each kind of meeting, which new meetings start from."),
+                group="organisation",
+            )
+        )
         api.add_member_panel(
             api.MemberPanel(
                 "metra_meetings/member_panel.html", _("Meeting minutes"), member.panel_context

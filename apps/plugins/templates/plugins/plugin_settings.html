@@ -7,14 +7,31 @@
     <div class="actions"><a class="button" href="{% url 'plugins:list' %}">{% translate "Add-ons" %}</a></div>
   </div>
   {% if not plugin.enabled %}<p class="notice">{% translate "This add-on is off. Its settings are kept and apply when it is turned on." %}</p>{% endif %}
-  <form method="post" class="form form--narrow" novalidate autocomplete="off">
-    {% csrf_token %}
-    {% for field in form %}{% include "register/_field.html" %}{% endfor %}
-    <div class="actions">
-      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
-      <a class="button" href="{% url 'plugins:list' %}">{% translate "Cancel" %}</a>
-    </div>
-  </form>
+  {% if pages %}
+    <section class="card settings-group">
+      {% for url, label, description in pages %}
+        <div class="setting-row">
+          <div>
+            <h2><a href="{{ url }}">{{ label }}</a></h2>
+            {% if description %}<p class="help">{{ description }}</p>{% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </section>
+  {% elif not plugin.enabled and not form %}
+    <p>{% translate "Turn the add-on on to open its settings pages." %}</p>
+  {% endif %}
+  {% if form %}
+    {% if pages %}<h2>{% translate "Other settings" %}</h2>{% endif %}
+    <form method="post" class="form form--narrow" novalidate autocomplete="off">
+      {% csrf_token %}
+      {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+      <div class="actions">
+        <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+        <a class="button" href="{% url 'plugins:list' %}">{% translate "Cancel" %}</a>
+      </div>
+    </form>
+  {% endif %}
   {% for test in tests %}
     <h2>{% translate "Send a test" %}</h2>
     {% if plugin.enabled %}

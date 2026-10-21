@@ -14,6 +14,7 @@ from apps.messaging.registry import EMAIL
 from config.plugins import BUNDLED, available
 
 from . import state
+from .hooks import SETTINGS_LINKS, hooks
 from .models import PluginState
 from .plugin_settings import PluginSettings, Setting, definitions
 
@@ -27,6 +28,11 @@ class Installed:
     enabled: bool
     bundled: bool
     has_settings: bool
+
+
+def has_pages(name):
+    """Whether the plugin adds settings links of its own (see api.SettingsLink)."""
+    return any(hooks.owner(link) == name for link in hooks.get(SETTINGS_LINKS, everything=True))
 
 
 def _config(name):
@@ -52,7 +58,7 @@ def installed():
                 version=dist.version if dist is not None else "",
                 enabled=state.is_enabled(name),
                 bundled=name in BUNDLED,
-                has_settings=bool(definitions(name)),
+                has_settings=bool(definitions(name)) or has_pages(name),
             )
         )
     return result
@@ -161,15 +167,19 @@ class SettingsForm(forms.Form):
 @login_required
 @permission_required("plugins.change_pluginsetting", raise_exception=True)
 def plugin_settings(request, name):
-    if name not in settings.PLUGIN_APPS or not definitions(name):
+    """The plugin's settings (``metra_settings``) and links to its own
+    settings pages (``api.add_settings_link``)."""
+    from .templatetags.plugins import settings_links
+
+    if name not in settings.PLUGIN_APPS or not (definitions(name) or has_pages(name)):
         raise Http404
     providers = _providers(name)
     if request.method == "POST" and request.POST.get("action") == "test":
         _send_test(request, name, providers)
         return redirect("plugins:settings", name=name)
     values = PluginSettings(name)
-    form = SettingsForm(request.POST or None, values=values)
-    if request.method == "POST" and form.is_valid():
+    form = SettingsForm(request.POST or None, values=values) if values.fields else None
+    if form is not None and request.method == "POST" and form.is_valid():
         form.save(request.user)
         messages.success(request, _("Saved the settings."))
         return redirect("plugins:settings", name=name)
@@ -179,6 +189,7 @@ def plugin_settings(request, name):
         {
             "form": form,
             "plugin": next(p for p in installed() if p.name == name),
+            "pages": settings_links(request.user, plugin=name),
             "tests": [
                 {
                     "channel": provider_class.channel,

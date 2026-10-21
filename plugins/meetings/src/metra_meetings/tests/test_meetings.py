@@ -308,11 +308,19 @@ def test_roles_get_the_permissions(db):
             .values_list("codename", flat=True)
         )
 
-    view = {"view_meeting", "view_agendaitem", "view_attendance", "view_approval"}
+    view = {
+        "view_meeting",
+        "view_agendaitem",
+        "view_attendance",
+        "view_approval",
+        "view_agendatemplate",
+    }
     assert {"add_meeting", "delete_meeting", "change_attendance"} <= codenames("Admin")
     board = codenames("Board")
     assert {"add_meeting", "change_meeting", "change_agendaitem", "add_attendance"} <= board
     assert "delete_meeting" not in board
+    assert {"add_agendatemplate", "change_agendatemplate"} <= board
+    assert "delete_agendatemplate" not in board
     assert codenames("Treasurer") == codenames("Read-only") == view
 
 

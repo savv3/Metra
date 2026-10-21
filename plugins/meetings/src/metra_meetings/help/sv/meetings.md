@@ -19,14 +19,30 @@ Tillägget slås på av den som sköter installationen
 ## Bered mötet
 
 1. Under **Möten**, klicka på **Nytt möte**. Välj typ av möte, skriv en
-   rubrik, datum, tid och plats och annat som kallelsen ska nämna.
+   rubrik, datum, tid och plats och annat som kallelsen ska nämna. Under
+   **Föredragningslista** får mötet föredragningslistan från mallen för sin
+   typ av möte (se nedan), en annan mall eller en tom föredragningslista.
 2. Kryssa i **En röst per enhet** om varje enhet (hushåll eller medlem) har
    en röst. Annars har alla närvarande en röst.
 3. Välj ordförande, sekreterare och protokolljusterare om ni redan vet vilka
    de är. Du kan ändra dem tills protokollet är justerat.
-4. Lägg till föredragningslistan med **Lägg till ett ärende**, ett ärende
-   (en paragraf, §) i taget. Ärendena visas i ordning efter sitt
-   ordningsnummer; beskrivningen syns på föredragningslistan.
+4. Kontrollera föredragningslistan och lägg till ärenden med **Lägg till ett
+   ärende**, ett ärende (en paragraf, §) i taget. Ärendena visas i ordning
+   efter sitt ordningsnummer; beskrivningen syns på föredragningslistan.
+
+## Mallar för föredragningslistor
+
+En mall för föredragningslista är den vanliga föredragningslistan för en typ
+av möte. Metra börjar med en för årsmöten och en för styrelsemöten, med de
+ärenden som föreningslagen förutsätter; anpassa dem till era stadgar. Du
+hittar dem med **Mallar för föredragningslistor** på sidan Möten, under
+**Inställningar** (**Organisation**) eller under **Inställningar > Tillägg >
+Möten > Inställningar**.
+
+Skriv ett ärende per rad, i ordning. **För** anger vilken typ av möte som
+börjar med mallen; lämna det tomt för en mall som du väljer själv, till
+exempel för en talkodag. Att ändra en mall ändrar inte möten som redan har
+lagts till. Admin och styrelsen ändrar mallarna; de andra kan se dem.
 
 ## Kalla till mötet
 

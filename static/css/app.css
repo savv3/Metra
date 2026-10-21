@@ -435,7 +435,7 @@ tbody th { font-weight: 600; }
 .card > h2 { font-size: 1.15rem; margin: 0.9rem 0 0.5rem; }
 .setting-row { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; align-items: center; justify-content: space-between; padding: 0.9rem 0; border-top: 1px solid var(--border); }
 .card > h2 + .setting-row { border-top: 0; }
-.setting-row h3 { margin: 0; font-size: 1rem; display: flex; gap: 0.5rem; align-items: center; }
+.setting-row h2, .setting-row h3 { margin: 0; font-size: 1rem; display: flex; gap: 0.5rem; align-items: center; }
 .setting-row .help { margin: 0.2rem 0 0; max-width: 38rem; }
 .auth-card { max-width: 26rem; margin: 2rem auto; padding: 1rem 1.75rem 1.75rem; }
 .auth-card .button--primary { width: 100%; }

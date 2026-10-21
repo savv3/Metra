@@ -25,7 +25,9 @@ def without_example_plugin(monkeypatch):
     monkeypatch.setattr(
         settings_page,
         "settings_links",
-        lambda user: [link for link in links(user) if "/plugins/example/" not in link[0]],
+        lambda user, **kwargs: [
+            link for link in links(user, **kwargs) if "/plugins/example/" not in link[0]
+        ],
     )
 
 
@@ -101,7 +103,10 @@ def test_superusers_also_get_advanced(client, make_user):
 def test_board_sees_only_what_it_may_change(client, make_user):
     page = get(client, make_user("board", "Board", is_staff=True)).content.decode()
 
-    assert groups(page) == ["register", "messages"]
+    # The meetings add-on's agenda templates are under Organisation.
+    assert groups(page) == ["organisation", "register", "messages"]
+    assert reverse("metra_meetings:template_list") in page
+    assert reverse("admin:register_organisation_add") not in page
     assert reverse("admin:register_tag_changelist") in page
     assert reverse("admin:messaging_consentrecord_changelist") in page
     assert reverse("admin:messaging_messagetemplate_changelist") not in page
@@ -119,15 +124,22 @@ def test_admin_entries_need_staff_status(client, make_user):
     page = get(client, make_user("admin", "Admin")).content.decode()
 
     assert "admin/" not in page.split('<main id="main">')[1]
-    assert groups(page) == ["messages", "integrations", "backups", "setup"]
+    assert groups(page) == ["organisation", "messages", "integrations", "backups", "setup"]
 
 
-@pytest.mark.parametrize("role", ["Read-only", "Board"])
+@pytest.mark.parametrize("role", ["Read-only", "Treasurer"])
 def test_users_with_nothing_to_set_are_refused(client, make_user, role):
     user = make_user("someone", role)
 
     assert get(client, user).status_code == 403
     assert f'href="{URL}"' not in client.get(reverse("register:unit_list")).content.decode()
+
+
+def test_board_without_staff_status_sets_only_add_on_pages(client, make_user):
+    page = get(client, make_user("board", "Board")).content.decode()
+
+    assert groups(page) == ["organisation"]
+    assert reverse("metra_meetings:template_list") in page
 
 
 def test_anonymous_users_are_sent_to_log_in(client):

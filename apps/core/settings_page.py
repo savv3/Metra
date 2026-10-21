@@ -255,8 +255,7 @@ def visible_groups(user):
     result = []
     for group in _groups():
         links = [(e.href(), e.label, e.description) for e in group.entries if e.allowed(user)]
-        if group.key == "integrations":
-            links += settings_links(user)
+        links += settings_links(user, group=group.key)
         if links:
             result.append((group, links))
     return result

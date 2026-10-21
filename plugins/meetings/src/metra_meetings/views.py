@@ -13,8 +13,14 @@ from django.views.decorators.http import require_POST
 from apps.plugins import api
 
 from . import documents
-from .forms import AgendaItemForm, AttendanceForm, MeetingForm, MinutesFormSet
-from .models import AgendaItem, Attendance, Meeting
+from .forms import (
+    AgendaItemForm,
+    AgendaTemplateForm,
+    AttendanceForm,
+    MeetingForm,
+    MinutesFormSet,
+)
+from .models import AgendaItem, AgendaTemplate, Attendance, Meeting
 
 PREFIX = "metra_meetings"
 
@@ -79,11 +85,22 @@ def meeting_list(request):
 def meeting_create(request):
     form = MeetingForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
-        meeting = form.save(commit=False)
-        meeting.created_by = request.user
-        meeting.save()
-        form.save_m2m()
-        messages.success(request, _("The meeting was added. Now add the agenda."))
+        with transaction.atomic():
+            meeting = form.save(commit=False)
+            meeting.created_by = request.user
+            meeting.save()
+            form.save_m2m()
+            template = form.agenda_template()
+            if template is not None:
+                template.copy_to(meeting)
+        if template is not None:
+            messages.success(
+                request,
+                _("The meeting was added with the agenda from %(template)s. Check the items.")
+                % {"template": template.name},
+            )
+        else:
+            messages.success(request, _("The meeting was added. Now add the agenda."))
         return redirect(meeting)
     return render(request, "metra_meetings/meeting_form.html", {"form": form, "meeting": None})
 
@@ -381,3 +398,52 @@ def approve(request, pk):
         return redirect(meeting)
     context = documents.minutes_context(meeting)
     return render(request, "metra_meetings/approve.html", context)
+
+
+# Agenda templates.
+
+
+@login_required
+@permission_required(f"{PREFIX}.view_agendatemplate", raise_exception=True)
+def template_list(request):
+    return render(
+        request,
+        "metra_meetings/template_list.html",
+        {"templates": AgendaTemplate.objects.all()},
+    )
+
+
+@login_required
+@permission_required(f"{PREFIX}.add_agendatemplate", raise_exception=True)
+def template_create(request):
+    return _template_form(request, AgendaTemplate())
+
+
+@login_required
+@permission_required(f"{PREFIX}.change_agendatemplate", raise_exception=True)
+def template_edit(request, pk):
+    return _template_form(request, get_object_or_404(AgendaTemplate, pk=pk))
+
+
+def _template_form(request, template):
+    form = AgendaTemplateForm(request.POST or None, instance=template)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, _("The agenda template was saved."))
+        return redirect("metra_meetings:template_list")
+    return render(
+        request,
+        "metra_meetings/template_form.html",
+        {"form": form, "template": template if template.pk else None},
+    )
+
+
+@login_required
+@permission_required(f"{PREFIX}.delete_agendatemplate", raise_exception=True)
+def template_delete(request, pk):
+    template = get_object_or_404(AgendaTemplate, pk=pk)
+    if request.method == "POST":
+        template.delete()
+        messages.success(request, _("The agenda template was deleted."))
+        return redirect("metra_meetings:template_list")
+    return render(request, "metra_meetings/template_confirm_delete.html", {"template": template})

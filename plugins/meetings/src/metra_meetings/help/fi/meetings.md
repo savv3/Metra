@@ -1,11 +1,11 @@
 # Kokoukset ja pöytäkirjat
 
-Kokouslaajennuksella yhdistys kutsuu koolle, pitää ja pöytäkirjaa
+Kokouslisäosalla yhdistys kutsuu koolle, pitää ja pöytäkirjaa
 kokouksensa Metrassa: vuosikokoukset, ylimääräiset kokoukset ja hallituksen
 kokoukset. Tarkastetut pöytäkirjat säilytetään yhdistyksen asiakirjoina, ja
 jäsenet voivat lukea ne henkilökohtaiselta sivultaan.
 
-Laajennuksen ottaa käyttöön asennuksen ylläpitäjä
+Lisäosan ottaa käyttöön asennuksen ylläpitäjä
 (`METRA_PLUGINS=meetings`). Sen jälkeen päävalikossa näkyy **Kokoukset**.
 
 ## Kuka voi tehdä mitä
@@ -20,15 +20,32 @@ Laajennuksen ottaa käyttöön asennuksen ylläpitäjä
 
 1. Valitse **Kokoukset** ja napsauta **Uusi kokous**. Valitse kokouksen
    laji, kirjoita otsikko, päivämäärä, aika ja paikka sekä muu, mitä
-   kokouskutsussa pitää mainita.
+   kokouskutsussa pitää mainita. Kohdassa **Esityslista** kokous saa
+   lajinsa esityslistapohjan (katso alla), muun pohjan tai tyhjän
+   esityslistan.
 2. Valitse **Yksi ääni yksikköä kohden**, jos jokaisella yksiköllä
    (taloudella tai jäsenellä) on yksi ääni. Muuten jokaisella läsnäolijalla
    on ääni.
 3. Valitse puheenjohtaja, sihteeri ja pöytäkirjantarkastajat, jos ne ovat jo
    tiedossa. Voit muuttaa niitä, kunnes pöytäkirja on tarkastettu.
-4. Lisää esityslista kohdalla **Lisää asia**, yksi asia (pykälä, §)
-   kerrallaan. Asiat näytetään järjestysnumeron mukaan; kuvaus näkyy
-   esityslistalla.
+4. Tarkista esityslista ja lisää asioita kohdalla **Lisää asia**, yksi asia
+   (pykälä, §) kerrallaan. Asiat näytetään järjestysnumeron mukaan; kuvaus
+   näkyy esityslistalla.
+
+## Esityslistapohjat
+
+Esityslistapohja on kokouslajin tavallinen esityslista. Metrassa on
+valmiina pohja vuosikokoukselle ja hallituksen kokoukselle, ja niissä ovat
+yhdistyslain edellyttämät asiat; muokkaa ne sääntöjenne mukaisiksi. Löydät
+ne Kokoukset-sivun painikkeesta **Esityslistapohjat**, kohdasta
+**Asetukset** (**Organisaatio**) tai kohdasta **Asetukset > Lisäosat >
+Kokoukset > Asetukset**.
+
+Kirjoita yksi asia riville, järjestyksessä. **Kokouslaji** kertoo, mikä
+kokouslaji alkaa pohjasta; jätä se tyhjäksi, jos valitset pohjan itse,
+esimerkiksi talkoopäivää varten. Pohjan muuttaminen ei muuta jo lisättyjä
+kokouksia. Ylläpitäjät ja hallitus muokkaavat pohjia; muut voivat katsoa
+niitä.
 
 ## Kutsu kokous koolle
 

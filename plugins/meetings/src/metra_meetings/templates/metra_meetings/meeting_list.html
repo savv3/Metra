@@ -4,9 +4,14 @@
 {% block content %}
   <div class="page-head">
     <h1>{% translate "Meetings" %}</h1>
-    {% if perms.metra_meetings.add_meeting %}
-      <a class="button button--primary" href="{% url 'metra_meetings:meeting_create' %}">{% translate "New meeting" %}</a>
-    {% endif %}
+    <div class="actions">
+      {% if perms.metra_meetings.add_meeting %}
+        <a class="button button--primary" href="{% url 'metra_meetings:meeting_create' %}">{% translate "New meeting" %}</a>
+      {% endif %}
+      {% if perms.metra_meetings.view_agendatemplate %}
+        <a class="button" href="{% url 'metra_meetings:template_list' %}">{% translate "Agenda templates" %}</a>
+      {% endif %}
+    </div>
   </div>
 
   {% if to_approve %}

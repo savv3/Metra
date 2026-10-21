@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 18:28+0000\n"
+"POT-Creation-Date: 2026-10-21 21:48+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -582,7 +582,7 @@ msgstr "Palauta tämä tilannevedos"
 #: apps/invoicing/templates/invoicing/run_form.html:14
 #: apps/messaging/templates/messaging/compose.html:126
 #: apps/messaging/templates/messaging/newsletter_compose.html:36
-#: apps/plugins/templates/plugins/plugin_settings.html:15
+#: apps/plugins/templates/plugins/plugin_settings.html:31
 #: apps/readings/templates/readings/reading_form.html:31
 #: apps/readings/templates/readings/round_form.html:20
 #: apps/register/templates/register/import_upload.html:20
@@ -2442,7 +2442,7 @@ msgid "A password is saved. Leave this empty to keep it."
 msgstr ""
 "Salasana on tallennettu. Jätä kenttä tyhjäksi, jos haluat säilyttää sen."
 
-#: apps/messaging/email_forms.py:103 apps/plugins/views.py:110
+#: apps/messaging/email_forms.py:103 apps/plugins/views.py:115
 #, python-format
 msgid ""
 "Set in the server environment (%(variable)s), so it cannot be changed here."
@@ -3337,7 +3337,7 @@ msgstr ""
 
 #: apps/messaging/templates/messaging/email_settings.html:16
 #: apps/notifications/templates/notifications/settings.html:19
-#: apps/plugins/templates/plugins/plugin_settings.html:14
+#: apps/plugins/templates/plugins/plugin_settings.html:30
 #: apps/readings/templates/readings/_round_row.html:20
 #: apps/readings/templates/readings/reading_form.html:30
 #: apps/readings/templates/readings/round_form.html:19
@@ -3347,18 +3347,18 @@ msgid "Save"
 msgstr "Tallenna"
 
 #: apps/messaging/templates/messaging/email_settings.html:19
-#: apps/plugins/templates/plugins/plugin_settings.html:19
+#: apps/plugins/templates/plugins/plugin_settings.html:36
 msgid "Send a test"
 msgstr "Lähetä testi"
 
 #: apps/messaging/templates/messaging/email_settings.html:23
-#: apps/plugins/templates/plugins/plugin_settings.html:30
+#: apps/plugins/templates/plugins/plugin_settings.html:47
 #: apps/setup/templates/setup/messaging.html:16
 msgid "Send a test email to"
 msgstr "Lähetä testisähköposti osoitteeseen"
 
 #: apps/messaging/templates/messaging/email_settings.html:24
-#: apps/plugins/templates/plugins/plugin_settings.html:31
+#: apps/plugins/templates/plugins/plugin_settings.html:48
 #: apps/setup/templates/setup/messaging.html:17
 msgid "Send test email"
 msgstr "Lähetä testisähköposti"
@@ -3831,7 +3831,15 @@ msgstr ""
 "Lisäosa ei ole käytössä. Sen asetukset säilyvät ja tulevat voimaan, kun se "
 "otetaan käyttöön."
 
-#: apps/plugins/templates/plugins/plugin_settings.html:21
+#: apps/plugins/templates/plugins/plugin_settings.html:22
+msgid "Turn the add-on on to open its settings pages."
+msgstr "Ota lisäosa käyttöön avataksesi sen asetussivut."
+
+#: apps/plugins/templates/plugins/plugin_settings.html:25
+msgid "Other settings"
+msgstr "Muut asetukset"
+
+#: apps/plugins/templates/plugins/plugin_settings.html:38
 msgid ""
 "Save the settings first. The test goes through this add-on even if another "
 "one is chosen for sending."
@@ -3839,46 +3847,46 @@ msgstr ""
 "Tallenna asetukset ensin. Testi lähetetään tämän lisäosan kautta, vaikka "
 "lähetyksiin olisi valittu jokin muu."
 
-#: apps/plugins/templates/plugins/plugin_settings.html:27
+#: apps/plugins/templates/plugins/plugin_settings.html:44
 #: apps/setup/templates/setup/messaging.html:29
 msgid "Send a test SMS to"
 msgstr "Lähetä testiviesti numeroon"
 
-#: apps/plugins/templates/plugins/plugin_settings.html:28
+#: apps/plugins/templates/plugins/plugin_settings.html:45
 #: apps/setup/templates/setup/messaging.html:30
 msgid "Send test SMS"
 msgstr "Lähetä testiviesti"
 
-#: apps/plugins/templates/plugins/plugin_settings.html:35
-#: apps/plugins/views.py:210
+#: apps/plugins/templates/plugins/plugin_settings.html:52
+#: apps/plugins/views.py:220
 msgid "Turn the add-on on to send a test."
 msgstr "Ota lisäosa käyttöön lähettääksesi testin."
 
-#: apps/plugins/views.py:84
+#: apps/plugins/views.py:89
 #, python-format
 msgid "%(plugin)s is on."
 msgstr "%(plugin)s on käytössä."
 
-#: apps/plugins/views.py:86
+#: apps/plugins/views.py:91
 #, python-format
 msgid "%(plugin)s is off. Its data is kept."
 msgstr "%(plugin)s ei ole käytössä. Sen tiedot säilyvät."
 
-#: apps/plugins/views.py:99
+#: apps/plugins/views.py:104
 #, python-format
 msgid "Remove the saved %(setting)s"
 msgstr "Poista tallennettu %(setting)s"
 
-#: apps/plugins/views.py:133
+#: apps/plugins/views.py:138
 msgid "The saved value cannot be read with this server's key; enter it again."
 msgstr ""
 "Tallennettua arvoa ei voi lukea palvelimen avaimella. Anna se uudelleen."
 
-#: apps/plugins/views.py:135
+#: apps/plugins/views.py:140
 msgid "A value is saved. Leave this empty to keep it."
 msgstr "Arvo on tallennettu. Jätä kenttä tyhjäksi, jos haluat säilyttää sen."
 
-#: apps/plugins/views.py:175
+#: apps/plugins/views.py:184
 msgid "Saved the settings."
 msgstr "Asetukset tallennettu."
 

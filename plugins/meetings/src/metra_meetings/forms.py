@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from apps.plugins import api
 
-from .models import AgendaItem, Attendance, Meeting
+from .models import AgendaItem, AgendaTemplate, Attendance, Meeting
 
 
 def active_users():
@@ -58,6 +58,48 @@ class MeetingForm(forms.ModelForm):
         # Querysets are made per form, so new users show up.
         for name in ("chair", "secretary", "checkers"):
             self.fields[name].queryset = active_users()
+        templates = list(AgendaTemplate.objects.all())
+        if self.instance.pk is None and templates:
+            self.fields["agenda"] = forms.ChoiceField(
+                label=_("Agenda"),
+                choices=[
+                    (AUTO, _("The agenda template for this kind of meeting, if there is one")),
+                    (EMPTY, _("An empty agenda")),
+                    *[(str(t.pk), t.name) for t in templates],
+                ],
+                initial=AUTO,
+                required=False,
+                help_text=_("You can change the items afterwards."),
+            )
+            self.order_fields(["kind", "agenda"])
+
+    def agenda_template(self):
+        """The template chosen for a new meeting's agenda, or None."""
+        choice = self.cleaned_data.get("agenda") or EMPTY
+        if choice == AUTO:
+            return AgendaTemplate.for_kind(self.instance.kind)
+        if choice == EMPTY:
+            return None
+        return AgendaTemplate.objects.filter(pk=choice).first()
+
+
+AUTO, EMPTY = "auto", "empty"
+
+
+class AgendaTemplateForm(forms.ModelForm):
+    class Meta:
+        model = AgendaTemplate
+        fields = ["name", "kind", "items"]
+        widgets = {"items": forms.Textarea(attrs={"rows": 14})}
+
+    def clean_kind(self):
+        kind = self.cleaned_data["kind"]
+        others = AgendaTemplate.objects.exclude(pk=self.instance.pk)
+        if kind and others.filter(kind=kind).exists():
+            raise forms.ValidationError(
+                _("Another template is already used for this kind of meeting.")
+            )
+        return kind
 
 
 class AgendaItemForm(forms.ModelForm):

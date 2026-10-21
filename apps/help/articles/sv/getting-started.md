@@ -67,7 +67,9 @@ En admin ser tilläggen som är installerade på servern under **Inställningar 
 Tillägg** och slår på eller av varje tillägg med **Slå på** och **Slå av**. Ett
 tillägg som är avslaget försvinner direkt från menyn och sidorna, och dess data
 sparas till nästa gång det slås på. Tillägg med inställningar, till exempel en
-API-nyckel, har en knapp **Inställningar** där. Ett sparat lösenord eller en
+API-nyckel, eller med egna inställningssidor, till exempel mötestilläggets
+mallar för föredragningslistor, har en knapp **Inställningar** där. De egna
+sidorna finns också på sidan Inställningar, under det avsnitt de hör till. Ett sparat lösenord eller en
 sparad nyckel visas aldrig igen: lämna fältet tomt för att behålla det, eller
 skriv in ett nytt. En inställning som är grånad är angiven på servern och kan
 inte ändras i appen. Nya tillägg installeras på servern, se
