@@ -31,12 +31,10 @@ class MeetingsConfig(AppConfig):
                 "metra_meetings/member_panel.html", _("Meeting minutes"), member.panel_context
             )
         )
-        # Help articles come with the help pages (Metra 0.3); older releases skip them.
-        if hasattr(api, "add_help_articles"):
-            api.add_help_articles(
-                api.HelpArticles(
-                    str(Path(__file__).parent / "help"),
-                    order=["meetings"],
-                    pages={"metra_meetings": "meetings"},
-                )
+        api.add_help_articles(
+            api.HelpArticles(
+                str(Path(__file__).parent / "help"),
+                order=["meetings"],
+                pages={"metra_meetings": "meetings"},
             )
+        )

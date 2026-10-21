@@ -334,3 +334,12 @@ def test_help_is_written_in_every_language():
     for language in ("sv", "en", "fi"):
         text = (folder / language / "meetings.md").read_text()
         assert text.startswith("# ")
+
+
+def test_the_meetings_guide_is_in_help(board_client):
+    from django.urls import reverse
+
+    page = board_client.get(reverse("help:index"), HTTP_ACCEPT_LANGUAGE="en").content.decode()
+    assert reverse("help:article", args=["meetings"]) in page
+    meetings = board_client.get(reverse("metra_meetings:meeting_list")).content.decode()
+    assert f'href="{reverse("help:article", args=["meetings"])}" class="help-link"' in meetings

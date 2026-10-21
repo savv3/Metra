@@ -38,6 +38,7 @@ from apps.messaging.registry import EMAIL, SMS, Provider, ProviderError, SendRes
 
 from . import events
 from .hooks import (
+    HELP_ARTICLES,
     MEMBER_PANELS,
     NAVIGATION,
     PERSON_PANELS,
@@ -101,6 +102,7 @@ def __getattr__(name):
 
 __all__ = [
     "API_VERSION",
+    "HelpArticles",
     "SUPPORTED_API_VERSIONS",
     "EMAIL",
     "SMS",
@@ -114,6 +116,7 @@ __all__ = [
     "SettingsLink",
     "WebhookEvent",
     "add_member_panel",
+    "add_help_articles",
     "add_messaging_provider",
     "add_navigation",
     "add_person_panel",
@@ -340,3 +343,19 @@ def member_page_url(token):
     from apps.selfservice.public import member_page_url
 
     return member_page_url(token)
+
+
+@dataclass
+class HelpArticles:
+    """A plugin's help articles: ``folder`` holds ``<language>/<slug>.md`` files
+    (Markdown, starting with ``# Title``), ``order`` lists the slugs in the
+    order the help index shows them, and ``pages`` maps the plugin's URL
+    namespaces to the article its pages' Help link opens."""
+
+    folder: str
+    order: list = field(default_factory=list)
+    pages: dict = field(default_factory=dict)
+
+
+def add_help_articles(articles):
+    return hooks.register(HELP_ARTICLES, articles)

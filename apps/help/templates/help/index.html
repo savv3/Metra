@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Help" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "Help" %}</h1>
+  <div class="help-layout">
+    {% include "help/_nav.html" %}
+    <div class="help-body">
+      {% if query %}
+        <h2>{% blocktranslate %}Search results for “{{ query }}”{% endblocktranslate %}</h2>
+        {% if results %}
+          <ul class="plain-list help-results">
+            {% for r in results %}<li><a href="{% url 'help:article' r.article.slug %}">{{ r.article.title }}</a><p class="help">{{ r.text }}</p></li>{% endfor %}
+          </ul>
+        {% else %}
+          <p class="empty">{% translate "No help article matches. Try another word." %}</p>
+        {% endif %}
+      {% else %}
+        <p>{% translate "Short guides to how things are done in Metra. Every page has a Help link in the menu that opens the guide for that page." %}</p>
+        <ul class="plain-list">
+          {% for a in articles %}<li><a href="{% url 'help:article' a.slug %}">{{ a.title }}</a></li>{% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

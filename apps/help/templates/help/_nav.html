@@ -1,0 +1,11 @@
+{% load i18n %}
+<nav class="help-nav" aria-label="{% translate 'Help articles' %}">
+  <form method="get" action="{% url 'help:index' %}" class="help-search" role="search">
+    <label for="help-q" class="visually-hidden">{% translate "Search help" %}</label>
+    <input type="search" id="help-q" name="q" value="{{ query|default:'' }}" placeholder="{% translate 'Search help' %}">
+    <button type="submit" class="button button--small">{% translate "Search" %}</button>
+  </form>
+  <ul class="plain-list">
+    {% for a in articles %}<li><a href="{% url 'help:article' a.slug %}"{% if a.slug == article.slug %} aria-current="page"{% endif %}>{{ a.title }}</a></li>{% endfor %}
+  </ul>
+</nav>
