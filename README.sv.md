@@ -49,6 +49,8 @@ först för ett vattenandelslag med ungefär 50 hushåll. Andra som passar bra:
   betalning, kreditnotor och betalningspåminnelser
 - Säkerhetskopior varje natt, krypterade och kopierade till S3, SFTP eller
   FTPS
+- Aviseringar under en klocka för personalen, till exempel en misslyckad
+  säkerhetskopia eller sms som inte kom fram, och var och en väljer vad den får
 - Möten (ett tillägg att slå på): kallelse med föredragningslista, närvaro
   och röster, protokoll som justeras av protokolljusterarna och visas för
   medlemmarna

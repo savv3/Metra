@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ngettext_lazy
 
 
 class WebhooksConfig(AppConfig):
@@ -26,5 +27,18 @@ class WebhooksConfig(AppConfig):
                 "metra_webhooks:endpoint_list",
                 "metra_webhooks.view_webhookendpoint",
                 _("Tell outside systems when something changes in Metra."),
+            )
+        )
+        api.add_notification_kind(
+            api.NotificationKind(
+                "webhook_failed",
+                _("A webhook could not be delivered"),
+                ngettext_lazy(
+                    "A webhook to %(endpoint)s could not be delivered and was given up.",
+                    "%(count)s webhooks to %(endpoint)s could not be delivered and were given up.",
+                    "count",
+                ),
+                roles=["Admin"],
+                permission="metra_webhooks.view_webhookdelivery",
             )
         )

@@ -14,6 +14,7 @@ WEBHOOK_EVENTS = "webhook_events"
 MEMBER_PANELS = "member_panels"
 
 HELP_ARTICLES = "help_articles"
+NOTIFICATION_KINDS = "notification_kinds"
 
 KNOWN = {
     NAVIGATION,
@@ -21,8 +22,9 @@ KNOWN = {
     PERSON_PANELS,
     SETTINGS_LINKS,
     WEBHOOK_EVENTS,
-    MEMBER_PANELS,
     HELP_ARTICLES,
+    NOTIFICATION_KINDS,
+    MEMBER_PANELS,
 }
 
 

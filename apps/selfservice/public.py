@@ -16,6 +16,7 @@ from django.views.decorators.cache import never_cache
 from apps.core.language import switch_language
 from apps.core.models import Notice
 from apps.messaging.models import ConsentRecord
+from apps.notifications.service import notify
 from apps.readings.models import Reading
 from apps.readings.usage import earlier_values
 from apps.register.models import Organisation
@@ -110,6 +111,17 @@ def _log_context(request, link, **extra):
     )
 
 
+def _notify_staff():
+    """Tell the board, under the bell, that a member changed something. One
+    notification a day, with a count; it names nobody."""
+    notify(
+        "self_service_change",
+        {"count": 1},
+        link=reverse("selfservice:recent_changes"),
+        group=f"day-{timezone.localdate().isoformat()}",
+    )
+
+
 def _log_visit(request, link):
     LogEntry.objects.log_create(
         link,
@@ -163,12 +175,14 @@ def member_page(request, token):
             reading.submitted_at = timezone.now()
             with _log_context(request, link, round_id=round_.pk):
                 reading.save()
+            _notify_staff()
             messages.success(request, _("Thank you. Your reading is saved."))
             return _private(redirect(request.path + "#reading"))
         if action == "newsletter":
             wanted = request.POST.get("subscribed") == "1"
             with _log_context(request, link):
                 ConsentRecord.record(link.person, wanted, ConsentRecord.Source.SELF_SERVICE)
+            _notify_staff()
             if wanted:
                 messages.success(request, _("Thank you. You will get the newsletter."))
             else:
@@ -178,6 +192,7 @@ def member_page(request, token):
             if contact_form.has_changed():
                 with _log_context(request, link):
                     contact_form.save()
+                _notify_staff()
                 messages.success(request, _("Thank you. Your contact details are updated."))
             else:
                 messages.info(request, _("Nothing was changed."))

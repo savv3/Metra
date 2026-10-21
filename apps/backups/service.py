@@ -14,8 +14,11 @@ from pathlib import Path
 
 from django.conf import settings
 from django.db import DatabaseError, transaction
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext as _
+
+from apps.notifications.service import notify
 
 from . import archive
 from .models import BackupRun
@@ -59,6 +62,14 @@ def _record(trigger, user):
         return None
 
 
+def notify_failure(message, variant=""):
+    """Tell the admins (under the bell) that a snapshot failed."""
+    params = {"error": message[:300]}
+    if variant:
+        params["variant"] = variant
+    notify("backup_failed", params, link=reverse("backups:list"))
+
+
 def _save(run, **fields):
     if run is None:
         return
@@ -92,6 +103,7 @@ def take_snapshot(trigger, user=None, upload=NOW, runner=subprocess.run):
         message = str(error) or error.__class__.__name__
         logger.error("Snapshot failed: %s", message)
         _save(run, error=message, finished_at=timezone.now())
+        notify_failure(message)
         raise SnapshotFailed(message) from error
     _save(
         run,
@@ -129,6 +141,7 @@ def send_offsite(path, run=None, runner=subprocess.run):
             message = target.scrub(message)
         logger.error("Sending snapshot offsite failed: %s", message)
         _save(run, success=False, error=message)
+        notify_failure(message, "offsite")
         return
     _save(
         run,

@@ -16,6 +16,10 @@ invoices.
 Your own language, the light or dark theme and two-factor login are in the
 menu under your name.
 
+The **bell** next to your name shows how many notifications you have not
+read, such as a failed backup or changes members sent in. See
+[Notifications](/help/notifications/).
+
 ## Setting up a new installation
 
 The first admin to log in is taken through the **setup wizard**, one page at

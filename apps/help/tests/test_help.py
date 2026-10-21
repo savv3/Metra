@@ -75,6 +75,8 @@ def test_title_matches_come_first():
         ("messaging:batch_list", "messages"),
         ("invoicing:invoice_list", "invoicing"),
         ("accounts:profile", "roles"),
+        ("notifications:list", "notifications"),
+        ("notifications:settings", "notifications"),
     ],
 )
 def test_every_main_page_links_to_its_article(role_client, url_name, slug):

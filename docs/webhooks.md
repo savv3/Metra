@@ -118,7 +118,8 @@ Answer with a `2xx` status within 10 seconds; anything else counts as a
 failure (including redirects, `3xx`). Answer first and do slow work after.
 
 A failed delivery is tried again after 1 minute, 5 minutes, 30 minutes,
-2 hours and 12 hours; if that fails too it is **given up**. Retries use the
+2 hours and 12 hours; if that fails too it is **given up**, and admins get a
+notification under the bell (one per endpoint and day). Retries use the
 same body and a new timestamp. If the worker is stopped, whatever is due is
 sent when it starts again. Under **Show deliveries** you can see the latest 100
 deliveries with their status, attempts, response code and error, and press

@@ -266,3 +266,30 @@ def test_plugins_hear_about_issued_invoices_and_payments(
 
     assert payments == [payment]
     assert issued[-1] == note.number
+
+
+def test_invoices_that_became_overdue_notify_the_treasurer_once(
+    invoices, make_user, django_capture_on_commit_callbacks
+):
+    from apps.invoicing.tasks import notify_overdue
+    from apps.notifications.models import Notification
+
+    treasurer = make_user("kassor", "Treasurer")
+    make_user("board", "Board")
+    yesterday = TODAY - datetime.timedelta(days=1)
+    Invoice.objects.filter(unit__name__in=["Bystigen 4", "Bystigen 6"]).update(due_date=yesterday)
+
+    with django_capture_on_commit_callbacks(execute=True):
+        assert notify_overdue() == 2
+    with django_capture_on_commit_callbacks(execute=True):
+        assert notify_overdue() == 0  # a second run the same day sends nothing
+
+    notification = Notification.objects.get(kind="invoices_overdue")
+    assert notification.params["count"] == 2
+    assert notification.link == reverse("invoicing:overdue_list")
+    assert list(notification.recipients.values_list("user", flat=True)) == [treasurer.pk]
+
+    # The next day only invoices that became overdue since then count.
+    Invoice.objects.filter(unit__name="Bystigen 8").update(due_date=TODAY)
+    with django_capture_on_commit_callbacks(execute=True):
+        assert notify_overdue(TODAY + datetime.timedelta(days=1)) == 1

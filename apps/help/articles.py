@@ -24,6 +24,7 @@ ORDER = [
     "messages",
     "invoicing",
     "backups",
+    "notifications",
     "roles",
 ]
 FALLBACK = ["en", "sv"]
@@ -37,6 +38,7 @@ PAGES = {
     "invoicing": "invoicing",
     "backups": "backups",
     "accounts": "roles",
+    "notifications": "notifications",
 }
 SLUG = re.compile(r"^[a-z0-9-]+$")
 

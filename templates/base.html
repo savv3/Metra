@@ -1,4 +1,4 @@
-{% load help i18n nav plugins roles static %}<!doctype html>
+{% load help i18n nav notifications plugins roles static %}<!doctype html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -27,6 +27,7 @@
           {% if user.is_staff %}{% translate "Settings" as label %}{% nav_link "admin:index" label %}{% endif %}
           {% help_link %}
         </nav>
+        {% notification_bell %}
         <details class="user-menu">
           <summary>
             <span class="avatar" aria-hidden="true">{{ user.get_username|first|upper }}</span>
@@ -38,6 +39,7 @@
               {% with roles=user|role_names %}{% if roles %}<span>{{ roles }}</span>{% endif %}{% endwith %}
             </p>
             <a href="{% url 'accounts:profile' %}">{% translate "My account" %}</a>
+            <a href="{% url 'notifications:settings' %}">{% translate "Notification settings" %}</a>
             {% include "_language_form.html" with suffix="-menu" %}
             <div class="lang-form theme-form">
               <label for="theme">{% translate "Theme" %}</label>

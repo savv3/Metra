@@ -223,6 +223,7 @@ def run(name, safety_name, username):
                 success=False,
                 error=message,
             )
+            _notify("restore_failed", name, username, message)
             return False
         # Recorded in the restored database, so the record survives the restore.
         Restore.objects.create(
@@ -233,9 +234,23 @@ def run(name, safety_name, username):
             finished_at=timezone.now(),
             success=True,
         )
+        # Like the record, sent in the restored database (it replaced the old
+        # notifications), to the admins in it.
+        _notify("restore_done", name, username)
         return True
     finally:
         _leave_maintenance()
+
+
+def _notify(kind, name, username, error=""):
+    from django.urls import reverse
+
+    from apps.notifications.service import notify
+
+    params = {"snapshot": name, "user": username}
+    if error:
+        params["error"] = error[:300]
+    notify(kind, params, link=reverse("backups:list"))
 
 
 def _replace_with(path):

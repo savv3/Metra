@@ -60,6 +60,8 @@ tavoittaa kaikki nopeasti. Se tehtiin ensin vesiosuuskunnalle, jossa on noin
   maksun QR-koodilla, hyvityslaskuilla ja maksumuistutuksilla
 - Öiset varmuuskopiot, salattuina ja kopioituina S3:een, SFTP:hen tai
   FTPS:ään
+- Ilmoitukset kellon alla henkilökunnalle, esimerkiksi epäonnistunut
+  varmuuskopio tai perille menemätön tekstiviesti, ja jokainen valitsee, mitä saa
 - Kokoukset (erikseen käyttöön otettava laajennus): kokouskutsu ja
   esityslista, läsnäolo ja äänet sekä pöytäkirjat, jotka
   pöytäkirjantarkastajat tarkastavat ja jotka näytetään jäsenille

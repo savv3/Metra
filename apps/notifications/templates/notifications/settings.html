@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Notification settings" %}{% endblock %}
+{% block content %}
+  <p class="back-link"><a href="{% url 'notifications:list' %}">&larr; {% translate "Notifications" %}</a></p>
+  <h1>{% translate "Notification settings" %}</h1>
+  <p>{% translate "Choose which notifications you get under the bell. Only the kinds your role can see are listed." %}</p>
+  {% if rows %}
+    <form method="post" class="form--inline">
+      {% csrf_token %}
+      <fieldset>
+        <legend>{% translate "Notify me when" %}</legend>
+        <ul>
+          {% for kind, enabled in rows %}
+            <li><label><input type="checkbox" name="kinds" value="{{ kind.name }}"{% if enabled %} checked{% endif %}> {{ kind.label }}</label></li>
+          {% endfor %}
+        </ul>
+      </fieldset>
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+    </form>
+  {% else %}
+    <p class="empty">{% translate "There are no notifications for your role." %}</p>
+  {% endif %}
+{% endblock %}

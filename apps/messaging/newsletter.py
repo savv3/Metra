@@ -16,6 +16,7 @@ from django.utils.translation import gettext as _
 from apps.register.models import Person
 
 from . import attachments
+from .failures import notify_failures
 from .models import ConsentRecord, Message, MessageBatch, MessageTemplate, organisation_placeholders
 from .registry import EMAIL, ProviderError, provider_for
 
@@ -87,6 +88,12 @@ def send_part(batch, limit=None):
         batch.status = MessageBatch.Status.DONE
         batch.finished_at = timezone.now()
         batch.save(update_fields=["status", "finished_at"])
+        # Someone who unsubscribed before it went out has a row without an
+        # address: that is their choice, not a delivery that failed.
+        notify_failures(
+            batch,
+            batch.messages.filter(status=Message.Status.FAILED).exclude(recipient="").count(),
+        )
     return left
 
 

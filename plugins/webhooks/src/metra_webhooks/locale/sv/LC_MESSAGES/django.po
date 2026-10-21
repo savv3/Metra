@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 23:29+0300\n"
+"POT-Creation-Date: 2026-10-21 10:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,14 +16,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: apps.py:7 apps.py:23 templates/metra_webhooks/endpoint_list.html:3
+
+#: apps.py:8 apps.py:26 templates/metra_webhooks/endpoint_list.html:3
 #: templates/metra_webhooks/endpoint_list.html:6
 msgid "Webhooks"
 msgstr "Webhooks"
 
-#: apps.py:26
+#: apps.py:29
 msgid "Tell outside systems when something changes in Metra."
 msgstr "Berätta för externa system när något ändras i Metra."
+
+#: apps.py:35
+msgid "A webhook could not be delivered"
+msgstr "En webhook kunde inte levereras"
+
+#: apps.py:37
+#, python-format
+msgid "A webhook to %(endpoint)s could not be delivered and was given up."
+msgid_plural ""
+"%(count)s webhooks to %(endpoint)s could not be delivered and were given up."
+msgstr[0] "En webhook till %(endpoint)s kunde inte levereras och avbröts."
+msgstr[1] "%(count)s webhooks till %(endpoint)s kunde inte levereras och avbröts."
 
 #: events.py:71
 msgid "A unit was added or changed"
@@ -169,33 +182,33 @@ msgstr "webhook-leverans"
 msgid "webhook deliveries"
 msgstr "webhook-leveranser"
 
-#: service.py:64
+#: service.py:65
 msgid "The address must start with https://."
 msgstr "Adressen måste börja med https://."
 
-#: service.py:66
+#: service.py:67
 msgid "The address must start with https:// or http://."
 msgstr "Adressen måste börja med https:// eller http://."
 
-#: service.py:69
+#: service.py:70
 msgid "The address must not contain a user name or password."
 msgstr "Adressen får inte innehålla användarnamn eller lösenord."
 
-#: service.py:89 service.py:92
+#: service.py:90 service.py:93
 #, python-format
 msgid "The address %(host)s could not be found."
 msgstr "Adressen %(host)s hittades inte."
 
-#: service.py:97
+#: service.py:98
 #, python-format
 msgid "%(host)s points to an internal address, which is not allowed."
 msgstr "%(host)s pekar på en intern adress, vilket inte är tillåtet."
 
-#: service.py:239
+#: service.py:248
 msgid "The endpoint is switched off."
 msgstr "Mottagaren är avstängd."
 
-#: service.py:256
+#: service.py:265
 #, python-format
 msgid "The receiver answered %(status)s."
 msgstr "Mottagaren svarade %(status)s."
@@ -305,7 +318,9 @@ msgstr "Hemlighet"
 msgid ""
 "The receiver uses this to check that a request came from Metra. Keep it "
 "private."
-msgstr "Mottagaren använder den för att kontrollera att en begäran kommer från Metra. Håll den hemlig."
+msgstr ""
+"Mottagaren använder den för att kontrollera att en begäran kommer från "
+"Metra. Håll den hemlig."
 
 #: templates/metra_webhooks/endpoint_form.html:28
 msgid "Make a new secret"
@@ -319,7 +334,9 @@ msgstr "Visa leveranser"
 msgid ""
 "An endpoint is an address that Metra tells when something changes. Only ids "
 "are sent, never names or contact details."
-msgstr "En mottagare är en adress som Metra meddelar när något ändras. Endast id-nummer skickas, aldrig namn eller kontaktuppgifter."
+msgstr ""
+"En mottagare är en adress som Metra meddelar när något ändras. Endast id-"
+"nummer skickas, aldrig namn eller kontaktuppgifter."
 
 #: templates/metra_webhooks/endpoint_list.html:13
 msgid "Endpoints"
@@ -360,7 +377,9 @@ msgstr "Mottagaren sparades."
 #: views.py:63
 msgid ""
 "A new secret was made. Give it to the receiver; the old one no longer works."
-msgstr "En ny hemlighet skapades. Ge den till mottagaren; den gamla fungerar inte längre."
+msgstr ""
+"En ny hemlighet skapades. Ge den till mottagaren; den gamla fungerar inte "
+"längre."
 
 #: views.py:74
 msgid "A test event was sent. The result is on this page."

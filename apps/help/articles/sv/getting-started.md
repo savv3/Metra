@@ -16,6 +16,10 @@ fakturor.
 Ditt eget språk, ljust eller mörkt tema och tvåfaktorsinloggning finns i
 menyn under ditt namn.
 
+**Klockan** bredvid ditt namn visar hur många aviseringar du inte har läst,
+till exempel en misslyckad säkerhetskopia eller ändringar som medlemmar
+skickat in. Se [Aviseringar](/help/notifications/).
+
 ## Att ställa in en ny installation
 
 Den första administratören som loggar in leds genom **installationsguiden**,

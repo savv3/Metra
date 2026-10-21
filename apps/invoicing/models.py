@@ -319,9 +319,9 @@ class InvoiceQuerySet(models.QuerySet):
     def issued(self):
         return self.exclude(status=Invoice.Status.DRAFT)
 
-    def overdue(self):
+    def overdue(self, today=None):
         """Issued, unpaid invoices past their due date (or a reminder's new one)."""
-        today = timezone.localdate()
+        today = today or timezone.localdate()
         latest = PaymentReminder.objects.filter(invoice=models.OuterRef("pk")).order_by(
             "-created_at", "-pk"
         )
