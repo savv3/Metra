@@ -180,8 +180,9 @@ permissions; phase 6 opens it to outside systems.
 | 1 to 4 | Done. Alongside them: alerts, a public page, Finnish, the rename to Metra, a new layout with a dark theme, and READMEs in three languages |
 | 5 | A to C done (email a unit, attachments, setup wizard). D, email deliverability, is paused |
 | 6 | Done: plugin groundwork, 46elks SMS, REST API and webhooks as plugins (release 0.2.0) |
-| 7 | Next: restore, help pages and meeting protocols. Build plan below |
-| 8 to 14 | Planned. Each phase gets a build plan with one row per pull request before work starts |
+| 7 | Done: snapshots, restore in the app, help pages, meeting protocols plugin and notifications |
+| 8 | Next: bank file import. Build plan below |
+| 9 to 14 | Planned. Each phase gets a build plan with one row per pull request before work starts |
 
 ## Later phases
 
@@ -431,6 +432,33 @@ Staff also get a notification centre. It ships as five pull requests, starting w
 | C. Help pages | A Help section with short articles on how to do things: getting started, the register, readings, messages and newsletters, invoicing, backups and restore, roles and two-factor login. Articles are Markdown files per language in the repository, shown in the app with search. Each page links to the article that fits it, Finnish articles carry the machine-translation notice, and plugins can add their own articles through a hook | Every main page has a help link that opens the right article in the user's language |
 | D. Meeting protocols plugin | `metra-meetings` under `plugins/`, off by default. Meetings (annual, extraordinary, board) with date, place and agenda; the notice of meeting sent as a message with the agenda attached; attendance from the register, with votes per unit where the rules say so; minutes per agenda item with decisions, the chair, the secretary and the minute checkers; a PDF of the minutes that the checkers approve in the app; approved minutes published to members on the self-service page. Attendance is covered by the per-person export, and approved minutes are kept as the association's records | The annual meeting is called, held and minuted in Metra, and members can read the approved minutes |
 | E. Notifications | A notification service in the core: a bell icon next to the account menu with the number of unread notifications, and a Notifications page listing them newest first. Each notification can be opened (it links to what it is about), marked as read or unread, or dismissed, and there is "mark all as read". Notifications go to a user or to everyone in a role, for example a failed or finished backup, a restore, SMS or email that could not be delivered, a reading or contact change sent in through self-service, an invoice becoming overdue, and a failed webhook. Each user chooses which kinds they get; plugins send their own through `apps.plugins.api`. Read and dismissed notifications are removed after 90 days | A failed backup shows up under the bell for every admin, and an admin marks it as read and dismisses it |
+
+## Phase 8 build plan
+
+Phase 8 is done when the treasurer can download the bank's statement file,
+upload it to Metra, and see every payment with a correct reference recorded
+on its invoice, while the payments Metra could not place wait in a review
+list. It ships as two pull requests.
+
+| PR | Contents | Done when |
+| --- | --- | --- |
+| A. Import and automatic matching | A new `apps/banking` app. Bank files are read by importers behind an interface (`api.add_bank_importer` for plugins); the core reads ISO 20022 camt.054 (incoming reference payments) and camt.053 (account statement), each transaction detail in a batch entry as its own line. An import keeps the file's account, period and lines (date, amount, reference, message, payer name and account, the bank's archive reference). Importing the same file twice is refused, and a line already imported from another file (camt.054 first, camt.053 later) is skipped. Each incoming line whose Finnish or RF reference belongs to an issued invoice and pays exactly what is outstanding is recorded as a payment on that invoice; every other line gets a reason (no or unknown reference, partial, too much, already paid, credited) and waits for review. Outgoing lines are kept but not matched. A Bank files page under Invoices lists imports, and each import shows its lines and what happened to them | The treasurer uploads the bank's camt.054 for October, the households that paid exactly are marked paid, and uploading the same file again changes nothing |
+| B. Review list | A list of lines waiting for review across imports: record a line as a payment on the suggested invoice or on one the treasurer finds (a partial payment, or the whole amount when too much was paid), or mark it as not an invoice payment, with a note; both can be undone while no payment hangs on it. A notification tells the treasurer when an import leaves lines to review. The invoicing help article in three languages covers bank files | Every line of a real bank file is either recorded or explained, and the review list is empty |
+
+### Bank file rules
+
+- **What counts.** Only booked incoming lines in euros are matched.
+  Pending lines are not imported, and outgoing ones are kept for the
+  bookkeeping plugin in phase 9.
+- **References.** A reference matches with or without spaces and leading
+  zeros, and an RF reference matches the Finnish reference it wraps, so a
+  payer who types either form finds the invoice.
+- **Payments stay immutable.** A matched line records an ordinary payment
+  (with the bank's reference and the import in its note); a wrong match is
+  reversed with a negative payment, as for payments entered by hand.
+- **Personal data.** A line holds the payer's name and account number. They
+  are bookkeeping material like the payment itself, kept for the legal
+  period and excluded from erasure.
 
 ## Plugins
 

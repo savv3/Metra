@@ -44,6 +44,24 @@ adress för den), eller som brev till dem som vill ha post eller saknar båda,
 med påminnelseavgiften om en sådan är inställd och
 minst 14 dagar att betala.
 
+## Bankfiler
+
+I stället för att registrera varje betalning för hand kan du ladda ner bankens
+fil över inkommande betalningar från din nätbank och ladda upp den under
+**Fakturor > Bankfiler**. Metra läser XML-filer enligt ISO 20022: camt.054,
+filen med referensbetalningar, och camt.053, kontoutdraget. Varje betalning
+vars referensnummer hör till en faktura och som betalar exakt det som återstår
+registreras på fakturan. Referensnumret kan vara det finländska eller RF-numret,
+med eller utan mellanslag.
+
+Betalningar utan referensnummer eller med ett okänt, delbetalningar och för
+stora betalningar markeras **Att kontrollera**: registrera dem för hand på rätt
+faktura. Utbetalningar visas men matchas inte. Om du laddar upp samma fil två
+gånger ändras inget, och en betalning som redan har importerats från en
+tidigare fil (till exempel filen med referensbetalningar före månadens
+kontoutdrag) hoppas över. Varje importerad fil visar sina rader och vad som
+hände med var och en.
+
 ## Till bokföraren
 
 **Exportera som CSV** under fakturalistan ger alla utfärdade fakturor med

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Bank files" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Bank files" %}</h1>
+    <div class="actions"><a class="button" href="{% url 'invoicing:invoice_list' %}">{% translate "All invoices" %}</a></div>
+  </div>
+  <p>{% blocktranslate trimmed %}
+    Upload the file your online bank gives for incoming payments. Every payment with an
+    invoice's reference that pays exactly what is left is recorded on that invoice; the rest
+    are listed for you to check. Uploading the same payments again changes nothing.
+  {% endblocktranslate %}</p>
+  {% if perms.banking.add_bankstatement and perms.invoicing.add_payment %}
+    <form method="post" action="{% url 'banking:statement_upload' %}" enctype="multipart/form-data" class="form form--narrow" novalidate>
+      {% csrf_token %}
+      {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+      <p class="help">{% translate "Formats Metra reads:" %} {% for importer in formats %}{{ importer.label }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+      <div class="actions"><button type="submit" class="button button--primary">{% translate "Import" %}</button></div>
+    </form>
+  {% endif %}
+  <h2>{% translate "Imported files" %}</h2>
+  {% if statements %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Imported files' %}">
+      <table>
+        <thead><tr>
+          <th scope="col">{% translate "File" %}</th><th scope="col">{% translate "Period" %}</th><th scope="col">{% translate "Imported" %}</th>
+          <th scope="col" class="num">{% translate "Lines" %}</th><th scope="col" class="num">{% translate "Recorded" %}</th><th scope="col" class="num">{% translate "To review" %}</th><th scope="col" class="num">{% translate "Money in" %}</th>
+        </tr></thead>
+        <tbody>
+          {% for statement in statements %}
+            <tr>
+              <th scope="row"><a href="{{ statement.get_absolute_url }}">{{ statement.file_name }}</a><span class="help">{{ statement.format }}{% if statement.account %} · {{ statement.account }}{% endif %}</span></th>
+              <td>{{ statement.starts|date:"SHORT_DATE_FORMAT" }}{% if statement.ends and statement.ends != statement.starts %} – {{ statement.ends|date:"SHORT_DATE_FORMAT" }}{% endif %}</td>
+              <td>{{ statement.imported_at|date:"SHORT_DATE_FORMAT" }}{% if statement.imported_by %}<span class="help">{{ statement.imported_by.get_full_name|default:statement.imported_by.get_username }}</span>{% endif %}</td>
+              <td class="num">{{ statement.lines }}</td>
+              <td class="num">{{ statement.matched }}</td>
+              <td class="num">{% if statement.to_review %}<span class="status-error">{{ statement.to_review }}</span>{% else %}0{% endif %}</td>
+              <td class="num">{{ statement.received|default:0|floatformat:2 }} €</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "No bank files imported yet." %}</p>
+  {% endif %}
+{% endblock %}

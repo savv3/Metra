@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ statement.file_name }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{{ statement.file_name }}</h1>
+    <div class="actions"><a class="button" href="{% url 'banking:statement_list' %}">{% translate "Bank files" %}</a></div>
+  </div>
+  <dl class="details-list">
+    <dt>{% translate "Format" %}</dt><dd>{{ statement.format }}</dd>
+    {% if statement.account %}<dt>{% translate "Account" %}</dt><dd>{{ statement.account }}</dd>{% endif %}
+    <dt>{% translate "Period" %}</dt><dd>{{ statement.starts|date:"SHORT_DATE_FORMAT" }}{% if statement.ends and statement.ends != statement.starts %} – {{ statement.ends|date:"SHORT_DATE_FORMAT" }}{% endif %}</dd>
+    <dt>{% translate "Imported" %}</dt><dd>{{ statement.imported_at|date:"SHORT_DATETIME_FORMAT" }}{% if statement.imported_by %}, {{ statement.imported_by.get_full_name|default:statement.imported_by.get_username }}{% endif %}</dd>
+    <dt>{% translate "Lines" %}</dt><dd>{% blocktranslate with lines=statement.lines matched=statement.matched review=statement.to_review trimmed %}{{ lines }} lines: {{ matched }} recorded, {{ review }} to review{% endblocktranslate %}{% if statement.skipped %}{% blocktranslate count count=statement.skipped trimmed %}; {{ count }} more was already imported from an earlier file{% plural %}; {{ count }} more were already imported from earlier files{% endblocktranslate %}{% endif %}</dd>
+  </dl>
+  <form class="filters" method="get">
+    <div class="field">
+      <label for="f-show">{% translate "Show" %}</label>
+      <select id="f-show" name="show" onchange="this.form.submit()">
+        <option value="">{% translate "All" %}</option>
+        {% for value, label in statuses %}<option value="{{ value }}"{% if show == value %} selected{% endif %}>{{ label }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="field field--submit"><button type="submit" class="button">{% translate "Filter" %}</button></div>
+  </form>
+  {% if lines %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Lines in the file' %}">
+      <table>
+        <thead><tr>
+          <th scope="col">{% translate "Booked" %}</th><th scope="col">{% translate "Payer" %}</th><th scope="col">{% translate "Reference or message" %}</th>
+          <th scope="col" class="num">{% translate "Amount" %}</th><th scope="col">{% translate "Status" %}</th><th scope="col">{% translate "Invoice" %}</th>
+        </tr></thead>
+        <tbody>
+          {% for line in lines %}
+            <tr>
+              <td>{{ line.booked_on|date:"SHORT_DATE_FORMAT" }}</td>
+              <td>{{ line.payer_name|default:"–" }}{% if line.payer_account %}<span class="help">{{ line.payer_account }}</span>{% endif %}</td>
+              <td>{{ line.reference }}{% if line.message %}<span class="help">{{ line.message }}</span>{% endif %}</td>
+              <td class="num">{{ line.amount|floatformat:2 }}{% if line.currency == "EUR" %} €{% else %} {{ line.currency }}{% endif %}</td>
+              <td>{% if line.status == "review" %}<span class="status-error">{{ line.get_status_display }}</span><span class="help">{{ line.get_reason_display }}</span>{% elif line.status == "matched" %}<span class="status-ok">{{ line.get_status_display }}</span>{% else %}{{ line.get_status_display }}{% endif %}</td>
+              <td>{% if line.invoice %}<a href="{{ line.invoice.get_absolute_url }}">{{ line.invoice.number }}</a>{% else %}–{% endif %}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "No lines to show." %}</p>
+  {% endif %}
+{% endblock %}

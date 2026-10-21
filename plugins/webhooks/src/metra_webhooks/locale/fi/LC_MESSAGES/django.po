@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 10:55+0300\n"
+"POT-Creation-Date: 2026-10-21 18:43+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,306 +18,314 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps.py:8 apps.py:26 templates/metra_webhooks/endpoint_list.html:3
-#: templates/metra_webhooks/endpoint_list.html:6
+#: plugins/webhooks/src/metra_webhooks/apps.py:8
+#: plugins/webhooks/src/metra_webhooks/apps.py:26
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:3
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:6
 msgid "Webhooks"
 msgstr "Webhookit"
 
-#: apps.py:29
+#: plugins/webhooks/src/metra_webhooks/apps.py:29
 msgid "Tell outside systems when something changes in Metra."
 msgstr "Kerro ulkoisille järjestelmille, kun jokin muuttuu Metrassa."
 
-#: apps.py:35
+#: plugins/webhooks/src/metra_webhooks/apps.py:35
 msgid "A webhook could not be delivered"
 msgstr "Webhookia ei voitu toimittaa"
 
-#: apps.py:37
+#: plugins/webhooks/src/metra_webhooks/apps.py:37
 #, python-format
 msgid "A webhook to %(endpoint)s could not be delivered and was given up."
 msgid_plural ""
 "%(count)s webhooks to %(endpoint)s could not be delivered and were given up."
-msgstr[0] "Webhookia kohteeseen %(endpoint)s ei voitu toimittaa, ja siitä luovuttiin."
-msgstr[1] "%(count)s webhookia kohteeseen %(endpoint)s ei voitu toimittaa, ja niistä luovuttiin."
+msgstr[0] ""
+"Webhookia kohteeseen %(endpoint)s ei voitu toimittaa, ja siitä luovuttiin."
+msgstr[1] ""
+"%(count)s webhookia kohteeseen %(endpoint)s ei voitu toimittaa, ja niistä "
+"luovuttiin."
 
-#: events.py:71
+#: plugins/webhooks/src/metra_webhooks/events.py:71
 msgid "A unit was added or changed"
 msgstr "Yksikkö lisättiin tai sitä muutettiin"
 
-#: events.py:72
+#: plugins/webhooks/src/metra_webhooks/events.py:72
 msgid "A person was added or changed"
 msgstr "Henkilö lisättiin tai häntä muutettiin"
 
-#: events.py:75
+#: plugins/webhooks/src/metra_webhooks/events.py:75
 msgid "A reading was entered or corrected"
 msgstr "Lukema syötettiin tai korjattiin"
 
-#: events.py:79
+#: plugins/webhooks/src/metra_webhooks/events.py:79
 msgid "An invoice was issued"
 msgstr "Lasku annettiin"
 
-#: events.py:82
+#: plugins/webhooks/src/metra_webhooks/events.py:82
 msgid "A payment was recorded"
 msgstr "Maksu kirjattiin"
 
-#: forms.py:10 templates/metra_webhooks/endpoint_list.html:18
+#: plugins/webhooks/src/metra_webhooks/forms.py:10
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:18
 msgid "Events"
 msgstr "Tapahtumat"
 
-#: forms.py:13
+#: plugins/webhooks/src/metra_webhooks/forms.py:13
 msgid "The endpoint gets nothing until at least one event is ticked."
 msgstr ""
 "Vastaanottaja ei saa mitään, ennen kuin vähintään yksi tapahtuma on valittu."
 
-#: forms.py:17
+#: plugins/webhooks/src/metra_webhooks/forms.py:17
 msgid "Address"
 msgstr "Osoite"
 
-#: forms.py:20
+#: plugins/webhooks/src/metra_webhooks/forms.py:20
 msgid "Where Metra sends the events. Must start with https://."
 msgstr "Minne Metra lähettää tapahtumat. Osoitteen on alettava https://."
 
-#: forms.py:27
+#: plugins/webhooks/src/metra_webhooks/forms.py:27
 msgid "What the receiver is, for your own reference."
 msgstr "Mikä vastaanottaja on, omaa käyttöäsi varten."
 
-#: models.py:19
+#: plugins/webhooks/src/metra_webhooks/models.py:19
 msgid "address"
 msgstr "osoite"
 
-#: models.py:20
+#: plugins/webhooks/src/metra_webhooks/models.py:20
 msgid "description"
 msgstr "kuvaus"
 
-#: models.py:22
+#: plugins/webhooks/src/metra_webhooks/models.py:22
 msgid "events"
 msgstr "tapahtumat"
 
-#: models.py:24
+#: plugins/webhooks/src/metra_webhooks/models.py:24
 msgid "secret"
 msgstr "salaisuus"
 
-#: models.py:25
+#: plugins/webhooks/src/metra_webhooks/models.py:25
 msgid "active"
 msgstr "aktiivinen"
 
-#: models.py:28
+#: plugins/webhooks/src/metra_webhooks/models.py:28
 msgid "created by"
 msgstr "luonut"
 
-#: models.py:34 models.py:81
+#: plugins/webhooks/src/metra_webhooks/models.py:34
+#: plugins/webhooks/src/metra_webhooks/models.py:81
 msgid "created"
 msgstr "luotu"
 
-#: models.py:38
+#: plugins/webhooks/src/metra_webhooks/models.py:38
 msgid "webhook endpoint"
 msgstr "webhook-vastaanottaja"
 
-#: models.py:39
+#: plugins/webhooks/src/metra_webhooks/models.py:39
 msgid "webhook endpoints"
 msgstr "webhook-vastaanottajat"
 
-#: models.py:56
+#: plugins/webhooks/src/metra_webhooks/models.py:56
 msgid "Waiting"
 msgstr "Odottaa"
 
-#: models.py:57
+#: plugins/webhooks/src/metra_webhooks/models.py:57
 msgid "Delivered"
 msgstr "Toimitettu"
 
-#: models.py:58
+#: plugins/webhooks/src/metra_webhooks/models.py:58
 msgid "Failed, will retry"
 msgstr "Epäonnistui, yritetään uudelleen"
 
-#: models.py:59
+#: plugins/webhooks/src/metra_webhooks/models.py:59
 msgid "Given up"
 msgstr "Luovutettu"
 
-#: models.py:64
+#: plugins/webhooks/src/metra_webhooks/models.py:64
 msgid "endpoint"
 msgstr "vastaanottaja"
 
-#: models.py:68
+#: plugins/webhooks/src/metra_webhooks/models.py:68
 msgid "event"
 msgstr "tapahtuma"
 
-#: models.py:71
+#: plugins/webhooks/src/metra_webhooks/models.py:71
 msgid "payload"
 msgstr "sisältö"
 
-#: models.py:73
+#: plugins/webhooks/src/metra_webhooks/models.py:73
 msgid "status"
 msgstr "tila"
 
-#: models.py:75
+#: plugins/webhooks/src/metra_webhooks/models.py:75
 msgid "attempts"
 msgstr "yritykset"
 
-#: models.py:76
+#: plugins/webhooks/src/metra_webhooks/models.py:76
 msgid "next attempt"
 msgstr "seuraava yritys"
 
-#: models.py:77
+#: plugins/webhooks/src/metra_webhooks/models.py:77
 msgid "last attempt"
 msgstr "viimeisin yritys"
 
-#: models.py:78
+#: plugins/webhooks/src/metra_webhooks/models.py:78
 msgid "response code"
 msgstr "vastauskoodi"
 
-#: models.py:79
+#: plugins/webhooks/src/metra_webhooks/models.py:79
 msgid "response"
 msgstr "vastaus"
 
-#: models.py:80
+#: plugins/webhooks/src/metra_webhooks/models.py:80
 msgid "error"
 msgstr "virhe"
 
-#: models.py:82
+#: plugins/webhooks/src/metra_webhooks/models.py:82
 msgid "delivered"
 msgstr "toimitettu"
 
-#: models.py:86
+#: plugins/webhooks/src/metra_webhooks/models.py:86
 msgid "webhook delivery"
 msgstr "webhook-toimitus"
 
-#: models.py:87
+#: plugins/webhooks/src/metra_webhooks/models.py:87
 msgid "webhook deliveries"
 msgstr "webhook-toimitukset"
 
-#: service.py:65
+#: plugins/webhooks/src/metra_webhooks/service.py:65
 msgid "The address must start with https://."
 msgstr "Osoitteen on alettava https://."
 
-#: service.py:67
+#: plugins/webhooks/src/metra_webhooks/service.py:67
 msgid "The address must start with https:// or http://."
 msgstr "Osoitteen on alettava https:// tai http://."
 
-#: service.py:70
+#: plugins/webhooks/src/metra_webhooks/service.py:70
 msgid "The address must not contain a user name or password."
 msgstr "Osoite ei saa sisältää käyttäjätunnusta tai salasanaa."
 
-#: service.py:90 service.py:93
+#: plugins/webhooks/src/metra_webhooks/service.py:90
+#: plugins/webhooks/src/metra_webhooks/service.py:93
 #, python-format
 msgid "The address %(host)s could not be found."
 msgstr "Osoitetta %(host)s ei löytynyt."
 
-#: service.py:98
+#: plugins/webhooks/src/metra_webhooks/service.py:98
 #, python-format
 msgid "%(host)s points to an internal address, which is not allowed."
 msgstr "%(host)s osoittaa sisäiseen osoitteeseen, mikä ei ole sallittua."
 
-#: service.py:248
+#: plugins/webhooks/src/metra_webhooks/service.py:248
 msgid "The endpoint is switched off."
 msgstr "Vastaanottaja on poissa käytöstä."
 
-#: service.py:265
+#: plugins/webhooks/src/metra_webhooks/service.py:265
 #, python-format
 msgid "The receiver answered %(status)s."
 msgstr "Vastaanottaja vastasi %(status)s."
 
-#: templates/metra_webhooks/delivery_list.html:3
-#: templates/metra_webhooks/delivery_list.html:6
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:3
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:6
 #, python-format
 msgid "Deliveries to %(name)s"
 msgstr "Toimitukset vastaanottajalle %(name)s"
 
-#: templates/metra_webhooks/delivery_list.html:10
-#: templates/metra_webhooks/endpoint_form.html:37
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:10
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_form.html:37
 msgid "Send a test event"
 msgstr "Lähetä testitapahtuma"
 
-#: templates/metra_webhooks/delivery_list.html:14
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:14
 msgid "All endpoints"
 msgstr "Kaikki vastaanottajat"
 
-#: templates/metra_webhooks/delivery_list.html:15
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:15
 msgid "The latest 100. Older deliveries are removed after a while."
 msgstr "Viimeiset 100. Vanhemmat toimitukset poistetaan jonkin ajan kuluttua."
 
-#: templates/metra_webhooks/delivery_list.html:17
-#: templates/metra_webhooks/endpoint_form.html:32
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:17
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_form.html:32
 msgid "Deliveries"
 msgstr "Toimitukset"
 
-#: templates/metra_webhooks/delivery_list.html:21
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:21
 msgid "Event"
 msgstr "Tapahtuma"
 
-#: templates/metra_webhooks/delivery_list.html:22
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:22
 msgid "Created"
 msgstr "Luotu"
 
-#: templates/metra_webhooks/delivery_list.html:23
-#: templates/metra_webhooks/endpoint_list.html:19
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:23
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:19
 msgid "Status"
 msgstr "Tila"
 
-#: templates/metra_webhooks/delivery_list.html:24
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:24
 msgid "Attempts"
 msgstr "Yritykset"
 
-#: templates/metra_webhooks/delivery_list.html:25
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:25
 msgid "Response code"
 msgstr "Vastauskoodi"
 
-#: templates/metra_webhooks/delivery_list.html:26
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:26
 msgid "Error"
 msgstr "Virhe"
 
-#: templates/metra_webhooks/delivery_list.html:37
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:37
 #, python-format
 msgid "Next try %(when)s"
 msgstr "Seuraava yritys %(when)s"
 
-#: templates/metra_webhooks/delivery_list.html:46
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:46
 msgid "Retry now"
 msgstr "Yritä uudelleen nyt"
 
-#: templates/metra_webhooks/delivery_list.html:56
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/delivery_list.html:56
 msgid "Nothing has been sent to this endpoint yet."
 msgstr "Tähän vastaanottajaan ei ole vielä lähetetty mitään."
 
-#: templates/metra_webhooks/endpoint_confirm_delete.html:3
-#: templates/metra_webhooks/endpoint_confirm_delete.html:5
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_confirm_delete.html:3
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_confirm_delete.html:5
 msgid "Delete endpoint"
 msgstr "Poista vastaanottaja"
 
-#: templates/metra_webhooks/endpoint_confirm_delete.html:6
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_confirm_delete.html:6
 #, python-format
 msgid "Delete %(name)s and its delivery history? Nothing more is sent to it."
 msgstr ""
 "Poistetaanko %(name)s ja sen toimitushistoria? Sinne ei lähetetä enää mitään."
 
-#: templates/metra_webhooks/endpoint_confirm_delete.html:10
-#: templates/metra_webhooks/endpoint_form.html:40
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_confirm_delete.html:10
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_form.html:40
 msgid "Delete"
 msgstr "Poista"
 
-#: templates/metra_webhooks/endpoint_confirm_delete.html:11
-#: templates/metra_webhooks/endpoint_form.html:17
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_confirm_delete.html:11
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_form.html:17
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: templates/metra_webhooks/endpoint_form.html:3
-#: templates/metra_webhooks/endpoint_form.html:6
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_form.html:3
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_form.html:6
 msgid "Edit endpoint"
 msgstr "Muokkaa vastaanottajaa"
 
-#: templates/metra_webhooks/endpoint_form.html:3
-#: templates/metra_webhooks/endpoint_form.html:6
-#: templates/metra_webhooks/endpoint_list.html:8
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_form.html:3
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_form.html:6
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:8
 msgid "Add an endpoint"
 msgstr "Lisää vastaanottaja"
 
-#: templates/metra_webhooks/endpoint_form.html:16
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_form.html:16
 msgid "Save"
 msgstr "Tallenna"
 
-#: templates/metra_webhooks/endpoint_form.html:23
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_form.html:23
 msgid "Secret"
 msgstr "Salaisuus"
 
-#: templates/metra_webhooks/endpoint_form.html:24
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_form.html:24
 msgid ""
 "The receiver uses this to check that a request came from Metra. Keep it "
 "private."
@@ -325,15 +333,15 @@ msgstr ""
 "Vastaanottaja käyttää tätä tarkistaakseen, että pyyntö tulee Metrasta. Pidä "
 "se salassa."
 
-#: templates/metra_webhooks/endpoint_form.html:28
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_form.html:28
 msgid "Make a new secret"
 msgstr "Luo uusi salaisuus"
 
-#: templates/metra_webhooks/endpoint_form.html:34
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_form.html:34
 msgid "Show deliveries"
 msgstr "Näytä toimitukset"
 
-#: templates/metra_webhooks/endpoint_list.html:11
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:11
 msgid ""
 "An endpoint is an address that Metra tells when something changes. Only ids "
 "are sent, never names or contact details."
@@ -341,56 +349,56 @@ msgstr ""
 "Vastaanottaja on osoite, jolle Metra ilmoittaa, kun jokin muuttuu. Vain "
 "tunnisteet lähetetään, ei koskaan nimiä tai yhteystietoja."
 
-#: templates/metra_webhooks/endpoint_list.html:13
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:13
 msgid "Endpoints"
 msgstr "Vastaanottajat"
 
-#: templates/metra_webhooks/endpoint_list.html:17
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:17
 msgid "Endpoint"
 msgstr "Vastaanottaja"
 
-#: templates/metra_webhooks/endpoint_list.html:20
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:20
 msgid "Last delivery"
 msgstr "Viimeisin toimitus"
 
-#: templates/metra_webhooks/endpoint_list.html:31
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:31
 msgid "Active"
 msgstr "Aktiivinen"
 
-#: templates/metra_webhooks/endpoint_list.html:31
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:31
 msgid "Off"
 msgstr "Pois"
 
-#: templates/metra_webhooks/endpoint_list.html:37
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:37
 msgid "None yet"
 msgstr "Ei vielä"
 
-#: templates/metra_webhooks/endpoint_list.html:46
+#: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:46
 msgid "No endpoints yet."
 msgstr "Ei vielä vastaanottajia."
 
-#: views.py:37
+#: plugins/webhooks/src/metra_webhooks/views.py:37
 msgid "The endpoint was added. Copy its secret to the receiver."
 msgstr ""
 "Vastaanottaja lisättiin. Kopioi sen salaisuus vastaanottajan järjestelmään."
 
-#: views.py:49
+#: plugins/webhooks/src/metra_webhooks/views.py:49
 msgid "The endpoint was saved."
 msgstr "Vastaanottaja tallennettiin."
 
-#: views.py:63
+#: plugins/webhooks/src/metra_webhooks/views.py:63
 msgid ""
 "A new secret was made. Give it to the receiver; the old one no longer works."
 msgstr "Uusi salaisuus luotiin. Anna se vastaanottajalle; vanha ei enää toimi."
 
-#: views.py:74
+#: plugins/webhooks/src/metra_webhooks/views.py:74
 msgid "A test event was sent. The result is on this page."
 msgstr "Testitapahtuma lähetettiin. Tulos näkyy tällä sivulla."
 
-#: views.py:84
+#: plugins/webhooks/src/metra_webhooks/views.py:84
 msgid "The endpoint was deleted."
 msgstr "Vastaanottaja poistettiin."
 
-#: views.py:112
+#: plugins/webhooks/src/metra_webhooks/views.py:112
 msgid "The delivery was sent again."
 msgstr "Toimitus lähetettiin uudelleen."

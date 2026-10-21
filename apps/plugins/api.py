@@ -21,6 +21,7 @@ the same API_VERSION; anything else in the app may change.
                                      roles=["Admin"], permission="my_plugin.view_thing")
             )
             api.add_member_panel(api.MemberPanel("my_plugin/member.html", "Mine"))
+            api.add_bank_importer(MyBankFormat)  # an api.BankImporter subclass
 
     api.notify("thing_failed", {"thing": "Pump"}, link="/plugins/my_plugin/")
 
@@ -39,12 +40,17 @@ from importlib import import_module
 
 from django.dispatch import Signal
 
+from apps.banking.importers import Importer as BankImporter
+from apps.banking.importers import ParsedLine as BankLine
+from apps.banking.importers import ParsedStatement as BankStatementData
+from apps.banking.importers import StatementError as BankFileError
 from apps.core.pdf import PDFUnavailable
 from apps.messaging.registry import EMAIL, SMS, Provider, ProviderError, SendResult, registry
 from apps.notifications.kinds import Kind as NotificationKind
 
 from . import events
 from .hooks import (
+    BANK_IMPORTERS,
     HELP_ARTICLES,
     MEMBER_PANELS,
     NAVIGATION,
@@ -109,6 +115,10 @@ def __getattr__(name):
 
 __all__ = [
     "API_VERSION",
+    "BankFileError",
+    "BankImporter",
+    "BankLine",
+    "BankStatementData",
     "HelpArticles",
     "SUPPORTED_API_VERSIONS",
     "EMAIL",
@@ -124,6 +134,7 @@ __all__ = [
     "WebhookEvent",
     "HelpArticles",
     "NotificationKind",
+    "add_bank_importer",
     "add_member_panel",
     "add_help_articles",
     "add_notification_kind",
@@ -239,6 +250,15 @@ def on_webhook_event(listener):
     """Call ``listener(event)`` for each ``WebhookEvent`` registered from now on,
     so a sender of webhooks also sees events of plugins that load after it."""
     hooks.subscribe(WEBHOOK_EVENTS, listener)
+
+
+def add_bank_importer(importer):
+    """A bank file format: a ``BankImporter`` subclass (or instance) whose
+    ``accepts(data)`` says whether it reads a file's bytes and whose
+    ``parse(data)`` returns a ``BankStatementData`` with one ``BankLine`` per
+    transaction, or raises ``BankFileError`` with a message for the user.
+    Metra stores and matches the lines; an importer never touches the database."""
+    return hooks.register(BANK_IMPORTERS, importer)
 
 
 # For SMS provider plugins.

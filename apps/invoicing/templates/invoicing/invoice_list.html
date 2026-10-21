@@ -7,6 +7,7 @@
     <div class="actions">
       <a class="button" href="{% url 'invoicing:overdue_list' %}">{% translate "Overdue" %}</a>
       <a class="button" href="{% url 'invoicing:run_list' %}">{% translate "Invoice runs" %}</a>
+      {% if perms.banking.view_bankstatement %}<a class="button" href="{% url 'banking:statement_list' %}">{% translate "Bank files" %}</a>{% endif %}
       {% if perms.invoicing.view_payment %}<a class="button" href="{% url 'invoicing:export_payments' %}">{% translate "Export payments" %}</a>{% endif %}
     </div>
   </div>

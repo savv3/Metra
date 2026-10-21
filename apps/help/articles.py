@@ -36,6 +36,7 @@ PAGES = {
     "readings": "readings",
     "messaging": "messages",
     "invoicing": "invoicing",
+    "banking": "invoicing",
     "backups": "backups",
     "accounts": "roles",
     "notifications": "notifications",

@@ -14,6 +14,13 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- Bank files: upload the bank's ISO 20022 file of incoming payments
+  (camt.054, or the camt.053 account statement) under Invoices > Bank files.
+  Payments whose Finnish or RF reference belongs to an invoice and that pay
+  exactly what is left are recorded on that invoice; the rest are marked To
+  review with the reason. The same file or payment is never imported twice.
+  Treasurers and admins import, the board can look. Plugins add other bank
+  formats with `api.add_bank_importer`.
 - A Settings page of Metra's own at /settings/, grouped by task:
   Organisation, Register, Readings, Invoicing, Messages, Users and roles,
   Integrations, Backups and the Setup wizard, each entry with a short

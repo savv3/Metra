@@ -46,6 +46,23 @@ siihen ei ole osoitetta) tai kirjeenä niille, jotka toivovat postia tai joilla
 ei ole kumpaakaan; mukana on muistutusmaksu, jos
 sellainen on määritetty, ja maksuaikaa on vähintään 14 päivää.
 
+## Pankkitiedostot
+
+Sen sijaan että kirjaisit jokaisen maksun käsin, lataa verkkopankistasi pankin
+tiedosto saapuneista maksuista ja lähetä se kohdassa **Laskut > Pankkitiedostot**.
+Metra lukee ISO 20022 -standardin XML-tiedostot: camt.054, viitemaksujen
+tiedosto, ja camt.053, tiliote. Jokainen maksu, jonka viite kuuluu laskulle ja
+joka maksaa täsmälleen jäljellä olevan summan, kirjataan kyseiselle laskulle.
+Viite voi olla kansallinen viite tai RF-viite, välilyönneillä tai ilman.
+
+Maksut, joilla ei ole viitettä tai joiden viite on tuntematon, osamaksut ja
+liian suuret maksut merkitään **Tarkastettava**: kirjaa ne käsin oikealle
+laskulle. Lähtevät maksut näytetään mutta niitä ei kohdisteta. Saman tiedoston
+lataaminen kahdesti ei muuta mitään, ja maksu, joka on jo tuotu aiemmasta
+tiedostosta (esimerkiksi viitemaksujen tiedosto ennen kuukauden tiliotetta),
+ohitetaan. Jokaisen tuodun tiedoston kohdalla näkyvät sen rivit ja se, mitä
+kullekin tapahtui.
+
 ## Kirjanpitäjälle
 
 **Vie CSV-tiedostona** laskuluettelon alla antaa jokaisen laaditun laskun

@@ -15,6 +15,7 @@ MEMBER_PANELS = "member_panels"
 
 HELP_ARTICLES = "help_articles"
 NOTIFICATION_KINDS = "notification_kinds"
+BANK_IMPORTERS = "bank_importers"
 
 KNOWN = {
     NAVIGATION,
@@ -25,6 +26,7 @@ KNOWN = {
     HELP_ARTICLES,
     NOTIFICATION_KINDS,
     MEMBER_PANELS,
+    BANK_IMPORTERS,
 }
 
 

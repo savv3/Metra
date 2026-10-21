@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 18:08+0300\n"
+"POT-Creation-Date: 2026-10-21 18:43+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,7 +96,7 @@ msgid "Email"
 msgstr "Sähköposti"
 
 #: apps/accounts/templates/accounts/profile.html:18
-#: apps/core/settings_page.py:178
+#: apps/core/settings_page.py:181
 msgid "Roles"
 msgstr "Roolit"
 
@@ -180,7 +180,7 @@ msgstr "Vaihda salasana"
 
 #: apps/backups/apps.py:7 apps/backups/templates/backups/backup_list.html:3
 #: apps/backups/templates/backups/backup_list.html:6
-#: apps/core/settings_page.py:189 apps/core/settings_page.py:192
+#: apps/core/settings_page.py:192 apps/core/settings_page.py:195
 msgid "Backups"
 msgstr "Varmuuskopiot"
 
@@ -529,7 +529,7 @@ msgid "People"
 msgstr "Henkilöt"
 
 #: apps/backups/templates/backups/restore.html:32
-#: apps/core/settings_page.py:108 apps/readings/apps.py:7
+#: apps/core/settings_page.py:111 apps/readings/apps.py:7
 #: apps/readings/templates/readings/_round_results.html:3
 #: apps/readings/templates/readings/_unit_readings.html:3
 #: templates/base.html:23
@@ -537,7 +537,7 @@ msgid "Readings"
 msgstr "Lukemat"
 
 #: apps/backups/templates/backups/restore.html:32
-#: apps/core/settings_page.py:141
+#: apps/core/settings_page.py:144
 #: apps/messaging/templates/messaging/_unit_messages.html:4
 #: apps/messaging/templates/messaging/batch_detail.html:61
 #: apps/messaging/templates/messaging/batch_list.html:24
@@ -567,10 +567,10 @@ msgstr "Poistettavat laaditut laskut:"
 msgid "Payments that would be removed:"
 msgstr "Poistettavat maksut:"
 
-#: apps/backups/templates/backups/restore.html:49 apps/invoicing/delivery.py:59
-#: apps/invoicing/models.py:408 apps/invoicing/models.py:671
-#: apps/invoicing/models.py:732 apps/invoicing/models.py:772
-#: apps/invoicing/models.py:812
+#: apps/backups/templates/backups/restore.html:49 apps/banking/models.py:95
+#: apps/invoicing/delivery.py:59 apps/invoicing/models.py:408
+#: apps/invoicing/models.py:671 apps/invoicing/models.py:732
+#: apps/invoicing/models.py:772 apps/invoicing/models.py:812
 msgid "invoice"
 msgstr "lasku"
 
@@ -642,6 +642,457 @@ msgstr ""
 "tilannevedoksessa %(safety)s. Sinun on ehkä kirjauduttava uudelleen, kun "
 "palautus on valmis."
 
+#: apps/banking/apps.py:7
+#: apps/banking/templates/banking/statement_detail.html:7
+#: apps/banking/templates/banking/statement_list.html:3
+#: apps/banking/templates/banking/statement_list.html:6
+#: apps/invoicing/templates/invoicing/invoice_list.html:10
+#
+msgid "Bank files"
+msgstr "Pankkitiedostot"
+
+#: apps/banking/importers.py:95
+#, python-format
+msgid "The file has a date that cannot be read: %s"
+msgstr "Tiedostossa on päivämäärä, jota ei voi lukea: %s"
+
+#: apps/banking/importers.py:102
+#
+msgid "The file has an amount that cannot be read."
+msgstr "Tiedostossa on summa, jota ei voi lukea."
+
+#: apps/banking/importers.py:107
+#
+msgid "The file is too large to be a bank file."
+msgstr "Tiedosto on liian suuri ollakseen pankkitiedosto."
+
+#: apps/banking/importers.py:110
+msgid "The file is not a bank file Metra can read."
+msgstr "Tiedosto ei ole pankkitiedosto, jonka Metra osaa lukea."
+
+#: apps/banking/importers.py:114
+msgid "The file is not valid XML."
+msgstr "Tiedosto ei ole kelvollista XML:ää."
+
+#: apps/banking/importers.py:133
+#, python-format
+msgid "The file is not a %s file."
+msgstr "Tiedosto ei ole %s-tiedosto."
+
+#: apps/banking/importers.py:161
+msgid "An entry in the file has no booking date."
+msgstr "Tiedoston kirjauksella ei ole kirjauspäivää."
+
+#: apps/banking/importers.py:179
+msgid "A payment in a batch entry has no amount."
+msgstr "Erittelyn maksulta puuttuu summa."
+
+#: apps/banking/importers.py:214
+msgid "ISO 20022 camt.054 (reference payments)"
+msgstr "ISO 20022 camt.054 (viitemaksut)"
+
+#: apps/banking/importers.py:221
+msgid "ISO 20022 camt.053 (account statement)"
+msgstr "ISO 20022 camt.053 (tiliote)"
+
+#: apps/banking/importers.py:240
+msgid ""
+"Metra cannot read this file. Download the bank's camt.054 or camt.053 file "
+"(XML)."
+msgstr "Metra ei osaa lukea tätä tiedostoa. Lataa pankin camt.054- tai camt.053-tiedosto (XML)."
+
+#: apps/banking/matching.py:103
+#, python-format
+msgid "Bank file %(file)s"
+msgstr "Pankkitiedosto %(file)s"
+
+#
+#: apps/banking/models.py:14 apps/messaging/models.py:336
+msgid "file"
+msgstr "tiedosto"
+
+#: apps/banking/models.py:15
+#
+msgid "checksum"
+msgstr "tarkistussumma"
+
+#: apps/banking/models.py:16
+#
+msgid "format"
+msgstr "muoto"
+
+#: apps/banking/models.py:17
+#
+msgid "account"
+msgstr "tili"
+
+#: apps/banking/models.py:18
+msgid "from"
+msgstr "alkaen"
+
+#: apps/banking/models.py:19 apps/messaging/models.py:65
+msgid "to"
+msgstr "vastaanottaja"
+
+#: apps/banking/models.py:21
+msgid "already imported"
+msgstr "jo tuodut"
+
+#: apps/banking/models.py:23
+msgid "Lines skipped because an earlier file had them."
+msgstr "Rivit, jotka ohitettiin, koska aiempi tiedosto sisälsi ne."
+
+#: apps/banking/models.py:27
+#
+msgid "imported by"
+msgstr "tuonut"
+
+#: apps/banking/models.py:33
+#
+msgid "imported"
+msgstr "tuotu"
+
+#
+#: apps/banking/models.py:37 apps/banking/models.py:68
+#
+msgid "bank file"
+msgstr "pankkitiedosto"
+
+#: apps/banking/models.py:38
+#
+msgid "bank files"
+msgstr "pankkitiedostot"
+
+#: apps/banking/models.py:52
+#: apps/banking/templates/banking/statement_list.html:28
+#
+msgid "Recorded"
+msgstr "Kirjattu"
+
+#: apps/banking/models.py:53
+#: apps/banking/templates/banking/statement_list.html:28
+#
+msgid "To review"
+msgstr "Tarkastettava"
+
+#: apps/banking/models.py:54
+#
+msgid "Money out"
+msgstr "Lähtevä maksu"
+
+#: apps/banking/models.py:58
+#
+msgid "No reference"
+msgstr "Ei viitettä"
+
+#: apps/banking/models.py:59
+msgid "No invoice has this reference"
+msgstr "Millään laskulla ei ole tätä viitettä"
+
+#: apps/banking/models.py:60
+msgid "Less than the amount to pay"
+msgstr "Vähemmän kuin maksettava summa"
+
+#: apps/banking/models.py:61
+msgid "More than the amount to pay"
+msgstr "Enemmän kuin maksettava summa"
+
+#: apps/banking/models.py:62
+msgid "The invoice is already paid"
+msgstr "Lasku on jo maksettu"
+
+#: apps/banking/models.py:63
+#
+msgid "The invoice is credited"
+msgstr "Lasku on hyvitetty"
+
+#: apps/banking/models.py:64
+msgid "Not in euros"
+msgstr "Ei euroina"
+
+#: apps/banking/models.py:73
+msgid "line id"
+msgstr "rivin tunnus"
+
+#: apps/banking/models.py:76
+msgid "The bank's reference for the line, so it is imported only once."
+msgstr "Pankin viite riville, jotta se tuodaan vain kerran."
+
+#: apps/banking/models.py:78
+#
+msgid "booked"
+msgstr "kirjauspäivä"
+
+#: apps/banking/models.py:79
+#
+msgid "value date"
+msgstr "arvopäivä"
+
+#: apps/banking/models.py:80 apps/invoicing/models.py:775
+msgid "amount"
+msgstr "summa"
+
+#: apps/banking/models.py:81
+msgid "currency"
+msgstr "valuutta"
+
+#: apps/banking/models.py:82
+#
+msgid "reference"
+msgstr "viite"
+
+#: apps/banking/models.py:83 apps/invoicing/models.py:737
+#: apps/invoicing/models.py:819 apps/messaging/models.py:183
+msgid "message"
+msgstr "viesti"
+
+#: apps/banking/models.py:84
+msgid "payer"
+msgstr "maksaja"
+
+#: apps/banking/models.py:85
+#
+msgid "payer's account"
+msgstr "maksajan tili"
+
+#: apps/banking/models.py:86
+#
+msgid "archive reference"
+msgstr "arkistointiviite"
+
+#: apps/banking/models.py:88 apps/invoicing/models.py:351
+#: apps/messaging/models.py:75 apps/messaging/models.py:172
+#: apps/register/models.py:317
+msgid "status"
+msgstr "tila"
+
+#: apps/banking/models.py:91
+msgid "reason"
+msgstr "syy"
+
+#: apps/banking/models.py:103 apps/invoicing/models.py:795
+msgid "payment"
+msgstr "maksu"
+
+#: apps/banking/models.py:112
+msgid "bank line"
+msgstr "pankkirivi"
+
+#: apps/banking/models.py:113
+#
+msgid "bank lines"
+msgstr "pankkirivit"
+
+#: apps/banking/templates/banking/statement_detail.html:10
+msgid "Format"
+msgstr "Muoto"
+
+#
+#: apps/banking/templates/banking/statement_detail.html:11
+#
+msgid "Account"
+msgstr "Tili"
+
+#: apps/banking/templates/banking/statement_detail.html:12
+#: apps/banking/templates/banking/statement_list.html:27
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:79
+#: apps/readings/views.py:147
+msgid "Period"
+msgstr "Ajanjakso"
+
+#: apps/banking/templates/banking/statement_detail.html:13
+#: apps/banking/templates/banking/statement_list.html:27
+#
+msgid "Imported"
+msgstr "Tuotu"
+
+#: apps/banking/templates/banking/statement_detail.html:14
+#: apps/banking/templates/banking/statement_list.html:28
+#: apps/invoicing/templates/invoicing/invoice_detail.html:56
+#: apps/invoicing/templates/invoicing/invoice_detail.html:62
+#: apps/invoicing/templates/invoicing/invoice_detail.html:84
+msgid "Lines"
+msgstr "Rivit"
+
+#: apps/banking/templates/banking/statement_detail.html:14
+#, python-format
+msgid "%(lines)s lines: %(matched)s recorded, %(review)s to review"
+msgstr "%(lines)s riviä: %(matched)s kirjattu, %(review)s tarkastettavana"
+
+#: apps/banking/templates/banking/statement_detail.html:14
+#, python-format
+msgid "; %(count)s more was already imported from an earlier file"
+msgid_plural "; %(count)s more were already imported from earlier files"
+msgstr[0] "; %(count)s lisää on jo tuotu aiemmasta tiedostosta"
+msgstr[1] "; %(count)s lisää on jo tuotu aiemmista tiedostoista"
+
+#: apps/banking/templates/banking/statement_detail.html:18
+#: apps/invoicing/templates/invoicing/invoice_list.html:20
+#: apps/notifications/templates/notifications/list.html:19
+#: apps/readings/templates/readings/round_detail.html:29
+#: apps/register/templates/register/_show_select.html:3
+msgid "Show"
+msgstr "Näytä"
+
+#: apps/banking/templates/banking/statement_detail.html:20
+#: apps/invoicing/templates/invoicing/invoice_list.html:22
+#: apps/notifications/templates/notifications/list.html:20
+#: apps/register/templates/register/_show_select.html:7
+msgid "All"
+msgstr "Kaikki"
+
+#: apps/banking/templates/banking/statement_detail.html:24
+#: apps/invoicing/templates/invoicing/invoice_list.html:38
+#: apps/readings/templates/readings/round_detail.html:37
+#: apps/register/templates/register/person_list.html:25
+#: apps/register/templates/register/unit_list.html:42
+msgid "Filter"
+msgstr "Suodata"
+
+#: apps/banking/templates/banking/statement_detail.html:27
+#
+msgid "Lines in the file"
+msgstr "Tiedoston rivit"
+
+#: apps/banking/templates/banking/statement_detail.html:30
+#
+msgid "Booked"
+msgstr "Kirjauspäivä"
+
+#: apps/banking/templates/banking/statement_detail.html:30
+msgid "Payer"
+msgstr "Maksaja"
+
+#: apps/banking/templates/banking/statement_detail.html:30
+#
+msgid "Reference or message"
+msgstr "Viite tai viesti"
+
+#: apps/banking/templates/banking/statement_detail.html:31
+#: apps/invoicing/templates/invoicing/invoice_detail.html:88
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:90
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:142
+#: apps/invoicing/views.py:495
+msgid "Amount"
+msgstr "Summa"
+
+#: apps/banking/templates/banking/statement_detail.html:31
+#: apps/invoicing/templates/invoicing/_invoice_results.html:13
+#: apps/invoicing/templates/invoicing/run_detail.html:33
+#: apps/invoicing/views.py:445
+#: apps/messaging/templates/messaging/_unit_messages.html:16
+#: apps/messaging/templates/messaging/batch_detail.html:68
+#: apps/messaging/templates/messaging/batch_list.html:25
+#: apps/readings/templates/readings/round_list.html:22
+#: apps/register/csv_io.py:468
+#: apps/register/templates/register/_unit_results.html:10
+#: apps/register/templates/register/unit_list.html:27
+#: apps/selfservice/templates/selfservice/round_links.html:43
+msgid "Status"
+msgstr "Tila"
+
+#: apps/banking/templates/banking/statement_detail.html:31
+#: apps/invoicing/models.py:346
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:6
+#: apps/invoicing/views.py:493 apps/messaging/models.py:222
+msgid "Invoice"
+msgstr "Lasku"
+
+#: apps/banking/templates/banking/statement_detail.html:48
+#
+msgid "No lines to show."
+msgstr "Ei näytettäviä rivejä."
+
+#: apps/banking/templates/banking/statement_list.html:7
+#: apps/invoicing/templates/invoicing/overdue_list.html:7
+#: apps/invoicing/templates/invoicing/run_list.html:8
+msgid "All invoices"
+msgstr "Kaikki laskut"
+
+#: apps/banking/templates/banking/statement_list.html:9
+msgid ""
+"Upload the file your online bank gives for incoming payments. Every payment "
+"with an invoice's reference that pays exactly what is left is recorded on "
+"that invoice; the rest are listed for you to check. Uploading the same "
+"payments again changes nothing."
+msgstr "Lataa verkkopankin antama tiedosto saapuneista maksuista. Jokainen maksu, jossa on laskun viite ja joka maksaa täsmälleen jäljellä olevan summan, kirjataan kyseiselle laskulle. Muut maksut näytetään tarkastettaviksi. Samojen maksujen lataaminen uudelleen ei muuta mitään."
+
+#: apps/banking/templates/banking/statement_list.html:18
+msgid "Formats Metra reads:"
+msgstr "Metran lukemat muodot:"
+
+#: apps/banking/templates/banking/statement_list.html:19
+#
+msgid "Import"
+msgstr "Tuo"
+
+#
+#: apps/banking/templates/banking/statement_list.html:22
+#: apps/banking/templates/banking/statement_list.html:24
+#
+msgid "Imported files"
+msgstr "Tuodut tiedostot"
+
+#: apps/banking/templates/banking/statement_list.html:27
+#
+msgid "File"
+msgstr "Tiedosto"
+
+#: apps/banking/templates/banking/statement_list.html:28
+msgid "Money in"
+msgstr "Saapuvat maksut"
+
+#: apps/banking/templates/banking/statement_list.html:46
+#
+msgid "No bank files imported yet."
+msgstr "Pankkitiedostoja ei ole vielä tuotu."
+
+#
+#: apps/banking/views.py:21
+#
+msgid "Bank file"
+msgstr "Pankkitiedosto"
+
+#: apps/banking/views.py:23
+msgid ""
+"The XML file from your online bank: camt.054 for reference payments, or "
+"camt.053, the account statement."
+msgstr "Verkkopankin XML-tiedosto: camt.054 viitemaksuille tai camt.053, tiliote."
+
+#: apps/banking/views.py:64
+#, python-format
+msgid "This file was imported on %(date)s. Nothing was changed."
+msgstr "Tämä tiedosto tuotiin %(date)s. Mitään ei muutettu."
+
+#: apps/banking/views.py:83
+#, python-format
+msgid "Imported the file: %(matched)s payment was recorded on its invoice."
+msgid_plural ""
+"Imported the file: %(matched)s payments were recorded on their invoices."
+msgstr[0] "Tiedosto tuotiin: %(matched)s maksu kirjattiin laskulleen."
+msgstr[1] "Tiedosto tuotiin: %(matched)s maksua kirjattiin laskuilleen."
+
+#: apps/banking/views.py:93
+#, python-format
+msgid "%(count)s payment needs checking by hand."
+msgid_plural "%(count)s payments need checking by hand."
+msgstr[0] "%(count)s maksu täytyy tarkastaa käsin."
+msgstr[1] "%(count)s maksua täytyy tarkastaa käsin."
+
+#: apps/banking/views.py:103
+#, python-format
+msgid "%(count)s line was skipped because an earlier file had it."
+msgid_plural "%(count)s lines were skipped because earlier files had them."
+msgstr[0] "%(count)s rivi ohitettiin, koska aiempi tiedosto sisälsi sen."
+msgstr[1] "%(count)s riviä ohitettiin, koska aiemmat tiedostot sisälsivät ne."
+
+#: apps/banking/views.py:114
+#, python-format
+msgid ""
+"The file is for the account %(account)s, not the one on invoices (%(ours)s). "
+"Payments were matched by reference all the same."
+msgstr "Tiedosto koskee tiliä %(account)s, ei laskuilla olevaa tiliä (%(ours)s). Maksut kohdistettiin silti viitteen perusteella."
+
 #: apps/core/apps.py:7
 msgid "General"
 msgstr "Yleinen"
@@ -699,44 +1150,44 @@ msgid "notices"
 msgstr "tiedotteet"
 
 #
-#: apps/core/settings_page.py:68 apps/setup/views.py:39
+#: apps/core/settings_page.py:71 apps/setup/views.py:39
 msgid "Organisation"
 msgstr "Organisaatio"
 
 #
 #
-#: apps/core/settings_page.py:71
+#: apps/core/settings_page.py:74
 msgid "Organisation details"
 msgstr "Organisaation tiedot"
 
-#: apps/core/settings_page.py:72
+#: apps/core/settings_page.py:75
 msgid "Name, business ID, contact details, logo and the public page."
 msgstr "Nimi, Y-tunnus, yhteystiedot, logo ja julkinen sivu."
 
-#: apps/core/settings_page.py:81 apps/register/apps.py:7
+#: apps/core/settings_page.py:84 apps/register/apps.py:7
 msgid "Register"
 msgstr "Rekisteri"
 
 #
-#: apps/core/settings_page.py:84
+#: apps/core/settings_page.py:87
 msgid "Unit types and their fields"
 msgstr "Yksikkötyypit ja niiden kentät"
 
 #
-#: apps/core/settings_page.py:85
+#: apps/core/settings_page.py:88
 msgid "The kinds of units in the register and the fields each one has."
 msgstr "Rekisterin yksiköiden lajit ja kunkin lajin kentät."
 
 #
-#: apps/core/settings_page.py:91
+#: apps/core/settings_page.py:94
 msgid "Person fields"
 msgstr "Henkilöiden kentät"
 
-#: apps/core/settings_page.py:92
+#: apps/core/settings_page.py:95
 msgid "Extra fields on every person, besides name and contact details."
 msgstr "Lisäkentät jokaiselle henkilölle nimen ja yhteystietojen lisäksi."
 
-#: apps/core/settings_page.py:98 apps/register/csv_io.py:475
+#: apps/core/settings_page.py:101 apps/register/csv_io.py:475
 #: apps/register/csv_io.py:528
 #: apps/register/templates/register/_person_results.html:11
 #: apps/register/templates/register/_unit_results.html:11
@@ -745,109 +1196,109 @@ msgstr "Lisäkentät jokaiselle henkilölle nimen ja yhteystietojen lisäksi."
 msgid "Tags"
 msgstr "Tunnisteet"
 
-#: apps/core/settings_page.py:99
+#: apps/core/settings_page.py:102
 msgid "Labels for grouping units and people, for example for send-outs."
 msgstr ""
 "Tunnisteet yksiköiden ja henkilöiden ryhmittelyyn, esimerkiksi lähetyksiä "
 "varten."
 
 #
-#: apps/core/settings_page.py:111
+#: apps/core/settings_page.py:114
 msgid "Reading types"
 msgstr "Lukematyypit"
 
-#: apps/core/settings_page.py:112
+#: apps/core/settings_page.py:115
 msgid "What is read, for which unit type, and in which unit."
 msgstr "Mitä luetaan, mille yksikkötyypille ja missä mittayksikössä."
 
-#: apps/core/settings_page.py:121 apps/invoicing/apps.py:7
+#: apps/core/settings_page.py:124 apps/invoicing/apps.py:7
 msgid "Invoicing"
 msgstr "Laskutus"
 
-#: apps/core/settings_page.py:124 apps/invoicing/models.py:118
+#: apps/core/settings_page.py:127 apps/invoicing/models.py:118
 msgid "Invoice settings"
 msgstr "Laskutusasetukset"
 
-#: apps/core/settings_page.py:125
+#: apps/core/settings_page.py:128
 msgid "Bank account, payment terms, VAT, numbering and reminders."
 msgstr "Pankkitili, maksuehdot, ALV, numerointi ja maksumuistutukset."
 
-#: apps/core/settings_page.py:131
+#: apps/core/settings_page.py:134
 #: apps/invoicing/templates/invoicing/run_list.html:9
 msgid "Fee plans"
 msgstr "Maksusuunnitelmat"
 
-#: apps/core/settings_page.py:132
+#: apps/core/settings_page.py:135
 msgid "What units pay: fixed fees and usage fees, with their fee lines."
 msgstr ""
 "Mitä yksiköt maksavat: kiinteät maksut ja kulutusmaksut maksuriveineen."
 
 #
-#: apps/core/settings_page.py:144
+#: apps/core/settings_page.py:147
 msgid "Message templates"
 msgstr "Viestipohjat"
 
-#: apps/core/settings_page.py:145
+#: apps/core/settings_page.py:148
 msgid "The texts of invoices, reminders, reading requests and other messages."
 msgstr "Laskujen, muistutusten, lukemapyyntöjen ja muiden viestien tekstit."
 
 #
-#: apps/core/settings_page.py:151
+#: apps/core/settings_page.py:154
 msgid "Notices"
 msgstr "Ilmoitukset"
 
 #
-#: apps/core/settings_page.py:152
+#: apps/core/settings_page.py:155
 msgid "Short notices on the public page and members' pages."
 msgstr "Lyhyet ilmoitukset julkisella sivulla ja jäsenten sivuilla."
 
 #
-#: apps/core/settings_page.py:158
+#: apps/core/settings_page.py:161
 msgid "Newsletter consents"
 msgstr "Uutiskirjeen suostumukset"
 
 #
-#: apps/core/settings_page.py:159
+#: apps/core/settings_page.py:162
 msgid "The record of who subscribed to or unsubscribed from the newsletter."
 msgstr "Tiedot siitä, kuka on tilannut uutiskirjeen tai perunut tilauksen."
 
 #
-#: apps/core/settings_page.py:168
+#: apps/core/settings_page.py:171
 msgid "Users and roles"
 msgstr "Käyttäjät ja roolit"
 
 #
-#: apps/core/settings_page.py:171
+#: apps/core/settings_page.py:174
 msgid "Users"
 msgstr "Käyttäjät"
 
-#: apps/core/settings_page.py:172
+#: apps/core/settings_page.py:175
 msgid "Who can log in, and the role each one has."
 msgstr "Kuka voi kirjautua sisään ja mikä rooli kullakin on."
 
-#: apps/core/settings_page.py:179
+#: apps/core/settings_page.py:182
 msgid "What each role may see and do."
 msgstr "Mitä kukin rooli saa nähdä ja tehdä."
 
 #
-#: apps/core/settings_page.py:186
+#: apps/core/settings_page.py:189
 msgid "Integrations"
 msgstr "Integraatiot"
 
 #
-#: apps/core/settings_page.py:193
+#: apps/core/settings_page.py:196
 msgid "Snapshots of the register, here and offsite, and restoring one."
 msgstr "Rekisterin varmuuskopiot täällä ja muualla sekä niiden palauttaminen."
 
-#: apps/core/settings_page.py:201
+#: apps/core/settings_page.py:204
 msgid "Setup wizard"
 msgstr "Käyttöönotto"
 
-#: apps/core/settings_page.py:204
+#: apps/core/settings_page.py:207
 msgid "Run the setup wizard"
 msgstr "Käynnistä käyttöönotto"
 
-#: apps/core/settings_page.py:206
+#: apps/core/settings_page.py:209
 msgid ""
 "Organisation, language, logo, units and fields, email and SMS, invoices and "
 "the board, step by step."
@@ -855,16 +1306,16 @@ msgstr ""
 "Organisaatio, kieli, logo, yksiköt ja kentät, sähköposti ja tekstiviestit, "
 "laskut ja hallitus vaihe vaiheelta."
 
-#: apps/core/settings_page.py:216
+#: apps/core/settings_page.py:219
 msgid "Advanced"
 msgstr "Lisäasetukset"
 
 #
-#: apps/core/settings_page.py:219
+#: apps/core/settings_page.py:222
 msgid "All data tables"
 msgstr "Kaikki tietotaulut"
 
-#: apps/core/settings_page.py:220
+#: apps/core/settings_page.py:223
 msgid "The full Django admin, with every table. For technical changes."
 msgstr "Koko Django-ylläpito kaikkine tauluineen. Teknisiä muutoksia varten."
 
@@ -950,7 +1401,7 @@ msgid "Search help"
 msgstr "Hae ohjeista"
 
 #: apps/help/templates/help/_nav.html:6
-#: apps/invoicing/templates/invoicing/invoice_list.html:15
+#: apps/invoicing/templates/invoicing/invoice_list.html:16
 #: apps/readings/templates/readings/round_detail.html:25
 #: apps/register/templates/register/person_list.html:13
 #: apps/register/templates/register/unit_list.html:16
@@ -1354,33 +1805,22 @@ msgid "Issued"
 msgstr "Laadittu"
 
 #: apps/invoicing/models.py:342
-#: apps/invoicing/templates/invoicing/invoice_list.html:24
+#: apps/invoicing/templates/invoicing/invoice_list.html:25
 #: apps/invoicing/views.py:442
 msgid "Paid"
 msgstr "Maksettu"
 
 #: apps/invoicing/models.py:343
-#: apps/invoicing/templates/invoicing/invoice_list.html:26
+#: apps/invoicing/templates/invoicing/invoice_list.html:27
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:121
 #: apps/invoicing/views.py:441
 msgid "Credited"
 msgstr "Hyvitetty"
 
-#: apps/invoicing/models.py:346
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:6
-#: apps/invoicing/views.py:493 apps/messaging/models.py:222
-msgid "Invoice"
-msgstr "Lasku"
-
 #: apps/invoicing/models.py:347
 #: apps/invoicing/templates/invoicing/_invoice_results.html:19
 msgid "Credit note"
 msgstr "Hyvityslasku"
-
-#: apps/invoicing/models.py:351 apps/messaging/models.py:75
-#: apps/messaging/models.py:172 apps/register/models.py:317
-msgid "status"
-msgstr "tila"
 
 #: apps/invoicing/models.py:365 apps/messaging/models.py:168
 msgid "recipient"
@@ -1506,11 +1946,6 @@ msgstr "Kirje"
 msgid "channel"
 msgstr "kanava"
 
-#: apps/invoicing/models.py:737 apps/invoicing/models.py:819
-#: apps/messaging/models.py:183
-msgid "message"
-msgstr "viesti"
-
 #: apps/invoicing/models.py:747
 msgid "invoice delivery"
 msgstr "laskun toimitus"
@@ -1518,10 +1953,6 @@ msgstr "laskun toimitus"
 #: apps/invoicing/models.py:748
 msgid "invoice deliveries"
 msgstr "laskujen toimitukset"
-
-#: apps/invoicing/models.py:775
-msgid "amount"
-msgstr "summa"
 
 #: apps/invoicing/models.py:778
 msgid "Negative to reverse a payment recorded by mistake."
@@ -1547,10 +1978,6 @@ msgstr "kirjannut"
 #: apps/invoicing/models.py:791 apps/messaging/models.py:273
 msgid "recorded"
 msgstr "kirjattu"
-
-#: apps/invoicing/models.py:795
-msgid "payment"
-msgstr "maksu"
 
 #: apps/invoicing/models.py:796
 msgid "payments"
@@ -1666,24 +2093,10 @@ msgstr "Eräpäivä"
 msgid "Total"
 msgstr "Yhteensä"
 
-#: apps/invoicing/templates/invoicing/_invoice_results.html:13
-#: apps/invoicing/templates/invoicing/run_detail.html:33
-#: apps/invoicing/views.py:445
-#: apps/messaging/templates/messaging/_unit_messages.html:16
-#: apps/messaging/templates/messaging/batch_detail.html:68
-#: apps/messaging/templates/messaging/batch_list.html:25
-#: apps/readings/templates/readings/round_list.html:22
-#: apps/register/csv_io.py:468
-#: apps/register/templates/register/_unit_results.html:10
-#: apps/register/templates/register/unit_list.html:27
-#: apps/selfservice/templates/selfservice/round_links.html:43
-msgid "Status"
-msgstr "Tila"
-
 #: apps/invoicing/templates/invoicing/_invoice_results.html:25
 #: apps/invoicing/templates/invoicing/invoice_detail.html:6
 #: apps/invoicing/templates/invoicing/invoice_list.html:8
-#: apps/invoicing/templates/invoicing/invoice_list.html:25
+#: apps/invoicing/templates/invoicing/invoice_list.html:26
 msgid "Overdue"
 msgstr "Erääntynyt"
 
@@ -1712,7 +2125,7 @@ msgstr "Laskuja ei löytynyt."
 
 #: apps/invoicing/templates/invoicing/export_payments.html:3
 #: apps/invoicing/templates/invoicing/export_payments.html:5
-#: apps/invoicing/templates/invoicing/invoice_list.html:10
+#: apps/invoicing/templates/invoicing/invoice_list.html:11
 msgid "Export payments"
 msgstr "Vie maksut"
 
@@ -1785,12 +2198,6 @@ msgstr "Eräpäivä"
 msgid "Issued by"
 msgstr "Laatija"
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:56
-#: apps/invoicing/templates/invoicing/invoice_detail.html:62
-#: apps/invoicing/templates/invoicing/invoice_detail.html:84
-msgid "Lines"
-msgstr "Rivit"
-
 #: apps/invoicing/templates/invoicing/invoice_detail.html:65
 #: apps/invoicing/templates/invoicing/invoice_detail.html:87
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:86
@@ -1825,13 +2232,6 @@ msgstr "Poista"
 #: apps/invoicing/templates/invoicing/invoice_detail.html:81
 msgid "Save the draft"
 msgstr "Tallenna luonnos"
-
-#: apps/invoicing/templates/invoicing/invoice_detail.html:88
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:90
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:142
-#: apps/invoicing/views.py:495
-msgid "Amount"
-msgstr "Summa"
 
 #: apps/invoicing/templates/invoicing/invoice_detail.html:104
 #, python-format
@@ -1905,7 +2305,7 @@ msgid "Sent"
 msgstr "Lähetetty"
 
 #: apps/invoicing/templates/invoicing/invoice_detail.html:140
-#: apps/invoicing/templates/invoicing/invoice_list.html:27
+#: apps/invoicing/templates/invoicing/invoice_list.html:28
 msgid "Credit notes"
 msgstr "Hyvityslaskut"
 
@@ -1916,53 +2316,28 @@ msgstr "Hyvityslaskut"
 msgid "Invoice runs"
 msgstr "Laskutuskierrokset"
 
-#: apps/invoicing/templates/invoicing/invoice_list.html:19
-#: apps/notifications/templates/notifications/list.html:19
-#: apps/readings/templates/readings/round_detail.html:29
-#: apps/register/templates/register/_show_select.html:3
-msgid "Show"
-msgstr "Näytä"
-
-#: apps/invoicing/templates/invoicing/invoice_list.html:21
-#: apps/notifications/templates/notifications/list.html:20
-#: apps/register/templates/register/_show_select.html:7
-msgid "All"
-msgstr "Kaikki"
-
-#: apps/invoicing/templates/invoicing/invoice_list.html:22
+#: apps/invoicing/templates/invoicing/invoice_list.html:23
 #: apps/invoicing/templates/invoicing/run_list.html:17
 msgid "Drafts"
 msgstr "Luonnokset"
 
-#: apps/invoicing/templates/invoicing/invoice_list.html:23
+#: apps/invoicing/templates/invoicing/invoice_list.html:24
 msgid "Unpaid"
 msgstr "Maksamattomat"
 
-#: apps/invoicing/templates/invoicing/invoice_list.html:31
+#: apps/invoicing/templates/invoicing/invoice_list.html:32
 msgid "Invoice run"
 msgstr "Laskutuskierros"
 
-#: apps/invoicing/templates/invoicing/invoice_list.html:33
+#: apps/invoicing/templates/invoicing/invoice_list.html:34
 msgid "All runs"
 msgstr "Kaikki kierrokset"
-
-#: apps/invoicing/templates/invoicing/invoice_list.html:37
-#: apps/readings/templates/readings/round_detail.html:37
-#: apps/register/templates/register/person_list.html:25
-#: apps/register/templates/register/unit_list.html:42
-msgid "Filter"
-msgstr "Suodata"
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:3
 #: apps/invoicing/templates/invoicing/overdue_list.html:6
 #: apps/invoicing/templates/invoicing/overdue_list.html:12
 msgid "Overdue invoices"
 msgstr "Erääntyneet laskut"
-
-#: apps/invoicing/templates/invoicing/overdue_list.html:7
-#: apps/invoicing/templates/invoicing/run_list.html:8
-msgid "All invoices"
-msgstr "Kaikki laskut"
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:15
 msgid "Choose"
@@ -2059,11 +2434,6 @@ msgstr "Hyvittää laskun"
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:78
 msgid "Customer"
 msgstr "Asiakas"
-
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:79
-#: apps/readings/views.py:147
-msgid "Period"
-msgstr "Ajanjakso"
 
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:90
 msgid "Amount excl. VAT"
@@ -2345,7 +2715,7 @@ msgstr ""
 msgid "This email provider cannot send attachments."
 msgstr "Tämä sähköpostipalvelu ei voi lähettää liitteitä."
 
-#: apps/messaging/attachments.py:160 apps/messaging/attachments.py:166
+#: apps/messaging/attachments.py:160
 msgid "Files:"
 msgstr "Tiedostot:"
 
@@ -2642,10 +3012,6 @@ msgstr "Lähetetään"
 msgid "Done"
 msgstr "Valmis"
 
-#: apps/messaging/models.py:65
-msgid "to"
-msgstr "vastaanottaja"
-
 #: apps/messaging/models.py:68 apps/readings/models.py:118
 #: apps/selfservice/models.py:68
 msgid "reading round"
@@ -2814,11 +3180,6 @@ msgstr "kyllä"
 #: apps/messaging/templates/messaging/_person_newsletter.html:24
 msgid "no"
 msgstr "ei"
-
-#
-#: apps/messaging/models.py:336
-msgid "file"
-msgstr "tiedosto"
 
 #: apps/messaging/models.py:338
 msgid "size"
@@ -3523,6 +3884,10 @@ msgstr "Kaikki ilmoitukset on merkitty luetuiksi."
 #: apps/notifications/views.py:142
 msgid "Your notification settings are saved."
 msgstr "Ilmoitusasetuksesi on tallennettu."
+
+#: apps/plugins/apps.py:7
+msgid "Plugins"
+msgstr "Lisäosat"
 
 #: apps/readings/admin.py:20
 msgid "Archive selected reading types"
@@ -5593,15 +5958,15 @@ msgid "Setup is done. You can run it again from Settings."
 msgstr ""
 "Käyttöönotto on valmis. Voit käynnistää sen uudelleen kohdasta Asetukset."
 
-#: config/settings.py:181
+#: config/settings.py:182
 msgid "Swedish"
 msgstr "Ruotsi"
 
-#: config/settings.py:182
+#: config/settings.py:183
 msgid "English"
 msgstr "Englanti"
 
-#: config/settings.py:183
+#: config/settings.py:184
 msgid "Finnish (machine translated)"
 msgstr "Suomi (konekäännös)"
 
@@ -5675,9 +6040,6 @@ msgstr ""
 
 #~ msgid "Snapshots and backups"
 #~ msgstr "Tilannevedokset ja varmuuskopiot"
-
-#~ msgid "Plugins"
-#~ msgstr "Lisäosat"
 
 #, python-format
 #~ msgid "New %(unit_type)s"

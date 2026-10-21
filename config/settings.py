@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     "apps.selfservice",
     "apps.messaging",
     "apps.invoicing",
+    "apps.banking",
     "apps.plugins",
     "apps.setup",
     "apps.help",

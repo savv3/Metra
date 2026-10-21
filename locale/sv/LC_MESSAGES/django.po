@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 18:08+0300\n"
+"POT-Creation-Date: 2026-10-21 18:43+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,7 +95,7 @@ msgid "Email"
 msgstr "E-post"
 
 #: apps/accounts/templates/accounts/profile.html:18
-#: apps/core/settings_page.py:178
+#: apps/core/settings_page.py:181
 msgid "Roles"
 msgstr "Roller"
 
@@ -179,7 +179,7 @@ msgstr "Byt lösenord"
 
 #: apps/backups/apps.py:7 apps/backups/templates/backups/backup_list.html:3
 #: apps/backups/templates/backups/backup_list.html:6
-#: apps/core/settings_page.py:189 apps/core/settings_page.py:192
+#: apps/core/settings_page.py:192 apps/core/settings_page.py:195
 msgid "Backups"
 msgstr "Säkerhetskopior"
 
@@ -528,7 +528,7 @@ msgid "People"
 msgstr "Personer"
 
 #: apps/backups/templates/backups/restore.html:32
-#: apps/core/settings_page.py:108 apps/readings/apps.py:7
+#: apps/core/settings_page.py:111 apps/readings/apps.py:7
 #: apps/readings/templates/readings/_round_results.html:3
 #: apps/readings/templates/readings/_unit_readings.html:3
 #: templates/base.html:23
@@ -536,7 +536,7 @@ msgid "Readings"
 msgstr "Avläsningar"
 
 #: apps/backups/templates/backups/restore.html:32
-#: apps/core/settings_page.py:141
+#: apps/core/settings_page.py:144
 #: apps/messaging/templates/messaging/_unit_messages.html:4
 #: apps/messaging/templates/messaging/batch_detail.html:61
 #: apps/messaging/templates/messaging/batch_list.html:24
@@ -566,10 +566,10 @@ msgstr "Utfärdade fakturor som skulle tas bort:"
 msgid "Payments that would be removed:"
 msgstr "Betalningar som skulle tas bort:"
 
-#: apps/backups/templates/backups/restore.html:49 apps/invoicing/delivery.py:59
-#: apps/invoicing/models.py:408 apps/invoicing/models.py:671
-#: apps/invoicing/models.py:732 apps/invoicing/models.py:772
-#: apps/invoicing/models.py:812
+#: apps/backups/templates/backups/restore.html:49 apps/banking/models.py:95
+#: apps/invoicing/delivery.py:59 apps/invoicing/models.py:408
+#: apps/invoicing/models.py:671 apps/invoicing/models.py:732
+#: apps/invoicing/models.py:772 apps/invoicing/models.py:812
 msgid "invoice"
 msgstr "faktura"
 
@@ -641,6 +641,457 @@ msgstr ""
 "Återställer %(name)s. Uppgifterna som de var strax innan finns kvar i "
 "%(safety)s. Du kan behöva logga in på nytt när det är klart."
 
+#: apps/banking/apps.py:7
+#: apps/banking/templates/banking/statement_detail.html:7
+#: apps/banking/templates/banking/statement_list.html:3
+#: apps/banking/templates/banking/statement_list.html:6
+#: apps/invoicing/templates/invoicing/invoice_list.html:10
+#
+msgid "Bank files"
+msgstr "Bankfiler"
+
+#: apps/banking/importers.py:95
+#, python-format
+msgid "The file has a date that cannot be read: %s"
+msgstr "Filen har ett datum som inte går att läsa: %s"
+
+#: apps/banking/importers.py:102
+#
+msgid "The file has an amount that cannot be read."
+msgstr "Filen har ett belopp som inte går att läsa."
+
+#: apps/banking/importers.py:107
+#
+msgid "The file is too large to be a bank file."
+msgstr "Filen är för stor för att vara en bankfil."
+
+#: apps/banking/importers.py:110
+msgid "The file is not a bank file Metra can read."
+msgstr "Filen är inte en bankfil som Metra kan läsa."
+
+#: apps/banking/importers.py:114
+msgid "The file is not valid XML."
+msgstr "Filen är inte giltig XML."
+
+#: apps/banking/importers.py:133
+#, python-format
+msgid "The file is not a %s file."
+msgstr "Filen är inte en %s-fil."
+
+#: apps/banking/importers.py:161
+msgid "An entry in the file has no booking date."
+msgstr "En post i filen saknar bokföringsdatum."
+
+#: apps/banking/importers.py:179
+msgid "A payment in a batch entry has no amount."
+msgstr "En betalning i en samlingspost saknar belopp."
+
+#: apps/banking/importers.py:214
+msgid "ISO 20022 camt.054 (reference payments)"
+msgstr "ISO 20022 camt.054 (referensbetalningar)"
+
+#: apps/banking/importers.py:221
+msgid "ISO 20022 camt.053 (account statement)"
+msgstr "ISO 20022 camt.053 (kontoutdrag)"
+
+#: apps/banking/importers.py:240
+msgid ""
+"Metra cannot read this file. Download the bank's camt.054 or camt.053 file "
+"(XML)."
+msgstr "Metra kan inte läsa den här filen. Ladda ner bankens camt.054- eller camt.053-fil (XML)."
+
+#: apps/banking/matching.py:103
+#, python-format
+msgid "Bank file %(file)s"
+msgstr "Bankfil %(file)s"
+
+#
+#: apps/banking/models.py:14 apps/messaging/models.py:336
+msgid "file"
+msgstr "fil"
+
+#: apps/banking/models.py:15
+#
+msgid "checksum"
+msgstr "kontrollsumma"
+
+#: apps/banking/models.py:16
+#
+msgid "format"
+msgstr "format"
+
+#: apps/banking/models.py:17
+#
+msgid "account"
+msgstr "konto"
+
+#: apps/banking/models.py:18
+msgid "from"
+msgstr "från"
+
+#: apps/banking/models.py:19 apps/messaging/models.py:65
+msgid "to"
+msgstr "till"
+
+#: apps/banking/models.py:21
+msgid "already imported"
+msgstr "redan importerade"
+
+#: apps/banking/models.py:23
+msgid "Lines skipped because an earlier file had them."
+msgstr "Rader som hoppades över eftersom en tidigare fil hade dem."
+
+#: apps/banking/models.py:27
+#
+msgid "imported by"
+msgstr "importerad av"
+
+#: apps/banking/models.py:33
+#
+msgid "imported"
+msgstr "importerad"
+
+#
+#: apps/banking/models.py:37 apps/banking/models.py:68
+#
+msgid "bank file"
+msgstr "bankfil"
+
+#: apps/banking/models.py:38
+#
+msgid "bank files"
+msgstr "bankfiler"
+
+#: apps/banking/models.py:52
+#: apps/banking/templates/banking/statement_list.html:28
+#
+msgid "Recorded"
+msgstr "Registrerad"
+
+#: apps/banking/models.py:53
+#: apps/banking/templates/banking/statement_list.html:28
+#
+msgid "To review"
+msgstr "Att kontrollera"
+
+#: apps/banking/models.py:54
+#
+msgid "Money out"
+msgstr "Utbetalning"
+
+#: apps/banking/models.py:58
+#
+msgid "No reference"
+msgstr "Inget referensnummer"
+
+#: apps/banking/models.py:59
+msgid "No invoice has this reference"
+msgstr "Ingen faktura har det här referensnumret"
+
+#: apps/banking/models.py:60
+msgid "Less than the amount to pay"
+msgstr "Mindre än beloppet att betala"
+
+#: apps/banking/models.py:61
+msgid "More than the amount to pay"
+msgstr "Mer än beloppet att betala"
+
+#: apps/banking/models.py:62
+msgid "The invoice is already paid"
+msgstr "Fakturan är redan betald"
+
+#: apps/banking/models.py:63
+#
+msgid "The invoice is credited"
+msgstr "Fakturan är krediterad"
+
+#: apps/banking/models.py:64
+msgid "Not in euros"
+msgstr "Inte i euro"
+
+#: apps/banking/models.py:73
+msgid "line id"
+msgstr "rad-id"
+
+#: apps/banking/models.py:76
+msgid "The bank's reference for the line, so it is imported only once."
+msgstr "Bankens referens för raden, så att den bara importeras en gång."
+
+#: apps/banking/models.py:78
+#
+msgid "booked"
+msgstr "bokförd"
+
+#: apps/banking/models.py:79
+#
+msgid "value date"
+msgstr "valutadatum"
+
+#: apps/banking/models.py:80 apps/invoicing/models.py:775
+msgid "amount"
+msgstr "belopp"
+
+#: apps/banking/models.py:81
+msgid "currency"
+msgstr "valuta"
+
+#: apps/banking/models.py:82
+#
+msgid "reference"
+msgstr "referensnummer"
+
+#: apps/banking/models.py:83 apps/invoicing/models.py:737
+#: apps/invoicing/models.py:819 apps/messaging/models.py:183
+msgid "message"
+msgstr "meddelande"
+
+#: apps/banking/models.py:84
+msgid "payer"
+msgstr "betalare"
+
+#: apps/banking/models.py:85
+#
+msgid "payer's account"
+msgstr "betalarens konto"
+
+#: apps/banking/models.py:86
+#
+msgid "archive reference"
+msgstr "arkivreferens"
+
+#: apps/banking/models.py:88 apps/invoicing/models.py:351
+#: apps/messaging/models.py:75 apps/messaging/models.py:172
+#: apps/register/models.py:317
+msgid "status"
+msgstr "status"
+
+#: apps/banking/models.py:91
+msgid "reason"
+msgstr "orsak"
+
+#: apps/banking/models.py:103 apps/invoicing/models.py:795
+msgid "payment"
+msgstr "betalning"
+
+#: apps/banking/models.py:112
+msgid "bank line"
+msgstr "bankrad"
+
+#: apps/banking/models.py:113
+#
+msgid "bank lines"
+msgstr "bankrader"
+
+#: apps/banking/templates/banking/statement_detail.html:10
+msgid "Format"
+msgstr "Format"
+
+#
+#: apps/banking/templates/banking/statement_detail.html:11
+#
+msgid "Account"
+msgstr "Konto"
+
+#: apps/banking/templates/banking/statement_detail.html:12
+#: apps/banking/templates/banking/statement_list.html:27
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:79
+#: apps/readings/views.py:147
+msgid "Period"
+msgstr "Period"
+
+#: apps/banking/templates/banking/statement_detail.html:13
+#: apps/banking/templates/banking/statement_list.html:27
+#
+msgid "Imported"
+msgstr "Importerad"
+
+#: apps/banking/templates/banking/statement_detail.html:14
+#: apps/banking/templates/banking/statement_list.html:28
+#: apps/invoicing/templates/invoicing/invoice_detail.html:56
+#: apps/invoicing/templates/invoicing/invoice_detail.html:62
+#: apps/invoicing/templates/invoicing/invoice_detail.html:84
+msgid "Lines"
+msgstr "Rader"
+
+#: apps/banking/templates/banking/statement_detail.html:14
+#, python-format
+msgid "%(lines)s lines: %(matched)s recorded, %(review)s to review"
+msgstr "%(lines)s rader: %(matched)s registrerade, %(review)s att kontrollera"
+
+#: apps/banking/templates/banking/statement_detail.html:14
+#, python-format
+msgid "; %(count)s more was already imported from an earlier file"
+msgid_plural "; %(count)s more were already imported from earlier files"
+msgstr[0] "; %(count)s till har redan importerats från en tidigare fil"
+msgstr[1] "; %(count)s till har redan importerats från tidigare filer"
+
+#: apps/banking/templates/banking/statement_detail.html:18
+#: apps/invoicing/templates/invoicing/invoice_list.html:20
+#: apps/notifications/templates/notifications/list.html:19
+#: apps/readings/templates/readings/round_detail.html:29
+#: apps/register/templates/register/_show_select.html:3
+msgid "Show"
+msgstr "Visa"
+
+#: apps/banking/templates/banking/statement_detail.html:20
+#: apps/invoicing/templates/invoicing/invoice_list.html:22
+#: apps/notifications/templates/notifications/list.html:20
+#: apps/register/templates/register/_show_select.html:7
+msgid "All"
+msgstr "Alla"
+
+#: apps/banking/templates/banking/statement_detail.html:24
+#: apps/invoicing/templates/invoicing/invoice_list.html:38
+#: apps/readings/templates/readings/round_detail.html:37
+#: apps/register/templates/register/person_list.html:25
+#: apps/register/templates/register/unit_list.html:42
+msgid "Filter"
+msgstr "Filtrera"
+
+#: apps/banking/templates/banking/statement_detail.html:27
+#
+msgid "Lines in the file"
+msgstr "Rader i filen"
+
+#: apps/banking/templates/banking/statement_detail.html:30
+#
+msgid "Booked"
+msgstr "Bokförd"
+
+#: apps/banking/templates/banking/statement_detail.html:30
+msgid "Payer"
+msgstr "Betalare"
+
+#: apps/banking/templates/banking/statement_detail.html:30
+#
+msgid "Reference or message"
+msgstr "Referensnummer eller meddelande"
+
+#: apps/banking/templates/banking/statement_detail.html:31
+#: apps/invoicing/templates/invoicing/invoice_detail.html:88
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:90
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:142
+#: apps/invoicing/views.py:495
+msgid "Amount"
+msgstr "Belopp"
+
+#: apps/banking/templates/banking/statement_detail.html:31
+#: apps/invoicing/templates/invoicing/_invoice_results.html:13
+#: apps/invoicing/templates/invoicing/run_detail.html:33
+#: apps/invoicing/views.py:445
+#: apps/messaging/templates/messaging/_unit_messages.html:16
+#: apps/messaging/templates/messaging/batch_detail.html:68
+#: apps/messaging/templates/messaging/batch_list.html:25
+#: apps/readings/templates/readings/round_list.html:22
+#: apps/register/csv_io.py:468
+#: apps/register/templates/register/_unit_results.html:10
+#: apps/register/templates/register/unit_list.html:27
+#: apps/selfservice/templates/selfservice/round_links.html:43
+msgid "Status"
+msgstr "Status"
+
+#: apps/banking/templates/banking/statement_detail.html:31
+#: apps/invoicing/models.py:346
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:6
+#: apps/invoicing/views.py:493 apps/messaging/models.py:222
+msgid "Invoice"
+msgstr "Faktura"
+
+#: apps/banking/templates/banking/statement_detail.html:48
+#
+msgid "No lines to show."
+msgstr "Inga rader att visa."
+
+#: apps/banking/templates/banking/statement_list.html:7
+#: apps/invoicing/templates/invoicing/overdue_list.html:7
+#: apps/invoicing/templates/invoicing/run_list.html:8
+msgid "All invoices"
+msgstr "Alla fakturor"
+
+#: apps/banking/templates/banking/statement_list.html:9
+msgid ""
+"Upload the file your online bank gives for incoming payments. Every payment "
+"with an invoice's reference that pays exactly what is left is recorded on "
+"that invoice; the rest are listed for you to check. Uploading the same "
+"payments again changes nothing."
+msgstr "Ladda upp filen som din nätbank ger för inkommande betalningar. Varje betalning med en fakturas referensnummer som betalar exakt det som återstår registreras på fakturan. Resten visas så att du kan kontrollera dem. Om du laddar upp samma betalningar igen ändras inget."
+
+#: apps/banking/templates/banking/statement_list.html:18
+msgid "Formats Metra reads:"
+msgstr "Format som Metra läser:"
+
+#: apps/banking/templates/banking/statement_list.html:19
+#
+msgid "Import"
+msgstr "Importera"
+
+#
+#: apps/banking/templates/banking/statement_list.html:22
+#: apps/banking/templates/banking/statement_list.html:24
+#
+msgid "Imported files"
+msgstr "Importerade filer"
+
+#: apps/banking/templates/banking/statement_list.html:27
+#
+msgid "File"
+msgstr "Fil"
+
+#: apps/banking/templates/banking/statement_list.html:28
+msgid "Money in"
+msgstr "Inbetalningar"
+
+#: apps/banking/templates/banking/statement_list.html:46
+#
+msgid "No bank files imported yet."
+msgstr "Inga bankfiler har importerats ännu."
+
+#
+#: apps/banking/views.py:21
+#
+msgid "Bank file"
+msgstr "Bankfil"
+
+#: apps/banking/views.py:23
+msgid ""
+"The XML file from your online bank: camt.054 for reference payments, or "
+"camt.053, the account statement."
+msgstr "XML-filen från din nätbank: camt.054 för referensbetalningar eller camt.053, kontoutdraget."
+
+#: apps/banking/views.py:64
+#, python-format
+msgid "This file was imported on %(date)s. Nothing was changed."
+msgstr "Den här filen importerades %(date)s. Inget ändrades."
+
+#: apps/banking/views.py:83
+#, python-format
+msgid "Imported the file: %(matched)s payment was recorded on its invoice."
+msgid_plural ""
+"Imported the file: %(matched)s payments were recorded on their invoices."
+msgstr[0] "Filen importerades: %(matched)s betalning registrerades på sin faktura."
+msgstr[1] "Filen importerades: %(matched)s betalningar registrerades på sina fakturor."
+
+#: apps/banking/views.py:93
+#, python-format
+msgid "%(count)s payment needs checking by hand."
+msgid_plural "%(count)s payments need checking by hand."
+msgstr[0] "%(count)s betalning måste kontrolleras manuellt."
+msgstr[1] "%(count)s betalningar måste kontrolleras manuellt."
+
+#: apps/banking/views.py:103
+#, python-format
+msgid "%(count)s line was skipped because an earlier file had it."
+msgid_plural "%(count)s lines were skipped because earlier files had them."
+msgstr[0] "%(count)s rad hoppades över eftersom en tidigare fil hade den."
+msgstr[1] "%(count)s rader hoppades över eftersom tidigare filer hade dem."
+
+#: apps/banking/views.py:114
+#, python-format
+msgid ""
+"The file is for the account %(account)s, not the one on invoices (%(ours)s). "
+"Payments were matched by reference all the same."
+msgstr "Filen gäller kontot %(account)s, inte det som står på fakturorna (%(ours)s). Betalningarna matchades ändå enligt referensnummer."
+
 #: apps/core/apps.py:7
 msgid "General"
 msgstr "Allmänt"
@@ -698,44 +1149,44 @@ msgid "notices"
 msgstr "anslag"
 
 #
-#: apps/core/settings_page.py:68 apps/setup/views.py:39
+#: apps/core/settings_page.py:71 apps/setup/views.py:39
 msgid "Organisation"
 msgstr "Organisation"
 
 #
 #
-#: apps/core/settings_page.py:71
+#: apps/core/settings_page.py:74
 msgid "Organisation details"
 msgstr "Organisationens uppgifter"
 
-#: apps/core/settings_page.py:72
+#: apps/core/settings_page.py:75
 msgid "Name, business ID, contact details, logo and the public page."
 msgstr "Namn, FO-nummer, kontaktuppgifter, logotyp och den offentliga sidan."
 
-#: apps/core/settings_page.py:81 apps/register/apps.py:7
+#: apps/core/settings_page.py:84 apps/register/apps.py:7
 msgid "Register"
 msgstr "Register"
 
 #
-#: apps/core/settings_page.py:84
+#: apps/core/settings_page.py:87
 msgid "Unit types and their fields"
 msgstr "Enhetstyper och deras fält"
 
 #
-#: apps/core/settings_page.py:85
+#: apps/core/settings_page.py:88
 msgid "The kinds of units in the register and the fields each one has."
 msgstr "Vilka slags enheter registret har och vilka fält var och en har."
 
 #
-#: apps/core/settings_page.py:91
+#: apps/core/settings_page.py:94
 msgid "Person fields"
 msgstr "Fält för personer"
 
-#: apps/core/settings_page.py:92
+#: apps/core/settings_page.py:95
 msgid "Extra fields on every person, besides name and contact details."
 msgstr "Extra fält för alla personer, utöver namn och kontaktuppgifter."
 
-#: apps/core/settings_page.py:98 apps/register/csv_io.py:475
+#: apps/core/settings_page.py:101 apps/register/csv_io.py:475
 #: apps/register/csv_io.py:528
 #: apps/register/templates/register/_person_results.html:11
 #: apps/register/templates/register/_unit_results.html:11
@@ -744,115 +1195,115 @@ msgstr "Extra fält för alla personer, utöver namn och kontaktuppgifter."
 msgid "Tags"
 msgstr "Taggar"
 
-#: apps/core/settings_page.py:99
+#: apps/core/settings_page.py:102
 msgid "Labels for grouping units and people, for example for send-outs."
 msgstr ""
 "Taggar för att gruppera enheter och personer, till exempel för utskick."
 
 #
-#: apps/core/settings_page.py:111
+#: apps/core/settings_page.py:114
 msgid "Reading types"
 msgstr "Avläsningstyper"
 
-#: apps/core/settings_page.py:112
+#: apps/core/settings_page.py:115
 msgid "What is read, for which unit type, and in which unit."
 msgstr "Vad som läses av, för vilken enhetstyp och med vilken måttenhet."
 
-#: apps/core/settings_page.py:121 apps/invoicing/apps.py:7
+#: apps/core/settings_page.py:124 apps/invoicing/apps.py:7
 msgid "Invoicing"
 msgstr "Fakturering"
 
-#: apps/core/settings_page.py:124 apps/invoicing/models.py:118
+#: apps/core/settings_page.py:127 apps/invoicing/models.py:118
 msgid "Invoice settings"
 msgstr "Faktureringsinställningar"
 
-#: apps/core/settings_page.py:125
+#: apps/core/settings_page.py:128
 msgid "Bank account, payment terms, VAT, numbering and reminders."
 msgstr ""
 "Bankkonto, betalningsvillkor, moms, numrering och betalningspåminnelser."
 
-#: apps/core/settings_page.py:131
+#: apps/core/settings_page.py:134
 #: apps/invoicing/templates/invoicing/run_list.html:9
 msgid "Fee plans"
 msgstr "Avgiftsplaner"
 
-#: apps/core/settings_page.py:132
+#: apps/core/settings_page.py:135
 msgid "What units pay: fixed fees and usage fees, with their fee lines."
 msgstr ""
 "Vad enheterna betalar: fasta avgifter och förbrukningsavgifter, med sina "
 "avgiftsrader."
 
 #
-#: apps/core/settings_page.py:144
+#: apps/core/settings_page.py:147
 msgid "Message templates"
 msgstr "Meddelandemallar"
 
-#: apps/core/settings_page.py:145
+#: apps/core/settings_page.py:148
 msgid "The texts of invoices, reminders, reading requests and other messages."
 msgstr ""
 "Texterna i fakturor, påminnelser, begäranden om avläsning och andra "
 "meddelanden."
 
 #
-#: apps/core/settings_page.py:151
+#: apps/core/settings_page.py:154
 msgid "Notices"
 msgstr "Anslag"
 
 #
-#: apps/core/settings_page.py:152
+#: apps/core/settings_page.py:155
 msgid "Short notices on the public page and members' pages."
 msgstr "Korta anslag på den offentliga sidan och medlemmarnas sidor."
 
 #
-#: apps/core/settings_page.py:158
+#: apps/core/settings_page.py:161
 msgid "Newsletter consents"
 msgstr "Samtycken till nyhetsbrev"
 
 #
-#: apps/core/settings_page.py:159
+#: apps/core/settings_page.py:162
 msgid "The record of who subscribed to or unsubscribed from the newsletter."
 msgstr ""
 "Förteckningen över vem som har börjat eller slutat prenumerera på "
 "nyhetsbrevet."
 
 #
-#: apps/core/settings_page.py:168
+#: apps/core/settings_page.py:171
 msgid "Users and roles"
 msgstr "Användare och roller"
 
 #
-#: apps/core/settings_page.py:171
+#: apps/core/settings_page.py:174
 msgid "Users"
 msgstr "Användare"
 
-#: apps/core/settings_page.py:172
+#: apps/core/settings_page.py:175
 msgid "Who can log in, and the role each one has."
 msgstr "Vem som kan logga in och vilken roll var och en har."
 
-#: apps/core/settings_page.py:179
+#: apps/core/settings_page.py:182
 msgid "What each role may see and do."
 msgstr "Vad varje roll får se och göra."
 
 #
-#: apps/core/settings_page.py:186
+#: apps/core/settings_page.py:189
 msgid "Integrations"
 msgstr "Integrationer"
 
 #
-#: apps/core/settings_page.py:193
+#: apps/core/settings_page.py:196
 msgid "Snapshots of the register, here and offsite, and restoring one."
 msgstr ""
 "Säkerhetskopior av registret, här och externt, och återställning av dem."
 
-#: apps/core/settings_page.py:201
+#: apps/core/settings_page.py:204
 msgid "Setup wizard"
 msgstr "Installationsguide"
 
-#: apps/core/settings_page.py:204
+#: apps/core/settings_page.py:207
 msgid "Run the setup wizard"
 msgstr "Kör installationsguiden"
 
-#: apps/core/settings_page.py:206
+#: apps/core/settings_page.py:209
 msgid ""
 "Organisation, language, logo, units and fields, email and SMS, invoices and "
 "the board, step by step."
@@ -860,16 +1311,16 @@ msgstr ""
 "Organisation, språk, logotyp, enheter och fält, e-post och sms, fakturor och "
 "styrelsen, steg för steg."
 
-#: apps/core/settings_page.py:216
+#: apps/core/settings_page.py:219
 msgid "Advanced"
 msgstr "Avancerat"
 
 #
-#: apps/core/settings_page.py:219
+#: apps/core/settings_page.py:222
 msgid "All data tables"
 msgstr "Alla datatabeller"
 
-#: apps/core/settings_page.py:220
+#: apps/core/settings_page.py:223
 msgid "The full Django admin, with every table. For technical changes."
 msgstr ""
 "Hela Django-administrationen med alla tabeller. För tekniska ändringar."
@@ -956,7 +1407,7 @@ msgid "Search help"
 msgstr "Sök i hjälpen"
 
 #: apps/help/templates/help/_nav.html:6
-#: apps/invoicing/templates/invoicing/invoice_list.html:15
+#: apps/invoicing/templates/invoicing/invoice_list.html:16
 #: apps/readings/templates/readings/round_detail.html:25
 #: apps/register/templates/register/person_list.html:13
 #: apps/register/templates/register/unit_list.html:16
@@ -1361,33 +1812,22 @@ msgid "Issued"
 msgstr "Utfärdad"
 
 #: apps/invoicing/models.py:342
-#: apps/invoicing/templates/invoicing/invoice_list.html:24
+#: apps/invoicing/templates/invoicing/invoice_list.html:25
 #: apps/invoicing/views.py:442
 msgid "Paid"
 msgstr "Betald"
 
 #: apps/invoicing/models.py:343
-#: apps/invoicing/templates/invoicing/invoice_list.html:26
+#: apps/invoicing/templates/invoicing/invoice_list.html:27
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:121
 #: apps/invoicing/views.py:441
 msgid "Credited"
 msgstr "Krediterad"
 
-#: apps/invoicing/models.py:346
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:6
-#: apps/invoicing/views.py:493 apps/messaging/models.py:222
-msgid "Invoice"
-msgstr "Faktura"
-
 #: apps/invoicing/models.py:347
 #: apps/invoicing/templates/invoicing/_invoice_results.html:19
 msgid "Credit note"
 msgstr "Kreditnota"
-
-#: apps/invoicing/models.py:351 apps/messaging/models.py:75
-#: apps/messaging/models.py:172 apps/register/models.py:317
-msgid "status"
-msgstr "status"
 
 #: apps/invoicing/models.py:365 apps/messaging/models.py:168
 msgid "recipient"
@@ -1513,11 +1953,6 @@ msgstr "Brev"
 msgid "channel"
 msgstr "kanal"
 
-#: apps/invoicing/models.py:737 apps/invoicing/models.py:819
-#: apps/messaging/models.py:183
-msgid "message"
-msgstr "meddelande"
-
 #: apps/invoicing/models.py:747
 msgid "invoice delivery"
 msgstr "fakturaleverans"
@@ -1525,10 +1960,6 @@ msgstr "fakturaleverans"
 #: apps/invoicing/models.py:748
 msgid "invoice deliveries"
 msgstr "fakturaleveranser"
-
-#: apps/invoicing/models.py:775
-msgid "amount"
-msgstr "belopp"
 
 #: apps/invoicing/models.py:778
 msgid "Negative to reverse a payment recorded by mistake."
@@ -1554,10 +1985,6 @@ msgstr "registrerat av"
 #: apps/invoicing/models.py:791 apps/messaging/models.py:273
 msgid "recorded"
 msgstr "registrerat"
-
-#: apps/invoicing/models.py:795
-msgid "payment"
-msgstr "betalning"
 
 #: apps/invoicing/models.py:796
 msgid "payments"
@@ -1674,24 +2101,10 @@ msgstr "Förfaller"
 msgid "Total"
 msgstr "Summa"
 
-#: apps/invoicing/templates/invoicing/_invoice_results.html:13
-#: apps/invoicing/templates/invoicing/run_detail.html:33
-#: apps/invoicing/views.py:445
-#: apps/messaging/templates/messaging/_unit_messages.html:16
-#: apps/messaging/templates/messaging/batch_detail.html:68
-#: apps/messaging/templates/messaging/batch_list.html:25
-#: apps/readings/templates/readings/round_list.html:22
-#: apps/register/csv_io.py:468
-#: apps/register/templates/register/_unit_results.html:10
-#: apps/register/templates/register/unit_list.html:27
-#: apps/selfservice/templates/selfservice/round_links.html:43
-msgid "Status"
-msgstr "Status"
-
 #: apps/invoicing/templates/invoicing/_invoice_results.html:25
 #: apps/invoicing/templates/invoicing/invoice_detail.html:6
 #: apps/invoicing/templates/invoicing/invoice_list.html:8
-#: apps/invoicing/templates/invoicing/invoice_list.html:25
+#: apps/invoicing/templates/invoicing/invoice_list.html:26
 msgid "Overdue"
 msgstr "Förfallen"
 
@@ -1720,7 +2133,7 @@ msgstr "Inga fakturor hittades."
 
 #: apps/invoicing/templates/invoicing/export_payments.html:3
 #: apps/invoicing/templates/invoicing/export_payments.html:5
-#: apps/invoicing/templates/invoicing/invoice_list.html:10
+#: apps/invoicing/templates/invoicing/invoice_list.html:11
 msgid "Export payments"
 msgstr "Exportera betalningar"
 
@@ -1793,12 +2206,6 @@ msgstr "Förfallodag"
 msgid "Issued by"
 msgstr "Utfärdad av"
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:56
-#: apps/invoicing/templates/invoicing/invoice_detail.html:62
-#: apps/invoicing/templates/invoicing/invoice_detail.html:84
-msgid "Lines"
-msgstr "Rader"
-
 #: apps/invoicing/templates/invoicing/invoice_detail.html:65
 #: apps/invoicing/templates/invoicing/invoice_detail.html:87
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:86
@@ -1833,13 +2240,6 @@ msgstr "Ta bort"
 #: apps/invoicing/templates/invoicing/invoice_detail.html:81
 msgid "Save the draft"
 msgstr "Spara utkastet"
-
-#: apps/invoicing/templates/invoicing/invoice_detail.html:88
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:90
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:142
-#: apps/invoicing/views.py:495
-msgid "Amount"
-msgstr "Belopp"
 
 #: apps/invoicing/templates/invoicing/invoice_detail.html:104
 #, python-format
@@ -1914,7 +2314,7 @@ msgid "Sent"
 msgstr "Skickat"
 
 #: apps/invoicing/templates/invoicing/invoice_detail.html:140
-#: apps/invoicing/templates/invoicing/invoice_list.html:27
+#: apps/invoicing/templates/invoicing/invoice_list.html:28
 msgid "Credit notes"
 msgstr "Kreditnotor"
 
@@ -1925,53 +2325,28 @@ msgstr "Kreditnotor"
 msgid "Invoice runs"
 msgstr "Faktureringsomgångar"
 
-#: apps/invoicing/templates/invoicing/invoice_list.html:19
-#: apps/notifications/templates/notifications/list.html:19
-#: apps/readings/templates/readings/round_detail.html:29
-#: apps/register/templates/register/_show_select.html:3
-msgid "Show"
-msgstr "Visa"
-
-#: apps/invoicing/templates/invoicing/invoice_list.html:21
-#: apps/notifications/templates/notifications/list.html:20
-#: apps/register/templates/register/_show_select.html:7
-msgid "All"
-msgstr "Alla"
-
-#: apps/invoicing/templates/invoicing/invoice_list.html:22
+#: apps/invoicing/templates/invoicing/invoice_list.html:23
 #: apps/invoicing/templates/invoicing/run_list.html:17
 msgid "Drafts"
 msgstr "Utkast"
 
-#: apps/invoicing/templates/invoicing/invoice_list.html:23
+#: apps/invoicing/templates/invoicing/invoice_list.html:24
 msgid "Unpaid"
 msgstr "Obetald"
 
-#: apps/invoicing/templates/invoicing/invoice_list.html:31
+#: apps/invoicing/templates/invoicing/invoice_list.html:32
 msgid "Invoice run"
 msgstr "Faktureringsomgång"
 
-#: apps/invoicing/templates/invoicing/invoice_list.html:33
+#: apps/invoicing/templates/invoicing/invoice_list.html:34
 msgid "All runs"
 msgstr "Alla omgångar"
-
-#: apps/invoicing/templates/invoicing/invoice_list.html:37
-#: apps/readings/templates/readings/round_detail.html:37
-#: apps/register/templates/register/person_list.html:25
-#: apps/register/templates/register/unit_list.html:42
-msgid "Filter"
-msgstr "Filtrera"
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:3
 #: apps/invoicing/templates/invoicing/overdue_list.html:6
 #: apps/invoicing/templates/invoicing/overdue_list.html:12
 msgid "Overdue invoices"
 msgstr "Förfallna fakturor"
-
-#: apps/invoicing/templates/invoicing/overdue_list.html:7
-#: apps/invoicing/templates/invoicing/run_list.html:8
-msgid "All invoices"
-msgstr "Alla fakturor"
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:15
 msgid "Choose"
@@ -2068,11 +2443,6 @@ msgstr "Krediterar faktura"
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:78
 msgid "Customer"
 msgstr "Kund"
-
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:79
-#: apps/readings/views.py:147
-msgid "Period"
-msgstr "Period"
 
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:90
 msgid "Amount excl. VAT"
@@ -2350,7 +2720,7 @@ msgstr "Filerna är %(size)s tillsammans; högst %(limit)s kan skickas."
 msgid "This email provider cannot send attachments."
 msgstr "Den här e-postleverantören kan inte skicka bilagor."
 
-#: apps/messaging/attachments.py:160 apps/messaging/attachments.py:166
+#: apps/messaging/attachments.py:160
 msgid "Files:"
 msgstr "Filer:"
 
@@ -2648,10 +3018,6 @@ msgstr "Skickas"
 msgid "Done"
 msgstr "Klar"
 
-#: apps/messaging/models.py:65
-msgid "to"
-msgstr "till"
-
 #: apps/messaging/models.py:68 apps/readings/models.py:118
 #: apps/selfservice/models.py:68
 msgid "reading round"
@@ -2820,11 +3186,6 @@ msgstr "ja"
 #: apps/messaging/templates/messaging/_person_newsletter.html:24
 msgid "no"
 msgstr "nej"
-
-#
-#: apps/messaging/models.py:336
-msgid "file"
-msgstr "fil"
 
 #: apps/messaging/models.py:338
 msgid "size"
@@ -3520,6 +3881,10 @@ msgstr "Alla aviseringar är markerade som lästa."
 #: apps/notifications/views.py:142
 msgid "Your notification settings are saved."
 msgstr "Dina inställningar för aviseringar är sparade."
+
+#: apps/plugins/apps.py:7
+msgid "Plugins"
+msgstr "Insticksprogram"
 
 #: apps/readings/admin.py:20
 msgid "Archive selected reading types"
@@ -5588,15 +5953,15 @@ msgstr "Inbjudan skickad till %(email)s."
 msgid "Setup is done. You can run it again from Settings."
 msgstr "Inställningen är klar. Du kan köra den igen från Inställningar."
 
-#: config/settings.py:181
+#: config/settings.py:182
 msgid "Swedish"
 msgstr "Svenska"
 
-#: config/settings.py:182
+#: config/settings.py:183
 msgid "English"
 msgstr "Engelska"
 
-#: config/settings.py:183
+#: config/settings.py:184
 msgid "Finnish (machine translated)"
 msgstr "Finska (maskinöversatt)"
 
@@ -5669,9 +6034,6 @@ msgstr ""
 
 #~ msgid "Snapshots and backups"
 #~ msgstr "Säkerhetskopior"
-
-#~ msgid "Plugins"
-#~ msgstr "Insticksprogram"
 
 #, python-format
 #~ msgid "New %(unit_type)s"

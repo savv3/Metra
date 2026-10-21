@@ -39,6 +39,23 @@ reminders to the chosen** sends a payment reminder on each person's preferred
 channel (email or SMS, or the other one if they have no address for it), or
 by letter to those who prefer post or have neither, with the reminder fee if one is set and at least 14 days to pay.
 
+## Bank files
+
+Instead of recording each payment by hand, download the bank's file of
+incoming payments from your online bank and upload it under **Invoices > Bank
+files**. Metra reads ISO 20022 XML files: camt.054, the file of reference
+payments, and camt.053, the account statement. Every payment whose reference
+belongs to an invoice and that pays exactly what is left is recorded on that
+invoice. The reference may be the Finnish one or the RF one, with or without
+spaces.
+
+Payments with no reference or an unknown one, partial payments and payments of
+too much are marked **To review**: record those by hand on the right invoice.
+Money paid out is listed but not matched. Uploading the same file twice changes
+nothing, and a payment already imported from an earlier file (such as the
+reference payments file before the month's statement) is skipped. Each
+imported file shows its lines and what happened to each one.
+
 ## For the accountant
 
 **Export as CSV** under the invoice list gives every issued invoice with
