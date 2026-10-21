@@ -24,13 +24,12 @@ def test_create_round(board_client, meter):
             "period_label": "2026",
             "opens_on": "2026-03-01",
             "closes_on": "2026-03-31",
-            "status": "open",
         },
     )
 
     round_ = ReadingRound.objects.get()
     assert response.status_code == 302
-    assert (round_.period_label, round_.status) == ("2026", "open")
+    assert (round_.period_label, round_.is_draft) == ("2026", False)
 
 
 def test_round_cannot_close_before_it_opens(board_client, meter):
@@ -41,7 +40,6 @@ def test_round_cannot_close_before_it_opens(board_client, meter):
             "period_label": "2026",
             "opens_on": "2026-03-31",
             "closes_on": "2026-03-01",
-            "status": "open",
         },
     )
 

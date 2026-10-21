@@ -25,6 +25,11 @@ ne on otettu, Metran version, koon sekä sen, onko varmuuskopio tällä
 palvelimella, palvelimen ulkopuolella vai molemmissa. Viimeaikaiset ongelmat
 näkyvät sivun yläreunassa.
 
+Varmuuskopioiden ongelmista, kuten epäonnistuneesta varmuuskopiosta tai
+sellaisesta, jota ei voitu lähettää palvelimen ulkopuolelle, ilmoitetaan
+ylläpitäjille jokaisen sivun yläreunan kellolla (katso Ilmoitukset), ei
+Yksiköt-sivulla.
+
 ## Varmuuskopion palauttaminen
 
 Palautus palauttaa koko rekisterin ja kaikki tiedostot sellaisiksi kuin ne

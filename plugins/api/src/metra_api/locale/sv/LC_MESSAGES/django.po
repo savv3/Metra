@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 23:43+0300\n"
+"POT-Creation-Date: 2026-10-21 15:06+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,13 +21,13 @@ msgstr ""
 msgid "API"
 msgstr "API"
 
-#: apps.py:19 models.py:78 templates/metra_api/client_list.html:3
+#: apps.py:21 models.py:78 templates/metra_api/client_list.html:3
 #: templates/metra_api/client_list.html:6
 #: templates/metra_api/client_list.html:14 templates/metra_api/docs.html:9
 msgid "API clients"
 msgstr "API-klienter"
 
-#: apps.py:22
+#: apps.py:24
 msgid "Tokens for other systems that read or change the register."
 msgstr "Tokens för andra system som läser eller ändrar registret."
 
@@ -55,7 +55,9 @@ msgstr "Valfritt. Tokenen slutar fungera när dagen är slut."
 msgid ""
 "The client may do what a user with this role may. Choose the narrowest role "
 "that does the job."
-msgstr "Klienten får göra det som en användare med den här rollen får göra. Välj den snävaste roll som räcker."
+msgstr ""
+"Klienten får göra det som en användare med den här rollen får göra. Välj den "
+"snävaste roll som räcker."
 
 #: forms.py:57
 msgid "Choose today or a later day."
@@ -145,19 +147,19 @@ msgstr "Ange ett enda värde."
 msgid "A unit's type cannot change."
 msgstr "En enhets typ kan inte ändras."
 
-#: serializers.py:157 serializers.py:245
+#: serializers.py:157 serializers.py:247
 msgid "This field is required."
 msgstr "Detta fält måste fyllas i."
 
-#: serializers.py:239
+#: serializers.py:241
 msgid "A reading cannot move; enter a new one instead."
 msgstr "En avläsning kan inte flyttas; för in en ny i stället."
 
-#: serializers.py:253
+#: serializers.py:255
 msgid "This round is not read from units of this type."
 msgstr "Den här omgången gäller inte enheter av den här typen."
 
-#: serializers.py:257
+#: serializers.py:259
 msgid "This unit already has a reading in this round; change it."
 msgstr "Enheten har redan en avläsning i den här omgången; ändra den."
 
@@ -187,7 +189,7 @@ msgstr "Ny klient"
 msgid ""
 "Each client is another system with its own token. It may do what its role "
 "allows, and every change it makes is logged under its name."
-msgstr "Varje klient är ett annat system med en egen token. Den får göra det som rollen tillåter, och varje ändring den gör loggas under dess namn."
+msgstr ""
 "Varje klient är ett annat system med en egen token. Den får göra det som "
 "rollen tillåter, och varje ändring den gör loggas under dess namn."
 
@@ -268,9 +270,11 @@ msgstr "Kopiera tokenen nu"
 msgid ""
 "This is the only time the token is shown. Metra keeps only a fingerprint of "
 "it. If it is lost, make a new one."
-msgstr "Tokenen visas bara den här gången. Metra sparar endast ett fingeravtryck av den. Om den kommer bort, skapa en ny."
+msgstr ""
 "Tokenen visas bara den här gången. Metra sparar endast ett fingeravtryck av "
-"den. Om den kommer bort, skapa en ny."
+"den. Om den kommer bort, skapa en ny.Tokenen visas bara den här gången. "
+"Metra sparar endast ett fingeravtryck av den. Om den kommer bort, skapa en "
+"ny."
 
 #: templates/metra_api/client_token.html:14
 msgid "Header"
@@ -280,9 +284,10 @@ msgstr "Rubrik"
 msgid ""
 "Store it in the other system's settings or a password manager, never in "
 "email or chat."
-msgstr "Spara den i det andra systemets inställningar eller i en lösenordshanterare, aldrig i e-post eller chatt."
+msgstr ""
 "Spara den i det andra systemets inställningar eller i en lösenordshanterare, "
-"aldrig i e-post eller chatt."
+"aldrig i e-post eller chatt.Spara den i det andra systemets inställningar "
+"eller i en lösenordshanterare, aldrig i e-post eller chatt."
 
 #: templates/metra_api/client_token.html:22
 msgid "Done"
@@ -306,20 +311,25 @@ msgid ""
 "Send the client's token in every request as <code>Authorization: Bearer "
 "&lt;token&gt;</code>. Requests and answers are JSON. Lists come in pages: "
 "<code>?page=2&amp;page_size=100</code> (at most 200)."
-msgstr "Skicka klientens token i varje anrop som <code>Authorization: Bearer &lt;token&gt;</code>. Anrop och svar är JSON. Listor kommer i sidor: <code>?page=2&amp;page_size=100</code> (högst 200)."
+msgstr ""
 "Skicka klientens token i varje anrop som <code>Authorization: Bearer "
 "&lt;token&gt;</code>. Anrop och svar är JSON. Listor kommer i sidor: <code>?"
-"page=2&amp;page_size=100</code> (högst 200)."
+"page=2&amp;page_size=100</code> (högst 200).Skicka klientens token i varje "
+"anrop som <code>Authorization: Bearer &lt;token&gt;</code>. Anrop och svar "
+"är JSON. Listor kommer i sidor: <code>?page=2&amp;page_size=100</code> "
+"(högst 200)."
 
 #: templates/metra_api/docs.html:18
 msgid ""
 "Units and people are never deleted: DELETE archives them. Custom fields are "
 "in <code>custom_fields</code>, keyed by the field's key, and are checked as "
 "on the web pages."
-msgstr "Enheter och personer raderas aldrig: DELETE arkiverar dem. Egna fält finns i <code>custom_fields</code> med fältets nyckel och kontrolleras som på webbsidorna."
+msgstr ""
 "Enheter och personer raderas aldrig: DELETE arkiverar dem. Egna fält finns i "
 "<code>custom_fields</code> med fältets nyckel och kontrolleras som på "
-"webbsidorna."
+"webbsidorna.Enheter och personer raderas aldrig: DELETE arkiverar dem. Egna "
+"fält finns i <code>custom_fields</code> med fältets nyckel och kontrolleras "
+"som på webbsidorna."
 
 #: templates/metra_api/docs.html:27
 msgid "Path"

@@ -68,6 +68,19 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   days, then weekly for 4 weeks and monthly for 12 months; ones taken by hand
   stay until deleted. A new Backups page lists them, here and offsite.
 - `manage.py backup` is now `manage.py snapshot`.
+- A reading round is a draft or published; a published round opens and closes
+  on its dates, so there is no status to forget to change. The round list
+  shows Draft, Opens (date), Open until (date) or Closed. Existing open and
+  closed rounds become published, drafts stay drafts. For plugin authors and
+  API clients: `ReadingRound.status` is now a computed read-only value
+  (`draft`, `upcoming`, `open`, `closed`; `upcoming` is new), the model has
+  an `is_draft` field, and the `status` filter of `/api/v1/reading-rounds/`
+  works on the computed state.
+- The Units page no longer shows a backup box; backup problems are reported
+  through the notification bell. Staff on an installation without required
+  two-factor login see one banner, not two.
+- Fee plans and invoice settings are linked from the setup wizard's invoicing
+  step, the invoice run pages and the overdue page.
 - The menu's Settings opens the new Settings page instead of the admin. Fee
   lines are no longer listed on their own in the admin (they are edited in
   their fee plan), and the admin's index shows non-superusers only the
@@ -85,6 +98,10 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Fixed
 
+- The API clients page showed its Swedish introduction twice.
+- The help index listed every article twice.
+- The setup wizard's email and SMS step shows a description of the SMS
+  provider instead of its code name.
 - Every send-out now follows each person's preferred channel, using one rule:
   those who prefer email get email and those who prefer SMS get an SMS, or
   the other one when they lack an address for it, and those who prefer post

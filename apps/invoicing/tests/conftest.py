@@ -38,13 +38,13 @@ def meter(household):
 
 @pytest.fixture
 def rounds(meter):
-    def make(year, status="closed"):
+    def make(year):
         return ReadingRound.objects.create(
             reading_type=meter,
             period_label=str(year),
             opens_on=datetime.date(year, 10, 1),
             closes_on=datetime.date(year, 10, 31),
-            status=status,
+            is_draft=False,
         )
 
     return make(2025), make(2026)

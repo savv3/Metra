@@ -88,7 +88,7 @@ def test_reading_shows_previous_value_and_rejects_bad_input(client, issued, unit
         period_label="Last year",
         opens_on=datetime.date(2000, 1, 1),
         closes_on=datetime.date(2000, 12, 31),
-        status="closed",
+        is_draft=False,
     )
     Reading.objects.create(round=last, unit=unit, value=900)
     _link, _token, url = issued
@@ -105,7 +105,7 @@ def test_reading_shows_previous_value_and_rejects_bad_input(client, issued, unit
 def test_closed_round_shows_the_reading_but_accepts_no_changes(client, issued, unit, open_round):
     _link, _token, url = issued
     Reading.objects.create(round=open_round, unit=unit, value=50)
-    open_round.status = ReadingRound.Status.CLOSED
+    open_round.closes_on = timezone.localdate() - datetime.timedelta(days=1)
     open_round.save()
 
     page = client.get(url, HTTP_ACCEPT_LANGUAGE="en").content.decode()

@@ -8,6 +8,7 @@ import re
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.core.mail.message import make_msgid
+from django.utils.translation import gettext_lazy as _
 
 from .registry import EMAIL, SMS, Provider, ProviderError, SendResult, registry
 
@@ -62,6 +63,7 @@ class ConsoleSMS(Provider):
 
     channel = SMS
     name = "console"
+    description = _("Shown in the server log (development)")
 
     def send(self, recipient, body, subject="", callback_url=None, headers=None):
         logger.warning("SMS to %s:\n%s", recipient, body)
@@ -78,6 +80,7 @@ class DummySMS(Provider):
 
     channel = SMS
     name = "dummy"
+    description = _("Kept in memory, nothing is sent (tests)")
 
     def send(self, recipient, body, subject="", callback_url=None, headers=None):
         if recipient.strip() == "+000":

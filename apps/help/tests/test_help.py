@@ -113,3 +113,10 @@ def test_plugins_add_articles_and_page_links(board_client, plugin_articles):
     assert "How to hold the annual meeting." in swedish
     assert 'lang="en"' in swedish
     assert articles.for_page("core") == "test-guide"
+
+
+def test_the_help_index_lists_each_article_once(board_client):
+    page = board_client.get(reverse("help:index"), HTTP_ACCEPT_LANGUAGE="en").content.decode()
+
+    for slug in articles.ORDER:
+        assert page.count(f'href="{reverse("help:article", args=[slug])}"') == 1, slug

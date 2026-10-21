@@ -212,6 +212,8 @@ class ReadingTypeSerializer(serializers.ModelSerializer):
 
 class ReadingRoundSerializer(serializers.ModelSerializer):
     reading_type = ReadingTypeSerializer(read_only=True)
+    # Worked out from the draft flag and the dates: draft, upcoming, open or closed.
+    status = serializers.CharField(read_only=True)
 
     class Meta:
         model = api.ReadingRound

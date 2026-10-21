@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 15:24+0300\n"
+"POT-Creation-Date: 2026-10-21 18:08+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgid "role"
 msgstr ""
 
 #: apps/accounts/admin.py:28 apps/invoicing/models.py:143
-#: apps/messaging/models.py:337 apps/readings/models.py:23
+#: apps/messaging/models.py:337 apps/readings/models.py:24
 #: apps/register/models.py:57 apps/register/models.py:115
 #: apps/register/models.py:129 apps/register/models.py:315
 msgid "name"
@@ -132,7 +132,8 @@ msgstr ""
 msgid "Turn off"
 msgstr ""
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:74
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:70
+#: templates/base.html:75
 msgid "Turn on two-factor login"
 msgstr ""
 
@@ -172,8 +173,7 @@ msgstr ""
 msgid "Change password"
 msgstr ""
 
-#: apps/backups/apps.py:7 apps/backups/templates/backups/_status.html:4
-#: apps/backups/templates/backups/backup_list.html:3
+#: apps/backups/apps.py:7 apps/backups/templates/backups/backup_list.html:3
 #: apps/backups/templates/backups/backup_list.html:6
 #: apps/core/settings_page.py:189 apps/core/settings_page.py:192
 msgid "Backups"
@@ -314,28 +314,6 @@ msgstr ""
 
 #: apps/backups/service.py:208
 msgid "Only snapshots taken by hand can be deleted."
-msgstr ""
-
-#: apps/backups/templates/backups/_status.html:5
-msgid "Snapshots and backups"
-msgstr ""
-
-#: apps/backups/templates/backups/_status.html:7
-#, python-format
-msgid "Last successful backup %(when)s (%(size)s) to %(target)s."
-msgstr ""
-
-#: apps/backups/templates/backups/_status.html:11
-msgid "No backup has been made yet."
-msgstr ""
-
-#: apps/backups/templates/backups/_status.html:14
-#, python-format
-msgid "The last backup failed %(when)s:"
-msgstr ""
-
-#: apps/backups/templates/backups/_status.html:18
-msgid "The last successful backup is more than a day and a half old."
 msgstr ""
 
 #: apps/backups/templates/backups/backup_list.html:10
@@ -569,7 +547,7 @@ msgid "Restore this snapshot"
 msgstr ""
 
 #: apps/backups/templates/backups/restore.html:58
-#: apps/invoicing/templates/invoicing/run_form.html:13
+#: apps/invoicing/templates/invoicing/run_form.html:14
 #: apps/messaging/templates/messaging/compose.html:114
 #: apps/messaging/templates/messaging/newsletter_compose.html:36
 #: apps/readings/templates/readings/reading_form.html:31
@@ -654,7 +632,7 @@ msgstr ""
 #: apps/core/models.py:37 apps/invoicing/models.py:304
 #: apps/invoicing/models.py:402 apps/invoicing/models.py:743
 #: apps/messaging/models.py:85 apps/messaging/models.py:177
-#: apps/notifications/models.py:28 apps/readings/models.py:78
+#: apps/notifications/models.py:28 apps/readings/models.py:111
 #: apps/register/models.py:236 apps/selfservice/models.py:76
 msgid "created"
 msgstr ""
@@ -733,6 +711,7 @@ msgid "Bank account, payment terms, VAT, numbering and reminders."
 msgstr ""
 
 #: apps/core/settings_page.py:131
+#: apps/invoicing/templates/invoicing/run_list.html:9
 msgid "Fee plans"
 msgstr ""
 
@@ -896,7 +875,7 @@ msgstr ""
 #: apps/invoicing/templates/invoicing/invoice_list.html:15
 #: apps/readings/templates/readings/round_detail.html:25
 #: apps/register/templates/register/person_list.html:13
-#: apps/register/templates/register/unit_list.html:17
+#: apps/register/templates/register/unit_list.html:16
 msgid "Search"
 msgstr ""
 
@@ -919,6 +898,10 @@ msgstr ""
 msgid ""
 "Short guides to how things are done in Metra. Every page has a Help link in "
 "the menu that opens the guide for that page."
+msgstr ""
+
+#: apps/help/templates/help/index.html:20
+msgid "Pick a guide from the list, or search for a word."
 msgstr ""
 
 #: apps/invoicing/admin.py:13 apps/invoicing/models.py:388
@@ -1092,7 +1075,7 @@ msgstr ""
 msgid "Number %(number)s is already used; numbers cannot repeat."
 msgstr ""
 
-#: apps/invoicing/models.py:145 apps/readings/models.py:26
+#: apps/invoicing/models.py:145 apps/readings/models.py:27
 #: apps/register/models.py:144 apps/register/models.py:168
 msgid "unit type"
 msgstr ""
@@ -1106,7 +1089,7 @@ msgid "in use"
 msgstr ""
 
 #: apps/invoicing/models.py:156 apps/invoicing/models.py:673
-#: apps/readings/models.py:45 apps/register/models.py:139
+#: apps/readings/models.py:46 apps/register/models.py:139
 msgid "description"
 msgstr ""
 
@@ -1163,7 +1146,7 @@ msgstr ""
 
 #: apps/invoicing/models.py:202 apps/invoicing/models.py:362
 #: apps/invoicing/models.py:675 apps/messaging/models.py:161
-#: apps/readings/models.py:137 apps/register/models.py:330
+#: apps/readings/models.py:200 apps/register/models.py:330
 #: apps/register/models.py:353 apps/selfservice/models.py:58
 msgid "unit"
 msgstr ""
@@ -1176,8 +1159,8 @@ msgstr ""
 msgid "VAT rate (%)"
 msgstr ""
 
-#: apps/invoicing/models.py:213 apps/readings/models.py:49
-#: apps/readings/models.py:66
+#: apps/invoicing/models.py:213 apps/readings/models.py:50
+#: apps/readings/models.py:94
 msgid "reading type"
 msgstr ""
 
@@ -1241,7 +1224,7 @@ msgid "price tier"
 msgstr ""
 
 #: apps/invoicing/models.py:286 apps/invoicing/models.py:375
-#: apps/readings/models.py:71
+#: apps/readings/models.py:99
 msgid "period"
 msgstr ""
 
@@ -1249,7 +1232,7 @@ msgstr ""
 msgid "Shown on the invoices, for example 2026."
 msgstr ""
 
-#: apps/invoicing/models.py:291 apps/readings/models.py:84
+#: apps/invoicing/models.py:291 apps/readings/models.py:119
 msgid "reading rounds"
 msgstr ""
 
@@ -1272,12 +1255,12 @@ msgstr ""
 
 #: apps/invoicing/models.py:340
 #: apps/invoicing/templates/invoicing/_invoice_results.html:19
-#: apps/readings/models.py:60
+#: apps/readings/models.py:87
 msgid "Draft"
 msgstr ""
 
 #: apps/invoicing/models.py:341
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 msgid "Issued"
 msgstr ""
 
@@ -1306,8 +1289,7 @@ msgid "Credit note"
 msgstr ""
 
 #: apps/invoicing/models.py:351 apps/messaging/models.py:75
-#: apps/messaging/models.py:172 apps/readings/models.py:76
-#: apps/register/models.py:317
+#: apps/messaging/models.py:172 apps/register/models.py:317
 msgid "status"
 msgstr ""
 
@@ -1464,7 +1446,7 @@ msgid "reference given"
 msgstr ""
 
 #: apps/invoicing/models.py:782 apps/messaging/models.py:283
-#: apps/readings/models.py:161
+#: apps/readings/models.py:224
 msgid "note"
 msgstr ""
 
@@ -1589,7 +1571,7 @@ msgstr ""
 #: apps/invoicing/templates/invoicing/_invoice_results.html:12
 #: apps/invoicing/templates/invoicing/invoice_detail.html:100
 #: apps/invoicing/templates/invoicing/run_detail.html:33
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 #: apps/invoicing/views.py:440
 msgid "Total"
 msgstr ""
@@ -1603,7 +1585,7 @@ msgstr ""
 #: apps/readings/templates/readings/round_list.html:22
 #: apps/register/csv_io.py:468
 #: apps/register/templates/register/_unit_results.html:10
-#: apps/register/templates/register/unit_list.html:28
+#: apps/register/templates/register/unit_list.html:27
 #: apps/selfservice/templates/selfservice/round_links.html:43
 msgid "Status"
 msgstr ""
@@ -1837,7 +1819,7 @@ msgstr ""
 #: apps/invoicing/templates/invoicing/invoice_list.html:9
 #: apps/invoicing/templates/invoicing/run_list.html:3
 #: apps/invoicing/templates/invoicing/run_list.html:6
-#: apps/invoicing/templates/invoicing/run_list.html:14
+#: apps/invoicing/templates/invoicing/run_list.html:15
 msgid "Invoice runs"
 msgstr ""
 
@@ -1855,7 +1837,7 @@ msgid "All"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:22
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 msgid "Drafts"
 msgstr ""
 
@@ -1874,7 +1856,7 @@ msgstr ""
 #: apps/invoicing/templates/invoicing/invoice_list.html:37
 #: apps/readings/templates/readings/round_detail.html:37
 #: apps/register/templates/register/person_list.html:25
-#: apps/register/templates/register/unit_list.html:43
+#: apps/register/templates/register/unit_list.html:42
 msgid "Filter"
 msgstr ""
 
@@ -1909,6 +1891,13 @@ msgstr ""
 #: apps/invoicing/templates/invoicing/overdue_list.html:36
 #, python-format
 msgid "Each reminder adds a fee of %(fee)s € and gives %(days)s days to pay."
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:36
+#, python-format
+msgid ""
+"Reminders have no fee (see <a href=\"%(billing_url)s\">invoice settings</a>) "
+"and give %(days)s days to pay."
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:36
@@ -2071,7 +2060,7 @@ msgstr ""
 
 #: apps/invoicing/templates/invoicing/run_form.html:3
 #: apps/invoicing/templates/invoicing/run_form.html:5
-#: apps/invoicing/templates/invoicing/run_list.html:9
+#: apps/invoicing/templates/invoicing/run_list.html:10
 msgid "New invoice run"
 msgstr ""
 
@@ -2081,27 +2070,39 @@ msgid ""
 "Nothing is sent or numbered until you issue the drafts."
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/run_form.html:12
+#: apps/invoicing/templates/invoicing/run_form.html:7
+#: apps/setup/templates/setup/invoicing.html:5
+msgid "Open the fee plans"
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/run_form.html:13
 msgid "Make draft invoices"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/run_list.html:12
+#: apps/invoicing/templates/invoicing/run_list.html:13
+#, python-format
+msgid ""
+"Fill in the <a href=\"%(billing_url)s\">invoice settings</a> (IBAN, payment "
+"terms, VAT) before issuing invoices."
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/run_list.html:13
 msgid ""
 "Fill in the invoice settings (IBAN, payment terms, VAT) under Settings > "
 "Invoice settings before issuing invoices."
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 msgid "Run"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 #: apps/register/history.py:63
 #: apps/selfservice/templates/selfservice/round_links.html:41
 msgid "Created"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/run_list.html:25
+#: apps/invoicing/templates/invoicing/run_list.html:26
 msgid "No invoice runs yet."
 msgstr ""
 
@@ -2300,7 +2301,7 @@ msgstr ""
 
 #: apps/messaging/forms.py:108
 #: apps/register/templates/register/person_list.html:17
-#: apps/register/templates/register/unit_list.html:35
+#: apps/register/templates/register/unit_list.html:34
 msgid "Tag"
 msgstr ""
 
@@ -2503,7 +2504,7 @@ msgstr ""
 msgid "to"
 msgstr ""
 
-#: apps/messaging/models.py:68 apps/readings/models.py:83
+#: apps/messaging/models.py:68 apps/readings/models.py:118
 #: apps/selfservice/models.py:68
 msgid "reading round"
 msgstr ""
@@ -2640,7 +2641,7 @@ msgstr ""
 msgid "wants the newsletter"
 msgstr ""
 
-#: apps/messaging/models.py:272 apps/readings/models.py:141
+#: apps/messaging/models.py:272 apps/readings/models.py:204
 msgid "source"
 msgstr ""
 
@@ -2706,6 +2707,14 @@ msgstr ""
 #: apps/messaging/newsletter.py:118
 #: apps/messaging/templates/messaging/_send_forms.html:8
 msgid "Email is not set up."
+msgstr ""
+
+#: apps/messaging/providers.py:66
+msgid "Shown in the server log (development)"
+msgstr ""
+
+#: apps/messaging/providers.py:83
+msgid "Kept in memory, nothing is sent (tests)"
 msgstr ""
 
 #: apps/messaging/sending.py:95
@@ -3201,7 +3210,7 @@ msgstr ""
 msgid "group"
 msgstr ""
 
-#: apps/notifications/models.py:29 apps/readings/models.py:79
+#: apps/notifications/models.py:29 apps/readings/models.py:112
 #: apps/register/models.py:237
 msgid "updated"
 msgstr ""
@@ -3358,97 +3367,121 @@ msgstr ""
 msgid "Reading"
 msgstr ""
 
-#: apps/readings/models.py:29
+#: apps/readings/models.py:30
 msgid "The kind of unit that reports this reading."
 msgstr ""
 
-#: apps/readings/models.py:32
+#: apps/readings/models.py:33
 msgid "unit of measure"
 msgstr ""
 
-#: apps/readings/models.py:32
+#: apps/readings/models.py:33
 msgid "For example m³ or kWh."
 msgstr ""
 
-#: apps/readings/models.py:35
+#: apps/readings/models.py:36
 msgid "decimals"
 msgstr ""
 
-#: apps/readings/models.py:38
+#: apps/readings/models.py:39
 msgid "cumulative meter"
 msgstr ""
 
-#: apps/readings/models.py:41
+#: apps/readings/models.py:42
 msgid ""
 "The value is a meter position that only grows. Usage is the value minus the "
 "previous reading."
 msgstr ""
 
-#: apps/readings/models.py:50
+#: apps/readings/models.py:51
 msgid "reading types"
 msgstr ""
 
-#: apps/readings/models.py:61
+#: apps/readings/models.py:88
+msgid "Not yet open"
+msgstr ""
+
+#: apps/readings/models.py:89
 msgid "Open"
 msgstr ""
 
-#: apps/readings/models.py:62
+#: apps/readings/models.py:90
 msgid "Closed"
 msgstr ""
 
-#: apps/readings/models.py:71
+#: apps/readings/models.py:99
 msgid "Shown to members, for example 2026."
 msgstr ""
 
-#: apps/readings/models.py:73
+#: apps/readings/models.py:101
 msgid "opens"
 msgstr ""
 
-#: apps/readings/models.py:74
+#: apps/readings/models.py:102
 msgid "closes"
 msgstr ""
 
-#: apps/readings/models.py:99
-msgid "The round closes before it opens."
+#: apps/readings/models.py:104
+msgid "draft"
 msgstr ""
 
-#: apps/readings/models.py:130
-msgid "Staff"
-msgstr ""
-
-#: apps/readings/models.py:131
-msgid "Member"
+#: apps/readings/models.py:107
+msgid ""
+"A draft is never open. Clear this to publish the round: it then opens and "
+"closes on its dates."
 msgstr ""
 
 #: apps/readings/models.py:134
-msgid "round"
-msgstr ""
-
-#: apps/readings/models.py:139
-msgid "value"
-msgstr ""
-
-#: apps/readings/models.py:145
-msgid "entered by"
-msgstr ""
-
-#: apps/readings/models.py:153
-msgid "reported by"
+msgid "The round closes before it opens."
 msgstr ""
 
 #: apps/readings/models.py:158
-msgid "The member who reported it through a self-service link."
+#, python-format
+msgid "Opens %(date)s"
 msgstr ""
 
 #: apps/readings/models.py:160
+#, python-format
+msgid "Open until %(date)s"
+msgstr ""
+
+#: apps/readings/models.py:193
+msgid "Staff"
+msgstr ""
+
+#: apps/readings/models.py:194
+msgid "Member"
+msgstr ""
+
+#: apps/readings/models.py:197
+msgid "round"
+msgstr ""
+
+#: apps/readings/models.py:202
+msgid "value"
+msgstr ""
+
+#: apps/readings/models.py:208
+msgid "entered by"
+msgstr ""
+
+#: apps/readings/models.py:216
+msgid "reported by"
+msgstr ""
+
+#: apps/readings/models.py:221
+msgid "The member who reported it through a self-service link."
+msgstr ""
+
+#: apps/readings/models.py:223
 msgid "submitted"
 msgstr ""
 
-#: apps/readings/models.py:165
+#: apps/readings/models.py:228
 msgid "reading"
 msgstr ""
 
-#: apps/readings/models.py:166
+#: apps/readings/models.py:229
 msgid "readings"
 msgstr ""
 
@@ -3700,7 +3733,7 @@ msgstr ""
 
 #: apps/register/csv_io.py:467
 #: apps/register/templates/register/_unit_results.html:8
-#: apps/register/templates/register/unit_list.html:21
+#: apps/register/templates/register/unit_list.html:20
 msgid "Type"
 msgstr ""
 
@@ -4382,7 +4415,7 @@ msgid "Add person"
 msgstr ""
 
 #: apps/register/templates/register/person_list.html:19
-#: apps/register/templates/register/unit_list.html:37
+#: apps/register/templates/register/unit_list.html:36
 msgid "All tags"
 msgstr ""
 
@@ -4424,11 +4457,11 @@ msgstr ""
 msgid "Add unit"
 msgstr ""
 
-#: apps/register/templates/register/unit_list.html:23
+#: apps/register/templates/register/unit_list.html:22
 msgid "All types"
 msgstr ""
 
-#: apps/register/templates/register/unit_list.html:30
+#: apps/register/templates/register/unit_list.html:29
 msgid "All statuses"
 msgstr ""
 
@@ -4545,7 +4578,7 @@ msgid "Print self-service letter"
 msgstr ""
 
 #: apps/selfservice/templates/selfservice/base.html:9
-#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:262
+#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:263
 #: templates/base.html:7 templates/base.html:18
 msgid "Metra"
 msgstr ""
@@ -5037,7 +5070,8 @@ msgstr ""
 #: apps/setup/templates/setup/invoicing.html:4
 msgid ""
 "What every invoice needs: your bank account, payment terms, VAT and "
-"numbering. Fees are set up later under Invoices."
+"numbering. Fee plans, which say what each unit is charged, are set up "
+"afterwards under Settings."
 msgstr ""
 
 #: apps/setup/templates/setup/language.html:4
@@ -5212,18 +5246,18 @@ msgstr ""
 msgid "Test sent to %(to)s."
 msgstr ""
 
-#: apps/setup/views.py:236
+#: apps/setup/views.py:237
 msgid ""
 "Email is not set up, so no invitation can be sent. Add the person under "
 "Settings."
 msgstr ""
 
-#: apps/setup/views.py:267
+#: apps/setup/views.py:268
 #, python-format
 msgid "Your account for %(organisation)s"
 msgstr ""
 
-#: apps/setup/views.py:270
+#: apps/setup/views.py:271
 #, python-format
 msgid ""
 "Hello %(name)s,\n"
@@ -5237,17 +5271,17 @@ msgid ""
 "The link works for a few days."
 msgstr ""
 
-#: apps/setup/views.py:280
+#: apps/setup/views.py:281
 #, python-format
 msgid "The invitation could not be sent: %(error)s"
 msgstr ""
 
-#: apps/setup/views.py:282
+#: apps/setup/views.py:283
 #, python-format
 msgid "Invitation sent to %(email)s."
 msgstr ""
 
-#: apps/setup/views.py:303
+#: apps/setup/views.py:304
 msgid "Setup is done. You can run it again from Settings."
 msgstr ""
 
@@ -5307,13 +5341,13 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: templates/base.html:68
+#: templates/base.html:69
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
 msgstr ""
 
-#: templates/base.html:73
+#: templates/base.html:74
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."

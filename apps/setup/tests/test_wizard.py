@@ -252,3 +252,22 @@ def test_existing_installs_are_not_sent_to_the_wizard(make_user):
     SetupState.objects.create(finished_at="2026-01-01T00:00:00Z")
 
     assert login_redirect(admin) != reverse("setup:start")
+
+
+def test_invoicing_step_points_to_the_fee_plans(make_user, client, settings):
+    settings.REQUIRE_MFA = False
+    client.force_login(make_user("boss", "Admin", is_staff=True))
+
+    page = client.get(url("invoicing"), HTTP_ACCEPT_LANGUAGE="en").content.decode()
+
+    assert reverse("admin:invoicing_feeplan_changelist") in page
+    assert "under Invoices" not in page
+
+
+def test_messaging_step_describes_the_provider_not_its_code_name(admin_client, settings):
+    settings.MESSAGING = {**settings.MESSAGING, "sms_provider": "console"}
+
+    page = admin_client.get(url("messaging"), HTTP_ACCEPT_LANGUAGE="en").content.decode()
+
+    assert "Shown in the server log (development)" in page
+    assert "console &middot;" not in page

@@ -9,7 +9,7 @@ from .models import Reading, ReadingRound, ReadingType
 class RoundForm(forms.ModelForm):
     class Meta:
         model = ReadingRound
-        fields = ["reading_type", "period_label", "opens_on", "closes_on", "status"]
+        fields = ["reading_type", "period_label", "opens_on", "closes_on", "is_draft"]
         widgets = {"opens_on": DATE_WIDGET, "closes_on": DATE_WIDGET}
 
     def __init__(self, *args, **kwargs):

@@ -229,11 +229,10 @@ def test_a_broken_remote_is_shown_not_a_crash(role_client, settings):
     assert "must be one of" in page.content.decode()
 
 
-def test_settings_and_the_status_panel_link_to_backups(role_client, settings_admin):
+def test_settings_link_to_backups(settings_admin):
     url = reverse("backups:list")
 
     assert url in settings_admin.get(reverse("core:settings")).content.decode()
-    assert url in role_client("Admin").get(reverse("register:unit_list")).content.decode()
 
 
 def test_a_snapshot_during_a_request_is_sent_offsite_after_the_commit(

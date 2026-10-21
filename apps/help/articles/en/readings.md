@@ -10,6 +10,13 @@ type it applies to, the unit of measure (such as m³), the decimals, and
 whether it is a meter that keeps counting. Under **Readings**, open a round
 (for example "2026") with the dates members may report in.
 
+A round starts as a **draft**: tick **Draft** while you set it up, and nobody
+can report to it. Clear the tick to publish it. A published round opens on
+its first date and closes after its last date by itself, so there is no
+status to remember to change. The list and the round page show where it
+stands: *Draft*, *Opens* (a date), *Open until* (a date) or *Closed*. Members
+can report, and reminders are sent, only while a published round is open.
+
 ## Entering readings
 
 The round page shows how many units have reported and which are missing. Type

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 23:43+0300\n"
+"POT-Creation-Date: 2026-10-21 15:06+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,16 +21,18 @@ msgstr ""
 msgid "API"
 msgstr "API"
 
-#: apps.py:19 models.py:78 templates/metra_api/client_list.html:3
+#: apps.py:21 models.py:78 templates/metra_api/client_list.html:3
 #: templates/metra_api/client_list.html:6
 #: templates/metra_api/client_list.html:14 templates/metra_api/docs.html:9
 msgid "API clients"
 msgstr "API-asiakkaat"
 
-#: apps.py:22
+#: apps.py:24
 msgid "Tokens for other systems that read or change the register."
-msgstr "Tunnisteet muille järjestelmille, jotka lukevat tai muuttavat rekisteriä."
-"Tunnisteet muille järjestelmille, jotka lukevat tai muuttavat rekisteriä."
+msgstr ""
+"Tunnisteet muille järjestelmille, jotka lukevat tai muuttavat "
+"rekisteriä.Tunnisteet muille järjestelmille, jotka lukevat tai muuttavat "
+"rekisteriä."
 
 #: auth.py:28
 msgid "Give the token after Bearer, without spaces."
@@ -56,7 +58,9 @@ msgstr "Valinnainen. Tunniste lakkaa toimimasta, kun tämä päivä päättyy."
 msgid ""
 "The client may do what a user with this role may. Choose the narrowest role "
 "that does the job."
-msgstr "Asiakas saa tehdä sen, mitä tämän roolin käyttäjä saa. Valitse suppein rooli, joka riittää."
+msgstr ""
+"Asiakas saa tehdä sen, mitä tämän roolin käyttäjä saa. Valitse suppein "
+"rooli, joka riittää."
 
 #: forms.py:57
 msgid "Choose today or a later day."
@@ -146,19 +150,19 @@ msgstr "Anna yksi arvo."
 msgid "A unit's type cannot change."
 msgstr "Yksikön tyyppiä ei voi muuttaa."
 
-#: serializers.py:157 serializers.py:245
+#: serializers.py:157 serializers.py:247
 msgid "This field is required."
 msgstr "Tämä kenttä vaaditaan."
 
-#: serializers.py:239
+#: serializers.py:241
 msgid "A reading cannot move; enter a new one instead."
 msgstr "Lukemaa ei voi siirtää; syötä sen sijaan uusi."
 
-#: serializers.py:253
+#: serializers.py:255
 msgid "This round is not read from units of this type."
 msgstr "Tätä kierrosta ei lueta tämän tyyppisiltä yksiköiltä."
 
-#: serializers.py:257
+#: serializers.py:259
 msgid "This unit already has a reading in this round; change it."
 msgstr "Yksiköllä on jo lukema tällä kierroksella; muuta sitä."
 
@@ -188,10 +192,12 @@ msgstr "Uusi asiakas"
 msgid ""
 "Each client is another system with its own token. It may do what its role "
 "allows, and every change it makes is logged under its name."
-msgstr "Jokainen asiakas on toinen järjestelmä, jolla on oma tunniste. Se saa tehdä sen, mitä sen rooli sallii, ja jokainen sen tekemä muutos kirjataan sen nimellä."
+msgstr ""
 "Jokainen asiakas on toinen järjestelmä, jolla on oma tunniste. Se saa tehdä "
 "sen, mitä sen rooli sallii, ja jokainen sen tekemä muutos kirjataan sen "
-"nimellä."
+"nimellä.Jokainen asiakas on toinen järjestelmä, jolla on oma tunniste. Se "
+"saa tehdä sen, mitä sen rooli sallii, ja jokainen sen tekemä muutos "
+"kirjataan sen nimellä."
 
 #: templates/metra_api/client_list.html:18
 msgid "Client"
@@ -270,9 +276,10 @@ msgstr "Kopioi tunniste nyt"
 msgid ""
 "This is the only time the token is shown. Metra keeps only a fingerprint of "
 "it. If it is lost, make a new one."
-msgstr "Tunniste näytetään vain tämän kerran. Metra tallentaa siitä vain sormenjäljen. Jos se katoaa, luo uusi."
+msgstr ""
 "Tunniste näytetään vain tämän kerran. Metra tallentaa siitä vain "
-"sormenjäljen. Jos se katoaa, luo uusi."
+"sormenjäljen. Jos se katoaa, luo uusi.Tunniste näytetään vain tämän kerran. "
+"Metra tallentaa siitä vain sormenjäljen. Jos se katoaa, luo uusi."
 
 #: templates/metra_api/client_token.html:14
 msgid "Header"
@@ -282,9 +289,10 @@ msgstr "Otsake"
 msgid ""
 "Store it in the other system's settings or a password manager, never in "
 "email or chat."
-msgstr "Tallenna se toisen järjestelmän asetuksiin tai salasanojen hallintaan, ei koskaan sähköpostiin tai chattiin."
+msgstr ""
 "Tallenna se toisen järjestelmän asetuksiin tai salasanojen hallintaan, ei "
-"koskaan sähköpostiin tai chattiin."
+"koskaan sähköpostiin tai chattiin.Tallenna se toisen järjestelmän asetuksiin "
+"tai salasanojen hallintaan, ei koskaan sähköpostiin tai chattiin."
 
 #: templates/metra_api/client_token.html:22
 msgid "Done"
@@ -308,20 +316,26 @@ msgid ""
 "Send the client's token in every request as <code>Authorization: Bearer "
 "&lt;token&gt;</code>. Requests and answers are JSON. Lists come in pages: "
 "<code>?page=2&amp;page_size=100</code> (at most 200)."
-msgstr "Lähetä asiakkaan tunniste jokaisessa pyynnössä muodossa <code>Authorization: Bearer &lt;token&gt;</code>. Pyynnöt ja vastaukset ovat JSONia. Luettelot tulevat sivuina: <code>?page=2&amp;page_size=100</code> (enintään 200)."
+msgstr ""
 "Lähetä asiakkaan tunniste jokaisessa pyynnössä muodossa <code>Authorization: "
 "Bearer &lt;token&gt;</code>. Pyynnöt ja vastaukset ovat JSONia. Luettelot "
-"tulevat sivuina: <code>?page=2&amp;page_size=100</code> (enintään 200)."
+"tulevat sivuina: <code>?page=2&amp;page_size=100</code> (enintään "
+"200).Lähetä asiakkaan tunniste jokaisessa pyynnössä muodossa "
+"<code>Authorization: Bearer &lt;token&gt;</code>. Pyynnöt ja vastaukset ovat "
+"JSONia. Luettelot tulevat sivuina: <code>?page=2&amp;page_size=100</code> "
+"(enintään 200)."
 
 #: templates/metra_api/docs.html:18
 msgid ""
 "Units and people are never deleted: DELETE archives them. Custom fields are "
 "in <code>custom_fields</code>, keyed by the field's key, and are checked as "
 "on the web pages."
-msgstr "Yksiköitä ja henkilöitä ei koskaan poisteta: DELETE arkistoi ne. Omat kentät ovat kohdassa <code>custom_fields</code> kentän avaimella, ja ne tarkistetaan kuten verkkosivuilla."
+msgstr ""
 "Yksiköitä ja henkilöitä ei koskaan poisteta: DELETE arkistoi ne. Omat kentät "
 "ovat kohdassa <code>custom_fields</code> kentän avaimella, ja ne "
-"tarkistetaan kuten verkkosivuilla."
+"tarkistetaan kuten verkkosivuilla.Yksiköitä ja henkilöitä ei koskaan "
+"poisteta: DELETE arkistoi ne. Omat kentät ovat kohdassa <code>custom_fields</"
+"code> kentän avaimella, ja ne tarkistetaan kuten verkkosivuilla."
 
 #: templates/metra_api/docs.html:27
 msgid "Path"

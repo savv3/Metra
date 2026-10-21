@@ -26,7 +26,7 @@ def open_round(household):
         period_label="2026",
         opens_on=today - datetime.timedelta(days=5),
         closes_on=datetime.date(2026, 10, 31),
-        status=ReadingRound.Status.OPEN,
+        is_draft=False,
     )
 
 

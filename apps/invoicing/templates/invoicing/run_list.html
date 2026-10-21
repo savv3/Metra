@@ -6,10 +6,11 @@
     <h1>{% translate "Invoice runs" %}</h1>
     <div class="actions">
       <a class="button" href="{% url 'invoicing:invoice_list' %}">{% translate "All invoices" %}</a>
+      {% if user.is_staff and perms.invoicing.view_feeplan %}<a class="button" href="{% url 'admin:invoicing_feeplan_changelist' %}">{% translate "Fee plans" %}</a>{% endif %}
       {% if perms.invoicing.add_invoicerun %}<a class="button button--primary" href="{% url 'invoicing:run_create' %}">{% translate "New invoice run" %}</a>{% endif %}
     </div>
   </div>
-  {% if settings_missing %}<p class="notice">{% translate "Fill in the invoice settings (IBAN, payment terms, VAT) under Settings > Invoice settings before issuing invoices." %}</p>{% endif %}
+  {% if settings_missing %}<p class="notice">{% if user.is_staff and perms.invoicing.change_billingsettings %}{% url 'admin:invoicing_billingsettings_changelist' as billing_url %}{% blocktranslate trimmed %}Fill in the <a href="{{ billing_url }}">invoice settings</a> (IBAN, payment terms, VAT) before issuing invoices.{% endblocktranslate %}{% else %}{% translate "Fill in the invoice settings (IBAN, payment terms, VAT) under Settings > Invoice settings before issuing invoices." %}{% endif %}</p>{% endif %}
   {% if runs %}
     <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Invoice runs' %}">
       <table>

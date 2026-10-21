@@ -9,7 +9,7 @@
       {% if perms.readings.change_readinground %}<a class="button" href="{% url 'readings:round_edit' round.pk %}">{% translate "Edit" %}</a>{% endif %}
     </div>
   </div>
-  <p class="subtitle">{{ round.get_status_display }} &middot; {{ round.opens_on|date:"SHORT_DATE_FORMAT" }}–{{ round.closes_on|date:"SHORT_DATE_FORMAT" }}</p>
+  <p class="subtitle">{{ round.state_label }} &middot; {{ round.opens_on|date:"SHORT_DATE_FORMAT" }}–{{ round.closes_on|date:"SHORT_DATE_FORMAT" }}</p>
 
   <div class="progress-panel">
     <p id="progress-label">{% blocktranslate count count=expected %}{{ submitted }} of {{ count }} unit has reported. {{ missing }} missing.{% plural %}{{ submitted }} of {{ count }} units have reported. {{ missing }} missing.{% endblocktranslate %}</p>

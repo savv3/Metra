@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 15:24+0300\n"
+"POT-Creation-Date: 2026-10-21 18:08+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgid "role"
 msgstr "roll"
 
 #: apps/accounts/admin.py:28 apps/invoicing/models.py:143
-#: apps/messaging/models.py:337 apps/readings/models.py:23
+#: apps/messaging/models.py:337 apps/readings/models.py:24
 #: apps/register/models.py:57 apps/register/models.py:115
 #: apps/register/models.py:129 apps/register/models.py:315
 msgid "name"
@@ -134,7 +134,8 @@ msgstr "Skydda ditt konto med en kod från en autentiseringsapp i telefonen."
 msgid "Turn off"
 msgstr "Stäng av"
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:74
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:70
+#: templates/base.html:75
 msgid "Turn on two-factor login"
 msgstr "Slå på tvåfaktorsinloggning"
 
@@ -176,8 +177,7 @@ msgstr "Använd ett långt lösenord som du inte använder någon annanstans."
 msgid "Change password"
 msgstr "Byt lösenord"
 
-#: apps/backups/apps.py:7 apps/backups/templates/backups/_status.html:4
-#: apps/backups/templates/backups/backup_list.html:3
+#: apps/backups/apps.py:7 apps/backups/templates/backups/backup_list.html:3
 #: apps/backups/templates/backups/backup_list.html:6
 #: apps/core/settings_page.py:189 apps/core/settings_page.py:192
 msgid "Backups"
@@ -331,29 +331,6 @@ msgstr ""
 #: apps/backups/service.py:208
 msgid "Only snapshots taken by hand can be deleted."
 msgstr "Bara manuellt tagna säkerhetskopior kan tas bort."
-
-#: apps/backups/templates/backups/_status.html:5
-msgid "Snapshots and backups"
-msgstr "Säkerhetskopior"
-
-#: apps/backups/templates/backups/_status.html:7
-#, python-format
-msgid "Last successful backup %(when)s (%(size)s) to %(target)s."
-msgstr "Senaste lyckade säkerhetskopia %(when)s (%(size)s) till %(target)s."
-
-#: apps/backups/templates/backups/_status.html:11
-msgid "No backup has been made yet."
-msgstr "Ingen säkerhetskopia har gjorts ännu."
-
-#: apps/backups/templates/backups/_status.html:14
-#, python-format
-msgid "The last backup failed %(when)s:"
-msgstr "Den senaste säkerhetskopieringen misslyckades %(when)s:"
-
-#: apps/backups/templates/backups/_status.html:18
-msgid "The last successful backup is more than a day and a half old."
-msgstr ""
-"Den senaste lyckade säkerhetskopian är mer än ett och ett halvt dygn gammal."
 
 #: apps/backups/templates/backups/backup_list.html:10
 msgid "Take a snapshot now"
@@ -620,7 +597,7 @@ msgid "Restore this snapshot"
 msgstr "Återställ den här säkerhetskopian"
 
 #: apps/backups/templates/backups/restore.html:58
-#: apps/invoicing/templates/invoicing/run_form.html:13
+#: apps/invoicing/templates/invoicing/run_form.html:14
 #: apps/messaging/templates/messaging/compose.html:114
 #: apps/messaging/templates/messaging/newsletter_compose.html:36
 #: apps/readings/templates/readings/reading_form.html:31
@@ -707,7 +684,7 @@ msgstr "skapad av"
 #: apps/core/models.py:37 apps/invoicing/models.py:304
 #: apps/invoicing/models.py:402 apps/invoicing/models.py:743
 #: apps/messaging/models.py:85 apps/messaging/models.py:177
-#: apps/notifications/models.py:28 apps/readings/models.py:78
+#: apps/notifications/models.py:28 apps/readings/models.py:111
 #: apps/register/models.py:236 apps/selfservice/models.py:76
 msgid "created"
 msgstr "skapad"
@@ -794,8 +771,8 @@ msgid "Bank account, payment terms, VAT, numbering and reminders."
 msgstr ""
 "Bankkonto, betalningsvillkor, moms, numrering och betalningspåminnelser."
 
-#
 #: apps/core/settings_page.py:131
+#: apps/invoicing/templates/invoicing/run_list.html:9
 msgid "Fee plans"
 msgstr "Avgiftsplaner"
 
@@ -982,7 +959,7 @@ msgstr "Sök i hjälpen"
 #: apps/invoicing/templates/invoicing/invoice_list.html:15
 #: apps/readings/templates/readings/round_detail.html:25
 #: apps/register/templates/register/person_list.html:13
-#: apps/register/templates/register/unit_list.html:17
+#: apps/register/templates/register/unit_list.html:16
 msgid "Search"
 msgstr "Sök"
 
@@ -1009,6 +986,10 @@ msgid ""
 msgstr ""
 "Korta guider till hur man gör saker i Metra. Varje sida har en hjälplänk i "
 "menyn som öppnar guiden för den sidan."
+
+#: apps/help/templates/help/index.html:20
+msgid "Pick a guide from the list, or search for a word."
+msgstr "Välj en guide i listan eller sök efter ett ord."
 
 #: apps/invoicing/admin.py:13 apps/invoicing/models.py:388
 #: apps/invoicing/templates/invoicing/invoice_detail.html:107
@@ -1188,7 +1169,7 @@ msgstr "faktureringsinställningar"
 msgid "Number %(number)s is already used; numbers cannot repeat."
 msgstr "Numret %(number)s används redan; nummer kan inte upprepas."
 
-#: apps/invoicing/models.py:145 apps/readings/models.py:26
+#: apps/invoicing/models.py:145 apps/readings/models.py:27
 #: apps/register/models.py:144 apps/register/models.py:168
 msgid "unit type"
 msgstr "enhetstyp"
@@ -1202,7 +1183,7 @@ msgid "in use"
 msgstr "i bruk"
 
 #: apps/invoicing/models.py:156 apps/invoicing/models.py:673
-#: apps/readings/models.py:45 apps/register/models.py:139
+#: apps/readings/models.py:46 apps/register/models.py:139
 msgid "description"
 msgstr "beskrivning"
 
@@ -1259,7 +1240,7 @@ msgstr "Endast fasta avgifter."
 
 #: apps/invoicing/models.py:202 apps/invoicing/models.py:362
 #: apps/invoicing/models.py:675 apps/messaging/models.py:161
-#: apps/readings/models.py:137 apps/register/models.py:330
+#: apps/readings/models.py:200 apps/register/models.py:330
 #: apps/register/models.py:353 apps/selfservice/models.py:58
 msgid "unit"
 msgstr "enhet"
@@ -1272,8 +1253,8 @@ msgstr "Till exempel st."
 msgid "VAT rate (%)"
 msgstr "momssats (%)"
 
-#: apps/invoicing/models.py:213 apps/readings/models.py:49
-#: apps/readings/models.py:66
+#: apps/invoicing/models.py:213 apps/readings/models.py:50
+#: apps/readings/models.py:94
 msgid "reading type"
 msgstr "avläsningstyp"
 
@@ -1339,7 +1320,7 @@ msgid "price tier"
 msgstr "prisnivå"
 
 #: apps/invoicing/models.py:286 apps/invoicing/models.py:375
-#: apps/readings/models.py:71
+#: apps/readings/models.py:99
 msgid "period"
 msgstr "period"
 
@@ -1347,7 +1328,7 @@ msgstr "period"
 msgid "Shown on the invoices, for example 2026."
 msgstr "Visas på fakturorna, till exempel 2026."
 
-#: apps/invoicing/models.py:291 apps/readings/models.py:84
+#: apps/invoicing/models.py:291 apps/readings/models.py:119
 msgid "reading rounds"
 msgstr "avläsningsomgångar"
 
@@ -1370,12 +1351,12 @@ msgstr "Fakturor %(period)s"
 
 #: apps/invoicing/models.py:340
 #: apps/invoicing/templates/invoicing/_invoice_results.html:19
-#: apps/readings/models.py:60
+#: apps/readings/models.py:87
 msgid "Draft"
 msgstr "Utkast"
 
 #: apps/invoicing/models.py:341
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 msgid "Issued"
 msgstr "Utfärdad"
 
@@ -1404,8 +1385,7 @@ msgid "Credit note"
 msgstr "Kreditnota"
 
 #: apps/invoicing/models.py:351 apps/messaging/models.py:75
-#: apps/messaging/models.py:172 apps/readings/models.py:76
-#: apps/register/models.py:317
+#: apps/messaging/models.py:172 apps/register/models.py:317
 msgid "status"
 msgstr "status"
 
@@ -1563,7 +1543,7 @@ msgid "reference given"
 msgstr "angiven referens"
 
 #: apps/invoicing/models.py:782 apps/messaging/models.py:283
-#: apps/readings/models.py:161
+#: apps/readings/models.py:224
 msgid "note"
 msgstr "anteckning"
 
@@ -1689,7 +1669,7 @@ msgstr "Förfaller"
 #: apps/invoicing/templates/invoicing/_invoice_results.html:12
 #: apps/invoicing/templates/invoicing/invoice_detail.html:100
 #: apps/invoicing/templates/invoicing/run_detail.html:33
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 #: apps/invoicing/views.py:440
 msgid "Total"
 msgstr "Summa"
@@ -1703,7 +1683,7 @@ msgstr "Summa"
 #: apps/readings/templates/readings/round_list.html:22
 #: apps/register/csv_io.py:468
 #: apps/register/templates/register/_unit_results.html:10
-#: apps/register/templates/register/unit_list.html:28
+#: apps/register/templates/register/unit_list.html:27
 #: apps/selfservice/templates/selfservice/round_links.html:43
 msgid "Status"
 msgstr "Status"
@@ -1941,7 +1921,7 @@ msgstr "Kreditnotor"
 #: apps/invoicing/templates/invoicing/invoice_list.html:9
 #: apps/invoicing/templates/invoicing/run_list.html:3
 #: apps/invoicing/templates/invoicing/run_list.html:6
-#: apps/invoicing/templates/invoicing/run_list.html:14
+#: apps/invoicing/templates/invoicing/run_list.html:15
 msgid "Invoice runs"
 msgstr "Faktureringsomgångar"
 
@@ -1959,7 +1939,7 @@ msgid "All"
 msgstr "Alla"
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:22
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 msgid "Drafts"
 msgstr "Utkast"
 
@@ -1978,7 +1958,7 @@ msgstr "Alla omgångar"
 #: apps/invoicing/templates/invoicing/invoice_list.html:37
 #: apps/readings/templates/readings/round_detail.html:37
 #: apps/register/templates/register/person_list.html:25
-#: apps/register/templates/register/unit_list.html:43
+#: apps/register/templates/register/unit_list.html:42
 msgid "Filter"
 msgstr "Filtrera"
 
@@ -2016,6 +1996,16 @@ msgid "Each reminder adds a fee of %(fee)s € and gives %(days)s days to pay."
 msgstr ""
 "Varje påminnelse lägger till en avgift på %(fee)s € och ger %(days)s dagar "
 "att betala."
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:36
+#, python-format
+msgid ""
+"Reminders have no fee (see <a href=\"%(billing_url)s\">invoice settings</a>) "
+"and give %(days)s days to pay."
+msgstr ""
+"Påminnelser har ingen avgift (se <a "
+"href=\"%(billing_url)s\">faktureringsinställningarna</a>) och ger %(days)s "
+"dagar att betala."
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:36
 #, python-format
@@ -2188,7 +2178,7 @@ msgstr ""
 
 #: apps/invoicing/templates/invoicing/run_form.html:3
 #: apps/invoicing/templates/invoicing/run_form.html:5
-#: apps/invoicing/templates/invoicing/run_list.html:9
+#: apps/invoicing/templates/invoicing/run_list.html:10
 msgid "New invoice run"
 msgstr "Ny faktureringsomgång"
 
@@ -2200,11 +2190,25 @@ msgstr ""
 "Skapar ett fakturautkast för varje aktiv enhet som de valda avgiftsplanerna "
 "gäller för. Ingenting skickas eller numreras förrän du utfärdar utkasten."
 
-#: apps/invoicing/templates/invoicing/run_form.html:12
+#: apps/invoicing/templates/invoicing/run_form.html:7
+#: apps/setup/templates/setup/invoicing.html:5
+msgid "Open the fee plans"
+msgstr "Öppna avgiftsplanerna"
+
+#: apps/invoicing/templates/invoicing/run_form.html:13
 msgid "Make draft invoices"
 msgstr "Skapa fakturautkast"
 
-#: apps/invoicing/templates/invoicing/run_list.html:12
+#: apps/invoicing/templates/invoicing/run_list.html:13
+#, python-format
+msgid ""
+"Fill in the <a href=\"%(billing_url)s\">invoice settings</a> (IBAN, payment "
+"terms, VAT) before issuing invoices."
+msgstr ""
+"Fyll i <a href=\"%(billing_url)s\">faktureringsinställningarna</a> (IBAN, "
+"betalningsvillkor, moms) innan du utfärdar fakturor."
+
+#: apps/invoicing/templates/invoicing/run_list.html:13
 msgid ""
 "Fill in the invoice settings (IBAN, payment terms, VAT) under Settings > "
 "Invoice settings before issuing invoices."
@@ -2212,17 +2216,17 @@ msgstr ""
 "Fyll i faktureringsinställningarna (IBAN, betalningsvillkor, moms) under "
 "Inställningar > Faktureringsinställningar innan du utfärdar fakturor."
 
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 msgid "Run"
 msgstr "Omgång"
 
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 #: apps/register/history.py:63
 #: apps/selfservice/templates/selfservice/round_links.html:41
 msgid "Created"
 msgstr "Skapad"
 
-#: apps/invoicing/templates/invoicing/run_list.html:25
+#: apps/invoicing/templates/invoicing/run_list.html:26
 msgid "No invoice runs yet."
 msgstr "Inga faktureringsomgångar ännu."
 
@@ -2433,7 +2437,7 @@ msgstr "Skicka till"
 
 #: apps/messaging/forms.py:108
 #: apps/register/templates/register/person_list.html:17
-#: apps/register/templates/register/unit_list.html:35
+#: apps/register/templates/register/unit_list.html:34
 msgid "Tag"
 msgstr "Tagg"
 
@@ -2648,7 +2652,7 @@ msgstr "Klar"
 msgid "to"
 msgstr "till"
 
-#: apps/messaging/models.py:68 apps/readings/models.py:83
+#: apps/messaging/models.py:68 apps/readings/models.py:118
 #: apps/selfservice/models.py:68
 msgid "reading round"
 msgstr "avläsningsomgång"
@@ -2791,7 +2795,7 @@ msgstr "Avregistreringslänk"
 msgid "wants the newsletter"
 msgstr "vill ha nyhetsbrevet"
 
-#: apps/messaging/models.py:272 apps/readings/models.py:141
+#: apps/messaging/models.py:272 apps/readings/models.py:204
 msgid "source"
 msgstr "källa"
 
@@ -2862,6 +2866,14 @@ msgstr "Avslutade prenumerationen innan det skickades."
 #: apps/messaging/templates/messaging/_send_forms.html:8
 msgid "Email is not set up."
 msgstr "E-post är inte inställt."
+
+#: apps/messaging/providers.py:66
+msgid "Shown in the server log (development)"
+msgstr "Visas i serverloggen (utveckling)"
+
+#: apps/messaging/providers.py:83
+msgid "Kept in memory, nothing is sent (tests)"
+msgstr "Sparas i minnet, inget skickas (tester)"
 
 #: apps/messaging/sending.py:95
 msgid "The unit has no contact person."
@@ -3373,7 +3385,7 @@ msgstr "länk"
 msgid "group"
 msgstr "grupp"
 
-#: apps/notifications/models.py:29 apps/readings/models.py:79
+#: apps/notifications/models.py:29 apps/readings/models.py:112
 #: apps/register/models.py:237
 msgid "updated"
 msgstr "uppdaterad"
@@ -3532,27 +3544,27 @@ msgstr "Återställd."
 msgid "Reading"
 msgstr "Avläsning"
 
-#: apps/readings/models.py:29
+#: apps/readings/models.py:30
 msgid "The kind of unit that reports this reading."
 msgstr "Vilken typ av enhet som rapporterar den här avläsningen."
 
-#: apps/readings/models.py:32
+#: apps/readings/models.py:33
 msgid "unit of measure"
 msgstr "måttenhet"
 
-#: apps/readings/models.py:32
+#: apps/readings/models.py:33
 msgid "For example m³ or kWh."
 msgstr "Till exempel m³ eller kWh."
 
-#: apps/readings/models.py:35
+#: apps/readings/models.py:36
 msgid "decimals"
 msgstr "decimaler"
 
-#: apps/readings/models.py:38
+#: apps/readings/models.py:39
 msgid "cumulative meter"
 msgstr "ackumulerande mätare"
 
-#: apps/readings/models.py:41
+#: apps/readings/models.py:42
 msgid ""
 "The value is a meter position that only grows. Usage is the value minus the "
 "previous reading."
@@ -3560,71 +3572,98 @@ msgstr ""
 "Värdet är en mätarställning som bara ökar. Förbrukningen är värdet minus "
 "föregående avläsning."
 
-#: apps/readings/models.py:50
+#: apps/readings/models.py:51
 msgid "reading types"
 msgstr "avläsningstyper"
 
-#: apps/readings/models.py:61
+#
+#: apps/readings/models.py:88
+msgid "Not yet open"
+msgstr "Ännu inte öppen"
+
+#: apps/readings/models.py:89
 msgid "Open"
 msgstr "Öppen"
 
-#: apps/readings/models.py:62
+#: apps/readings/models.py:90
 msgid "Closed"
 msgstr "Stängd"
 
-#: apps/readings/models.py:71
+#: apps/readings/models.py:99
 msgid "Shown to members, for example 2026."
 msgstr "Visas för medlemmar, till exempel 2026."
 
-#: apps/readings/models.py:73
+#: apps/readings/models.py:101
 msgid "opens"
 msgstr "öppnar"
 
-#: apps/readings/models.py:74
+#: apps/readings/models.py:102
 msgid "closes"
 msgstr "stänger"
 
-#: apps/readings/models.py:99
+#: apps/readings/models.py:104
+msgid "draft"
+msgstr "utkast"
+
+#: apps/readings/models.py:107
+msgid ""
+"A draft is never open. Clear this to publish the round: it then opens and "
+"closes on its dates."
+msgstr ""
+"Ett utkast är aldrig öppet. Avmarkera för att publicera omgången: den öppnar "
+"och stänger då på sina datum."
+
+#: apps/readings/models.py:134
 msgid "The round closes before it opens."
 msgstr "Omgången stänger innan den öppnar."
 
-#: apps/readings/models.py:130
+#: apps/readings/models.py:158
+#, python-format
+msgid "Opens %(date)s"
+msgstr "Öppnar %(date)s"
+
+#: apps/readings/models.py:160
+#, python-format
+msgid "Open until %(date)s"
+msgstr "Öppen till %(date)s"
+
+#: apps/readings/models.py:193
 msgid "Staff"
 msgstr "Personal"
 
-#: apps/readings/models.py:131
+#: apps/readings/models.py:194
 msgid "Member"
 msgstr "Medlem"
 
-#: apps/readings/models.py:134
+#: apps/readings/models.py:197
 msgid "round"
 msgstr "omgång"
 
-#: apps/readings/models.py:139
+#: apps/readings/models.py:202
 msgid "value"
 msgstr "värde"
 
-#: apps/readings/models.py:145
+#: apps/readings/models.py:208
 msgid "entered by"
 msgstr "inmatad av"
 
-#: apps/readings/models.py:153
+#: apps/readings/models.py:216
 msgid "reported by"
 msgstr "rapporterad av"
 
-#: apps/readings/models.py:158
+#: apps/readings/models.py:221
 msgid "The member who reported it through a self-service link."
 msgstr "Medlemmen som rapporterade det via en självbetjäningslänk."
 
-#: apps/readings/models.py:160
+#: apps/readings/models.py:223
 msgid "submitted"
 msgstr "inlämnad"
 
-#: apps/readings/models.py:165
+#: apps/readings/models.py:228
 msgid "reading"
 msgstr "avläsning"
 
-#: apps/readings/models.py:166
+#: apps/readings/models.py:229
 msgid "readings"
 msgstr "avläsningar"
 
@@ -3886,7 +3925,7 @@ msgstr "Ny person: %(name)s"
 
 #: apps/register/csv_io.py:467
 #: apps/register/templates/register/_unit_results.html:8
-#: apps/register/templates/register/unit_list.html:21
+#: apps/register/templates/register/unit_list.html:20
 msgid "Type"
 msgstr "Typ"
 
@@ -4585,7 +4624,7 @@ msgid "Add person"
 msgstr "Lägg till person"
 
 #: apps/register/templates/register/person_list.html:19
-#: apps/register/templates/register/unit_list.html:37
+#: apps/register/templates/register/unit_list.html:36
 msgid "All tags"
 msgstr "Alla taggar"
 
@@ -4627,11 +4666,11 @@ msgstr "Importera CSV"
 msgid "Add unit"
 msgstr "Lägg till enhet"
 
-#: apps/register/templates/register/unit_list.html:23
+#: apps/register/templates/register/unit_list.html:22
 msgid "All types"
 msgstr "Alla typer"
 
-#: apps/register/templates/register/unit_list.html:30
+#: apps/register/templates/register/unit_list.html:29
 msgid "All statuses"
 msgstr "Alla statusar"
 
@@ -4751,7 +4790,7 @@ msgid "Print self-service letter"
 msgstr "Skriv ut brev med länk"
 
 #: apps/selfservice/templates/selfservice/base.html:9
-#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:262
+#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:263
 #: templates/base.html:7 templates/base.html:18
 msgid "Metra"
 msgstr "Metra"
@@ -5289,10 +5328,12 @@ msgstr "Slutför och gå till registret"
 #: apps/setup/templates/setup/invoicing.html:4
 msgid ""
 "What every invoice needs: your bank account, payment terms, VAT and "
-"numbering. Fees are set up later under Invoices."
+"numbering. Fee plans, which say what each unit is charged, are set up "
+"afterwards under Settings."
 msgstr ""
 "Det som varje faktura behöver: bankkonto, betalningsvillkor, moms och "
-"numrering. Avgifterna ställs in senare under Fakturor."
+"numrering. Avgiftsplaner, som anger vad varje enhet debiteras, ställs in "
+"efteråt under Inställningar."
 
 #: apps/setup/templates/setup/language.html:4
 msgid ""
@@ -5497,7 +5538,7 @@ msgid "Test sent to %(to)s."
 msgstr "Testet skickades till %(to)s."
 
 #
-#: apps/setup/views.py:236
+#: apps/setup/views.py:237
 msgid ""
 "Email is not set up, so no invitation can be sent. Add the person under "
 "Settings."
@@ -5505,12 +5546,12 @@ msgstr ""
 "E-post är inte inställd, så ingen inbjudan kan skickas. Lägg till personen "
 "under Inställningar."
 
-#: apps/setup/views.py:267
+#: apps/setup/views.py:268
 #, python-format
 msgid "Your account for %(organisation)s"
 msgstr "Ditt konto för %(organisation)s"
 
-#: apps/setup/views.py:270
+#: apps/setup/views.py:271
 #, python-format
 msgid ""
 "Hello %(name)s,\n"
@@ -5533,17 +5574,17 @@ msgstr ""
 "\n"
 "Länken fungerar i några dagar."
 
-#: apps/setup/views.py:280
+#: apps/setup/views.py:281
 #, python-format
 msgid "The invitation could not be sent: %(error)s"
 msgstr "Inbjudan kunde inte skickas: %(error)s"
 
-#: apps/setup/views.py:282
+#: apps/setup/views.py:283
 #, python-format
 msgid "Invitation sent to %(email)s."
 msgstr "Inbjudan skickad till %(email)s."
 
-#: apps/setup/views.py:303
+#: apps/setup/views.py:304
 msgid "Setup is done. You can run it again from Settings."
 msgstr "Inställningen är klar. Du kan köra den igen från Inställningar."
 
@@ -5607,7 +5648,7 @@ msgstr "Mörkt"
 msgid "Log out"
 msgstr "Logga ut"
 
-#: templates/base.html:68
+#: templates/base.html:69
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
@@ -5615,7 +5656,7 @@ msgstr ""
 "Tvåfaktorsinloggning krävs inte i den här installationen (METRA_REQUIRE_MFA "
 "är avstängd). Slå på den innan riktiga uppgifter läggs in."
 
-#: templates/base.html:73
+#: templates/base.html:74
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."
@@ -5623,15 +5664,41 @@ msgstr ""
 "Skydda ditt konto med tvåfaktorsinloggning. Det tar en minut med en "
 "autentiseringsapp i telefonen."
 
+#~ msgid "Snapshots of the register, here and offsite."
+#~ msgstr "Säkerhetskopior av registret, här och externt."
+
+#~ msgid "Snapshots and backups"
+#~ msgstr "Säkerhetskopior"
+
+#~ msgid "Plugins"
+#~ msgstr "Insticksprogram"
+
 #, python-format
 #~ msgid "New %(unit_type)s"
 #~ msgstr "Ny %(unit_type)s"
 
-#~ msgid "Snapshots of the register, here and offsite."
-#~ msgstr "Säkerhetskopior av registret, här och externt."
+#~ msgid ""
+#~ "What every invoice needs: your bank account, payment terms, VAT and "
+#~ "numbering. Fees are set up later under Invoices."
+#~ msgstr ""
+#~ "Det som varje faktura behöver: bankkonto, betalningsvillkor, moms och "
+#~ "numrering. Avgifterna ställs in senare under Fakturor."
 
-#~ msgid "Plugins"
-#~ msgstr "Insticksprogram"
+#, python-format
+#~ msgid "Last successful backup %(when)s (%(size)s) to %(target)s."
+#~ msgstr "Senaste lyckade säkerhetskopia %(when)s (%(size)s) till %(target)s."
+
+#~ msgid "No backup has been made yet."
+#~ msgstr "Ingen säkerhetskopia har gjorts ännu."
+
+#, python-format
+#~ msgid "The last backup failed %(when)s:"
+#~ msgstr "Den senaste säkerhetskopieringen misslyckades %(when)s:"
+
+#~ msgid "The last successful backup is more than a day and a half old."
+#~ msgstr ""
+#~ "Den senaste lyckade säkerhetskopian är mer än ett och ett halvt dygn "
+#~ "gammal."
 
 #~ msgid "To restore a snapshot, see INSTALL.md, Backup and restore."
 #~ msgstr ""

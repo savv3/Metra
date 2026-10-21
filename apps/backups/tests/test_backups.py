@@ -486,42 +486,20 @@ def test_restore_reports_a_missing_file(restored):
         call_command("restore", "/nowhere/metra-backup-x.tar.gz")
 
 
-# Status panel
+# Units page
 
 
 @pytest.mark.django_db
-def test_admins_see_the_backup_status(role_client):
-    BackupRun.objects.create(
-        success=True,
-        archive_name="a",
-        size=2048,
-        target="/data/backups",
-        finished_at=timezone.now(),
-    )
-
-    page = role_client("Admin").get(reverse("register:unit_list"), HTTP_ACCEPT_LANGUAGE="en")
-
-    html = page.content.decode()
-    assert "Last successful backup" in html
-    assert "/data/backups" in html
-
-
-@pytest.mark.django_db
-def test_failed_and_missing_backups_are_shown(role_client):
-    client = role_client("Admin")
-    assert (
-        "Ingen säkerhetskopia har gjorts ännu."
-        in client.get(reverse("register:unit_list")).content.decode()
-    )
-
+@pytest.mark.parametrize("role", ["Admin", "Board", "Treasurer", "Read-only"])
+def test_the_units_page_shows_no_backup_box(role_client, role):
+    """Backup problems are reported through the notification bell only."""
     BackupRun.objects.create(success=False, error="disk full", finished_at=timezone.now())
-    html = client.get(reverse("register:unit_list"), HTTP_ACCEPT_LANGUAGE="en").content.decode()
-    assert "The last backup failed" in html and "disk full" in html
 
-
-@pytest.mark.django_db
-@pytest.mark.parametrize("role", ["Board", "Treasurer", "Read-only"])
-def test_other_roles_do_not_see_backups(role_client, role):
-    html = role_client(role).get(reverse("register:unit_list")).content.decode()
+    html = (
+        role_client(role)
+        .get(reverse("register:unit_list"), HTTP_ACCEPT_LANGUAGE="en")
+        .content.decode()
+    )
 
     assert 'id="backup-status"' not in html
+    assert "disk full" not in html and "Last successful backup" not in html

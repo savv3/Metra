@@ -137,3 +137,27 @@ def test_water_sample_adds_the_fee_plan(db):
         ("fixed", "Grundavgift {period}", D("120.0000")),
         ("usage", "Vatten {period}", D("1.5000")),
     ]
+
+
+def test_fee_plan_links_for_staff_who_may_see_them(make_user, client, settings):
+    settings.REQUIRE_MFA = False
+    plans = reverse("admin:invoicing_feeplan_changelist")
+    billing = reverse("admin:invoicing_billingsettings_changelist")
+    client.force_login(make_user("tina", "Treasurer", is_staff=True))
+
+    runs = client.get(reverse("invoicing:run_list"), HTTP_ACCEPT_LANGUAGE="en").content.decode()
+    form = client.get(reverse("invoicing:run_create"), HTTP_ACCEPT_LANGUAGE="en").content.decode()
+
+    assert f'href="{plans}"' in runs and f'href="{billing}"' in runs
+    assert f'href="{plans}"' in form
+
+
+def test_fee_plan_links_are_hidden_without_permission(role_client, make_user, client):
+    plans = reverse("admin:invoicing_feeplan_changelist")
+    billing = reverse("admin:invoicing_billingsettings_changelist")
+    # Board may view invoicing but is no staff; a Treasurer who is no staff cannot open Settings.
+    for user in [make_user("bo", "Board"), make_user("tre", "Treasurer")]:
+        client.force_login(user)
+        page = client.get(reverse("invoicing:run_list"), HTTP_ACCEPT_LANGUAGE="en").content.decode()
+        assert plans not in page and billing not in page
+        assert "under Settings > Invoice settings" in page

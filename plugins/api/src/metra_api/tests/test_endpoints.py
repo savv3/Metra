@@ -265,7 +265,7 @@ def round_(household):
         period_label="2026",
         opens_on=datetime.date(2026, 1, 1),
         closes_on=datetime.date(2026, 12, 31),
-        status="open",
+        is_draft=False,
     )
 
 
@@ -294,6 +294,27 @@ def test_readings_create_and_correct(api_as, unit, round_):
     listed = http.get(f"{V1}readings/", {"round": round_.pk}).json()
     assert listed["count"] == 1
     assert http.get(f"{V1}reading-rounds/").json()["results"][0]["period_label"] == "2026"
+
+
+def test_reading_round_status_is_worked_out_from_flag_and_dates(api_as, round_):
+    import datetime
+
+    from django.utils import timezone
+
+    http = api_as("Board")
+    today = timezone.localdate()
+    round_.opens_on, round_.closes_on = today - datetime.timedelta(days=1), today
+    round_.save()
+
+    result = http.get(f"{V1}reading-rounds/").json()["results"][0]
+    assert result["status"] == "open"
+    assert len(http.get(f"{V1}reading-rounds/", {"status": "open"}).json()["results"]) == 1
+    assert http.get(f"{V1}reading-rounds/", {"status": "closed"}).json()["results"] == []
+
+    round_.is_draft = True
+    round_.save()
+    assert http.get(f"{V1}reading-rounds/").json()["results"][0]["status"] == "draft"
+    assert len(http.get(f"{V1}reading-rounds/", {"status": "draft"}).json()["results"]) == 1
 
 
 def test_readings_only_for_units_of_the_rounds_type(api_as, round_):

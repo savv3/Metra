@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n backups %}
+{% load i18n %}
 {% block title %}{{ unit_word_plural }}{% endblock %}
 {% block content %}
   <div class="page-head">
@@ -9,7 +9,6 @@
       {% if perms.register.add_unit %}<a class="button button--primary" href="{% url 'register:unit_create' %}">{% if single_unit_type %}{% blocktranslate with unit_type=unit_word_singular %}Add: {{ unit_type }}{% endblocktranslate %}{% else %}{% translate "Add unit" %}{% endif %}</a>{% endif %}
     </div>
   </div>
-  {% backup_status %}
   <form class="filters" method="get" action="{% url 'register:unit_list' %}" role="search"
         hx-get="{% url 'register:unit_list' %}" hx-target="#results" hx-push-url="true"
         hx-trigger="input delay:300ms from:#f-q, change, submit">

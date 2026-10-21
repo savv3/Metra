@@ -230,7 +230,7 @@ class PersonFieldViewSet(ApiViewMixin, viewsets.ReadOnlyModelViewSet):
 class ReadingRoundViewSet(ApiViewMixin, viewsets.ReadOnlyModelViewSet):
     filters = [
         OpenApiParameter("reading_type", int),
-        OpenApiParameter("status", str, enum=["draft", "open", "closed"]),
+        OpenApiParameter("status", str, enum=["draft", "upcoming", "open", "closed"]),
     ]
     queryset = api.ReadingRound.objects.select_related("reading_type")
     serializer_class = serializers.ReadingRoundSerializer
@@ -240,8 +240,8 @@ class ReadingRoundViewSet(ApiViewMixin, viewsets.ReadOnlyModelViewSet):
         params = self.request.query_params
         if (reading_type := params.get("reading_type", "")).isdigit():
             queryset = queryset.filter(reading_type_id=reading_type)
-        if (state := params.get("status", "")) in api.ReadingRound.Status.values:
-            queryset = queryset.filter(status=state)
+        if (state := params.get("status", "")) in api.ReadingRound.State.values:
+            queryset = queryset.in_state(state)
         return queryset
 
 

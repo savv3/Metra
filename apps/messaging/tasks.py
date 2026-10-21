@@ -29,14 +29,17 @@ def send_batch_task(batch_id):
 
 @db_periodic_task(crontab(hour="10", minute="0"))
 def automatic_reminders():
-    """Remind units missing a reading METRA_READING_REMINDER_DAYS before an open
+    """Remind units missing a reading METRA_READING_REMINDER_DAYS before a published
     round closes. Off unless the setting is given; each round is reminded once."""
     days = settings.MESSAGING["reminder_days_before_close"]
     if days is None:
         return
-    closes = timezone.localdate() + datetime.timedelta(days=days)
-    rounds = ReadingRound.objects.filter(status=ReadingRound.Status.OPEN, closes_on=closes).exclude(
-        message_batches__kind=MessageBatch.Kind.AUTO_REMINDER
+    today = timezone.localdate()
+    closes = today + datetime.timedelta(days=days)
+    rounds = (
+        ReadingRound.objects.published()
+        .filter(closes_on=closes, opens_on__lte=today)
+        .exclude(message_batches__kind=MessageBatch.Kind.AUTO_REMINDER)
     )
     for round_ in rounds:
         batch = MessageBatch.objects.create(

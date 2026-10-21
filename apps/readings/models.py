@@ -8,6 +8,7 @@ from django.core.validators import MaxValueValidator
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.formats import date_format
 from django.utils.translation import gettext_lazy as _
 
 from apps.register.models import Archivable, Person, Unit, UnitType
@@ -53,11 +54,38 @@ class ReadingType(Archivable):
         return self.name
 
 
-class ReadingRound(models.Model):
-    """One collection of a reading type, e.g. the water meter readings for 2026."""
+class ReadingRoundQuerySet(models.QuerySet):
+    def published(self):
+        return self.filter(is_draft=False)
 
-    class Status(models.TextChoices):
+    def open_now(self):
+        """Published rounds whose dates include today."""
+        today = timezone.localdate()
+        return self.published().filter(opens_on__lte=today, closes_on__gte=today)
+
+    def in_state(self, state):
+        """Rounds in one of the states of ``ReadingRound.State``."""
+        today = timezone.localdate()
+        if state == ReadingRound.State.DRAFT:
+            return self.filter(is_draft=True)
+        published = self.published()
+        if state == ReadingRound.State.UPCOMING:
+            return published.filter(opens_on__gt=today)
+        if state == ReadingRound.State.OPEN:
+            return published.filter(opens_on__lte=today, closes_on__gte=today)
+        if state == ReadingRound.State.CLOSED:
+            return published.filter(closes_on__lt=today)
+        return self.none()
+
+
+class ReadingRound(models.Model):
+    """One collection of a reading type, e.g. the water meter readings for 2026.
+
+    A published round is open between its dates; a draft is never open."""
+
+    class State(models.TextChoices):
         DRAFT = "draft", _("Draft")
+        UPCOMING = "upcoming", _("Not yet open")
         OPEN = "open", _("Open")
         CLOSED = "closed", _("Closed")
 
@@ -72,11 +100,18 @@ class ReadingRound(models.Model):
     )
     opens_on = models.DateField(_("opens"))
     closes_on = models.DateField(_("closes"))
-    status = models.CharField(
-        _("status"), max_length=10, choices=Status.choices, default=Status.DRAFT
+    is_draft = models.BooleanField(
+        _("draft"),
+        default=True,
+        help_text=_(
+            "A draft is never open. Clear this to publish the round: it then opens and "
+            "closes on its dates."
+        ),
     )
     created_at = models.DateTimeField(_("created"), auto_now_add=True)
     updated_at = models.DateTimeField(_("updated"), auto_now=True)
+
+    objects = ReadingRoundQuerySet.as_manager()
 
     class Meta:
         ordering = ["-opens_on", "-pk"]
@@ -99,10 +134,38 @@ class ReadingRound(models.Model):
             raise ValidationError({"closes_on": _("The round closes before it opens.")})
 
     @property
+    def state(self):
+        """Draft, not yet open, open or closed, worked out from the flag and the dates."""
+        if self.is_draft:
+            return self.State.DRAFT
+        today = timezone.localdate()
+        if today < self.opens_on:
+            return self.State.UPCOMING
+        if today > self.closes_on:
+            return self.State.CLOSED
+        return self.State.OPEN
+
+    @property
+    def status(self):
+        """The state as a plain value for the API: draft, upcoming, open or closed."""
+        return self.state.value
+
+    @property
+    def state_label(self):
+        """The state in words, with the date that matters: when it opens or closes."""
+        state = self.state
+        if state == self.State.UPCOMING:
+            return _("Opens %(date)s") % {"date": date_format(self.opens_on, "SHORT_DATE_FORMAT")}
+        if state == self.State.OPEN:
+            return _("Open until %(date)s") % {
+                "date": date_format(self.closes_on, "SHORT_DATE_FORMAT")
+            }
+        return state.label
+
+    @property
     def accepts_member_readings(self):
         """Members can submit or change their reading while the round is open."""
-        today = timezone.localdate()
-        return self.status == self.Status.OPEN and self.opens_on <= today <= self.closes_on
+        return self.state == self.State.OPEN
 
     def expected_units(self):
         """Units that should report: active units of the type, plus any that did."""

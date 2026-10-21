@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 15:24+0300\n"
+"POT-Creation-Date: 2026-10-21 18:08+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgid "role"
 msgstr "rooli"
 
 #: apps/accounts/admin.py:28 apps/invoicing/models.py:143
-#: apps/messaging/models.py:337 apps/readings/models.py:23
+#: apps/messaging/models.py:337 apps/readings/models.py:24
 #: apps/register/models.py:57 apps/register/models.py:115
 #: apps/register/models.py:129 apps/register/models.py:315
 msgid "name"
@@ -134,7 +134,8 @@ msgstr "Suojaa tilisi puhelimen todennussovelluksen koodilla."
 msgid "Turn off"
 msgstr "Poista käytöstä"
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:74
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:70
+#: templates/base.html:75
 msgid "Turn on two-factor login"
 msgstr "Ota kaksivaiheinen tunnistautuminen käyttöön"
 
@@ -177,8 +178,7 @@ msgstr "Käytä pitkää salasanaa, jota et käytä missään muualla."
 msgid "Change password"
 msgstr "Vaihda salasana"
 
-#: apps/backups/apps.py:7 apps/backups/templates/backups/_status.html:4
-#: apps/backups/templates/backups/backup_list.html:3
+#: apps/backups/apps.py:7 apps/backups/templates/backups/backup_list.html:3
 #: apps/backups/templates/backups/backup_list.html:6
 #: apps/core/settings_page.py:189 apps/core/settings_page.py:192
 msgid "Backups"
@@ -331,30 +331,6 @@ msgstr ""
 #: apps/backups/service.py:208
 msgid "Only snapshots taken by hand can be deleted."
 msgstr "Vain käsin otetut tilannevedokset voi poistaa."
-
-#: apps/backups/templates/backups/_status.html:5
-msgid "Snapshots and backups"
-msgstr "Tilannevedokset ja varmuuskopiot"
-
-#: apps/backups/templates/backups/_status.html:7
-#, python-format
-msgid "Last successful backup %(when)s (%(size)s) to %(target)s."
-msgstr ""
-"Viimeisin onnistunut varmuuskopio %(when)s (%(size)s) kohteeseen %(target)s."
-
-#: apps/backups/templates/backups/_status.html:11
-msgid "No backup has been made yet."
-msgstr "Varmuuskopiota ei ole vielä tehty."
-
-#: apps/backups/templates/backups/_status.html:14
-#, python-format
-msgid "The last backup failed %(when)s:"
-msgstr "Viimeisin varmuuskopiointi epäonnistui %(when)s:"
-
-#: apps/backups/templates/backups/_status.html:18
-msgid "The last successful backup is more than a day and a half old."
-msgstr ""
-"Viimeisin onnistunut varmuuskopio on yli puolitoista vuorokautta vanha."
 
 #: apps/backups/templates/backups/backup_list.html:10
 msgid "Take a snapshot now"
@@ -621,7 +597,7 @@ msgid "Restore this snapshot"
 msgstr "Palauta tämä tilannevedos"
 
 #: apps/backups/templates/backups/restore.html:58
-#: apps/invoicing/templates/invoicing/run_form.html:13
+#: apps/invoicing/templates/invoicing/run_form.html:14
 #: apps/messaging/templates/messaging/compose.html:114
 #: apps/messaging/templates/messaging/newsletter_compose.html:36
 #: apps/readings/templates/readings/reading_form.html:31
@@ -709,7 +685,7 @@ msgstr "luonut"
 #: apps/core/models.py:37 apps/invoicing/models.py:304
 #: apps/invoicing/models.py:402 apps/invoicing/models.py:743
 #: apps/messaging/models.py:85 apps/messaging/models.py:177
-#: apps/notifications/models.py:28 apps/readings/models.py:78
+#: apps/notifications/models.py:28 apps/readings/models.py:111
 #: apps/register/models.py:236 apps/selfservice/models.py:76
 msgid "created"
 msgstr "luotu"
@@ -796,8 +772,8 @@ msgstr "Laskutusasetukset"
 msgid "Bank account, payment terms, VAT, numbering and reminders."
 msgstr "Pankkitili, maksuehdot, ALV, numerointi ja maksumuistutukset."
 
-#
 #: apps/core/settings_page.py:131
+#: apps/invoicing/templates/invoicing/run_list.html:9
 msgid "Fee plans"
 msgstr "Maksusuunnitelmat"
 
@@ -977,7 +953,7 @@ msgstr "Hae ohjeista"
 #: apps/invoicing/templates/invoicing/invoice_list.html:15
 #: apps/readings/templates/readings/round_detail.html:25
 #: apps/register/templates/register/person_list.html:13
-#: apps/register/templates/register/unit_list.html:17
+#: apps/register/templates/register/unit_list.html:16
 msgid "Search"
 msgstr "Hae"
 
@@ -1005,6 +981,10 @@ msgid ""
 msgstr ""
 "Lyhyitä ohjeita Metran käyttöön. Jokaisen sivun valikossa on Ohje-linkki, "
 "joka avaa sivun ohjeen."
+
+#: apps/help/templates/help/index.html:20
+msgid "Pick a guide from the list, or search for a word."
+msgstr "Valitse opas luettelosta tai hae sanalla."
 
 #: apps/invoicing/admin.py:13 apps/invoicing/models.py:388
 #: apps/invoicing/templates/invoicing/invoice_detail.html:107
@@ -1182,7 +1162,7 @@ msgstr "laskutusasetukset"
 msgid "Number %(number)s is already used; numbers cannot repeat."
 msgstr "Numero %(number)s on jo käytössä; numerot eivät voi toistua."
 
-#: apps/invoicing/models.py:145 apps/readings/models.py:26
+#: apps/invoicing/models.py:145 apps/readings/models.py:27
 #: apps/register/models.py:144 apps/register/models.py:168
 msgid "unit type"
 msgstr "yksikkötyyppi"
@@ -1196,7 +1176,7 @@ msgid "in use"
 msgstr "käytössä"
 
 #: apps/invoicing/models.py:156 apps/invoicing/models.py:673
-#: apps/readings/models.py:45 apps/register/models.py:139
+#: apps/readings/models.py:46 apps/register/models.py:139
 msgid "description"
 msgstr "kuvaus"
 
@@ -1253,7 +1233,7 @@ msgstr "Vain kiinteille maksuille."
 
 #: apps/invoicing/models.py:202 apps/invoicing/models.py:362
 #: apps/invoicing/models.py:675 apps/messaging/models.py:161
-#: apps/readings/models.py:137 apps/register/models.py:330
+#: apps/readings/models.py:200 apps/register/models.py:330
 #: apps/register/models.py:353 apps/selfservice/models.py:58
 msgid "unit"
 msgstr "yksikkö"
@@ -1266,8 +1246,8 @@ msgstr "Esimerkiksi kpl."
 msgid "VAT rate (%)"
 msgstr "ALV-prosentti (%)"
 
-#: apps/invoicing/models.py:213 apps/readings/models.py:49
-#: apps/readings/models.py:66
+#: apps/invoicing/models.py:213 apps/readings/models.py:50
+#: apps/readings/models.py:94
 msgid "reading type"
 msgstr "lukematyyppi"
 
@@ -1333,7 +1313,7 @@ msgid "price tier"
 msgstr "hintaporras"
 
 #: apps/invoicing/models.py:286 apps/invoicing/models.py:375
-#: apps/readings/models.py:71
+#: apps/readings/models.py:99
 msgid "period"
 msgstr "jakso"
 
@@ -1341,7 +1321,7 @@ msgstr "jakso"
 msgid "Shown on the invoices, for example 2026."
 msgstr "Näytetään laskuilla, esimerkiksi 2026."
 
-#: apps/invoicing/models.py:291 apps/readings/models.py:84
+#: apps/invoicing/models.py:291 apps/readings/models.py:119
 msgid "reading rounds"
 msgstr "lukemakierrokset"
 
@@ -1364,12 +1344,12 @@ msgstr "Laskut %(period)s"
 
 #: apps/invoicing/models.py:340
 #: apps/invoicing/templates/invoicing/_invoice_results.html:19
-#: apps/readings/models.py:60
+#: apps/readings/models.py:87
 msgid "Draft"
 msgstr "Luonnos"
 
 #: apps/invoicing/models.py:341
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 msgid "Issued"
 msgstr "Laadittu"
 
@@ -1398,8 +1378,7 @@ msgid "Credit note"
 msgstr "Hyvityslasku"
 
 #: apps/invoicing/models.py:351 apps/messaging/models.py:75
-#: apps/messaging/models.py:172 apps/readings/models.py:76
-#: apps/register/models.py:317
+#: apps/messaging/models.py:172 apps/register/models.py:317
 msgid "status"
 msgstr "tila"
 
@@ -1557,7 +1536,7 @@ msgid "reference given"
 msgstr "annettu viite"
 
 #: apps/invoicing/models.py:782 apps/messaging/models.py:283
-#: apps/readings/models.py:161
+#: apps/readings/models.py:224
 msgid "note"
 msgstr "huomautus"
 
@@ -1682,7 +1661,7 @@ msgstr "Eräpäivä"
 #: apps/invoicing/templates/invoicing/_invoice_results.html:12
 #: apps/invoicing/templates/invoicing/invoice_detail.html:100
 #: apps/invoicing/templates/invoicing/run_detail.html:33
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 #: apps/invoicing/views.py:440
 msgid "Total"
 msgstr "Yhteensä"
@@ -1696,7 +1675,7 @@ msgstr "Yhteensä"
 #: apps/readings/templates/readings/round_list.html:22
 #: apps/register/csv_io.py:468
 #: apps/register/templates/register/_unit_results.html:10
-#: apps/register/templates/register/unit_list.html:28
+#: apps/register/templates/register/unit_list.html:27
 #: apps/selfservice/templates/selfservice/round_links.html:43
 msgid "Status"
 msgstr "Tila"
@@ -1933,7 +1912,7 @@ msgstr "Hyvityslaskut"
 #: apps/invoicing/templates/invoicing/invoice_list.html:9
 #: apps/invoicing/templates/invoicing/run_list.html:3
 #: apps/invoicing/templates/invoicing/run_list.html:6
-#: apps/invoicing/templates/invoicing/run_list.html:14
+#: apps/invoicing/templates/invoicing/run_list.html:15
 msgid "Invoice runs"
 msgstr "Laskutuskierrokset"
 
@@ -1951,7 +1930,7 @@ msgid "All"
 msgstr "Kaikki"
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:22
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 msgid "Drafts"
 msgstr "Luonnokset"
 
@@ -1970,7 +1949,7 @@ msgstr "Kaikki kierrokset"
 #: apps/invoicing/templates/invoicing/invoice_list.html:37
 #: apps/readings/templates/readings/round_detail.html:37
 #: apps/register/templates/register/person_list.html:25
-#: apps/register/templates/register/unit_list.html:43
+#: apps/register/templates/register/unit_list.html:42
 msgid "Filter"
 msgstr "Suodata"
 
@@ -2008,6 +1987,16 @@ msgid "Each reminder adds a fee of %(fee)s € and gives %(days)s days to pay."
 msgstr ""
 "Jokaisesta muistutuksesta peritään %(fee)s € muistutusmaksu, ja maksuaikaa "
 "annetaan %(days)s päivää."
+
+#: apps/invoicing/templates/invoicing/overdue_list.html:36
+#, python-format
+msgid ""
+"Reminders have no fee (see <a href=\"%(billing_url)s\">invoice settings</a>) "
+"and give %(days)s days to pay."
+msgstr ""
+"Muistutuksista ei peritä maksua (katso <a "
+"href=\"%(billing_url)s\">laskutusasetukset</a>), ja maksuaikaa annetaan "
+"%(days)s päivää."
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:36
 #, python-format
@@ -2181,7 +2170,7 @@ msgstr ""
 
 #: apps/invoicing/templates/invoicing/run_form.html:3
 #: apps/invoicing/templates/invoicing/run_form.html:5
-#: apps/invoicing/templates/invoicing/run_list.html:9
+#: apps/invoicing/templates/invoicing/run_list.html:10
 msgid "New invoice run"
 msgstr "Uusi laskutuskierros"
 
@@ -2194,11 +2183,25 @@ msgstr ""
 "maksusuunnitelmat pätevät. Mitään ei lähetetä eikä numeroida, ennen kuin "
 "laadit luonnokset."
 
-#: apps/invoicing/templates/invoicing/run_form.html:12
+#: apps/invoicing/templates/invoicing/run_form.html:7
+#: apps/setup/templates/setup/invoicing.html:5
+msgid "Open the fee plans"
+msgstr "Avaa maksusuunnitelmat"
+
+#: apps/invoicing/templates/invoicing/run_form.html:13
 msgid "Make draft invoices"
 msgstr "Tee luonnoslaskut"
 
-#: apps/invoicing/templates/invoicing/run_list.html:12
+#: apps/invoicing/templates/invoicing/run_list.html:13
+#, python-format
+msgid ""
+"Fill in the <a href=\"%(billing_url)s\">invoice settings</a> (IBAN, payment "
+"terms, VAT) before issuing invoices."
+msgstr ""
+"Täytä <a href=\"%(billing_url)s\">laskutusasetukset</a> (IBAN, maksuehdot, "
+"ALV) ennen laskujen laatimista."
+
+#: apps/invoicing/templates/invoicing/run_list.html:13
 msgid ""
 "Fill in the invoice settings (IBAN, payment terms, VAT) under Settings > "
 "Invoice settings before issuing invoices."
@@ -2206,17 +2209,17 @@ msgstr ""
 "Täytä laskutusasetukset (IBAN, maksuehdot, ALV) kohdassa Asetukset > "
 "Laskutusasetukset ennen laskujen laatimista."
 
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 msgid "Run"
 msgstr "Kierros"
 
-#: apps/invoicing/templates/invoicing/run_list.html:16
+#: apps/invoicing/templates/invoicing/run_list.html:17
 #: apps/register/history.py:63
 #: apps/selfservice/templates/selfservice/round_links.html:41
 msgid "Created"
 msgstr "Luotu"
 
-#: apps/invoicing/templates/invoicing/run_list.html:25
+#: apps/invoicing/templates/invoicing/run_list.html:26
 msgid "No invoice runs yet."
 msgstr "Ei vielä laskutuskierroksia."
 
@@ -2428,7 +2431,7 @@ msgstr "Vastaanottajat"
 
 #: apps/messaging/forms.py:108
 #: apps/register/templates/register/person_list.html:17
-#: apps/register/templates/register/unit_list.html:35
+#: apps/register/templates/register/unit_list.html:34
 msgid "Tag"
 msgstr "Tunniste"
 
@@ -2643,7 +2646,7 @@ msgstr "Valmis"
 msgid "to"
 msgstr "vastaanottaja"
 
-#: apps/messaging/models.py:68 apps/readings/models.py:83
+#: apps/messaging/models.py:68 apps/readings/models.py:118
 #: apps/selfservice/models.py:68
 msgid "reading round"
 msgstr "lukemakierros"
@@ -2786,7 +2789,7 @@ msgstr "Peruutuslinkki"
 msgid "wants the newsletter"
 msgstr "haluaa uutiskirjeen"
 
-#: apps/messaging/models.py:272 apps/readings/models.py:141
+#: apps/messaging/models.py:272 apps/readings/models.py:204
 msgid "source"
 msgstr "lähde"
 
@@ -2856,6 +2859,14 @@ msgstr "Tilaus peruutettiin ennen lähetystä."
 #: apps/messaging/templates/messaging/_send_forms.html:8
 msgid "Email is not set up."
 msgstr "Sähköpostia ei ole otettu käyttöön."
+
+#: apps/messaging/providers.py:66
+msgid "Shown in the server log (development)"
+msgstr "Näkyy palvelimen lokissa (kehitys)"
+
+#: apps/messaging/providers.py:83
+msgid "Kept in memory, nothing is sent (tests)"
+msgstr "Tallennetaan muistiin, mitään ei lähetetä (testit)"
 
 #: apps/messaging/sending.py:95
 msgid "The unit has no contact person."
@@ -3377,7 +3388,7 @@ msgstr "linkki"
 msgid "group"
 msgstr "ryhmä"
 
-#: apps/notifications/models.py:29 apps/readings/models.py:79
+#: apps/notifications/models.py:29 apps/readings/models.py:112
 #: apps/register/models.py:237
 msgid "updated"
 msgstr "päivitetty"
@@ -3536,27 +3547,27 @@ msgstr "Palautettu."
 msgid "Reading"
 msgstr "Lukema"
 
-#: apps/readings/models.py:29
+#: apps/readings/models.py:30
 msgid "The kind of unit that reports this reading."
 msgstr "Yksikön tyyppi, joka ilmoittaa tämän lukeman."
 
-#: apps/readings/models.py:32
+#: apps/readings/models.py:33
 msgid "unit of measure"
 msgstr "mittayksikkö"
 
-#: apps/readings/models.py:32
+#: apps/readings/models.py:33
 msgid "For example m³ or kWh."
 msgstr "Esimerkiksi m³ tai kWh."
 
-#: apps/readings/models.py:35
+#: apps/readings/models.py:36
 msgid "decimals"
 msgstr "desimaalit"
 
-#: apps/readings/models.py:38
+#: apps/readings/models.py:39
 msgid "cumulative meter"
 msgstr "kumulatiivinen mittari"
 
-#: apps/readings/models.py:41
+#: apps/readings/models.py:42
 msgid ""
 "The value is a meter position that only grows. Usage is the value minus the "
 "previous reading."
@@ -3564,71 +3575,98 @@ msgstr ""
 "Arvo on mittarilukema, joka vain kasvaa. Kulutus on arvo miinus edellinen "
 "lukema."
 
-#: apps/readings/models.py:50
+#: apps/readings/models.py:51
 msgid "reading types"
 msgstr "lukematyypit"
 
-#: apps/readings/models.py:61
+#
+#: apps/readings/models.py:88
+msgid "Not yet open"
+msgstr "Ei vielä avoinna"
+
+#: apps/readings/models.py:89
 msgid "Open"
 msgstr "Avoin"
 
-#: apps/readings/models.py:62
+#: apps/readings/models.py:90
 msgid "Closed"
 msgstr "Suljettu"
 
-#: apps/readings/models.py:71
+#: apps/readings/models.py:99
 msgid "Shown to members, for example 2026."
 msgstr "Näytetään jäsenille, esimerkiksi 2026."
 
-#: apps/readings/models.py:73
+#: apps/readings/models.py:101
 msgid "opens"
 msgstr "aukeaa"
 
-#: apps/readings/models.py:74
+#: apps/readings/models.py:102
 msgid "closes"
 msgstr "sulkeutuu"
 
-#: apps/readings/models.py:99
+#: apps/readings/models.py:104
+msgid "draft"
+msgstr "luonnos"
+
+#: apps/readings/models.py:107
+msgid ""
+"A draft is never open. Clear this to publish the round: it then opens and "
+"closes on its dates."
+msgstr ""
+"Luonnos ei ole koskaan avoin. Poista valinta julkaistaksesi kierroksen: se "
+"avautuu ja sulkeutuu silloin päivämäärien mukaan."
+
+#: apps/readings/models.py:134
 msgid "The round closes before it opens."
 msgstr "Kierros sulkeutuu ennen kuin se aukeaa."
 
-#: apps/readings/models.py:130
+#: apps/readings/models.py:158
+#, python-format
+msgid "Opens %(date)s"
+msgstr "Avautuu %(date)s"
+
+#: apps/readings/models.py:160
+#, python-format
+msgid "Open until %(date)s"
+msgstr "Avoinna %(date)s asti"
+
+#: apps/readings/models.py:193
 msgid "Staff"
 msgstr "Henkilökunta"
 
-#: apps/readings/models.py:131
+#: apps/readings/models.py:194
 msgid "Member"
 msgstr "Jäsen"
 
-#: apps/readings/models.py:134
+#: apps/readings/models.py:197
 msgid "round"
 msgstr "kierros"
 
-#: apps/readings/models.py:139
+#: apps/readings/models.py:202
 msgid "value"
 msgstr "arvo"
 
-#: apps/readings/models.py:145
+#: apps/readings/models.py:208
 msgid "entered by"
 msgstr "syöttänyt"
 
-#: apps/readings/models.py:153
+#: apps/readings/models.py:216
 msgid "reported by"
 msgstr "ilmoittanut"
 
-#: apps/readings/models.py:158
+#: apps/readings/models.py:221
 msgid "The member who reported it through a self-service link."
 msgstr "Jäsen, joka ilmoitti lukeman itsepalvelulinkin kautta."
 
-#: apps/readings/models.py:160
+#: apps/readings/models.py:223
 msgid "submitted"
 msgstr "lähetetty"
 
-#: apps/readings/models.py:165
+#: apps/readings/models.py:228
 msgid "reading"
 msgstr "lukema"
 
-#: apps/readings/models.py:166
+#: apps/readings/models.py:229
 msgid "readings"
 msgstr "lukemat"
 
@@ -3890,7 +3928,7 @@ msgstr "Uusi henkilö: %(name)s"
 
 #: apps/register/csv_io.py:467
 #: apps/register/templates/register/_unit_results.html:8
-#: apps/register/templates/register/unit_list.html:21
+#: apps/register/templates/register/unit_list.html:20
 msgid "Type"
 msgstr "Tyyppi"
 
@@ -4592,7 +4630,7 @@ msgid "Add person"
 msgstr "Lisää henkilö"
 
 #: apps/register/templates/register/person_list.html:19
-#: apps/register/templates/register/unit_list.html:37
+#: apps/register/templates/register/unit_list.html:36
 msgid "All tags"
 msgstr "Kaikki tunnisteet"
 
@@ -4634,11 +4672,11 @@ msgstr "Tuo CSV"
 msgid "Add unit"
 msgstr "Lisää yksikkö"
 
-#: apps/register/templates/register/unit_list.html:23
+#: apps/register/templates/register/unit_list.html:22
 msgid "All types"
 msgstr "Kaikki tyypit"
 
-#: apps/register/templates/register/unit_list.html:30
+#: apps/register/templates/register/unit_list.html:29
 msgid "All statuses"
 msgstr "Kaikki tilat"
 
@@ -4759,7 +4797,7 @@ msgid "Print self-service letter"
 msgstr "Tulosta itsepalvelukirje"
 
 #: apps/selfservice/templates/selfservice/base.html:9
-#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:262
+#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:263
 #: templates/base.html:7 templates/base.html:18
 msgid "Metra"
 msgstr "Metra"
@@ -5295,10 +5333,12 @@ msgstr "Valmis, siirry rekisteriin"
 #: apps/setup/templates/setup/invoicing.html:4
 msgid ""
 "What every invoice needs: your bank account, payment terms, VAT and "
-"numbering. Fees are set up later under Invoices."
+"numbering. Fee plans, which say what each unit is charged, are set up "
+"afterwards under Settings."
 msgstr ""
 "Mitä jokainen lasku tarvitsee: pankkitili, maksuehdot, ALV ja numerointi. "
-"Maksut määritetään myöhemmin kohdassa Laskut."
+"Maksusuunnitelmat, jotka kertovat mitä kullekin yksikölle laskutetaan, "
+"määritetään myöhemmin kohdassa Asetukset."
 
 #: apps/setup/templates/setup/language.html:4
 msgid ""
@@ -5502,7 +5542,7 @@ msgid "Test sent to %(to)s."
 msgstr "Testi lähetetty: %(to)s."
 
 #
-#: apps/setup/views.py:236
+#: apps/setup/views.py:237
 msgid ""
 "Email is not set up, so no invitation can be sent. Add the person under "
 "Settings."
@@ -5510,12 +5550,12 @@ msgstr ""
 "Sähköpostia ei ole määritetty, joten kutsua ei voi lähettää. Lisää henkilö "
 "kohdassa Asetukset."
 
-#: apps/setup/views.py:267
+#: apps/setup/views.py:268
 #, python-format
 msgid "Your account for %(organisation)s"
 msgstr "Käyttäjätilisi: %(organisation)s"
 
-#: apps/setup/views.py:270
+#: apps/setup/views.py:271
 #, python-format
 msgid ""
 "Hello %(name)s,\n"
@@ -5538,17 +5578,17 @@ msgstr ""
 "\n"
 "Linkki toimii muutaman päivän."
 
-#: apps/setup/views.py:280
+#: apps/setup/views.py:281
 #, python-format
 msgid "The invitation could not be sent: %(error)s"
 msgstr "Kutsua ei voitu lähettää: %(error)s"
 
-#: apps/setup/views.py:282
+#: apps/setup/views.py:283
 #, python-format
 msgid "Invitation sent to %(email)s."
 msgstr "Kutsu lähetetty osoitteeseen %(email)s."
 
-#: apps/setup/views.py:303
+#: apps/setup/views.py:304
 msgid "Setup is done. You can run it again from Settings."
 msgstr ""
 "Käyttöönotto on valmis. Voit käynnistää sen uudelleen kohdasta Asetukset."
@@ -5613,7 +5653,7 @@ msgstr "Tumma"
 msgid "Log out"
 msgstr "Kirjaudu ulos"
 
-#: templates/base.html:68
+#: templates/base.html:69
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
@@ -5622,7 +5662,7 @@ msgstr ""
 "(METRA_REQUIRE_MFA on pois päältä). Ota se käyttöön ennen kuin järjestelmään "
 "syötetään oikeita tietoja."
 
-#: templates/base.html:73
+#: templates/base.html:74
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."
@@ -5630,15 +5670,42 @@ msgstr ""
 "Suojaa tilisi kaksivaiheisella tunnistautumisella. Se vie minuutin "
 "todennussovelluksella puhelimellasi."
 
+#~ msgid "Snapshots of the register, here and offsite."
+#~ msgstr "Rekisterin tilannevedokset, täällä ja ulkoisessa säilössä."
+
+#~ msgid "Snapshots and backups"
+#~ msgstr "Tilannevedokset ja varmuuskopiot"
+
+#~ msgid "Plugins"
+#~ msgstr "Lisäosat"
+
 #, python-format
 #~ msgid "New %(unit_type)s"
 #~ msgstr "Uusi %(unit_type)s"
 
-#~ msgid "Snapshots of the register, here and offsite."
-#~ msgstr "Rekisterin tilannevedokset, täällä ja ulkoisessa säilössä."
+#~ msgid ""
+#~ "What every invoice needs: your bank account, payment terms, VAT and "
+#~ "numbering. Fees are set up later under Invoices."
+#~ msgstr ""
+#~ "Mitä jokainen lasku tarvitsee: pankkitili, maksuehdot, ALV ja numerointi. "
+#~ "Maksut määritetään myöhemmin kohdassa Laskut."
 
-#~ msgid "Plugins"
-#~ msgstr "Lisäosat"
+#, python-format
+#~ msgid "Last successful backup %(when)s (%(size)s) to %(target)s."
+#~ msgstr ""
+#~ "Viimeisin onnistunut varmuuskopio %(when)s (%(size)s) kohteeseen "
+#~ "%(target)s."
+
+#~ msgid "No backup has been made yet."
+#~ msgstr "Varmuuskopiota ei ole vielä tehty."
+
+#, python-format
+#~ msgid "The last backup failed %(when)s:"
+#~ msgstr "Viimeisin varmuuskopiointi epäonnistui %(when)s:"
+
+#~ msgid "The last successful backup is more than a day and a half old."
+#~ msgstr ""
+#~ "Viimeisin onnistunut varmuuskopio on yli puolitoista vuorokautta vanha."
 
 #~ msgid "To restore a snapshot, see INSTALL.md, Backup and restore."
 #~ msgstr ""
