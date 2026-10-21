@@ -22,10 +22,13 @@ class Entry:
     url: object  # a URL name, or a function returning the URL
     permission: str = ""
     admin: bool = False  # opens the admin, which needs staff status
-    superuser: bool = False
+    # Only superusers and users with the Admin role, such as the full admin.
+    admins_only: bool = False
 
     def allowed(self, user):
-        if self.superuser and not user.is_superuser:
+        if self.admins_only and not (
+            user.is_superuser or user.groups.filter(name="Admin").exists()
+        ):
             return False
         if self.admin and not (user.is_active and user.is_staff):
             return False
@@ -219,7 +222,7 @@ def _groups():
                     _("All data tables"),
                     _("The full Django admin, with every table. For technical changes."),
                     "admin:index",
-                    superuser=True,
+                    admins_only=True,
                     admin=True,
                 ),
             ],

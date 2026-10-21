@@ -19,7 +19,7 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   Integrations, Backups and the Setup wizard, each entry with a short
   description. Everyone sees only the entries their role may change, and the
   menu shows Settings to anyone with at least one. The full admin is under
-  Advanced, for superusers only. Links that plugins add with
+  Advanced, for admins and superusers. Links that plugins add with
   `api.add_settings_link` are listed under Integrations.
 - Invoice settings now include the payment reference type and the reminder
   fee and days, which could not be changed before.
