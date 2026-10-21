@@ -10,6 +10,7 @@ from django.db import DatabaseError, connections
 from apps.backups import archive as backup_archive
 from apps.backups.models import BackupRun
 from apps.backups.rclone import RcloneError
+from apps.backups.restore import is_newer
 from apps.backups.service import SnapshotFailed, database_path, remote, take_snapshot
 from apps.register.models import Person, Unit
 
@@ -66,6 +67,12 @@ class Command(BaseCommand):
                 db_file, media = backup_archive.extract_archive(path, Path(tmp) / "extracted")
             except backup_archive.ArchiveError as error:
                 raise CommandError(str(error)) from None
+            version = backup_archive.manifest_version(Path(tmp) / "extracted")
+            if version and is_newer(version):
+                raise CommandError(
+                    f"{name} was taken by Metra {version}, newer than this one "
+                    f"({settings.METRA_VERSION}); restore it with that version or newer."
+                )
             connections.close_all()
             backup_archive.restore_database(db_file, database_path())
             backup_archive.restore_media(media, settings.MEDIA_ROOT)

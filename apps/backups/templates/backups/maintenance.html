@@ -1,0 +1,17 @@
+{% load i18n static %}<!doctype html>
+<html lang="{{ language }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="10">
+  <meta name="robots" content="noindex">
+  <title>{% translate "Back in a moment" %}</title>
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body>
+  <main id="main" class="member-main">
+    <h1>{% translate "Back in a moment" %}</h1>
+    <p>{% translate "A snapshot is being restored. The page reloads by itself when it is done, usually within a minute." %}</p>
+  </main>
+</body>
+</html>
