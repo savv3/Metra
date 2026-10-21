@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 10:09+0300\n"
+"POT-Creation-Date: 2026-10-21 10:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,7 +59,7 @@ msgstr ""
 
 #: apps/accounts/templates/accounts/profile.html:3
 #: apps/accounts/templates/accounts/profile.html:7
-#: templates/allauth/layouts/base.html:9 templates/base.html:40
+#: templates/allauth/layouts/base.html:9 templates/base.html:41
 msgid "My account"
 msgstr ""
 
@@ -131,7 +131,7 @@ msgstr ""
 msgid "Turn off"
 msgstr ""
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:72
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:74
 msgid "Turn on two-factor login"
 msgstr ""
 
@@ -311,7 +311,7 @@ msgid ""
 "removed."
 msgstr ""
 
-#: apps/backups/service.py:195
+#: apps/backups/service.py:208
 msgid "Only snapshots taken by hand can be deleted."
 msgstr ""
 
@@ -544,7 +544,7 @@ msgstr ""
 msgid "Payments that would be removed:"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:49 apps/invoicing/delivery.py:59
+#: apps/backups/templates/backups/restore.html:49 apps/invoicing/delivery.py:60
 #: apps/invoicing/models.py:408 apps/invoicing/models.py:671
 #: apps/invoicing/models.py:732 apps/invoicing/models.py:772
 #: apps/invoicing/models.py:812
@@ -656,8 +656,8 @@ msgstr ""
 #: apps/core/models.py:37 apps/invoicing/models.py:304
 #: apps/invoicing/models.py:402 apps/invoicing/models.py:743
 #: apps/messaging/models.py:84 apps/messaging/models.py:176
-#: apps/readings/models.py:78 apps/register/models.py:227
-#: apps/selfservice/models.py:76
+#: apps/notifications/models.py:28 apps/readings/models.py:78
+#: apps/register/models.py:227 apps/selfservice/models.py:76
 msgid "created"
 msgstr ""
 
@@ -804,11 +804,11 @@ msgstr ""
 msgid "Invoicing"
 msgstr ""
 
-#: apps/invoicing/delivery.py:59
+#: apps/invoicing/delivery.py:60
 msgid "credit-note"
 msgstr ""
 
-#: apps/invoicing/delivery.py:112
+#: apps/invoicing/delivery.py:114
 msgid "This email provider cannot attach the invoice PDF."
 msgstr ""
 
@@ -983,7 +983,8 @@ msgid "Usage"
 msgstr ""
 
 #: apps/invoicing/models.py:182 apps/invoicing/models.py:349
-#: apps/messaging/models.py:63
+#: apps/messaging/models.py:63 apps/notifications/models.py:22
+#: apps/notifications/models.py:104
 msgid "kind"
 msgstr ""
 
@@ -1359,7 +1360,7 @@ msgstr ""
 msgid "payment reminders"
 msgstr ""
 
-#: apps/invoicing/payments.py:124 apps/messaging/sending.py:39
+#: apps/invoicing/payments.py:126 apps/messaging/sending.py:40
 msgid "There is no message template for this. Add one under Settings."
 msgstr ""
 
@@ -1692,12 +1693,14 @@ msgid "Invoice runs"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:19
+#: apps/notifications/templates/notifications/list.html:19
 #: apps/readings/templates/readings/round_detail.html:29
 #: apps/register/templates/register/_show_select.html:3
 msgid "Show"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:21
+#: apps/notifications/templates/notifications/list.html:20
 #: apps/register/templates/register/_show_select.html:7
 msgid "All"
 msgstr ""
@@ -2535,25 +2538,25 @@ msgstr ""
 msgid "attachments"
 msgstr ""
 
-#: apps/messaging/newsletter.py:53
+#: apps/messaging/newsletter.py:54
 #, python-format
 msgid "You get this because you subscribed. Unsubscribe: %(url)s"
 msgstr ""
 
-#: apps/messaging/newsletter.py:81
+#: apps/messaging/newsletter.py:82
 msgid "Unsubscribed before it was sent."
 msgstr ""
 
-#: apps/messaging/newsletter.py:111
+#: apps/messaging/newsletter.py:113
 #: apps/messaging/templates/messaging/_send_forms.html:8
 msgid "Email is not set up."
 msgstr ""
 
-#: apps/messaging/sending.py:101
+#: apps/messaging/sending.py:103
 msgid "The unit has no contact person."
 msgstr ""
 
-#: apps/messaging/sending.py:134
+#: apps/messaging/sending.py:136
 msgid "[personal link]"
 msgstr ""
 
@@ -2731,7 +2734,7 @@ msgstr ""
 msgid "Sent by"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:45
+#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:47
 msgid "Automatic"
 msgstr ""
 
@@ -2942,6 +2945,236 @@ msgstr ""
 msgid "Saved the newsletter choice."
 msgstr ""
 
+#: apps/notifications/apps.py:7
+#: apps/notifications/templates/notifications/_bell.html:2
+#: apps/notifications/templates/notifications/list.html:3
+#: apps/notifications/templates/notifications/list.html:6
+#: apps/notifications/templates/notifications/settings.html:5
+msgid "Notifications"
+msgstr ""
+
+#: apps/notifications/kinds.py:54
+msgid "A snapshot failed"
+msgstr ""
+
+#: apps/notifications/kinds.py:55
+#, python-format
+msgid "A snapshot failed: %(error)s"
+msgstr ""
+
+#: apps/notifications/kinds.py:58
+#, python-format
+msgid "A snapshot could not be sent offsite: %(error)s"
+msgstr ""
+
+#: apps/notifications/kinds.py:62
+msgid "The nightly snapshot was taken"
+msgstr ""
+
+#: apps/notifications/kinds.py:63
+msgid "The nightly snapshot was taken."
+msgstr ""
+
+#: apps/notifications/kinds.py:70
+msgid "A snapshot was restored"
+msgstr ""
+
+#: apps/notifications/kinds.py:71
+#, python-format
+msgid "The snapshot %(snapshot)s was restored by %(user)s."
+msgstr ""
+
+#: apps/notifications/kinds.py:77
+msgid "A restore failed"
+msgstr ""
+
+#: apps/notifications/kinds.py:78
+#, python-format
+msgid ""
+"Restoring %(snapshot)s failed, so the data from before it was put back: "
+"%(error)s"
+msgstr ""
+
+#: apps/notifications/kinds.py:84
+msgid "SMS or email could not be delivered"
+msgstr ""
+
+#: apps/notifications/kinds.py:86
+#, python-format
+msgid "%(count)s message in a send-out could not be delivered."
+msgid_plural "%(count)s messages in a send-out could not be delivered."
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/notifications/kinds.py:95
+msgid "Members sent in a reading or a change through their link"
+msgstr ""
+
+#: apps/notifications/kinds.py:97
+#, python-format
+msgid "A member sent in a reading or a change through their link."
+msgid_plural ""
+"Members sent in %(count)s readings or changes through their links."
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/notifications/kinds.py:110
+msgid "Invoices became overdue"
+msgstr ""
+
+#: apps/notifications/kinds.py:112
+#, python-format
+msgid "%(count)s invoice became overdue."
+msgid_plural "%(count)s invoices became overdue."
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/notifications/models.py:23
+msgid "details"
+msgstr ""
+
+#: apps/notifications/models.py:25
+msgid "link"
+msgstr ""
+
+#: apps/notifications/models.py:27
+msgid "group"
+msgstr ""
+
+#: apps/notifications/models.py:29 apps/readings/models.py:79
+#: apps/register/models.py:228
+msgid "updated"
+msgstr ""
+
+#: apps/notifications/models.py:33 apps/notifications/models.py:64
+msgid "notification"
+msgstr ""
+
+#: apps/notifications/models.py:34
+msgid "notifications"
+msgstr ""
+
+#: apps/notifications/models.py:49
+msgid "A notification from a feature that is no longer installed."
+msgstr ""
+
+#: apps/notifications/models.py:70 apps/notifications/models.py:100
+msgid "user"
+msgstr ""
+
+#: apps/notifications/models.py:74
+msgid "read"
+msgstr ""
+
+#: apps/notifications/models.py:75
+msgid "dismissed"
+msgstr ""
+
+#: apps/notifications/models.py:78
+msgid "notification recipient"
+msgstr ""
+
+#: apps/notifications/models.py:79
+msgid "notification recipients"
+msgstr ""
+
+#: apps/notifications/models.py:105
+msgid "on"
+msgstr ""
+
+#: apps/notifications/models.py:108
+msgid "notification setting"
+msgstr ""
+
+#: apps/notifications/models.py:109
+msgid "notification settings"
+msgstr ""
+
+#: apps/notifications/templates/notifications/_bell.html:2
+#, python-format
+msgid "Notifications, %(counter)s unread"
+msgid_plural "Notifications, %(counter)s unread"
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/notifications/templates/notifications/list.html:12
+msgid "Mark all as read"
+msgstr ""
+
+#: apps/notifications/templates/notifications/list.html:15
+#: apps/notifications/templates/notifications/settings.html:3
+#: apps/notifications/templates/notifications/settings.html:6
+#: templates/base.html:42
+msgid "Notification settings"
+msgstr ""
+
+#: apps/notifications/templates/notifications/list.html:21
+msgid "Unread"
+msgstr ""
+
+#: apps/notifications/templates/notifications/list.html:30
+msgid "Unread:"
+msgstr ""
+
+#: apps/notifications/templates/notifications/list.html:46
+msgid "Mark as unread"
+msgstr ""
+
+#: apps/notifications/templates/notifications/list.html:52
+msgid "Mark as read"
+msgstr ""
+
+#: apps/notifications/templates/notifications/list.html:58
+msgid "Dismiss"
+msgstr ""
+
+#: apps/notifications/templates/notifications/list.html:67
+msgid "No unread notifications."
+msgstr ""
+
+#: apps/notifications/templates/notifications/list.html:69
+msgid "No notifications."
+msgstr ""
+
+#: apps/notifications/templates/notifications/list.html:71
+msgid "Read and dismissed notifications are removed after 90 days."
+msgstr ""
+
+#: apps/notifications/templates/notifications/settings.html:7
+msgid ""
+"Choose which notifications you get under the bell. Only the kinds your role "
+"can see are listed."
+msgstr ""
+
+#: apps/notifications/templates/notifications/settings.html:12
+msgid "Notify me when"
+msgstr ""
+
+#: apps/notifications/templates/notifications/settings.html:19
+#: apps/readings/templates/readings/_round_row.html:20
+#: apps/readings/templates/readings/reading_form.html:30
+#: apps/readings/templates/readings/round_form.html:19
+#: apps/register/templates/register/person_form.html:37
+#: apps/register/templates/register/unit_form.html:28
+msgid "Save"
+msgstr ""
+
+#: apps/notifications/templates/notifications/settings.html:22
+msgid "There are no notifications for your role."
+msgstr ""
+
+#: apps/notifications/views.py:119
+msgid "The notification was dismissed."
+msgstr ""
+
+#: apps/notifications/views.py:127
+msgid "All notifications are marked as read."
+msgstr ""
+
+#: apps/notifications/views.py:144
+msgid "Your notification settings are saved."
+msgstr ""
+
 #: apps/readings/admin.py:20
 msgid "Archive selected reading types"
 msgstr ""
@@ -3015,10 +3248,6 @@ msgstr ""
 msgid "closes"
 msgstr ""
 
-#: apps/readings/models.py:79 apps/register/models.py:228
-msgid "updated"
-msgstr ""
-
 #: apps/readings/models.py:99
 msgid "The round closes before it opens."
 msgstr ""
@@ -3087,14 +3316,6 @@ msgstr ""
 #: apps/readings/templates/readings/reading_form.html:5
 #, python-format
 msgid "Reading for %(name)s"
-msgstr ""
-
-#: apps/readings/templates/readings/_round_row.html:20
-#: apps/readings/templates/readings/reading_form.html:30
-#: apps/readings/templates/readings/round_form.html:19
-#: apps/register/templates/register/person_form.html:37
-#: apps/register/templates/register/unit_form.html:28
-msgid "Save"
 msgstr ""
 
 #: apps/readings/templates/readings/_round_row.html:24
@@ -4112,23 +4333,23 @@ msgstr ""
 msgid "self-service links"
 msgstr ""
 
-#: apps/selfservice/public.py:108
+#: apps/selfservice/public.py:122
 msgid "Thank you. Your reading is saved."
 msgstr ""
 
-#: apps/selfservice/public.py:115
+#: apps/selfservice/public.py:130
 msgid "Thank you. You will get the newsletter."
 msgstr ""
 
-#: apps/selfservice/public.py:117
+#: apps/selfservice/public.py:132
 msgid "You will not get the newsletter."
 msgstr ""
 
-#: apps/selfservice/public.py:123
+#: apps/selfservice/public.py:139
 msgid "Thank you. Your contact details are updated."
 msgstr ""
 
-#: apps/selfservice/public.py:125
+#: apps/selfservice/public.py:141
 msgid "Nothing was changed."
 msgstr ""
 
@@ -4887,15 +5108,15 @@ msgstr ""
 msgid "Setup is done. You can run it again from Settings."
 msgstr ""
 
-#: config/settings.py:179
+#: config/settings.py:180
 msgid "Swedish"
 msgstr ""
 
-#: config/settings.py:180
+#: config/settings.py:181
 msgid "English"
 msgstr ""
 
-#: config/settings.py:181
+#: config/settings.py:182
 msgid "Finnish (machine translated)"
 msgstr ""
 
@@ -4927,29 +5148,29 @@ msgstr ""
 msgid "Main"
 msgstr ""
 
-#: templates/base.html:43
+#: templates/base.html:45
 msgid "Theme"
 msgstr ""
 
-#: templates/base.html:46
+#: templates/base.html:48
 msgid "Light"
 msgstr ""
 
-#: templates/base.html:47
+#: templates/base.html:49
 msgid "Dark"
 msgstr ""
 
-#: templates/base.html:52
+#: templates/base.html:54
 msgid "Log out"
 msgstr ""
 
-#: templates/base.html:66
+#: templates/base.html:68
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
 msgstr ""
 
-#: templates/base.html:71
+#: templates/base.html:73
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."

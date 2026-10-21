@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 10:09+0300\n"
+"POT-Creation-Date: 2026-10-21 10:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgstr "Vain luku"
 
 #: apps/accounts/templates/accounts/profile.html:3
 #: apps/accounts/templates/accounts/profile.html:7
-#: templates/allauth/layouts/base.html:9 templates/base.html:40
+#: templates/allauth/layouts/base.html:9 templates/base.html:41
 msgid "My account"
 msgstr "Oma tili"
 
@@ -133,7 +133,7 @@ msgstr "Suojaa tilisi puhelimen todennussovelluksen koodilla."
 msgid "Turn off"
 msgstr "Poista käytöstä"
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:72
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:74
 msgid "Turn on two-factor login"
 msgstr "Ota kaksivaiheinen tunnistautuminen käyttöön"
 
@@ -327,7 +327,7 @@ msgid ""
 msgstr ""
 "Vahvista, että tilannevedoksen jälkeen kirjatut laskut ja maksut poistetaan."
 
-#: apps/backups/service.py:195
+#: apps/backups/service.py:208
 msgid "Only snapshots taken by hand can be deleted."
 msgstr "Vain käsin otetut tilannevedokset voi poistaa."
 
@@ -593,7 +593,7 @@ msgstr "Poistettavat laaditut laskut:"
 msgid "Payments that would be removed:"
 msgstr "Poistettavat maksut:"
 
-#: apps/backups/templates/backups/restore.html:49 apps/invoicing/delivery.py:59
+#: apps/backups/templates/backups/restore.html:49 apps/invoicing/delivery.py:60
 #: apps/invoicing/models.py:408 apps/invoicing/models.py:671
 #: apps/invoicing/models.py:732 apps/invoicing/models.py:772
 #: apps/invoicing/models.py:812
@@ -711,8 +711,8 @@ msgstr "luonut"
 #: apps/core/models.py:37 apps/invoicing/models.py:304
 #: apps/invoicing/models.py:402 apps/invoicing/models.py:743
 #: apps/messaging/models.py:84 apps/messaging/models.py:176
-#: apps/readings/models.py:78 apps/register/models.py:227
-#: apps/selfservice/models.py:76
+#: apps/notifications/models.py:28 apps/readings/models.py:78
+#: apps/register/models.py:227 apps/selfservice/models.py:76
 msgid "created"
 msgstr "luotu"
 
@@ -866,11 +866,11 @@ msgstr "Muokkaa portaita (%(count)s)"
 msgid "Invoicing"
 msgstr "Laskutus"
 
-#: apps/invoicing/delivery.py:59
+#: apps/invoicing/delivery.py:60
 msgid "credit-note"
 msgstr "hyvityslasku"
 
-#: apps/invoicing/delivery.py:112
+#: apps/invoicing/delivery.py:114
 msgid "This email provider cannot attach the invoice PDF."
 msgstr "Tämä sähköpostipalvelu ei voi liittää laskun PDF-tiedostoa viestiin."
 
@@ -1050,7 +1050,8 @@ msgid "Usage"
 msgstr "Kulutus"
 
 #: apps/invoicing/models.py:182 apps/invoicing/models.py:349
-#: apps/messaging/models.py:63
+#: apps/messaging/models.py:63 apps/notifications/models.py:22
+#: apps/notifications/models.py:104
 msgid "kind"
 msgstr "laji"
 
@@ -1429,7 +1430,7 @@ msgstr "maksumuistutus"
 msgid "payment reminders"
 msgstr "maksumuistutukset"
 
-#: apps/invoicing/payments.py:124 apps/messaging/sending.py:39
+#: apps/invoicing/payments.py:126 apps/messaging/sending.py:40
 msgid "There is no message template for this. Add one under Settings."
 msgstr "Tälle ei ole viestipohjaa. Lisää sellainen kohdassa Asetukset."
 
@@ -1765,12 +1766,14 @@ msgid "Invoice runs"
 msgstr "Laskutuskierrokset"
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:19
+#: apps/notifications/templates/notifications/list.html:19
 #: apps/readings/templates/readings/round_detail.html:29
 #: apps/register/templates/register/_show_select.html:3
 msgid "Show"
 msgstr "Näytä"
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:21
+#: apps/notifications/templates/notifications/list.html:20
 #: apps/register/templates/register/_show_select.html:7
 msgid "All"
 msgstr "Kaikki"
@@ -2658,25 +2661,25 @@ msgstr "liite"
 msgid "attachments"
 msgstr "liitteet"
 
-#: apps/messaging/newsletter.py:53
+#: apps/messaging/newsletter.py:54
 #, python-format
 msgid "You get this because you subscribed. Unsubscribe: %(url)s"
 msgstr "Saat tämän, koska olet tilannut uutiskirjeen. Peruuta tilaus: %(url)s"
 
-#: apps/messaging/newsletter.py:81
+#: apps/messaging/newsletter.py:82
 msgid "Unsubscribed before it was sent."
 msgstr "Tilaus peruutettiin ennen lähetystä."
 
-#: apps/messaging/newsletter.py:111
+#: apps/messaging/newsletter.py:113
 #: apps/messaging/templates/messaging/_send_forms.html:8
 msgid "Email is not set up."
 msgstr "Sähköpostia ei ole otettu käyttöön."
 
-#: apps/messaging/sending.py:101
+#: apps/messaging/sending.py:103
 msgid "The unit has no contact person."
 msgstr "Yksiköllä ei ole yhteyshenkilöä."
 
-#: apps/messaging/sending.py:134
+#: apps/messaging/sending.py:136
 msgid "[personal link]"
 msgstr "[henkilökohtainen linkki]"
 
@@ -2863,7 +2866,7 @@ msgstr "Aloitettu"
 msgid "Sent by"
 msgstr "Lähettäjä"
 
-#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:45
+#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:47
 msgid "Automatic"
 msgstr "Automaattinen"
 
@@ -3086,6 +3089,239 @@ msgstr "Kaikki, jotka haluavat uutiskirjeen"
 msgid "Saved the newsletter choice."
 msgstr "Uutiskirjeen valinta tallennettu."
 
+#: apps/notifications/apps.py:7
+#: apps/notifications/templates/notifications/_bell.html:2
+#: apps/notifications/templates/notifications/list.html:3
+#: apps/notifications/templates/notifications/list.html:6
+#: apps/notifications/templates/notifications/settings.html:5
+msgid "Notifications"
+msgstr "Ilmoitukset"
+
+#: apps/notifications/kinds.py:54
+msgid "A snapshot failed"
+msgstr "Tilannevedos epäonnistui"
+
+#: apps/notifications/kinds.py:55
+#, python-format
+msgid "A snapshot failed: %(error)s"
+msgstr "Tilannevedos epäonnistui: %(error)s"
+
+#: apps/notifications/kinds.py:58
+#, python-format
+msgid "A snapshot could not be sent offsite: %(error)s"
+msgstr "Tilannevedosta ei voitu lähettää ulkoiseen säilöön: %(error)s"
+
+#: apps/notifications/kinds.py:62
+msgid "The nightly snapshot was taken"
+msgstr "Yöllinen tilannevedos otettiin"
+
+#
+#: apps/notifications/kinds.py:63
+msgid "The nightly snapshot was taken."
+msgstr "Yöllinen tilannevedos otettiin."
+
+#
+#: apps/notifications/kinds.py:70
+msgid "A snapshot was restored"
+msgstr "Tilannevedos palautettiin"
+
+#: apps/notifications/kinds.py:71
+#, python-format
+msgid "The snapshot %(snapshot)s was restored by %(user)s."
+msgstr "Käyttäjä %(user)s palautti tilannevedoksen %(snapshot)s."
+
+#
+#: apps/notifications/kinds.py:77
+msgid "A restore failed"
+msgstr "Palautus epäonnistui"
+
+#: apps/notifications/kinds.py:78
+#, python-format
+msgid ""
+"Restoring %(snapshot)s failed, so the data from before it was put back: "
+"%(error)s"
+msgstr "Tilannevedoksen %(snapshot)s palautus epäonnistui, joten sitä edeltävät tiedot palautettiin: %(error)s"
+
+#: apps/notifications/kinds.py:84
+msgid "SMS or email could not be delivered"
+msgstr "Tekstiviestiä tai sähköpostia ei voitu toimittaa"
+
+#: apps/notifications/kinds.py:86
+#, python-format
+msgid "%(count)s message in a send-out could not be delivered."
+msgid_plural "%(count)s messages in a send-out could not be delivered."
+msgstr[0] "Lähetyksen %(count)s viesti jäi toimittamatta."
+msgstr[1] "Lähetyksen %(count)s viestiä ei voitu toimittaa."
+
+#: apps/notifications/kinds.py:95
+msgid "Members sent in a reading or a change through their link"
+msgstr "Jäsenet lähettivät lukeman tai muutoksen linkkinsä kautta"
+
+#: apps/notifications/kinds.py:97
+#, python-format
+msgid "A member sent in a reading or a change through their link."
+msgid_plural ""
+"Members sent in %(count)s readings or changes through their links."
+msgstr[0] "Jäsen lähetti lukeman tai muutoksen linkkinsä kautta."
+msgstr[1] "Jäsenet lähettivät %(count)s lukemaa tai muutosta linkkiensä kautta."
+
+#: apps/notifications/kinds.py:110
+msgid "Invoices became overdue"
+msgstr "Laskuja erääntyi"
+
+#: apps/notifications/kinds.py:112
+#, python-format
+msgid "%(count)s invoice became overdue."
+msgid_plural "%(count)s invoices became overdue."
+msgstr[0] "%(count)s lasku erääntyi."
+msgstr[1] "%(count)s laskua erääntyi."
+
+#: apps/notifications/models.py:23
+msgid "details"
+msgstr "tiedot"
+
+#: apps/notifications/models.py:25
+msgid "link"
+msgstr "linkki"
+
+#: apps/notifications/models.py:27
+msgid "group"
+msgstr "ryhmä"
+
+#: apps/notifications/models.py:29 apps/readings/models.py:79
+#: apps/register/models.py:228
+msgid "updated"
+msgstr "päivitetty"
+
+#: apps/notifications/models.py:33 apps/notifications/models.py:64
+msgid "notification"
+msgstr "ilmoitus"
+
+#: apps/notifications/models.py:34
+msgid "notifications"
+msgstr "ilmoitukset"
+
+#: apps/notifications/models.py:49
+msgid "A notification from a feature that is no longer installed."
+msgstr "Ilmoitus toiminnosta, joka ei ole enää asennettuna."
+
+#: apps/notifications/models.py:70 apps/notifications/models.py:100
+msgid "user"
+msgstr "käyttäjä"
+
+#: apps/notifications/models.py:74
+msgid "read"
+msgstr "luettu"
+
+#: apps/notifications/models.py:75
+msgid "dismissed"
+msgstr "hylätty"
+
+#: apps/notifications/models.py:78
+msgid "notification recipient"
+msgstr "ilmoituksen vastaanottaja"
+
+#: apps/notifications/models.py:79
+msgid "notification recipients"
+msgstr "ilmoitusten vastaanottajat"
+
+#: apps/notifications/models.py:105
+msgid "on"
+msgstr "päällä"
+
+#: apps/notifications/models.py:108
+msgid "notification setting"
+msgstr "ilmoitusasetus"
+
+#: apps/notifications/models.py:109
+msgid "notification settings"
+msgstr "ilmoitusasetukset"
+
+#: apps/notifications/templates/notifications/_bell.html:2
+#, python-format
+msgid "Notifications, %(counter)s unread"
+msgid_plural "Notifications, %(counter)s unread"
+msgstr[0] "Ilmoitukset, %(counter)s lukematon"
+msgstr[1] "Ilmoitukset, %(counter)s lukematonta"
+
+#: apps/notifications/templates/notifications/list.html:12
+msgid "Mark all as read"
+msgstr "Merkitse kaikki luetuiksi"
+
+#: apps/notifications/templates/notifications/list.html:15
+#: apps/notifications/templates/notifications/settings.html:3
+#: apps/notifications/templates/notifications/settings.html:6
+#: templates/base.html:42
+msgid "Notification settings"
+msgstr "Ilmoitusasetukset"
+
+#: apps/notifications/templates/notifications/list.html:21
+msgid "Unread"
+msgstr "Lukemattomat"
+
+#: apps/notifications/templates/notifications/list.html:30
+msgid "Unread:"
+msgstr "Lukematon:"
+
+#: apps/notifications/templates/notifications/list.html:46
+msgid "Mark as unread"
+msgstr "Merkitse lukemattomaksi"
+
+#: apps/notifications/templates/notifications/list.html:52
+msgid "Mark as read"
+msgstr "Merkitse luetuksi"
+
+#: apps/notifications/templates/notifications/list.html:58
+msgid "Dismiss"
+msgstr "Hylkää"
+
+#: apps/notifications/templates/notifications/list.html:67
+msgid "No unread notifications."
+msgstr "Ei lukemattomia ilmoituksia."
+
+#: apps/notifications/templates/notifications/list.html:69
+msgid "No notifications."
+msgstr "Ei ilmoituksia."
+
+#: apps/notifications/templates/notifications/list.html:71
+msgid "Read and dismissed notifications are removed after 90 days."
+msgstr "Luetut ja hylätyt ilmoitukset poistetaan 90 päivän kuluttua."
+
+#: apps/notifications/templates/notifications/settings.html:7
+msgid ""
+"Choose which notifications you get under the bell. Only the kinds your role "
+"can see are listed."
+msgstr "Valitse, mitkä ilmoitukset saat kellon alle. Luettelossa ovat vain lajit, jotka roolisi voi nähdä."
+
+#: apps/notifications/templates/notifications/settings.html:12
+msgid "Notify me when"
+msgstr "Ilmoita minulle, kun"
+
+#: apps/notifications/templates/notifications/settings.html:19
+#: apps/readings/templates/readings/_round_row.html:20
+#: apps/readings/templates/readings/reading_form.html:30
+#: apps/readings/templates/readings/round_form.html:19
+#: apps/register/templates/register/person_form.html:37
+#: apps/register/templates/register/unit_form.html:28
+msgid "Save"
+msgstr "Tallenna"
+
+#: apps/notifications/templates/notifications/settings.html:22
+msgid "There are no notifications for your role."
+msgstr "Roolillesi ei ole ilmoituksia."
+
+#: apps/notifications/views.py:119
+msgid "The notification was dismissed."
+msgstr "Ilmoitus hylättiin."
+
+#: apps/notifications/views.py:127
+msgid "All notifications are marked as read."
+msgstr "Kaikki ilmoitukset on merkitty luetuiksi."
+
+#: apps/notifications/views.py:144
+msgid "Your notification settings are saved."
+msgstr "Ilmoitusasetuksesi on tallennettu."
+
 #: apps/readings/admin.py:20
 msgid "Archive selected reading types"
 msgstr "Arkistoi valitut lukematyypit"
@@ -3161,10 +3397,6 @@ msgstr "aukeaa"
 msgid "closes"
 msgstr "sulkeutuu"
 
-#: apps/readings/models.py:79 apps/register/models.py:228
-msgid "updated"
-msgstr "päivitetty"
-
 #: apps/readings/models.py:99
 msgid "The round closes before it opens."
 msgstr "Kierros sulkeutuu ennen kuin se aukeaa."
@@ -3234,14 +3466,6 @@ msgstr "Yksiköitä ei löytynyt."
 #, python-format
 msgid "Reading for %(name)s"
 msgstr "Lukema: %(name)s"
-
-#: apps/readings/templates/readings/_round_row.html:20
-#: apps/readings/templates/readings/reading_form.html:30
-#: apps/readings/templates/readings/round_form.html:19
-#: apps/register/templates/register/person_form.html:37
-#: apps/register/templates/register/unit_form.html:28
-msgid "Save"
-msgstr "Tallenna"
 
 #: apps/readings/templates/readings/_round_row.html:24
 #: apps/setup/templates/setup/done.html:10
@@ -4289,23 +4513,23 @@ msgstr "itsepalvelulinkki"
 msgid "self-service links"
 msgstr "itsepalvelulinkit"
 
-#: apps/selfservice/public.py:108
+#: apps/selfservice/public.py:122
 msgid "Thank you. Your reading is saved."
 msgstr "Kiitos. Lukemasi on tallennettu."
 
-#: apps/selfservice/public.py:115
+#: apps/selfservice/public.py:130
 msgid "Thank you. You will get the newsletter."
 msgstr "Kiitos. Saat uutiskirjeen."
 
-#: apps/selfservice/public.py:117
+#: apps/selfservice/public.py:132
 msgid "You will not get the newsletter."
 msgstr "Et saa uutiskirjettä."
 
-#: apps/selfservice/public.py:123
+#: apps/selfservice/public.py:139
 msgid "Thank you. Your contact details are updated."
 msgstr "Kiitos. Yhteystietosi on päivitetty."
 
-#: apps/selfservice/public.py:125
+#: apps/selfservice/public.py:141
 msgid "Nothing was changed."
 msgstr "Mitään ei muutettu."
 
@@ -5155,15 +5379,15 @@ msgid "Setup is done. You can run it again from Settings."
 msgstr ""
 "Käyttöönotto on valmis. Voit käynnistää sen uudelleen kohdasta Asetukset."
 
-#: config/settings.py:179
+#: config/settings.py:180
 msgid "Swedish"
 msgstr "Ruotsi"
 
-#: config/settings.py:180
+#: config/settings.py:181
 msgid "English"
 msgstr "Englanti"
 
-#: config/settings.py:181
+#: config/settings.py:182
 msgid "Finnish (machine translated)"
 msgstr "Suomi (konekäännös)"
 
@@ -5199,23 +5423,23 @@ msgstr ""
 msgid "Main"
 msgstr "Päävalikko"
 
-#: templates/base.html:43
+#: templates/base.html:45
 msgid "Theme"
 msgstr "Teema"
 
-#: templates/base.html:46
+#: templates/base.html:48
 msgid "Light"
 msgstr "Vaalea"
 
-#: templates/base.html:47
+#: templates/base.html:49
 msgid "Dark"
 msgstr "Tumma"
 
-#: templates/base.html:52
+#: templates/base.html:54
 msgid "Log out"
 msgstr "Kirjaudu ulos"
 
-#: templates/base.html:66
+#: templates/base.html:68
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
@@ -5224,7 +5448,7 @@ msgstr ""
 "(METRA_REQUIRE_MFA on pois päältä). Ota se käyttöön ennen kuin järjestelmään "
 "syötetään oikeita tietoja."
 
-#: templates/base.html:71
+#: templates/base.html:73
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."

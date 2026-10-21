@@ -16,6 +16,12 @@ the same API_VERSION; anything else in the app may change.
             api.add_webhook_event(
                 api.WebhookEvent("thing.saved", "A thing was saved", thing_saved, thing_payload)
             )
+            api.add_notification_kind(
+                api.NotificationKind("thing_failed", "A thing failed", "%(thing)s failed.",
+                                     roles=["Admin"], permission="my_plugin.view_thing")
+            )
+
+    api.notify("thing_failed", {"thing": "Pump"}, link="/plugins/my_plugin/")
 
     @receiver(api.events.invoice_issued)
     def on_issue(sender, invoice, **kwargs): ...
@@ -33,6 +39,7 @@ from importlib import import_module
 from django.dispatch import Signal
 
 from apps.messaging.registry import EMAIL, SMS, Provider, ProviderError, SendResult, registry
+from apps.notifications.kinds import Kind as NotificationKind
 
 from . import events
 from .hooks import (
@@ -108,7 +115,9 @@ __all__ = [
     "SettingsLink",
     "WebhookEvent",
     "HelpArticles",
+    "NotificationKind",
     "add_help_articles",
+    "add_notification_kind",
     "add_messaging_provider",
     "add_navigation",
     "add_person_panel",
@@ -119,6 +128,7 @@ __all__ = [
     "grant_to_roles",
     *RECORDS,
     "normalise_phone",
+    "notify",
     "on_webhook_event",
     "record_delivery",
     "sms_country_code",
@@ -262,3 +272,27 @@ class HelpArticles:
 
 def add_help_articles(articles):
     return hooks.register(HELP_ARTICLES, articles)
+
+
+# Notifications under the bell (apps/notifications). NotificationKind is
+# documented in apps/notifications/kinds.py and docs/plugins.md.
+
+
+def add_notification_kind(kind):
+    """A kind of notification the plugin sends, shown on each user's
+    notification settings page."""
+    from apps.notifications import kinds
+
+    return kinds.register(kind)
+
+
+def notify(kind, params=None, link="", users=(), roles=(), group=""):
+    """Notify staff about ``kind`` (a registered kind's name), once the current
+    transaction commits. ``params`` fill the kind's message; keep them to
+    counts and technical facts, never members' personal data. ``link`` is a
+    path on this site. With no ``users`` or ``roles``, the kind's roles get it.
+    A ``group`` joins it to an unread notification of the same kind and group
+    from the last 24 hours. Never raises."""
+    from apps.notifications.service import notify as send
+
+    return send(kind, params, link=link, users=users, roles=roles, group=group)

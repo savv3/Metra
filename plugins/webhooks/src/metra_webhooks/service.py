@@ -24,6 +24,7 @@ from urllib.parse import urlsplit
 from auditlog.context import disable_auditlog
 from django.conf import settings
 from django.db import transaction
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext as _
 
@@ -269,8 +270,24 @@ def attempt(delivery):
                 delivery.next_attempt_at = now + BACKOFF[delivery.attempts - 1]
             else:
                 delivery.status = WebhookDelivery.Status.GIVEN_UP
+                notify_given_up(delivery)
     delivery.save()
     return delivery
+
+
+def notify_given_up(delivery):
+    """Tell the admins, under the bell, that a delivery was given up. One
+    notification per endpoint and day, with a count."""
+    from apps.plugins import api
+
+    endpoint = delivery.endpoint
+    api.notify(
+        "webhook_failed",
+        # The description, or only the host: an address may carry a token.
+        {"count": 1, "endpoint": endpoint.description or urlsplit(endpoint.url).hostname or ""},
+        link=reverse("metra_webhooks:delivery_list", args=[endpoint.pk]),
+        group=f"endpoint-{endpoint.pk}",
+    )
 
 
 def retry_now(delivery):

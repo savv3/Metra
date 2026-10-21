@@ -13,6 +13,7 @@ from django.db import transaction
 from django.utils import timezone, translation
 from django.utils.translation import gettext as _
 
+from apps.messaging.failures import notify_failures
 from apps.messaging.models import (
     Channel,
     Message,
@@ -99,6 +100,7 @@ def send_reminders(batch, invoices, user=None):
     batch.status = MessageBatch.Status.DONE
     batch.finished_at = timezone.now()
     batch.save(update_fields=["status", "finished_at"])
+    notify_failures(batch)
 
 
 def _deliver(batch, invoice, reminder):

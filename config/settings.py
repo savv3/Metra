@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     "apps.plugins",
     "apps.setup",
     "apps.help",
+    "apps.notifications",
 ]
 
 # Plugins: installed packages that are Django apps, enabled by name (see

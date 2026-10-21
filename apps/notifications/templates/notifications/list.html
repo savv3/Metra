@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Notifications" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Notifications" %}</h1>
+    <div class="actions">
+      {% if has_unread %}
+        <form method="post" action="{% url 'notifications:read_all' %}" class="inline-form">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ here }}">
+          <button type="submit" class="button">{% translate "Mark all as read" %}</button>
+        </form>
+      {% endif %}
+      <a class="button" href="{% url 'notifications:settings' %}">{% translate "Notification settings" %}</a>
+    </div>
+  </div>
+
+  <nav class="filter-tabs" aria-label="{% translate 'Show' %}">
+    <a href="{% url 'notifications:list' %}"{% if not unread_only %} aria-current="page"{% endif %}>{% translate "All" %}</a>
+    <a href="{% url 'notifications:list' %}?show=unread"{% if unread_only %} aria-current="page"{% endif %}>{% translate "Unread" %}</a>
+  </nav>
+
+  {% if page.object_list %}
+    <ul class="notification-list">
+      {% for copy in page %}
+        {% with item=copy.notification %}
+          <li class="notification{% if not copy.read_at %} notification--unread{% endif %}">
+            <div class="notification__body">
+              {% if not copy.read_at %}<span class="notification__dot" aria-hidden="true"></span><span class="visually-hidden">{% translate "Unread:" %} </span>{% endif %}
+              {% if copy.openable %}
+                <form method="post" action="{% url 'notifications:open' item.pk %}" class="inline-form">
+                  {% csrf_token %}
+                  <button type="submit" class="notification__text button--link">{{ item.text }}</button>
+                </form>
+              {% else %}
+                <span class="notification__text">{{ item.text }}</span>
+              {% endif %}
+              <time class="notification__time" datetime="{{ item.updated_at|date:'c' }}">{{ item.updated_at|date:"SHORT_DATETIME_FORMAT" }}</time>
+            </div>
+            <div class="notification__actions">
+              {% if copy.read_at %}
+                <form method="post" action="{% url 'notifications:unread' item.pk %}" class="inline-form">
+                  {% csrf_token %}
+                  <input type="hidden" name="next" value="{{ here }}">
+                  <button type="submit" class="button button--small">{% translate "Mark as unread" %}</button>
+                </form>
+              {% else %}
+                <form method="post" action="{% url 'notifications:read' item.pk %}" class="inline-form">
+                  {% csrf_token %}
+                  <input type="hidden" name="next" value="{{ here }}">
+                  <button type="submit" class="button button--small">{% translate "Mark as read" %}</button>
+                </form>
+              {% endif %}
+              <form method="post" action="{% url 'notifications:dismiss' item.pk %}" class="inline-form">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ here }}">
+                <button type="submit" class="button button--small">{% translate "Dismiss" %}</button>
+              </form>
+            </div>
+          </li>
+        {% endwith %}
+      {% endfor %}
+    </ul>
+    {% include "register/_pagination.html" %}
+  {% elif unread_only %}
+    <p class="empty">{% translate "No unread notifications." %}</p>
+  {% else %}
+    <p class="empty">{% translate "No notifications." %}</p>
+  {% endif %}
+  <p class="help">{% translate "Read and dismissed notifications are removed after 90 days." %}</p>
+{% endblock %}

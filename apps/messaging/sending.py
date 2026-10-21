@@ -16,6 +16,7 @@ from apps.register.models import Person
 from apps.selfservice.models import SelfServiceLink, primary_contact
 
 from .broadcast import send_written
+from .failures import notify_failures
 from .models import Channel, Message, MessageBatch, MessageTemplate, organisation_placeholders
 from .registry import EMAIL, SMS, ProviderError, provider_for
 
@@ -88,6 +89,7 @@ def _finish(batch):
     batch.status = MessageBatch.Status.DONE
     batch.finished_at = timezone.now()
     batch.save(update_fields=["status", "finished_at"])
+    notify_failures(batch)
 
 
 def send_to_unit(batch, unit, purpose):

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 23:29+0300\n"
+"POT-Creation-Date: 2026-10-21 10:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,14 +16,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: apps.py:7 apps.py:23 templates/metra_webhooks/endpoint_list.html:3
+
+#: apps.py:8 apps.py:26 templates/metra_webhooks/endpoint_list.html:3
 #: templates/metra_webhooks/endpoint_list.html:6
 msgid "Webhooks"
 msgstr ""
 
-#: apps.py:26
+#: apps.py:29
 msgid "Tell outside systems when something changes in Metra."
 msgstr ""
+
+#: apps.py:35
+msgid "A webhook could not be delivered"
+msgstr ""
+
+#: apps.py:37
+#, python-format
+msgid "A webhook to %(endpoint)s could not be delivered and was given up."
+msgid_plural ""
+"%(count)s webhooks to %(endpoint)s could not be delivered and were given up."
+msgstr[0] ""
+msgstr[1] ""
 
 #: events.py:71
 msgid "A unit was added or changed"
@@ -169,33 +182,33 @@ msgstr ""
 msgid "webhook deliveries"
 msgstr ""
 
-#: service.py:64
+#: service.py:65
 msgid "The address must start with https://."
 msgstr ""
 
-#: service.py:66
+#: service.py:67
 msgid "The address must start with https:// or http://."
 msgstr ""
 
-#: service.py:69
+#: service.py:70
 msgid "The address must not contain a user name or password."
 msgstr ""
 
-#: service.py:89 service.py:92
+#: service.py:90 service.py:93
 #, python-format
 msgid "The address %(host)s could not be found."
 msgstr ""
 
-#: service.py:97
+#: service.py:98
 #, python-format
 msgid "%(host)s points to an internal address, which is not allowed."
 msgstr ""
 
-#: service.py:239
+#: service.py:248
 msgid "The endpoint is switched off."
 msgstr ""
 
-#: service.py:256
+#: service.py:265
 #, python-format
 msgid "The receiver answered %(status)s."
 msgstr ""

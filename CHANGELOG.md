@@ -23,6 +23,16 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   started, the register, readings, messages and newsletters, invoicing,
   backups, and roles and two-factor login. Every page has a Help link to the
   guide for it, the guides can be searched, and plugins can add their own.
+- Notifications: a bell next to your name shows how many unread
+  notifications you have, and a Notifications page lists them. Each can be
+  opened, marked as read or unread, or dismissed, and there is "mark all as
+  read". Staff are notified about failed (and, if they ask, nightly)
+  snapshots, restores, SMS and email that could not be delivered, readings
+  and changes members send in, invoices that became overdue, and webhooks
+  that were given up. Each person chooses what they get under Notification
+  settings. Read and dismissed notifications are removed after 90 days.
+- Plugins can send notifications: `api.NotificationKind`,
+  `api.add_notification_kind` and `api.notify`.
 
 ### Changed
 

@@ -391,3 +391,35 @@ def test_the_next_checked_address_is_tried_when_one_does_not_answer(monkeypatch)
 
     assert connection._connect_socket() == "socket"
     assert tried == ["2001:db8::1", "93.184.216.34"]
+
+
+def test_a_given_up_delivery_shows_up_under_the_admins_bell(
+    endpoint, network, role_client, django_capture_on_commit_callbacks
+):
+    client = role_client("Admin")
+    network.answer = (500, "")
+    delivery = make_delivery(endpoint)
+    WebhookDelivery.objects.filter(pk=delivery.pk).update(attempts=len(service.BACKOFF))
+    delivery.refresh_from_db()
+
+    with django_capture_on_commit_callbacks(execute=True):
+        service.attempt(delivery)
+
+    page = client.get("/notifications/", HTTP_ACCEPT_LANGUAGE="en").content.decode()
+    assert "A webhook to hooks.example.org could not be delivered and was given up." in page
+    assert 'aria-label="Notifications, 1 unread"' in page
+
+
+def test_a_switched_off_endpoint_notifies_nobody(
+    endpoint, network, role_client, django_capture_on_commit_callbacks
+):
+    client = role_client("Admin")
+    delivery = make_delivery(endpoint)
+    endpoint.active = False
+    endpoint.save()
+
+    with django_capture_on_commit_callbacks(execute=True):
+        service.attempt(delivery)
+
+    page = client.get("/notifications/", HTTP_ACCEPT_LANGUAGE="en").content.decode()
+    assert "given up" not in page

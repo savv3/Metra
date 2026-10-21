@@ -15,6 +15,10 @@ kerää lukemat, lähettää viestejä ja uutiskirjeitä sekä tekee laskut.
 Oma kielesi, vaalea tai tumma teema ja kaksivaiheinen tunnistautuminen ovat
 valikossa nimesi alla.
 
+Nimesi vieressä oleva **kello** näyttää, montako ilmoitusta et ole lukenut,
+esimerkiksi epäonnistuneen varmuuskopion tai jäsenten lähettämät muutokset.
+Katso [Ilmoitukset](/help/notifications/).
+
 ## Uuden asennuksen käyttöönotto
 
 Ensimmäinen kirjautuva ylläpitäjä käy läpi **käyttöönoton ohjatun

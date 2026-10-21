@@ -16,6 +16,7 @@ from django.utils.translation import gettext as _
 from apps.register.models import Person
 
 from . import attachments
+from .failures import notify_failures
 from .models import ConsentRecord, Message, MessageBatch, MessageTemplate, organisation_placeholders
 from .registry import EMAIL, ProviderError, provider_for
 
@@ -87,6 +88,7 @@ def send_part(batch, limit=None):
         batch.status = MessageBatch.Status.DONE
         batch.finished_at = timezone.now()
         batch.save(update_fields=["status", "finished_at"])
+        notify_failures(batch)
     return left
 
 

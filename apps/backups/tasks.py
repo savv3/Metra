@@ -1,6 +1,9 @@
 from django.conf import settings
+from django.urls import reverse
 from huey import crontab
 from huey.contrib.djhuey import db_periodic_task, db_task
+
+from apps.notifications.service import notify
 
 from .models import BackupRun
 from .service import SnapshotFailed, send_offsite, take_snapshot
@@ -21,9 +24,12 @@ HOUR, MINUTE = schedule_time(settings.BACKUP["time"])
 @db_periodic_task(crontab(hour=str(HOUR), minute=str(MINUTE)))
 def nightly_snapshot():
     try:
-        take_snapshot(BackupRun.Trigger.NIGHTLY)
+        _path, run = take_snapshot(BackupRun.Trigger.NIGHTLY)
     except SnapshotFailed:
-        pass  # recorded on the run, and shown on the Backups page
+        return  # recorded on the run, shown on the Backups page and under the bell
+    if run is None or run.success:
+        # Off unless an admin turns it on: a nightly success is no news.
+        notify("backup_done", link=reverse("backups:list"))
 
 
 @db_task()
