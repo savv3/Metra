@@ -95,7 +95,7 @@ def test_smtp_needs_a_server_and_a_from_address(admin, db):
 
 def test_the_environment_wins_and_locks_the_field(admin, settings, monkeypatch, db):
     admin.post(URL, SMTP)
-    monkeypatch.setenv("METRA_EMAIL_FROM", "noreply@vatten.ax")
+    monkeypatch.setenv("METRA_EMAIL_FROM", "noreply@example.org")
     settings.MESSAGING = {**settings.MESSAGING, "email_provider": "django"}
 
     page = admin.get(URL).content.decode()
@@ -103,7 +103,7 @@ def test_the_environment_wins_and_locks_the_field(admin, settings, monkeypatch, 
 
     assert "Set in the server environment (METRA_EMAIL_FROM)" in page
     config = email_config.current()
-    assert config.from_email == "noreply@vatten.ax"
+    assert config.from_email == "noreply@example.org"
     assert config.provider == "django"
     assert EmailSettings.objects.get().from_email == "styrelsen@example.fi"
 

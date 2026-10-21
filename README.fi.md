@@ -91,6 +91,7 @@ Muu dokumentaatio on englanniksi:
 - [Laajennukset](docs/plugins.md)
 - [REST-rajapinta](docs/api.md): `api`-laajennus muille järjestelmille tunnisteilla
 - [AGENTS.md](AGENTS.md): ohjeet koodia kehittäville
+- [SECURITY.md](SECURITY.md): tietoturvaongelman ilmoittaminen
 
 ## Lisenssi
 
