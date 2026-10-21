@@ -71,7 +71,13 @@ healthy() {
 
 if podman-compose exec -T web true >/dev/null 2>&1; then
     echo "Taking a snapshot first."
-    podman-compose exec -T web python manage.py snapshot
+    # The running version may be older than 0.3.0, where the command was
+    # still called backup.
+    if podman-compose exec -T web python manage.py help snapshot >/dev/null 2>&1; then
+        podman-compose exec -T web python manage.py snapshot
+    else
+        podman-compose exec -T web python manage.py backup
+    fi
 else
     echo "The web container is not running, so no snapshot was taken (the new version takes one before migrating)."
 fi
