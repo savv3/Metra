@@ -66,8 +66,10 @@ kokouspöytäkirjat. Ylläpitäjä näkee palvelimelle asennetut lisäosat kohda
 **Asetukset > Lisäosat** ja ottaa kunkin käyttöön tai pois käytöstä
 painikkeilla **Ota käyttöön** ja **Poista käytöstä**. Pois käytöstä oleva
 lisäosa katoaa valikosta ja sivuilta heti, ja sen tiedot säilyvät, kunnes se
-otetaan taas käyttöön. Lisäosilla, joilla on asetuksia, kuten API-avain, on
-siellä **Asetukset**-painike. Tallennettua salasanaa tai avainta ei näytetä
+otetaan taas käyttöön. Lisäosilla, joilla on asetuksia, kuten API-avain, tai
+omia asetussivuja, kuten kokouslisäosan esityslistapohjat, on siellä
+**Asetukset**-painike. Omat asetussivut näkyvät myös Asetukset-sivulla siinä
+osiossa, johon ne kuuluvat. Tallennettua salasanaa tai avainta ei näytetä
 enää koskaan: jätä kenttä tyhjäksi, jos haluat säilyttää sen, tai anna uusi.
 Harmaana oleva asetus on asetettu palvelimella, eikä sitä voi muuttaa
 sovelluksessa. Uusi lisäosa asennetaan palvelimella, katso asennusohje.

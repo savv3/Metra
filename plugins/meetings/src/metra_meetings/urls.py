@@ -27,6 +27,10 @@ urlpatterns = [
     path("<int:pk>/minutes.pdf", views.minutes_pdf, name="minutes_pdf"),
     path("<int:pk>/notice/", views.send_notice, name="send_notice"),
     path("<int:pk>/approve/", views.approve, name="approve"),
+    path("templates/", views.template_list, name="template_list"),
+    path("templates/new/", views.template_create, name="template_create"),
+    path("templates/<int:pk>/", views.template_edit, name="template_edit"),
+    path("templates/<int:pk>/delete/", views.template_delete, name="template_delete"),
     # For members, through their personal link (no login).
     path("m/<str:token>/<int:pk>/minutes.pdf", member.minutes_pdf, name="member_minutes"),
 ]

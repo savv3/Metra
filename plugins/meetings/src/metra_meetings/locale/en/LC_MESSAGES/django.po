@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 10:34+0300\n"
+"POT-Creation-Date: 2026-10-21 21:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,11 +19,85 @@ msgstr ""
 
 #: apps.py:9 apps.py:27 templates/metra_meetings/meeting_list.html:3
 #: templates/metra_meetings/meeting_list.html:6
+#: templates/metra_meetings/template_list.html:9
 msgid "Meetings"
 msgstr ""
 
-#: apps.py:31
+#: apps.py:31 templates/metra_meetings/meeting_list.html:12
+#: templates/metra_meetings/template_list.html:3
+#: templates/metra_meetings/template_list.html:6
+#: templates/metra_meetings/template_list.html:18
+msgid "Agenda templates"
+msgstr ""
+
+#: apps.py:34
+msgid ""
+"The usual agenda of each kind of meeting, which new meetings start from."
+msgstr ""
+
+#: apps.py:40
 msgid "Meeting minutes"
+msgstr ""
+
+#: defaults.py:12 models.py:34
+msgid "Annual meeting"
+msgstr ""
+
+#: defaults.py:15 defaults.py:34
+msgid "Opening of the meeting"
+msgstr ""
+
+#: defaults.py:17
+msgid ""
+"Election of a chair, a secretary, two minute checkers and two vote counters"
+msgstr ""
+
+#: defaults.py:19 defaults.py:35
+msgid "Establishing that the meeting is lawful and has a quorum"
+msgstr ""
+
+#: defaults.py:20 defaults.py:36
+msgid "Approval of the agenda"
+msgstr ""
+
+#: defaults.py:21
+msgid "The annual report, the accounts and the auditor's report"
+msgstr ""
+
+#: defaults.py:22
+msgid "Adoption of the accounts and discharge from liability for the board"
+msgstr ""
+
+#: defaults.py:23
+msgid "The plan of action, the budget and the fees for the coming year"
+msgstr ""
+
+#: defaults.py:24
+msgid "Election of the board"
+msgstr ""
+
+#: defaults.py:25
+msgid "Election of the auditor"
+msgstr ""
+
+#: defaults.py:26 defaults.py:38
+msgid "Other matters"
+msgstr ""
+
+#: defaults.py:27 defaults.py:40
+msgid "Closing of the meeting"
+msgstr ""
+
+#: defaults.py:31 models.py:36
+msgid "Board meeting"
+msgstr ""
+
+#: defaults.py:37
+msgid "The minutes of the previous meeting"
+msgstr ""
+
+#: defaults.py:39
+msgid "Next meeting"
 msgstr ""
 
 #: documents.py:55
@@ -108,59 +182,72 @@ msgstr ""
 msgid "They approve the minutes in Metra. Everyone ticked must approve."
 msgstr ""
 
-#: forms.py:96
+#: forms.py:64 templates/metra_meetings/pdf/agenda.html:6
+#: templates/metra_meetings/pdf/agenda.html:12
+msgid "Agenda"
+msgstr ""
+
+#: forms.py:66
+msgid "The agenda template for this kind of meeting, if there is one"
+msgstr ""
+
+#: forms.py:67
+msgid "An empty agenda"
+msgstr ""
+
+#: forms.py:72
+msgid "You can change the items afterwards."
+msgstr ""
+
+#: forms.py:100
+msgid "Another template is already used for this kind of meeting."
+msgstr ""
+
+#: forms.py:138
 msgid "Person"
 msgstr ""
 
-#: forms.py:98 templates/metra_meetings/attendance.html:22
+#: forms.py:140 templates/metra_meetings/attendance.html:22
 #: templates/metra_meetings/pdf/minutes.html:26
 msgid "Unit"
 msgstr ""
 
-#: forms.py:101
+#: forms.py:143
 msgid "Empty: the person's unit, if they have only one."
 msgstr ""
 
-#: forms.py:119
+#: forms.py:161
 msgid ""
 "Empty: one vote for the first person present for a unit, none for the others."
 msgstr ""
 
-#: forms.py:121
+#: forms.py:163
 msgid "Empty: one vote."
 msgstr ""
 
-#: forms.py:134
+#: forms.py:176
 msgid "This person is already on the list."
 msgstr ""
 
-#: forms.py:145
+#: forms.py:187
 msgid "Only units have votes at this meeting."
 msgstr ""
 
-#: forms.py:149
+#: forms.py:191
 #, python-format
 msgid "%(name)s already carries the vote of %(unit)s."
 msgstr ""
 
-#: forms.py:154
+#: forms.py:196
 msgid "A unit has one vote. Note the proxy for any votes beyond it."
 msgstr ""
 
-#: models.py:22 views.py:29
+#: models.py:22 views.py:35
 msgid "The minutes are approved and can no longer be changed."
-msgstr ""
-
-#: models.py:34
-msgid "Annual meeting"
 msgstr ""
 
 #: models.py:35
 msgid "Extraordinary meeting"
-msgstr ""
-
-#: models.py:36
-msgid "Board meeting"
 msgstr ""
 
 #: models.py:39
@@ -294,7 +381,7 @@ msgstr ""
 msgid "agenda item"
 msgstr ""
 
-#: models.py:206
+#: models.py:206 models.py:334
 msgid "agenda items"
 msgstr ""
 
@@ -310,7 +397,7 @@ msgstr ""
 msgid "The unit the person represents, if any."
 msgstr ""
 
-#: models.py:247
+#: models.py:247 models.py:322
 msgid "name"
 msgstr ""
 
@@ -348,6 +435,28 @@ msgstr ""
 
 #: models.py:304
 msgid "approvals"
+msgstr ""
+
+#: models.py:324
+msgid "for"
+msgstr ""
+
+#: models.py:329
+msgid ""
+"New meetings of this kind start with this agenda. Empty: chosen by hand for "
+"any kind of meeting."
+msgstr ""
+
+#: models.py:335
+msgid "One item per line, in order. Each line becomes a paragraph (§)."
+msgstr ""
+
+#: models.py:340
+msgid "agenda template"
+msgstr ""
+
+#: models.py:341
+msgid "agenda templates"
 msgstr ""
 
 #: templates/metra_meetings/_meeting_table.html:7
@@ -500,6 +609,7 @@ msgid "Proxy"
 msgstr ""
 
 #: templates/metra_meetings/attendance.html:25
+#: templates/metra_meetings/template_list.html:24
 msgid "Actions"
 msgstr ""
 
@@ -532,6 +642,7 @@ msgstr ""
 #: templates/metra_meetings/item_form.html:14
 #: templates/metra_meetings/meeting_form.html:13
 #: templates/metra_meetings/minutes_form.html:23
+#: templates/metra_meetings/template_form.html:13
 msgid "Save"
 msgstr ""
 
@@ -540,6 +651,8 @@ msgstr ""
 #: templates/metra_meetings/meeting_confirm_delete.html:10
 #: templates/metra_meetings/meeting_form.html:14
 #: templates/metra_meetings/minutes_form.html:25
+#: templates/metra_meetings/template_confirm_delete.html:10
+#: templates/metra_meetings/template_form.html:14
 msgid "Cancel"
 msgstr ""
 
@@ -573,6 +686,7 @@ msgstr ""
 
 #: templates/metra_meetings/meeting_confirm_delete.html:9
 #: templates/metra_meetings/meeting_detail.html:12
+#: templates/metra_meetings/template_confirm_delete.html:9
 msgid "Delete"
 msgstr ""
 
@@ -658,27 +772,27 @@ msgstr ""
 
 #: templates/metra_meetings/meeting_form.html:3
 #: templates/metra_meetings/meeting_form.html:6
-#: templates/metra_meetings/meeting_list.html:8
+#: templates/metra_meetings/meeting_list.html:9
 msgid "New meeting"
 msgstr ""
 
-#: templates/metra_meetings/meeting_list.html:14
+#: templates/metra_meetings/meeting_list.html:19
 msgid "Minutes for you to approve"
 msgstr ""
 
-#: templates/metra_meetings/meeting_list.html:23
+#: templates/metra_meetings/meeting_list.html:28
 msgid "Upcoming"
 msgstr ""
 
-#: templates/metra_meetings/meeting_list.html:24
+#: templates/metra_meetings/meeting_list.html:29
 msgid "Upcoming meetings"
 msgstr ""
 
-#: templates/metra_meetings/meeting_list.html:25
+#: templates/metra_meetings/meeting_list.html:30
 msgid "Past"
 msgstr ""
 
-#: templates/metra_meetings/meeting_list.html:26
+#: templates/metra_meetings/meeting_list.html:31
 msgid "Past meetings"
 msgstr ""
 
@@ -695,11 +809,6 @@ msgstr ""
 
 #: templates/metra_meetings/minutes_form.html:29
 msgid "Add the agenda first."
-msgstr ""
-
-#: templates/metra_meetings/pdf/agenda.html:6
-#: templates/metra_meetings/pdf/agenda.html:12
-msgid "Agenda"
 msgstr ""
 
 #: templates/metra_meetings/pdf/agenda.html:14
@@ -725,71 +834,144 @@ msgstr ""
 msgid "approved in Metra on %(date)s"
 msgstr ""
 
-#: views.py:41
+#: templates/metra_meetings/template_confirm_delete.html:3
+#: templates/metra_meetings/template_confirm_delete.html:5
+msgid "Delete agenda template"
+msgstr ""
+
+#: templates/metra_meetings/template_confirm_delete.html:6
+#, python-format
+msgid ""
+"Delete the agenda template %(name)s? Meetings that started from it keep "
+"their agenda."
+msgstr ""
+
+#: templates/metra_meetings/template_form.html:3
+#: templates/metra_meetings/template_form.html:6
+msgid "Edit agenda template"
+msgstr ""
+
+#: templates/metra_meetings/template_form.html:3
+#: templates/metra_meetings/template_form.html:6
+msgid "New agenda template"
+msgstr ""
+
+#: templates/metra_meetings/template_list.html:8
+msgid "New template"
+msgstr ""
+
+#: templates/metra_meetings/template_list.html:12
+msgid ""
+"The usual agenda of each kind of meeting. A new meeting starts with the "
+"items of the template for its kind, or of the one chosen, and you change "
+"them there as needed. Changing a template does not change meetings already "
+"added."
+msgstr ""
+
+#: templates/metra_meetings/template_list.html:21
+msgid "Template"
+msgstr ""
+
+#: templates/metra_meetings/template_list.html:22
+msgid "For"
+msgstr ""
+
+#: templates/metra_meetings/template_list.html:23
+msgid "Items"
+msgstr ""
+
+#: templates/metra_meetings/template_list.html:30
+msgid "Chosen by hand"
+msgstr ""
+
+#: templates/metra_meetings/template_list.html:32
+#, python-format
+msgid "Delete<span class=\"visually-hidden\"> %(name)s</span>"
+msgstr ""
+
+#: templates/metra_meetings/template_list.html:39
+msgid "No agenda templates yet."
+msgstr ""
+
+#: views.py:47
 msgid "The minutes changed, so the checkers' approvals so far were removed."
 msgstr ""
 
-#: views.py:49 views.py:336
+#: views.py:55 views.py:353
 msgid "PDFs cannot be made on this server (WeasyPrint is missing)."
 msgstr ""
 
-#: views.py:86
+#: views.py:99
+#, python-format
+msgid ""
+"The meeting was added with the agenda from %(template)s. Check the items."
+msgstr ""
+
+#: views.py:103
 msgid "The meeting was added. Now add the agenda."
 msgstr ""
 
-#: views.py:115
+#: views.py:132
 msgid "The meeting was saved."
 msgstr ""
 
-#: views.py:126
+#: views.py:143
 msgid "The meeting was deleted."
 msgstr ""
 
-#: views.py:147
+#: views.py:164
 #, python-format
 msgid "The meeting is now: %(status)s."
 msgstr ""
 
-#: views.py:166
+#: views.py:183
 msgid "The item was added to the agenda."
 msgstr ""
 
-#: views.py:186
+#: views.py:203
 msgid "The item was saved."
 msgstr ""
 
-#: views.py:202
+#: views.py:219
 msgid "The item was removed from the agenda."
 msgstr ""
 
-#: views.py:217
+#: views.py:234
 msgid "The minutes were saved."
 msgstr ""
 
-#: views.py:270
+#: views.py:287
 #, python-format
 msgid "%(name)s was added as present."
 msgstr ""
 
-#: views.py:287
+#: views.py:304
 msgid "The attendance was saved."
 msgstr ""
 
-#: views.py:305
+#: views.py:322
 #, python-format
 msgid "%(name)s was removed from the list."
 msgstr ""
 
-#: views.py:353
+#: views.py:370
 msgid ""
 "The notice is ready with the agenda attached. Choose who gets it, check and "
 "send. Then mark the meeting as called."
 msgstr ""
 
-#: views.py:375
+#: views.py:392
 msgid "The minutes are approved by every checker and can no longer be changed."
 msgstr ""
 
-#: views.py:379
+#: views.py:396
 msgid "Thank you. The minutes are approved when every checker has approved."
+msgstr ""
+
+#: views.py:432
+msgid "The agenda template was saved."
+msgstr ""
+
+#: views.py:447
+msgid "The agenda template was deleted."
 msgstr ""

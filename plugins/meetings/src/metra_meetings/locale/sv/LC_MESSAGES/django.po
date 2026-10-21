@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 10:34+0300\n"
+"POT-Creation-Date: 2026-10-21 21:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,12 +19,90 @@ msgstr ""
 
 #: apps.py:9 apps.py:27 templates/metra_meetings/meeting_list.html:3
 #: templates/metra_meetings/meeting_list.html:6
+#: templates/metra_meetings/template_list.html:9
 msgid "Meetings"
 msgstr "Möten"
 
-#: apps.py:31
+#: apps.py:31 templates/metra_meetings/meeting_list.html:12
+#: templates/metra_meetings/template_list.html:3
+#: templates/metra_meetings/template_list.html:6
+#: templates/metra_meetings/template_list.html:18
+msgid "Agenda templates"
+msgstr "Mallar för föredragningslistor"
+
+#: apps.py:34
+msgid ""
+"The usual agenda of each kind of meeting, which new meetings start from."
+msgstr ""
+"Den vanliga föredragningslistan för varje slags möte, som nya möten utgår "
+"från."
+
+#: apps.py:40
 msgid "Meeting minutes"
 msgstr "Mötesprotokoll"
+
+#: defaults.py:12 models.py:34
+msgid "Annual meeting"
+msgstr "Årsmöte"
+
+#: defaults.py:15 defaults.py:34
+msgid "Opening of the meeting"
+msgstr "Mötets öppnande"
+
+#: defaults.py:17
+msgid ""
+"Election of a chair, a secretary, two minute checkers and two vote counters"
+msgstr ""
+"Val av ordförande, sekreterare, två protokolljusterare och två rösträknare"
+
+#: defaults.py:19 defaults.py:35
+msgid "Establishing that the meeting is lawful and has a quorum"
+msgstr "Konstaterande av mötets laglighet och beslutförhet"
+
+#: defaults.py:20 defaults.py:36
+msgid "Approval of the agenda"
+msgstr "Godkännande av föredragningslistan"
+
+#: defaults.py:21
+msgid "The annual report, the accounts and the auditor's report"
+msgstr "Verksamhetsberättelsen, bokslutet och revisionsberättelsen"
+
+#: defaults.py:22
+msgid "Adoption of the accounts and discharge from liability for the board"
+msgstr ""
+"Fastställande av bokslutet och beviljande av ansvarsfrihet för styrelsen"
+
+#: defaults.py:23
+msgid "The plan of action, the budget and the fees for the coming year"
+msgstr "Verksamhetsplan, budget och avgifter för det kommande året"
+
+#: defaults.py:24
+msgid "Election of the board"
+msgstr "Val av styrelse"
+
+#: defaults.py:25
+msgid "Election of the auditor"
+msgstr "Val av revisor"
+
+#: defaults.py:26 defaults.py:38
+msgid "Other matters"
+msgstr "Övriga ärenden"
+
+#: defaults.py:27 defaults.py:40
+msgid "Closing of the meeting"
+msgstr "Mötets avslutande"
+
+#: defaults.py:31 models.py:36
+msgid "Board meeting"
+msgstr "Styrelsemöte"
+
+#: defaults.py:37
+msgid "The minutes of the previous meeting"
+msgstr "Föregående mötes protokoll"
+
+#: defaults.py:39
+msgid "Next meeting"
+msgstr "Nästa möte"
 
 #: documents.py:55
 msgid "agenda"
@@ -41,8 +119,12 @@ msgstr "Kallelse: %(title)s den %(date)s"
 
 #: documents.py:81
 #, python-format
-msgid "Welcome to %(title)s on %(date)s at %(time)s, %(place)s. The agenda is in the attached file."
-msgstr "Välkommen till %(title)s den %(date)s kl. %(time)s, %(place)s. Föredragningslistan finns i den bifogade filen."
+msgid ""
+"Welcome to %(title)s on %(date)s at %(time)s, %(place)s. The agenda is in the"
+" attached file."
+msgstr ""
+"Välkommen till %(title)s den %(date)s kl. %(time)s, %(place)s. "
+"Föredragningslistan finns i den bifogade filen."
 
 #: documents.py:87
 #, python-brace-format
@@ -106,59 +188,75 @@ msgstr "Protokolljusterare"
 msgid "They approve the minutes in Metra. Everyone ticked must approve."
 msgstr "De justerar protokollet i Metra. Alla som är ikryssade måste justera."
 
-#: forms.py:96
+#: forms.py:64 templates/metra_meetings/pdf/agenda.html:6
+#: templates/metra_meetings/pdf/agenda.html:12
+msgid "Agenda"
+msgstr "Föredragningslista"
+
+#: forms.py:66
+msgid "The agenda template for this kind of meeting, if there is one"
+msgstr ""
+"Mallen för föredragningslista för den här typen av möte, om det finns någon"
+
+#: forms.py:67
+msgid "An empty agenda"
+msgstr "En tom föredragningslista"
+
+#: forms.py:72
+msgid "You can change the items afterwards."
+msgstr "Du kan ändra ärendena efteråt."
+
+#: forms.py:100
+msgid "Another template is already used for this kind of meeting."
+msgstr "En annan mall används redan för den här typen av möte."
+
+#: forms.py:138
 msgid "Person"
 msgstr "Person"
 
-#: forms.py:98 templates/metra_meetings/attendance.html:22
+#: forms.py:140 templates/metra_meetings/attendance.html:22
 #: templates/metra_meetings/pdf/minutes.html:26
 msgid "Unit"
 msgstr "Enhet"
 
-#: forms.py:101
+#: forms.py:143
 msgid "Empty: the person's unit, if they have only one."
 msgstr "Tomt: personens enhet, om hen bara har en."
 
-#: forms.py:119
-msgid "Empty: one vote for the first person present for a unit, none for the others."
-msgstr "Tomt: en röst för den första närvarande för en enhet, ingen för de andra."
+#: forms.py:161
+msgid ""
+"Empty: one vote for the first person present for a unit, none for the others."
+msgstr ""
+"Tomt: en röst för den första närvarande för en enhet, ingen för de andra."
 
-#: forms.py:121
+#: forms.py:163
 msgid "Empty: one vote."
 msgstr "Tomt: en röst."
 
-#: forms.py:134
+#: forms.py:176
 msgid "This person is already on the list."
 msgstr "Personen finns redan på listan."
 
-#: forms.py:145
+#: forms.py:187
 msgid "Only units have votes at this meeting."
 msgstr "Vid det här mötet har bara enheter röster."
 
-#: forms.py:149
+#: forms.py:191
 #, python-format
 msgid "%(name)s already carries the vote of %(unit)s."
 msgstr "%(name)s har redan rösten för %(unit)s."
 
-#: forms.py:154
+#: forms.py:196
 msgid "A unit has one vote. Note the proxy for any votes beyond it."
 msgstr "En enhet har en röst. Anteckna fullmakten för röster utöver den."
 
-#: models.py:22 views.py:29
+#: models.py:22 views.py:35
 msgid "The minutes are approved and can no longer be changed."
 msgstr "Protokollet är justerat och kan inte längre ändras."
-
-#: models.py:34
-msgid "Annual meeting"
-msgstr "Årsmöte"
 
 #: models.py:35
 msgid "Extraordinary meeting"
 msgstr "Extra möte"
-
-#: models.py:36
-msgid "Board meeting"
-msgstr "Styrelsemöte"
 
 #: models.py:39
 msgid "Being prepared"
@@ -197,16 +295,23 @@ msgid "other information"
 msgstr "övrig information"
 
 #: models.py:51
-msgid "Shown in the notice and on the agenda, for example how to attend online."
-msgstr "Visas i kallelsen och på föredragningslistan, till exempel hur man deltar på distans."
+msgid ""
+"Shown in the notice and on the agenda, for example how to attend online."
+msgstr ""
+"Visas i kallelsen och på föredragningslistan, till exempel hur man deltar på "
+"distans."
 
 #: models.py:54 templates/metra_meetings/_minutes.html:8
 msgid "one vote per unit"
 msgstr "en röst per enhet"
 
 #: models.py:57
-msgid "Each unit has one vote, carried by one of the people present for it. Otherwise everyone present has a vote."
-msgstr "Varje enhet har en röst, som en av de närvarande för enheten för. Annars har alla närvarande en röst."
+msgid ""
+"Each unit has one vote, carried by one of the people present for it. "
+"Otherwise everyone present has a vote."
+msgstr ""
+"Varje enhet har en röst, som en av de närvarande för enheten för. Annars har "
+"alla närvarande en röst."
 
 #: models.py:62
 msgid "show the approved minutes to members"
@@ -288,7 +393,7 @@ msgstr "beslut"
 msgid "agenda item"
 msgstr "ärende"
 
-#: models.py:206
+#: models.py:206 models.py:334
 msgid "agenda items"
 msgstr "ärenden"
 
@@ -304,7 +409,7 @@ msgstr "enhet"
 msgid "The unit the person represents, if any."
 msgstr "Den enhet personen representerar, om någon."
 
-#: models.py:247
+#: models.py:247 models.py:322
 msgid "name"
 msgstr "namn"
 
@@ -343,6 +448,30 @@ msgstr "justering"
 #: models.py:304
 msgid "approvals"
 msgstr "justeringar"
+
+#: models.py:324
+msgid "for"
+msgstr "för"
+
+#: models.py:329
+msgid ""
+"New meetings of this kind start with this agenda. Empty: chosen by hand for "
+"any kind of meeting."
+msgstr ""
+"Nya möten av den här typen börjar med den här föredragningslistan. Tomt: "
+"väljs för hand för alla slags möten."
+
+#: models.py:335
+msgid "One item per line, in order. Each line becomes a paragraph (§)."
+msgstr "Ett ärende per rad, i ordning. Varje rad blir en paragraf (§)."
+
+#: models.py:340
+msgid "agenda template"
+msgstr "mall för föredragningslista"
+
+#: models.py:341
+msgid "agenda templates"
+msgstr "mallar för föredragningslistor"
 
 #: templates/metra_meetings/_meeting_table.html:7
 msgid "Meeting"
@@ -420,8 +549,12 @@ msgid "Approve the minutes"
 msgstr "Justera protokollet"
 
 #: templates/metra_meetings/approve.html:7
-msgid "Read the minutes below or as a PDF. When every minute checker has approved them, they can no longer be changed."
-msgstr "Läs protokollet nedan eller som pdf. När alla protokolljusterare har justerat det kan det inte längre ändras."
+msgid ""
+"Read the minutes below or as a PDF. When every minute checker has approved "
+"them, they can no longer be changed."
+msgstr ""
+"Läs protokollet nedan eller som pdf. När alla protokolljusterare har justerat"
+" det kan det inte längre ändras."
 
 #: templates/metra_meetings/approve.html:8
 #: templates/metra_meetings/meeting_detail.html:30
@@ -433,8 +566,11 @@ msgid "Not now"
 msgstr "Inte nu"
 
 #: templates/metra_meetings/approve.html:21
-msgid "If something is wrong, do not approve: tell the secretary, who corrects the minutes."
-msgstr "Om något är fel, justera inte: säg till sekreteraren, som rättar protokollet."
+msgid ""
+"If something is wrong, do not approve: tell the secretary, who corrects the "
+"minutes."
+msgstr ""
+"Om något är fel, justera inte: säg till sekreteraren, som rättar protokollet."
 
 #: templates/metra_meetings/attendance.html:3
 #: templates/metra_meetings/attendance.html:6
@@ -490,6 +626,7 @@ msgid "Proxy"
 msgstr "Fullmakt"
 
 #: templates/metra_meetings/attendance.html:25
+#: templates/metra_meetings/template_list.html:24
 msgid "Actions"
 msgstr "Åtgärder"
 
@@ -511,7 +648,8 @@ msgstr "Lägg till"
 
 #: templates/metra_meetings/attendance.html:66
 msgid "Type the first letters of a name in the list to find the person."
-msgstr "Skriv de första bokstäverna i ett namn i listan för att hitta personen."
+msgstr ""
+"Skriv de första bokstäverna i ett namn i listan för att hitta personen."
 
 #: templates/metra_meetings/attendance_form.html:3
 #: templates/metra_meetings/attendance_form.html:5
@@ -522,6 +660,7 @@ msgstr "Redigera närvaro"
 #: templates/metra_meetings/item_form.html:14
 #: templates/metra_meetings/meeting_form.html:13
 #: templates/metra_meetings/minutes_form.html:23
+#: templates/metra_meetings/template_form.html:13
 msgid "Save"
 msgstr "Spara"
 
@@ -530,6 +669,8 @@ msgstr "Spara"
 #: templates/metra_meetings/meeting_confirm_delete.html:10
 #: templates/metra_meetings/meeting_form.html:14
 #: templates/metra_meetings/minutes_form.html:25
+#: templates/metra_meetings/template_confirm_delete.html:10
+#: templates/metra_meetings/template_form.html:14
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -563,6 +704,7 @@ msgstr "Ta bort %(title)s med föredragningslista, närvaro och protokoll?"
 
 #: templates/metra_meetings/meeting_confirm_delete.html:9
 #: templates/metra_meetings/meeting_detail.html:12
+#: templates/metra_meetings/template_confirm_delete.html:9
 msgid "Delete"
 msgstr "Ta bort"
 
@@ -607,8 +749,12 @@ msgid "Not held yet"
 msgstr "Inte hållet ännu"
 
 #: templates/metra_meetings/meeting_detail.html:58
-msgid "The notice opens as a new message with the agenda attached, so you can choose who gets it and check it before sending."
-msgstr "Kallelsen öppnas som ett nytt meddelande med föredragningslistan bifogad, så att du kan välja vem som får den och kontrollera den innan den skickas."
+msgid ""
+"The notice opens as a new message with the agenda attached, so you can choose"
+" who gets it and check it before sending."
+msgstr ""
+"Kallelsen öppnas som ett nytt meddelande med föredragningslistan bifogad, så "
+"att du kan välja vem som får den och kontrollera den innan den skickas."
 
 #: templates/metra_meetings/meeting_detail.html:64
 msgid "Approval of the minutes"
@@ -625,7 +771,8 @@ msgstr "Medlemmarna kan läsa det på sin personliga sida."
 
 #: templates/metra_meetings/meeting_detail.html:69
 msgid "No minute checkers are chosen. Edit the meeting to add them."
-msgstr "Inga protokolljusterare är valda. Redigera mötet för att lägga till dem."
+msgstr ""
+"Inga protokolljusterare är valda. Redigera mötet för att lägga till dem."
 
 #: templates/metra_meetings/meeting_detail.html:71
 msgid "Waiting for:"
@@ -646,27 +793,27 @@ msgstr "Redigera möte"
 
 #: templates/metra_meetings/meeting_form.html:3
 #: templates/metra_meetings/meeting_form.html:6
-#: templates/metra_meetings/meeting_list.html:8
+#: templates/metra_meetings/meeting_list.html:9
 msgid "New meeting"
 msgstr "Nytt möte"
 
-#: templates/metra_meetings/meeting_list.html:14
+#: templates/metra_meetings/meeting_list.html:19
 msgid "Minutes for you to approve"
 msgstr "Protokoll som du ska justera"
 
-#: templates/metra_meetings/meeting_list.html:23
+#: templates/metra_meetings/meeting_list.html:28
 msgid "Upcoming"
 msgstr "Kommande"
 
-#: templates/metra_meetings/meeting_list.html:24
+#: templates/metra_meetings/meeting_list.html:29
 msgid "Upcoming meetings"
 msgstr "Kommande möten"
 
-#: templates/metra_meetings/meeting_list.html:25
+#: templates/metra_meetings/meeting_list.html:30
 msgid "Past"
 msgstr "Tidigare"
 
-#: templates/metra_meetings/meeting_list.html:26
+#: templates/metra_meetings/meeting_list.html:31
 msgid "Past meetings"
 msgstr "Tidigare möten"
 
@@ -684,11 +831,6 @@ msgstr "Spara och fortsätt skriva"
 #: templates/metra_meetings/minutes_form.html:29
 msgid "Add the agenda first."
 msgstr "Lägg först till föredragningslistan."
-
-#: templates/metra_meetings/pdf/agenda.html:6
-#: templates/metra_meetings/pdf/agenda.html:12
-msgid "Agenda"
-msgstr "Föredragningslista"
 
 #: templates/metra_meetings/pdf/agenda.html:14
 #: templates/metra_meetings/pdf/minutes.html:15
@@ -713,69 +855,153 @@ msgstr "Protokollet är justerat"
 msgid "approved in Metra on %(date)s"
 msgstr "justerade i Metra den %(date)s"
 
-#: views.py:41
+#: templates/metra_meetings/template_confirm_delete.html:3
+#: templates/metra_meetings/template_confirm_delete.html:5
+msgid "Delete agenda template"
+msgstr "Ta bort mall för föredragningslista"
+
+#: templates/metra_meetings/template_confirm_delete.html:6
+#, python-format
+msgid ""
+"Delete the agenda template %(name)s? Meetings that started from it keep their"
+" agenda."
+msgstr ""
+"Ta bort mallen för föredragningslista %(name)s? Möten som har utgått från den"
+" behåller sin föredragningslista."
+
+#: templates/metra_meetings/template_form.html:3
+#: templates/metra_meetings/template_form.html:6
+msgid "Edit agenda template"
+msgstr "Redigera mall för föredragningslista"
+
+#: templates/metra_meetings/template_form.html:3
+#: templates/metra_meetings/template_form.html:6
+msgid "New agenda template"
+msgstr "Ny mall för föredragningslista"
+
+#: templates/metra_meetings/template_list.html:8
+msgid "New template"
+msgstr "Ny mall"
+
+#: templates/metra_meetings/template_list.html:12
+msgid ""
+"The usual agenda of each kind of meeting. A new meeting starts with the items"
+" of the template for its kind, or of the one chosen, and you change them "
+"there as needed. Changing a template does not change meetings already added."
+msgstr ""
+"Den vanliga föredragningslistan för varje slags möte. Ett nytt möte börjar "
+"med ärendena i mallen för dess typ, eller i den mall som du väljer, och där "
+"ändrar du dem vid behov. Om du ändrar en mall ändras inte möten som redan är "
+"tillagda."
+
+#: templates/metra_meetings/template_list.html:21
+msgid "Template"
+msgstr "Mall"
+
+#: templates/metra_meetings/template_list.html:22
+msgid "For"
+msgstr "För"
+
+#: templates/metra_meetings/template_list.html:23
+msgid "Items"
+msgstr "Ärenden"
+
+#: templates/metra_meetings/template_list.html:30
+msgid "Chosen by hand"
+msgstr "Väljs för hand"
+
+#: templates/metra_meetings/template_list.html:32
+#, python-format
+msgid "Delete<span class=\"visually-hidden\"> %(name)s</span>"
+msgstr "Ta bort<span class=\"visually-hidden\"> %(name)s</span>"
+
+#: templates/metra_meetings/template_list.html:39
+msgid "No agenda templates yet."
+msgstr "Inga mallar för föredragningslistor ännu."
+
+#: views.py:47
 msgid "The minutes changed, so the checkers' approvals so far were removed."
 msgstr "Protokollet ändrades, så justerarnas godkännanden hittills togs bort."
 
-#: views.py:49 views.py:336
+#: views.py:55 views.py:353
 msgid "PDFs cannot be made on this server (WeasyPrint is missing)."
 msgstr "Pdf-filer kan inte skapas på den här servern (WeasyPrint saknas)."
 
-#: views.py:86
+#: views.py:99
+#, python-format
+msgid ""
+"The meeting was added with the agenda from %(template)s. Check the items."
+msgstr ""
+"Mötet lades till med föredragningslistan från %(template)s. Kontrollera "
+"ärendena."
+
+#: views.py:103
 msgid "The meeting was added. Now add the agenda."
 msgstr "Mötet lades till. Lägg nu till föredragningslistan."
 
-#: views.py:115
+#: views.py:132
 msgid "The meeting was saved."
 msgstr "Mötet sparades."
 
-#: views.py:126
+#: views.py:143
 msgid "The meeting was deleted."
 msgstr "Mötet togs bort."
 
-#: views.py:147
+#: views.py:164
 #, python-format
 msgid "The meeting is now: %(status)s."
 msgstr "Mötet är nu: %(status)s."
 
-#: views.py:166
+#: views.py:183
 msgid "The item was added to the agenda."
 msgstr "Ärendet lades till på föredragningslistan."
 
-#: views.py:186
+#: views.py:203
 msgid "The item was saved."
 msgstr "Ärendet sparades."
 
-#: views.py:202
+#: views.py:219
 msgid "The item was removed from the agenda."
 msgstr "Ärendet togs bort från föredragningslistan."
 
-#: views.py:217
+#: views.py:234
 msgid "The minutes were saved."
 msgstr "Protokollet sparades."
 
-#: views.py:270
+#: views.py:287
 #, python-format
 msgid "%(name)s was added as present."
 msgstr "%(name)s antecknades som närvarande."
 
-#: views.py:287
+#: views.py:304
 msgid "The attendance was saved."
 msgstr "Närvaron sparades."
 
-#: views.py:305
+#: views.py:322
 #, python-format
 msgid "%(name)s was removed from the list."
 msgstr "%(name)s togs bort från listan."
 
-#: views.py:353
-msgid "The notice is ready with the agenda attached. Choose who gets it, check and send. Then mark the meeting as called."
-msgstr "Kallelsen är klar med föredragningslistan bifogad. Välj vem som får den, kontrollera och skicka. Markera sedan mötet som kallat."
+#: views.py:370
+msgid ""
+"The notice is ready with the agenda attached. Choose who gets it, check and "
+"send. Then mark the meeting as called."
+msgstr ""
+"Kallelsen är klar med föredragningslistan bifogad. Välj vem som får den, "
+"kontrollera och skicka. Markera sedan mötet som kallat."
 
-#: views.py:375
+#: views.py:392
 msgid "The minutes are approved by every checker and can no longer be changed."
 msgstr "Protokollet är justerat av alla justerare och kan inte längre ändras."
 
-#: views.py:379
+#: views.py:396
 msgid "Thank you. The minutes are approved when every checker has approved."
 msgstr "Tack. Protokollet är justerat när alla justerare har justerat det."
+
+#: views.py:432
+msgid "The agenda template was saved."
+msgstr "Mallen för föredragningslistan sparades."
+
+#: views.py:447
+msgid "The agenda template was deleted."
+msgstr "Mallen för föredragningslistan togs bort."

@@ -316,7 +316,52 @@ class Approval(models.Model):
         return super().delete(*args, **kwargs)
 
 
+class AgendaTemplate(models.Model):
+    """The usual agenda of a kind of meeting, copied into a new meeting."""
+
+    name = models.CharField(_("name"), max_length=200)
+    kind = models.CharField(
+        _("for"),
+        max_length=20,
+        choices=Meeting.Kind.choices,
+        blank=True,
+        help_text=_(
+            "New meetings of this kind start with this agenda. "
+            "Empty: chosen by hand for any kind of meeting."
+        ),
+    )
+    items = models.TextField(
+        _("agenda items"),
+        help_text=_("One item per line, in order. Each line becomes a paragraph (§)."),
+    )
+
+    class Meta:
+        ordering = ["kind", "name", "pk"]
+        verbose_name = _("agenda template")
+        verbose_name_plural = _("agenda templates")
+
+    def __str__(self):
+        return self.name
+
+    def titles(self):
+        """The items' titles, without empty lines."""
+        return [line.strip() for line in self.items.splitlines() if line.strip()]
+
+    @classmethod
+    def for_kind(cls, kind):
+        """The template that new meetings of ``kind`` start with, or None."""
+        return cls.objects.filter(kind=kind).first()
+
+    def copy_to(self, meeting):
+        """Add the items to ``meeting``'s agenda, after any it has."""
+        last = meeting.items.order_by("-order").first()
+        start = last.order + 1 if last else 1
+        for order, title in enumerate(self.titles(), start=start):
+            AgendaItem.objects.create(meeting=meeting, order=order, title=title[:200])
+
+
 auditlog.register(Meeting, m2m_fields={"checkers"})
 auditlog.register(AgendaItem)
 auditlog.register(Attendance)
 auditlog.register(Approval)
+auditlog.register(AgendaTemplate)

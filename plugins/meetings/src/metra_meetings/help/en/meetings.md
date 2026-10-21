@@ -19,14 +19,30 @@ The plugin is turned on by the person running the installation
 ## Prepare the meeting
 
 1. Under **Meetings**, click **New meeting**. Choose the kind, write a title,
-   the date, time and place, and anything else the notice should say.
+   the date, time and place, and anything else the notice should say. Under
+   **Agenda**, the meeting starts with the agenda template for its kind
+   (see below), or another template, or an empty agenda.
 2. Tick **One vote per unit** if each unit (household or member) has one
    vote. Otherwise everyone present has a vote.
 3. Choose the chair, the secretary and the minute checkers if you already
    know them. You can change them until the minutes are approved.
-4. Add the agenda with **Add an item**, one item (paragraph, §) at a time.
-   Items are listed by their order number; the description is shown on the
-   agenda.
+4. Check the agenda, and add items with **Add an item**, one item
+   (paragraph, §) at a time. Items are listed by their order number; the
+   description is shown on the agenda.
+
+## Agenda templates
+
+An agenda template is the usual agenda of a kind of meeting. Metra starts
+with one for annual meetings and one for board meetings, with the items the
+Associations Act expects; adapt them to your rules. Open them with
+**Agenda templates** on the Meetings page, or under **Settings**
+(**Organisation**), or under **Settings > Add-ons > Meetings > Settings**.
+
+Write one item per line, in order. **For** says which kind of meeting starts
+with the template; leave it empty for a template you choose by hand, for
+example for a spring cleaning day. Changing a template does not change
+meetings already added. Admins and the board edit templates; the others can
+look at them.
 
 ## Call the meeting
 

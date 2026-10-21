@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Agenda templates" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Agenda templates" %}</h1>
+    <div class="actions">
+      {% if perms.metra_meetings.add_agendatemplate %}<a class="button button--primary" href="{% url 'metra_meetings:template_create' %}">{% translate "New template" %}</a>{% endif %}
+      <a class="button" href="{% url 'metra_meetings:meeting_list' %}">{% translate "Meetings" %}</a>
+    </div>
+  </div>
+  <p>{% blocktranslate trimmed %}
+    The usual agenda of each kind of meeting. A new meeting starts with the items of the
+    template for its kind, or of the one chosen, and you change them there as needed.
+    Changing a template does not change meetings already added.
+  {% endblocktranslate %}</p>
+  {% if templates %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Agenda templates' %}">
+      <table>
+        <thead><tr>
+          <th scope="col">{% translate "Template" %}</th>
+          <th scope="col">{% translate "For" %}</th>
+          <th scope="col">{% translate "Items" %}</th>
+          <th scope="col"><span class="visually-hidden">{% translate "Actions" %}</span></th>
+        </tr></thead>
+        <tbody>
+          {% for template in templates %}
+            <tr>
+              <th scope="row">{% if perms.metra_meetings.change_agendatemplate %}<a href="{% url 'metra_meetings:template_edit' template.pk %}">{{ template.name }}</a>{% else %}{{ template.name }}{% endif %}</th>
+              <td>{{ template.get_kind_display|default:_("Chosen by hand") }}</td>
+              <td>{{ template.titles|length }}</td>
+              <td>{% if perms.metra_meetings.delete_agendatemplate %}<a class="button" href="{% url 'metra_meetings:template_delete' template.pk %}">{% blocktranslate with name=template.name %}Delete<span class="visually-hidden"> {{ name }}</span>{% endblocktranslate %}</a>{% endif %}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "No agenda templates yet." %}</p>
+  {% endif %}
+{% endblock %}

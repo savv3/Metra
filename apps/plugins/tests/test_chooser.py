@@ -186,3 +186,29 @@ def test_a_plugin_reads_its_own_settings_without_naming_itself(db):
     from metra_example_plugin import views
 
     assert views.api.plugin_settings("example").get("greeting") == "Hello"
+
+
+def test_a_plugin_page_lists_the_plugins_own_settings_pages(role_client):
+    client = role_client("Admin")
+
+    page = client.get(SETTINGS).content.decode()
+    webhooks = client.get(reverse("plugins:settings", args=["webhooks"])).content.decode()
+
+    assert 'href="/plugins/example/">Example plugin</a>' in page
+    assert 'name="greeting"' in page
+    # A plugin with pages of its own but no settings of the generic kind.
+    assert reverse("metra_webhooks:endpoint_list") in webhooks
+    assert "<form" not in webhooks.split('<main id="main">')[1].split("</main>")[0]
+
+
+def test_settings_links_go_in_the_section_they_name(role_client, settings):
+    settings.REQUIRE_MFA = False
+    link = api.SettingsLink("Odd", "plugins:list", group="nowhere")
+    hooks.register(SETTINGS_LINKS, link, owner="example")
+    try:
+        page = role_client("Admin").get(reverse("core:settings")).content.decode()
+    finally:
+        hooks._items[SETTINGS_LINKS].remove(link)
+
+    integrations = page.split('id="settings-integrations"')[1].split("</section>")[0]
+    assert ">Odd</a>" in integrations

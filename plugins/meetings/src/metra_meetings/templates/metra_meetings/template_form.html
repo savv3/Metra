@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if template %}{% translate "Edit agenda template" %}{% else %}{% translate "New agenda template" %}{% endif %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% if template %}{% translate "Edit agenda template" %}{% else %}{% translate "New agenda template" %}{% endif %}</h1>
+  </div>
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+      <a class="button" href="{% url 'metra_meetings:template_list' %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+{% endblock %}

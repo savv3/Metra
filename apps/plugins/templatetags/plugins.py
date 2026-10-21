@@ -102,13 +102,22 @@ def member_panels(context, member_link):
     return mark_safe("\n".join(html))
 
 
-def settings_links(user):
+def settings_links(user, group=None, plugin=None):
     """(url, label, description) for the plugins' links on the Settings page
-    that ``user`` may open."""
+    that ``user`` may open: all of them, or those in the Settings page's
+    section ``group``, or those added by the plugin named ``plugin``."""
+    from ..api import SETTINGS_GROUPS
+
     links = []
     for link in hooks.get(SETTINGS_LINKS):
         if not _allowed(user, link.permission):
             continue
+        if plugin is not None and hooks.owner(link) != plugin:
+            continue
+        if group is not None:
+            linked = link.group if link.group in SETTINGS_GROUPS else "integrations"
+            if linked != group:
+                continue
         try:
             links.append((reverse(link.url_name), link.label, link.description))
         except NoReverseMatch:

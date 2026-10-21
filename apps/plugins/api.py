@@ -13,7 +13,8 @@ the same API_VERSION; anything else in the app may change.
             api.add_navigation(api.NavItem("My page", "my_plugin:index", "register.view_unit"))
             api.add_unit_panel(api.Panel("my_plugin/panel.html", title="Mine"))
             api.add_messaging_provider(MySMSProvider)
-            api.add_settings_link(api.SettingsLink("My settings", "my_plugin:settings"))
+            api.add_settings_link(api.SettingsLink("My settings", "my_plugin:settings",
+                                                   group="organisation"))
             api.add_webhook_event(
                 api.WebhookEvent("thing.saved", "A thing was saved", thing_saved, thing_payload)
             )
@@ -137,6 +138,7 @@ __all__ = [
     "SendResult",
     "Setting",
     "SettingsLink",
+    "SETTINGS_GROUPS",
     "WebhookEvent",
     "HelpArticles",
     "NotificationKind",
@@ -217,12 +219,29 @@ def add_messaging_provider(provider_class):
 
 @dataclass
 class SettingsLink:
-    """A link on the Settings page to a plugin's own settings or tools."""
+    """A link to a plugin's own settings or tools. It shows on the Settings
+    page, in the section named by ``group`` (see SETTINGS_GROUPS), and on the
+    plugin's page under Settings > Add-ons."""
 
     label: str
     url_name: str
     permission: str = ""
     description: str = ""
+    group: str = "integrations"
+
+
+# The sections of the Settings page a SettingsLink can go in. A link with
+# another group goes under "integrations".
+SETTINGS_GROUPS = (
+    "organisation",
+    "register",
+    "readings",
+    "invoicing",
+    "messages",
+    "users",
+    "integrations",
+    "backups",
+)
 
 
 def add_settings_link(link):

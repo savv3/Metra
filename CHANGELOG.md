@@ -14,6 +14,18 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- Agenda templates in the meetings add-on: the usual agenda of each kind of
+  meeting, which a new meeting starts with (or another template, or an empty
+  agenda). New installations get templates for annual and board meetings to
+  adapt. Admins and the board edit them under Meetings > Agenda templates,
+  Settings > Organisation, or Settings > Add-ons > Meetings.
+- An add-on's page under Settings > Add-ons now also lists its own setting
+  pages, such as the webhooks or agenda templates, and opens for add-ons that
+  have such pages but no other settings.
+- For plugin authors: `api.SettingsLink` takes `group`, the section of the
+  Settings page the link goes in (`api.SETTINGS_GROUPS`, Integrations by
+  default), and the link is also listed on the plugin's page under
+  Settings > Add-ons.
 - Mailgun add-on (`metra-email-mailgun`, bundled and on by default): send
   email through Mailgun's API, EU region by default, with attachments,
   List-Unsubscribe and a tag per send-out. Set it up under Settings >
