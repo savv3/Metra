@@ -38,7 +38,7 @@ def get(client, user):
     return client.get(URL, HTTP_ACCEPT_LANGUAGE="en")
 
 
-def test_admin_sees_every_group_but_advanced(client, make_user):
+def test_admin_sees_every_group(client, make_user):
     page = get(client, make_user("admin", "Admin", is_staff=True)).content.decode()
 
     assert groups(page) == [
@@ -51,7 +51,9 @@ def test_admin_sees_every_group_but_advanced(client, make_user):
         "integrations",
         "backups",
         "setup",
+        "advanced",
     ]
+    assert reverse("admin:index") in page
     for url in [
         reverse("admin:register_organisation_add"),
         reverse("admin:register_unittype_changelist"),
@@ -68,7 +70,6 @@ def test_admin_sees_every_group_but_advanced(client, make_user):
         reverse("setup:start"),
     ]:
         assert f'href="{url}"' in page
-    assert f'href="{reverse("admin:index")}"' not in page
 
 
 def test_main_pages_are_not_repeated(client, make_user):
@@ -202,3 +203,10 @@ def test_invoice_settings_offer_every_setting(client, make_user):
 
     for name in ["reference_type", "reminder_fee", "reminder_days", "iban"]:
         assert f'name="{name}"' in form
+
+
+def test_advanced_is_only_for_admins_and_superusers(client, make_user):
+    board = get(client, make_user("board", "Board", is_staff=True)).content.decode()
+
+    assert "advanced" not in groups(board)
+    assert f'href="{reverse("admin:index")}"' not in board
