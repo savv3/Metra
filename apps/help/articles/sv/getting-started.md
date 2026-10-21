@@ -72,3 +72,9 @@ sparad nyckel visas aldrig igen: lämna fältet tomt för att behålla det, elle
 skriv in ett nytt. En inställning som är grånad är angiven på servern och kan
 inte ändras i appen. Nya tillägg installeras på servern, se
 installationsanvisningen.
+
+För att skicka sms öppnar du **Inställningar** för tillägget **46elks SMS**,
+fyller i API-användarnamnet och lösenordet från ditt konto hos 46elks och
+avsändaren som visas i telefonen (högst 11 bokstäver och siffror), och
+skickar ett test-sms från installationsguiden. Med **Testläge** kontrollerar
+46elks meddelandena utan att skicka dem.

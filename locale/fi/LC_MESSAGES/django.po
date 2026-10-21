@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 20:01+0300\n"
+"POT-Creation-Date: 2026-10-21 17:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -790,7 +790,9 @@ msgstr ""
 
 #: apps/core/settings_page.py:148
 msgid "How email is sent: the mail server or service, and the from address."
-msgstr "Miten sähköposti lähetetään: sähköpostipalvelin tai palvelu ja lähettäjän osoite."
+msgstr ""
+"Miten sähköposti lähetetään: sähköpostipalvelin tai palvelu ja lähettäjän "
+"osoite."
 
 #
 #: apps/core/settings_page.py:153
@@ -2439,11 +2441,13 @@ msgstr "Minne vastaukset menevät, jos ei lähettäjän osoitteeseen."
 #: apps/messaging/email_forms.py:83
 msgid ""
 "The saved password cannot be read with this server's key; enter it again."
-msgstr "Tallennettua salasanaa ei voi lukea palvelimen avaimella. Anna se uudelleen."
+msgstr ""
+"Tallennettua salasanaa ei voi lukea palvelimen avaimella. Anna se uudelleen."
 
 #: apps/messaging/email_forms.py:85
 msgid "A password is saved. Leave this empty to keep it."
-msgstr "Salasana on tallennettu. Jätä kenttä tyhjäksi, jos haluat säilyttää sen."
+msgstr ""
+"Salasana on tallennettu. Jätä kenttä tyhjäksi, jos haluat säilyttää sen."
 
 #: apps/messaging/email_forms.py:103 apps/plugins/views.py:108
 #, python-format
@@ -3054,7 +3058,9 @@ msgstr "SMTP"
 msgid ""
 "Only used when email goes through SMTP. Your email provider or IT support "
 "can tell you these."
-msgstr "Käytössä vain, kun sähköposti lähetetään SMTP:n kautta. Sähköpostin tarjoajasi tai IT-tukesi osaa kertoa nämä."
+msgstr ""
+"Käytössä vain, kun sähköposti lähetetään SMTP:n kautta. Sähköpostin "
+"tarjoajasi tai IT-tukesi osaa kertoa nämä."
 
 #: apps/messaging/templates/messaging/_person_newsletter.html:6
 msgid "Does not want the newsletter"
@@ -3339,7 +3345,9 @@ msgstr ""
 msgid ""
 "All email from Metra goes this way: messages, newsletters, invoices and "
 "reminders, and login codes and invitations."
-msgstr "Kaikki Metran sähköposti lähetetään näin: viestit, uutiskirjeet, laskut ja muistutukset sekä kirjautumiskoodit ja kutsut."
+msgstr ""
+"Kaikki Metran sähköposti lähetetään näin: viestit, uutiskirjeet, laskut ja "
+"muistutukset sekä kirjautumiskoodit ja kutsut."
 
 #: apps/messaging/templates/messaging/email_settings.html:16
 #: apps/notifications/templates/notifications/settings.html:19
@@ -5635,7 +5643,7 @@ msgstr ""
 "sen sijaan kohdassa Asetukset."
 
 #: apps/setup/templates/setup/board.html:21
-#: apps/setup/templates/setup/messaging.html:34
+#: apps/setup/templates/setup/messaging.html:33
 #: apps/setup/templates/setup/types.html:39
 msgid "Continue"
 msgstr "Jatka"
@@ -5699,7 +5707,10 @@ msgid ""
 "All email from Metra goes this way: messages, newsletters, invoices and "
 "reminders, and login codes and invitations. You can change it later under "
 "Settings > Email."
-msgstr "Kaikki Metran sähköposti lähetetään näin: viestit, uutiskirjeet, laskut ja muistutukset sekä kirjautumiskoodit ja kutsut. Voit muuttaa tätä myöhemmin kohdassa Asetukset > Sähköposti."
+msgstr ""
+"Kaikki Metran sähköposti lähetetään näin: viestit, uutiskirjeet, laskut ja "
+"muistutukset sekä kirjautumiskoodit ja kutsut. Voit muuttaa tätä myöhemmin "
+"kohdassa Asetukset > Sähköposti."
 
 #: apps/setup/templates/setup/messaging.html:10
 msgid "Save email settings"
@@ -5714,6 +5725,13 @@ msgstr "Määritetty"
 msgid "Sender %(sender)s"
 msgstr "Lähettäjä %(sender)s"
 
+#: apps/setup/templates/setup/messaging.html:23
+#, python-format
+msgid ""
+"Turn on an SMS add-on and enter its details under <a "
+"href=\"%(addons)s\">Settings &rsaquo; Add-ons</a>."
+msgstr "Ota tekstiviestilisäosa käyttöön ja anna sen tiedot kohdassa <a href=\"%(addons)s\">Asetukset &rsaquo; Lisäosat</a>."
+
 #: apps/setup/templates/setup/messaging.html:29
 msgid "Send a test SMS to"
 msgstr "Lähetä testiviesti numeroon"
@@ -5722,10 +5740,6 @@ msgstr "Lähetä testiviesti numeroon"
 #: apps/setup/templates/setup/messaging.html:30
 msgid "Send test SMS"
 msgstr "Lähetä testiviesti"
-
-#: apps/setup/templates/setup/messaging.html:33
-msgid "SMS settings are described in INSTALL.md, under Email and SMS."
-msgstr "Tekstiviestiasetukset on kuvattu tiedostossa INSTALL.md, kohdassa Email and SMS."
 
 #
 #: apps/setup/templates/setup/organisation.html:4
@@ -5958,6 +5972,11 @@ msgid ""
 msgstr ""
 "Suojaa tilisi kaksivaiheisella tunnistautumisella. Se vie minuutin "
 "todennussovelluksella puhelimellasi."
+
+#~ msgid "SMS settings are described in INSTALL.md, under Email and SMS."
+#~ msgstr ""
+#~ "Tekstiviestiasetukset on kuvattu tiedostossa INSTALL.md, kohdassa Email "
+#~ "and SMS."
 
 #~ msgid ""
 #~ "Email and SMS are set by whoever installed Metra, in the server's "

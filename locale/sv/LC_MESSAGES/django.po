@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 20:01+0300\n"
+"POT-Creation-Date: 2026-10-21 17:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2445,7 +2445,8 @@ msgstr "Dit svaren går, om inte till avsändaradressen."
 #: apps/messaging/email_forms.py:83
 msgid ""
 "The saved password cannot be read with this server's key; enter it again."
-msgstr "Det sparade lösenordet kan inte läsas med serverns nyckel. Skriv in det igen."
+msgstr ""
+"Det sparade lösenordet kan inte läsas med serverns nyckel. Skriv in det igen."
 
 #: apps/messaging/email_forms.py:85
 msgid "A password is saved. Leave this empty to keep it."
@@ -3058,7 +3059,9 @@ msgstr "SMTP"
 msgid ""
 "Only used when email goes through SMTP. Your email provider or IT support "
 "can tell you these."
-msgstr "Används bara när e-posten skickas via SMTP. Din e-postleverantör eller IT-support kan berätta vad du ska ange."
+msgstr ""
+"Används bara när e-posten skickas via SMTP. Din e-postleverantör eller IT-"
+"support kan berätta vad du ska ange."
 
 #: apps/messaging/templates/messaging/_person_newsletter.html:6
 msgid "Does not want the newsletter"
@@ -3337,7 +3340,9 @@ msgstr "Ingenting skickas förrän du har kontrollerat mottagarna och bekräftat
 msgid ""
 "All email from Metra goes this way: messages, newsletters, invoices and "
 "reminders, and login codes and invitations."
-msgstr "All e-post från Metra skickas på det här sättet: meddelanden, nyhetsbrev, fakturor och påminnelser samt inloggningskoder och inbjudningar."
+msgstr ""
+"All e-post från Metra skickas på det här sättet: meddelanden, nyhetsbrev, "
+"fakturor och påminnelser samt inloggningskoder och inbjudningar."
 
 #: apps/messaging/templates/messaging/email_settings.html:16
 #: apps/notifications/templates/notifications/settings.html:19
@@ -5628,7 +5633,7 @@ msgstr ""
 "personer under Inställningar i stället."
 
 #: apps/setup/templates/setup/board.html:21
-#: apps/setup/templates/setup/messaging.html:34
+#: apps/setup/templates/setup/messaging.html:33
 #: apps/setup/templates/setup/types.html:39
 msgid "Continue"
 msgstr "Fortsätt"
@@ -5693,7 +5698,10 @@ msgid ""
 "All email from Metra goes this way: messages, newsletters, invoices and "
 "reminders, and login codes and invitations. You can change it later under "
 "Settings > Email."
-msgstr "All e-post från Metra skickas på det här sättet: meddelanden, nyhetsbrev, fakturor och påminnelser samt inloggningskoder och inbjudningar. Du kan ändra det senare under Inställningar > E-post."
+msgstr ""
+"All e-post från Metra skickas på det här sättet: meddelanden, nyhetsbrev, "
+"fakturor och påminnelser samt inloggningskoder och inbjudningar. Du kan "
+"ändra det senare under Inställningar > E-post."
 
 #: apps/setup/templates/setup/messaging.html:10
 msgid "Save email settings"
@@ -5708,6 +5716,13 @@ msgstr "Inställt"
 msgid "Sender %(sender)s"
 msgstr "Avsändare %(sender)s"
 
+#: apps/setup/templates/setup/messaging.html:23
+#, python-format
+msgid ""
+"Turn on an SMS add-on and enter its details under <a "
+"href=\"%(addons)s\">Settings &rsaquo; Add-ons</a>."
+msgstr "Slå på ett SMS-tillägg och fyll i dess uppgifter under <a href=\"%(addons)s\">Inställningar &rsaquo; Tillägg</a>."
+
 #: apps/setup/templates/setup/messaging.html:29
 msgid "Send a test SMS to"
 msgstr "Skicka ett test-sms till"
@@ -5716,10 +5731,6 @@ msgstr "Skicka ett test-sms till"
 #: apps/setup/templates/setup/messaging.html:30
 msgid "Send test SMS"
 msgstr "Skicka test-sms"
-
-#: apps/setup/templates/setup/messaging.html:33
-msgid "SMS settings are described in INSTALL.md, under Email and SMS."
-msgstr "Sms-inställningar beskrivs i INSTALL.md, under Email and SMS."
 
 #
 #: apps/setup/templates/setup/organisation.html:4
@@ -5950,6 +5961,9 @@ msgid ""
 msgstr ""
 "Skydda ditt konto med tvåfaktorsinloggning. Det tar en minut med en "
 "autentiseringsapp i telefonen."
+
+#~ msgid "SMS settings are described in INSTALL.md, under Email and SMS."
+#~ msgstr "Sms-inställningar beskrivs i INSTALL.md, under Email and SMS."
 
 #~ msgid ""
 #~ "Email and SMS are set by whoever installed Metra, in the server's "

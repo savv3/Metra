@@ -20,7 +20,7 @@
   <h2>{% translate "SMS" %}</h2>
   <dl class="details-list">
     <dt>{% translate "SMS" %}</dt>
-    <dd>{% if sms %}<span class="pill pill--ok">{% translate "Set up" %}</span> {{ sms_label }} &middot; {% blocktranslate with sender=sms_sender %}Sender {{ sender }}{% endblocktranslate %}{% else %}<span class="pill pill--warn">{% translate "Not set up" %}</span> <span class="help">METRA_ELKS_API_USER, METRA_ELKS_API_PASSWORD, METRA_SMS_SENDER</span>{% endif %}</dd>
+    <dd>{% if sms %}<span class="pill pill--ok">{% translate "Set up" %}</span> {{ sms_label }} &middot; {% blocktranslate with sender=sms_sender %}Sender {{ sender }}{% endblocktranslate %}{% else %}<span class="pill pill--warn">{% translate "Not set up" %}</span> <span class="help">{% url 'plugins:list' as addons %}{% blocktranslate %}Turn on an SMS add-on and enter its details under <a href="{{ addons }}">Settings &rsaquo; Add-ons</a>.{% endblocktranslate %}</span>{% endif %}</dd>
   </dl>
   {% if sms %}
     <form method="post" class="form form--inline">
@@ -30,6 +30,5 @@
       <button type="submit" class="button">{% translate "Send test SMS" %}</button>
     </form>
   {% endif %}
-  <p class="help">{% translate "SMS settings are described in INSTALL.md, under Email and SMS." %}</p>
   <div class="actions"><a class="button button--primary" href="{{ next_url }}">{% translate "Continue" %}</a></div>
 {% endblock %}

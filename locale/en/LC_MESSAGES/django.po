@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 20:01+0300\n"
+"POT-Creation-Date: 2026-10-21 17:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5360,7 +5360,7 @@ msgid ""
 msgstr ""
 
 #: apps/setup/templates/setup/board.html:21
-#: apps/setup/templates/setup/messaging.html:34
+#: apps/setup/templates/setup/messaging.html:33
 #: apps/setup/templates/setup/types.html:39
 msgid "Continue"
 msgstr ""
@@ -5431,16 +5431,19 @@ msgstr ""
 msgid "Sender %(sender)s"
 msgstr ""
 
+#: apps/setup/templates/setup/messaging.html:23
+#, python-format
+msgid ""
+"Turn on an SMS add-on and enter its details under <a "
+"href=\"%(addons)s\">Settings &rsaquo; Add-ons</a>."
+msgstr ""
+
 #: apps/setup/templates/setup/messaging.html:29
 msgid "Send a test SMS to"
 msgstr ""
 
 #: apps/setup/templates/setup/messaging.html:30
 msgid "Send test SMS"
-msgstr ""
-
-#: apps/setup/templates/setup/messaging.html:33
-msgid "SMS settings are described in INSTALL.md, under Email and SMS."
 msgstr ""
 
 #: apps/setup/templates/setup/organisation.html:4
