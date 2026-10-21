@@ -116,6 +116,14 @@ def test_example_names_follow_the_language():
         assert examples.water_association().name == "Hushåll"
 
 
+def test_unit_type_form_takes_a_plural_name(admin_client):
+    admin_client.post(
+        url("types"), {"action": "type", "type-name": "Stuga", "type-name_plural": "Stugor"}
+    )
+
+    assert UnitType.objects.get(name="Stuga").name_plural == "Stugor"
+
+
 def test_unit_types_and_fields_can_be_added(admin_client):
     admin_client.post(url("types"), {"action": "type", "type-name": "Båtplats"})
     berth = UnitType.objects.get(name="Båtplats")

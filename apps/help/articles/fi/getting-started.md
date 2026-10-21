@@ -5,7 +5,7 @@ kerää lukemat, lähettää viestejä ja uutiskirjeitä sekä tekee laskut.
 
 ## Valikko
 
-- **Yksiköt** ja **Henkilöt**: rekisteri.
+- **Yksiköt** ja **Henkilöt**: rekisteri. Jos yksikkötyyppejä on vain yksi, valikko käyttää sen omaa nimeä (esimerkiksi **Mökit**).
 - **Lukemat**: lukemakierrokset, esimerkiksi vuosittainen vesimittarin luenta.
 - **Laskut**: laskutusajot, maksut ja muistutukset.
 - **Lähetykset**: viestit, kiireelliset hälytykset ja uutiskirjeet toimitustiloineen.

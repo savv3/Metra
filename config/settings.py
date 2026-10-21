@@ -112,6 +112,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "apps.core.context_processors.languages",
+                "apps.register.context_processors.unit_words",
             ],
         },
     },

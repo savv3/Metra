@@ -107,7 +107,7 @@ class SnapshotBeforeDeleteMixin:
 @admin.register(UnitType)
 class UnitTypeAdmin(SnapshotBeforeDeleteMixin, AuditlogHistoryAdminMixin, admin.ModelAdmin):
     show_auditlog_history_link = True
-    list_display = ["name", "order"]
+    list_display = ["name", "name_plural", "order"]
     inlines = [UnitCustomFieldInline]
 
     def save_formset(self, request, form, formset, change):

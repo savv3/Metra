@@ -6,7 +6,7 @@ fakturor.
 
 ## Menyn
 
-- **Enheter** och **Personer**: registret.
+- **Enheter** och **Personer**: registret. Om ni bara har en enhetstyp används dess eget namn i menyn (till exempel **Stugor**).
 - **Avläsningar**: avläsningsomgångar, till exempel den årliga avläsningen av vattenmätare.
 - **Fakturor**: faktureringsomgångar, betalningar och påminnelser.
 - **Utskick**: meddelanden, brådskande varningar och nyhetsbrev, med leveransstatus.

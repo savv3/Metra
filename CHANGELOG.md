@@ -23,7 +23,12 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   `api.add_settings_link` are listed under Integrations.
 - Invoice settings now include the payment reference type and the reminder
   fee and days, which could not be changed before.
-
+- A unit type can have a plural name. With exactly one unit type, the menu,
+  the list heading and the buttons use that type's own name instead of
+  "Units", and the unit list drops the type filter and column. Adding a unit
+  now reads "Add: <type>" (Lägg till: …), which fixes the wrong grammatical
+  form in Swedish and Finnish. The water association example fills the plural.
+  Existing unit types have no plural name until an admin adds one.
 - The meetings plugin (`METRA_PLUGINS=meetings`, off by default): annual,
   extraordinary and board meetings with an agenda, the notice sent as a
   message with the agenda attached, attendance from the register with votes

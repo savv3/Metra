@@ -65,7 +65,7 @@ class LogoForm(forms.ModelForm):
 class UnitTypeForm(forms.ModelForm):
     class Meta:
         model = UnitType
-        fields = ["name", "description"]
+        fields = ["name", "name_plural", "description"]
         widgets = {"description": forms.Textarea(attrs={"rows": 2})}
 
 

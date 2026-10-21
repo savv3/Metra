@@ -6,7 +6,7 @@ invoices.
 
 ## The menu
 
-- **Units** and **People**: the register.
+- **Units** and **People**: the register. With a single unit type, the menu uses that type's own name (for example **Cabins**).
 - **Readings**: reading rounds, such as the yearly water meter reading.
 - **Invoices**: invoice runs, payments and reminders.
 - **Send-outs**: messages, urgent alerts and newsletters, with their delivery status.
