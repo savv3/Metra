@@ -8,7 +8,7 @@ flera enheter.
 ## Enhetstyper och fält
 
 En administratör ställer in sorterna av enheter under **Inställningar >
-Enhetstyper**, var och en med egna fält, som fastighetsbeteckning eller
+Register > Enhetstyper och deras fält**, var och en med egna fält, som fastighetsbeteckning eller
 mätarnummer. Fält kan också läggas till för alla personer. När en enhetstyp
 eller ett fält tas bort tas först en säkerhetskopia, eftersom uppgifterna då
 försvinner från alla enheter.

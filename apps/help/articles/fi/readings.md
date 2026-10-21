@@ -5,7 +5,7 @@ vesimittarit lokakuussa.
 
 ## Lukematyypit ja kierrokset
 
-Ylläpitäjä määrittää, mitä luetaan, kohdassa **Asetukset > Lukematyypit**:
+Ylläpitäjä määrittää, mitä luetaan, kohdassa **Asetukset > Lukemat > Lukematyypit**:
 yksikkötyyppi, johon lukema liittyy, mittayksikkö (esimerkiksi m³),
 desimaalit ja se, onko kyseessä mittari, joka jatkaa laskemista. Avaa
 kohdassa **Lukemat** kierros (esimerkiksi "2026") ja aseta päivät, joina
@@ -46,4 +46,4 @@ Kierroksen linkki toimii, kunnes kierros suljetaan. Uuden linkin
 tekeminen mitätöi henkilön aiemman linkin, ja linkit voi mitätöidä myös
 käsin.
 
-Tekstit ovat kohdassa **Asetukset > Viestipohjat**.
+Tekstit ovat kohdassa **Asetukset > Viestit > Viestipohjat**.

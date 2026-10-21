@@ -7,7 +7,7 @@ usean yksikön yhteyshenkilö.
 
 ## Yksikkötyypit ja kentät
 
-Ylläpitäjä määrittää yksiköiden lajit kohdassa **Asetukset > Yksikkötyypit**,
+Ylläpitäjä määrittää yksiköiden lajit kohdassa **Asetukset > Rekisteri > Yksikkötyypit ja niiden kentät**,
 kullekin omat kenttänsä, kuten kiinteistötunnus tai mittarin numero. Kenttiä
 voi lisätä myös kaikille henkilöille. Yksikkötyypin tai kentän poistamista
 edeltää varmuuskopio, koska poisto vie tiedot jokaiselta yksiköltä.

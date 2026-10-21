@@ -240,7 +240,7 @@ def test_settings_links_to_the_wizard(make_user, client, settings):
     settings.REQUIRE_MFA = False
     client.force_login(make_user("root", "Admin", is_staff=True))
 
-    page = client.get(reverse("admin:index")).content.decode()
+    page = client.get(reverse("core:settings")).content.decode()
 
     assert reverse("setup:start") in page
 

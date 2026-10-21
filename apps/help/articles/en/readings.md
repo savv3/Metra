@@ -5,7 +5,7 @@ meter in October.
 
 ## Reading types and rounds
 
-An admin sets up what is read under **Settings > Reading types**: the unit
+An admin sets up what is read under **Settings > Readings > Reading types**: the unit
 type it applies to, the unit of measure (such as m³), the decimals, and
 whether it is a meter that keeps counting. Under **Readings**, open a round
 (for example "2026") with the dates members may report in.
@@ -41,4 +41,4 @@ On the round page:
 A link for a round works until the round closes. Making a new link stops the
 person's earlier one, and links can be stopped by hand.
 
-The texts are under **Settings > Message templates**.
+The texts are under **Settings > Messages > Message templates**.

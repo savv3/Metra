@@ -232,7 +232,7 @@ def test_a_broken_remote_is_shown_not_a_crash(role_client, settings):
 def test_settings_link_to_backups(settings_admin):
     url = reverse("backups:list")
 
-    assert url in settings_admin.get(reverse("admin:index")).content.decode()
+    assert url in settings_admin.get(reverse("core:settings")).content.decode()
 
 
 def test_a_snapshot_during_a_request_is_sent_offsite_after_the_commit(

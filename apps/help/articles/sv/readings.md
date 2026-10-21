@@ -6,7 +6,7 @@ vattenmätare i oktober.
 ## Avläsningstyper och omgångar
 
 En administratör ställer in vad som läses av under **Inställningar >
-Avläsningstyper**: vilken enhetstyp det gäller, enheten (som m³), antalet
+Avläsningar > Avläsningstyper**: vilken enhetstyp det gäller, enheten (som m³), antalet
 decimaler och om det är en mätare som räknar vidare. Under **Avläsningar**
 öppnar du en omgång (till exempel "2026") med de datum då medlemmarna kan
 rapportera.
@@ -44,4 +44,4 @@ På omgångens sida:
 En länk för en omgång fungerar tills omgången stänger. En ny länk stoppar
 personens tidigare länk, och länkar kan också stoppas för hand.
 
-Texterna finns under **Inställningar > Meddelandemallar**.
+Texterna finns under **Inställningar > Meddelanden > Meddelandemallar**.

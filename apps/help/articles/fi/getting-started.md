@@ -9,7 +9,7 @@ kerää lukemat, lähettää viestejä ja uutiskirjeitä sekä tekee laskut.
 - **Lukemat**: lukemakierrokset, esimerkiksi vuosittainen vesimittarin luenta.
 - **Laskut**: laskutusajot, maksut ja muistutukset.
 - **Lähetykset**: viestit, kiireelliset hälytykset ja uutiskirjeet toimitustiloineen.
-- **Asetukset** (ylläpitäjät): organisaatio, yksikkötyypit ja kentät, käyttäjät ja roolit, viestipohjat, laskuasetukset ja varmuuskopiot.
+- **Asetukset**: organisaatio, rekisterin yksikkötyypit ja kentät, lukematyypit, laskutusasetukset ja maksusuunnitelmat, viestipohjat, käyttäjät ja roolit, integraatiot ja varmuuskopiot. Katso ”Asetukset” alempana.
 - **Ohje**: nämä oppaat. Jokaisen sivun Ohje-linkki avaa kyseisen sivun oppaan.
 
 Oma kielesi, vaalea tai tumma teema ja kaksivaiheinen tunnistautuminen ovat
@@ -34,7 +34,24 @@ toiminnon** sivu kerrallaan:
 
 Minkä tahansa vaiheen voi ohittaa, eikä mikään muutu, ennen kuin vaihe
 tallennetaan. Ylläpitäjät voivat ajaa ohjatun toiminnon uudelleen kohdassa
-**Asetukset > Käynnistä käyttöönotto**.
+**Asetukset > Käyttöönotto**.
+
+## Asetukset
+
+Valikon **Asetukset** kokoaa kaiken, minkä ylläpitäjä määrittää, tehtävien
+mukaan ryhmiteltynä:
+
+- **Organisaatio**: nimi, Y-tunnus, yhteystiedot, logo ja julkinen sivu.
+- **Rekisteri**: yksikkötyypit ja niiden kentät, henkilöiden kentät ja tunnisteet.
+- **Lukemat**: lukematyypit.
+- **Laskutus**: laskutusasetukset ja maksusuunnitelmat. Maksusuunnitelman maksurivejä muokataan itse suunnitelmassa.
+- **Viestit**: viestipohjat, ilmoitukset julkisella sivulla ja uutiskirjeen suostumukset.
+- **Käyttäjät ja roolit**: kuka voi kirjautua sisään ja mitä kukin rooli saa tehdä.
+- **Integraatiot**: API-asiakkaat, webhookit ja muut yhteydet, kun ne ovat käytössä.
+- **Varmuuskopiot** ja **Käyttöönotto**.
+
+Kukin näkee vain sen, mitä oma rooli saa muuttaa, ja valikko näyttää
+Asetukset vain niille, jotka voivat muuttaa siellä jotakin.
 
 ## Jäsenet
 

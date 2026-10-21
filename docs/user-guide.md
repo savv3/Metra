@@ -29,12 +29,12 @@ It goes through, one page each:
 
 Every step can be skipped, and nothing changes until a step is saved. When
 you finish, the wizard stops appearing; admins can run it again any time
-from **Settings > Run the setup wizard**. Installations that were set up
+from **Settings > Setup wizard**. Installations that were set up
 before the wizard existed are not sent to it.
 
 ## Readings
 
-An admin sets up what is read under **Settings > Reading types**: a name,
+An admin sets up what is read under **Settings > Readings > Reading types**: a name,
 the unit type it applies to, the unit of measure (for example m³), the
 number of decimals, and whether it is a cumulative meter. The water setup
 (`load_sample_setup water`) adds "Vattenmätare" in whole m³. Reading types
@@ -99,7 +99,7 @@ Sending runs in the worker, and the send-out page (under **Send-outs**)
 shows each message's status as it goes, including delivery reports from
 46elks.
 
-The texts are under **Settings > Message templates**, one per purpose
+The texts are under **Settings > Messages > Message templates**, one per purpose
 (link or reminder) and channel (SMS or email), with the placeholders
 `{name}`, `{first_name}`, `{link}`, `{closes}`, `{period}`,
 `{reading_type}`, `{unit}` and `{organisation}`. The stored copy of each
@@ -116,7 +116,7 @@ Visitors who are not logged in see the organisation's own page at the
 site's address: its public name, logo, a short description, phone, email,
 address, opening hours, website and an emergency phone, with a link to the
 staff login. An admin fills these in under **Settings > Organisation >
-Public page and contact details**. The logo can be a PNG, JPEG or WebP
+Organisation details**, under "Public page and contact details". The logo can be a PNG, JPEG or WebP
 image up to 1 MB. Untick **Show the public page** to show only a plain
 welcome page instead.
 
@@ -130,7 +130,7 @@ set). Only organisation data is shown there, never anyone's personal data.
 pages, for example "Water off in the village until 18:00". An urgent alert
 can publish one (**Also show as a notice on the public page**, with an
 optional end time); the send-out page has **Remove the notice**, and all
-notices are listed under **Settings > Notices**.
+notices are listed under **Settings > Messages > Notices**.
 
 Search engines may index the public page and nothing else: `robots.txt`
 allows only `/`, and every other page sends `X-Robots-Tag: noindex`.
@@ -161,7 +161,7 @@ These are service messages about the organisation's own service, sent on
 the basis of membership, so they do not need newsletter consent; use them
 for operational information, not marketing. Only the Admin role may send
 them; an admin can give the "Can send messages and alerts to everyone"
-permission to Board under **Settings > Groups**.
+permission to Board under **Settings > Users and roles > Roles**.
 
 To write to one household, open the unit and use **Send message** under
 **Messages**. It goes to the unit's contacts, by email unless you choose
@@ -192,7 +192,7 @@ Newsletters are email to people who have said yes, and only to them.
   paper or by phone, with a note on how it was given), or the unsubscribe
   link. A person's newest answer counts; no answer means no. Staff see and
   record it on the person page; earlier answers are listed there too, and
-  the records are never edited (**Settings > Newsletter consents**).
+  the records are never edited (**Settings > Messages > Newsletter consents**).
 - **Sending.** **Send-outs > New newsletter** (Admin): write a subject and
   plain text with `{first_name}`, `{name}` and `{organisation}`, check how it
   looks, and send. It goes to active people whose newest answer is yes and
@@ -210,10 +210,10 @@ Consent records are personal data, covered by the export and erasure tools.
 
 ## Invoicing
 
-Under **Settings > Invoice settings** an admin sets whether the organisation
+Under **Settings > Invoicing > Invoice settings** an admin sets whether the organisation
 is VAT registered (off by default; invoices then carry the exemption text),
 the IBAN and BIC, payment terms, the invoice numbering and the texts on
-invoices. **Settings > Fee plans** says what units pay: fixed fees (with
+invoices. **Settings > Invoicing > Fee plans** says what units pay: fixed fees (with
 `{period}` in the text, for example "Grundavgift {period}") and usage fees
 priced per unit of a reading, optionally in tiers, each with its VAT rate.
 A fee line can apply only to units with a given custom field value, and a
@@ -239,12 +239,12 @@ seller's details and business ID, the buyer, the lines, VAT per rate or the
 exemption text, the due date, the payment reference and a payment block
 with the IBAN, a SEPA payment QR code and the bank barcode
 (virtuaaliviivakoodi) that bank apps read. The reference is a Finnish
-reference number (viitenumero) by default; **Settings > Invoice settings >
-Payment reference** switches to international RF references. The barcode
+reference number (viitenumero) by default; **Settings > Invoicing > Invoice
+settings > Payment reference** switches to international RF references. The barcode
 needs a Finnish IBAN.
 
 **Send invoices** on a run page emails each issued invoice with its PDF
-attached (the text is under **Settings > Message templates**, "Invoice").
+attached (the text is under **Settings > Messages > Message templates**, "Invoice").
 Recipients without email, or who prefer post, end up in **PDF to print** on
 the send-out page; **PDF of invoices for post** on the run page gives the
 same letters at any time. Members find their household's invoices as PDFs
@@ -262,12 +262,12 @@ one, record the same amount as a negative payment.
 days late and the amount to pay. **Send reminders to the chosen** sends a
 payment reminder by email (with a reminder PDF that has the new amount,
 due date and barcode), else by SMS, else as a letter in a PDF to print.
-Each reminder adds the reminder fee if one is set (**Settings > Invoice
+Each reminder adds the reminder fee if one is set (**Settings > Invoicing > Invoice
 settings**; none by default) and gives at least 14 days to pay. In Finland the Debt
 Collection Act (laki saatavien perinnästä) caps a reminder fee to a consumer
 at 5 € and requires those 14 days before further collection steps; check
 the rules before charging more or reminding businesses differently. The
-texts are under **Settings > Message templates**, "Payment reminder".
+texts are under **Settings > Messages > Message templates**, "Payment reminder".
 
 For the accountant, **Export as CSV** under the invoice list gives every
 issued invoice (or the filtered ones) with totals, VAT, credits, payments,
@@ -315,7 +315,7 @@ In development (`METRA_DEBUG=true`) two-factor is not required, so you can
 log in with just a password; staff see a warning banner saying so.
 `METRA_REQUIRE_MFA` sets it either way (it is on by default in production).
 
-Further users are added under **Settings > Users**. Give each one a role by
+Further users are added under **Settings > Users and roles > Users**. Give each one a role by
 adding them to one group:
 
 | Role | Can |
@@ -330,4 +330,4 @@ the name you give them. Two-factor login is optional for users without staff sta
 on under **Two-factor login**, every page reminds them to. Every change to the register, every role
 change and every opened unit or person page is recorded in the audit log,
 shown on the unit and person pages for Admin and Board and under
-**Settings > Log entries**.
+**Settings > Advanced** (superusers).

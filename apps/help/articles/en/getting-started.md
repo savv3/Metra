@@ -10,7 +10,7 @@ invoices.
 - **Readings**: reading rounds, such as the yearly water meter reading.
 - **Invoices**: invoice runs, payments and reminders.
 - **Send-outs**: messages, urgent alerts and newsletters, with their delivery status.
-- **Settings** (admins): the organisation, unit types and fields, users and roles, message templates, invoice settings and backups.
+- **Settings**: the organisation, the register's unit types and fields, reading types, invoice settings and fee plans, message templates, users and roles, integrations and backups. See "Settings" below.
 - **Help**: these guides. Every page's Help link opens the guide for that page.
 
 Your own language, the light or dark theme and two-factor login are in the
@@ -34,7 +34,24 @@ a time:
 7. **Invite the board**: each person gets an email with a link to choose a password.
 
 Any step can be skipped, and nothing changes until a step is saved. Admins
-can run the wizard again under **Settings > Run the setup wizard**.
+can run the wizard again under **Settings > Setup wizard**.
+
+## Settings
+
+**Settings** in the menu collects everything an admin sets up, grouped by
+task:
+
+- **Organisation**: name, business ID, contact details, logo and the public page.
+- **Register**: unit types and their fields, fields for people, and tags.
+- **Readings**: reading types.
+- **Invoicing**: invoice settings and fee plans. A fee plan's fee lines are edited in the plan itself.
+- **Messages**: message templates, notices on the public page, and newsletter consents.
+- **Users and roles**: who can log in, and what each role may do.
+- **Integrations**: API clients, webhooks and other connections, when they are turned on.
+- **Backups** and the **Setup wizard**.
+
+Everyone sees only what their role may change, and the menu shows Settings
+only to those who can change something there.
 
 ## Members
 
