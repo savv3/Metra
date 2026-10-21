@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Meetings" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Meetings" %}</h1>
+    {% if perms.metra_meetings.add_meeting %}
+      <a class="button button--primary" href="{% url 'metra_meetings:meeting_create' %}">{% translate "New meeting" %}</a>
+    {% endif %}
+  </div>
+
+  {% if to_approve %}
+    <div class="status-panel">
+      <h2>{% translate "Minutes for you to approve" %}</h2>
+      <ul class="plain-list">
+        {% for meeting in to_approve %}
+          <li><a href="{% url 'metra_meetings:approve' meeting.pk %}">{{ meeting.title }}</a>, {{ meeting.starts_at|date:"DATE_FORMAT" }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <h2>{% translate "Upcoming" %}</h2>
+  {% include "metra_meetings/_meeting_table.html" with meetings=upcoming label=_("Upcoming meetings") %}
+  <h2>{% translate "Past" %}</h2>
+  {% include "metra_meetings/_meeting_table.html" with meetings=past label=_("Past meetings") %}
+{% endblock %}

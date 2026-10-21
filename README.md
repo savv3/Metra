@@ -49,6 +49,8 @@ first for a water association with about 50 households. Other good fits:
 - Nightly backups, encrypted and copied to S3, SFTP or FTPS
 - Notifications under a bell for staff, such as a failed backup or SMS that
   could not be delivered, with each person choosing what they get
+- Meetings (an optional plugin): the notice with the agenda, attendance
+  and votes, minutes approved by the minute checkers and shown to members
 - Plugins, and Swedish, English and Finnish in the app (the Finnish is
   machine translated and unreviewed, and the app says so)
 
@@ -71,6 +73,7 @@ docker compose up -d --build
 - [Plugins](docs/plugins.md)
 - [REST API](docs/api.md): the `api` plugin, for other systems with tokens
 - [Webhooks](docs/webhooks.md): tell outside systems when something changes
+- [Meetings](plugins/meetings/README.md): call, minute and approve meetings
 - [AGENTS.md](AGENTS.md): conventions for contributors
 
 ## Licence

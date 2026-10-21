@@ -1,8 +1,11 @@
 """The member page behind a personal link: no login, one page, works on a phone."""
 
+from dataclasses import dataclass
+
 from auditlog.context import set_extra_data
 from auditlog.models import LogEntry
 from django.apps import apps
+from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -37,6 +40,60 @@ def _unavailable(request, status=404):
     """The same page for unknown, expired and revoked links, so none can be told apart."""
     template = "selfservice/unavailable.html" if status == 404 else "selfservice/too_many.html"
     return _private(render(request, template, status=status))
+
+
+@dataclass
+class MemberLink:
+    """The member behind a personal link, for plugins (``api.member_link``)
+    and member page panels: the ``unit`` and ``person`` it belongs to, and the
+    ``token`` for addresses under the same link."""
+
+    unit: object
+    person: object
+    token: str
+    link: SelfServiceLink
+
+    def log_access(self, request, obj):
+        """Record in the audit log that the member opened ``obj`` through the link."""
+        LogEntry.objects.log_create(
+            obj,
+            action=LogEntry.Action.ACCESS,
+            changes=None,
+            force_log=True,
+            additional_data={"self_service_link": self.link.pk, "person_id": self.person.pk},
+            remote_addr=ratelimit.client_ip(request) or None,
+        )
+
+
+def member_link(request, token):
+    """The MemberLink for a token, or None. Counts against the same rate limit
+    as the member page; an unknown, expired or revoked token counts as a
+    failure. Answer None with ``member_unavailable(request)``."""
+    if not ratelimit.allow_visit(request):
+        request._member_link_status = 429
+        return None
+    link = SelfServiceLink.find(token)
+    if link is None:
+        ratelimit.record_failure(request)
+        return None
+    return MemberLink(unit=link.unit, person=link.person, token=token, link=link)
+
+
+def member_unavailable(request):
+    """The page for unknown, expired and revoked links (or too many tries)."""
+    return _unavailable(request, status=getattr(request, "_member_link_status", 404))
+
+
+def member_response(response):
+    """Mark a response made for a member link as private: not cached, not
+    indexed and its address never sent to other sites."""
+    response["Cache-Control"] = "private, no-store"
+    return _private(response)
+
+
+def member_page_url(token):
+    """The full address of the member page for a token."""
+    return settings.BASE_URL + reverse("selfservice:member", args=[token])
 
 
 def _log_context(request, link, **extra):
@@ -162,6 +219,7 @@ def member_page(request, token):
         "notices": Notice.objects.current(),
         "consent": ConsentRecord.current(link.person),
         "invoices": _invoices(link),
+        "member_link": MemberLink(unit=link.unit, person=link.person, token=token, link=link),
     }
     return _private(render(request, "selfservice/member.html", context))
 

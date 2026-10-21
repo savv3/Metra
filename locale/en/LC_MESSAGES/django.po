@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 10:55+0300\n"
+"POT-Creation-Date: 2026-10-21 11:02+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2016,8 +2016,8 @@ msgid "All issued invoices of this run have been sent."
 msgstr ""
 
 #: apps/invoicing/views.py:353 apps/invoicing/views.py:416
-#: apps/messaging/views.py:53 apps/messaging/views.py:152
-#: apps/messaging/views.py:227
+#: apps/messaging/views.py:53 apps/messaging/views.py:155
+#: apps/messaging/views.py:230
 msgid "Sending has started. This page shows how it goes."
 msgstr ""
 
@@ -2113,172 +2113,172 @@ msgid ""
 "{emergency_phone}."
 msgstr ""
 
-#: apps/messaging/forms.py:60
+#: apps/messaging/forms.py:64
 #: apps/messaging/templates/messaging/_attachments.html:4
 #: apps/messaging/templates/messaging/batch_detail.html:13
 msgid "Attached files"
 msgstr ""
 
-#: apps/messaging/forms.py:64
+#: apps/messaging/forms.py:68
 msgid "Untick a file to leave it out."
 msgstr ""
 
-#: apps/messaging/forms.py:67
+#: apps/messaging/forms.py:71
 msgid "Attach files"
 msgstr ""
 
-#: apps/messaging/forms.py:70
+#: apps/messaging/forms.py:74
 #, python-format
 msgid ""
 "PDF, images or office documents, up to %(file)s MB each and %(total)s MB "
 "together. Email recipients get the files attached; SMS recipients get a link."
 msgstr ""
 
-#: apps/messaging/forms.py:98 apps/messaging/models.py:41
+#: apps/messaging/forms.py:102 apps/messaging/models.py:41
 #: apps/messaging/templates/messaging/batch_list.html:12
 #: apps/messaging/templates/messaging/compose.html:3
 #: apps/messaging/templates/messaging/compose.html:6
 msgid "Urgent alert"
 msgstr ""
 
-#: apps/messaging/forms.py:100
+#: apps/messaging/forms.py:104
 msgid "For disruptions such as a water leak. Sent to everyone at once."
 msgstr ""
 
-#: apps/messaging/forms.py:102
+#: apps/messaging/forms.py:106
 msgid "Send to"
 msgstr ""
 
-#: apps/messaging/forms.py:103
+#: apps/messaging/forms.py:107
 #: apps/register/templates/register/person_list.html:17
 #: apps/register/templates/register/unit_list.html:35
 msgid "Tag"
 msgstr ""
 
-#: apps/messaging/forms.py:105 apps/register/import_views.py:24
+#: apps/messaging/forms.py:109 apps/register/import_views.py:24
 msgid "Unit type"
 msgstr ""
 
-#: apps/messaging/forms.py:109
+#: apps/messaging/forms.py:113
 msgid "Who in each unit"
 msgstr ""
 
-#: apps/messaging/forms.py:115
+#: apps/messaging/forms.py:119
 #: apps/messaging/templates/messaging/batch_detail.html:9
 #: apps/messaging/templates/messaging/compose.html:18
 msgid "Send by"
 msgstr ""
 
-#: apps/messaging/forms.py:123 apps/messaging/models.py:40
+#: apps/messaging/forms.py:127 apps/messaging/models.py:40
 #: apps/messaging/templates/messaging/_unit_messages.html:13
 #: apps/messaging/templates/messaging/batch_detail.html:10
 #: apps/messaging/templates/messaging/compose.html:26
 msgid "Message"
 msgstr ""
 
-#: apps/messaging/forms.py:130
+#: apps/messaging/forms.py:134
 #: apps/messaging/templates/messaging/batch_detail.html:11
 msgid "Email subject"
 msgstr ""
 
-#: apps/messaging/forms.py:133
+#: apps/messaging/forms.py:137
 msgid "Needed when the message goes by email."
 msgstr ""
 
-#: apps/messaging/forms.py:136
+#: apps/messaging/forms.py:140
 msgid "Longer text for email"
 msgstr ""
 
-#: apps/messaging/forms.py:140
+#: apps/messaging/forms.py:144
 msgid ""
 "Needed when the message goes by email only. Otherwise optional: without it, "
 "the email has the same text as the SMS."
 msgstr ""
 
-#: apps/messaging/forms.py:146
+#: apps/messaging/forms.py:150
 msgid "Also show as a notice on the public page"
 msgstr ""
 
-#: apps/messaging/forms.py:148
+#: apps/messaging/forms.py:152
 msgid "Anyone can see it there and on members' pages, so no personal details."
 msgstr ""
 
-#: apps/messaging/forms.py:151
+#: apps/messaging/forms.py:155
 msgid "Notice text"
 msgstr ""
 
-#: apps/messaging/forms.py:155
+#: apps/messaging/forms.py:159
 msgid "Empty: the message text."
 msgstr ""
 
-#: apps/messaging/forms.py:158
+#: apps/messaging/forms.py:162
 msgid "Show the notice until"
 msgstr ""
 
-#: apps/messaging/forms.py:162
+#: apps/messaging/forms.py:166
 msgid "Empty: until you remove it."
 msgstr ""
 
-#: apps/messaging/forms.py:193
+#: apps/messaging/forms.py:197
 msgid "Choose a tag."
 msgstr ""
 
-#: apps/messaging/forms.py:195
+#: apps/messaging/forms.py:199
 msgid "Choose a unit type."
 msgstr ""
 
-#: apps/messaging/forms.py:198
+#: apps/messaging/forms.py:202
 msgid "Add a subject for the email."
 msgstr ""
 
-#: apps/messaging/forms.py:200
+#: apps/messaging/forms.py:204
 msgid "Write the message."
 msgstr ""
 
-#: apps/messaging/forms.py:204
+#: apps/messaging/forms.py:208
 msgid "Write the text of the email."
 msgstr ""
 
-#: apps/messaging/forms.py:210
+#: apps/messaging/forms.py:214
 msgid "Write the notice without personal placeholders."
 msgstr ""
 
-#: apps/messaging/forms.py:246
+#: apps/messaging/forms.py:250
 msgid "Subject"
 msgstr ""
 
-#: apps/messaging/forms.py:248 apps/register/models.py:150
+#: apps/messaging/forms.py:252 apps/register/models.py:150
 msgid "Text"
 msgstr ""
 
-#: apps/messaging/forms.py:251
+#: apps/messaging/forms.py:255
 #, python-brace-format
 msgid ""
 "Plain text. You can use {first_name}, {name} and {organisation}. An "
 "unsubscribe link is added at the end of every email."
 msgstr ""
 
-#: apps/messaging/forms.py:265 apps/messaging/models.py:42
+#: apps/messaging/forms.py:269 apps/messaging/models.py:42
 #: apps/messaging/templates/messaging/_person_newsletter.html:3
 #: apps/messaging/templates/messaging/unsubscribe.html:3
 #: apps/selfservice/templates/selfservice/member.html:62
 msgid "Newsletter"
 msgstr ""
 
-#: apps/messaging/forms.py:266
+#: apps/messaging/forms.py:270
 #: apps/messaging/templates/messaging/_person_newsletter.html:6
 msgid "Wants the newsletter"
 msgstr ""
 
-#: apps/messaging/forms.py:266
+#: apps/messaging/forms.py:270
 msgid "Does not want it"
 msgstr ""
 
-#: apps/messaging/forms.py:271
+#: apps/messaging/forms.py:275
 msgid "How it was given"
 msgstr ""
 
-#: apps/messaging/forms.py:274
+#: apps/messaging/forms.py:278
 msgid "For example: signed form at the annual meeting."
 msgstr ""
 
@@ -2547,7 +2547,7 @@ msgstr ""
 msgid "Unsubscribed before it was sent."
 msgstr ""
 
-#: apps/messaging/newsletter.py:113
+#: apps/messaging/newsletter.py:118
 #: apps/messaging/templates/messaging/_send_forms.html:8
 msgid "Email is not set up."
 msgstr ""
@@ -2929,19 +2929,19 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr ""
 
-#: apps/messaging/views.py:128
+#: apps/messaging/views.py:131
 msgid "Nobody can be reached with these choices."
 msgstr ""
 
-#: apps/messaging/views.py:198
+#: apps/messaging/views.py:201
 msgid "The notice is no longer shown."
 msgstr ""
 
-#: apps/messaging/views.py:221
+#: apps/messaging/views.py:224
 msgid "Everyone who wants the newsletter"
 msgstr ""
 
-#: apps/messaging/views.py:257
+#: apps/messaging/views.py:260
 msgid "Saved the newsletter choice."
 msgstr ""
 
@@ -3171,7 +3171,7 @@ msgstr ""
 msgid "All notifications are marked as read."
 msgstr ""
 
-#: apps/notifications/views.py:144
+#: apps/notifications/views.py:142
 msgid "Your notification settings are saved."
 msgstr ""
 
@@ -4333,23 +4333,23 @@ msgstr ""
 msgid "self-service links"
 msgstr ""
 
-#: apps/selfservice/public.py:122
+#: apps/selfservice/public.py:179
 msgid "Thank you. Your reading is saved."
 msgstr ""
 
-#: apps/selfservice/public.py:130
+#: apps/selfservice/public.py:187
 msgid "Thank you. You will get the newsletter."
 msgstr ""
 
-#: apps/selfservice/public.py:132
+#: apps/selfservice/public.py:189
 msgid "You will not get the newsletter."
 msgstr ""
 
-#: apps/selfservice/public.py:139
+#: apps/selfservice/public.py:196
 msgid "Thank you. Your contact details are updated."
 msgstr ""
 
-#: apps/selfservice/public.py:141
+#: apps/selfservice/public.py:198
 msgid "Nothing was changed."
 msgstr ""
 
@@ -4490,12 +4490,12 @@ msgstr ""
 msgid "To change their details, use their own link or contact us."
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:93
+#: apps/selfservice/templates/selfservice/member.html:95
 #, python-format
 msgid "Contact %(name)s"
 msgstr ""
 
-#: apps/selfservice/templates/selfservice/member.html:98
+#: apps/selfservice/templates/selfservice/member.html:100
 msgid "This page is personal. Do not share the link."
 msgstr ""
 

@@ -1,5 +1,5 @@
 {% extends "selfservice/base.html" %}
-{% load i18n readings %}
+{% load i18n plugins readings %}
 {% block title %}{{ unit.name }} – {{ block.super }}{% endblock %}
 {% block content %}
   {% include "core/_notices.html" %}
@@ -87,6 +87,8 @@
       <p class="help">{% translate "To change their details, use their own link or contact us." %}</p>
     </section>
   {% endif %}
+
+  {% member_panels member_link %}
 
   {% if organisation %}
     <section class="member-section" aria-labelledby="org-contact">

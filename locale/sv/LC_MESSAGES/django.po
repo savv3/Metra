@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 10:55+0300\n"
+"POT-Creation-Date: 2026-10-21 11:02+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2109,8 +2109,8 @@ msgid "All issued invoices of this run have been sent."
 msgstr "Alla utfärdade fakturor i den här omgången har skickats."
 
 #: apps/invoicing/views.py:353 apps/invoicing/views.py:416
-#: apps/messaging/views.py:53 apps/messaging/views.py:152
-#: apps/messaging/views.py:227
+#: apps/messaging/views.py:53 apps/messaging/views.py:155
+#: apps/messaging/views.py:230
 msgid "Sending has started. This page shows how it goes."
 msgstr "Utskicket har startat. Den här sidan visar hur det går."
 
@@ -2212,21 +2212,21 @@ msgstr ""
 "{emergency_phone}."
 
 #
-#: apps/messaging/forms.py:60
+#: apps/messaging/forms.py:64
 #: apps/messaging/templates/messaging/_attachments.html:4
 #: apps/messaging/templates/messaging/batch_detail.html:13
 msgid "Attached files"
 msgstr "Bifogade filer"
 
-#: apps/messaging/forms.py:64
+#: apps/messaging/forms.py:68
 msgid "Untick a file to leave it out."
 msgstr "Bocka ur en fil för att ta bort den."
 
-#: apps/messaging/forms.py:67
+#: apps/messaging/forms.py:71
 msgid "Attach files"
 msgstr "Bifoga filer"
 
-#: apps/messaging/forms.py:70
+#: apps/messaging/forms.py:74
 #, python-format
 msgid ""
 "PDF, images or office documents, up to %(file)s MB each and %(total)s MB "
@@ -2236,64 +2236,64 @@ msgstr ""
 "MB tillsammans. Den som får e-post får filerna bifogade, den som får sms får "
 "en länk."
 
-#: apps/messaging/forms.py:98 apps/messaging/models.py:41
+#: apps/messaging/forms.py:102 apps/messaging/models.py:41
 #: apps/messaging/templates/messaging/batch_list.html:12
 #: apps/messaging/templates/messaging/compose.html:3
 #: apps/messaging/templates/messaging/compose.html:6
 msgid "Urgent alert"
 msgstr "Brådskande varning"
 
-#: apps/messaging/forms.py:100
+#: apps/messaging/forms.py:104
 msgid "For disruptions such as a water leak. Sent to everyone at once."
 msgstr ""
 "För störningar, till exempel en vattenläcka. Skickas till alla samtidigt."
 
-#: apps/messaging/forms.py:102
+#: apps/messaging/forms.py:106
 msgid "Send to"
 msgstr "Skicka till"
 
-#: apps/messaging/forms.py:103
+#: apps/messaging/forms.py:107
 #: apps/register/templates/register/person_list.html:17
 #: apps/register/templates/register/unit_list.html:35
 msgid "Tag"
 msgstr "Tagg"
 
-#: apps/messaging/forms.py:105 apps/register/import_views.py:24
+#: apps/messaging/forms.py:109 apps/register/import_views.py:24
 msgid "Unit type"
 msgstr "Enhetstyp"
 
-#: apps/messaging/forms.py:109
+#: apps/messaging/forms.py:113
 msgid "Who in each unit"
 msgstr "Vem i varje enhet"
 
-#: apps/messaging/forms.py:115
+#: apps/messaging/forms.py:119
 #: apps/messaging/templates/messaging/batch_detail.html:9
 #: apps/messaging/templates/messaging/compose.html:18
 msgid "Send by"
 msgstr "Skicka via"
 
-#: apps/messaging/forms.py:123 apps/messaging/models.py:40
+#: apps/messaging/forms.py:127 apps/messaging/models.py:40
 #: apps/messaging/templates/messaging/_unit_messages.html:13
 #: apps/messaging/templates/messaging/batch_detail.html:10
 #: apps/messaging/templates/messaging/compose.html:26
 msgid "Message"
 msgstr "Meddelande"
 
-#: apps/messaging/forms.py:130
+#: apps/messaging/forms.py:134
 #: apps/messaging/templates/messaging/batch_detail.html:11
 msgid "Email subject"
 msgstr "E-postens ämne"
 
-#: apps/messaging/forms.py:133
+#: apps/messaging/forms.py:137
 msgid "Needed when the message goes by email."
 msgstr "Behövs när meddelandet skickas via e-post."
 
-#: apps/messaging/forms.py:136
+#: apps/messaging/forms.py:140
 msgid "Longer text for email"
 msgstr "Längre text för e-post"
 
 #
-#: apps/messaging/forms.py:140
+#: apps/messaging/forms.py:144
 msgid ""
 "Needed when the message goes by email only. Otherwise optional: without it, "
 "the email has the same text as the SMS."
@@ -2301,67 +2301,67 @@ msgstr ""
 "Behövs när meddelandet bara skickas med e-post. Annars valfri: utan den får "
 "e-postmeddelandet samma text som sms:et."
 
-#: apps/messaging/forms.py:146
+#: apps/messaging/forms.py:150
 msgid "Also show as a notice on the public page"
 msgstr "Visa också som anslag på den offentliga sidan"
 
-#: apps/messaging/forms.py:148
+#: apps/messaging/forms.py:152
 msgid "Anyone can see it there and on members' pages, so no personal details."
 msgstr ""
 "Vem som helst kan se det där och på medlemmarnas sidor, så skriv inga "
 "personuppgifter."
 
-#: apps/messaging/forms.py:151
+#: apps/messaging/forms.py:155
 msgid "Notice text"
 msgstr "Anslagets text"
 
-#: apps/messaging/forms.py:155
+#: apps/messaging/forms.py:159
 msgid "Empty: the message text."
 msgstr "Tomt: meddelandets text."
 
-#: apps/messaging/forms.py:158
+#: apps/messaging/forms.py:162
 msgid "Show the notice until"
 msgstr "Visa anslaget till"
 
-#: apps/messaging/forms.py:162
+#: apps/messaging/forms.py:166
 msgid "Empty: until you remove it."
 msgstr "Tomt: visas tills du tar bort det."
 
-#: apps/messaging/forms.py:193
+#: apps/messaging/forms.py:197
 msgid "Choose a tag."
 msgstr "Välj en tagg."
 
-#: apps/messaging/forms.py:195
+#: apps/messaging/forms.py:199
 msgid "Choose a unit type."
 msgstr "Välj en enhetstyp."
 
-#: apps/messaging/forms.py:198
+#: apps/messaging/forms.py:202
 msgid "Add a subject for the email."
 msgstr "Lägg till ett ämne för e-postmeddelandet."
 
 #
-#: apps/messaging/forms.py:200
+#: apps/messaging/forms.py:204
 msgid "Write the message."
 msgstr "Skriv meddelandet."
 
 #
-#: apps/messaging/forms.py:204
+#: apps/messaging/forms.py:208
 msgid "Write the text of the email."
 msgstr "Skriv texten i e-postmeddelandet."
 
-#: apps/messaging/forms.py:210
+#: apps/messaging/forms.py:214
 msgid "Write the notice without personal placeholders."
 msgstr "Skriv anslaget utan personliga platshållare."
 
-#: apps/messaging/forms.py:246
+#: apps/messaging/forms.py:250
 msgid "Subject"
 msgstr "Ämne"
 
-#: apps/messaging/forms.py:248 apps/register/models.py:150
+#: apps/messaging/forms.py:252 apps/register/models.py:150
 msgid "Text"
 msgstr "Text"
 
-#: apps/messaging/forms.py:251
+#: apps/messaging/forms.py:255
 #, python-brace-format
 msgid ""
 "Plain text. You can use {first_name}, {name} and {organisation}. An "
@@ -2370,27 +2370,27 @@ msgstr ""
 "Ren text. Du kan använda {first_name}, {name} och {organisation}. En "
 "avregistreringslänk läggs till i slutet av varje e-post."
 
-#: apps/messaging/forms.py:265 apps/messaging/models.py:42
+#: apps/messaging/forms.py:269 apps/messaging/models.py:42
 #: apps/messaging/templates/messaging/_person_newsletter.html:3
 #: apps/messaging/templates/messaging/unsubscribe.html:3
 #: apps/selfservice/templates/selfservice/member.html:62
 msgid "Newsletter"
 msgstr "Nyhetsbrev"
 
-#: apps/messaging/forms.py:266
+#: apps/messaging/forms.py:270
 #: apps/messaging/templates/messaging/_person_newsletter.html:6
 msgid "Wants the newsletter"
 msgstr "Vill ha nyhetsbrevet"
 
-#: apps/messaging/forms.py:266
+#: apps/messaging/forms.py:270
 msgid "Does not want it"
 msgstr "Vill inte ha det"
 
-#: apps/messaging/forms.py:271
+#: apps/messaging/forms.py:275
 msgid "How it was given"
 msgstr "Hur det gavs"
 
-#: apps/messaging/forms.py:274
+#: apps/messaging/forms.py:278
 msgid "For example: signed form at the annual meeting."
 msgstr "Till exempel: underskriven blankett vid årsmötet."
 
@@ -2669,7 +2669,7 @@ msgstr ""
 msgid "Unsubscribed before it was sent."
 msgstr "Avslutade prenumerationen innan det skickades."
 
-#: apps/messaging/newsletter.py:113
+#: apps/messaging/newsletter.py:118
 #: apps/messaging/templates/messaging/_send_forms.html:8
 msgid "Email is not set up."
 msgstr "E-post är inte inställt."
@@ -3062,19 +3062,19 @@ msgstr "Nyhetsbrevet skickas till %(name)s."
 msgid "Unsubscribe"
 msgstr "Avsluta prenumerationen"
 
-#: apps/messaging/views.py:128
+#: apps/messaging/views.py:131
 msgid "Nobody can be reached with these choices."
 msgstr "Ingen kan nås med de här valen."
 
-#: apps/messaging/views.py:198
+#: apps/messaging/views.py:201
 msgid "The notice is no longer shown."
 msgstr "Anslaget visas inte längre."
 
-#: apps/messaging/views.py:221
+#: apps/messaging/views.py:224
 msgid "Everyone who wants the newsletter"
 msgstr "Alla som vill ha nyhetsbrevet"
 
-#: apps/messaging/views.py:257
+#: apps/messaging/views.py:260
 msgid "Saved the newsletter choice."
 msgstr "Valet för nyhetsbrevet är sparat."
 
@@ -3129,7 +3129,9 @@ msgstr "En återställning misslyckades"
 msgid ""
 "Restoring %(snapshot)s failed, so the data from before it was put back: "
 "%(error)s"
-msgstr "Återställningen av %(snapshot)s misslyckades, så uppgifterna från före den lades tillbaka: %(error)s"
+msgstr ""
+"Återställningen av %(snapshot)s misslyckades, så uppgifterna från före den "
+"lades tillbaka: %(error)s"
 
 #: apps/notifications/kinds.py:84
 msgid "SMS or email could not be delivered"
@@ -3152,7 +3154,8 @@ msgid "A member sent in a reading or a change through their link."
 msgid_plural ""
 "Members sent in %(count)s readings or changes through their links."
 msgstr[0] "En medlem skickade in en avläsning eller en ändring via sin länk."
-msgstr[1] "Medlemmar skickade in %(count)s avläsningar eller ändringar via sina länkar."
+msgstr[1] ""
+"Medlemmar skickade in %(count)s avläsningar eller ändringar via sina länkar."
 
 #: apps/notifications/kinds.py:110
 msgid "Invoices became overdue"
@@ -3280,7 +3283,9 @@ msgstr "Lästa och avfärdade aviseringar tas bort efter 90 dagar."
 msgid ""
 "Choose which notifications you get under the bell. Only the kinds your role "
 "can see are listed."
-msgstr "Välj vilka aviseringar du får under klockan. Bara de slag som din roll kan se finns med."
+msgstr ""
+"Välj vilka aviseringar du får under klockan. Bara de slag som din roll kan "
+"se finns med."
 
 #: apps/notifications/templates/notifications/settings.html:12
 msgid "Notify me when"
@@ -3307,7 +3312,7 @@ msgstr "Aviseringen avfärdades."
 msgid "All notifications are marked as read."
 msgstr "Alla aviseringar är markerade som lästa."
 
-#: apps/notifications/views.py:144
+#: apps/notifications/views.py:142
 msgid "Your notification settings are saved."
 msgstr "Dina inställningar för aviseringar är sparade."
 
@@ -4499,23 +4504,23 @@ msgstr "självbetjäningslänk"
 msgid "self-service links"
 msgstr "självbetjäningslänkar"
 
-#: apps/selfservice/public.py:122
+#: apps/selfservice/public.py:179
 msgid "Thank you. Your reading is saved."
 msgstr "Tack! Din avläsning är sparad."
 
-#: apps/selfservice/public.py:130
+#: apps/selfservice/public.py:187
 msgid "Thank you. You will get the newsletter."
 msgstr "Tack! Du får nyhetsbrevet."
 
-#: apps/selfservice/public.py:132
+#: apps/selfservice/public.py:189
 msgid "You will not get the newsletter."
 msgstr "Du får inte nyhetsbrevet."
 
-#: apps/selfservice/public.py:139
+#: apps/selfservice/public.py:196
 msgid "Thank you. Your contact details are updated."
 msgstr "Tack! Dina kontaktuppgifter är uppdaterade."
 
-#: apps/selfservice/public.py:141
+#: apps/selfservice/public.py:198
 msgid "Nothing was changed."
 msgstr "Inget ändrades."
 
@@ -4662,12 +4667,12 @@ msgstr ""
 "För att ändra deras uppgifter använder du deras egen länk eller kontaktar "
 "oss."
 
-#: apps/selfservice/templates/selfservice/member.html:93
+#: apps/selfservice/templates/selfservice/member.html:95
 #, python-format
 msgid "Contact %(name)s"
 msgstr "Kontakta %(name)s"
 
-#: apps/selfservice/templates/selfservice/member.html:98
+#: apps/selfservice/templates/selfservice/member.html:100
 msgid "This page is personal. Do not share the link."
 msgstr "Den här sidan är personlig. Dela inte länken."
 

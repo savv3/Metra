@@ -62,6 +62,9 @@ tavoittaa kaikki nopeasti. Se tehtiin ensin vesiosuuskunnalle, jossa on noin
   FTPS:ään
 - Ilmoitukset kellon alla henkilökunnalle, esimerkiksi epäonnistunut
   varmuuskopio tai perille menemätön tekstiviesti, ja jokainen valitsee, mitä saa
+- Kokoukset (erikseen käyttöön otettava laajennus): kokouskutsu ja
+  esityslista, läsnäolo ja äänet sekä pöytäkirjat, jotka
+  pöytäkirjantarkastajat tarkastavat ja jotka näytetään jäsenille
 - Laajennukset (pluginit) sekä ruotsi, englanti ja suomi sovelluksessa
   (suomenkielinen käännös on konekäännös, jota ei ole tarkistettu, ja
   sovellus kertoo sen)
