@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Restore a snapshot" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "Restore a snapshot" %}</h1>
+  <dl class="details-list">
+    <dt>{% translate "Snapshot" %}</dt><dd>{{ preview.info.name }}</dd>
+    <dt>{% translate "Taken" %}</dt><dd>{{ preview.info.taken|date:"SHORT_DATETIME_FORMAT" }}</dd>
+    <dt>{% translate "Version" %}</dt><dd>{{ preview.info.version }}</dd>
+  </dl>
+
+  <div class="status-panel status-panel--warning">
+    <p><strong>{% blocktranslate with taken=preview.info.taken|date:"SHORT_DATETIME_FORMAT" trimmed %}
+      Restoring replaces the whole register and all uploaded files with the snapshot's. Everything added or changed since {{ taken }} is removed.
+    {% endblocktranslate %}</strong></p>
+    <p>{% translate "A snapshot of the data as it is now is taken first, so this can be undone by restoring that one." %}</p>
+  </div>
+
+  <h2 id="counts">{% translate "What changes" %}</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="counts">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">{% translate "Now" %}</th>
+          <th scope="col">{% translate "In the snapshot" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in preview.counts %}
+          <tr>
+            <th scope="row">{% if c.label == "units" %}{% translate "Units" %}{% elif c.label == "people" %}{% translate "People" %}{% elif c.label == "readings" %}{% translate "Readings" %}{% elif c.label == "messages" %}{% translate "Messages" %}{% elif c.label == "invoices" %}{% translate "Issued invoices" %}{% else %}{% translate "Payments" %}{% endif %}</th>
+            <td>{{ c.now }}</td>
+            <td>{{ c.then }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <form method="post" class="form">
+    {% csrf_token %}
+    {% if preview.needs_bookkeeping_confirmation %}
+      <div class="status-panel status-panel--warning">
+        <h3>{% translate "Bookkeeping recorded since the snapshot" %}</h3>
+        {% if preview.invoices_since %}<p>{% translate "Issued invoices that would be removed:" %} {{ preview.invoices_since|join:", " }}</p>{% endif %}
+        {% if preview.payments_since %}
+          <p>{% translate "Payments that would be removed:" %}</p>
+          <ul class="plain-list">{% for p in preview.payments_since %}<li>{{ p.paid_on|date:"SHORT_DATE_FORMAT" }} &middot; {{ p.amount }} € &middot; {% translate "invoice" %} {{ p.invoice.number }}</li>{% endfor %}</ul>
+        {% endif %}
+        <p>{% translate "Sent invoices and recorded payments may already be in your bookkeeping. If you restore, record them again afterwards or correct them with credit notes." %}</p>
+        <div class="field field--checkbox"><label><input type="checkbox" name="bookkeeping" value="1" required> {% translate "I understand that these invoices and payments will be removed." %}</label></div>
+      </div>
+    {% endif %}
+    <div class="field field--checkbox"><label><input type="checkbox" name="confirm" value="1" required> {% blocktranslate with taken=preview.info.taken|date:"SHORT_DATETIME_FORMAT" %}Replace all data with the snapshot from {{ taken }}.{% endblocktranslate %}</label></div>
+    <div class="actions">
+      <button type="submit" class="button button--danger">{% translate "Restore this snapshot" %}</button>
+      <a class="button" href="{% url 'backups:list' %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+{% endblock %}

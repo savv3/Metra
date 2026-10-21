@@ -47,7 +47,7 @@
             <th scope="col">{% translate "Version" %}</th>
             <th scope="col">{% translate "Size" %}</th>
             <th scope="col">{% translate "Where" %}</th>
-            {% if perms.backups.delete_snapshot %}<th scope="col"><span class="visually-hidden">{% translate "Actions" %}</span></th>{% endif %}
+            {% if perms.backups.delete_snapshot or perms.backups.restore_snapshot %}<th scope="col"><span class="visually-hidden">{% translate "Actions" %}</span></th>{% endif %}
           </tr>
         </thead>
         <tbody>
@@ -58,8 +58,10 @@
               <td>{{ s.info.version }}</td>
               <td>{{ s.size|filesizeformat }}</td>
               <td>{% if s.here %}{% translate "This server" %}{% endif %}{% if s.here and s.offsite %}, {% endif %}{% if s.offsite %}{% translate "Offsite" %}{% endif %}</td>
-              {% if perms.backups.delete_snapshot %}
-                <td>{% if s.deletable %}
+              {% if perms.backups.delete_snapshot or perms.backups.restore_snapshot %}
+                <td class="actions">
+                {% if perms.backups.restore_snapshot %}<a class="button button--small" href="{% url 'backups:restore' s.info.name %}">{% translate "Restore…" %}<span class="visually-hidden"> {{ s.info.name }}</span></a>{% endif %}
+                {% if perms.backups.delete_snapshot and s.deletable %}
                   <form method="post" action="{% url 'backups:delete' %}" class="inline-form">
                     {% csrf_token %}
                     <input type="hidden" name="name" value="{{ s.info.name }}">
@@ -75,5 +77,14 @@
   {% else %}
     <p class="empty">{% translate "No snapshot has been taken yet." %}</p>
   {% endif %}
-  <p class="help">{% translate "To restore a snapshot, see INSTALL.md, Backup and restore." %}</p>
+  {% if restores %}
+    <h2 id="restores">{% translate "Restores" %}</h2>
+    <ul class="plain-list">
+      {% for r in restores %}
+        <li>{{ r.finished_at|date:"SHORT_DATETIME_FORMAT" }} &middot; {{ r.snapshot }} &middot; {{ r.requested_by }} &middot;
+          {% if r.success %}<span class="status-ok">{% translate "Restored" %}</span>{% else %}<span class="status-error">{% translate "Failed, the data was put back" %}</span> {{ r.error }}{% endif %}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  <p class="help">{% translate "If the app does not start at all, a snapshot can also be restored from the command line: see INSTALL.md, Backup and restore." %}</p>
 {% endblock %}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 09:37+0300\n"
+"POT-Creation-Date: 2026-10-21 09:53+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,8 +182,8 @@ msgstr "Byt lösenord"
 msgid "Backups"
 msgstr "Säkerhetskopior"
 
-#: apps/backups/models.py:12
 #
+#: apps/backups/models.py:12
 msgid "Nightly"
 msgstr "Nattlig"
 
@@ -211,12 +211,12 @@ msgstr "Före borttagning av en enhetstyp eller ett fält"
 msgid "Before a restore"
 msgstr "Före en återställning"
 
-#: apps/backups/models.py:20
+#: apps/backups/models.py:20 apps/backups/models.py:65
 msgid "started"
 msgstr "startad"
 
-#: apps/backups/models.py:21 apps/messaging/models.py:85
-#: apps/setup/models.py:10
+#: apps/backups/models.py:21 apps/backups/models.py:66
+#: apps/messaging/models.py:85 apps/setup/models.py:10
 msgid "finished"
 msgstr "klar"
 
@@ -228,13 +228,14 @@ msgstr "startad av"
 msgid "taken by"
 msgstr "tagen av"
 
-#: apps/backups/models.py:33
+#: apps/backups/models.py:33 apps/backups/models.py:67
 msgid "succeeded"
 msgstr "lyckades"
 
 #: apps/backups/models.py:34 apps/backups/models.py:44
+#: apps/backups/models.py:60
 msgid "snapshot"
-msgstr "ögonblicksbild"
+msgstr "säkerhetskopia"
 
 #: apps/backups/models.py:35
 msgid "size in bytes"
@@ -252,30 +253,84 @@ msgstr "mål"
 msgid "sent offsite"
 msgstr "skickad externt"
 
-#: apps/backups/models.py:40 apps/messaging/models.py:175
+#: apps/backups/models.py:40 apps/backups/models.py:68
+#: apps/messaging/models.py:175
 msgid "error"
 msgstr "fel"
 
 #: apps/backups/models.py:45
 msgid "snapshots"
-msgstr "ögonblicksbilder"
+msgstr "säkerhetskopior"
 
 #: apps/backups/models.py:47
 msgid "Can take a snapshot"
-msgstr "Kan ta en ögonblicksbild"
+msgstr "Kan ta en säkerhetskopia"
 
 #: apps/backups/models.py:48
 msgid "Can delete snapshots taken by hand"
-msgstr "Kan ta bort manuellt tagna ögonblicksbilder"
+msgstr "Kan ta bort manuellt tagna säkerhetskopior"
 
-#: apps/backups/service.py:193
+#: apps/backups/models.py:49
+#
+msgid "Can restore a snapshot"
+msgstr "Kan återställa en säkerhetskopia"
+
+#: apps/backups/models.py:62
+#
+msgid "snapshot taken before"
+msgstr "säkerhetskopia tagen innan"
+
+#: apps/backups/models.py:64
+#
+msgid "restored by"
+msgstr "återställd av"
+
+#: apps/backups/models.py:72
+#
+msgid "restore"
+msgstr "återställning"
+
+#: apps/backups/models.py:73
+#
+msgid "restores"
+msgstr "återställningar"
+
+#: apps/backups/restore.py:89
+#
+msgid "That is not a snapshot."
+msgstr "Det är ingen säkerhetskopia."
+
+#: apps/backups/restore.py:95
+#, python-format
+msgid "The snapshot %(name)s was not found."
+msgstr "Säkerhetskopian %(name)s hittades inte."
+
+#: apps/backups/restore.py:118
+#, python-format
+msgid ""
+"This snapshot was taken by Metra %(version)s, which is newer than the "
+"version running now (%(running)s), so it cannot be restored here."
+msgstr "Säkerhetskopian togs av Metra %(version)s, som är nyare än versionen som körs nu (%(running)s), så den kan inte återställas här."
+
+#: apps/backups/restore.py:189
+#
+msgid "A restore is already running."
+msgstr "En återställning pågår redan."
+
+#: apps/backups/restore.py:193
+msgid ""
+"Confirm that invoices and payments recorded since the snapshot will be "
+"removed."
+msgstr "Bekräfta att fakturor och betalningar som registrerats efter säkerhetskopian tas bort."
+
+#: apps/backups/service.py:195
 msgid "Only snapshots taken by hand can be deleted."
-msgstr "Bara manuellt tagna ögonblicksbilder kan tas bort."
+msgstr "Bara manuellt tagna säkerhetskopior kan tas bort."
 
 #: apps/backups/templates/backups/_status.html:5
 #: apps/setup/templates/admin/metra_index.html:21
 msgid "Snapshots and backups"
-msgstr "Ögonblicksbilder och säkerhetskopior"
+msgstr "Säkerhetskopior"
 
 #: apps/backups/templates/backups/_status.html:7
 #, python-format
@@ -298,7 +353,7 @@ msgstr ""
 
 #: apps/backups/templates/backups/backup_list.html:10
 msgid "Take a snapshot now"
-msgstr "Ta en ögonblicksbild nu"
+msgstr "Ta en säkerhetskopia nu"
 
 #: apps/backups/templates/backups/backup_list.html:14
 #, python-format
@@ -306,7 +361,10 @@ msgid ""
 "A snapshot is a copy of the whole register and all uploaded files. One is "
 "taken every night at %(time)s, before every upgrade, before a CSV import, "
 "before deleting a unit type or field, and whenever you take one here."
-msgstr "En ögonblicksbild är en kopia av hela registret och alla uppladdade filer. En tas varje natt kl. %(time)s, före varje uppdatering, före en CSV-import, före borttagning av en enhetstyp eller ett fält, och när du tar en här."
+msgstr ""
+"En säkerhetskopia är en kopia av hela registret och alla uppladdade filer. "
+"En tas varje natt kl. %(time)s, före varje uppdatering, före en CSV-import, "
+"före borttagning av en enhetstyp eller ett fält, och när du tar en här."
 
 #: apps/backups/templates/backups/backup_list.html:18
 #, python-format
@@ -314,18 +372,23 @@ msgid ""
 "Every snapshot is kept for %(days)s days, then the newest of each week for "
 "%(weeks)s weeks and the newest of each month for %(months)s months. "
 "Snapshots taken by hand stay until you delete them."
-msgstr "Varje ögonblicksbild sparas i %(days)s dagar, därefter den senaste för varje vecka i %(weeks)s veckor och den senaste för varje månad i %(months)s månader. Manuellt tagna ögonblicksbilder finns kvar tills du tar bort dem."
+msgstr ""
+"Varje säkerhetskopia sparas i %(days)s dagar, därefter den senaste för varje "
+"vecka i %(weeks)s veckor och den senaste för varje månad i %(months)s "
+"månader. Manuellt tagna säkerhetskopior finns kvar tills du tar bort dem."
 
 #: apps/backups/templates/backups/backup_list.html:23
 #, python-format
 msgid "Each snapshot is also sent offsite to %(remote)s."
-msgstr "Varje ögonblicksbild skickas också externt till %(remote)s."
+msgstr "Varje säkerhetskopia skickas också externt till %(remote)s."
 
 #: apps/backups/templates/backups/backup_list.html:25
 msgid ""
 "Snapshots are only kept on this server. Set up an offsite copy "
 "(METRA_BACKUP_REMOTE_TYPE) so they survive if the server is lost."
-msgstr "Ögonblicksbilderna finns bara på den här servern. Ställ in en extern kopia (METRA_BACKUP_REMOTE_TYPE) så att de finns kvar om servern går förlorad."
+msgstr ""
+"Säkerhetskopiorna finns bara på den här servern. Ställ in en extern kopia "
+"(METRA_BACKUP_REMOTE_TYPE) så att de finns kvar om servern går förlorad."
 
 #: apps/backups/templates/backups/backup_list.html:28
 #, python-format
@@ -338,18 +401,20 @@ msgstr "Senaste problem"
 
 #: apps/backups/templates/backups/backup_list.html:39
 msgid "Snapshots"
-msgstr "Ögonblicksbilder"
+msgstr "Säkerhetskopior"
 
 #: apps/backups/templates/backups/backup_list.html:45
+#: apps/backups/templates/backups/restore.html:8
 msgid "Taken"
 msgstr "Tagen"
 
-#: apps/backups/templates/backups/backup_list.html:46
 #
+#: apps/backups/templates/backups/backup_list.html:46
 msgid "Why"
 msgstr "Varför"
 
 #: apps/backups/templates/backups/backup_list.html:47
+#: apps/backups/templates/backups/restore.html:9
 msgid "Version"
 msgstr "Version"
 
@@ -376,39 +441,213 @@ msgstr "Den här servern"
 msgid "Offsite"
 msgstr "Externt"
 
-#: apps/backups/templates/backups/backup_list.html:66
+#: apps/backups/templates/backups/backup_list.html:63
 #
+msgid "Restore…"
+msgstr "Återställ…"
+
+#
+#: apps/backups/templates/backups/backup_list.html:68
 msgid "Delete"
 msgstr "Ta bort"
 
-#: apps/backups/templates/backups/backup_list.html:76
 #
-msgid "No snapshot has been taken yet."
-msgstr "Ingen ögonblicksbild har tagits ännu."
-
 #: apps/backups/templates/backups/backup_list.html:78
-msgid "To restore a snapshot, see INSTALL.md, Backup and restore."
-msgstr "Se INSTALL.md, Backup and restore, för hur en ögonblicksbild återställs."
+msgid "No snapshot has been taken yet."
+msgstr "Ingen säkerhetskopia har tagits ännu."
 
-#: apps/backups/views.py:45
+#: apps/backups/templates/backups/backup_list.html:81
+#
+msgid "Restores"
+msgstr "Återställningar"
+
+#: apps/backups/templates/backups/backup_list.html:85
+#
+msgid "Restored"
+msgstr "Återställd"
+
+#: apps/backups/templates/backups/backup_list.html:85
+msgid "Failed, the data was put back"
+msgstr "Misslyckades, uppgifterna återställdes"
+
+#: apps/backups/templates/backups/backup_list.html:89
+msgid ""
+"If the app does not start at all, a snapshot can also be restored from the "
+"command line: see INSTALL.md, Backup and restore."
+msgstr "Om appen inte startar alls kan en säkerhetskopia också återställas från kommandoraden: se INSTALL.md, Backup and restore."
+
+#: apps/backups/templates/backups/maintenance.html:8
+#: apps/backups/templates/backups/maintenance.html:13
+#
+msgid "Back in a moment"
+msgstr "Tillbaka om en stund"
+
+#: apps/backups/templates/backups/maintenance.html:14
+msgid ""
+"A snapshot is being restored. The page reloads by itself when it is done, "
+"usually within a minute."
+msgstr "En säkerhetskopia återställs. Sidan laddas om av sig själv när det är klart, oftast inom en minut."
+
+#: apps/backups/templates/backups/restore.html:3
+#: apps/backups/templates/backups/restore.html:5
+#
+msgid "Restore a snapshot"
+msgstr "Återställ en säkerhetskopia"
+
+#: apps/backups/templates/backups/restore.html:7
+#
+msgid "Snapshot"
+msgstr "Säkerhetskopia"
+
+#: apps/backups/templates/backups/restore.html:13
 #, python-format
-msgid "The snapshot failed: %(error)s"
-msgstr "Ögonblicksbilden misslyckades: %(error)s"
+msgid ""
+"Restoring replaces the whole register and all uploaded files with the "
+"snapshot's. Everything added or changed since %(taken)s is removed."
+msgstr "Återställningen ersätter hela registret och alla uppladdade filer med säkerhetskopians. Allt som lagts till eller ändrats sedan %(taken)s tas bort."
+
+#: apps/backups/templates/backups/restore.html:16
+msgid ""
+"A snapshot of the data as it is now is taken first, so this can be undone by "
+"restoring that one."
+msgstr "Först tas en säkerhetskopia av uppgifterna som de är nu, så att återställningen kan ångras genom att återställa den."
+
+#: apps/backups/templates/backups/restore.html:19
+#
+msgid "What changes"
+msgstr "Vad som ändras"
+
+#: apps/backups/templates/backups/restore.html:25
+#
+msgid "Now"
+msgstr "Nu"
+
+#: apps/backups/templates/backups/restore.html:26
+#
+msgid "In the snapshot"
+msgstr "I säkerhetskopian"
+
+#: apps/backups/templates/backups/restore.html:32 apps/register/csv_io.py:531
+#: apps/register/templates/register/_unit_results.html:3
+#: apps/register/templates/register/person_detail.html:32
+#: apps/register/templates/register/unit_list.html:3
+#: apps/register/templates/register/unit_list.html:6 templates/base.html:21
+msgid "Units"
+msgstr "Enheter"
+
+#: apps/backups/templates/backups/restore.html:32
+#: apps/register/templates/register/_person_results.html:3
+#: apps/register/templates/register/person_list.html:3
+#: apps/register/templates/register/person_list.html:6 templates/base.html:22
+msgid "People"
+msgstr "Personer"
+
+#: apps/backups/templates/backups/restore.html:32 apps/readings/apps.py:7
+#: apps/readings/templates/readings/_round_results.html:3
+#: apps/readings/templates/readings/_unit_readings.html:3
+#: templates/base.html:23
+msgid "Readings"
+msgstr "Avläsningar"
+
+#: apps/backups/templates/backups/restore.html:32
+#: apps/messaging/templates/messaging/_unit_messages.html:4
+#: apps/messaging/templates/messaging/batch_detail.html:61
+#: apps/messaging/templates/messaging/batch_list.html:24
+msgid "Messages"
+msgstr "Meddelanden"
+
+#: apps/backups/templates/backups/restore.html:32
+#
+msgid "Issued invoices"
+msgstr "Utfärdade fakturor"
+
+#: apps/backups/templates/backups/restore.html:32
+#: apps/invoicing/templates/invoicing/invoice_detail.html:115
+msgid "Payments"
+msgstr "Betalningar"
+
+#: apps/backups/templates/backups/restore.html:45
+msgid "Bookkeeping recorded since the snapshot"
+msgstr "Bokföring som registrerats efter säkerhetskopian"
+
+#: apps/backups/templates/backups/restore.html:46
+#
+msgid "Issued invoices that would be removed:"
+msgstr "Utfärdade fakturor som skulle tas bort:"
+
+#: apps/backups/templates/backups/restore.html:48
+msgid "Payments that would be removed:"
+msgstr "Betalningar som skulle tas bort:"
+
+#: apps/backups/templates/backups/restore.html:49 apps/invoicing/delivery.py:59
+#: apps/invoicing/models.py:408 apps/invoicing/models.py:671
+#: apps/invoicing/models.py:732 apps/invoicing/models.py:772
+#: apps/invoicing/models.py:812
+msgid "invoice"
+msgstr "faktura"
+
+#: apps/backups/templates/backups/restore.html:51
+msgid ""
+"Sent invoices and recorded payments may already be in your bookkeeping. If "
+"you restore, record them again afterwards or correct them with credit notes."
+msgstr "Skickade fakturor och registrerade betalningar kan redan finnas i bokföringen. Om du återställer, registrera dem på nytt efteråt eller rätta dem med kreditnotor."
+
+#: apps/backups/templates/backups/restore.html:52
+msgid "I understand that these invoices and payments will be removed."
+msgstr "Jag förstår att de här fakturorna och betalningarna tas bort."
+
+#: apps/backups/templates/backups/restore.html:55
+#, python-format
+msgid "Replace all data with the snapshot from %(taken)s."
+msgstr "Ersätt alla uppgifter med säkerhetskopian från %(taken)s."
+
+#: apps/backups/templates/backups/restore.html:57
+#
+msgid "Restore this snapshot"
+msgstr "Återställ den här säkerhetskopian"
+
+#: apps/backups/templates/backups/restore.html:58
+#: apps/invoicing/templates/invoicing/run_form.html:13
+#: apps/messaging/templates/messaging/compose.html:98
+#: apps/messaging/templates/messaging/newsletter_compose.html:36
+#: apps/readings/templates/readings/reading_form.html:31
+#: apps/readings/templates/readings/round_form.html:20
+#: apps/register/templates/register/import_upload.html:20
+#: apps/register/templates/register/person_form.html:38
+#: apps/register/templates/register/unit_form.html:29
+msgid "Cancel"
+msgstr "Avbryt"
 
 #: apps/backups/views.py:47
 #, python-format
-msgid "Snapshot taken: %(name)s"
-msgstr "Ögonblicksbild tagen: %(name)s"
+msgid "The snapshot failed: %(error)s"
+msgstr "Säkerhetskopian misslyckades: %(error)s"
 
-#: apps/backups/views.py:62
+#: apps/backups/views.py:49
+#, python-format
+msgid "Snapshot taken: %(name)s"
+msgstr "Säkerhetskopia tagen: %(name)s"
+
+#: apps/backups/views.py:64
 #, python-format
 msgid "The snapshot could not be deleted: %(error)s"
-msgstr "Ögonblicksbilden kunde inte tas bort: %(error)s"
+msgstr "Säkerhetskopian kunde inte tas bort: %(error)s"
 
-#: apps/backups/views.py:65
+#: apps/backups/views.py:67
 #, python-format
 msgid "Deleted %(name)s."
 msgstr "Tog bort %(name)s."
+
+#: apps/backups/views.py:84
+msgid "Tick the box to confirm the restore."
+msgstr "Kryssa i rutan för att bekräfta återställningen."
+
+#: apps/backups/views.py:96
+#, python-format
+msgid ""
+"Restoring %(name)s. The data as it was just before is kept in %(safety)s. "
+"You may need to log in again when it is done."
+msgstr "Återställer %(name)s. Uppgifterna som de var strax innan finns kvar i %(safety)s. Du kan behöva logga in på nytt när det är klart."
 
 #: apps/core/apps.py:7
 msgid "General"
@@ -564,12 +803,6 @@ msgstr "Fakturering"
 #: apps/invoicing/delivery.py:59
 msgid "credit-note"
 msgstr "kreditnota"
-
-#: apps/invoicing/delivery.py:59 apps/invoicing/models.py:408
-#: apps/invoicing/models.py:671 apps/invoicing/models.py:732
-#: apps/invoicing/models.py:772 apps/invoicing/models.py:812
-msgid "invoice"
-msgstr "faktura"
 
 #: apps/invoicing/delivery.py:112
 msgid "This email provider cannot attach the invoice PDF."
@@ -1411,10 +1644,6 @@ msgstr "Inte momsregistrerad"
 msgid "To pay"
 msgstr "Att betala"
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:115
-msgid "Payments"
-msgstr "Betalningar"
-
 #: apps/invoicing/templates/invoicing/invoice_detail.html:117
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:115
 msgid "Invoice total"
@@ -1736,17 +1965,6 @@ msgstr ""
 #: apps/invoicing/templates/invoicing/run_form.html:12
 msgid "Make draft invoices"
 msgstr "Skapa fakturautkast"
-
-#: apps/invoicing/templates/invoicing/run_form.html:13
-#: apps/messaging/templates/messaging/compose.html:98
-#: apps/messaging/templates/messaging/newsletter_compose.html:36
-#: apps/readings/templates/readings/reading_form.html:31
-#: apps/readings/templates/readings/round_form.html:20
-#: apps/register/templates/register/import_upload.html:20
-#: apps/register/templates/register/person_form.html:38
-#: apps/register/templates/register/unit_form.html:29
-msgid "Cancel"
-msgstr "Avbryt"
 
 #: apps/invoicing/templates/invoicing/run_list.html:12
 msgid ""
@@ -2461,12 +2679,6 @@ msgid_plural "%(count)s SMS each (%(used)s characters, %(per_sms)s per SMS)"
 msgstr[0] "%(count)s SMS (%(used)s tecken, %(per_sms)s per SMS)"
 msgstr[1] "%(count)s SMS vardera (%(used)s tecken, %(per_sms)s per SMS)"
 
-#: apps/messaging/templates/messaging/_unit_messages.html:4
-#: apps/messaging/templates/messaging/batch_detail.html:61
-#: apps/messaging/templates/messaging/batch_list.html:24
-msgid "Messages"
-msgstr "Meddelanden"
-
 #
 #: apps/messaging/templates/messaging/_unit_messages.html:5
 msgid "Send message"
@@ -2823,13 +3035,6 @@ msgstr "Återställ valda avläsningstyper"
 msgid "Restored."
 msgstr "Återställd."
 
-#: apps/readings/apps.py:7
-#: apps/readings/templates/readings/_round_results.html:3
-#: apps/readings/templates/readings/_unit_readings.html:3
-#: templates/base.html:23
-msgid "Readings"
-msgstr "Avläsningar"
-
 #: apps/readings/forms.py:29
 #: apps/readings/templates/readings/_round_results.html:9
 #: apps/readings/templates/readings/_unit_readings.html:9
@@ -3132,7 +3337,8 @@ msgstr ""
 #: apps/register/admin.py:81
 #, python-format
 msgid "Nothing was deleted: a snapshot could not be taken first (%(error)s)."
-msgstr "Inget togs bort: det gick inte att först ta en ögonblicksbild (%(error)s)."
+msgstr ""
+"Inget togs bort: det gick inte att först ta en säkerhetskopia (%(error)s)."
 
 #: apps/register/apps.py:7
 msgid "Register"
@@ -3278,14 +3484,6 @@ msgstr "Efternamn"
 msgid "Preferred channel"
 msgstr "Önskad kanal"
 
-#: apps/register/csv_io.py:531
-#: apps/register/templates/register/_unit_results.html:3
-#: apps/register/templates/register/person_detail.html:32
-#: apps/register/templates/register/unit_list.html:3
-#: apps/register/templates/register/unit_list.html:6 templates/base.html:21
-msgid "Units"
-msgstr "Enheter"
-
 #: apps/register/csv_io.py:564
 #, python-format
 msgid "CSV export of %(count)s %(things)s"
@@ -3367,7 +3565,8 @@ msgstr "Roll för kontakter som saknar roll"
 #: apps/register/import_views.py:137
 #, python-format
 msgid "Nothing was imported: a snapshot could not be taken first (%(error)s)."
-msgstr "Inget importerades: det gick inte att först ta en ögonblicksbild (%(error)s)."
+msgstr ""
+"Inget importerades: det gick inte att först ta en säkerhetskopia (%(error)s)."
 
 #: apps/register/import_views.py:169
 #, python-format
@@ -3699,12 +3898,6 @@ msgstr "Sida %(number)s av %(total)s"
 #: apps/register/templates/register/import_upload.html:19
 msgid "Next"
 msgstr "Nästa"
-
-#: apps/register/templates/register/_person_results.html:3
-#: apps/register/templates/register/person_list.html:3
-#: apps/register/templates/register/person_list.html:6 templates/base.html:22
-msgid "People"
-msgstr "Personer"
 
 #: apps/register/templates/register/_person_results.html:29
 #, python-format
@@ -4524,7 +4717,7 @@ msgstr "Kör installationsguiden"
 
 #: apps/setup/templates/admin/metra_index.html:20
 msgid "Snapshots of the register, here and offsite."
-msgstr "Ögonblicksbilder av registret, här och externt."
+msgstr "Säkerhetskopior av registret, här och externt."
 
 #: apps/setup/templates/admin/metra_index.html:30
 msgid "Plugins"
@@ -4894,15 +5087,15 @@ msgstr "Inbjudan skickad till %(email)s."
 msgid "Setup is done. You can run it again from Settings."
 msgstr "Inställningen är klar. Du kan köra den igen från Inställningar."
 
-#: config/settings.py:177
+#: config/settings.py:178
 msgid "Swedish"
 msgstr "Svenska"
 
-#: config/settings.py:178
+#: config/settings.py:179
 msgid "English"
 msgstr "Engelska"
 
-#: config/settings.py:179
+#: config/settings.py:180
 msgid "Finnish (machine translated)"
 msgstr "Finska (maskinöversatt)"
 
@@ -4969,6 +5162,10 @@ msgid ""
 msgstr ""
 "Skydda ditt konto med tvåfaktorsinloggning. Det tar en minut med en "
 "autentiseringsapp i telefonen."
+
+#~ msgid "To restore a snapshot, see INSTALL.md, Backup and restore."
+#~ msgstr ""
+#~ "Se INSTALL.md, Backup and restore, för hur en säkerhetskopia återställs."
 
 #~ msgid "Nightly schedule"
 #~ msgstr "Nattlig körning"

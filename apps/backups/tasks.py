@@ -35,3 +35,11 @@ def upload_snapshot(run_id):
     path = settings.BACKUP["dir"] / run.archive_name
     if path.is_file():
         send_offsite(path, run)
+
+
+@db_task()
+def restore_snapshot(name, safety_name, username):
+    """Restore a snapshot an admin chose on the Backups page."""
+    from . import restore
+
+    restore.run(name, safety_name, username)
