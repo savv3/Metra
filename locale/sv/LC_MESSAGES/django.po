@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 17:36+0000\n"
+"POT-Creation-Date: 2026-10-21 17:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5591,7 +5591,7 @@ msgstr ""
 " under Inställningar i stället."
 
 #: apps/setup/templates/setup/board.html:21
-#: apps/setup/templates/setup/messaging.html:34
+#: apps/setup/templates/setup/messaging.html:33
 #: apps/setup/templates/setup/types.html:39
 msgid "Continue"
 msgstr "Fortsätt"
@@ -5672,6 +5672,15 @@ msgstr "Inställt"
 msgid "Sender %(sender)s"
 msgstr "Avsändare %(sender)s"
 
+#: apps/setup/templates/setup/messaging.html:23
+#, python-format
+msgid ""
+"Turn on an SMS add-on and enter its details under <a "
+"href=\"%(addons)s\">Settings &rsaquo; Add-ons</a>."
+msgstr ""
+"Slå på ett SMS-tillägg och fyll i dess uppgifter under <a "
+"href=\"%(addons)s\">Inställningar &rsaquo; Tillägg</a>."
+
 #: apps/setup/templates/setup/messaging.html:29
 msgid "Send a test SMS to"
 msgstr "Skicka ett test-sms till"
@@ -5679,10 +5688,6 @@ msgstr "Skicka ett test-sms till"
 #: apps/setup/templates/setup/messaging.html:30
 msgid "Send test SMS"
 msgstr "Skicka test-sms"
-
-#: apps/setup/templates/setup/messaging.html:33
-msgid "SMS settings are described in INSTALL.md, under Email and SMS."
-msgstr "Sms-inställningar beskrivs i INSTALL.md, under Email and SMS."
 
 #: apps/setup/templates/setup/organisation.html:4
 msgid ""
@@ -5901,6 +5906,9 @@ msgid ""
 msgstr ""
 "Skydda ditt konto med tvåfaktorsinloggning. Det tar en minut med en "
 "autentiseringsapp i telefonen."
+
+#~ msgid "SMS settings are described in INSTALL.md, under Email and SMS."
+#~ msgstr "Sms-inställningar beskrivs i INSTALL.md, under Email and SMS."
 
 #~ msgid ""
 #~ "Email and SMS are set by whoever installed Metra, in the server's settings "

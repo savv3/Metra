@@ -164,15 +164,21 @@ records.
 **SMS** goes through [46elks](https://46elks.com):
 
 1. Create an account at 46elks and add credit. Messages are paid per SMS.
-2. Under *Account* copy the **API username** and **API password** into
-   `METRA_ELKS_API_USER` and `METRA_ELKS_API_PASSWORD`.
-3. Set `METRA_SMS_SENDER` to the name shown on the phone (up to 11 letters
-   and digits, for example `Vatten`) or to a number you have at 46elks.
-4. Numbers written without a country code (`040 123 4567`) get
-   `METRA_SMS_COUNTRY_CODE`, 358 (Finland and Åland) by default.
-5. Optional: set `METRA_ELKS_DRY_RUN=true` to have 46elks check messages
-   without sending them or charging, while you try the setup.
-6. Restart: `docker compose up -d`.
+2. In Metra, open **Settings > Add-ons > 46elks SMS** and enter the
+   **API username** and **API password** from *Account* at 46elks.
+3. Enter the **Sender**, the name shown on the phone (up to 11 letters and
+   digits, for example `Vatten`), or a number you have at 46elks. Without
+   one, `METRA_SMS_SENDER` or "Register" is used.
+4. Optional: tick **Test mode** to have 46elks check messages without
+   sending them or charging, while you try the setup.
+5. Send a test SMS from the setup wizard's messaging step.
+
+Numbers written without a country code (`040 123 4567`) get
+`METRA_SMS_COUNTRY_CODE`, 358 (Finland and Åland) by default. The settings
+can instead be set on the server with `METRA_ELKS_API_USER`,
+`METRA_ELKS_API_PASSWORD`, `METRA_SMS_SENDER` and `METRA_ELKS_DRY_RUN`; a
+variable that is set wins over the page and shows there as locked, so
+existing installs keep working unchanged.
 
 Delivery reports come back automatically when the app is reachable over
 HTTPS at `METRA_BASE_URL`. 46elks posts them to a secret address the app

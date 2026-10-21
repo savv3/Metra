@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 17:36+0000\n"
+"POT-Creation-Date: 2026-10-21 17:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5601,7 +5601,7 @@ msgstr ""
 "sen sijaan kohdassa Asetukset."
 
 #: apps/setup/templates/setup/board.html:21
-#: apps/setup/templates/setup/messaging.html:34
+#: apps/setup/templates/setup/messaging.html:33
 #: apps/setup/templates/setup/types.html:39
 msgid "Continue"
 msgstr "Jatka"
@@ -5681,6 +5681,15 @@ msgstr "Määritetty"
 msgid "Sender %(sender)s"
 msgstr "Lähettäjä %(sender)s"
 
+#: apps/setup/templates/setup/messaging.html:23
+#, python-format
+msgid ""
+"Turn on an SMS add-on and enter its details under <a "
+"href=\"%(addons)s\">Settings &rsaquo; Add-ons</a>."
+msgstr ""
+"Ota tekstiviestilisäosa käyttöön ja anna sen tiedot kohdassa <a "
+"href=\"%(addons)s\">Asetukset &rsaquo; Lisäosat</a>."
+
 #: apps/setup/templates/setup/messaging.html:29
 msgid "Send a test SMS to"
 msgstr "Lähetä testiviesti numeroon"
@@ -5688,12 +5697,6 @@ msgstr "Lähetä testiviesti numeroon"
 #: apps/setup/templates/setup/messaging.html:30
 msgid "Send test SMS"
 msgstr "Lähetä testiviesti"
-
-#: apps/setup/templates/setup/messaging.html:33
-msgid "SMS settings are described in INSTALL.md, under Email and SMS."
-msgstr ""
-"Tekstiviestiasetukset on kuvattu tiedostossa INSTALL.md, kohdassa Email and "
-"SMS."
 
 #: apps/setup/templates/setup/organisation.html:4
 msgid ""
@@ -5914,6 +5917,11 @@ msgid ""
 msgstr ""
 "Suojaa tilisi kaksivaiheisella tunnistautumisella. Se vie minuutin "
 "todennussovelluksella puhelimellasi."
+
+#~ msgid "SMS settings are described in INSTALL.md, under Email and SMS."
+#~ msgstr ""
+#~ "Tekstiviestiasetukset on kuvattu tiedostossa INSTALL.md, kohdassa Email and "
+#~ "SMS."
 
 #~ msgid ""
 #~ "Email and SMS are set by whoever installed Metra, in the server's settings "

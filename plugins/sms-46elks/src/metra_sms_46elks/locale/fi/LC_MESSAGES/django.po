@@ -1,0 +1,50 @@
+# Finnish translation of the Metra 46elks plugin.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# MACHINE TRANSLATED: not reviewed by a Finnish speaker. Corrections welcome.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-21 17:13+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:22
+msgid "API username"
+msgstr "API-käyttäjätunnus"
+
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:23
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:30
+msgid "At 46elks, under Account."
+msgstr "46elksin palvelussa kohdassa Account."
+
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:28
+msgid "API password"
+msgstr "API-salasana"
+
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:35
+msgid "Sender"
+msgstr "Lähettäjä"
+
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:37
+msgid ""
+"The name shown on the phone, up to 11 letters and digits (for example "
+"Vatten), or a number you have at 46elks."
+msgstr "Puhelimessa näkyvä nimi, enintään 11 kirjainta ja numeroa (esimerkiksi Vatten), tai numero, joka sinulla on 46elksissä."
+
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:44
+msgid "Test mode"
+msgstr "Testitila"
+
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:46
+msgid "46elks checks messages without sending them or charging."
+msgstr "46elks tarkistaa viestit lähettämättä niitä ja veloittamatta."
