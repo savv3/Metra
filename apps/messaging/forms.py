@@ -2,7 +2,7 @@ from django import forms
 from django.http import QueryDict
 from django.utils.translation import gettext_lazy as _
 
-from apps.register.models import Tag, Unit, UnitType
+from apps.register.models import Person, Tag, Unit, UnitType
 
 from . import attachments, broadcast
 from .models import (
@@ -16,7 +16,7 @@ from .registry import EMAIL
 
 SCOPES = [
     (broadcast.EVERYONE, _("Everyone")),
-    (broadcast.TAG, _("Units with a tag")),
+    (broadcast.TAG, _("Units or people with a tag")),
     (broadcast.UNIT_TYPE, _("Units of a type")),
     (broadcast.FILTERED, _("The units in the filtered list")),
 ]
@@ -238,6 +238,13 @@ class MessageForm(AttachmentsMixin, forms.Form):
         return broadcast.audience_units(
             data["scope"], getattr(value, "pk", ""), QueryDict(data.get("filters", ""))
         )
+
+    def people(self):
+        """People picked on their own: those who carry the tag themselves."""
+        if self.unit is not None:
+            return Person.objects.none()
+        data = self.cleaned_data
+        return broadcast.audience_people(data["scope"], getattr(data.get("tag"), "pk", ""))
 
     def audience_label(self):
         data = self.cleaned_data

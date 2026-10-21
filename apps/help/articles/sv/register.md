@@ -23,7 +23,7 @@ Med flera typer behålls de allmänna orden.
 - **Enheter** och **Personer** visar registret. Sök och filtrera listan och använd sedan **Exportera som CSV** för att ladda ner det du ser.
 - **Lägg till** en enhet eller person med knappen ovanför listan. På en enhets sida lägger du till en befintlig person som kontakt eller skapar en ny.
 - **Arkivera** i stället för att ta bort: en arkiverad enhet eller person sparas, men försvinner ur listorna och utskicken.
-- **Taggar** grupperar enheter, till exempel en by eller en ledningssträcka, och meddelanden kan skickas till alla med en viss tagg.
+- **Taggar** grupperar enheter, till exempel en by eller en ledningssträcka, och meddelanden kan skickas till alla med en viss tagg. Även en person kan ha en tagg.
 
 Varje ändring, och varje gång någon öppnar en enhets eller persons sida,
 sparas i historiken. Admin och Styrelse ser den längst ner på sidan.

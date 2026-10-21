@@ -27,13 +27,25 @@
     <blockquote class="message-preview">{{ example|linebreaksbr }}</blockquote>
     {% include "messaging/_attachments.html" with sms_note=sms_count %}
 
+    {% if nobody %}
+      <div class="status-panel status-panel--warning">
+        <h3>{% translate "Nobody matches these choices" %}</h3>
+        {% for reason in nobody %}<p>{{ reason }}</p>{% endfor %}
+        {% if without_contacts %}
+          <ul class="plain-list">
+            {% for u in without_contacts %}<li><a href="{{ u.get_absolute_url }}">{{ u.name }}</a></li>{% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    {% endif %}
+
     {% if plan.unreachable %}
       <div class="status-panel status-panel--warning">
         <h3>{% blocktranslate count count=plan.unreachable|length %}{{ count }} person cannot be reached this way{% plural %}{{ count }} people cannot be reached this way{% endblocktranslate %}</h3>
         <p>{% translate "Call or visit them:" %}</p>
         <ul class="plain-list">
           {% for r in plan.unreachable %}
-            <li><a href="{{ r.person.get_absolute_url }}">{{ r.person.full_name }}</a>, {{ r.unit.name }}{% if r.person.phone %} &middot; {{ r.person.phone }}{% endif %}{% if r.unit.address_line and r.unit.address_line != r.unit.name %} &middot; {{ r.unit.address_line }}{% endif %}</li>
+            <li><a href="{{ r.person.get_absolute_url }}">{{ r.person.full_name }}</a>{% if r.unit %}, {{ r.unit.name }}{% endif %}{% if r.person.phone %} &middot; {{ r.person.phone }}{% endif %}{% if r.unit and r.unit.address_line and r.unit.address_line != r.unit.name %} &middot; {{ r.unit.address_line }}{% endif %}</li>
           {% endfor %}
         </ul>
       </div>

@@ -120,6 +120,15 @@ class ProviderRegistry:
         except KeyError:
             raise ProviderError(f"No {channel} provider called {name!r}") from None
 
+    def of_plugin(self, plugin):
+        """The provider classes a plugin added, whether it is on or off."""
+        return [
+            provider_class
+            for providers in self._providers.values()
+            for provider_class in providers.values()
+            if provider_class.plugin == plugin
+        ]
+
     def configured(self, channel):
         """The first registered provider of the channel that is configured, or None."""
         for provider_class in self._available(channel).values():

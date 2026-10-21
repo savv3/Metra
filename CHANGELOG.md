@@ -26,6 +26,9 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   Settings page the link goes in (`api.SETTINGS_GROUPS`, Integrations by
   default), and the link is also listed on the plugin's page under
   Settings > Add-ons.
+- A test SMS (or test email) from the add-on's own settings page, for
+  example Settings > Add-ons > 46elks SMS. It goes through that add-on even
+  when another one is chosen for sending.
 - Mailgun add-on (`metra-email-mailgun`, bundled and on by default): send
   email through Mailgun's API, EU region by default, with attachments,
   List-Unsubscribe and a tag per send-out. Set it up under Settings >
@@ -105,6 +108,10 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Changed
 
+- Messages to a tag ("Units or people with a tag") now also reach people who
+  carry the tag themselves, not only the contacts of tagged units. When
+  nobody matches, the check page says why, for example a tagged unit without
+  contacts, and links to it.
 - Backups are now snapshots: a copy of the database and uploads taken every
   night, when a new version starts, before a CSV import, before deleting a
   unit type or field, before a restore, and on demand. They are kept for 7

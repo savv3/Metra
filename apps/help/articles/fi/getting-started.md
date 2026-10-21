@@ -77,5 +77,5 @@ sovelluksessa. Uusi lisäosa asennetaan palvelimella, katso asennusohje.
 Tekstiviestejä varten avaa **46elks SMS** -lisäosan **Asetukset**, anna
 46elks-tilisi API-käyttäjätunnus ja -salasana sekä puhelimessa näkyvä
 lähettäjä (enintään 11 kirjainta ja numeroa) ja lähetä testiviesti
-käyttöönotto-oppaasta. **Testitilassa** 46elks tarkistaa viestit lähettämättä
+samalta sivulta tai käyttöönotto-oppaasta. **Testitilassa** 46elks tarkistaa viestit lähettämättä
 niitä.

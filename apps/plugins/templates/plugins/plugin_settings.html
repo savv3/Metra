@@ -32,4 +32,24 @@
       </div>
     </form>
   {% endif %}
+  {% for test in tests %}
+    <h2>{% translate "Send a test" %}</h2>
+    {% if plugin.enabled %}
+      <p class="help">{% translate "Save the settings first. The test goes through this add-on even if another one is chosen for sending." %}</p>
+      <form method="post" class="form form--inline">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="test">
+        <input type="hidden" name="channel" value="{{ test.channel }}">
+        {% if test.channel == "sms" %}
+          <div class="field"><label for="test-sms">{% translate "Send a test SMS to" %}</label><input type="tel" id="test-sms" name="to" value="{{ test.to }}" required></div>
+          <button type="submit" class="button">{% translate "Send test SMS" %}</button>
+        {% else %}
+          <div class="field"><label for="test-email">{% translate "Send a test email to" %}</label><input type="email" id="test-email" name="to" value="{{ test.to }}" required></div>
+          <button type="submit" class="button">{% translate "Send test email" %}</button>
+        {% endif %}
+      </form>
+    {% else %}
+      <p class="help">{% translate "Turn the add-on on to send a test." %}</p>
+    {% endif %}
+  {% endfor %}
 {% endblock %}

@@ -29,7 +29,7 @@ skräppost noteras på meddelandet.
 ## Att skriva till många hushåll
 
 **Utskick > Nytt meddelande** skriver ett meddelande till alla, till enheter
-med en tagg eller av en typ, eller till enheterna i listan du har filtrerat
+eller personer med en tagg, till enheter av en typ, eller till enheterna i listan du har filtrerat
 (**Skicka ett meddelande till de här enheterna** under enhetslistan). Välj om
 det går till alla kontakter för varje enhet eller bara huvudkontakten, och
 hur. Det vanliga valet är **Enligt var och ens önskade kanal**: de som vill ha
@@ -42,6 +42,11 @@ oavsett vad var och en önskar:
 - **Endast SMS** eller **Endast e-post**,
 - **SMS, eller e-post till dem som saknar telefon**, eller
 - **Både SMS och e-post**.
+
+En tagg når kontakterna för de enheter som har taggen och de personer som
+själva har den, även om de inte är kontakt för någon enhet. Om ingen
+motsvarar valen säger kontrollsidan varför, till exempel att den taggade
+enheten ännu saknar kontakter.
 
 Med önskad kanal skriver du både sms-texten och e-postens ämne, eftersom
 mottagarna kan få vilket som helst. Formuläret visar bara de texter som det

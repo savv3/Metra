@@ -19,7 +19,7 @@ from django.views.decorators.http import require_POST
 from apps.invoicing.models import BillingSettings
 from apps.messaging.email_forms import EmailSettingsForm
 from apps.messaging.registry import EMAIL, SMS, ProviderError, provider_for
-from apps.messaging.views import send_test_email
+from apps.messaging.views import send_test, send_test_email
 from apps.register.models import CustomField, Organisation, UnitType
 
 from . import examples
@@ -207,16 +207,7 @@ def messaging_step(request, name):
 
 
 def _send_test_sms(request, to):
-    provider = provider_for(SMS)
-    try:
-        if provider is None:
-            raise ProviderError(_("This channel is not set up."))
-        provider.send(to, _("This is a test message from Metra. If you got it, sending works."))
-    except ProviderError as error:
-        messages.error(request, _("The test failed: %(error)s") % {"error": error})
-        return False
-    messages.success(request, _("Test sent to %(to)s.") % {"to": to})
-    return True
+    return send_test(request, provider_for(SMS), SMS, to)
 
 
 def invoicing_step(request, name):

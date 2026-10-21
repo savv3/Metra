@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 18:35+0000\n"
+"POT-Creation-Date: 2026-10-21 21:48+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -580,7 +580,7 @@ msgstr "Återställ den här säkerhetskopian"
 
 #: apps/backups/templates/backups/restore.html:58
 #: apps/invoicing/templates/invoicing/run_form.html:14
-#: apps/messaging/templates/messaging/compose.html:114
+#: apps/messaging/templates/messaging/compose.html:126
 #: apps/messaging/templates/messaging/newsletter_compose.html:36
 #: apps/plugins/templates/plugins/plugin_settings.html:31
 #: apps/readings/templates/readings/reading_form.html:31
@@ -2277,7 +2277,7 @@ msgstr "Alla utfärdade fakturor i den här omgången har skickats."
 
 #: apps/invoicing/views.py:353 apps/invoicing/views.py:416
 #: apps/messaging/views.py:54 apps/messaging/views.py:156
-#: apps/messaging/views.py:233
+#: apps/messaging/views.py:238
 msgid "Sending has started. This page shows how it goes."
 msgstr "Utskicket har startat. Den här sidan visar hur det går."
 
@@ -2337,7 +2337,28 @@ msgstr "Den här e-postleverantören kan inte skicka bilagor."
 msgid "Files:"
 msgstr "Filer:"
 
-#: apps/messaging/broadcast.py:161
+#: apps/messaging/broadcast.py:124
+msgid "No active unit has this tag, and nobody carries it themselves."
+msgstr "Ingen aktiv enhet har den här taggen, och ingen person har den heller."
+
+#: apps/messaging/broadcast.py:126
+msgid "No active unit matches these choices."
+msgstr "Ingen aktiv enhet motsvarar de här valen."
+
+#: apps/messaging/broadcast.py:130
+#, python-format
+msgid "The unit that matches has no contacts. Add them on the unit's page."
+msgid_plural ""
+"The %(count)s units that match have no contacts. Add them on each unit's "
+"page."
+msgstr[0] ""
+"Enheten som motsvarar valen har inga kontaktpersoner. Lägg till dem på "
+"enhetens sida."
+msgstr[1] ""
+"De %(count)s enheterna som motsvarar valen har inga kontaktpersoner. Lägg "
+"till dem på varje enhets sida."
+
+#: apps/messaging/broadcast.py:212
 msgid "No phone number or email address to send to."
 msgstr ""
 "Det finns inget telefonnummer eller ingen e-postadress att skicka till."
@@ -2422,7 +2443,7 @@ msgstr ""
 msgid "A password is saved. Leave this empty to keep it."
 msgstr "Ett lösenord är sparat. Lämna fältet tomt för att behålla det."
 
-#: apps/messaging/email_forms.py:103 apps/plugins/views.py:114
+#: apps/messaging/email_forms.py:103 apps/plugins/views.py:115
 #, python-format
 msgid ""
 "Set in the server environment (%(variable)s), so it cannot be changed here."
@@ -2441,8 +2462,8 @@ msgid "Everyone"
 msgstr "Alla"
 
 #: apps/messaging/forms.py:19
-msgid "Units with a tag"
-msgstr "Enheter med en tagg"
+msgid "Units or people with a tag"
+msgstr "Enheter eller personer med en tagg"
 
 #: apps/messaging/forms.py:20
 msgid "Units of a type"
@@ -2619,15 +2640,15 @@ msgstr "Skriv texten i e-postmeddelandet."
 msgid "Write the notice without personal placeholders."
 msgstr "Skriv anslaget utan personliga platshållare."
 
-#: apps/messaging/forms.py:254
+#: apps/messaging/forms.py:261
 msgid "Subject"
 msgstr "Ämne"
 
-#: apps/messaging/forms.py:256 apps/register/models.py:159
+#: apps/messaging/forms.py:263 apps/register/models.py:159
 msgid "Text"
 msgstr "Text"
 
-#: apps/messaging/forms.py:259
+#: apps/messaging/forms.py:266
 #, python-brace-format
 msgid ""
 "Plain text. You can use {first_name}, {name} and {organisation}. An "
@@ -2636,27 +2657,27 @@ msgstr ""
 "Ren text. Du kan använda {first_name}, {name} och {organisation}. En "
 "avregistreringslänk läggs till i slutet av varje e-post."
 
-#: apps/messaging/forms.py:273 apps/messaging/models.py:42
+#: apps/messaging/forms.py:280 apps/messaging/models.py:42
 #: apps/messaging/templates/messaging/_person_newsletter.html:3
 #: apps/messaging/templates/messaging/unsubscribe.html:3
 #: apps/selfservice/templates/selfservice/member.html:62
 msgid "Newsletter"
 msgstr "Nyhetsbrev"
 
-#: apps/messaging/forms.py:274
+#: apps/messaging/forms.py:281
 #: apps/messaging/templates/messaging/_person_newsletter.html:6
 msgid "Wants the newsletter"
 msgstr "Vill ha nyhetsbrevet"
 
-#: apps/messaging/forms.py:274
+#: apps/messaging/forms.py:281
 msgid "Does not want it"
 msgstr "Vill inte ha det"
 
-#: apps/messaging/forms.py:279
+#: apps/messaging/forms.py:286
 msgid "How it was given"
 msgstr "Hur det gavs"
 
-#: apps/messaging/forms.py:282
+#: apps/messaging/forms.py:289
 msgid "For example: signed form at the annual meeting."
 msgstr "Till exempel: underskriven blankett vid årsmötet."
 
@@ -2988,7 +3009,7 @@ msgstr "Avslutade prenumerationen innan det skickades."
 
 #: apps/messaging/newsletter.py:116
 #: apps/messaging/templates/messaging/_send_forms.html:8
-#: apps/messaging/views.py:346
+#: apps/messaging/views.py:352
 msgid "Email is not set up."
 msgstr "E-post är inte inställt."
 
@@ -3105,7 +3126,7 @@ msgid "No messages yet."
 msgstr "Inga meddelanden än."
 
 #: apps/messaging/templates/messaging/batch_detail.html:17
-#: apps/messaging/templates/messaging/compose.html:106
+#: apps/messaging/templates/messaging/compose.html:118
 msgid "Public notice"
 msgstr "Offentligt anslag"
 
@@ -3253,45 +3274,49 @@ msgid "The message, as %(name)s gets it"
 msgstr "Meddelandet så som %(name)s får det"
 
 #: apps/messaging/templates/messaging/compose.html:32
+msgid "Nobody matches these choices"
+msgstr "Ingen motsvarar de här valen"
+
+#: apps/messaging/templates/messaging/compose.html:44
 #, python-format
 msgid "%(count)s person cannot be reached this way"
 msgid_plural "%(count)s people cannot be reached this way"
 msgstr[0] "%(count)s person kan inte nås på det här sättet"
 msgstr[1] "%(count)s personer kan inte nås på det här sättet"
 
-#: apps/messaging/templates/messaging/compose.html:33
+#: apps/messaging/templates/messaging/compose.html:45
 msgid "Call or visit them:"
 msgstr "Ring eller besök dem:"
 
-#: apps/messaging/templates/messaging/compose.html:48
+#: apps/messaging/templates/messaging/compose.html:60
 #, python-format
 msgid "Send now to %(count)s person"
 msgid_plural "Send now to %(count)s people"
 msgstr[0] "Skicka nu till %(count)s person"
 msgstr[1] "Skicka nu till %(count)s personer"
 
-#: apps/messaging/templates/messaging/compose.html:49
+#: apps/messaging/templates/messaging/compose.html:61
 msgid "Change the message"
 msgstr "Ändra meddelandet"
 
-#: apps/messaging/templates/messaging/compose.html:58
+#: apps/messaging/templates/messaging/compose.html:70
 #, python-format
 msgid "To the contacts of %(name)s."
 msgstr "Till kontakterna för %(name)s."
 
-#: apps/messaging/templates/messaging/compose.html:58
+#: apps/messaging/templates/messaging/compose.html:70
 msgid "Back to the unit"
 msgstr "Tillbaka till enheten"
 
-#: apps/messaging/templates/messaging/compose.html:81
+#: apps/messaging/templates/messaging/compose.html:93
 msgid "Other options"
 msgstr "Andra alternativ"
 
-#: apps/messaging/templates/messaging/compose.html:113
+#: apps/messaging/templates/messaging/compose.html:125
 msgid "Check recipients"
 msgstr "Kontrollera mottagare"
 
-#: apps/messaging/templates/messaging/compose.html:116
+#: apps/messaging/templates/messaging/compose.html:128
 msgid "Nothing is sent until you have checked the recipients and confirmed."
 msgstr "Ingenting skickas förrän du har kontrollerat mottagarna och bekräftat."
 
@@ -3315,15 +3340,18 @@ msgid "Save"
 msgstr "Spara"
 
 #: apps/messaging/templates/messaging/email_settings.html:19
+#: apps/plugins/templates/plugins/plugin_settings.html:36
 msgid "Send a test"
 msgstr "Skicka ett test"
 
 #: apps/messaging/templates/messaging/email_settings.html:23
+#: apps/plugins/templates/plugins/plugin_settings.html:47
 #: apps/setup/templates/setup/messaging.html:16
 msgid "Send a test email to"
 msgstr "Skicka ett testmejl till"
 
 #: apps/messaging/templates/messaging/email_settings.html:24
+#: apps/plugins/templates/plugins/plugin_settings.html:48
 #: apps/setup/templates/setup/messaging.html:17
 msgid "Send test email"
 msgstr "Skicka testmejl"
@@ -3439,38 +3467,50 @@ msgstr "Avsluta prenumerationen"
 msgid "Nobody can be reached with these choices."
 msgstr "Ingen kan nås med de här valen."
 
-#: apps/messaging/views.py:204
+#: apps/messaging/views.py:209
 msgid "The notice is no longer shown."
 msgstr "Anslaget visas inte längre."
 
-#: apps/messaging/views.py:227
+#: apps/messaging/views.py:232
 msgid "Everyone who wants the newsletter"
 msgstr "Alla som vill ha nyhetsbrevet"
 
-#: apps/messaging/views.py:263
+#: apps/messaging/views.py:268
 msgid "Saved the newsletter choice."
 msgstr "Valet för nyhetsbrevet är sparat."
 
-#: apps/messaging/views.py:349 apps/setup/views.py:214
+#: apps/messaging/views.py:352
+msgid "This channel is not set up."
+msgstr "Den här kanalen är inte inställd."
+
+#: apps/messaging/views.py:356
+msgid "Enter an email address."
+msgstr "Ange en e-postadress."
+
+#: apps/messaging/views.py:356
+msgid "Enter a phone number."
+msgstr "Ange ett telefonnummer."
+
+#: apps/messaging/views.py:360
 msgid "This is a test message from Metra. If you got it, sending works."
 msgstr ""
 "Det här är ett testmeddelande från Metra. Om du fick det fungerar utskicket."
 
-#: apps/messaging/views.py:350
+#: apps/messaging/views.py:361
 msgid "Test message from Metra"
 msgstr "Testmeddelande från Metra"
 
-#: apps/messaging/views.py:353 apps/setup/views.py:216
+#: apps/messaging/views.py:364
 #, python-format
 msgid "The test failed: %(error)s"
 msgstr "Testet misslyckades: %(error)s"
 
-#: apps/messaging/views.py:355 apps/setup/views.py:218
+#: apps/messaging/views.py:366
 #, python-format
 msgid "Test sent to %(to)s."
 msgstr "Testet skickades till %(to)s."
 
-#: apps/messaging/views.py:368 apps/setup/views.py:185
+#: apps/messaging/views.py:384 apps/setup/views.py:185
 msgid "Saved the email settings."
 msgstr "E-postinställningarna är sparade."
 
@@ -3789,31 +3829,54 @@ msgstr "Slå på tillägget för att öppna dess inställningssidor."
 msgid "Other settings"
 msgstr "Övriga inställningar"
 
-#: apps/plugins/views.py:88
+#: apps/plugins/templates/plugins/plugin_settings.html:38
+msgid ""
+"Save the settings first. The test goes through this add-on even if another "
+"one is chosen for sending."
+msgstr ""
+"Spara inställningarna först. Testet skickas via det här tillägget även om ett"
+" annat är valt för utskick."
+
+#: apps/plugins/templates/plugins/plugin_settings.html:44
+#: apps/setup/templates/setup/messaging.html:29
+msgid "Send a test SMS to"
+msgstr "Skicka ett test-sms till"
+
+#: apps/plugins/templates/plugins/plugin_settings.html:45
+#: apps/setup/templates/setup/messaging.html:30
+msgid "Send test SMS"
+msgstr "Skicka test-sms"
+
+#: apps/plugins/templates/plugins/plugin_settings.html:52
+#: apps/plugins/views.py:220
+msgid "Turn the add-on on to send a test."
+msgstr "Slå på tillägget för att skicka ett test."
+
+#: apps/plugins/views.py:89
 #, python-format
 msgid "%(plugin)s is on."
 msgstr "%(plugin)s är på."
 
-#: apps/plugins/views.py:90
+#: apps/plugins/views.py:91
 #, python-format
 msgid "%(plugin)s is off. Its data is kept."
 msgstr "%(plugin)s är av. Dess data sparas."
 
-#: apps/plugins/views.py:103
+#: apps/plugins/views.py:104
 #, python-format
 msgid "Remove the saved %(setting)s"
 msgstr "Ta bort sparad %(setting)s"
 
-#: apps/plugins/views.py:137
+#: apps/plugins/views.py:138
 msgid "The saved value cannot be read with this server's key; enter it again."
 msgstr ""
 "Det sparade värdet kan inte läsas med serverns nyckel. Skriv in det igen."
 
-#: apps/plugins/views.py:139
+#: apps/plugins/views.py:140
 msgid "A value is saved. Leave this empty to keep it."
 msgstr "Ett värde är sparat. Lämna fältet tomt för att behålla det."
 
-#: apps/plugins/views.py:179
+#: apps/plugins/views.py:184
 msgid "Saved the settings."
 msgstr "Inställningarna är sparade."
 
@@ -5102,7 +5165,7 @@ msgid "Print self-service letter"
 msgstr "Skriv ut brev med länk"
 
 #: apps/selfservice/templates/selfservice/base.html:9
-#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:279
+#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:270
 #: templates/base.html:7 templates/base.html:18
 msgid "Metra"
 msgstr "Metra"
@@ -5689,14 +5752,6 @@ msgstr ""
 "Slå på ett SMS-tillägg och fyll i dess uppgifter under <a "
 "href=\"%(addons)s\">Inställningar &rsaquo; Tillägg</a>."
 
-#: apps/setup/templates/setup/messaging.html:29
-msgid "Send a test SMS to"
-msgstr "Skicka ett test-sms till"
-
-#: apps/setup/templates/setup/messaging.html:30
-msgid "Send test SMS"
-msgstr "Skicka test-sms"
-
 #: apps/setup/templates/setup/organisation.html:4
 msgid ""
 "Who runs this installation. The contact details appear on the public page, on"
@@ -5787,11 +5842,7 @@ msgstr "Logotypen togs bort."
 msgid "Added %(name)s with its fields and a water meter."
 msgstr "La till %(name)s med fält och en vattenmätare."
 
-#: apps/setup/views.py:213
-msgid "This channel is not set up."
-msgstr "Den här kanalen är inte inställd."
-
-#: apps/setup/views.py:253
+#: apps/setup/views.py:244
 msgid ""
 "Email is not set up, so no invitation can be sent. Add the person under "
 "Settings."
@@ -5799,12 +5850,12 @@ msgstr ""
 "E-post är inte inställd, så ingen inbjudan kan skickas. Lägg till personen "
 "under Inställningar."
 
-#: apps/setup/views.py:284
+#: apps/setup/views.py:275
 #, python-format
 msgid "Your account for %(organisation)s"
 msgstr "Ditt konto för %(organisation)s"
 
-#: apps/setup/views.py:287
+#: apps/setup/views.py:278
 #, python-format
 msgid ""
 "Hello %(name)s,\n"
@@ -5825,17 +5876,17 @@ msgstr ""
 "\n"
 "Länken fungerar i några dagar."
 
-#: apps/setup/views.py:297
+#: apps/setup/views.py:288
 #, python-format
 msgid "The invitation could not be sent: %(error)s"
 msgstr "Inbjudan kunde inte skickas: %(error)s"
 
-#: apps/setup/views.py:299
+#: apps/setup/views.py:290
 #, python-format
 msgid "Invitation sent to %(email)s."
 msgstr "Inbjudan skickad till %(email)s."
 
-#: apps/setup/views.py:320
+#: apps/setup/views.py:311
 msgid "Setup is done. You can run it again from Settings."
 msgstr "Inställningen är klar. Du kan köra den igen från Inställningar."
 
