@@ -12,6 +12,17 @@
       </table>
     </div>
   {% endif %}
+  {% if perms.backups.view_backuprun %}
+    <div class="module" id="backups-link">
+      <table>
+        <caption>{% translate "Backups" %}</caption>
+        <tr>
+          <th scope="row">{% translate "Snapshots of the register, here and offsite." %}</th>
+          <td><a href="{% url 'backups:list' %}">{% translate "Snapshots and backups" %}</a></td>
+        </tr>
+      </table>
+    </div>
+  {% endif %}
   {% plugin_settings_links as plugin_links %}
   {% if plugin_links %}
     <div class="module" id="plugin-settings">

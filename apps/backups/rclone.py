@@ -134,15 +134,26 @@ class Remote:
     def download(self, name, destination):
         self.run("copyto", f"{CRYPT}:{name}", str(destination))
 
-    def list(self):
-        """Archive names on the remote, oldest first."""
-        output = self.run("lsf", "--files-only", f"{CRYPT}:")
-        names = (name.strip() for name in output.splitlines())
-        return sorted((name for name in names if is_archive_name(name)), key=archive_time)
+    def sizes(self):
+        """{snapshot name: size in bytes} on the remote, oldest first."""
+        output = self.run("lsf", "--files-only", "--format", "ps", "--separator", ";", f"{CRYPT}:")
+        found = {}
+        for line in output.splitlines():
+            name, _, size = line.strip().rpartition(";")
+            if is_archive_name(name):
+                found[name] = int(size) if size.isdigit() else None
+        return dict(sorted(found.items(), key=lambda item: archive_time(item[0])))
 
-    def prune(self, keep):
-        names = self.list()
-        old = names[:-keep] if keep > 0 else names
+    def list(self):
+        """Snapshot names on the remote, oldest first."""
+        return list(self.sizes())
+
+    def delete(self, name):
+        self.run("deletefile", f"{CRYPT}:{name}")
+
+    def prune(self, policy, now):
+        """Delete the snapshots ``policy`` no longer keeps; return their names."""
+        old = policy.to_delete(self.list(), now)
         for name in old:
-            self.run("deletefile", f"{CRYPT}:{name}")
+            self.delete(name)
         return old

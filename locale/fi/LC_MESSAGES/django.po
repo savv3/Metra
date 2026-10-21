@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 20:40+0300\n"
+"POT-Creation-Date: 2026-10-21 09:37+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -177,77 +177,240 @@ msgid "Change password"
 msgstr "Vaihda salasana"
 
 #: apps/backups/apps.py:7 apps/backups/templates/backups/_status.html:4
+#: apps/backups/templates/backups/backup_list.html:3
+#: apps/backups/templates/backups/backup_list.html:6
+#: apps/setup/templates/admin/metra_index.html:18
 msgid "Backups"
 msgstr "Varmuuskopiot"
 
-#: apps/backups/models.py:10
-msgid "Nightly schedule"
-msgstr "Yöajo"
+#: apps/backups/models.py:12
+#
+msgid "Nightly"
+msgstr "Yöllinen"
 
-#: apps/backups/models.py:11
+#: apps/backups/models.py:13
+msgid "Taken by hand"
+msgstr "Otettu käsin"
+
+#: apps/backups/models.py:14
 msgid "Command"
 msgstr "Komento"
 
-#: apps/backups/models.py:13
+#: apps/backups/models.py:15
+msgid "Before an upgrade"
+msgstr "Ennen päivitystä"
+
+#: apps/backups/models.py:16
+msgid "Before a CSV import"
+msgstr "Ennen CSV-tuontia"
+
+#: apps/backups/models.py:17
+msgid "Before deleting a unit type or field"
+msgstr "Ennen yksikkötyypin tai kentän poistoa"
+
+#: apps/backups/models.py:18
+msgid "Before a restore"
+msgstr "Ennen palautusta"
+
+#: apps/backups/models.py:20
 msgid "started"
 msgstr "alkoi"
 
-#: apps/backups/models.py:14 apps/messaging/models.py:85
+#: apps/backups/models.py:21 apps/messaging/models.py:85
 #: apps/setup/models.py:10
 msgid "finished"
 msgstr "päättyi"
 
-#: apps/backups/models.py:16
+#: apps/backups/models.py:23
 msgid "started by"
 msgstr "aloittaja"
 
-#: apps/backups/models.py:18
+#: apps/backups/models.py:27
+msgid "taken by"
+msgstr "ottanut"
+
+#: apps/backups/models.py:33
 msgid "succeeded"
 msgstr "onnistui"
 
-#: apps/backups/models.py:19
-msgid "archive"
-msgstr "arkisto"
+#: apps/backups/models.py:34 apps/backups/models.py:44
+msgid "snapshot"
+msgstr "tilannevedos"
 
-#: apps/backups/models.py:20
+#: apps/backups/models.py:35
 msgid "size in bytes"
 msgstr "koko tavuina"
 
-#: apps/backups/models.py:22
+#: apps/backups/models.py:36
+msgid "version"
+msgstr "versio"
+
+#: apps/backups/models.py:38
 msgid "target"
 msgstr "kohde"
 
-#: apps/backups/models.py:23 apps/messaging/models.py:175
+#: apps/backups/models.py:39
+msgid "sent offsite"
+msgstr "lähetetty ulkoiseen säilöön"
+
+#: apps/backups/models.py:40 apps/messaging/models.py:175
 msgid "error"
 msgstr "virhe"
 
-#: apps/backups/models.py:27
-msgid "backup"
-msgstr "varmuuskopio"
+#: apps/backups/models.py:45
+msgid "snapshots"
+msgstr "tilannevedokset"
 
-#: apps/backups/models.py:28
-msgid "backups"
-msgstr "varmuuskopiot"
+#: apps/backups/models.py:47
+msgid "Can take a snapshot"
+msgstr "Voi ottaa tilannevedoksen"
 
-#: apps/backups/templates/backups/_status.html:6
+#: apps/backups/models.py:48
+msgid "Can delete snapshots taken by hand"
+msgstr "Voi poistaa käsin otettuja tilannevedoksia"
+
+#: apps/backups/service.py:193
+msgid "Only snapshots taken by hand can be deleted."
+msgstr "Vain käsin otetut tilannevedokset voi poistaa."
+
+#: apps/backups/templates/backups/_status.html:5
+#: apps/setup/templates/admin/metra_index.html:21
+msgid "Snapshots and backups"
+msgstr "Tilannevedokset ja varmuuskopiot"
+
+#: apps/backups/templates/backups/_status.html:7
 #, python-format
 msgid "Last successful backup %(when)s (%(size)s) to %(target)s."
 msgstr ""
 "Viimeisin onnistunut varmuuskopio %(when)s (%(size)s) kohteeseen %(target)s."
 
-#: apps/backups/templates/backups/_status.html:10
+#: apps/backups/templates/backups/_status.html:11
 msgid "No backup has been made yet."
 msgstr "Varmuuskopiota ei ole vielä tehty."
 
-#: apps/backups/templates/backups/_status.html:13
+#: apps/backups/templates/backups/_status.html:14
 #, python-format
 msgid "The last backup failed %(when)s:"
 msgstr "Viimeisin varmuuskopiointi epäonnistui %(when)s:"
 
-#: apps/backups/templates/backups/_status.html:17
+#: apps/backups/templates/backups/_status.html:18
 msgid "The last successful backup is more than a day and a half old."
 msgstr ""
 "Viimeisin onnistunut varmuuskopio on yli puolitoista vuorokautta vanha."
+
+#: apps/backups/templates/backups/backup_list.html:10
+msgid "Take a snapshot now"
+msgstr "Ota tilannevedos nyt"
+
+#: apps/backups/templates/backups/backup_list.html:14
+#, python-format
+msgid ""
+"A snapshot is a copy of the whole register and all uploaded files. One is "
+"taken every night at %(time)s, before every upgrade, before a CSV import, "
+"before deleting a unit type or field, and whenever you take one here."
+msgstr "Tilannevedos on kopio koko rekisteristä ja kaikista ladatuista tiedostoista. Sellainen otetaan joka yö klo %(time)s, ennen jokaista päivitystä, ennen CSV-tuontia, ennen yksikkötyypin tai kentän poistoa ja aina kun otat sellaisen täällä."
+
+#: apps/backups/templates/backups/backup_list.html:18
+#, python-format
+msgid ""
+"Every snapshot is kept for %(days)s days, then the newest of each week for "
+"%(weeks)s weeks and the newest of each month for %(months)s months. "
+"Snapshots taken by hand stay until you delete them."
+msgstr "Jokainen tilannevedos säilytetään %(days)s päivää, sen jälkeen kunkin viikon uusin %(weeks)s viikkoa ja kunkin kuukauden uusin %(months)s kuukautta. Käsin otetut tilannevedokset säilyvät, kunnes poistat ne."
+
+#: apps/backups/templates/backups/backup_list.html:23
+#, python-format
+msgid "Each snapshot is also sent offsite to %(remote)s."
+msgstr "Jokainen tilannevedos lähetetään myös ulkoiseen säilöön: %(remote)s."
+
+#: apps/backups/templates/backups/backup_list.html:25
+msgid ""
+"Snapshots are only kept on this server. Set up an offsite copy "
+"(METRA_BACKUP_REMOTE_TYPE) so they survive if the server is lost."
+msgstr "Tilannevedokset ovat vain tällä palvelimella. Määritä ulkoinen kopio (METRA_BACKUP_REMOTE_TYPE), jotta ne säilyvät, jos palvelin menetetään."
+
+#: apps/backups/templates/backups/backup_list.html:28
+#, python-format
+msgid "The offsite copies could not be listed: %(error)s"
+msgstr "Ulkoisia kopioita ei voitu näyttää: %(error)s"
+
+#: apps/backups/templates/backups/backup_list.html:32
+msgid "Recent problems"
+msgstr "Viimeaikaiset ongelmat"
+
+#: apps/backups/templates/backups/backup_list.html:39
+msgid "Snapshots"
+msgstr "Tilannevedokset"
+
+#: apps/backups/templates/backups/backup_list.html:45
+msgid "Taken"
+msgstr "Otettu"
+
+#: apps/backups/templates/backups/backup_list.html:46
+#
+msgid "Why"
+msgstr "Syy"
+
+#: apps/backups/templates/backups/backup_list.html:47
+msgid "Version"
+msgstr "Versio"
+
+#: apps/backups/templates/backups/backup_list.html:48
+msgid "Size"
+msgstr "Koko"
+
+#: apps/backups/templates/backups/backup_list.html:49
+msgid "Where"
+msgstr "Sijainti"
+
+#: apps/backups/templates/backups/backup_list.html:50
+#: apps/readings/templates/readings/_unit_readings.html:12
+#: apps/register/templates/register/unit_detail.html:41
+#: apps/selfservice/templates/selfservice/round_links.html:44
+msgid "Actions"
+msgstr "Toiminnot"
+
+#: apps/backups/templates/backups/backup_list.html:60
+msgid "This server"
+msgstr "Tämä palvelin"
+
+#: apps/backups/templates/backups/backup_list.html:60
+msgid "Offsite"
+msgstr "Ulkoinen säilö"
+
+#: apps/backups/templates/backups/backup_list.html:66
+#
+msgid "Delete"
+msgstr "Poista"
+
+#: apps/backups/templates/backups/backup_list.html:76
+#
+msgid "No snapshot has been taken yet."
+msgstr "Tilannevedosta ei ole vielä otettu."
+
+#: apps/backups/templates/backups/backup_list.html:78
+msgid "To restore a snapshot, see INSTALL.md, Backup and restore."
+msgstr "Tilannevedoksen palauttaminen on kuvattu tiedostossa INSTALL.md, kohdassa Backup and restore."
+
+#: apps/backups/views.py:45
+#, python-format
+msgid "The snapshot failed: %(error)s"
+msgstr "Tilannevedos epäonnistui: %(error)s"
+
+#: apps/backups/views.py:47
+#, python-format
+msgid "Snapshot taken: %(name)s"
+msgstr "Tilannevedos otettu: %(name)s"
+
+#: apps/backups/views.py:62
+#, python-format
+msgid "The snapshot could not be deleted: %(error)s"
+msgstr "Tilannevedosta ei voitu poistaa: %(error)s"
+
+#: apps/backups/views.py:65
+#, python-format
+msgid "Deleted %(name)s."
+msgstr "Poistettu: %(name)s."
 
 #: apps/core/apps.py:7
 msgid "General"
@@ -1853,12 +2016,14 @@ msgstr "Tarvitaan, kun viesti lähetetään sähköpostilla."
 msgid "Longer text for email"
 msgstr "Pidempi teksti sähköpostiin"
 
-#: apps/messaging/forms.py:140
 #
+#: apps/messaging/forms.py:140
 msgid ""
 "Needed when the message goes by email only. Otherwise optional: without it, "
 "the email has the same text as the SMS."
-msgstr "Pakollinen, kun viesti lähetetään vain sähköpostilla. Muuten vapaaehtoinen: ilman sitä sähköpostissa on sama teksti kuin tekstiviestissä."
+msgstr ""
+"Pakollinen, kun viesti lähetetään vain sähköpostilla. Muuten vapaaehtoinen: "
+"ilman sitä sähköpostissa on sama teksti kuin tekstiviestissä."
 
 #: apps/messaging/forms.py:146
 msgid "Also show as a notice on the public page"
@@ -1898,13 +2063,13 @@ msgstr "Valitse yksikkötyyppi."
 msgid "Add a subject for the email."
 msgstr "Lisää sähköpostille aihe."
 
-#: apps/messaging/forms.py:200
 #
+#: apps/messaging/forms.py:200
 msgid "Write the message."
 msgstr "Kirjoita viesti."
 
-#: apps/messaging/forms.py:204
 #
+#: apps/messaging/forms.py:204
 msgid "Write the text of the email."
 msgstr "Kirjoita sähköpostin teksti."
 
@@ -2652,10 +2817,6 @@ msgstr "Kaikki, jotka haluavat uutiskirjeen"
 msgid "Saved the newsletter choice."
 msgstr "Uutiskirjeen valinta tallennettu."
 
-#: apps/plugins/apps.py:7 apps/setup/templates/admin/metra_index.html:19
-msgid "Plugins"
-msgstr "Lisäosat"
-
 #: apps/readings/admin.py:20
 msgid "Archive selected reading types"
 msgstr "Arkistoi valitut lukematyypit"
@@ -2835,12 +2996,6 @@ msgstr "Puuttuu"
 msgid "Round"
 msgstr "Kierros"
 
-#: apps/readings/templates/readings/_unit_readings.html:12
-#: apps/register/templates/register/unit_detail.html:41
-#: apps/selfservice/templates/selfservice/round_links.html:44
-msgid "Actions"
-msgstr "Toiminnot"
-
 #: apps/readings/templates/readings/_unit_readings.html:27
 msgid "Correct"
 msgstr "Korjaa"
@@ -2972,17 +3127,22 @@ msgstr "Varoitukset"
 msgid "Saved the reading for %(name)s."
 msgstr "Lukema tallennettu: %(name)s."
 
-#: apps/register/admin.py:42
+#: apps/register/admin.py:44
 msgid "Public page and contact details"
 msgstr "Julkinen sivu ja yhteystiedot"
 
-#: apps/register/admin.py:45
+#: apps/register/admin.py:47
 msgid ""
 "Shown to anyone on the public page, on members' pages and in letters, "
 "together with the email, phone and address above."
 msgstr ""
 "Näytetään kaikille julkisella sivulla, jäsenten sivuilla ja kirjeissä sekä "
 "yllä olevan sähköpostiosoitteen, puhelinnumeron ja osoitteen yhteydessä."
+
+#: apps/register/admin.py:81
+#, python-format
+msgid "Nothing was deleted: a snapshot could not be taken first (%(error)s)."
+msgstr "Mitään ei poistettu: tilannevedosta ei voitu ottaa ensin (%(error)s)."
 
 #: apps/register/apps.py:7
 msgid "Register"
@@ -3215,7 +3375,12 @@ msgstr "Sarake %(number)s"
 msgid "Role for contacts without one"
 msgstr "Rooli yhteyshenkilöille, joilla ei ole roolia"
 
-#: apps/register/import_views.py:151
+#: apps/register/import_views.py:137
+#, python-format
+msgid "Nothing was imported: a snapshot could not be taken first (%(error)s)."
+msgstr "Mitään ei tuotu: tilannevedosta ei voitu ottaa ensin (%(error)s)."
+
+#: apps/register/import_views.py:169
 #, python-format
 msgid ""
 "Imported %(units)s units and %(people)s new people; skipped %(skipped)s."
@@ -4370,6 +4535,14 @@ msgstr ""
 msgid "Run the setup wizard"
 msgstr "Käynnistä käyttöönotto"
 
+#: apps/setup/templates/admin/metra_index.html:20
+msgid "Snapshots of the register, here and offsite."
+msgstr "Rekisterin tilannevedokset, täällä ja ulkoisessa säilössä."
+
+#: apps/setup/templates/admin/metra_index.html:30
+msgid "Plugins"
+msgstr "Lisäosat"
+
 #
 #: apps/setup/templates/setup/_form.html:7
 msgid "Save and continue"
@@ -4810,3 +4983,15 @@ msgid ""
 msgstr ""
 "Suojaa tilisi kaksivaiheisella tunnistautumisella. Se vie minuutin "
 "todennussovelluksella puhelimellasi."
+
+#~ msgid "Nightly schedule"
+#~ msgstr "Yöajo"
+
+#~ msgid "archive"
+#~ msgstr "arkisto"
+
+#~ msgid "backup"
+#~ msgstr "varmuuskopio"
+
+#~ msgid "backups"
+#~ msgstr "varmuuskopiot"

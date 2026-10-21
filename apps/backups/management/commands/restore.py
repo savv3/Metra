@@ -8,8 +8,9 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db import DatabaseError, connections
 
 from apps.backups import archive as backup_archive
+from apps.backups.models import BackupRun
 from apps.backups.rclone import RcloneError
-from apps.backups.service import database_path, remote
+from apps.backups.service import SnapshotFailed, database_path, remote, take_snapshot
 from apps.register.models import Person, Unit
 
 
@@ -22,19 +23,25 @@ def database_has_data():
 
 class Command(BaseCommand):
     help = (
-        "Restore the database and media from a backup archive. "
-        "Stop the web app and the worker first."
+        "Restore the database and uploads from a snapshot. Stop the web app and the "
+        "worker first. A snapshot of the current data is taken before anything is replaced."
     )
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "archive", help="A metra-backup-*.tar.gz file, or with --remote the name of one."
+            "archive", help="A metra-snapshot-*.tar.gz file, or with --remote the name of one."
         )
         parser.add_argument(
             "--remote", action="store_true", help="Download the archive from the remote first."
         )
         parser.add_argument(
             "--force", action="store_true", help="Replace a database that already has data."
+        )
+        parser.add_argument(
+            "--skip-snapshot",
+            action="store_true",
+            help="Restore without first taking a snapshot of the current data, for a "
+            "database too damaged to copy.",
         )
 
     def handle(self, *args, **options):
@@ -44,6 +51,15 @@ class Command(BaseCommand):
                 "of it; run again with --force if that is what you want."
             )
         name = Path(options["archive"]).name
+        if database_has_data() and not options["skip_snapshot"]:
+            try:
+                path, _run = take_snapshot(BackupRun.Trigger.RESTORE)
+            except SnapshotFailed as error:
+                raise CommandError(
+                    f"Could not take a snapshot of the current data first: {error}. "
+                    "Run again with --skip-snapshot to restore anyway."
+                ) from None
+            self.stdout.write(f"Snapshot of the current data: {path.name}")
         with tempfile.TemporaryDirectory() as tmp:
             path = self._fetch(options["archive"], options["remote"], Path(tmp))
             try:

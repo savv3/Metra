@@ -52,8 +52,8 @@ allow root and the containers have no root rights on the host.
    Then point the Cloudflare Tunnel's public hostname at
    `http://localhost:8000`. Skip the `caddy` service: Cloudflare handles TLS.
 
-If Metra already runs as root, move it: take a backup
-(`podman-compose exec web python manage.py backup`), copy the archive to the
+If Metra already runs as root, move it: take a snapshot
+(`podman-compose exec web python manage.py snapshot`), copy it to the
 new user, deploy there, and restore it as [INSTALL.md](../INSTALL.md#restore-onto-a-fresh-install)
 describes. Then stop the root containers.
 
@@ -85,7 +85,7 @@ scripts/deploy.sh 0.2.0
 copies it and `docker/upgrade.sh` to the server, and runs the upgrade there.
 `upgrade.sh`:
 
-1. takes a backup (`manage.py backup`) if the app is running,
+1. takes a snapshot (`manage.py snapshot`) if the app is running,
 2. loads the image as `metra:0.2.0` and sets `METRA_IMAGE=metra:0.2.0` in
    `.env`,
 3. recreates the `web` and `worker` containers (migrations run on start),

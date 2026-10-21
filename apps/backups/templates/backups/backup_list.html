@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Backups" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Backups" %}</h1>
+    {% if perms.backups.take_snapshot %}
+      <form method="post" action="{% url 'backups:take' %}" class="actions">
+        {% csrf_token %}
+        <button type="submit" class="button button--primary">{% translate "Take a snapshot now" %}</button>
+      </form>
+    {% endif %}
+  </div>
+  <p>{% blocktranslate with time=time trimmed %}
+    A snapshot is a copy of the whole register and all uploaded files. One is taken every night at {{ time }},
+    before every upgrade, before a CSV import, before deleting a unit type or field, and whenever you take one here.
+  {% endblocktranslate %}</p>
+  <p class="help">{% blocktranslate with days=keep_days weeks=keep_weeks months=keep_months trimmed %}
+    Every snapshot is kept for {{ days }} days, then the newest of each week for {{ weeks }} weeks and the newest
+    of each month for {{ months }} months. Snapshots taken by hand stay until you delete them.
+  {% endblocktranslate %}</p>
+  {% if remote %}
+    <p>{% blocktranslate with remote=remote %}Each snapshot is also sent offsite to {{ remote }}.{% endblocktranslate %}</p>
+  {% else %}
+    <p class="notice">{% translate "Snapshots are only kept on this server. Set up an offsite copy (METRA_BACKUP_REMOTE_TYPE) so they survive if the server is lost." %}</p>
+  {% endif %}
+  {% if remote_error %}
+    <p class="status-error">{% blocktranslate with error=remote_error %}The offsite copies could not be listed: {{ error }}{% endblocktranslate %}</p>
+  {% endif %}
+  {% if failures %}
+    <div class="status-panel status-panel--warning">
+      <h2>{% translate "Recent problems" %}</h2>
+      <ul class="plain-list">
+        {% for run in failures %}<li>{{ run.finished_at|date:"SHORT_DATETIME_FORMAT" }} &middot; {{ run.get_trigger_display }}: {{ run.error }}</li>{% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <h2 id="snapshots">{% translate "Snapshots" %}</h2>
+  {% if snapshots %}
+    <div class="table-wrap" tabindex="0" role="region" aria-labelledby="snapshots">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">{% translate "Taken" %}</th>
+            <th scope="col">{% translate "Why" %}</th>
+            <th scope="col">{% translate "Version" %}</th>
+            <th scope="col">{% translate "Size" %}</th>
+            <th scope="col">{% translate "Where" %}</th>
+            {% if perms.backups.delete_snapshot %}<th scope="col"><span class="visually-hidden">{% translate "Actions" %}</span></th>{% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in snapshots %}
+            <tr>
+              <th scope="row">{{ s.info.taken|date:"SHORT_DATETIME_FORMAT" }}</th>
+              <td>{{ s.trigger_label }}</td>
+              <td>{{ s.info.version }}</td>
+              <td>{{ s.size|filesizeformat }}</td>
+              <td>{% if s.here %}{% translate "This server" %}{% endif %}{% if s.here and s.offsite %}, {% endif %}{% if s.offsite %}{% translate "Offsite" %}{% endif %}</td>
+              {% if perms.backups.delete_snapshot %}
+                <td>{% if s.deletable %}
+                  <form method="post" action="{% url 'backups:delete' %}" class="inline-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ s.info.name }}">
+                    <button type="submit" class="button button--small">{% translate "Delete" %}<span class="visually-hidden"> {{ s.info.name }}</span></button>
+                  </form>
+                {% endif %}</td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "No snapshot has been taken yet." %}</p>
+  {% endif %}
+  <p class="help">{% translate "To restore a snapshot, see INSTALL.md, Backup and restore." %}</p>
+{% endblock %}

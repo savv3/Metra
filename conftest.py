@@ -1,3 +1,5 @@
+import sqlite3
+
 import pytest
 from django.contrib.auth.models import Group
 
@@ -76,3 +78,13 @@ def unit(household):
 @pytest.fixture
 def person(db):
     return Person.objects.create(first_name="Anna", last_name="Lindqvist", email="anna@example.com")
+
+
+@pytest.fixture(autouse=True)
+def snapshots_in_tmp(settings, tmp_path, monkeypatch):
+    """Snapshots taken during a test (before an import, a deletion or a restore)
+    copy a small throwaway database into a temporary folder, never the data folder."""
+    source = tmp_path / "snapshot-source.sqlite3"
+    sqlite3.connect(source).close()
+    monkeypatch.setattr("apps.backups.service.database_path", lambda: source)
+    settings.BACKUP = {**settings.BACKUP, "dir": tmp_path / "snapshots", "remote_type": ""}

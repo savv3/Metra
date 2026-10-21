@@ -5,6 +5,8 @@ role="${1:-web}"
 
 case "$role" in
   web)
+    # A snapshot before a new version changes the database (only after an upgrade).
+    python manage.py snapshot --before-upgrade
     python manage.py migrate --noinput
     exec gunicorn config.wsgi:application \
       --bind 0.0.0.0:8000 \
