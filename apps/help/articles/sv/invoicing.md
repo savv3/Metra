@@ -1,0 +1,49 @@
+# Fakturering
+
+## Inställningar och avgifter
+
+Under **Inställningar > Faktureringsinställningar** ställer en administratör
+in bankkonto, betalningsvillkor, moms, numrering och texterna på fakturorna.
+**Inställningar > Avgiftsplaner** anger vad enheterna betalar: fasta avgifter
+och avgifter per enhet av en avläsning (som per m³), om man vill i
+prisnivåer, var och en med sin momssats.
+
+## Att göra fakturor
+
+**Fakturor > Faktureringsomgångar > Ny faktureringsomgång** väljer period,
+avgiftsplaner och avläsningsomgång och gör ett fakturautkast för varje
+enhet, adresserat till faktureringskontakten eller ägaren. Utkast där
+avläsningen saknas eller ser konstig ut markeras **Kontrollera**: mata in
+avläsningen och bygg om utkastet, eller redigera raderna.
+
+**Utfärda alla kontrollerade utkast** på omgångens sida, eller **Utfärda
+fakturan** på ett enskilt utkast, ger varje faktura dess nummer och datum och
+låser den. En utfärdad faktura ändras aldrig: ett fel rättas med en
+kreditnota (**Gör en kreditnota** på fakturan), som kan kreditera hela eller
+en del av fakturan.
+
+## Utskick
+
+Utfärdade fakturor skickas med e-post som PDF med referensnummer, bankens
+streckkod och en QR-kod för betalning. De som saknar e-post, eller vill ha
+post, listas för utskrift, och **PDF med fakturor som skickas per post** på
+omgångens sida ger deras brev i en fil. Medlemmarna hittar också sina
+fakturor på sin egen sida.
+
+## Betalningar och påminnelser
+
+Registrera betalningar på fakturans sida med **Registrera en betalning**,
+helt eller i delar. En faktura är **Betald** när inget återstår. Betalningar
+ändras eller tas aldrig bort; för att ångra en registrerar du samma belopp
+som en negativ betalning.
+
+**Fakturor > Förfallen** visar obetalda fakturor efter förfallodagen.
+**Skicka påminnelser till de valda** skickar en betalningspåminnelse med
+e-post, sms eller brev, med påminnelseavgiften om en sådan är inställd och
+minst 14 dagar att betala.
+
+## Till bokföraren
+
+**Exportera som CSV** under fakturalistan ger alla utfärdade fakturor med
+summor, moms, krediteringar, betalningar och vad som återstår. **Exportera
+betalningar** ger betalningar och påminnelseavgifter för en period.

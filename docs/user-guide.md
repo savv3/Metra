@@ -3,7 +3,9 @@
 [Back to the README](../README.md) · [Installing and running](../INSTALL.md)
 
 How to set up and use Metra once it is running. Menu names are given in
-English; the app shows them in the user's language.
+English; the app shows them in the user's language. Shorter guides for
+everyday use are built into the app under **Help**, in Swedish, English and
+Finnish.
 
 ## Setup wizard
 

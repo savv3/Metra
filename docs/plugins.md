@@ -136,6 +136,7 @@ So that each can later move to its own repository, a plugin in plugins/:
 | Person panels | `api.add_person_panel(Panel(...))` | The same, on person pages |
 | SMS and email providers | `api.add_messaging_provider(ProviderClass)` | An `api.Provider` subclass with `channel` (`api.SMS` or `api.EMAIL`), `name` and `send()`. Chosen with `METRA_SMS_PROVIDER=<name>`, or automatically when `is_configured()` returns true. `api.sms_sender()`, `api.sms_country_code()`, `api.normalise_phone()` and `api.record_delivery()` help SMS providers |
 | Settings links | `api.add_settings_link(SettingsLink(label, url_name, permission, description))` | A link on the Settings page to the plugin's own settings or tools |
+| Help articles | `api.add_help_articles(HelpArticles(folder, order, pages))` | Markdown articles in `folder/<language>/<slug>.md`, each starting with `# Title`; `order` lists the slugs for the help index and `pages` maps the plugin's URL namespaces to the article its pages' Help link opens. An article missing in the reader's language is shown in English |
 | Webhook events | `api.add_webhook_event(WebhookEvent(name, label, signal, payload))` | An event that webhook endpoints can subscribe to. `signal` is a Django signal sent after commit; `payload(**signal_kwargs)` returns a dict of ids and non-personal facts (never names, emails, phones or addresses). Works whether or not the webhooks plugin is enabled, and whichever plugin loads first. A plugin that sends webhooks reads them with `api.webhook_events()` and `api.on_webhook_event(listener)` |
 
 ## Records

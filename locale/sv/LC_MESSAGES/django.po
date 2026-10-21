@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 09:37+0300\n"
+"POT-Creation-Date: 2026-10-21 10:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,7 @@ msgstr "Läsbehörighet"
 
 #: apps/accounts/templates/accounts/profile.html:3
 #: apps/accounts/templates/accounts/profile.html:7
-#: templates/allauth/layouts/base.html:9 templates/base.html:39
+#: templates/allauth/layouts/base.html:9 templates/base.html:40
 msgid "My account"
 msgstr "Mitt konto"
 
@@ -133,7 +133,7 @@ msgstr "Skydda ditt konto med en kod från en autentiseringsapp i telefonen."
 msgid "Turn off"
 msgstr "Stäng av"
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:71
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:72
 msgid "Turn on two-factor login"
 msgstr "Slå på tvåfaktorsinloggning"
 
@@ -182,8 +182,8 @@ msgstr "Byt lösenord"
 msgid "Backups"
 msgstr "Säkerhetskopior"
 
-#: apps/backups/models.py:12
 #
+#: apps/backups/models.py:12
 msgid "Nightly"
 msgstr "Nattlig"
 
@@ -268,7 +268,7 @@ msgstr "Kan ta en ögonblicksbild"
 msgid "Can delete snapshots taken by hand"
 msgstr "Kan ta bort manuellt tagna ögonblicksbilder"
 
-#: apps/backups/service.py:193
+#: apps/backups/service.py:195
 msgid "Only snapshots taken by hand can be deleted."
 msgstr "Bara manuellt tagna ögonblicksbilder kan tas bort."
 
@@ -306,7 +306,10 @@ msgid ""
 "A snapshot is a copy of the whole register and all uploaded files. One is "
 "taken every night at %(time)s, before every upgrade, before a CSV import, "
 "before deleting a unit type or field, and whenever you take one here."
-msgstr "En ögonblicksbild är en kopia av hela registret och alla uppladdade filer. En tas varje natt kl. %(time)s, före varje uppdatering, före en CSV-import, före borttagning av en enhetstyp eller ett fält, och när du tar en här."
+msgstr ""
+"En ögonblicksbild är en kopia av hela registret och alla uppladdade filer. "
+"En tas varje natt kl. %(time)s, före varje uppdatering, före en CSV-import, "
+"före borttagning av en enhetstyp eller ett fält, och när du tar en här."
 
 #: apps/backups/templates/backups/backup_list.html:18
 #, python-format
@@ -314,7 +317,10 @@ msgid ""
 "Every snapshot is kept for %(days)s days, then the newest of each week for "
 "%(weeks)s weeks and the newest of each month for %(months)s months. "
 "Snapshots taken by hand stay until you delete them."
-msgstr "Varje ögonblicksbild sparas i %(days)s dagar, därefter den senaste för varje vecka i %(weeks)s veckor och den senaste för varje månad i %(months)s månader. Manuellt tagna ögonblicksbilder finns kvar tills du tar bort dem."
+msgstr ""
+"Varje ögonblicksbild sparas i %(days)s dagar, därefter den senaste för varje "
+"vecka i %(weeks)s veckor och den senaste för varje månad i %(months)s "
+"månader. Manuellt tagna ögonblicksbilder finns kvar tills du tar bort dem."
 
 #: apps/backups/templates/backups/backup_list.html:23
 #, python-format
@@ -325,7 +331,9 @@ msgstr "Varje ögonblicksbild skickas också externt till %(remote)s."
 msgid ""
 "Snapshots are only kept on this server. Set up an offsite copy "
 "(METRA_BACKUP_REMOTE_TYPE) so they survive if the server is lost."
-msgstr "Ögonblicksbilderna finns bara på den här servern. Ställ in en extern kopia (METRA_BACKUP_REMOTE_TYPE) så att de finns kvar om servern går förlorad."
+msgstr ""
+"Ögonblicksbilderna finns bara på den här servern. Ställ in en extern kopia "
+"(METRA_BACKUP_REMOTE_TYPE) så att de finns kvar om servern går förlorad."
 
 #: apps/backups/templates/backups/backup_list.html:28
 #, python-format
@@ -344,8 +352,8 @@ msgstr "Ögonblicksbilder"
 msgid "Taken"
 msgstr "Tagen"
 
-#: apps/backups/templates/backups/backup_list.html:46
 #
+#: apps/backups/templates/backups/backup_list.html:46
 msgid "Why"
 msgstr "Varför"
 
@@ -376,19 +384,20 @@ msgstr "Den här servern"
 msgid "Offsite"
 msgstr "Externt"
 
-#: apps/backups/templates/backups/backup_list.html:66
 #
+#: apps/backups/templates/backups/backup_list.html:66
 msgid "Delete"
 msgstr "Ta bort"
 
-#: apps/backups/templates/backups/backup_list.html:76
 #
+#: apps/backups/templates/backups/backup_list.html:76
 msgid "No snapshot has been taken yet."
 msgstr "Ingen ögonblicksbild har tagits ännu."
 
 #: apps/backups/templates/backups/backup_list.html:78
 msgid "To restore a snapshot, see INSTALL.md, Backup and restore."
-msgstr "Se INSTALL.md, Backup and restore, för hur en ögonblicksbild återställs."
+msgstr ""
+"Se INSTALL.md, Backup and restore, för hur en ögonblicksbild återställs."
 
 #: apps/backups/views.py:45
 #, python-format
@@ -525,6 +534,49 @@ msgstr ""
 #: apps/core/templates/core/public.html:19
 msgid "Staff login"
 msgstr "Inloggning för personal"
+
+#: apps/help/apps.py:7 apps/help/templates/help/index.html:3
+#: apps/help/templates/help/index.html:5 apps/help/templatetags/help.py:22
+msgid "Help"
+msgstr "Hjälp"
+
+#: apps/help/templates/help/_nav.html:2
+msgid "Help articles"
+msgstr "Hjälpartiklar"
+
+#: apps/help/templates/help/_nav.html:4 apps/help/templates/help/_nav.html:5
+#
+msgid "Search help"
+msgstr "Sök i hjälpen"
+
+#: apps/help/templates/help/_nav.html:6
+#: apps/invoicing/templates/invoicing/invoice_list.html:15
+#: apps/readings/templates/readings/round_detail.html:25
+#: apps/register/templates/register/person_list.html:13
+#: apps/register/templates/register/unit_list.html:17
+msgid "Search"
+msgstr "Sök"
+
+#: apps/help/templates/help/article.html:9
+msgid ""
+"This article is not available in your language yet, so it is shown in "
+"English."
+msgstr "Den här artikeln finns inte på ditt språk ännu, så den visas på engelska."
+
+#: apps/help/templates/help/index.html:10
+#, python-format
+msgid "Search results for “%(query)s”"
+msgstr "Sökresultat för ”%(query)s”"
+
+#: apps/help/templates/help/index.html:16
+msgid "No help article matches. Try another word."
+msgstr "Ingen hjälpartikel matchar. Prova ett annat ord."
+
+#: apps/help/templates/help/index.html:19
+msgid ""
+"Short guides to how things are done in Metra. Every page has a Help link in "
+"the menu that opens the guide for that page."
+msgstr "Korta guider till hur man gör saker i Metra. Varje sida har en hjälplänk i menyn som öppnar guiden för den sidan."
 
 #: apps/invoicing/admin.py:13 apps/invoicing/models.py:388
 #: apps/invoicing/templates/invoicing/invoice_detail.html:107
@@ -1472,13 +1524,6 @@ msgstr "Kreditnotor"
 #: apps/invoicing/templates/invoicing/run_list.html:14
 msgid "Invoice runs"
 msgstr "Faktureringsomgångar"
-
-#: apps/invoicing/templates/invoicing/invoice_list.html:15
-#: apps/readings/templates/readings/round_detail.html:25
-#: apps/register/templates/register/person_list.html:13
-#: apps/register/templates/register/unit_list.html:17
-msgid "Search"
-msgstr "Sök"
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:19
 #: apps/readings/templates/readings/round_detail.html:29
@@ -2589,7 +2634,7 @@ msgstr "Startat"
 msgid "Sent by"
 msgstr "Skickat av"
 
-#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:44
+#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:45
 msgid "Automatic"
 msgstr "Automatiskt"
 
@@ -3132,7 +3177,8 @@ msgstr ""
 #: apps/register/admin.py:81
 #, python-format
 msgid "Nothing was deleted: a snapshot could not be taken first (%(error)s)."
-msgstr "Inget togs bort: det gick inte att först ta en ögonblicksbild (%(error)s)."
+msgstr ""
+"Inget togs bort: det gick inte att först ta en ögonblicksbild (%(error)s)."
 
 #: apps/register/apps.py:7
 msgid "Register"
@@ -3367,7 +3413,8 @@ msgstr "Roll för kontakter som saknar roll"
 #: apps/register/import_views.py:137
 #, python-format
 msgid "Nothing was imported: a snapshot could not be taken first (%(error)s)."
-msgstr "Inget importerades: det gick inte att först ta en ögonblicksbild (%(error)s)."
+msgstr ""
+"Inget importerades: det gick inte att först ta en ögonblicksbild (%(error)s)."
 
 #: apps/register/import_views.py:169
 #, python-format
@@ -4894,15 +4941,15 @@ msgstr "Inbjudan skickad till %(email)s."
 msgid "Setup is done. You can run it again from Settings."
 msgstr "Inställningen är klar. Du kan köra den igen från Inställningar."
 
-#: config/settings.py:177
+#: config/settings.py:178
 msgid "Swedish"
 msgstr "Svenska"
 
-#: config/settings.py:178
+#: config/settings.py:179
 msgid "English"
 msgstr "Engelska"
 
-#: config/settings.py:179
+#: config/settings.py:180
 msgid "Finnish (machine translated)"
 msgstr "Finska (maskinöversatt)"
 
@@ -4938,23 +4985,23 @@ msgstr ""
 msgid "Main"
 msgstr "Huvudnavigering"
 
-#: templates/base.html:42
+#: templates/base.html:43
 msgid "Theme"
 msgstr "Tema"
 
-#: templates/base.html:45
+#: templates/base.html:46
 msgid "Light"
 msgstr "Ljust"
 
-#: templates/base.html:46
+#: templates/base.html:47
 msgid "Dark"
 msgstr "Mörkt"
 
-#: templates/base.html:51
+#: templates/base.html:52
 msgid "Log out"
 msgstr "Logga ut"
 
-#: templates/base.html:65
+#: templates/base.html:66
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
@@ -4962,7 +5009,7 @@ msgstr ""
 "Tvåfaktorsinloggning krävs inte i den här installationen (METRA_REQUIRE_MFA "
 "är avstängd). Slå på den innan riktiga uppgifter läggs in."
 
-#: templates/base.html:70
+#: templates/base.html:71
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."

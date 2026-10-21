@@ -499,3 +499,15 @@ th.num, td.num { text-align: right; white-space: nowrap; }
 .setup-steps li[aria-current="step"] a { font-weight: 600; text-decoration: none; color: var(--text); }
 .setup-logo { max-height: 4rem; max-width: 12rem; }
 .setup-nav { margin-bottom: 0.5rem; }
+
+/* Help */
+.help-layout { display: grid; gap: 1.5rem; grid-template-columns: minmax(12rem, 16rem) 1fr; align-items: start; }
+@media (max-width: 48rem) { .help-layout { grid-template-columns: 1fr; } }
+.help-nav ul { margin: 1rem 0 0; }
+.help-nav li { margin: 0.35rem 0; }
+.help-nav a[aria-current="page"] { font-weight: 600; text-decoration: none; color: var(--text); }
+.help-search { display: flex; gap: 0.5rem; }
+.help-search input { flex: 1; min-width: 0; }
+.help-body { max-width: 46rem; }
+.help-body table { margin: 1rem 0; }
+.help-results li { margin-bottom: 1rem; }

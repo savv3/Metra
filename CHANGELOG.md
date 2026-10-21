@@ -12,6 +12,13 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+### Added
+
+- A Help section with short guides in Swedish, English and Finnish: getting
+  started, the register, readings, messages and newsletters, invoicing,
+  backups, and roles and two-factor login. Every page has a Help link to the
+  guide for it, the guides can be searched, and plugins can add their own.
+
 ### Changed
 
 - Backups are now snapshots: a copy of the database and uploads taken every

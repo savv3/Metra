@@ -91,6 +91,9 @@ docker compose up --build                       # full stack, needs a .env (see 
   Swedish and English but not Finnish, which is machine translated: keep it
   in `MACHINE_TRANSLATED_LANGUAGES` so pages show a notice saying so. Compiled `.mo` files are
   not committed.
+- **Help:** the in-app help articles are Markdown in
+  `apps/help/articles/<language>/`, in Swedish, English and Finnish. A change
+  users notice updates the article that describes it, in all three languages.
 - **Privacy (GDPR):** store only fields with a clear purpose, log changes to
   personal data, and make sure new personal data is covered by the
   per-person export and erasure tools. Never send personal data to a third

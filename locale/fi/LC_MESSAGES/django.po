@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 09:37+0300\n"
+"POT-Creation-Date: 2026-10-21 10:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgstr "Vain luku"
 
 #: apps/accounts/templates/accounts/profile.html:3
 #: apps/accounts/templates/accounts/profile.html:7
-#: templates/allauth/layouts/base.html:9 templates/base.html:39
+#: templates/allauth/layouts/base.html:9 templates/base.html:40
 msgid "My account"
 msgstr "Oma tili"
 
@@ -133,7 +133,7 @@ msgstr "Suojaa tilisi puhelimen todennussovelluksen koodilla."
 msgid "Turn off"
 msgstr "Poista käytöstä"
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:71
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:72
 msgid "Turn on two-factor login"
 msgstr "Ota kaksivaiheinen tunnistautuminen käyttöön"
 
@@ -183,8 +183,8 @@ msgstr "Vaihda salasana"
 msgid "Backups"
 msgstr "Varmuuskopiot"
 
-#: apps/backups/models.py:12
 #
+#: apps/backups/models.py:12
 msgid "Nightly"
 msgstr "Yöllinen"
 
@@ -269,7 +269,7 @@ msgstr "Voi ottaa tilannevedoksen"
 msgid "Can delete snapshots taken by hand"
 msgstr "Voi poistaa käsin otettuja tilannevedoksia"
 
-#: apps/backups/service.py:193
+#: apps/backups/service.py:195
 msgid "Only snapshots taken by hand can be deleted."
 msgstr "Vain käsin otetut tilannevedokset voi poistaa."
 
@@ -308,7 +308,11 @@ msgid ""
 "A snapshot is a copy of the whole register and all uploaded files. One is "
 "taken every night at %(time)s, before every upgrade, before a CSV import, "
 "before deleting a unit type or field, and whenever you take one here."
-msgstr "Tilannevedos on kopio koko rekisteristä ja kaikista ladatuista tiedostoista. Sellainen otetaan joka yö klo %(time)s, ennen jokaista päivitystä, ennen CSV-tuontia, ennen yksikkötyypin tai kentän poistoa ja aina kun otat sellaisen täällä."
+msgstr ""
+"Tilannevedos on kopio koko rekisteristä ja kaikista ladatuista tiedostoista. "
+"Sellainen otetaan joka yö klo %(time)s, ennen jokaista päivitystä, ennen CSV-"
+"tuontia, ennen yksikkötyypin tai kentän poistoa ja aina kun otat sellaisen "
+"täällä."
 
 #: apps/backups/templates/backups/backup_list.html:18
 #, python-format
@@ -316,7 +320,10 @@ msgid ""
 "Every snapshot is kept for %(days)s days, then the newest of each week for "
 "%(weeks)s weeks and the newest of each month for %(months)s months. "
 "Snapshots taken by hand stay until you delete them."
-msgstr "Jokainen tilannevedos säilytetään %(days)s päivää, sen jälkeen kunkin viikon uusin %(weeks)s viikkoa ja kunkin kuukauden uusin %(months)s kuukautta. Käsin otetut tilannevedokset säilyvät, kunnes poistat ne."
+msgstr ""
+"Jokainen tilannevedos säilytetään %(days)s päivää, sen jälkeen kunkin viikon "
+"uusin %(weeks)s viikkoa ja kunkin kuukauden uusin %(months)s kuukautta. "
+"Käsin otetut tilannevedokset säilyvät, kunnes poistat ne."
 
 #: apps/backups/templates/backups/backup_list.html:23
 #, python-format
@@ -327,7 +334,9 @@ msgstr "Jokainen tilannevedos lähetetään myös ulkoiseen säilöön: %(remote
 msgid ""
 "Snapshots are only kept on this server. Set up an offsite copy "
 "(METRA_BACKUP_REMOTE_TYPE) so they survive if the server is lost."
-msgstr "Tilannevedokset ovat vain tällä palvelimella. Määritä ulkoinen kopio (METRA_BACKUP_REMOTE_TYPE), jotta ne säilyvät, jos palvelin menetetään."
+msgstr ""
+"Tilannevedokset ovat vain tällä palvelimella. Määritä ulkoinen kopio "
+"(METRA_BACKUP_REMOTE_TYPE), jotta ne säilyvät, jos palvelin menetetään."
 
 #: apps/backups/templates/backups/backup_list.html:28
 #, python-format
@@ -346,8 +355,8 @@ msgstr "Tilannevedokset"
 msgid "Taken"
 msgstr "Otettu"
 
-#: apps/backups/templates/backups/backup_list.html:46
 #
+#: apps/backups/templates/backups/backup_list.html:46
 msgid "Why"
 msgstr "Syy"
 
@@ -378,19 +387,21 @@ msgstr "Tämä palvelin"
 msgid "Offsite"
 msgstr "Ulkoinen säilö"
 
-#: apps/backups/templates/backups/backup_list.html:66
 #
+#: apps/backups/templates/backups/backup_list.html:66
 msgid "Delete"
 msgstr "Poista"
 
-#: apps/backups/templates/backups/backup_list.html:76
 #
+#: apps/backups/templates/backups/backup_list.html:76
 msgid "No snapshot has been taken yet."
 msgstr "Tilannevedosta ei ole vielä otettu."
 
 #: apps/backups/templates/backups/backup_list.html:78
 msgid "To restore a snapshot, see INSTALL.md, Backup and restore."
-msgstr "Tilannevedoksen palauttaminen on kuvattu tiedostossa INSTALL.md, kohdassa Backup and restore."
+msgstr ""
+"Tilannevedoksen palauttaminen on kuvattu tiedostossa INSTALL.md, kohdassa "
+"Backup and restore."
 
 #: apps/backups/views.py:45
 #, python-format
@@ -527,6 +538,49 @@ msgstr ""
 #: apps/core/templates/core/public.html:19
 msgid "Staff login"
 msgstr "Henkilökunnan kirjautuminen"
+
+#: apps/help/apps.py:7 apps/help/templates/help/index.html:3
+#: apps/help/templates/help/index.html:5 apps/help/templatetags/help.py:22
+msgid "Help"
+msgstr "Ohje"
+
+#: apps/help/templates/help/_nav.html:2
+msgid "Help articles"
+msgstr "Ohjeartikkelit"
+
+#: apps/help/templates/help/_nav.html:4 apps/help/templates/help/_nav.html:5
+#
+msgid "Search help"
+msgstr "Hae ohjeista"
+
+#: apps/help/templates/help/_nav.html:6
+#: apps/invoicing/templates/invoicing/invoice_list.html:15
+#: apps/readings/templates/readings/round_detail.html:25
+#: apps/register/templates/register/person_list.html:13
+#: apps/register/templates/register/unit_list.html:17
+msgid "Search"
+msgstr "Hae"
+
+#: apps/help/templates/help/article.html:9
+msgid ""
+"This article is not available in your language yet, so it is shown in "
+"English."
+msgstr "Tätä artikkelia ei ole vielä saatavilla kielelläsi, joten se näytetään englanniksi."
+
+#: apps/help/templates/help/index.html:10
+#, python-format
+msgid "Search results for “%(query)s”"
+msgstr "Hakutulokset: ”%(query)s”"
+
+#: apps/help/templates/help/index.html:16
+msgid "No help article matches. Try another word."
+msgstr "Mikään ohje ei vastaa hakua. Kokeile toista sanaa."
+
+#: apps/help/templates/help/index.html:19
+msgid ""
+"Short guides to how things are done in Metra. Every page has a Help link in "
+"the menu that opens the guide for that page."
+msgstr "Lyhyitä ohjeita Metran käyttöön. Jokaisen sivun valikossa on Ohje-linkki, joka avaa sivun ohjeen."
 
 #: apps/invoicing/admin.py:13 apps/invoicing/models.py:388
 #: apps/invoicing/templates/invoicing/invoice_detail.html:107
@@ -1470,13 +1524,6 @@ msgstr "Hyvityslaskut"
 #: apps/invoicing/templates/invoicing/run_list.html:14
 msgid "Invoice runs"
 msgstr "Laskutuskierrokset"
-
-#: apps/invoicing/templates/invoicing/invoice_list.html:15
-#: apps/readings/templates/readings/round_detail.html:25
-#: apps/register/templates/register/person_list.html:13
-#: apps/register/templates/register/unit_list.html:17
-msgid "Search"
-msgstr "Hae"
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:19
 #: apps/readings/templates/readings/round_detail.html:29
@@ -2594,7 +2641,7 @@ msgstr "Aloitettu"
 msgid "Sent by"
 msgstr "Lähettäjä"
 
-#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:44
+#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:45
 msgid "Automatic"
 msgstr "Automaattinen"
 
@@ -4907,15 +4954,15 @@ msgid "Setup is done. You can run it again from Settings."
 msgstr ""
 "Käyttöönotto on valmis. Voit käynnistää sen uudelleen kohdasta Asetukset."
 
-#: config/settings.py:177
+#: config/settings.py:178
 msgid "Swedish"
 msgstr "Ruotsi"
 
-#: config/settings.py:178
+#: config/settings.py:179
 msgid "English"
 msgstr "Englanti"
 
-#: config/settings.py:179
+#: config/settings.py:180
 msgid "Finnish (machine translated)"
 msgstr "Suomi (konekäännös)"
 
@@ -4951,23 +4998,23 @@ msgstr ""
 msgid "Main"
 msgstr "Päävalikko"
 
-#: templates/base.html:42
+#: templates/base.html:43
 msgid "Theme"
 msgstr "Teema"
 
-#: templates/base.html:45
+#: templates/base.html:46
 msgid "Light"
 msgstr "Vaalea"
 
-#: templates/base.html:46
+#: templates/base.html:47
 msgid "Dark"
 msgstr "Tumma"
 
-#: templates/base.html:51
+#: templates/base.html:52
 msgid "Log out"
 msgstr "Kirjaudu ulos"
 
-#: templates/base.html:65
+#: templates/base.html:66
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
@@ -4976,7 +5023,7 @@ msgstr ""
 "(METRA_REQUIRE_MFA on pois päältä). Ota se käyttöön ennen kuin järjestelmään "
 "syötetään oikeita tietoja."
 
-#: templates/base.html:70
+#: templates/base.html:71
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."
