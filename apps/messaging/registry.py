@@ -1,7 +1,8 @@
 """SMS and email providers, looked up by name.
 
 An installation picks one provider per channel with a setting
-(``METRA_SMS_PROVIDER``, ``METRA_EMAIL_BACKEND``). Providers register here
+(``METRA_SMS_PROVIDER``; for email the Email settings page, see
+email_config). Providers register here
 under a name, so another one (GatewayAPI, Sinch, a plugin's own) can be
 added without touching the code that sends messages. With
 ``METRA_SMS_PROVIDER`` left at "auto", the first registered provider that
@@ -53,6 +54,21 @@ class Provider:
         add ``headers`` (e.g. List-Unsubscribe) and ``attachments`` ([(filename,
         bytes, mimetype)], e.g. an invoice PDF) to the message; SMS ignore them."""
         raise NotImplementedError
+
+    def send_email_message(self, message):
+        """Send a whole Django EmailMessage: the app's own mail, such as login
+        codes, when this provider is the chosen email provider. By default
+        each recipient gets the plain text; a provider that can send the
+        message as it is (with its HTML part) overrides this."""
+        attachments = [a for a in message.attachments if isinstance(a, tuple)]
+        for recipient in message.recipients():
+            self.send(
+                recipient,
+                message.body,
+                subject=message.subject,
+                headers=dict(message.extra_headers),
+                attachments=attachments or None,
+            )
 
     def delivery_callback_url(self):
         """Where the provider reports delivery, or None if it does not."""
@@ -110,6 +126,14 @@ AUTO = "auto"
 
 def provider_for(channel):
     """The installation's provider for a channel, or None when it is not set up."""
+    if channel == EMAIL:
+        from .email_config import current
+
+        name = current().provider
+        if name and name not in registry.names(EMAIL):
+            # The chosen add-on is off or gone: email is not set up for now.
+            return None
+        return registry.get(EMAIL, name) if name else None
     name = settings.MESSAGING[f"{channel}_provider"]
     if name == AUTO:
         provider = registry.configured(channel)

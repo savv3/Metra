@@ -144,6 +144,12 @@ def _groups():
             _("Messages"),
             [
                 Entry(
+                    _("Email"),
+                    _("How email is sent: the mail server or service, and the from address."),
+                    "messaging:email_settings",
+                    "messaging.change_emailsettings",
+                ),
+                Entry(
                     _("Message templates"),
                     _("The texts of invoices, reminders, reading requests and other messages."),
                     "admin:messaging_messagetemplate_changelist",

@@ -1,5 +1,18 @@
 # Meddelanden och nyhetsbrev
 
+## E-postinställningar
+
+En administratör bestämmer hur e-post skickas under **Inställningar > E-post**,
+som också är ett steg i installationsguiden. Välj **SMTP** för att skicka via
+föreningens eget e-postkonto: ange **E-postserver**, **Port**, **Kryptering**,
+**Användarnamn** och **Lösenord** som din e-postleverantör ger dig. Ett tillägg
+kan i stället erbjuda en sändningstjänst. Ange **Avsändaradress** som
+medlemmarna ser, och en **Svarsadress** om svaren ska gå någon annanstans. All
+e-post från Metra skickas på det här sättet, också inloggningskoder och
+inbjudningar. **Skicka testmejl** kontrollerar att det fungerar. Ett sparat
+lösenord visas aldrig igen: lämna fältet tomt för att behålla det. Ett fält som
+är nedtonat är inställt på servern och kan inte ändras i appen.
+
 ## Att skriva till många hushåll
 
 **Utskick > Nytt meddelande** skriver ett meddelande till alla, till enheter

@@ -119,10 +119,22 @@ To copy a snapshot off the server:
 
 ## Email and SMS
 
-**Email** goes out over SMTP when `METRA_EMAIL_HOST` is set, with
-`METRA_EMAIL_PORT`, `METRA_EMAIL_USER`, `METRA_EMAIL_PASSWORD`, `METRA_EMAIL_USE_TLS`
-or `METRA_EMAIL_USE_SSL`, and `METRA_EMAIL_FROM` as the sender. Without a host,
-email is off in production and printed to the console in development.
+**Email** is set up by an admin under **Settings > Email** (also a step of
+the setup wizard): SMTP with the mail server, port, encryption, user name and
+password of the organisation's own mail account, or a sending service added
+by an add-on, plus the from address and an optional Reply-To. The password is
+stored encrypted (see `METRA_SETTINGS_KEY`). All email goes that way,
+including login codes and invitations. **Send test email** on the same page
+checks it. Until it is set up, email is off in production and printed to the
+console in development.
+
+The `METRA_EMAIL_*` variables still work and win over the page field by
+field (`METRA_EMAIL_HOST`, `METRA_EMAIL_PORT`, `METRA_EMAIL_USER`,
+`METRA_EMAIL_PASSWORD`, `METRA_EMAIL_USE_TLS` or `METRA_EMAIL_USE_SSL`,
+`METRA_EMAIL_FROM` and `METRA_EMAIL_REPLY_TO`); the page shows those fields
+as locked. When `METRA_EMAIL_HOST` or `METRA_EMAIL_BACKEND` is set, the
+environment also decides how email is sent, so an existing install keeps
+working unchanged.
 
 **SMS** goes through [46elks](https://46elks.com):
 

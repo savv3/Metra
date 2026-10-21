@@ -1,5 +1,18 @@
 # Messages and newsletters
 
+## Email settings
+
+An admin decides how email is sent under **Settings > Email**, which is also a
+step of the setup wizard. Choose **SMTP** to send through the association's own
+mail account: enter the **Mail server**, **Port**, **Encryption**, **User name**
+and **Password** your email provider gives you. An add-on can offer a sending
+service instead. Set the **From address** members see, and a **Reply-To
+address** if replies should go somewhere else. All email from Metra goes this
+way, including login codes and invitations. **Send test email** checks that it
+works. A saved password is never shown again: leave the field empty to keep it.
+A field that is greyed out is set on the server and cannot be changed in the
+app.
+
 ## Writing to many households
 
 **Send-outs > New message** writes one message to everyone, to units with a
