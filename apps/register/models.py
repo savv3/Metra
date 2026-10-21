@@ -285,6 +285,10 @@ class Person(Archivable, Address):
     notes = models.TextField(_("notes"), blank=True)
     custom_data = models.JSONField(_("custom fields"), default=dict, blank=True)
     tags = models.ManyToManyField(Tag, verbose_name=_("tags"), blank=True, related_name="people")
+    # Set when the email provider reports that mail to ``email`` bounced
+    # (see apps.messaging.delivery_reports); cleared when the address changes.
+    email_bounced_at = models.DateTimeField(_("email bounced"), null=True, blank=True)
+    email_bounce_reason = models.CharField(_("bounce reason"), max_length=300, blank=True)
 
     class Meta:
         ordering = ["last_name", "first_name"]
@@ -293,6 +297,20 @@ class Person(Archivable, Address):
 
     def __str__(self):
         return self.full_name
+
+    def save(self, *args, **kwargs):
+        # A new address has not bounced.
+        if self.email_bounced_at and self.pk:
+            before = Person.objects.filter(pk=self.pk).values_list("email", flat=True).first()
+            if before is not None and before.lower() != self.email.lower():
+                self.email_bounced_at, self.email_bounce_reason = None, ""
+                if kwargs.get("update_fields") is not None:
+                    kwargs["update_fields"] = {
+                        *kwargs["update_fields"],
+                        "email_bounced_at",
+                        "email_bounce_reason",
+                    }
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("register:person_detail", args=[self.pk])

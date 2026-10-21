@@ -17,6 +17,7 @@ dependencies = [
     # Official plugins (plugins/), installed in the Docker image. Bundled ones
     # are on by default (config.plugins.BUNDLED); the rest need METRA_PLUGINS.
     "metra-api",
+    "metra-email-mailgun",
     "metra-meetings",
     "metra-sms-46elks",
     "metra-webhooks",
@@ -39,6 +40,7 @@ members = ["plugins/*"]
 # The example plugin, installed for the tests (METRA_PLUGINS=example there).
 metra-example-plugin = { workspace = true }
 metra-api = { workspace = true }
+metra-email-mailgun = { workspace = true }
 metra-meetings = { workspace = true }
 metra-sms-46elks = { workspace = true }
 metra-webhooks = { workspace = true }

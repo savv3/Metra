@@ -101,6 +101,7 @@ def test_urgent_alert_sends_sms_and_email_to_everyone(admin_client, make_househo
     assert [m["to"] for m in providers.outbox] == ["0401234567"]
     assert sorted(m.to[0] for m in mail.outbox) == ["a@example.com", "bo@example.com"]
     assert mail.outbox[0].subject == "Vattenläcka"
+    assert mail.outbox[0].extra_headers["X-Metra-Send-Out"] == str(batch.pk)
     assert batch.messages.filter(unit=a).count() == 2
     assert batch.messages.get(status="failed").error.startswith("No phone number")
 

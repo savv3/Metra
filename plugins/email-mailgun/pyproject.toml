@@ -1,0 +1,19 @@
+[project]
+name = "metra-email-mailgun"
+version = "0.1.0"
+description = "Send Metra's email through Mailgun (https://www.mailgun.com), with delivery and bounce reports."
+requires-python = ">=3.13"
+license = "MIT"
+dependencies = []
+
+# On by default in Metra (config.plugins.BUNDLED); it sends only once chosen
+# under Settings > Email. METRA_PLUGINS_DISABLED=mailgun turns it off.
+[project.entry-points."metra.plugins"]
+mailgun = "metra_email_mailgun"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/metra_email_mailgun"]

@@ -18,7 +18,7 @@ from .broadcast import send_written
 from .failures import notify_failures
 from .models import Channel, Message, MessageBatch, MessageTemplate, organisation_placeholders
 from .preference import channel_order
-from .registry import SMS, ProviderError, provider_for
+from .registry import EMAIL, SMS, ProviderError, email_headers, provider_for
 
 
 def channels_for(person):
@@ -134,6 +134,7 @@ def _send(batch, unit, person, purpose, channel, provider):
             MessageTemplate.fill(body, real),
             subject=MessageTemplate.fill(subject, real),
             callback_url=provider.delivery_callback_url(),
+            **(email_headers(provider, batch) if channel == EMAIL else {}),
         )
     except ProviderError as error:
         link.revoked = True

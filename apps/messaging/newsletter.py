@@ -5,8 +5,6 @@ A newsletter goes out in parts of METRA_NEWSLETTER_BATCH_SIZE emails with a
 pause between them, so a mail server's rate limits are respected.
 """
 
-import inspect
-
 from django.conf import settings
 from django.core import signing
 from django.urls import reverse
@@ -18,7 +16,7 @@ from apps.register.models import Person
 from . import attachments
 from .failures import notify_failures
 from .models import ConsentRecord, Message, MessageBatch, MessageTemplate, organisation_placeholders
-from .registry import EMAIL, ProviderError, provider_for
+from .registry import EMAIL, ProviderError, email_headers, provider_for
 
 SALT = "metra.messaging.unsubscribe"
 
@@ -117,14 +115,12 @@ def _send(batch, person, provider):
         if provider is None:
             raise ProviderError(_("Email is not set up."))
         url = unsubscribe_url(person)
-        extra = {}
-        # Providers written before headers existed (e.g. in a plugin) still work.
-        if "headers" in inspect.signature(provider.send).parameters:
-            extra["headers"] = {
-                # One-click unsubscribe in mail programs (RFC 8058).
-                "List-Unsubscribe": f"<{url}>",
-                "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
-            }
+        # One-click unsubscribe in mail programs (RFC 8058).
+        unsubscribe = {
+            "List-Unsubscribe": f"<{url}>",
+            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+        }
+        extra = email_headers(provider, batch, unsubscribe)
         extra |= attachments.email_kwargs(provider, batch)
         result = provider.send(person.email, body, subject=subject, **extra)
     except ProviderError as error:

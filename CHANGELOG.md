@@ -14,6 +14,16 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- Mailgun add-on (`metra-email-mailgun`, bundled and on by default): send
+  email through Mailgun's API, EU region by default, with attachments,
+  List-Unsubscribe and a tag per send-out. Set it up under Settings >
+  Add-ons > Mailgun (or `METRA_MAILGUN_*`) and choose it under Settings >
+  Email. Its signed webhooks record delivered, bounced and spam-reported
+  email on the message, and a bounced address is flagged on the person's
+  page until the address is changed.
+- For plugin authors: `api.record_email_event()` with `api.DELIVERED`,
+  `api.BOUNCED` and `api.COMPLAINED`, `api.email_from()`, and
+  `api.SEND_OUT_HEADER` on the email of a send-out.
 - Settings > Email (admins only, and a step of the setup wizard): choose how
   email is sent (SMTP or an add-on's sending service) and set the server,
   password, from address and the new Reply-To address, then send a test.

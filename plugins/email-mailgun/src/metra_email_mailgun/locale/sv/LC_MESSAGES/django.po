@@ -1,0 +1,67 @@
+# Swedish translation of the Metra Mailgun plugin.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-21 20:37+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps.py:24
+msgid "Sending domain"
+msgstr "Avsändardomän"
+
+#: apps.py:25
+msgid "The domain you added at Mailgun, for example mg.example.fi."
+msgstr "Domänen du lagt till hos Mailgun, till exempel mg.example.fi."
+
+#: apps.py:30
+msgid "API key"
+msgstr "API-nyckel"
+
+#: apps.py:32
+msgid "A sending API key for the domain, from Mailgun."
+msgstr "En API-nyckel för sändning för domänen, från Mailgun."
+
+#: apps.py:37
+msgid "Region"
+msgstr "Region"
+
+#: apps.py:39
+msgid "EU (api.eu.mailgun.net)"
+msgstr "EU (api.eu.mailgun.net)"
+
+#: apps.py:39
+msgid "US (api.mailgun.net)"
+msgstr "USA (api.mailgun.net)"
+
+#: apps.py:42
+msgid ""
+"Where your Mailgun account keeps its data. Choose EU unless it was made in "
+"the US."
+msgstr ""
+"Var ditt Mailgun-konto lagrar sina data. Välj EU om kontot inte skapades i "
+"USA."
+
+#: apps.py:48
+msgid "Webhook signing key"
+msgstr "Signeringsnyckel för webhooks"
+
+#: apps.py:52
+#, python-brace-format
+msgid ""
+"From Mailgun's Webhooks page. There, add {url} for delivered messages, "
+"permanent failures and spam complaints."
+msgstr ""
+"Från sidan Webhooks hos Mailgun. Lägg där till {url} för levererade "
+"meddelanden, permanenta fel och skräppostklagomål."

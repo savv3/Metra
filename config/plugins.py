@@ -19,7 +19,7 @@ from django.core.exceptions import ImproperlyConfigured
 
 GROUP = "metra.plugins"
 # Official plugins that ship with Metra and are on by default, in load order.
-BUNDLED = ("46elks",)
+BUNDLED = ("46elks", "mailgun")
 
 
 def available():

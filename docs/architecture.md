@@ -179,7 +179,7 @@ permissions; phase 6 opens it to outside systems.
 | 5 | A to C done (email a unit, attachments, setup wizard). D, email deliverability, is replaced by phase 8 |
 | 6 | Done: plugin groundwork, 46elks SMS, REST API and webhooks as plugins (release 0.2.0) |
 | 7 | Done: snapshots, restore in the app, help pages, meeting protocols plugin, notifications |
-| 8 | In progress: A (plugin chooser and plugin settings) and B (email settings) done; D (46elks settings) in review; C (Mailgun) next. Build plan below |
+| 8 | In progress: A (plugin chooser and plugin settings), B (email settings) and D (46elks settings) done; C (Mailgun) in review. Build plan below |
 | 9 to 12 | Planned. Each phase gets a build plan with one row per pull request before work starts |
 
 Ideas taken off the plan for now are in [might-do-later.md](might-do-later.md).

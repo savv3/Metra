@@ -13,6 +13,18 @@ works. A saved password is never shown again: leave the field empty to keep it.
 A field that is greyed out is set on the server and cannot be changed in the
 app.
 
+### Mailgun
+
+The **Mailgun** add-on sends email through Mailgun instead. Enter the
+**Sending domain**, **API key** and **Region** under **Settings > Add-ons >
+Mailgun**, then choose **Mailgun** under **Settings > Email**. With the
+**Webhook signing key** filled in and the webhook added at Mailgun (see the
+installation guide), each message's status shows whether it was delivered.
+When an email bounces, the message is marked failed and the person's page
+shows **Bounced** next to the address, with Mailgun's reason. Check the
+address with the person and correct it; a new address clears the mark. An
+email the recipient marked as spam is noted on the message.
+
 ## Writing to many households
 
 **Send-outs > New message** writes one message to everyone, to units with a

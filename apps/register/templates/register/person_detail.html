@@ -17,7 +17,7 @@
 
   <dl class="details-list">
     <dt>{% translate "Email" %}</dt>
-    <dd>{% if person.email %}<a href="mailto:{{ person.email }}">{{ person.email }}</a>{% else %}–{% endif %}</dd>
+    <dd>{% if person.email %}<a href="mailto:{{ person.email }}">{{ person.email }}</a>{% if person.email_bounced_at %} <span class="pill pill--warn" title="{{ person.email_bounce_reason }}">{% blocktranslate with date=person.email_bounced_at|date:"SHORT_DATE_FORMAT" %}Bounced {{ date }}{% endblocktranslate %}</span><br><span class="help">{% translate "Email to this address could not be delivered. Check the address with the person and correct it." %}{% if person.email_bounce_reason %} {{ person.email_bounce_reason }}{% endif %}</span>{% endif %}{% else %}–{% endif %}</dd>
     <dt>{% translate "Phone" %}</dt><dd>{{ person.phone|default:"–" }}</dd>
     <dt>{% translate "Preferred channel" %}</dt><dd>{{ person.get_preferred_channel_display }}</dd>
     <dt>{% translate "Address" %}</dt><dd>{{ person.address_line|default:"–" }}</dd>

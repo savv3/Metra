@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 17:21+0000\n"
+"POT-Creation-Date: 2026-10-21 17:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/accounts/admin.py:13 apps/register/models.py:358
+#: apps/accounts/admin.py:13 apps/register/models.py:376
 msgid "role"
 msgstr "roll"
 
 #: apps/accounts/admin.py:28 apps/invoicing/models.py:143
 #: apps/messaging/models.py:337 apps/readings/models.py:24
 #: apps/register/models.py:57 apps/register/models.py:115
-#: apps/register/models.py:129 apps/register/models.py:315
+#: apps/register/models.py:129 apps/register/models.py:333
 msgid "name"
 msgstr "namn"
 
@@ -186,7 +186,6 @@ msgstr "Byt lösenord"
 msgid "Backups"
 msgstr "Säkerhetskopior"
 
-#
 #: apps/backups/models.py:12
 msgid "Nightly"
 msgstr "Nattlig"
@@ -274,32 +273,26 @@ msgstr "Kan ta en säkerhetskopia"
 msgid "Can delete snapshots taken by hand"
 msgstr "Kan ta bort manuellt tagna säkerhetskopior"
 
-#
 #: apps/backups/models.py:49
 msgid "Can restore a snapshot"
 msgstr "Kan återställa en säkerhetskopia"
 
-#
 #: apps/backups/models.py:62
 msgid "snapshot taken before"
 msgstr "säkerhetskopia tagen innan"
 
-#
 #: apps/backups/models.py:64
 msgid "restored by"
 msgstr "återställd av"
 
-#
 #: apps/backups/models.py:72
 msgid "restore"
 msgstr "återställning"
 
-#
 #: apps/backups/models.py:73
 msgid "restores"
 msgstr "återställningar"
 
-#
 #: apps/backups/restore.py:89
 msgid "That is not a snapshot."
 msgstr "Det är ingen säkerhetskopia."
@@ -312,13 +305,12 @@ msgstr "Säkerhetskopian %(name)s hittades inte."
 #: apps/backups/restore.py:118
 #, python-format
 msgid ""
-"This snapshot was taken by Metra %(version)s, which is newer than the "
-"version running now (%(running)s), so it cannot be restored here."
+"This snapshot was taken by Metra %(version)s, which is newer than the version"
+" running now (%(running)s), so it cannot be restored here."
 msgstr ""
-"Säkerhetskopian togs av Metra %(version)s, som är nyare än versionen som "
-"körs nu (%(running)s), så den kan inte återställas här."
+"Säkerhetskopian togs av Metra %(version)s, som är nyare än versionen som körs"
+" nu (%(running)s), så den kan inte återställas här."
 
-#
 #: apps/backups/restore.py:189
 msgid "A restore is already running."
 msgstr "En återställning pågår redan."
@@ -346,16 +338,16 @@ msgid ""
 "taken every night at %(time)s, before every upgrade, before a CSV import, "
 "before deleting a unit type or field, and whenever you take one here."
 msgstr ""
-"En säkerhetskopia är en kopia av hela registret och alla uppladdade filer. "
-"En tas varje natt kl. %(time)s, före varje uppdatering, före en CSV-import, "
+"En säkerhetskopia är en kopia av hela registret och alla uppladdade filer. En"
+" tas varje natt kl. %(time)s, före varje uppdatering, före en CSV-import, "
 "före borttagning av en enhetstyp eller ett fält, och när du tar en här."
 
 #: apps/backups/templates/backups/backup_list.html:18
 #, python-format
 msgid ""
 "Every snapshot is kept for %(days)s days, then the newest of each week for "
-"%(weeks)s weeks and the newest of each month for %(months)s months. "
-"Snapshots taken by hand stay until you delete them."
+"%(weeks)s weeks and the newest of each month for %(months)s months. Snapshots"
+" taken by hand stay until you delete them."
 msgstr ""
 "Varje säkerhetskopia sparas i %(days)s dagar, därefter den senaste för varje "
 "vecka i %(weeks)s veckor och den senaste för varje månad i %(months)s "
@@ -392,7 +384,6 @@ msgstr "Säkerhetskopior"
 msgid "Taken"
 msgstr "Tagen"
 
-#
 #: apps/backups/templates/backups/backup_list.html:46
 msgid "Why"
 msgstr "Varför"
@@ -427,27 +418,22 @@ msgstr "Den här servern"
 msgid "Offsite"
 msgstr "Externt"
 
-#
 #: apps/backups/templates/backups/backup_list.html:63
 msgid "Restore…"
 msgstr "Återställ…"
 
-#
 #: apps/backups/templates/backups/backup_list.html:68
 msgid "Delete"
 msgstr "Ta bort"
 
-#
 #: apps/backups/templates/backups/backup_list.html:78
 msgid "No snapshot has been taken yet."
 msgstr "Ingen säkerhetskopia har tagits ännu."
 
-#
 #: apps/backups/templates/backups/backup_list.html:81
 msgid "Restores"
 msgstr "Återställningar"
 
-#
 #: apps/backups/templates/backups/backup_list.html:85
 msgid "Restored"
 msgstr "Återställd"
@@ -464,7 +450,6 @@ msgstr ""
 "Om appen inte startar alls kan en säkerhetskopia också återställas från "
 "kommandoraden: se INSTALL.md, Backup and restore."
 
-#
 #: apps/backups/templates/backups/maintenance.html:8
 #: apps/backups/templates/backups/maintenance.html:13
 msgid "Back in a moment"
@@ -478,13 +463,11 @@ msgstr ""
 "En säkerhetskopia återställs. Sidan laddas om av sig själv när det är klart, "
 "oftast inom en minut."
 
-#
 #: apps/backups/templates/backups/restore.html:3
 #: apps/backups/templates/backups/restore.html:5
 msgid "Restore a snapshot"
 msgstr "Återställ en säkerhetskopia"
 
-#
 #: apps/backups/templates/backups/restore.html:7
 msgid "Snapshot"
 msgstr "Säkerhetskopia"
@@ -506,17 +489,14 @@ msgstr ""
 "Först tas en säkerhetskopia av uppgifterna som de är nu, så att "
 "återställningen kan ångras genom att återställa den."
 
-#
 #: apps/backups/templates/backups/restore.html:19
 msgid "What changes"
 msgstr "Vad som ändras"
 
-#
 #: apps/backups/templates/backups/restore.html:25
 msgid "Now"
 msgstr "Nu"
 
-#
 #: apps/backups/templates/backups/restore.html:26
 msgid "In the snapshot"
 msgstr "I säkerhetskopian"
@@ -548,7 +528,6 @@ msgstr "Avläsningar"
 msgid "Messages"
 msgstr "Meddelanden"
 
-#
 #: apps/backups/templates/backups/restore.html:32
 msgid "Issued invoices"
 msgstr "Utfärdade fakturor"
@@ -562,7 +541,6 @@ msgstr "Betalningar"
 msgid "Bookkeeping recorded since the snapshot"
 msgstr "Bokföring som registrerats efter säkerhetskopian"
 
-#
 #: apps/backups/templates/backups/restore.html:46
 msgid "Issued invoices that would be removed:"
 msgstr "Utfärdade fakturor som skulle tas bort:"
@@ -596,7 +574,6 @@ msgstr "Jag förstår att de här fakturorna och betalningarna tas bort."
 msgid "Replace all data with the snapshot from %(taken)s."
 msgstr "Ersätt alla uppgifter med säkerhetskopian från %(taken)s."
 
-#
 #: apps/backups/templates/backups/restore.html:57
 msgid "Restore this snapshot"
 msgstr "Återställ den här säkerhetskopian"
@@ -641,8 +618,8 @@ msgstr "Kryssa i rutan för att bekräfta återställningen."
 #: apps/backups/views.py:96
 #, python-format
 msgid ""
-"Restoring %(name)s. The data as it was just before is kept in %(safety)s. "
-"You may need to log in again when it is done."
+"Restoring %(name)s. The data as it was just before is kept in %(safety)s. You"
+" may need to log in again when it is done."
 msgstr ""
 "Återställer %(name)s. Uppgifterna som de var strax innan finns kvar i "
 "%(safety)s. Du kan behöva logga in på nytt när det är klart."
@@ -703,13 +680,10 @@ msgstr "anslag"
 msgid "notices"
 msgstr "anslag"
 
-#
 #: apps/core/settings_page.py:71 apps/setup/views.py:41
 msgid "Organisation"
 msgstr "Organisation"
 
-#
-#
 #: apps/core/settings_page.py:74
 msgid "Organisation details"
 msgstr "Organisationens uppgifter"
@@ -722,17 +696,14 @@ msgstr "Namn, FO-nummer, kontaktuppgifter, logotyp och den offentliga sidan."
 msgid "Register"
 msgstr "Register"
 
-#
 #: apps/core/settings_page.py:87
 msgid "Unit types and their fields"
 msgstr "Enhetstyper och deras fält"
 
-#
 #: apps/core/settings_page.py:88
 msgid "The kinds of units in the register and the fields each one has."
 msgstr "Vilka slags enheter registret har och vilka fält var och en har."
 
-#
 #: apps/core/settings_page.py:94
 msgid "Person fields"
 msgstr "Fält för personer"
@@ -755,7 +726,6 @@ msgid "Labels for grouping units and people, for example for send-outs."
 msgstr ""
 "Taggar för att gruppera enheter och personer, till exempel för utskick."
 
-#
 #: apps/core/settings_page.py:114
 msgid "Reading types"
 msgstr "Avläsningstyper"
@@ -792,7 +762,6 @@ msgstr ""
 msgid "How email is sent: the mail server or service, and the from address."
 msgstr "Hur e-post skickas: e-postservern eller tjänsten och avsändaradressen."
 
-#
 #: apps/core/settings_page.py:153
 msgid "Message templates"
 msgstr "Meddelandemallar"
@@ -803,34 +772,28 @@ msgstr ""
 "Texterna i fakturor, påminnelser, begäranden om avläsning och andra "
 "meddelanden."
 
-#
 #: apps/core/settings_page.py:160
 msgid "Notices"
 msgstr "Anslag"
 
-#
 #: apps/core/settings_page.py:161
 msgid "Short notices on the public page and members' pages."
 msgstr "Korta anslag på den offentliga sidan och medlemmarnas sidor."
 
-#
 #: apps/core/settings_page.py:167
 msgid "Newsletter consents"
 msgstr "Samtycken till nyhetsbrev"
 
-#
 #: apps/core/settings_page.py:168
 msgid "The record of who subscribed to or unsubscribed from the newsletter."
 msgstr ""
 "Förteckningen över vem som har börjat eller slutat prenumerera på "
 "nyhetsbrevet."
 
-#
 #: apps/core/settings_page.py:177
 msgid "Users and roles"
 msgstr "Användare och roller"
 
-#
 #: apps/core/settings_page.py:180
 msgid "Users"
 msgstr "Användare"
@@ -843,7 +806,6 @@ msgstr "Vem som kan logga in och vilken roll var och en har."
 msgid "What each role may see and do."
 msgstr "Vad varje roll får se och göra."
 
-#
 #: apps/core/settings_page.py:197
 msgid "Integrations"
 msgstr "Integrationer"
@@ -860,7 +822,6 @@ msgstr "Tillägg"
 msgid "Turn add-ons on or off, and their settings."
 msgstr "Slå på eller av tillägg och ändra deras inställningar."
 
-#
 #: apps/core/settings_page.py:214
 msgid "Snapshots of the register, here and offsite, and restoring one."
 msgstr ""
@@ -886,7 +847,6 @@ msgstr ""
 msgid "Advanced"
 msgstr "Avancerat"
 
-#
 #: apps/core/settings_page.py:240
 msgid "All data tables"
 msgstr "Alla datatabeller"
@@ -974,7 +934,6 @@ msgstr "Hjälp"
 msgid "Help articles"
 msgstr "Hjälpartiklar"
 
-#
 #: apps/help/templates/help/_nav.html:4 apps/help/templates/help/_nav.html:5
 msgid "Search help"
 msgstr "Sök i hjälpen"
@@ -1103,8 +1062,8 @@ msgid ""
 "small-business limit): invoices then show no VAT and carry the text below."
 msgstr ""
 "Avmarkera om organisationen inte är momsregistrerad (till exempel under "
-"gränsen för småföretag). Fakturorna visar då ingen moms och innehåller "
-"texten nedan."
+"gränsen för småföretag). Fakturorna visar då ingen moms och innehåller texten"
+" nedan."
 
 #: apps/invoicing/models.py:53
 msgid "text when not VAT registered"
@@ -1264,8 +1223,8 @@ msgstr "Endast fasta avgifter."
 
 #: apps/invoicing/models.py:202 apps/invoicing/models.py:362
 #: apps/invoicing/models.py:675 apps/messaging/models.py:161
-#: apps/readings/models.py:200 apps/register/models.py:330
-#: apps/register/models.py:353 apps/selfservice/models.py:58
+#: apps/readings/models.py:200 apps/register/models.py:348
+#: apps/register/models.py:371 apps/selfservice/models.py:58
 msgid "unit"
 msgstr "enhet"
 
@@ -1336,8 +1295,8 @@ msgstr "upp till"
 msgid ""
 "Units of usage this tier covers up to, in total. Empty for the last tier."
 msgstr ""
-"Antal enheter förbrukning som nivån omfattar upp till, sammanlagt. Lämna "
-"tomt för den sista nivån."
+"Antal enheter förbrukning som nivån omfattar upp till, sammanlagt. Lämna tomt"
+" för den sista nivån."
 
 #: apps/invoicing/models.py:275
 msgid "price tier"
@@ -1409,7 +1368,7 @@ msgid "Credit note"
 msgstr "Kreditnota"
 
 #: apps/invoicing/models.py:351 apps/messaging/models.py:75
-#: apps/messaging/models.py:172 apps/register/models.py:317
+#: apps/messaging/models.py:172 apps/register/models.py:335
 msgid "status"
 msgstr "status"
 
@@ -2045,8 +2004,8 @@ msgstr ""
 msgid ""
 "A reminder goes by email with a PDF, else by SMS, else as a letter to print."
 msgstr ""
-"En påminnelse skickas via e-post med PDF, annars via sms, annars som brev "
-"att skriva ut."
+"En påminnelse skickas via e-post med PDF, annars via sms, annars som brev att"
+" skriva ut."
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:38
 msgid "Send reminders to the chosen"
@@ -2169,8 +2128,8 @@ msgid ""
 "Issued invoices go by email with the PDF attached. Recipients without email, "
 "or who prefer post, are listed for printing."
 msgstr ""
-"Utfärdade fakturor skickas per e-post med PDF bifogad. Mottagare utan e-"
-"post, eller som föredrar post, listas för utskrift."
+"Utfärdade fakturor skickas per e-post med PDF bifogad. Mottagare utan e-post,"
+" eller som föredrar post, listas för utskrift."
 
 #: apps/invoicing/templates/invoicing/run_detail.html:22
 #, python-format
@@ -2370,7 +2329,6 @@ msgstr "%(name)s är större än %(limit)s."
 msgid "The files are %(size)s together; at most %(limit)s can be sent."
 msgstr "Filerna är %(size)s tillsammans; högst %(limit)s kan skickas."
 
-#
 #: apps/messaging/attachments.py:136
 msgid "This email provider cannot send attachments."
 msgstr "Den här e-postleverantören kan inte skicka bilagor."
@@ -2384,7 +2342,19 @@ msgid "No phone number or email address to send to."
 msgstr ""
 "Det finns inget telefonnummer eller ingen e-postadress att skicka till."
 
-#
+#: apps/messaging/delivery_reports.py:62
+#, python-format
+msgid "Bounced: %(reason)s"
+msgstr "Studsade: %(reason)s"
+
+#: apps/messaging/delivery_reports.py:62
+msgid "Bounced."
+msgstr "Studsade."
+
+#: apps/messaging/delivery_reports.py:68
+msgid "The recipient marked this email as spam."
+msgstr "Mottagaren markerade e-postmeddelandet som skräppost."
+
 #: apps/messaging/email_forms.py:17
 #: apps/setup/templates/setup/messaging.html:23
 msgid "Not set up"
@@ -2501,7 +2471,6 @@ msgstr ""
 "{organisation_phone}, {organisation_email}, {organisation_website} och "
 "{emergency_phone}."
 
-#
 #: apps/messaging/forms.py:65
 #: apps/messaging/templates/messaging/_attachments.html:4
 #: apps/messaging/templates/messaging/batch_detail.html:13
@@ -2522,9 +2491,9 @@ msgid ""
 "PDF, images or office documents, up to %(file)s MB each and %(total)s MB "
 "together. Email recipients get the files attached; SMS recipients get a link."
 msgstr ""
-"PDF, bilder eller kontorsdokument, högst %(file)s MB per fil och %(total)s "
-"MB tillsammans. Den som får e-post får filerna bifogade, den som får sms får "
-"en länk."
+"PDF, bilder eller kontorsdokument, högst %(file)s MB per fil och %(total)s MB"
+" tillsammans. Den som får e-post får filerna bifogade, den som får sms får en"
+" länk."
 
 #: apps/messaging/forms.py:103 apps/messaging/models.py:41
 #: apps/messaging/templates/messaging/batch_list.html:12
@@ -2564,9 +2533,9 @@ msgstr "Skicka via"
 
 #: apps/messaging/forms.py:125
 msgid ""
-"Email to those who prefer email and SMS to those who prefer SMS, or the "
-"other one when they lack an address for it. Those who prefer post get an "
-"SMS, or else an email."
+"Email to those who prefer email and SMS to those who prefer SMS, or the other"
+" one when they lack an address for it. Those who prefer post get an SMS, or "
+"else an email."
 msgstr ""
 "E-post till dem som vill ha e-post och sms till dem som vill ha sms, eller "
 "det andra om de saknar adress för det. De som vill ha post får sms, eller "
@@ -2592,7 +2561,6 @@ msgstr "Behövs när meddelandet skickas via e-post."
 msgid "Longer text for email"
 msgstr "Längre text för e-post"
 
-#
 #: apps/messaging/forms.py:150
 msgid ""
 "Needed when the message goes by email only. Otherwise optional: without it, "
@@ -2639,12 +2607,10 @@ msgstr "Välj en enhetstyp."
 msgid "Add a subject for the email."
 msgstr "Lägg till ett ämne för e-postmeddelandet."
 
-#
 #: apps/messaging/forms.py:208
 msgid "Write the message."
 msgstr "Skriv meddelandet."
 
-#
 #: apps/messaging/forms.py:212
 msgid "Write the text of the email."
 msgstr "Skriv texten i e-postmeddelandet."
@@ -2781,7 +2747,6 @@ msgstr "e-posttext"
 msgid "recipients"
 msgstr "mottagare"
 
-#
 #: apps/messaging/models.py:106
 msgid "file link expires"
 msgstr "fillänken går ut"
@@ -2803,7 +2768,6 @@ msgstr "Kan skicka meddelanden och varningar till alla"
 msgid "Can send newsletters"
 msgstr "Kan skicka nyhetsbrev"
 
-#
 #: apps/messaging/models.py:115
 msgid "Can send a message to one unit"
 msgstr "Kan skicka ett meddelande till en enhet"
@@ -2825,7 +2789,7 @@ msgid "To print"
 msgstr "Ska skrivas ut"
 
 #: apps/messaging/models.py:153 apps/messaging/models.py:269
-#: apps/register/models.py:291 apps/register/models.py:356
+#: apps/register/models.py:295 apps/register/models.py:374
 #: apps/selfservice/models.py:62
 msgid "person"
 msgstr "person"
@@ -2929,7 +2893,6 @@ msgstr "ja"
 msgid "no"
 msgstr "nej"
 
-#
 #: apps/messaging/models.py:336
 msgid "file"
 msgstr "fil"
@@ -2938,11 +2901,10 @@ msgstr "fil"
 msgid "size"
 msgstr "storlek"
 
-#: apps/messaging/models.py:339 apps/register/models.py:313
+#: apps/messaging/models.py:339 apps/register/models.py:331
 msgid "type"
 msgstr "typ"
 
-#
 #: apps/messaging/models.py:342
 msgid "uploaded by"
 msgstr "uppladdad av"
@@ -2955,7 +2917,6 @@ msgstr "uppladdad"
 msgid "attachment"
 msgstr "bilaga"
 
-#
 #: apps/messaging/models.py:353
 msgid "attachments"
 msgstr "bilagor"
@@ -3015,17 +2976,17 @@ msgstr "e-postinställningar"
 msgid "Email settings"
 msgstr "E-postinställningar"
 
-#: apps/messaging/newsletter.py:54
+#: apps/messaging/newsletter.py:52
 #, python-format
 msgid "You get this because you subscribed. Unsubscribe: %(url)s"
 msgstr ""
 "Du får det här eftersom du prenumererar. Avsluta prenumerationen: %(url)s"
 
-#: apps/messaging/newsletter.py:82
+#: apps/messaging/newsletter.py:80
 msgid "Unsubscribed before it was sent."
 msgstr "Avslutade prenumerationen innan det skickades."
 
-#: apps/messaging/newsletter.py:118
+#: apps/messaging/newsletter.py:116
 #: apps/messaging/templates/messaging/_send_forms.html:8
 #: apps/messaging/views.py:346
 msgid "Email is not set up."
@@ -3057,8 +3018,8 @@ msgstr "SMTP"
 
 #: apps/messaging/templates/messaging/_email_settings_fields.html:5
 msgid ""
-"Only used when email goes through SMTP. Your email provider or IT support "
-"can tell you these."
+"Only used when email goes through SMTP. Your email provider or IT support can"
+" tell you these."
 msgstr ""
 "Används bara när e-posten skickas via SMTP. Din e-postleverantör eller IT-"
 "support kan berätta vad du ska ange."
@@ -3115,7 +3076,6 @@ msgid_plural "%(count)s SMS each (%(used)s characters, %(per_sms)s per SMS)"
 msgstr[0] "%(count)s SMS (%(used)s tecken, %(per_sms)s per SMS)"
 msgstr[1] "%(count)s SMS vardera (%(used)s tecken, %(per_sms)s per SMS)"
 
-#
 #: apps/messaging/templates/messaging/_unit_messages.html:5
 msgid "Send message"
 msgstr "Skicka meddelande"
@@ -3140,7 +3100,6 @@ msgstr "Person"
 msgid "Channel"
 msgstr "Kanal"
 
-#
 #: apps/messaging/templates/messaging/_unit_messages.html:33
 msgid "No messages yet."
 msgstr "Inga meddelanden än."
@@ -3355,7 +3314,6 @@ msgstr ""
 msgid "Save"
 msgstr "Spara"
 
-#
 #: apps/messaging/templates/messaging/email_settings.html:19
 msgid "Send a test"
 msgstr "Skicka ett test"
@@ -3365,7 +3323,6 @@ msgstr "Skicka ett test"
 msgid "Send a test email to"
 msgstr "Skicka ett testmejl till"
 
-#
 #: apps/messaging/templates/messaging/email_settings.html:24
 #: apps/setup/templates/setup/messaging.html:17
 msgid "Send test email"
@@ -3543,12 +3500,10 @@ msgstr "En säkerhetskopia kunde inte skickas externt: %(error)s"
 msgid "The nightly snapshot was taken"
 msgstr "Nattens säkerhetskopia togs"
 
-#
 #: apps/notifications/kinds.py:63
 msgid "The nightly snapshot was taken."
 msgstr "Nattens säkerhetskopia togs."
 
-#
 #: apps/notifications/kinds.py:70
 msgid "A snapshot was restored"
 msgstr "En säkerhetskopia återställdes"
@@ -3558,7 +3513,6 @@ msgstr "En säkerhetskopia återställdes"
 msgid "The snapshot %(snapshot)s was restored by %(user)s."
 msgstr "Säkerhetskopian %(snapshot)s återställdes av %(user)s."
 
-#
 #: apps/notifications/kinds.py:77
 msgid "A restore failed"
 msgstr "En återställning misslyckades"
@@ -3723,8 +3677,8 @@ msgid ""
 "Choose which notifications you get under the bell. Only the kinds your role "
 "can see are listed."
 msgstr ""
-"Välj vilka aviseringar du får under klockan. Bara de slag som din roll kan "
-"se finns med."
+"Välj vilka aviseringar du får under klockan. Bara de slag som din roll kan se"
+" finns med."
 
 #: apps/notifications/templates/notifications/settings.html:12
 msgid "Notify me when"
@@ -3780,9 +3734,9 @@ msgid ""
 "Add-ons add features to Metra. Turning one off hides its pages, menu items "
 "and sections at once, and its data is kept for when it is turned on again."
 msgstr ""
-"Tillägg ger Metra fler funktioner. När du slår av ett tillägg försvinner "
-"dess sidor, menyval och avsnitt direkt, och dess data sparas till nästa gång "
-"det slås på."
+"Tillägg ger Metra fler funktioner. När du slår av ett tillägg försvinner dess"
+" sidor, menyval och avsnitt direkt, och dess data sparas till nästa gång det "
+"slås på."
 
 #: apps/plugins/templates/plugins/plugin_list.html:13
 msgid ""
@@ -3910,7 +3864,6 @@ msgstr ""
 msgid "reading types"
 msgstr "avläsningstyper"
 
-#
 #: apps/readings/models.py:88
 msgid "Not yet open"
 msgstr "Ännu inte öppen"
@@ -4204,7 +4157,7 @@ msgstr "Filen behöver en rubrikrad och minst en rad med data."
 msgid "The file has more than %(max)s rows."
 msgstr "Filen har fler än %(max)s rader."
 
-#: apps/register/csv_io.py:94 apps/register/models.py:350
+#: apps/register/csv_io.py:94 apps/register/models.py:368
 #: apps/register/templates/register/import_preview.html:38
 msgid "Contact"
 msgstr "Kontakt"
@@ -4537,7 +4490,7 @@ msgid "tag"
 msgstr "tagg"
 
 #: apps/register/models.py:120 apps/register/models.py:287
-#: apps/register/models.py:323
+#: apps/register/models.py:341
 msgid "tags"
 msgstr "taggar"
 
@@ -4607,7 +4560,7 @@ msgid "custom field"
 msgstr "eget fält"
 
 #: apps/register/models.py:193 apps/register/models.py:286
-#: apps/register/models.py:322
+#: apps/register/models.py:340
 msgid "custom fields"
 msgstr "egna fält"
 
@@ -4643,52 +4596,60 @@ msgstr "efternamn"
 msgid "preferred channel"
 msgstr "önskad kanal"
 
-#: apps/register/models.py:285 apps/register/models.py:321
+#: apps/register/models.py:285 apps/register/models.py:339
 msgid "notes"
 msgstr "anteckningar"
 
-#: apps/register/models.py:292
+#: apps/register/models.py:290
+msgid "email bounced"
+msgstr "e-post studsade"
+
+#: apps/register/models.py:291
+msgid "bounce reason"
+msgstr "orsak till studs"
+
+#: apps/register/models.py:296
 msgid "people"
 msgstr "personer"
 
-#: apps/register/models.py:309
+#: apps/register/models.py:327
 #: apps/register/templates/register/_show_select.html:5
 msgid "Active"
 msgstr "Aktiv"
 
-#: apps/register/models.py:310
+#: apps/register/models.py:328
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: apps/register/models.py:319
+#: apps/register/models.py:337
 msgid "start date"
 msgstr "startdatum"
 
-#: apps/register/models.py:320
+#: apps/register/models.py:338
 msgid "end date"
 msgstr "slutdatum"
 
-#: apps/register/models.py:325 apps/register/models.py:363
+#: apps/register/models.py:343 apps/register/models.py:381
 msgid "contacts"
 msgstr "kontakter"
 
-#: apps/register/models.py:331
+#: apps/register/models.py:349
 msgid "units"
 msgstr "enheter"
 
-#: apps/register/models.py:341
+#: apps/register/models.py:359
 msgid "The end date is before the start date."
 msgstr "Slutdatumet är före startdatumet."
 
-#: apps/register/models.py:348
+#: apps/register/models.py:366
 msgid "Owner"
 msgstr "Ägare"
 
-#: apps/register/models.py:349
+#: apps/register/models.py:367
 msgid "Billing contact"
 msgstr "Faktureringskontakt"
 
-#: apps/register/models.py:362
+#: apps/register/models.py:380
 msgid "contact"
 msgstr "kontakt"
 
@@ -4898,9 +4859,9 @@ msgid ""
 "which column goes where in the next step, and see every row checked before "
 "anything is saved."
 msgstr ""
-"Varje rad blir en enhet, eventuellt med en kontaktperson. I nästa steg "
-"väljer du vilken kolumn som ska vart, och du ser att varje rad kontrolleras "
-"innan något sparas."
+"Varje rad blir en enhet, eventuellt med en kontaktperson. I nästa steg väljer"
+" du vilken kolumn som ska vart, och du ser att varje rad kontrolleras innan "
+"något sparas."
 
 #: apps/register/templates/register/import_upload.html:10
 msgid "Example for the water association setup:"
@@ -4923,6 +4884,19 @@ msgstr "Återställ"
 #: apps/register/templates/register/unit_detail.html:12
 msgid "Archive"
 msgstr "Arkivera"
+
+#: apps/register/templates/register/person_detail.html:20
+#, python-format
+msgid "Bounced %(date)s"
+msgstr "Studsade %(date)s"
+
+#: apps/register/templates/register/person_detail.html:20
+msgid ""
+"Email to this address could not be delivered. Check the address with the "
+"person and correct it."
+msgstr ""
+"E-post till den här adressen kunde inte levereras. Kontrollera adressen med "
+"personen och rätta den."
 
 #: apps/register/templates/register/person_detail.html:40
 msgid "Not linked to any unit."
@@ -5203,8 +5177,8 @@ msgid ""
 "We sometimes send a newsletter by email about what is going on. Messages "
 "about the service itself, such as disruptions, reach you either way."
 msgstr ""
-"Vi skickar ibland ett nyhetsbrev via e-post om vad som händer. Meddelanden "
-"om tjänsten själv, till exempel störningar, når dig ändå."
+"Vi skickar ibland ett nyhetsbrev via e-post om vad som händer. Meddelanden om"
+" tjänsten själv, till exempel störningar, når dig ändå."
 
 #: apps/selfservice/templates/selfservice/member.html:68
 msgid "Do you want the newsletter?"
@@ -5329,8 +5303,8 @@ msgid ""
 "Readings and contact details members changed through their personal links, "
 "newest first."
 msgstr ""
-"Avläsningar och kontaktuppgifter som medlemmar har ändrat via sina "
-"personliga länkar, senast först."
+"Avläsningar och kontaktuppgifter som medlemmar har ändrat via sina personliga"
+" länkar, senast först."
 
 #: apps/selfservice/templates/selfservice/recent_changes.html:40
 msgid "No changes through self-service links yet."
@@ -5478,7 +5452,6 @@ msgstr "En fastighet ansluten till vattennätet."
 msgid "Property ID"
 msgstr "Fastighetsbeteckning"
 
-#
 #: apps/setup/examples.py:25
 msgid "Meter number"
 msgstr "Mätarnummer"
@@ -5503,12 +5476,10 @@ msgstr "Vatten och avlopp"
 msgid "Number of residents"
 msgstr "Antal boende"
 
-#
 #: apps/setup/examples.py:50
 msgid "Water meter"
 msgstr "Vattenmätare"
 
-#
 #: apps/setup/forms.py:49
 msgid "Your language"
 msgstr "Ditt språk"
@@ -5520,12 +5491,10 @@ msgid ""
 msgstr ""
 "Var och en väljer sitt eget språk i menyn, och medlemmar på sina egna sidor."
 
-#
 #: apps/setup/forms.py:78
 msgid "Applies to"
 msgstr "Gäller"
 
-#
 #: apps/setup/forms.py:89 apps/setup/templates/setup/types.html:19
 msgid "Every person"
 msgstr "Alla personer"
@@ -5534,17 +5503,14 @@ msgstr "Alla personer"
 msgid "There is already a field with this name."
 msgstr "Det finns redan ett fält med det här namnet."
 
-#
 #: apps/setup/forms.py:152
 msgid "Someone already has this email as their username."
 msgstr "Någon har redan den här e-postadressen som användarnamn."
 
-#
 #: apps/setup/forms.py:158
 msgid "Send a test to"
 msgstr "Skicka ett test till"
 
-#
 #: apps/setup/models.py:13
 msgid "finished by"
 msgstr "slutförd av"
@@ -5557,7 +5523,6 @@ msgstr "installation"
 msgid "Can run the setup wizard"
 msgstr "Kan köra installationsguiden"
 
-#
 #: apps/setup/templates/setup/_form.html:7
 msgid "Save and continue"
 msgstr "Spara och fortsätt"
@@ -5571,7 +5536,6 @@ msgstr "Ställ in Metra"
 msgid "Setup steps"
 msgstr "Steg i installationen"
 
-#
 #: apps/setup/templates/setup/base.html:12
 msgid "saved"
 msgstr "sparat"
@@ -5581,12 +5545,10 @@ msgstr "sparat"
 msgid "Step %(number)s of %(total)s"
 msgstr "Steg %(number)s av %(total)s"
 
-#
 #: apps/setup/templates/setup/base.html:22
 msgid "Back"
 msgstr "Tillbaka"
 
-#
 #: apps/setup/templates/setup/base.html:23
 msgid "Skip this step"
 msgstr "Hoppa över steget"
@@ -5601,15 +5563,13 @@ msgstr ""
 
 #: apps/setup/templates/setup/board.html:4
 msgid ""
-"Invite the people who work in Metra. Each gets an email with a link to "
-"choose a password. Members do not need accounts: they use their personal "
-"links."
+"Invite the people who work in Metra. Each gets an email with a link to choose"
+" a password. Members do not need accounts: they use their personal links."
 msgstr ""
 "Bjud in dem som arbetar i Metra. Var och en får ett e-postmeddelande med en "
 "länk för att välja lösenord. Medlemmar behöver inga konton, de använder sina "
 "personliga länkar."
 
-#
 #: apps/setup/templates/setup/board.html:6
 msgid "Accounts"
 msgstr "Konton"
@@ -5618,19 +5578,17 @@ msgstr "Konton"
 msgid "Invite someone"
 msgstr "Bjud in någon"
 
-#
 #: apps/setup/templates/setup/board.html:16
 msgid "Send invitation"
 msgstr "Skicka inbjudan"
 
-#
 #: apps/setup/templates/setup/board.html:19
 msgid ""
-"Email is not set up, so invitations cannot be sent. Add people under "
-"Settings instead."
+"Email is not set up, so invitations cannot be sent. Add people under Settings"
+" instead."
 msgstr ""
-"E-post är inte inställd, så inbjudningar kan inte skickas. Lägg till "
-"personer under Inställningar i stället."
+"E-post är inte inställd, så inbjudningar kan inte skickas. Lägg till personer"
+" under Inställningar i stället."
 
 #: apps/setup/templates/setup/board.html:21
 #: apps/setup/templates/setup/messaging.html:33
@@ -5642,7 +5600,6 @@ msgstr "Fortsätt"
 msgid "Almost done"
 msgstr "Nästan klart"
 
-#
 #: apps/setup/templates/setup/done.html:10
 msgid "Skipped"
 msgstr "Överhoppat"
@@ -5684,7 +5641,6 @@ msgstr ""
 msgid "Current logo"
 msgstr "Nuvarande logotyp"
 
-#
 #: apps/setup/templates/setup/logo.html:10
 msgid "Remove the logo"
 msgstr "Ta bort logotypen"
@@ -5700,8 +5656,8 @@ msgid ""
 "Settings > Email."
 msgstr ""
 "All e-post från Metra skickas på det här sättet: meddelanden, nyhetsbrev, "
-"fakturor och påminnelser samt inloggningskoder och inbjudningar. Du kan "
-"ändra det senare under Inställningar > E-post."
+"fakturor och påminnelser samt inloggningskoder och inbjudningar. Du kan ändra"
+" det senare under Inställningar > E-post."
 
 #: apps/setup/templates/setup/messaging.html:10
 msgid "Save email settings"
@@ -5721,32 +5677,32 @@ msgstr "Avsändare %(sender)s"
 msgid ""
 "Turn on an SMS add-on and enter its details under <a "
 "href=\"%(addons)s\">Settings &rsaquo; Add-ons</a>."
-msgstr "Slå på ett SMS-tillägg och fyll i dess uppgifter under <a href=\"%(addons)s\">Inställningar &rsaquo; Tillägg</a>."
+msgstr ""
+"Slå på ett SMS-tillägg och fyll i dess uppgifter under <a "
+"href=\"%(addons)s\">Inställningar &rsaquo; Tillägg</a>."
 
 #: apps/setup/templates/setup/messaging.html:29
 msgid "Send a test SMS to"
 msgstr "Skicka ett test-sms till"
 
-#
 #: apps/setup/templates/setup/messaging.html:30
 msgid "Send test SMS"
 msgstr "Skicka test-sms"
 
-#
 #: apps/setup/templates/setup/organisation.html:4
 msgid ""
-"Who runs this installation. The contact details appear on the public page, "
-"on members' pages and in letters, so use the organisation's own details, not "
-"a person's."
+"Who runs this installation. The contact details appear on the public page, on"
+" members' pages and in letters, so use the organisation's own details, not a "
+"person's."
 msgstr ""
 "Vem som driver den här installationen. Kontaktuppgifterna visas på den "
-"offentliga sidan, på medlemmarnas sidor och i brev, så använd "
-"organisationens egna uppgifter, inte en persons."
+"offentliga sidan, på medlemmarnas sidor och i brev, så använd organisationens"
+" egna uppgifter, inte en persons."
 
 #: apps/setup/templates/setup/types.html:4
 msgid ""
-"A unit is what you keep a record of: a household, a property, a boat berth "
-"or a member. Each unit type has its own fields; people can have fields too."
+"A unit is what you keep a record of: a household, a property, a boat berth or"
+" a member. Each unit type has its own fields; people can have fields too."
 msgstr ""
 "En enhet är det ni för register över: ett hushåll, en fastighet, en båtplats "
 "eller en medlem. Varje enhetstyp har sina egna fält, och personer kan också "
@@ -5766,27 +5722,22 @@ msgstr ""
 "anslutningsår, anslutning och antal boende, och en vattenmätare som läses av "
 "en gång per år. Allt går att ändra eller ta bort efteråt."
 
-#
 #: apps/setup/templates/setup/types.html:10
 msgid "Add the water association example"
 msgstr "Lägg till exemplet vattenandelslag"
 
-#
 #: apps/setup/templates/setup/types.html:14
 msgid "Unit types"
 msgstr "Enhetstyper"
 
-#
 #: apps/setup/templates/setup/types.html:17
 msgid "no fields yet"
 msgstr "inga fält ännu"
 
-#
 #: apps/setup/templates/setup/types.html:23
 msgid "Add a unit type"
 msgstr "Lägg till en enhetstyp"
 
-#
 #: apps/setup/templates/setup/types.html:27
 msgid "Add unit type"
 msgstr "Lägg till enhetstyp"
@@ -5807,7 +5758,6 @@ msgstr "Logotyp"
 msgid "Units and fields"
 msgstr "Enheter och fält"
 
-#
 #: apps/setup/views.py:45
 msgid "Email and SMS"
 msgstr "E-post och sms"
@@ -5816,7 +5766,6 @@ msgstr "E-post och sms"
 msgid "Invite the board"
 msgstr "Bjud in styrelsen"
 
-#
 #: apps/setup/views.py:77
 msgid "Saved."
 msgstr "Sparat."
@@ -5830,12 +5779,10 @@ msgstr "Logotypen togs bort."
 msgid "Added %(name)s with its fields and a water meter."
 msgstr "La till %(name)s med fält och en vattenmätare."
 
-#
 #: apps/setup/views.py:213
 msgid "This channel is not set up."
 msgstr "Den här kanalen är inte inställd."
 
-#
 #: apps/setup/views.py:253
 msgid ""
 "Email is not set up, so no invitation can be sent. Add the person under "
@@ -5854,8 +5801,7 @@ msgstr "Ditt konto för %(organisation)s"
 msgid ""
 "Hello %(name)s,\n"
 "\n"
-"%(inviter)s has made you an account for %(organisation)s in Metra. Your "
-"username is %(username)s.\n"
+"%(inviter)s has made you an account for %(organisation)s in Metra. Your username is %(username)s.\n"
 "\n"
 "Choose your password here:\n"
 "%(link)s\n"
@@ -5864,8 +5810,7 @@ msgid ""
 msgstr ""
 "Hej %(name)s,\n"
 "\n"
-"%(inviter)s har skapat ett konto åt dig för %(organisation)s i Metra. Ditt "
-"användarnamn är %(username)s.\n"
+"%(inviter)s har skapat ett konto åt dig för %(organisation)s i Metra. Ditt användarnamn är %(username)s.\n"
 "\n"
 "Välj ditt lösenord här:\n"
 "%(link)s\n"
@@ -5907,8 +5852,8 @@ msgid ""
 "Your role does not allow you to open this page. Ask an admin if you need "
 "access."
 msgstr ""
-"Din roll tillåter inte att du öppnar den här sidan. Fråga en administratör "
-"om du behöver åtkomst."
+"Din roll tillåter inte att du öppnar den här sidan. Fråga en administratör om"
+" du behöver åtkomst."
 
 #: templates/403.html:7
 msgid "Go to the start page"
@@ -5966,9 +5911,8 @@ msgstr ""
 #~ msgstr "Sms-inställningar beskrivs i INSTALL.md, under Email and SMS."
 
 #~ msgid ""
-#~ "Email and SMS are set by whoever installed Metra, in the server's "
-#~ "settings file (.env). Here you can see what is set up and send yourself a "
-#~ "test."
+#~ "Email and SMS are set by whoever installed Metra, in the server's settings "
+#~ "file (.env). Here you can see what is set up and send yourself a test."
 #~ msgstr ""
 #~ "E-post och sms ställs in av den som installerade Metra, i serverns "
 #~ "inställningsfil (.env). Här ser du vad som är inställt och kan skicka ett "
@@ -6008,8 +5952,7 @@ msgstr ""
 
 #~ msgid "The last successful backup is more than a day and a half old."
 #~ msgstr ""
-#~ "Den senaste lyckade säkerhetskopian är mer än ett och ett halvt dygn "
-#~ "gammal."
+#~ "Den senaste lyckade säkerhetskopian är mer än ett och ett halvt dygn gammal."
 
 #~ msgid "To restore a snapshot, see INSTALL.md, Backup and restore."
 #~ msgstr ""
@@ -6028,6 +5971,5 @@ msgstr ""
 #~ msgstr "säkerhetskopior"
 
 #, fuzzy, python-format
-#~| msgid "All types"
 #~ msgid "Add: %(type)s"
 #~ msgstr "Alla typer"
