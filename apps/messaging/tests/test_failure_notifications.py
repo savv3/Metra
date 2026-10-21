@@ -59,3 +59,25 @@ def test_a_failed_delivery_report_joins_the_send_outs_notification(
     notification = Notification.objects.get(kind="messages_failed")
     assert notification.params["count"] == 1
     assert Recipient.objects.get(user=admin).read_at is not None
+
+
+def test_unsubscribing_before_a_newsletter_is_no_failure(
+    make_user, django_capture_on_commit_callbacks
+):
+    from apps.messaging import newsletter
+    from apps.messaging.models import ConsentRecord
+    from apps.register.models import Person
+
+    make_user("admin", "Admin")
+    reader = Person.objects.create(first_name="Anna", email="anna@example.com")
+    ConsentRecord.record(reader, True, ConsentRecord.Source.STAFF)
+    batch = MessageBatch.objects.create(
+        kind="newsletter", subject="Hej", email_body="Text", recipients=[[reader.pk, None]]
+    )
+    ConsentRecord.record(reader, False, ConsentRecord.Source.UNSUBSCRIBE_LINK)
+
+    with django_capture_on_commit_callbacks(execute=True):
+        newsletter.send_part(batch)
+
+    assert batch.messages.get().status == Message.Status.FAILED
+    assert not Notification.objects.exists()

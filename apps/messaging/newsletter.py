@@ -88,7 +88,12 @@ def send_part(batch, limit=None):
         batch.status = MessageBatch.Status.DONE
         batch.finished_at = timezone.now()
         batch.save(update_fields=["status", "finished_at"])
-        notify_failures(batch)
+        # Someone who unsubscribed before it went out has a row without an
+        # address: that is their choice, not a delivery that failed.
+        notify_failures(
+            batch,
+            batch.messages.filter(status=Message.Status.FAILED).exclude(recipient="").count(),
+        )
     return left
 
 
