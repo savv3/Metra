@@ -2,8 +2,8 @@
 
 ## Asetukset ja maksut
 
-Kohdassa **Asetukset > Laskutusasetukset** ylläpitäjä määrittää pankkitilin,
-maksuehdot, ALV:n, numeroinnin ja laskujen tekstit. **Asetukset >
+Kohdassa **Asetukset > Laskutus > Laskutusasetukset** ylläpitäjä määrittää pankkitilin,
+maksuehdot, ALV:n, numeroinnin ja laskujen tekstit. **Asetukset > Laskutus >
 Maksusuunnitelmat** määrää, mitä yksiköt maksavat: kiinteät maksut ja
 lukeman yksikköä kohti perittävät maksut (esimerkiksi per m³), tarvittaessa
 hintaportaittain, kukin omalla ALV-kannallaan.

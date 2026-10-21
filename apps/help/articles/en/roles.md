@@ -11,7 +11,7 @@ Everyone who works in Metra has an account with one role:
 | Treasurer | See the register, and run invoicing and payments |
 | Read-only | See the register |
 
-An admin adds users under **Settings > Users**, or invites them with the
+An admin adds users under **Settings > Users and roles > Users**, or invites them with the
 setup wizard's **Invite the board** step, which emails a link to choose a
 password.
 

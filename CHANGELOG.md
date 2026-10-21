@@ -14,6 +14,16 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- A Settings page of Metra's own at /settings/, grouped by task:
+  Organisation, Register, Readings, Invoicing, Messages, Users and roles,
+  Integrations, Backups and the Setup wizard, each entry with a short
+  description. Everyone sees only the entries their role may change, and the
+  menu shows Settings to anyone with at least one. The full admin is under
+  Advanced, for superusers only. Links that plugins add with
+  `api.add_settings_link` are listed under Integrations.
+- Invoice settings now include the payment reference type and the reminder
+  fee and days, which could not be changed before.
+
 - The meetings plugin (`METRA_PLUGINS=meetings`, off by default): annual,
   extraordinary and board meetings with an agenda, the notice sent as a
   message with the agenda attached, attendance from the register with votes
@@ -53,6 +63,10 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   days, then weekly for 4 weeks and monthly for 12 months; ones taken by hand
   stay until deleted. A new Backups page lists them, here and offsite.
 - `manage.py backup` is now `manage.py snapshot`.
+- The menu's Settings opens the new Settings page instead of the admin. Fee
+  lines are no longer listed on their own in the admin (they are edited in
+  their fee plan), and the admin's index shows non-superusers only the
+  tables that are settings.
 
 ### Upgrade notes
 

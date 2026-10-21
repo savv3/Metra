@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 11:02+0300\n"
+"POT-Creation-Date: 2026-10-21 15:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,6 +96,7 @@ msgid "Email"
 msgstr "Sähköposti"
 
 #: apps/accounts/templates/accounts/profile.html:18
+#: apps/core/settings_page.py:178
 msgid "Roles"
 msgstr "Roolit"
 
@@ -179,7 +180,7 @@ msgstr "Vaihda salasana"
 #: apps/backups/apps.py:7 apps/backups/templates/backups/_status.html:4
 #: apps/backups/templates/backups/backup_list.html:3
 #: apps/backups/templates/backups/backup_list.html:6
-#: apps/setup/templates/admin/metra_index.html:18
+#: apps/core/settings_page.py:189 apps/core/settings_page.py:192
 msgid "Backups"
 msgstr "Varmuuskopiot"
 
@@ -332,7 +333,6 @@ msgid "Only snapshots taken by hand can be deleted."
 msgstr "Vain käsin otetut tilannevedokset voi poistaa."
 
 #: apps/backups/templates/backups/_status.html:5
-#: apps/setup/templates/admin/metra_index.html:21
 msgid "Snapshots and backups"
 msgstr "Tilannevedokset ja varmuuskopiot"
 
@@ -556,7 +556,8 @@ msgstr "Yksiköt"
 msgid "People"
 msgstr "Henkilöt"
 
-#: apps/backups/templates/backups/restore.html:32 apps/readings/apps.py:7
+#: apps/backups/templates/backups/restore.html:32
+#: apps/core/settings_page.py:108 apps/readings/apps.py:7
 #: apps/readings/templates/readings/_round_results.html:3
 #: apps/readings/templates/readings/_unit_readings.html:3
 #: templates/base.html:23
@@ -564,6 +565,7 @@ msgid "Readings"
 msgstr "Lukemat"
 
 #: apps/backups/templates/backups/restore.html:32
+#: apps/core/settings_page.py:141
 #: apps/messaging/templates/messaging/_unit_messages.html:4
 #: apps/messaging/templates/messaging/batch_detail.html:61
 #: apps/messaging/templates/messaging/batch_list.html:24
@@ -724,6 +726,173 @@ msgstr "tiedote"
 msgid "notices"
 msgstr "tiedotteet"
 
+#
+#: apps/core/settings_page.py:68 apps/setup/views.py:39
+msgid "Organisation"
+msgstr "Organisaatio"
+
+#
+#: apps/core/settings_page.py:71
+#
+msgid "Organisation details"
+msgstr "Organisaation tiedot"
+
+#: apps/core/settings_page.py:72
+msgid "Name, business ID, contact details, logo and the public page."
+msgstr "Nimi, Y-tunnus, yhteystiedot, logo ja julkinen sivu."
+
+#: apps/core/settings_page.py:81 apps/register/apps.py:7
+msgid "Register"
+msgstr "Rekisteri"
+
+#: apps/core/settings_page.py:84
+#
+msgid "Unit types and their fields"
+msgstr "Yksikkötyypit ja niiden kentät"
+
+#: apps/core/settings_page.py:85
+#
+msgid "The kinds of units in the register and the fields each one has."
+msgstr "Rekisterin yksiköiden lajit ja kunkin lajin kentät."
+
+#: apps/core/settings_page.py:91
+#
+msgid "Person fields"
+msgstr "Henkilöiden kentät"
+
+#: apps/core/settings_page.py:92
+msgid "Extra fields on every person, besides name and contact details."
+msgstr "Lisäkentät jokaiselle henkilölle nimen ja yhteystietojen lisäksi."
+
+#: apps/core/settings_page.py:98 apps/register/csv_io.py:474
+#: apps/register/csv_io.py:527
+#: apps/register/templates/register/_person_results.html:11
+#: apps/register/templates/register/_unit_results.html:11
+#: apps/register/templates/register/person_detail.html:24
+#: apps/register/templates/register/unit_detail.html:23
+msgid "Tags"
+msgstr "Tunnisteet"
+
+#: apps/core/settings_page.py:99
+msgid "Labels for grouping units and people, for example for send-outs."
+msgstr "Tunnisteet yksiköiden ja henkilöiden ryhmittelyyn, esimerkiksi lähetyksiä varten."
+
+#: apps/core/settings_page.py:111
+#
+msgid "Reading types"
+msgstr "Lukematyypit"
+
+#: apps/core/settings_page.py:112
+msgid "What is read, for which unit type, and in which unit."
+msgstr "Mitä luetaan, mille yksikkötyypille ja missä mittayksikössä."
+
+#: apps/core/settings_page.py:121 apps/invoicing/apps.py:7
+msgid "Invoicing"
+msgstr "Laskutus"
+
+#: apps/core/settings_page.py:124 apps/invoicing/models.py:118
+msgid "Invoice settings"
+msgstr "Laskutusasetukset"
+
+#: apps/core/settings_page.py:125
+msgid "Bank account, payment terms, VAT, numbering and reminders."
+msgstr "Pankkitili, maksuehdot, ALV, numerointi ja maksumuistutukset."
+
+#: apps/core/settings_page.py:131
+#
+msgid "Fee plans"
+msgstr "Maksusuunnitelmat"
+
+#: apps/core/settings_page.py:132
+msgid "What units pay: fixed fees and usage fees, with their fee lines."
+msgstr "Mitä yksiköt maksavat: kiinteät maksut ja kulutusmaksut maksuriveineen."
+
+#: apps/core/settings_page.py:144
+#
+msgid "Message templates"
+msgstr "Viestipohjat"
+
+#: apps/core/settings_page.py:145
+msgid "The texts of invoices, reminders, reading requests and other messages."
+msgstr "Laskujen, muistutusten, lukemapyyntöjen ja muiden viestien tekstit."
+
+#: apps/core/settings_page.py:151
+#
+msgid "Notices"
+msgstr "Ilmoitukset"
+
+#: apps/core/settings_page.py:152
+#
+msgid "Short notices on the public page and members' pages."
+msgstr "Lyhyet ilmoitukset julkisella sivulla ja jäsenten sivuilla."
+
+#: apps/core/settings_page.py:158
+#
+msgid "Newsletter consents"
+msgstr "Uutiskirjeen suostumukset"
+
+#: apps/core/settings_page.py:159
+#
+msgid "The record of who subscribed to or unsubscribed from the newsletter."
+msgstr "Tiedot siitä, kuka on tilannut uutiskirjeen tai perunut tilauksen."
+
+#: apps/core/settings_page.py:168
+#
+msgid "Users and roles"
+msgstr "Käyttäjät ja roolit"
+
+#: apps/core/settings_page.py:171
+#
+msgid "Users"
+msgstr "Käyttäjät"
+
+#: apps/core/settings_page.py:172
+msgid "Who can log in, and the role each one has."
+msgstr "Kuka voi kirjautua sisään ja mikä rooli kullakin on."
+
+#: apps/core/settings_page.py:179
+msgid "What each role may see and do."
+msgstr "Mitä kukin rooli saa nähdä ja tehdä."
+
+#: apps/core/settings_page.py:186
+#
+msgid "Integrations"
+msgstr "Integraatiot"
+
+#: apps/core/settings_page.py:193
+#
+msgid "Snapshots of the register, here and offsite, and restoring one."
+msgstr "Rekisterin varmuuskopiot täällä ja muualla sekä niiden palauttaminen."
+
+#: apps/core/settings_page.py:201
+msgid "Setup wizard"
+msgstr "Käyttöönotto"
+
+#: apps/core/settings_page.py:204
+msgid "Run the setup wizard"
+msgstr "Käynnistä käyttöönotto"
+
+#: apps/core/settings_page.py:206
+msgid ""
+"Organisation, language, logo, units and fields, email and SMS, invoices and "
+"the board, step by step."
+msgstr ""
+"Organisaatio, kieli, logo, yksiköt ja kentät, sähköposti ja tekstiviestit, "
+"laskut ja hallitus vaihe vaiheelta."
+
+#: apps/core/settings_page.py:216
+msgid "Advanced"
+msgstr "Lisäasetukset"
+
+#: apps/core/settings_page.py:219
+#
+msgid "All data tables"
+msgstr "Kaikki tietotaulut"
+
+#: apps/core/settings_page.py:220
+msgid "The full Django admin, with every table. For technical changes."
+msgstr "Koko Django-ylläpito kaikkine tauluineen. Teknisiä muutoksia varten."
+
 #: apps/core/templates/core/_contact.html:8
 msgid "Emergencies"
 msgstr "Hätätilanteet"
@@ -783,6 +952,13 @@ msgstr ""
 #: apps/core/templates/core/public.html:19
 msgid "Staff login"
 msgstr "Henkilökunnan kirjautuminen"
+
+#: apps/core/templates/core/settings.html:3
+#: apps/core/templates/core/settings.html:6
+#: apps/register/templates/register/unit_type_choose.html:16
+#: templates/base.html:27
+msgid "Settings"
+msgstr "Asetukset"
 
 #: apps/help/apps.py:7 apps/help/templates/help/index.html:3
 #: apps/help/templates/help/index.html:5 apps/help/templatetags/help.py:22
@@ -845,26 +1021,26 @@ msgstr "ALV"
 msgid "Payment"
 msgstr "Maksu"
 
-#: apps/invoicing/admin.py:15
+#: apps/invoicing/admin.py:15 apps/messaging/models.py:44
+msgid "Payment reminders"
+msgstr "Maksumuistutukset"
+
+#: apps/invoicing/admin.py:16
 msgid "Numbering"
 msgstr "Numerointi"
 
-#: apps/invoicing/admin.py:16
+#: apps/invoicing/admin.py:17
 msgid "Invoice text"
 msgstr "Laskun teksti"
 
-#: apps/invoicing/admin.py:39 apps/invoicing/models.py:276
+#: apps/invoicing/admin.py:40 apps/invoicing/models.py:276
 msgid "price tiers"
 msgstr "hintaportaat"
 
-#: apps/invoicing/admin.py:46
+#: apps/invoicing/admin.py:47
 #, python-format
 msgid "Edit tiers (%(count)s)"
 msgstr "Muokkaa portaita (%(count)s)"
-
-#: apps/invoicing/apps.py:7
-msgid "Invoicing"
-msgstr "Laskutus"
 
 #: apps/invoicing/delivery.py:60
 msgid "credit-note"
@@ -1001,10 +1177,6 @@ msgstr "Muistutus antaa vähintään 14 päivää aikaa ennen jatkotoimia."
 #: apps/invoicing/models.py:114 apps/invoicing/models.py:115
 msgid "invoice settings"
 msgstr "laskutusasetukset"
-
-#: apps/invoicing/models.py:118
-msgid "Invoice settings"
-msgstr "Laskutusasetukset"
 
 #: apps/invoicing/models.py:125
 #, python-format
@@ -2415,10 +2587,6 @@ msgstr "Muistutus"
 msgid "Automatic reminder"
 msgstr "Automaattinen muistutus"
 
-#: apps/messaging/models.py:44
-msgid "Payment reminders"
-msgstr "Maksumuistutukset"
-
 #: apps/messaging/models.py:47
 #: apps/readings/templates/readings/round_detail.html:31
 #: apps/selfservice/views.py:23
@@ -3635,10 +3803,6 @@ msgstr ""
 msgid "Nothing was deleted: a snapshot could not be taken first (%(error)s)."
 msgstr "Mitään ei poistettu: tilannevedosta ei voitu ottaa ensin (%(error)s)."
 
-#: apps/register/apps.py:7
-msgid "Register"
-msgstr "Rekisteri"
-
 #: apps/register/csv_io.py:41
 msgid "The file is larger than 2 MB. Split it into smaller files."
 msgstr "Tiedosto on suurempi kuin 2 Mt. Jaa se pienempiin tiedostoihin."
@@ -3737,14 +3901,6 @@ msgstr "Alkamispäivä"
 #: apps/register/templates/register/unit_detail.html:22
 msgid "End date"
 msgstr "Päättymispäivä"
-
-#: apps/register/csv_io.py:474 apps/register/csv_io.py:527
-#: apps/register/templates/register/_person_results.html:11
-#: apps/register/templates/register/_unit_results.html:11
-#: apps/register/templates/register/person_detail.html:24
-#: apps/register/templates/register/unit_detail.html:23
-msgid "Tags"
-msgstr "Tunnisteet"
 
 #: apps/register/csv_io.py:475 apps/register/csv_io.py:528
 #: apps/register/templates/register/person_detail.html:26
@@ -4455,11 +4611,6 @@ msgstr ""
 "Yksikkötyyppejä ei ole vielä. Ylläpitäjän on ensin luotava yksikkötyyppi "
 "kohdassa"
 
-#: apps/register/templates/register/unit_type_choose.html:16
-#: templates/base.html:27
-msgid "Settings"
-msgstr "Asetukset"
-
 #: apps/register/views.py:170 apps/register/views.py:318
 #, python-format
 msgid "Restored %(name)s."
@@ -4996,30 +5147,6 @@ msgstr "käyttöönotto"
 msgid "Can run the setup wizard"
 msgstr "Voi käyttää käyttöönoton ohjattua toimintoa"
 
-#: apps/setup/templates/admin/metra_index.html:7
-msgid "Setup wizard"
-msgstr "Käyttöönotto"
-
-#: apps/setup/templates/admin/metra_index.html:9
-msgid ""
-"Organisation, language, logo, units and fields, email and SMS, invoices and "
-"the board, step by step."
-msgstr ""
-"Organisaatio, kieli, logo, yksiköt ja kentät, sähköposti ja tekstiviestit, "
-"laskut ja hallitus vaihe vaiheelta."
-
-#: apps/setup/templates/admin/metra_index.html:10
-msgid "Run the setup wizard"
-msgstr "Käynnistä käyttöönotto"
-
-#: apps/setup/templates/admin/metra_index.html:20
-msgid "Snapshots of the register, here and offsite."
-msgstr "Rekisterin tilannevedokset, täällä ja ulkoisessa säilössä."
-
-#: apps/setup/templates/admin/metra_index.html:30
-msgid "Plugins"
-msgstr "Lisäosat"
-
 #
 #: apps/setup/templates/setup/_form.html:7
 msgid "Save and continue"
@@ -5273,11 +5400,6 @@ msgstr "Lisää kenttä"
 msgid "Add field"
 msgstr "Lisää kenttä"
 
-#
-#: apps/setup/views.py:39
-msgid "Organisation"
-msgstr "Organisaatio"
-
 #: apps/setup/views.py:41
 msgid "Logo"
 msgstr "Logo"
@@ -5460,6 +5582,9 @@ msgid ""
 msgstr ""
 "Suojaa tilisi kaksivaiheisella tunnistautumisella. Se vie minuutin "
 "todennussovelluksella puhelimellasi."
+
+#~ msgid "Plugins"
+#~ msgstr "Lisäosat"
 
 #~ msgid "To restore a snapshot, see INSTALL.md, Backup and restore."
 #~ msgstr ""

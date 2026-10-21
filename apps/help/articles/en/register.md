@@ -6,7 +6,7 @@ contact or other contact, and one person can be a contact of several units.
 
 ## Unit types and fields
 
-An admin sets up the kinds of units under **Settings > Unit types**, each with
+An admin sets up the kinds of units under **Settings > Register > Unit types and their fields**, each with
 its own fields, such as a property ID or meter number. Fields can also be
 added for every person. Deleting a unit type or a field takes a backup first,
 because it removes that data from every unit.

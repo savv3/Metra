@@ -232,7 +232,7 @@ def test_a_broken_remote_is_shown_not_a_crash(role_client, settings):
 def test_settings_and_the_status_panel_link_to_backups(role_client, settings_admin):
     url = reverse("backups:list")
 
-    assert url in settings_admin.get(reverse("admin:index")).content.decode()
+    assert url in settings_admin.get(reverse("core:settings")).content.decode()
     assert url in role_client("Admin").get(reverse("register:unit_list")).content.decode()
 
 

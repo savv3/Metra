@@ -11,7 +11,7 @@ Jokaisella Metrassa työskentelevällä on tili ja yksi rooli:
 | Rahastonhoitaja | Nähdä rekisterin sekä ajaa laskutusta ja maksuja |
 | Vain luku | Nähdä rekisterin |
 
-Ylläpitäjä lisää käyttäjät kohdassa **Asetukset > Käyttäjät** tai kutsuu heidät
+Ylläpitäjä lisää käyttäjät kohdassa **Asetukset > Käyttäjät ja roolit > Käyttäjät** tai kutsuu heidät
 käyttöönoton ohjatun toiminnon **Kutsu hallitus** -vaiheessa, joka lähettää
 sähköpostilla linkin salasanan valitsemiseen.
 

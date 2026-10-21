@@ -1,5 +1,7 @@
 import mimetypes
 
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.db import connection
 from django.http import FileResponse, Http404, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
@@ -7,6 +9,7 @@ from django.templatetags.static import static
 
 from apps.register.models import Organisation
 
+from . import settings_page as settings_menu
 from .language import switch_language
 from .models import Notice
 
@@ -55,3 +58,14 @@ def healthz(request):
     with connection.cursor() as cursor:
         cursor.execute("SELECT 1")
     return JsonResponse({"status": "ok"})
+
+
+@login_required
+def settings_page(request):
+    """The Settings page: links to every setting the user may change, grouped
+    by task. It needs no single permission of its own; each entry checks the
+    one it needs, and a user with none of them is refused."""
+    groups = settings_menu.visible_groups(request.user)
+    if not groups:
+        raise PermissionDenied
+    return render(request, "core/settings.html", {"groups": groups})

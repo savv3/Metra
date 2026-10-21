@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 11:02+0300\n"
+"POT-Creation-Date: 2026-10-21 15:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,6 +94,7 @@ msgid "Email"
 msgstr ""
 
 #: apps/accounts/templates/accounts/profile.html:18
+#: apps/core/settings_page.py:178
 msgid "Roles"
 msgstr ""
 
@@ -174,7 +175,7 @@ msgstr ""
 #: apps/backups/apps.py:7 apps/backups/templates/backups/_status.html:4
 #: apps/backups/templates/backups/backup_list.html:3
 #: apps/backups/templates/backups/backup_list.html:6
-#: apps/setup/templates/admin/metra_index.html:18
+#: apps/core/settings_page.py:189 apps/core/settings_page.py:192
 msgid "Backups"
 msgstr ""
 
@@ -316,7 +317,6 @@ msgid "Only snapshots taken by hand can be deleted."
 msgstr ""
 
 #: apps/backups/templates/backups/_status.html:5
-#: apps/setup/templates/admin/metra_index.html:21
 msgid "Snapshots and backups"
 msgstr ""
 
@@ -509,7 +509,8 @@ msgstr ""
 msgid "People"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:32 apps/readings/apps.py:7
+#: apps/backups/templates/backups/restore.html:32
+#: apps/core/settings_page.py:108 apps/readings/apps.py:7
 #: apps/readings/templates/readings/_round_results.html:3
 #: apps/readings/templates/readings/_unit_readings.html:3
 #: templates/base.html:23
@@ -517,6 +518,7 @@ msgid "Readings"
 msgstr ""
 
 #: apps/backups/templates/backups/restore.html:32
+#: apps/core/settings_page.py:141
 #: apps/messaging/templates/messaging/_unit_messages.html:4
 #: apps/messaging/templates/messaging/batch_detail.html:61
 #: apps/messaging/templates/messaging/batch_list.html:24
@@ -669,6 +671,153 @@ msgstr ""
 msgid "notices"
 msgstr ""
 
+#: apps/core/settings_page.py:68 apps/setup/views.py:39
+msgid "Organisation"
+msgstr ""
+
+#: apps/core/settings_page.py:71
+msgid "Organisation details"
+msgstr ""
+
+#: apps/core/settings_page.py:72
+msgid "Name, business ID, contact details, logo and the public page."
+msgstr ""
+
+#: apps/core/settings_page.py:81 apps/register/apps.py:7
+msgid "Register"
+msgstr ""
+
+#: apps/core/settings_page.py:84
+msgid "Unit types and their fields"
+msgstr ""
+
+#: apps/core/settings_page.py:85
+msgid "The kinds of units in the register and the fields each one has."
+msgstr ""
+
+#: apps/core/settings_page.py:91
+msgid "Person fields"
+msgstr ""
+
+#: apps/core/settings_page.py:92
+msgid "Extra fields on every person, besides name and contact details."
+msgstr ""
+
+#: apps/core/settings_page.py:98 apps/register/csv_io.py:474
+#: apps/register/csv_io.py:527
+#: apps/register/templates/register/_person_results.html:11
+#: apps/register/templates/register/_unit_results.html:11
+#: apps/register/templates/register/person_detail.html:24
+#: apps/register/templates/register/unit_detail.html:23
+msgid "Tags"
+msgstr ""
+
+#: apps/core/settings_page.py:99
+msgid "Labels for grouping units and people, for example for send-outs."
+msgstr ""
+
+#: apps/core/settings_page.py:111
+msgid "Reading types"
+msgstr ""
+
+#: apps/core/settings_page.py:112
+msgid "What is read, for which unit type, and in which unit."
+msgstr ""
+
+#: apps/core/settings_page.py:121 apps/invoicing/apps.py:7
+msgid "Invoicing"
+msgstr ""
+
+#: apps/core/settings_page.py:124 apps/invoicing/models.py:118
+msgid "Invoice settings"
+msgstr ""
+
+#: apps/core/settings_page.py:125
+msgid "Bank account, payment terms, VAT, numbering and reminders."
+msgstr ""
+
+#: apps/core/settings_page.py:131
+msgid "Fee plans"
+msgstr ""
+
+#: apps/core/settings_page.py:132
+msgid "What units pay: fixed fees and usage fees, with their fee lines."
+msgstr ""
+
+#: apps/core/settings_page.py:144
+msgid "Message templates"
+msgstr ""
+
+#: apps/core/settings_page.py:145
+msgid "The texts of invoices, reminders, reading requests and other messages."
+msgstr ""
+
+#: apps/core/settings_page.py:151
+msgid "Notices"
+msgstr ""
+
+#: apps/core/settings_page.py:152
+msgid "Short notices on the public page and members' pages."
+msgstr ""
+
+#: apps/core/settings_page.py:158
+msgid "Newsletter consents"
+msgstr ""
+
+#: apps/core/settings_page.py:159
+msgid "The record of who subscribed to or unsubscribed from the newsletter."
+msgstr ""
+
+#: apps/core/settings_page.py:168
+msgid "Users and roles"
+msgstr ""
+
+#: apps/core/settings_page.py:171
+msgid "Users"
+msgstr ""
+
+#: apps/core/settings_page.py:172
+msgid "Who can log in, and the role each one has."
+msgstr ""
+
+#: apps/core/settings_page.py:179
+msgid "What each role may see and do."
+msgstr ""
+
+#: apps/core/settings_page.py:186
+msgid "Integrations"
+msgstr ""
+
+#: apps/core/settings_page.py:193
+msgid "Snapshots of the register, here and offsite, and restoring one."
+msgstr ""
+
+#: apps/core/settings_page.py:201
+msgid "Setup wizard"
+msgstr ""
+
+#: apps/core/settings_page.py:204
+msgid "Run the setup wizard"
+msgstr ""
+
+#: apps/core/settings_page.py:206
+msgid ""
+"Organisation, language, logo, units and fields, email and SMS, invoices and "
+"the board, step by step."
+msgstr ""
+
+#: apps/core/settings_page.py:216
+msgid "Advanced"
+msgstr ""
+
+#: apps/core/settings_page.py:219
+msgid "All data tables"
+msgstr ""
+
+#: apps/core/settings_page.py:220
+msgid "The full Django admin, with every table. For technical changes."
+msgstr ""
+
 #: apps/core/templates/core/_contact.html:8
 msgid "Emergencies"
 msgstr ""
@@ -727,6 +876,13 @@ msgstr ""
 msgid "Staff login"
 msgstr ""
 
+#: apps/core/templates/core/settings.html:3
+#: apps/core/templates/core/settings.html:6
+#: apps/register/templates/register/unit_type_choose.html:16
+#: templates/base.html:27
+msgid "Settings"
+msgstr ""
+
 #: apps/help/apps.py:7 apps/help/templates/help/index.html:3
 #: apps/help/templates/help/index.html:5 apps/help/templatetags/help.py:22
 msgid "Help"
@@ -783,25 +939,25 @@ msgstr ""
 msgid "Payment"
 msgstr ""
 
-#: apps/invoicing/admin.py:15
-msgid "Numbering"
+#: apps/invoicing/admin.py:15 apps/messaging/models.py:44
+msgid "Payment reminders"
 msgstr ""
 
 #: apps/invoicing/admin.py:16
+msgid "Numbering"
+msgstr ""
+
+#: apps/invoicing/admin.py:17
 msgid "Invoice text"
 msgstr ""
 
-#: apps/invoicing/admin.py:39 apps/invoicing/models.py:276
+#: apps/invoicing/admin.py:40 apps/invoicing/models.py:276
 msgid "price tiers"
 msgstr ""
 
-#: apps/invoicing/admin.py:46
+#: apps/invoicing/admin.py:47
 #, python-format
 msgid "Edit tiers (%(count)s)"
-msgstr ""
-
-#: apps/invoicing/apps.py:7
-msgid "Invoicing"
 msgstr ""
 
 #: apps/invoicing/delivery.py:60
@@ -933,10 +1089,6 @@ msgstr ""
 
 #: apps/invoicing/models.py:114 apps/invoicing/models.py:115
 msgid "invoice settings"
-msgstr ""
-
-#: apps/invoicing/models.py:118
-msgid "Invoice settings"
 msgstr ""
 
 #: apps/invoicing/models.py:125
@@ -2301,10 +2453,6 @@ msgstr ""
 msgid "Automatic reminder"
 msgstr ""
 
-#: apps/messaging/models.py:44
-msgid "Payment reminders"
-msgstr ""
-
 #: apps/messaging/models.py:47
 #: apps/readings/templates/readings/round_detail.html:31
 #: apps/selfservice/views.py:23
@@ -3473,10 +3621,6 @@ msgstr ""
 msgid "Nothing was deleted: a snapshot could not be taken first (%(error)s)."
 msgstr ""
 
-#: apps/register/apps.py:7
-msgid "Register"
-msgstr ""
-
 #: apps/register/csv_io.py:41
 msgid "The file is larger than 2 MB. Split it into smaller files."
 msgstr ""
@@ -3572,14 +3716,6 @@ msgstr ""
 #: apps/register/csv_io.py:473
 #: apps/register/templates/register/unit_detail.html:22
 msgid "End date"
-msgstr ""
-
-#: apps/register/csv_io.py:474 apps/register/csv_io.py:527
-#: apps/register/templates/register/_person_results.html:11
-#: apps/register/templates/register/_unit_results.html:11
-#: apps/register/templates/register/person_detail.html:24
-#: apps/register/templates/register/unit_detail.html:23
-msgid "Tags"
 msgstr ""
 
 #: apps/register/csv_io.py:475 apps/register/csv_io.py:528
@@ -4272,11 +4408,6 @@ msgid ""
 "under"
 msgstr ""
 
-#: apps/register/templates/register/unit_type_choose.html:16
-#: templates/base.html:27
-msgid "Settings"
-msgstr ""
-
 #: apps/register/views.py:170 apps/register/views.py:318
 #, python-format
 msgid "Restored %(name)s."
@@ -4782,28 +4913,6 @@ msgstr ""
 msgid "Can run the setup wizard"
 msgstr ""
 
-#: apps/setup/templates/admin/metra_index.html:7
-msgid "Setup wizard"
-msgstr ""
-
-#: apps/setup/templates/admin/metra_index.html:9
-msgid ""
-"Organisation, language, logo, units and fields, email and SMS, invoices and "
-"the board, step by step."
-msgstr ""
-
-#: apps/setup/templates/admin/metra_index.html:10
-msgid "Run the setup wizard"
-msgstr ""
-
-#: apps/setup/templates/admin/metra_index.html:20
-msgid "Snapshots of the register, here and offsite."
-msgstr ""
-
-#: apps/setup/templates/admin/metra_index.html:30
-msgid "Plugins"
-msgstr ""
-
 #: apps/setup/templates/setup/_form.html:7
 msgid "Save and continue"
 msgstr ""
@@ -5012,10 +5121,6 @@ msgstr ""
 
 #: apps/setup/templates/setup/types.html:36
 msgid "Add field"
-msgstr ""
-
-#: apps/setup/views.py:39
-msgid "Organisation"
 msgstr ""
 
 #: apps/setup/views.py:41
