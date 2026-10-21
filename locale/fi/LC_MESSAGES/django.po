@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 11:02+0300\n"
+"POT-Creation-Date: 2026-10-21 15:02+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,14 +18,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/accounts/admin.py:13 apps/register/models.py:349
+#: apps/accounts/admin.py:13 apps/register/models.py:358
 msgid "role"
 msgstr "rooli"
 
 #: apps/accounts/admin.py:28 apps/invoicing/models.py:143
 #: apps/messaging/models.py:336 apps/readings/models.py:23
 #: apps/register/models.py:57 apps/register/models.py:115
-#: apps/register/models.py:129 apps/register/models.py:306
+#: apps/register/models.py:129 apps/register/models.py:315
 msgid "name"
 msgstr "nimi"
 
@@ -76,7 +76,7 @@ msgstr "Tiedot"
 msgid "Username"
 msgstr "Käyttäjätunnus"
 
-#: apps/accounts/templates/accounts/profile.html:15 apps/register/csv_io.py:465
+#: apps/accounts/templates/accounts/profile.html:15 apps/register/csv_io.py:466
 #: apps/register/templates/register/_person_results.html:7
 #: apps/register/templates/register/_unit_results.html:7
 #: apps/register/templates/register/import_preview.html:36
@@ -87,7 +87,7 @@ msgstr "Nimi"
 #: apps/core/templates/core/_contact.html:14 apps/invoicing/models.py:728
 #: apps/messaging/models.py:29
 #: apps/messaging/templates/messaging/compose.html:20
-#: apps/register/csv_io.py:520 apps/register/models.py:265
+#: apps/register/csv_io.py:521 apps/register/models.py:274
 #: apps/register/templates/register/_person_results.html:8
 #: apps/register/templates/register/person_detail.html:19
 #: apps/register/templates/register/unit_detail.html:39 apps/setup/forms.py:142
@@ -541,11 +541,7 @@ msgstr "Nyt"
 msgid "In the snapshot"
 msgstr "Tilannevedoksessa"
 
-#: apps/backups/templates/backups/restore.html:32 apps/register/csv_io.py:531
-#: apps/register/templates/register/_unit_results.html:3
-#: apps/register/templates/register/person_detail.html:32
-#: apps/register/templates/register/unit_list.html:3
-#: apps/register/templates/register/unit_list.html:6 templates/base.html:21
+#: apps/backups/templates/backups/restore.html:32 apps/register/unitwords.py:23
 msgid "Units"
 msgstr "Yksiköt"
 
@@ -712,7 +708,7 @@ msgstr "luonut"
 #: apps/invoicing/models.py:402 apps/invoicing/models.py:743
 #: apps/messaging/models.py:84 apps/messaging/models.py:176
 #: apps/notifications/models.py:28 apps/readings/models.py:78
-#: apps/register/models.py:227 apps/selfservice/models.py:76
+#: apps/register/models.py:236 apps/selfservice/models.py:76
 msgid "created"
 msgstr "luotu"
 
@@ -728,7 +724,7 @@ msgstr "tiedotteet"
 msgid "Emergencies"
 msgstr "Hätätilanteet"
 
-#: apps/core/templates/core/_contact.html:13 apps/register/csv_io.py:521
+#: apps/core/templates/core/_contact.html:13 apps/register/csv_io.py:522
 #: apps/register/templates/register/_person_results.html:9
 #: apps/register/templates/register/person_detail.html:21
 #: apps/register/templates/register/unit_detail.html:40
@@ -1012,7 +1008,7 @@ msgid "Number %(number)s is already used; numbers cannot repeat."
 msgstr "Numero %(number)s on jo käytössä; numerot eivät voi toistua."
 
 #: apps/invoicing/models.py:145 apps/readings/models.py:26
-#: apps/register/models.py:135 apps/register/models.py:159
+#: apps/register/models.py:144 apps/register/models.py:168
 msgid "unit type"
 msgstr "yksikkötyyppi"
 
@@ -1025,7 +1021,7 @@ msgid "in use"
 msgstr "käytössä"
 
 #: apps/invoicing/models.py:156 apps/invoicing/models.py:673
-#: apps/readings/models.py:45 apps/register/models.py:130
+#: apps/readings/models.py:45 apps/register/models.py:139
 msgid "description"
 msgstr "kuvaus"
 
@@ -1082,8 +1078,8 @@ msgstr "Vain kiinteille maksuille."
 
 #: apps/invoicing/models.py:202 apps/invoicing/models.py:362
 #: apps/invoicing/models.py:675 apps/messaging/models.py:160
-#: apps/readings/models.py:137 apps/register/models.py:321
-#: apps/register/models.py:344 apps/selfservice/models.py:58
+#: apps/readings/models.py:137 apps/register/models.py:330
+#: apps/register/models.py:353 apps/selfservice/models.py:58
 msgid "unit"
 msgstr "yksikkö"
 
@@ -1121,7 +1117,7 @@ msgid "For example Sommar."
 msgstr "Esimerkiksi Sommar."
 
 #: apps/invoicing/models.py:229 apps/invoicing/models.py:692
-#: apps/register/models.py:131 apps/register/models.py:179
+#: apps/register/models.py:140 apps/register/models.py:188
 msgid "order"
 msgstr "järjestys"
 
@@ -1228,7 +1224,7 @@ msgstr "Hyvityslasku"
 
 #: apps/invoicing/models.py:351 apps/messaging/models.py:74
 #: apps/messaging/models.py:171 apps/readings/models.py:76
-#: apps/register/models.py:308
+#: apps/register/models.py:317
 msgid "status"
 msgstr "tila"
 
@@ -1470,7 +1466,7 @@ msgstr "Laskut"
 #: apps/invoicing/templates/invoicing/_invoice_results.html:7
 #: apps/invoicing/templates/invoicing/overdue_list.html:16
 #: apps/invoicing/templates/invoicing/run_detail.html:33
-#: apps/invoicing/views.py:431 apps/register/models.py:151
+#: apps/invoicing/views.py:431 apps/register/models.py:160
 msgid "Number"
 msgstr "Numero"
 
@@ -1482,7 +1478,8 @@ msgstr "Numero"
 #: apps/invoicing/views.py:436
 #: apps/messaging/templates/messaging/batch_detail.html:65
 #: apps/readings/templates/readings/_round_results.html:7
-#: apps/readings/views.py:145 apps/register/models.py:146
+#: apps/readings/views.py:145 apps/register/models.py:155
+#: apps/register/unitwords.py:22
 #: apps/selfservice/templates/selfservice/print.html:26
 #: apps/selfservice/templates/selfservice/round_links.html:39
 msgid "Unit"
@@ -1498,7 +1495,7 @@ msgid "Recipient"
 msgstr "Vastaanottaja"
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:10
-#: apps/invoicing/views.py:491 apps/register/models.py:152
+#: apps/invoicing/views.py:491 apps/register/models.py:161
 msgid "Date"
 msgstr "Päivämäärä"
 
@@ -1522,7 +1519,7 @@ msgstr "Yhteensä"
 #: apps/messaging/templates/messaging/batch_detail.html:68
 #: apps/messaging/templates/messaging/batch_list.html:25
 #: apps/readings/templates/readings/round_list.html:22
-#: apps/register/csv_io.py:467
+#: apps/register/csv_io.py:468
 #: apps/register/templates/register/_unit_results.html:10
 #: apps/register/templates/register/unit_list.html:28
 #: apps/selfservice/templates/selfservice/round_links.html:43
@@ -2359,7 +2356,7 @@ msgstr "Kirjoita tiedote ilman henkilökohtaisia paikkamerkkejä."
 msgid "Subject"
 msgstr "Aihe"
 
-#: apps/messaging/forms.py:252 apps/register/models.py:150
+#: apps/messaging/forms.py:252 apps/register/models.py:159
 msgid "Text"
 msgstr "Teksti"
 
@@ -2398,7 +2395,7 @@ msgstr "Esimerkiksi: allekirjoitettu lomake vuosikokouksessa."
 
 #: apps/messaging/models.py:28
 #: apps/messaging/templates/messaging/compose.html:19
-#: apps/register/models.py:266 apps/setup/templates/setup/messaging.html:8
+#: apps/register/models.py:275 apps/setup/templates/setup/messaging.html:8
 msgid "SMS"
 msgstr "SMS"
 
@@ -2526,7 +2523,7 @@ msgid "To print"
 msgstr "Tulostettava"
 
 #: apps/messaging/models.py:152 apps/messaging/models.py:268
-#: apps/register/models.py:282 apps/register/models.py:347
+#: apps/register/models.py:291 apps/register/models.py:356
 #: apps/selfservice/models.py:62
 msgid "person"
 msgstr "henkilö"
@@ -2639,7 +2636,7 @@ msgstr "tiedosto"
 msgid "size"
 msgstr "koko"
 
-#: apps/messaging/models.py:338 apps/register/models.py:304
+#: apps/messaging/models.py:338 apps/register/models.py:313
 msgid "type"
 msgstr "tyyppi"
 
@@ -2757,7 +2754,7 @@ msgstr "Milloin"
 
 #: apps/messaging/templates/messaging/_unit_messages.html:14
 #: apps/messaging/templates/messaging/batch_detail.html:66
-#: apps/register/models.py:147
+#: apps/register/models.py:156
 #: apps/register/templates/register/unit_detail.html:37
 #: apps/selfservice/templates/selfservice/print.html:27
 #: apps/selfservice/templates/selfservice/round_links.html:40
@@ -3192,7 +3189,7 @@ msgid "group"
 msgstr "ryhmä"
 
 #: apps/notifications/models.py:29 apps/readings/models.py:79
-#: apps/register/models.py:228
+#: apps/register/models.py:237
 msgid "updated"
 msgstr "päivitetty"
 
@@ -3639,106 +3636,106 @@ msgstr "Mitään ei poistettu: tilannevedosta ei voitu ottaa ensin (%(error)s)."
 msgid "Register"
 msgstr "Rekisteri"
 
-#: apps/register/csv_io.py:41
+#: apps/register/csv_io.py:42
 msgid "The file is larger than 2 MB. Split it into smaller files."
 msgstr "Tiedosto on suurempi kuin 2 Mt. Jaa se pienempiin tiedostoihin."
 
-#: apps/register/csv_io.py:45
+#: apps/register/csv_io.py:46
 msgid "The file is not UTF-8. In Excel, save it as “CSV UTF-8”."
 msgstr ""
 "Tiedosto ei ole UTF-8-muodossa. Tallenna se Excelissä muodossa “CSV UTF-8”."
 
-#: apps/register/csv_io.py:50
+#: apps/register/csv_io.py:51
 msgid "The file needs a header row and at least one row of data."
 msgstr "Tiedostossa on oltava otsikkorivi ja vähintään yksi tietorivi."
 
-#: apps/register/csv_io.py:52
+#: apps/register/csv_io.py:53
 #, python-format
 msgid "The file has more than %(max)s rows."
 msgstr "Tiedostossa on yli %(max)s riviä."
 
-#: apps/register/csv_io.py:93 apps/register/models.py:341
+#: apps/register/csv_io.py:94 apps/register/models.py:350
 #: apps/register/templates/register/import_preview.html:38
 msgid "Contact"
 msgstr "Yhteyshenkilö"
 
-#: apps/register/csv_io.py:218
+#: apps/register/csv_io.py:219
 #, python-format
 msgid "Tags: “%(name)s” does not exist. Add it under Settings first."
 msgstr "Tunnisteet: “%(name)s” ei ole olemassa. Lisää se ensin asetuksissa."
 
-#: apps/register/csv_io.py:244
+#: apps/register/csv_io.py:245
 #, python-format
 msgid "%(label)s: write yes or no, not “%(value)s”."
 msgstr "%(label)s: kirjoita kyllä tai ei, ei “%(value)s”."
 
-#: apps/register/csv_io.py:327
+#: apps/register/csv_io.py:328
 msgid "The row has more values than the header has columns."
 msgstr "Rivillä on enemmän arvoja kuin otsikkorivillä on sarakkeita."
 
-#: apps/register/csv_io.py:335
+#: apps/register/csv_io.py:336
 #, python-format
 msgid "The name is also used on line %(line)s."
 msgstr "Nimi on käytössä myös rivillä %(line)s."
 
-#: apps/register/csv_io.py:351
+#: apps/register/csv_io.py:352
 #, python-format
 msgid "Same person as line %(line)s"
 msgstr "Sama henkilö kuin rivillä %(line)s"
 
-#: apps/register/csv_io.py:355
+#: apps/register/csv_io.py:356
 msgid "A role is given but no contact details."
 msgstr "Rooli on annettu, mutta yhteystietoja ei."
 
-#: apps/register/csv_io.py:366
+#: apps/register/csv_io.py:367
 #, python-format
 msgid "Role: “%(value)s” is not one of owner, billing contact or contact."
 msgstr ""
 "Rooli: “%(value)s” ei ole omistaja, laskutusyhteyshenkilö tai yhteyshenkilö."
 
-#: apps/register/csv_io.py:372
+#: apps/register/csv_io.py:373
 #, python-format
 msgid "Existing person: %(name)s"
 msgstr "Olemassa oleva henkilö: %(name)s"
 
-#: apps/register/csv_io.py:383
+#: apps/register/csv_io.py:384
 #, python-format
 msgid "New person: %(name)s"
 msgstr "Uusi henkilö: %(name)s"
 
-#: apps/register/csv_io.py:466
+#: apps/register/csv_io.py:467
 #: apps/register/templates/register/_unit_results.html:8
 #: apps/register/templates/register/unit_list.html:21
 msgid "Type"
 msgstr "Tyyppi"
 
-#: apps/register/csv_io.py:468 apps/register/csv_io.py:523
+#: apps/register/csv_io.py:469 apps/register/csv_io.py:524
 msgid "Street address"
 msgstr "Katuosoite"
 
-#: apps/register/csv_io.py:469 apps/register/csv_io.py:524
+#: apps/register/csv_io.py:470 apps/register/csv_io.py:525
 msgid "Postal code"
 msgstr "Postinumero"
 
-#: apps/register/csv_io.py:470 apps/register/csv_io.py:525
+#: apps/register/csv_io.py:471 apps/register/csv_io.py:526
 msgid "City"
 msgstr "Postitoimipaikka"
 
-#: apps/register/csv_io.py:471 apps/register/csv_io.py:526
+#: apps/register/csv_io.py:472 apps/register/csv_io.py:527
 msgid "Country"
 msgstr "Maa"
 
-#: apps/register/csv_io.py:472
+#: apps/register/csv_io.py:473
 #: apps/register/templates/register/unit_detail.html:21
 msgid "Start date"
 msgstr "Alkamispäivä"
 
-#: apps/register/csv_io.py:473
+#: apps/register/csv_io.py:474
 #: apps/register/templates/register/unit_detail.html:22
 msgid "End date"
 msgstr "Päättymispäivä"
 
-#: apps/register/csv_io.py:474 apps/register/csv_io.py:527
+#: apps/register/csv_io.py:475 apps/register/csv_io.py:528
 #: apps/register/templates/register/_person_results.html:11
 #: apps/register/templates/register/_unit_results.html:11
 #: apps/register/templates/register/person_detail.html:24
@@ -3746,13 +3743,13 @@ msgstr "Päättymispäivä"
 msgid "Tags"
 msgstr "Tunnisteet"
 
-#: apps/register/csv_io.py:475 apps/register/csv_io.py:528
+#: apps/register/csv_io.py:476 apps/register/csv_io.py:529
 #: apps/register/templates/register/person_detail.html:26
 #: apps/register/templates/register/unit_detail.html:25
 msgid "Notes"
 msgstr "Muistiinpanot"
 
-#: apps/register/csv_io.py:476 apps/register/csv_io.py:529
+#: apps/register/csv_io.py:477 apps/register/csv_io.py:530
 #: apps/register/templates/register/_person_results.html:18
 #: apps/register/templates/register/_show_select.html:6
 #: apps/register/templates/register/_unit_results.html:18
@@ -3761,26 +3758,26 @@ msgstr "Muistiinpanot"
 msgid "Archived"
 msgstr "Arkistoitu"
 
-#: apps/register/csv_io.py:478
+#: apps/register/csv_io.py:479
 #: apps/register/templates/register/unit_detail.html:31
 #: apps/register/templates/register/unit_detail.html:33
 msgid "Contacts"
 msgstr "Yhteyshenkilöt"
 
-#: apps/register/csv_io.py:518 apps/setup/forms.py:140
+#: apps/register/csv_io.py:519 apps/setup/forms.py:140
 msgid "First name"
 msgstr "Etunimi"
 
-#: apps/register/csv_io.py:519 apps/setup/forms.py:141
+#: apps/register/csv_io.py:520 apps/setup/forms.py:141
 msgid "Last name"
 msgstr "Sukunimi"
 
-#: apps/register/csv_io.py:522
+#: apps/register/csv_io.py:523
 #: apps/register/templates/register/person_detail.html:22
 msgid "Preferred channel"
 msgstr "Ensisijainen kanava"
 
-#: apps/register/csv_io.py:564
+#: apps/register/csv_io.py:565
 #, python-format
 msgid "CSV export of %(count)s %(things)s"
 msgstr "CSV-vienti: %(count)s %(things)s"
@@ -3911,27 +3908,27 @@ msgstr "Tiedosto ei ole PNG-, JPEG- tai WebP-kuva."
 msgid "business ID"
 msgstr "Y-tunnus"
 
-#: apps/register/models.py:60 apps/register/models.py:271
+#: apps/register/models.py:60 apps/register/models.py:280
 msgid "email"
 msgstr "sähköposti"
 
-#: apps/register/models.py:61 apps/register/models.py:272
+#: apps/register/models.py:61 apps/register/models.py:281
 msgid "phone"
 msgstr "puhelin"
 
-#: apps/register/models.py:62 apps/register/models.py:249
+#: apps/register/models.py:62 apps/register/models.py:258
 msgid "street address"
 msgstr "katuosoite"
 
-#: apps/register/models.py:63 apps/register/models.py:250
+#: apps/register/models.py:63 apps/register/models.py:259
 msgid "postal code"
 msgstr "postinumero"
 
-#: apps/register/models.py:64 apps/register/models.py:251
+#: apps/register/models.py:64 apps/register/models.py:260
 msgid "city"
 msgstr "postitoimipaikka"
 
-#: apps/register/models.py:65 apps/register/models.py:252
+#: apps/register/models.py:65 apps/register/models.py:261
 msgid "country"
 msgstr "maa"
 
@@ -3998,148 +3995,158 @@ msgstr "organisaatio"
 msgid "tag"
 msgstr "tunniste"
 
-#: apps/register/models.py:120 apps/register/models.py:278
-#: apps/register/models.py:314
+#: apps/register/models.py:120 apps/register/models.py:287
+#: apps/register/models.py:323
 msgid "tags"
 msgstr "tunnisteet"
 
-#: apps/register/models.py:136
+#: apps/register/models.py:131
+msgid "plural name"
+msgstr "monikkonimi"
+
+#: apps/register/models.py:135
+msgid ""
+"For example \"Households\". Used in the menu and headings when this is the "
+"only unit type. Empty means the general word for units is used."
+msgstr "Esimerkiksi \"Taloudet\". Käytetään valikossa ja otsikoissa, kun tämä on ainoa yksikkötyyppi. Tyhjä tarkoittaa, että käytetään yleistä sanaa yksiköistä."
+
+#: apps/register/models.py:145
 msgid "unit types"
 msgstr "yksikkötyypit"
 
-#: apps/register/models.py:153
+#: apps/register/models.py:162
 msgid "Choice"
 msgstr "Valinta"
 
-#: apps/register/models.py:154
+#: apps/register/models.py:163
 msgid "Yes/no"
 msgstr "Kyllä/ei"
 
-#: apps/register/models.py:156
+#: apps/register/models.py:165
 msgid "applies to"
 msgstr "koskee"
 
-#: apps/register/models.py:166
+#: apps/register/models.py:175
 msgid "key"
 msgstr "avain"
 
-#: apps/register/models.py:168
+#: apps/register/models.py:177
 msgid "Short identifier used in CSV files and the API, e.g. meter_number."
 msgstr ""
 "Lyhyt tunniste, jota käytetään CSV-tiedostoissa ja API:ssa, esim. "
 "meter_number."
 
-#: apps/register/models.py:170
+#: apps/register/models.py:179
 msgid "label"
 msgstr "nimike"
 
-#: apps/register/models.py:172
+#: apps/register/models.py:181
 msgid "field type"
 msgstr "kenttätyyppi"
 
-#: apps/register/models.py:175
+#: apps/register/models.py:184
 msgid "choices"
 msgstr "vaihtoehdot"
 
-#: apps/register/models.py:175
+#: apps/register/models.py:184
 msgid "For choice fields: one option per line."
 msgstr "Valintakentille: yksi vaihtoehto riville."
 
-#: apps/register/models.py:177
+#: apps/register/models.py:186
 msgid "required"
 msgstr "pakollinen"
 
-#: apps/register/models.py:178
+#: apps/register/models.py:187
 msgid "help text"
 msgstr "ohjeteksti"
 
-#: apps/register/models.py:183
+#: apps/register/models.py:192
 msgid "custom field"
 msgstr "oma kenttä"
 
-#: apps/register/models.py:184 apps/register/models.py:277
-#: apps/register/models.py:313
+#: apps/register/models.py:193 apps/register/models.py:286
+#: apps/register/models.py:322
 msgid "custom fields"
 msgstr "omat kentät"
 
-#: apps/register/models.py:203
+#: apps/register/models.py:212
 msgid "Choose the unit type this field belongs to."
 msgstr "Valitse yksikkötyyppi, johon tämä kenttä kuuluu."
 
-#: apps/register/models.py:205
+#: apps/register/models.py:214
 msgid "Person fields apply to everyone."
 msgstr "Henkilökentät koskevat kaikkia."
 
-#: apps/register/models.py:207
+#: apps/register/models.py:216
 msgid "Add at least one option."
 msgstr "Lisää vähintään yksi vaihtoehto."
 
-#: apps/register/models.py:226
+#: apps/register/models.py:235
 msgid "archived"
 msgstr "arkistoitu"
 
-#: apps/register/models.py:267
+#: apps/register/models.py:276
 msgid "Post"
 msgstr "Posti"
 
-#: apps/register/models.py:269
+#: apps/register/models.py:278
 msgid "first name"
 msgstr "etunimi"
 
-#: apps/register/models.py:270
+#: apps/register/models.py:279
 msgid "last name"
 msgstr "sukunimi"
 
-#: apps/register/models.py:274
+#: apps/register/models.py:283
 msgid "preferred channel"
 msgstr "ensisijainen kanava"
 
-#: apps/register/models.py:276 apps/register/models.py:312
+#: apps/register/models.py:285 apps/register/models.py:321
 msgid "notes"
 msgstr "muistiinpanot"
 
-#: apps/register/models.py:283
+#: apps/register/models.py:292
 msgid "people"
 msgstr "henkilöt"
 
-#: apps/register/models.py:300
+#: apps/register/models.py:309
 #: apps/register/templates/register/_show_select.html:5
 msgid "Active"
 msgstr "Aktiivinen"
 
-#: apps/register/models.py:301
+#: apps/register/models.py:310
 msgid "Inactive"
 msgstr "Ei aktiivinen"
 
-#: apps/register/models.py:310
+#: apps/register/models.py:319
 msgid "start date"
 msgstr "alkamispäivä"
 
-#: apps/register/models.py:311
+#: apps/register/models.py:320
 msgid "end date"
 msgstr "päättymispäivä"
 
-#: apps/register/models.py:316 apps/register/models.py:354
+#: apps/register/models.py:325 apps/register/models.py:363
 msgid "contacts"
 msgstr "yhteyshenkilöt"
 
-#: apps/register/models.py:322
+#: apps/register/models.py:331
 msgid "units"
 msgstr "yksiköt"
 
-#: apps/register/models.py:332
+#: apps/register/models.py:341
 msgid "The end date is before the start date."
 msgstr "Päättymispäivä on ennen alkamispäivää."
 
-#: apps/register/models.py:339
+#: apps/register/models.py:348
 msgid "Owner"
 msgstr "Omistaja"
 
-#: apps/register/models.py:340
+#: apps/register/models.py:349
 msgid "Billing contact"
 msgstr "Laskutusyhteyshenkilö"
 
-#: apps/register/models.py:353
+#: apps/register/models.py:362
 msgid "contact"
 msgstr "yhteyshenkilö"
 
@@ -4211,6 +4218,11 @@ msgstr "Henkilöitä ei löytynyt."
 #: apps/register/templates/register/_unit_results.html:30
 msgid "Send a message to these units"
 msgstr "Lähetä viesti näille yksiköille"
+
+#: apps/register/templates/register/_unit_results.html:33
+#, python-format
+msgid "Export CSV: %(count)s %(word)s"
+msgstr "Vie CSV: %(count)s %(word)s"
 
 #: apps/register/templates/register/_unit_results.html:33
 #, python-format
@@ -4329,6 +4341,12 @@ msgstr "Virheet"
 
 #: apps/register/templates/register/import_upload.html:3
 #: apps/register/templates/register/import_upload.html:5
+#, python-format
+msgid "Import CSV: %(word)s"
+msgstr "Tuo CSV: %(word)s"
+
+#: apps/register/templates/register/import_upload.html:3
+#: apps/register/templates/register/import_upload.html:5
 msgid "Import units from CSV"
 msgstr "Tuo yksiköt CSV-tiedostosta"
 
@@ -4422,9 +4440,10 @@ msgstr "Muokkaa: %(unit)s"
 
 #: apps/register/templates/register/unit_form.html:3
 #: apps/register/templates/register/unit_form.html:5
+#: apps/register/templates/register/unit_list.html:9
 #, python-format
-msgid "New %(unit_type)s"
-msgstr "Uusi %(unit_type)s"
+msgid "Add: %(unit_type)s"
+msgstr "Lisää: %(unit_type)s"
 
 #: apps/register/templates/register/unit_list.html:8
 msgid "Import CSV"
@@ -4909,41 +4928,45 @@ msgstr "Käyttöönotto"
 msgid "Household"
 msgstr "Talous"
 
-#: apps/setup/examples.py:18
+#: apps/setup/examples.py:19
+msgid "Households"
+msgstr "Taloudet"
+
+#: apps/setup/examples.py:20
 msgid "A property connected to the water network."
 msgstr "Vesiverkostoon liitetty kiinteistö."
 
-#: apps/setup/examples.py:21
+#: apps/setup/examples.py:24
 msgid "Property ID"
 msgstr "Kiinteistötunnus"
 
 #
-#: apps/setup/examples.py:22
+#: apps/setup/examples.py:25
 msgid "Meter number"
 msgstr "Mittarin numero"
 
-#: apps/setup/examples.py:23
+#: apps/setup/examples.py:26
 msgid "Year connected"
 msgstr "Liittymisvuosi"
 
-#: apps/setup/examples.py:26
+#: apps/setup/examples.py:29
 msgid "Connection"
 msgstr "Liittymä"
 
-#: apps/setup/examples.py:28
+#: apps/setup/examples.py:31
 msgid "Water"
 msgstr "Vesi"
 
-#: apps/setup/examples.py:28
+#: apps/setup/examples.py:31
 msgid "Water and sewage"
 msgstr "Vesi ja viemäri"
 
-#: apps/setup/examples.py:31
+#: apps/setup/examples.py:34
 msgid "Number of residents"
 msgstr "Asukasmäärä"
 
 #
-#: apps/setup/examples.py:47
+#: apps/setup/examples.py:50
 msgid "Water meter"
 msgstr "Vesimittari"
 
@@ -5384,15 +5407,15 @@ msgid "Setup is done. You can run it again from Settings."
 msgstr ""
 "Käyttöönotto on valmis. Voit käynnistää sen uudelleen kohdasta Asetukset."
 
-#: config/settings.py:180
+#: config/settings.py:181
 msgid "Swedish"
 msgstr "Ruotsi"
 
-#: config/settings.py:181
+#: config/settings.py:182
 msgid "English"
 msgstr "Englanti"
 
-#: config/settings.py:182
+#: config/settings.py:183
 msgid "Finnish (machine translated)"
 msgstr "Suomi (konekäännös)"
 
@@ -5460,6 +5483,11 @@ msgid ""
 msgstr ""
 "Suojaa tilisi kaksivaiheisella tunnistautumisella. Se vie minuutin "
 "todennussovelluksella puhelimellasi."
+
+#, fuzzy, python-format
+#~| msgid "All types"
+#~ msgid "Add: %(type)s"
+#~ msgstr "Kaikki tyypit"
 
 #~ msgid "To restore a snapshot, see INSTALL.md, Backup and restore."
 #~ msgstr ""

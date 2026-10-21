@@ -19,6 +19,7 @@ from django.utils.translation import gettext_lazy
 from .custom_fields import FIELD_PREFIX, display_value
 from .forms import PersonForm, UnitForm
 from .models import COUNTRY_CHOICES, CustomField, Organisation, Person, Tag, Unit, UnitContact
+from .unitwords import words as unit_words
 
 MAX_UPLOAD_BYTES = 2 * 1024 * 1024
 MAX_ROWS = 5000
@@ -528,7 +529,7 @@ def export_people(people, definitions):
         _("Notes"),
         _("Archived"),
         *[d.label for d in definitions],
-        _("Units"),
+        unit_words()["plural"],
     ]
     rows = []
     for person in people:
