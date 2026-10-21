@@ -99,10 +99,10 @@ def unit_print(request, pk):
     """A letter for one unit, for the newest open round of its type if there is one."""
     unit = get_object_or_404(Unit.objects.prefetch_related("unit_contacts__person"), pk=pk)
     round_ = (
-        ReadingRound.objects.filter(
+        ReadingRound.objects.open_now()
+        .filter(
             reading_type__unit_type_id=unit.unit_type_id,
             reading_type__archived_at__isnull=True,
-            status=ReadingRound.Status.OPEN,
         )
         .select_related("reading_type")
         .order_by("-opens_on", "-pk")

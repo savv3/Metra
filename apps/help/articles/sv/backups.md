@@ -24,6 +24,10 @@ servern.
 varför den togs, Metras version, storleken och om den finns på den här
 servern, externt eller båda. Senaste problem visas överst.
 
+Problem med säkerhetskopior, till exempel en som misslyckats eller inte kunde
+skickas externt, rapporteras till administratörerna via klockan högst upp på
+varje sida (se Aviseringar), inte på sidan Enheter.
+
 ## Att återställa en säkerhetskopia
 
 En återställning gör hela registret och alla filer som de var när

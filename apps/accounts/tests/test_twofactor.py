@@ -201,3 +201,44 @@ def test_no_warning_when_two_factor_is_required(client, admin_user):
     page = client.get(reverse("register:unit_list"), HTTP_ACCEPT_LANGUAGE="en").content.decode()
 
     assert "is not required on this installation" not in page
+
+
+def banners(client):
+    page = client.get(reverse("register:unit_list"), HTTP_ACCEPT_LANGUAGE="en").content.decode()
+    return "two-factor-off" in page, "two-factor-nudge" in page, page
+
+
+def test_staff_without_two_factor_see_one_banner_when_it_is_off(client, admin_user, settings):
+    settings.REQUIRE_MFA = False
+    client.force_login(admin_user)
+
+    off, nudge, page = banners(client)
+
+    assert off and not nudge
+    assert "Turn on two-factor login" in page
+
+
+def test_staff_with_two_factor_see_the_installation_warning_only(client, admin_user, settings):
+    settings.REQUIRE_MFA = False
+    TOTP.activate(admin_user, SECRET)
+    client.force_login(admin_user)
+
+    off, nudge, page = banners(client)
+
+    assert off and not nudge
+    assert "Turn on two-factor login" not in page
+
+
+def test_no_two_factor_banner_when_required_and_set_up(client, admin_user):
+    TOTP.activate(admin_user, SECRET)
+    client.force_login(admin_user)
+
+    off, nudge, _page = banners(client)
+
+    assert not off and not nudge
+
+
+def test_other_users_without_two_factor_get_the_personal_nudge_only(role_client):
+    off, nudge, _page = banners(role_client("Board"))
+
+    assert nudge and not off

@@ -11,6 +11,14 @@ decimaler och om det är en mätare som räknar vidare. Under **Avläsningar**
 öppnar du en omgång (till exempel "2026") med de datum då medlemmarna kan
 rapportera.
 
+En omgång börjar som **utkast**: kryssa i **Utkast** medan du ställer in den,
+så kan ingen rapportera till den. Ta bort krysset för att publicera den. En
+publicerad omgång öppnar på första datumet och stänger efter sista datumet av
+sig själv, så det finns ingen status att komma ihåg att ändra. Listan och
+omgångens sida visar läget: *Utkast*, *Öppnar* (ett datum), *Öppen till* (ett
+datum) eller *Stängd*. Medlemmar kan rapportera, och påminnelser skickas, bara
+medan en publicerad omgång är öppen.
+
 ## Att mata in avläsningar
 
 Omgångens sida visar hur många enheter som har rapporterat och vilka som

@@ -22,6 +22,10 @@ storage outside the server.
 Metra version, its size, and whether it is on this server, offsite, or both.
 Recent problems are shown at the top.
 
+Backup problems, such as a failed backup or one that could not be sent
+offsite, are reported to admins through the bell at the top of every page
+(see Notifications), not on the Units page.
+
 ## Restoring a backup
 
 Restoring puts the whole register and all files back as they were when the

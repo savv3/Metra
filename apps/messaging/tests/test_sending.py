@@ -206,3 +206,26 @@ def test_read_only_cannot_send(role_client, open_round):
     assert response.status_code == 403
     assert "Send links to all units" not in page
     assert client.get(reverse("messaging:batch_list")).status_code == 200
+
+
+def test_automatic_reminder_skips_drafts_and_rounds_not_yet_open(
+    open_round, make_household, settings
+):
+    import datetime
+
+    from django.utils import timezone
+
+    make_household("A", first_name="A", phone="0401234567")
+    settings.MESSAGING = {**settings.MESSAGING, "reminder_days_before_close": 3}
+    open_round.closes_on = timezone.localdate() + datetime.timedelta(days=3)
+    open_round.is_draft = True
+    open_round.save()
+
+    automatic_reminders.call_local()
+    assert not MessageBatch.objects.exists()
+
+    open_round.is_draft = False
+    open_round.opens_on = timezone.localdate() + datetime.timedelta(days=1)
+    open_round.save()
+    automatic_reminders.call_local()
+    assert not MessageBatch.objects.exists()

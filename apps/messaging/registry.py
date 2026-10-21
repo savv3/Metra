@@ -33,6 +33,13 @@ class Provider:
 
     channel = ""
     name = ""
+    # A short human description for pages that show the provider; empty means
+    # the name is shown. Translatable.
+    description = ""
+
+    @classmethod
+    def label(cls):
+        return str(cls.description or cls.name)
 
     @classmethod
     def is_configured(cls):

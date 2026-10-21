@@ -3,7 +3,8 @@
 {% block title %}{% translate "New invoice run" %}{% endblock %}
 {% block content %}
   <h1>{% translate "New invoice run" %}</h1>
-  <p>{% translate "Makes a draft invoice for every active unit the chosen fee plans apply to. Nothing is sent or numbered until you issue the drafts." %}</p>
+  <p>{% translate "Makes a draft invoice for every active unit the chosen fee plans apply to. Nothing is sent or numbered until you issue the drafts." %}
+    {% if user.is_staff and perms.invoicing.view_feeplan %}<a href="{% url 'admin:invoicing_feeplan_changelist' %}">{% translate "Open the fee plans" %}</a>{% endif %}</p>
   <form method="post" class="form" novalidate>
     {% csrf_token %}
     {% if form.non_field_errors %}<div class="errorlist-box" role="alert">{{ form.non_field_errors }}</div>{% endif %}

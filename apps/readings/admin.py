@@ -33,5 +33,5 @@ class ReadingTypeAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
 @admin.register(ReadingRound)
 class ReadingRoundAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
     show_auditlog_history_link = True
-    list_display = ["reading_type", "period_label", "opens_on", "closes_on", "status"]
-    list_filter = ["reading_type", "status"]
+    list_display = ["reading_type", "period_label", "opens_on", "closes_on", "is_draft"]
+    list_filter = ["reading_type", "is_draft"]

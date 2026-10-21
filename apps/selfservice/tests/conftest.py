@@ -31,7 +31,7 @@ def open_round(meter):
         period_label=str(today.year),
         opens_on=today - datetime.timedelta(days=5),
         closes_on=today + datetime.timedelta(days=10),
-        status=ReadingRound.Status.OPEN,
+        is_draft=False,
     )
 
 

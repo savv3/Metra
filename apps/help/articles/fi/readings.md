@@ -11,6 +11,14 @@ desimaalit ja se, onko kyseessä mittari, joka jatkaa laskemista. Avaa
 kohdassa **Lukemat** kierros (esimerkiksi "2026") ja aseta päivät, joina
 jäsenet voivat ilmoittaa lukeman.
 
+Kierros alkaa **luonnoksena**: ruksi **Luonnos** kierrosta valmistellessasi,
+jolloin kukaan ei voi ilmoittaa siihen lukemia. Poista ruksi julkaistaksesi
+kierroksen. Julkaistu kierros avautuu ensimmäisenä päivänä ja sulkeutuu
+viimeisen päivän jälkeen itsestään, joten tilaa ei tarvitse muistaa vaihtaa.
+Luettelo ja kierroksen sivu näyttävät tilanteen: *Luonnos*, *Avautuu* (päivä),
+*Avoinna* (päivään asti) tai *Suljettu*. Jäsenet voivat ilmoittaa lukemia ja
+muistutuksia lähetetään vain, kun julkaistu kierros on auki.
+
 ## Lukemien syöttäminen
 
 Kierroksen sivu näyttää, kuinka moni yksikkö on ilmoittanut lukeman ja

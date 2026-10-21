@@ -29,7 +29,7 @@
               <th scope="row"><a href="{{ round.get_absolute_url }}">{{ round.reading_type }} {{ round.period_label }}</a></th>
               <td>{{ round.opens_on|date:"SHORT_DATE_FORMAT" }}</td>
               <td>{{ round.closes_on|date:"SHORT_DATE_FORMAT" }}</td>
-              <td>{{ round.get_status_display }}</td>
+              <td>{{ round.state_label }}</td>
               <td>{% blocktranslate with submitted=round.submitted expected=round.expected %}{{ submitted }} of {{ expected }}{% endblocktranslate %}</td>
             </tr>
           {% endfor %}

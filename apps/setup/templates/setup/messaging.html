@@ -6,7 +6,7 @@
     <dt>{% translate "Email" %}</dt>
     <dd>{% if email %}<span class="pill pill--ok">{% translate "Set up" %}</span> {% blocktranslate with sender=from_email %}Sent from {{ sender }}{% endblocktranslate %}{% else %}<span class="pill pill--warn">{% translate "Not set up" %}</span> <span class="help">METRA_EMAIL_HOST, METRA_EMAIL_USER, METRA_EMAIL_PASSWORD, METRA_EMAIL_FROM</span>{% endif %}</dd>
     <dt>{% translate "SMS" %}</dt>
-    <dd>{% if sms %}<span class="pill pill--ok">{% translate "Set up" %}</span> {{ sms.name }} &middot; {% blocktranslate with sender=sms_sender %}Sender {{ sender }}{% endblocktranslate %}{% else %}<span class="pill pill--warn">{% translate "Not set up" %}</span> <span class="help">METRA_ELKS_API_USER, METRA_ELKS_API_PASSWORD, METRA_SMS_SENDER</span>{% endif %}</dd>
+    <dd>{% if sms %}<span class="pill pill--ok">{% translate "Set up" %}</span> {{ sms_label }} &middot; {% blocktranslate with sender=sms_sender %}Sender {{ sender }}{% endblocktranslate %}{% else %}<span class="pill pill--warn">{% translate "Not set up" %}</span> <span class="help">METRA_ELKS_API_USER, METRA_ELKS_API_PASSWORD, METRA_SMS_SENDER</span>{% endif %}</dd>
   </dl>
   {% if email %}
     <form method="post" class="form form--inline">

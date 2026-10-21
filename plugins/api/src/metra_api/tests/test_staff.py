@@ -98,3 +98,9 @@ def test_the_settings_page_links_to_the_clients(make_user, rf):
     assert reverse("metra_api:client_list") in template.render(Context({"request": request}))
     request.user = make_user("board", "Board")
     assert reverse("metra_api:client_list") not in template.render(Context({"request": request}))
+
+
+def test_the_swedish_client_intro_appears_once(role_client):
+    html = role_client("Admin").get(reverse("metra_api:client_list")).content.decode()
+
+    assert html.count("Varje klient är ett annat system med en egen token.") == 1

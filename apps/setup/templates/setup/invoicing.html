@@ -1,6 +1,7 @@
 {% extends "setup/base.html" %}
 {% load i18n %}
 {% block step %}
-  <p>{% translate "What every invoice needs: your bank account, payment terms, VAT and numbering. Fees are set up later under Invoices." %}</p>
+  <p>{% translate "What every invoice needs: your bank account, payment terms, VAT and numbering. Fee plans, which say what each unit is charged, are set up afterwards under Settings." %}
+    {% if user.is_staff and perms.invoicing.view_feeplan %}<a href="{% url 'admin:invoicing_feeplan_changelist' %}">{% translate "Open the fee plans" %}</a>{% endif %}</p>
   {% include "setup/_form.html" %}
 {% endblock %}

@@ -17,9 +17,7 @@
         {% endif %}
       {% else %}
         <p>{% translate "Short guides to how things are done in Metra. Every page has a Help link in the menu that opens the guide for that page." %}</p>
-        <ul class="plain-list">
-          {% for a in articles %}<li><a href="{% url 'help:article' a.slug %}">{{ a.title }}</a></li>{% endfor %}
-        </ul>
+        <p class="help">{% translate "Pick a guide from the list, or search for a word." %}</p>
       {% endif %}
     </div>
   </div>

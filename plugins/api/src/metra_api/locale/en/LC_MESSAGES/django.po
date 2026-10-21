@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 23:43+0300\n"
+"POT-Creation-Date: 2026-10-21 15:06+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,13 +21,13 @@ msgstr ""
 msgid "API"
 msgstr ""
 
-#: apps.py:19 models.py:78 templates/metra_api/client_list.html:3
+#: apps.py:21 models.py:78 templates/metra_api/client_list.html:3
 #: templates/metra_api/client_list.html:6
 #: templates/metra_api/client_list.html:14 templates/metra_api/docs.html:9
 msgid "API clients"
 msgstr ""
 
-#: apps.py:22
+#: apps.py:24
 msgid "Tokens for other systems that read or change the register."
 msgstr ""
 
@@ -145,19 +145,19 @@ msgstr ""
 msgid "A unit's type cannot change."
 msgstr ""
 
-#: serializers.py:157 serializers.py:245
+#: serializers.py:157 serializers.py:247
 msgid "This field is required."
 msgstr ""
 
-#: serializers.py:239
+#: serializers.py:241
 msgid "A reading cannot move; enter a new one instead."
 msgstr ""
 
-#: serializers.py:253
+#: serializers.py:255
 msgid "This round is not read from units of this type."
 msgstr ""
 
-#: serializers.py:257
+#: serializers.py:259
 msgid "This unit already has a reading in this round; change it."
 msgstr ""
 
