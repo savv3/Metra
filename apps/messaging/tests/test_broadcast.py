@@ -1,3 +1,5 @@
+import re
+
 import pytest
 from django.core import mail
 from django.urls import reverse
@@ -276,6 +278,8 @@ def test_sms_only_needs_no_email_fields(admin_client, make_household):
         ("sms", {"body": ""}, "body"),
         ("sms_or_email", {"body": ""}, "body"),
         ("sms_and_email", {"body": ""}, "body"),
+        ("preferred", {"body": ""}, "body"),
+        ("preferred", {"subject": ""}, "subject"),
     ],
 )
 def test_the_chosen_channels_text_is_needed(admin_client, make_household, channels, missing, field):
@@ -290,8 +294,90 @@ def test_the_chosen_channels_text_is_needed(admin_client, make_household, channe
 
 def test_the_form_shows_only_the_chosen_channels_fields(admin_client):
     page = admin_client.get(URL + "?urgent=1").content.decode()
-    assert 'data-channels="sms sms_or_email sms_and_email">' in page  # both shown
+    assert 'data-channels="preferred sms sms_or_email sms_and_email">' in page  # both shown
 
     page = compose(admin_client, channels="email", body="", email_body="").content.decode()
-    assert 'data-channels="sms sms_or_email sms_and_email" hidden>' in page
-    assert 'data-channels="email sms_or_email sms_and_email">' in page
+    assert 'data-channels="preferred sms sms_or_email sms_and_email" hidden>' in page
+    assert 'data-channels="preferred email sms_or_email sms_and_email">' in page
+
+    page = admin_client.get(URL).content.decode()  # the preferred channel needs both texts
+    assert 'data-channels="preferred sms sms_or_email sms_and_email">' in page
+    assert 'data-channels="preferred email sms_or_email sms_and_email">' in page
+
+
+def test_the_preferred_channel_is_the_default_and_the_others_are_tucked_away(admin_client):
+    page = admin_client.get(URL, HTTP_ACCEPT_LANGUAGE="en").content.decode()
+
+    assert re.search(r'value="preferred"[^>]*checked', page)
+    assert "<details>" in page and "Other options" in page
+    assert page.index('value="preferred"') < page.index("<details>") < page.index('value="sms"')
+
+
+def test_other_options_are_open_when_one_of_them_is_chosen(admin_client):
+    # After a validation error, the choice made stays visible.
+    page = compose(admin_client, channels="sms", body="").content.decode()
+    assert "<details open>" in page
+    assert re.search(r'value="sms"[^>]*checked', page)
+
+    # Urgent alerts still default to both.
+    page = admin_client.get(URL + "?urgent=1").content.decode()
+    assert "<details open>" in page
+    assert re.search(r'value="sms_and_email"[^>]*checked', page)
+
+
+def test_preferred_channel_is_followed(admin_client, make_household):
+    email = make_household(
+        "A", first_name="Anna", phone="0401", email="a@example.com", preferred_channel="email"
+    )
+    sms = make_household(
+        "B", first_name="Bo", phone="0402", email="bo@example.com", preferred_channel="sms"
+    )
+    no_email = make_household("C", first_name="Cia", phone="0403", preferred_channel="email")
+    post = make_household(
+        "D", first_name="Dan", phone="0404", email="d@example.com", preferred_channel="post"
+    )
+    post_email = make_household(
+        "E", first_name="Eva", email="e@example.com", preferred_channel="post"
+    )
+    make_household("F", first_name="Fia", last_name="Utan", preferred_channel="sms")
+
+    response = compose(admin_client, channels="preferred")
+
+    assert response.context["sms_count"] == 3  # Bo, Cia, Dan
+    assert response.context["email_count"] == 2  # Anna, Eva
+    assert [r.person.first_name for r in response.context["plan"].unreachable] == ["Fia"]
+    assert "The message, as Anna gets it" in response.content.decode()
+
+    compose(admin_client, step="confirm", channels="preferred")
+
+    channel = {m.unit: m.channel for m in Message.objects.exclude(status="failed")}
+    assert channel == {
+        email: "email",
+        sms: "sms",
+        no_email: "sms",
+        post: "sms",
+        post_email: "email",
+    }
+    assert MessageBatch.objects.get().channels == "preferred"
+
+
+def test_failed_preferred_channel_falls_back_to_the_other(admin_client, make_household):
+    make_household(
+        "A", first_name="Anna", phone="+000", email="a@example.com", preferred_channel="sms"
+    )
+
+    compose(admin_client, step="confirm", channels="preferred")
+
+    statuses = list(Message.objects.order_by("pk").values_list("channel", "status"))
+    assert statuses == [("sms", "failed"), ("email", "sent")]
+
+
+def test_explicit_options_ignore_the_preference(admin_client, make_household):
+    make_household(
+        "A", first_name="Anna", phone="0401", email="a@example.com", preferred_channel="email"
+    )
+
+    response = compose(admin_client, channels="sms_or_email")
+    assert (response.context["sms_count"], response.context["email_count"]) == (1, 0)
+    response = compose(admin_client, channels="sms")
+    assert (response.context["sms_count"], response.context["email_count"]) == (1, 0)

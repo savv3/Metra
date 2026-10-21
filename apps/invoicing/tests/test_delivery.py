@@ -212,3 +212,12 @@ def test_drafts_are_not_shown_to_members(client, plan, rounds, make_household, b
     )
     assert client.get(f"/m/{token}/invoices/{draft.pk}/").status_code == 404
     assert '<div class="preview">' in invoice_html([draft])  # the DRAFT watermark
+
+
+def test_invoices_go_by_email_even_to_those_who_prefer_sms(issued):
+    # Invoices have no SMS; email is the fallback for those who prefer SMS.
+    anna = issued.invoices.get(unit__name="Bystigen 4")
+    anna.person.preferred_channel = "sms"
+    assert channel_for(anna) == "email"
+    anna.person.preferred_channel = "post"
+    assert channel_for(anna) == "letter"

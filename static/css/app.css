@@ -355,6 +355,9 @@ fieldset { border: 1px solid var(--border); border-radius: var(--radius); paddin
 legend { font-weight: 600; padding: 0 0.25rem; }
 fieldset ul { list-style: none; margin: 0; padding: 0; }
 fieldset li label { font-weight: 400; display: flex; gap: 0.5rem; align-items: center; padding: 0.15rem 0; }
+.channel-choice label { font-weight: 400; display: flex; gap: 0.5rem; align-items: center; padding: 0.15rem 0; margin: 0; }
+.channel-choice details { margin-top: 0.5rem; }
+.channel-choice summary { cursor: pointer; color: var(--primary); padding: 0.25rem 0; }
 .required { color: var(--error); }
 .help { color: var(--muted); font-size: 0.9rem; margin: 0.25rem 0 0; }
 .field--error input, .field--error select, .field--error textarea { border-color: var(--error); border-width: 2px; }

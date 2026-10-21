@@ -1,10 +1,10 @@
 """Sending send-outs: a round's self-service links and reminders here, and
 messages staff write in apps.messaging.broadcast.
 
-Each unit's primary contact gets a new link by SMS, or by email when there
-is no phone number or the SMS fails, or else a letter to print. A person
-whose preferred channel is post gets a letter. (Preferring email does not
-skip SMS: email is every person's default preference.)
+Each unit's primary contact gets a new link on their preferred channel,
+then on the other one when they have no address for it or it fails, or
+else a letter to print. A person whose preferred channel is post gets a
+letter. See apps.messaging.preference.
 The link's token exists only in memory here and in the message that goes
 out; the stored copy of the message has a placeholder instead.
 """
@@ -12,26 +12,18 @@ out; the stored copy of the message has a placeholder instead.
 from django.utils import timezone, translation
 from django.utils.translation import gettext as _
 
-from apps.register.models import Person
 from apps.selfservice.models import SelfServiceLink, primary_contact
 
 from .broadcast import send_written
 from .failures import notify_failures
 from .models import Channel, Message, MessageBatch, MessageTemplate, organisation_placeholders
-from .registry import EMAIL, SMS, ProviderError, provider_for
+from .preference import channel_order
+from .registry import SMS, ProviderError, provider_for
 
 
 def channels_for(person):
-    """The channels to try for a person, in order, with the providers set up here."""
-    order = [SMS, EMAIL]
-    if person.preferred_channel == Person.Channel.POST:
-        return []
-    address = {SMS: person.phone, EMAIL: person.email}
-    return [
-        (channel, provider)
-        for channel in order
-        if address[channel] and (provider := provider_for(channel)) is not None
-    ]
+    """The channels to try for a person, in order, with their providers."""
+    return [(channel, provider_for(channel)) for channel in channel_order(person)]
 
 
 def template_text(purpose, channel):

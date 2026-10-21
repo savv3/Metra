@@ -35,8 +35,9 @@ changed or deleted; to undo one, record the same amount as a negative
 payment.
 
 **Invoices > Overdue** lists unpaid invoices past their due date. **Send
-reminders to the chosen** sends a payment reminder by email, SMS or letter,
-with the reminder fee if one is set and at least 14 days to pay.
+reminders to the chosen** sends a payment reminder on each person's preferred
+channel (email or SMS, or the other one if they have no address for it), or
+by letter to those who prefer post or have neither, with the reminder fee if one is set and at least 14 days to pay.
 
 ## For the accountant
 

@@ -5,13 +5,21 @@
 **Send-outs > New message** writes one message to everyone, to units with a
 tag or of a type, or to the units in the list you have filtered (**Send a
 message to these units** under the unit list). Choose whether it goes to all
-contacts of each unit or only the main contact, and how:
+contacts of each unit or only the main contact, and how. The usual choice is
+**Each person's preferred channel**: those who prefer email get an email and
+those who prefer SMS get an SMS, or the other one when they have no address
+for it (or it fails). There are no letters for these messages, so those who
+prefer post get an SMS, or else an email. The preferred channel is set on each
+person's page. Under **Other options** you can instead choose, whatever people
+prefer:
 
 - **SMS only** or **Email only**,
 - **SMS, or email for those without a phone**, or
 - **Both SMS and email**.
 
-The form shows only the texts the chosen way needs. Placeholders such as
+With the preferred channel, write both the SMS text and the email subject,
+since people may get either. The form shows only the texts the chosen way
+needs. Placeholders such as
 `{first_name}` and `{unit}` are filled in for each person, and a counter shows
 how many SMS the text takes. Before anything is sent, a check page shows how
 many get an SMS and an email, and who cannot be reached, so someone can call
@@ -20,15 +28,15 @@ them.
 ## Urgent alerts
 
 **Urgent alert** (the red button) is for disruptions such as a water leak. It
-goes by SMS and email to every contact of every active unit at once, and can
-also be shown as a notice on the public page. The send-out page shows each
+goes by SMS and email to every contact of every active unit at once, whatever
+they prefer, and can also be shown as a notice on the public page. The send-out page shows each
 person's delivery status as it goes.
 
 ## One household
 
 On a unit's page, **Send message** under **Messages** writes to that unit's
-contacts. The same section lists everything they have been sent: links,
-reminders, invoices and messages.
+contacts, by default on each one's preferred channel. The same section lists
+everything they have been sent: links, reminders, invoices and messages.
 
 ## Attachments
 

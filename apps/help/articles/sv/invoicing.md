@@ -38,8 +38,10 @@ helt eller i delar. En faktura är **Betald** när inget återstår. Betalningar
 som en negativ betalning.
 
 **Fakturor > Förfallen** visar obetalda fakturor efter förfallodagen.
-**Skicka påminnelser till de valda** skickar en betalningspåminnelse med
-e-post, sms eller brev, med påminnelseavgiften om en sådan är inställd och
+**Skicka påminnelser till de valda** skickar en betalningspåminnelse via
+var och ens önskade kanal (e-post eller sms, eller den andra om de saknar
+adress för den), eller som brev till dem som vill ha post eller saknar båda,
+med påminnelseavgiften om en sådan är inställd och
 minst 14 dagar att betala.
 
 ## Till bokföraren

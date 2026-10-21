@@ -156,8 +156,10 @@ def _compose(request, form, unit=None):
                 return redirect(batch)
         if "edit" not in request.POST:
             per_person, total = broadcast.sms_estimate(data["body"], plan, files=bool(files))
-            text = form.main_text()
             first = plan.recipients[0] if plan.recipients else None
+            # The example is what the first person gets: their email when that
+            # is all they get, as with the preferred channel.
+            text = form.main_text(first.channels[0] if first else None)
             values = broadcast.placeholders(first and first.person, first and first.unit)
             context |= {
                 "example": MessageTemplate.fill(text, values),

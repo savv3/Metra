@@ -72,6 +72,10 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   lines are no longer listed on their own in the admin (they are edited in
   their fee plan), and the admin's index shows non-superusers only the
   tables that are settings.
+- New message and Message to one unit send on each person's preferred
+  channel by default ("Each person's preferred channel"); SMS only, Email
+  only, SMS or email, and Both are under "Other options". Urgent alerts still
+  go by SMS and email to everyone.
 
 ### Upgrade notes
 
@@ -81,6 +85,13 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Fixed
 
+- Every send-out now follows each person's preferred channel, using one rule:
+  those who prefer email get email and those who prefer SMS get an SMS, or
+  the other one when they lack an address for it, and those who prefer post
+  get a letter. Reading links and reminders used to go by SMS to everyone
+  with a phone, and payment reminders by email to everyone with an address.
+  Since email is the default preference, check people's preferred channel
+  before the next send-out.
 - New message and Message to one unit no longer ask for an SMS text when the
   message goes by email only: the form shows only the texts the chosen
   channels need, and checks only those.
