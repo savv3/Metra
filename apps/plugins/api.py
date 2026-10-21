@@ -7,6 +7,7 @@ the same API_VERSION; anything else in the app may change.
         name = "my_plugin"
         personal_data = []  # what personal data the plugin stores, see docs
         metra_api = [1]  # the API_VERSIONs the plugin works with
+        metra_settings = [api.Setting("api_key", "API key", kind=api.Setting.SECRET)]
 
         def ready(self):
             api.add_navigation(api.NavItem("My page", "my_plugin:index", "register.view_unit"))
@@ -23,6 +24,10 @@ the same API_VERSION; anything else in the app may change.
             api.add_member_panel(api.MemberPanel("my_plugin/member.html", "Mine"))
 
     api.notify("thing_failed", {"thing": "Pump"}, link="/plugins/my_plugin/")
+    key = api.plugin_settings("my_plugin").get("api_key")
+
+Everything a plugin registers is left out while an admin has turned the
+plugin off under Settings > Plugins (see apps/plugins/state.py).
 
     @receiver(api.events.invoice_issued)
     def on_issue(sender, invoice, **kwargs): ...
@@ -54,7 +59,9 @@ from .hooks import (
     WEBHOOK_EVENTS,
     hooks,
 )
+from .plugin_settings import PluginSettings, Setting
 from .roles import grant_to_roles
+from .state import calling_plugin
 
 # Bump API_VERSION only for a breaking change; additions keep it. The previous
 # version stays in SUPPORTED_API_VERSIONS for one more major release, so
@@ -120,6 +127,7 @@ __all__ = [
     "Provider",
     "ProviderError",
     "SendResult",
+    "Setting",
     "SettingsLink",
     "WebhookEvent",
     "HelpArticles",
@@ -144,6 +152,7 @@ __all__ = [
     "normalise_phone",
     "notify",
     "on_webhook_event",
+    "plugin_settings",
     "record_delivery",
     "render_pdf",
     "sms_country_code",
@@ -230,15 +239,26 @@ def add_webhook_event(event):
     return hooks.register(WEBHOOK_EVENTS, event)
 
 
-def webhook_events():
-    """Every registered ``WebhookEvent``. For plugins that send webhooks."""
-    return hooks.get(WEBHOOK_EVENTS)
+def webhook_events(everything=False):
+    """The registered ``WebhookEvent``s of plugins that are on, for plugins
+    that send webhooks. ``everything=True`` includes those of plugins that are
+    off, for connecting receivers at startup (receivers of a plugin that is
+    off are skipped when an event is sent)."""
+    return hooks.get(WEBHOOK_EVENTS, everything=everything)
 
 
 def on_webhook_event(listener):
     """Call ``listener(event)`` for each ``WebhookEvent`` registered from now on,
     so a sender of webhooks also sees events of plugins that load after it."""
     hooks.subscribe(WEBHOOK_EVENTS, listener)
+
+
+def plugin_settings(name=None):
+    """The settings a plugin lists in ``metra_settings`` on its AppConfig, as
+    an object whose ``get(key)`` gives the environment's value, else the one
+    saved on the plugin's settings page, else the default. ``name`` is the
+    plugin's name; by default the calling plugin's."""
+    return PluginSettings(name or calling_plugin())
 
 
 # For SMS provider plugins.

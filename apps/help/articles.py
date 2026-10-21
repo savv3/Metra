@@ -39,6 +39,7 @@ PAGES = {
     "backups": "backups",
     "accounts": "roles",
     "notifications": "notifications",
+    "plugins": "getting-started",
 }
 SLUG = re.compile(r"^[a-z0-9-]+$")
 

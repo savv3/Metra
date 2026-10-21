@@ -58,3 +58,16 @@ Asetukset vain niille, jotka voivat muuttaa siellä jotakin.
 Jäsenet eivät koskaan kirjaudu sisään. He saavat henkilökohtaisen linkin
 tekstiviestillä, sähköpostilla tai kirjeellä, ja sen kautta he ilmoittavat
 lukemansa ja korjaavat yhteystietonsa. Katso [Lukemat](/help/readings/).
+
+## Lisäosat
+
+Lisäosat tuovat uusia toimintoja, kuten tekstiviestit 46elksin kautta tai
+kokouspöytäkirjat. Ylläpitäjä näkee palvelimelle asennetut lisäosat kohdassa
+**Asetukset > Lisäosat** ja ottaa kunkin käyttöön tai pois käytöstä
+painikkeilla **Ota käyttöön** ja **Poista käytöstä**. Pois käytöstä oleva
+lisäosa katoaa valikosta ja sivuilta heti, ja sen tiedot säilyvät, kunnes se
+otetaan taas käyttöön. Lisäosilla, joilla on asetuksia, kuten API-avain, on
+siellä **Asetukset**-painike. Tallennettua salasanaa tai avainta ei näytetä
+enää koskaan: jätä kenttä tyhjäksi, jos haluat säilyttää sen, tai anna uusi.
+Harmaana oleva asetus on asetettu palvelimella, eikä sitä voi muuttaa
+sovelluksessa. Uusi lisäosa asennetaan palvelimella, katso asennusohje.

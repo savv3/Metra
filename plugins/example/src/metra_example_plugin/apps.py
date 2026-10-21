@@ -1,5 +1,7 @@
 from django.apps import AppConfig
 
+from apps.plugins.api import Setting
+
 
 class ExamplePluginConfig(AppConfig):
     name = "metra_example_plugin"
@@ -11,6 +13,15 @@ class ExamplePluginConfig(AppConfig):
     personal_data = []
     # The plugin API versions (apps.plugins.api.API_VERSION) this plugin works with.
     metra_api = [1]
+    # Settings an admin edits under Settings > Plugins; read them with
+    # api.plugin_settings("example").get("greeting"). A value in the
+    # environment variable named by env wins and cannot be changed there.
+    metra_settings = [
+        Setting("greeting", "Greeting", help="Shown on the example page.", default="Hello"),
+        Setting("api_key", "API key", kind=Setting.SECRET),
+        Setting("loud", "Shout the greeting", kind=Setting.BOOL, default=False),
+        Setting("times", "Times", kind=Setting.NUMBER, default=1, env="METRA_EXAMPLE_TIMES"),
+    ]
 
     def ready(self):
         from apps.plugins import api

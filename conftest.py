@@ -81,6 +81,16 @@ def person(db):
 
 
 @pytest.fixture(autouse=True)
+def plugin_states():
+    """Every test starts with the plugins' on/off states read afresh."""
+    from apps.plugins import state
+
+    state.forget()
+    yield
+    state.forget()
+
+
+@pytest.fixture(autouse=True)
 def snapshots_in_tmp(settings, tmp_path, monkeypatch):
     """Snapshots and restores during a test (before an import, a deletion or a
     restore) use a small throwaway database and a temporary data folder."""

@@ -88,7 +88,9 @@ Metra is refused. Only Admin may restore ("Can restore a snapshot").
 
 1. Install as in [Run it with Docker](#run-it-with-docker), with a `.env`
    that has the same `METRA_BACKUP_*` settings (including the encryption
-   password), and start it once: `docker compose up -d --build`.
+   password) and the same `METRA_SECRET_KEY` and `METRA_SETTINGS_KEY`
+   (without them, secrets saved in the app, such as plugins' API keys,
+   cannot be read and must be entered again), and start it once: `docker compose up -d --build`.
 2. Stop the app so nothing writes during the restore:
    `docker compose stop web worker`
 3. Restore the snapshot you want, from offsite:
@@ -148,7 +150,9 @@ providers can be added as plugins (see [docs/plugins.md](docs/plugins.md)).
 Plugins are pip-installable packages that add pages, menu items, panels on
 unit and person pages, or SMS and email providers. Install them through
 `METRA_PLUGIN_PACKAGES` (Docker build) or pip, and enable them by name in
-`METRA_PLUGINS`; nothing loads unless it is listed. Plugins run with full
+`METRA_PLUGINS`; nothing loads unless it is listed. An admin then turns
+installed plugins on and off, and edits their settings, under **Settings >
+Add-ons**, with no restart. Plugins run with full
 trust, so install only ones you trust. See [docs/plugins.md](docs/plugins.md)
 and the [example plugin](plugins/example).
 

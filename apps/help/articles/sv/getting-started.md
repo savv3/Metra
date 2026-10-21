@@ -59,3 +59,16 @@ Inställningar bara för dem som kan ändra något där.
 Medlemmar loggar aldrig in. De får en personlig länk med sms, e-post eller
 brev, där de anger sin avläsning och rättar sina kontaktuppgifter. Se
 [Avläsningar](/help/readings/).
+
+## Tillägg
+
+Tillägg ger fler funktioner, till exempel sms via 46elks eller mötesprotokoll.
+En admin ser tilläggen som är installerade på servern under **Inställningar >
+Tillägg** och slår på eller av varje tillägg med **Slå på** och **Slå av**. Ett
+tillägg som är avslaget försvinner direkt från menyn och sidorna, och dess data
+sparas till nästa gång det slås på. Tillägg med inställningar, till exempel en
+API-nyckel, har en knapp **Inställningar** där. Ett sparat lösenord eller en
+sparad nyckel visas aldrig igen: lämna fältet tomt för att behålla det, eller
+skriv in ett nytt. En inställning som är grånad är angiven på servern och kan
+inte ändras i appen. Nya tillägg installeras på servern, se
+installationsanvisningen.

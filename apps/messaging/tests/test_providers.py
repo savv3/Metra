@@ -44,7 +44,7 @@ class ReadySMS(Provider):
         return True
 
 
-def test_auto_picks_the_first_configured_sms_provider(settings):
+def test_auto_picks_the_first_configured_sms_provider(settings, db):
     settings.MESSAGING = {**settings.MESSAGING, "sms_provider": AUTO}
     settings.DEBUG = False
     saved = dict(registry._providers[SMS])

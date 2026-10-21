@@ -58,3 +58,15 @@ only to those who can change something there.
 Members never log in. They get a personal link by SMS, email or letter, where
 they report their reading and correct their contact details. See
 [Readings](/help/readings/).
+
+## Add-ons
+
+Add-ons add features, such as SMS through 46elks or meeting minutes. An admin
+sees the add-ons installed on the server under **Settings > Add-ons** and
+turns each one on or off with **Turn on** and **Turn off**. An add-on that is
+off disappears from the menu and pages at once, and its data is kept for when
+it is turned on again. Add-ons with settings, such as an API key, have a
+**Settings** button there. A saved password or key is never shown again: leave
+the field empty to keep it, or enter a new one. A setting that is greyed out is
+set on the server and cannot be changed in the app. Installing a new add-on is
+done on the server; see the installation guide.

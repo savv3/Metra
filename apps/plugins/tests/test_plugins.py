@@ -56,7 +56,7 @@ def test_plugin_panel_on_unit_page(board_client, unit):
     assert "Byvägen 4 has 0 contact links." in page
 
 
-def test_plugin_sms_provider_can_be_chosen(settings):
+def test_plugin_sms_provider_can_be_chosen(settings, db):
     settings.MESSAGING = {**settings.MESSAGING, "sms_provider": "example-log"}
 
     provider = provider_for("sms")

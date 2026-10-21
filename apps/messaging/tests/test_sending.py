@@ -182,7 +182,7 @@ def test_automatic_reminder_runs_once_per_round(open_round, make_household, sett
     assert len(providers.outbox) == 1
 
 
-def test_registry_rejects_unknown_providers():
+def test_registry_rejects_unknown_providers(db):
     import pytest
 
     with pytest.raises(ProviderError):

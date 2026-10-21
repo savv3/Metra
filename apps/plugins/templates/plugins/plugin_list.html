@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Add-ons" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Add-ons" %}</h1>
+    <div class="actions"><a class="button" href="{% url 'core:settings' %}">{% translate "Settings" %}</a></div>
+  </div>
+  <p>{% blocktranslate trimmed %}
+    Add-ons add features to Metra. Turning one off hides its pages, menu items and
+    sections at once, and its data is kept for when it is turned on again.
+  {% endblocktranslate %}</p>
+  <p class="help">{% blocktranslate trimmed %}
+    This list shows the add-ons installed on this server. Installing another one is done
+    on the server, with METRA_PLUGINS.
+  {% endblocktranslate %}</p>
+  {% if plugins %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Add-ons' %}">
+      <table>
+        <thead><tr>
+          <th scope="col">{% translate "Add-on" %}</th><th scope="col">{% translate "Version" %}</th>
+          <th scope="col">{% translate "Status" %}</th><th scope="col"><span class="visually-hidden">{% translate "Actions" %}</span></th>
+        </tr></thead>
+        <tbody>
+          {% for plugin in plugins %}
+            <tr>
+              <th scope="row">{{ plugin.label }}{% if plugin.description %}<span class="help">{{ plugin.description }}</span>{% endif %}</th>
+              <td>{{ plugin.version|default:"–" }}</td>
+              <td>{% if plugin.enabled %}<span class="status-ok">{% translate "On" %}</span>{% else %}{% translate "Off" %}{% endif %}</td>
+              <td>
+                <form method="post" action="{% url 'plugins:toggle' plugin.name %}" class="inline-form">
+                  {% csrf_token %}
+                  {% if plugin.enabled %}
+                    <input type="hidden" name="enabled" value="0">
+                    <button type="submit" class="button">{% blocktranslate with plugin=plugin.label %}Turn off<span class="visually-hidden"> {{ plugin }}</span>{% endblocktranslate %}</button>
+                  {% else %}
+                    <input type="hidden" name="enabled" value="1">
+                    <button type="submit" class="button button--primary">{% blocktranslate with plugin=plugin.label %}Turn on<span class="visually-hidden"> {{ plugin }}</span>{% endblocktranslate %}</button>
+                  {% endif %}
+                </form>
+                {% if plugin.has_settings and perms.plugins.change_pluginsetting %}<a class="button" href="{% url 'plugins:settings' plugin.name %}">{% blocktranslate with plugin=plugin.label %}Settings<span class="visually-hidden"> for {{ plugin }}</span>{% endblocktranslate %}</a>{% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "No add-ons are installed." %}</p>
+  {% endif %}
+{% endblock %}
