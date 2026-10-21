@@ -14,6 +14,9 @@ DEPLOY = ROOT / "scripts" / "deploy.sh"
 FAKE_COMPOSE = """#!/bin/sh
 echo "podman-compose $*" >>"$FAKE_LOG"
 case "$*" in
+    *"help snapshot"*)
+        [ -z "$FAKE_OLD" ]
+        ;;
     *healthz*)
         image=$(sed -n 's/^METRA_IMAGE=//p' .env)
         [ "$image" != "$FAKE_BROKEN" ]
@@ -48,12 +51,13 @@ def install(tmp_path):
     return tmp_path
 
 
-def upgrade(install, *args, broken=""):
+def upgrade(install, *args, broken="", old=""):
     env = {
         **os.environ,
         "PATH": f"{install / 'bin'}:{os.environ['PATH']}",
         "FAKE_LOG": str(install / "log"),
         "FAKE_BROKEN": broken,
+        "FAKE_OLD": old,
     }
     return subprocess.run(
         ["sh", str(UPGRADE), *args], capture_output=True, text=True, env=env, cwd=install
@@ -70,6 +74,16 @@ def test_upgrade_backs_up_and_switches_image(install):
     log = (install / "log").read_text()
     assert log.index("manage.py snapshot") < log.index("podman load")
     assert "up -d --force-recreate web worker" in log
+
+
+def test_upgrade_from_before_0_3_takes_a_backup(install):
+    result = upgrade(install, "0.2.0", "metra-0.2.0.tar.gz", "metra", old="1")
+
+    assert result.returncode == 0, result.stderr
+    log = (install / "log").read_text()
+    assert "manage.py backup" in log
+    assert "manage.py snapshot" not in log
+    assert log.index("manage.py backup") < log.index("podman load")
 
 
 def test_upgrade_goes_back_when_unhealthy(install):

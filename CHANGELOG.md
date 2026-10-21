@@ -12,6 +12,8 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-21
+
 ### Added
 
 - Agenda templates in the meetings add-on: the usual agenda of each kind of
@@ -140,12 +142,6 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   only, SMS or email, and Both are under "Other options". Urgent alerts still
   go by SMS and email to everyone.
 
-### Upgrade notes
-
-- `METRA_BACKUP_KEEP` and `METRA_BACKUP_DIR` are replaced by
-  `METRA_BACKUP_KEEP_DAYS`, `METRA_BACKUP_KEEP_WEEKS` and
-  `METRA_BACKUP_KEEP_MONTHS`; snapshots are kept in `/data/snapshots`.
-
 ### Fixed
 
 - The API clients page showed its Swedish introduction twice.
@@ -167,6 +163,22 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   deploy for an SSH scan and blocks the laptop.
 - The web container no longer logs "Permission denied: '/app/.gunicorn'" at
   start; gunicorn's control socket, which Metra does not use, is turned off.
+- `docker/upgrade.sh` takes its snapshot with `manage.py backup` when the
+  running version is older than 0.3.0, so upgrading from 0.2.0 works.
+
+### Upgrade notes
+
+- `METRA_BACKUP_KEEP` and `METRA_BACKUP_DIR` are replaced by
+  `METRA_BACKUP_KEEP_DAYS`, `METRA_BACKUP_KEEP_WEEKS` and
+  `METRA_BACKUP_KEEP_MONTHS`; snapshots are kept in `/data/snapshots`.
+  Remove the old variables from `.env`.
+- `manage.py backup` is now `manage.py snapshot`; update any cron job or
+  script that calls it.
+- Email and 46elks SMS can now be set up in the app. Any `METRA_EMAIL_*`,
+  `METRA_ELKS_*` or `METRA_SMS_SENDER` variable in `.env` still wins and
+  shows as locked on the settings page; empty them to manage the settings
+  in the app instead.
+- Check people's preferred channel before the next send-out (see Fixed).
 
 ## [0.2.0] - 2026-10-19
 
