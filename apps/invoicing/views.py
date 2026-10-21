@@ -408,7 +408,7 @@ def send_reminders(request):
         return redirect("invoicing:overdue_list")
     batch = MessageBatch.objects.create(
         kind=MessageBatch.Kind.PAYMENT_REMINDERS,
-        channels=MessageBatch.Channels.SMS_OR_EMAIL,
+        channels=MessageBatch.Channels.PREFERRED,
         audience=_("%(count)s overdue invoices") % {"count": len(invoice_ids)},
         created_by=request.user,
     )

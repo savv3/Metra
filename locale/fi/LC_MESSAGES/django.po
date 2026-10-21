@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 15:02+0300\n"
+"POT-Creation-Date: 2026-10-21 15:13+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgid "role"
 msgstr "rooli"
 
 #: apps/accounts/admin.py:28 apps/invoicing/models.py:143
-#: apps/messaging/models.py:336 apps/readings/models.py:23
+#: apps/messaging/models.py:337 apps/readings/models.py:23
 #: apps/register/models.py:57 apps/register/models.py:115
 #: apps/register/models.py:129 apps/register/models.py:315
 msgid "name"
@@ -217,7 +217,7 @@ msgid "started"
 msgstr "alkoi"
 
 #: apps/backups/models.py:21 apps/backups/models.py:66
-#: apps/messaging/models.py:85 apps/setup/models.py:10
+#: apps/messaging/models.py:86 apps/setup/models.py:10
 msgid "finished"
 msgstr "päättyi"
 
@@ -255,7 +255,7 @@ msgid "sent offsite"
 msgstr "lähetetty ulkoiseen säilöön"
 
 #: apps/backups/models.py:40 apps/backups/models.py:68
-#: apps/messaging/models.py:175
+#: apps/messaging/models.py:176
 msgid "error"
 msgstr "virhe"
 
@@ -589,7 +589,7 @@ msgstr "Poistettavat laaditut laskut:"
 msgid "Payments that would be removed:"
 msgstr "Poistettavat maksut:"
 
-#: apps/backups/templates/backups/restore.html:49 apps/invoicing/delivery.py:60
+#: apps/backups/templates/backups/restore.html:49 apps/invoicing/delivery.py:59
 #: apps/invoicing/models.py:408 apps/invoicing/models.py:671
 #: apps/invoicing/models.py:732 apps/invoicing/models.py:772
 #: apps/invoicing/models.py:812
@@ -620,7 +620,7 @@ msgstr "Palauta tämä tilannevedos"
 
 #: apps/backups/templates/backups/restore.html:58
 #: apps/invoicing/templates/invoicing/run_form.html:13
-#: apps/messaging/templates/messaging/compose.html:98
+#: apps/messaging/templates/messaging/compose.html:114
 #: apps/messaging/templates/messaging/newsletter_compose.html:36
 #: apps/readings/templates/readings/reading_form.html:31
 #: apps/readings/templates/readings/round_form.html:20
@@ -678,8 +678,8 @@ msgstr "Tiedote"
 msgid "Urgent"
 msgstr "Kiireellinen"
 
-#: apps/core/models.py:23 apps/messaging/models.py:89
-#: apps/messaging/models.py:169 apps/messaging/models.py:232
+#: apps/core/models.py:23 apps/messaging/models.py:90
+#: apps/messaging/models.py:170 apps/messaging/models.py:233
 msgid "text"
 msgstr "teksti"
 
@@ -706,13 +706,13 @@ msgstr "luonut"
 
 #: apps/core/models.py:37 apps/invoicing/models.py:304
 #: apps/invoicing/models.py:402 apps/invoicing/models.py:743
-#: apps/messaging/models.py:84 apps/messaging/models.py:176
+#: apps/messaging/models.py:85 apps/messaging/models.py:177
 #: apps/notifications/models.py:28 apps/readings/models.py:78
 #: apps/register/models.py:236 apps/selfservice/models.py:76
 msgid "created"
 msgstr "luotu"
 
-#: apps/core/models.py:43 apps/messaging/models.py:96
+#: apps/core/models.py:43 apps/messaging/models.py:97
 msgid "notice"
 msgstr "tiedote"
 
@@ -862,11 +862,11 @@ msgstr "Muokkaa portaita (%(count)s)"
 msgid "Invoicing"
 msgstr "Laskutus"
 
-#: apps/invoicing/delivery.py:60
+#: apps/invoicing/delivery.py:59
 msgid "credit-note"
 msgstr "hyvityslasku"
 
-#: apps/invoicing/delivery.py:114
+#: apps/invoicing/delivery.py:113
 msgid "This email provider cannot attach the invoice PDF."
 msgstr "Tämä sähköpostipalvelu ei voi liittää laskun PDF-tiedostoa viestiin."
 
@@ -1046,7 +1046,7 @@ msgid "Usage"
 msgstr "Kulutus"
 
 #: apps/invoicing/models.py:182 apps/invoicing/models.py:349
-#: apps/messaging/models.py:63 apps/notifications/models.py:22
+#: apps/messaging/models.py:64 apps/notifications/models.py:22
 #: apps/notifications/models.py:104
 msgid "kind"
 msgstr "laji"
@@ -1077,7 +1077,7 @@ msgid "Fixed fees only."
 msgstr "Vain kiinteille maksuille."
 
 #: apps/invoicing/models.py:202 apps/invoicing/models.py:362
-#: apps/invoicing/models.py:675 apps/messaging/models.py:160
+#: apps/invoicing/models.py:675 apps/messaging/models.py:161
 #: apps/readings/models.py:137 apps/register/models.py:330
 #: apps/register/models.py:353 apps/selfservice/models.py:58
 msgid "unit"
@@ -1213,7 +1213,7 @@ msgstr "Hyvitetty"
 
 #: apps/invoicing/models.py:346
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:6
-#: apps/invoicing/views.py:493 apps/messaging/models.py:221
+#: apps/invoicing/views.py:493 apps/messaging/models.py:222
 msgid "Invoice"
 msgstr "Lasku"
 
@@ -1222,13 +1222,13 @@ msgstr "Lasku"
 msgid "Credit note"
 msgstr "Hyvityslasku"
 
-#: apps/invoicing/models.py:351 apps/messaging/models.py:74
-#: apps/messaging/models.py:171 apps/readings/models.py:76
+#: apps/invoicing/models.py:351 apps/messaging/models.py:75
+#: apps/messaging/models.py:172 apps/readings/models.py:76
 #: apps/register/models.py:317
 msgid "status"
 msgstr "tila"
 
-#: apps/invoicing/models.py:365 apps/messaging/models.py:167
+#: apps/invoicing/models.py:365 apps/messaging/models.py:168
 msgid "recipient"
 msgstr "vastaanottaja"
 
@@ -1348,12 +1348,12 @@ msgid "Letter"
 msgstr "Kirje"
 
 #: apps/invoicing/models.py:734 apps/invoicing/models.py:816
-#: apps/messaging/models.py:166 apps/messaging/models.py:226
+#: apps/messaging/models.py:167 apps/messaging/models.py:227
 msgid "channel"
 msgstr "kanava"
 
 #: apps/invoicing/models.py:737 apps/invoicing/models.py:819
-#: apps/messaging/models.py:182
+#: apps/messaging/models.py:183
 msgid "message"
 msgstr "viesti"
 
@@ -1381,16 +1381,16 @@ msgstr "maksupäivä"
 msgid "reference given"
 msgstr "annettu viite"
 
-#: apps/invoicing/models.py:782 apps/messaging/models.py:282
+#: apps/invoicing/models.py:782 apps/messaging/models.py:283
 #: apps/readings/models.py:161
 msgid "note"
 msgstr "huomautus"
 
-#: apps/invoicing/models.py:785 apps/messaging/models.py:275
+#: apps/invoicing/models.py:785 apps/messaging/models.py:276
 msgid "recorded by"
 msgstr "kirjannut"
 
-#: apps/invoicing/models.py:791 apps/messaging/models.py:272
+#: apps/invoicing/models.py:791 apps/messaging/models.py:273
 msgid "recorded"
 msgstr "kirjattu"
 
@@ -1410,11 +1410,11 @@ msgstr "Maksut kirjataan laadituille laskuille."
 msgid "new due date"
 msgstr "uusi eräpäivä"
 
-#: apps/invoicing/models.py:827 apps/messaging/models.py:78
+#: apps/invoicing/models.py:827 apps/messaging/models.py:79
 msgid "sent by"
 msgstr "lähettänyt"
 
-#: apps/invoicing/models.py:833 apps/messaging/models.py:177
+#: apps/invoicing/models.py:833 apps/messaging/models.py:178
 msgid "sent"
 msgstr "lähetetty"
 
@@ -1426,7 +1426,7 @@ msgstr "maksumuistutus"
 msgid "payment reminders"
 msgstr "maksumuistutukset"
 
-#: apps/invoicing/payments.py:126 apps/messaging/sending.py:40
+#: apps/invoicing/payments.py:122 apps/messaging/sending.py:32
 msgid "There is no message template for this. Add one under Settings."
 msgstr "Tälle ei ole viestipohjaa. Lisää sellainen kohdassa Asetukset."
 
@@ -1746,7 +1746,7 @@ msgid "Record payment"
 msgstr "Kirjaa maksu"
 
 #: apps/invoicing/templates/invoicing/invoice_detail.html:135
-#: apps/messaging/models.py:137
+#: apps/messaging/models.py:138
 msgid "Sent"
 msgstr "Lähetetty"
 
@@ -2109,7 +2109,7 @@ msgstr "Kaikki tämän kierroksen laaditut laskut on lähetetty."
 
 #: apps/invoicing/views.py:353 apps/invoicing/views.py:416
 #: apps/messaging/views.py:53 apps/messaging/views.py:155
-#: apps/messaging/views.py:230
+#: apps/messaging/views.py:232
 msgid "Sending has started. This page shows how it goes."
 msgstr "Lähetys on alkanut. Tällä sivulla näkyy, miten se etenee."
 
@@ -2171,35 +2171,35 @@ msgstr "Tämä sähköpostipalvelu ei voi lähettää liitteitä."
 msgid "Files:"
 msgstr "Tiedostot:"
 
-#: apps/messaging/broadcast.py:156
+#: apps/messaging/broadcast.py:161
 msgid "No phone number or email address to send to."
 msgstr "Ei puhelinnumeroa tai sähköpostiosoitetta, johon lähettää."
 
-#: apps/messaging/forms.py:17
+#: apps/messaging/forms.py:18
 msgid "Everyone"
 msgstr "Kaikki"
 
-#: apps/messaging/forms.py:18
+#: apps/messaging/forms.py:19
 msgid "Units with a tag"
 msgstr "Yksiköt, joilla on tunniste"
 
-#: apps/messaging/forms.py:19
+#: apps/messaging/forms.py:20
 msgid "Units of a type"
 msgstr "Tietyn tyyppiset yksiköt"
 
-#: apps/messaging/forms.py:20
+#: apps/messaging/forms.py:21
 msgid "The units in the filtered list"
 msgstr "Suodatetun luettelon yksiköt"
 
-#: apps/messaging/forms.py:23
+#: apps/messaging/forms.py:24
 msgid "All contacts of each unit"
 msgstr "Kunkin yksikön kaikki yhteyshenkilöt"
 
-#: apps/messaging/forms.py:24
+#: apps/messaging/forms.py:25
 msgid "Only each unit's main contact"
 msgstr "Vain kunkin yksikön pääyhteyshenkilö"
 
-#: apps/messaging/forms.py:27
+#: apps/messaging/forms.py:28
 #, python-brace-format
 msgid ""
 "You can use {first_name}, {name}, {unit}, {organisation}, "
@@ -2211,21 +2211,21 @@ msgstr ""
 "{emergency_phone}."
 
 #
-#: apps/messaging/forms.py:64
+#: apps/messaging/forms.py:65
 #: apps/messaging/templates/messaging/_attachments.html:4
 #: apps/messaging/templates/messaging/batch_detail.html:13
 msgid "Attached files"
 msgstr "Liitetyt tiedostot"
 
-#: apps/messaging/forms.py:68
+#: apps/messaging/forms.py:69
 msgid "Untick a file to leave it out."
 msgstr "Poista valinta jättääksesi tiedoston pois."
 
-#: apps/messaging/forms.py:71
+#: apps/messaging/forms.py:72
 msgid "Attach files"
 msgstr "Liitä tiedostoja"
 
-#: apps/messaging/forms.py:74
+#: apps/messaging/forms.py:75
 #, python-format
 msgid ""
 "PDF, images or office documents, up to %(file)s MB each and %(total)s MB "
@@ -2235,64 +2235,74 @@ msgstr ""
 "ja %(total)s Mt yhteensä. Sähköpostin vastaanottajat saavat tiedostot "
 "liitteinä, tekstiviestin vastaanottajat linkin."
 
-#: apps/messaging/forms.py:102 apps/messaging/models.py:41
+#: apps/messaging/forms.py:103 apps/messaging/models.py:41
 #: apps/messaging/templates/messaging/batch_list.html:12
 #: apps/messaging/templates/messaging/compose.html:3
 #: apps/messaging/templates/messaging/compose.html:6
 msgid "Urgent alert"
 msgstr "Kiireellinen varoitus"
 
-#: apps/messaging/forms.py:104
+#: apps/messaging/forms.py:105
 msgid "For disruptions such as a water leak. Sent to everyone at once."
 msgstr ""
 "Häiriötilanteisiin, esimerkiksi vesivuotoon. Lähetetään kaikille kerralla."
 
-#: apps/messaging/forms.py:106
+#: apps/messaging/forms.py:107
 msgid "Send to"
 msgstr "Vastaanottajat"
 
-#: apps/messaging/forms.py:107
+#: apps/messaging/forms.py:108
 #: apps/register/templates/register/person_list.html:17
 #: apps/register/templates/register/unit_list.html:35
 msgid "Tag"
 msgstr "Tunniste"
 
-#: apps/messaging/forms.py:109 apps/register/import_views.py:24
+#: apps/messaging/forms.py:110 apps/register/import_views.py:24
 msgid "Unit type"
 msgstr "Yksikkötyyppi"
 
-#: apps/messaging/forms.py:113
+#: apps/messaging/forms.py:114
 msgid "Who in each unit"
 msgstr "Kuka kussakin yksikössä"
 
-#: apps/messaging/forms.py:119
+#: apps/messaging/forms.py:120
 #: apps/messaging/templates/messaging/batch_detail.html:9
 #: apps/messaging/templates/messaging/compose.html:18
 msgid "Send by"
 msgstr "Lähetystapa"
 
-#: apps/messaging/forms.py:127 apps/messaging/models.py:40
+#: apps/messaging/forms.py:125
+msgid ""
+"Email to those who prefer email and SMS to those who prefer SMS, or the "
+"other one when they lack an address for it. Those who prefer post get an "
+"SMS, or else an email."
+msgstr ""
+"Sähköposti niille, jotka toivovat sähköpostia, ja tekstiviesti niille, jotka "
+"toivovat tekstiviestiä, tai toinen, jos siihen ei ole osoitetta. Postia "
+"toivovat saavat tekstiviestin tai muuten sähköpostin."
+
+#: apps/messaging/forms.py:133 apps/messaging/models.py:40
 #: apps/messaging/templates/messaging/_unit_messages.html:13
 #: apps/messaging/templates/messaging/batch_detail.html:10
 #: apps/messaging/templates/messaging/compose.html:26
 msgid "Message"
 msgstr "Viesti"
 
-#: apps/messaging/forms.py:134
+#: apps/messaging/forms.py:140
 #: apps/messaging/templates/messaging/batch_detail.html:11
 msgid "Email subject"
 msgstr "Sähköpostin aihe"
 
-#: apps/messaging/forms.py:137
+#: apps/messaging/forms.py:143
 msgid "Needed when the message goes by email."
 msgstr "Tarvitaan, kun viesti lähetetään sähköpostilla."
 
-#: apps/messaging/forms.py:140
+#: apps/messaging/forms.py:146
 msgid "Longer text for email"
 msgstr "Pidempi teksti sähköpostiin"
 
 #
-#: apps/messaging/forms.py:144
+#: apps/messaging/forms.py:150
 msgid ""
 "Needed when the message goes by email only. Otherwise optional: without it, "
 "the email has the same text as the SMS."
@@ -2300,67 +2310,67 @@ msgstr ""
 "Pakollinen, kun viesti lähetetään vain sähköpostilla. Muuten vapaaehtoinen: "
 "ilman sitä sähköpostissa on sama teksti kuin tekstiviestissä."
 
-#: apps/messaging/forms.py:150
+#: apps/messaging/forms.py:156
 msgid "Also show as a notice on the public page"
 msgstr "Näytä myös tiedotteena julkisella sivulla"
 
-#: apps/messaging/forms.py:152
+#: apps/messaging/forms.py:158
 msgid "Anyone can see it there and on members' pages, so no personal details."
 msgstr ""
 "Sen näkevät kaikki julkisella sivulla ja jäsenten sivuilla, joten älä "
 "kirjoita henkilötietoja."
 
-#: apps/messaging/forms.py:155
+#: apps/messaging/forms.py:161
 msgid "Notice text"
 msgstr "Tiedotteen teksti"
 
-#: apps/messaging/forms.py:159
+#: apps/messaging/forms.py:165
 msgid "Empty: the message text."
 msgstr "Tyhjä: viestin teksti."
 
-#: apps/messaging/forms.py:162
+#: apps/messaging/forms.py:168
 msgid "Show the notice until"
 msgstr "Näytä tiedote asti"
 
-#: apps/messaging/forms.py:166
+#: apps/messaging/forms.py:172
 msgid "Empty: until you remove it."
 msgstr "Tyhjä: näkyy, kunnes poistat sen."
 
-#: apps/messaging/forms.py:197
+#: apps/messaging/forms.py:201
 msgid "Choose a tag."
 msgstr "Valitse tunniste."
 
-#: apps/messaging/forms.py:199
+#: apps/messaging/forms.py:203
 msgid "Choose a unit type."
 msgstr "Valitse yksikkötyyppi."
 
-#: apps/messaging/forms.py:202
+#: apps/messaging/forms.py:206
 msgid "Add a subject for the email."
 msgstr "Lisää sähköpostille aihe."
 
 #
-#: apps/messaging/forms.py:204
+#: apps/messaging/forms.py:208
 msgid "Write the message."
 msgstr "Kirjoita viesti."
 
 #
-#: apps/messaging/forms.py:208
+#: apps/messaging/forms.py:212
 msgid "Write the text of the email."
 msgstr "Kirjoita sähköpostin teksti."
 
-#: apps/messaging/forms.py:214
+#: apps/messaging/forms.py:218
 msgid "Write the notice without personal placeholders."
 msgstr "Kirjoita tiedote ilman henkilökohtaisia paikkamerkkejä."
 
-#: apps/messaging/forms.py:250
+#: apps/messaging/forms.py:254
 msgid "Subject"
 msgstr "Aihe"
 
-#: apps/messaging/forms.py:252 apps/register/models.py:159
+#: apps/messaging/forms.py:256 apps/register/models.py:159
 msgid "Text"
 msgstr "Teksti"
 
-#: apps/messaging/forms.py:255
+#: apps/messaging/forms.py:259
 #, python-brace-format
 msgid ""
 "Plain text. You can use {first_name}, {name} and {organisation}. An "
@@ -2369,27 +2379,27 @@ msgstr ""
 "Pelkkää tekstiä. Voit käyttää tunnisteita {first_name}, {name} ja "
 "{organisation}. Jokaisen sähköpostin loppuun lisätään peruutuslinkki."
 
-#: apps/messaging/forms.py:269 apps/messaging/models.py:42
+#: apps/messaging/forms.py:273 apps/messaging/models.py:42
 #: apps/messaging/templates/messaging/_person_newsletter.html:3
 #: apps/messaging/templates/messaging/unsubscribe.html:3
 #: apps/selfservice/templates/selfservice/member.html:62
 msgid "Newsletter"
 msgstr "Uutiskirje"
 
-#: apps/messaging/forms.py:270
+#: apps/messaging/forms.py:274
 #: apps/messaging/templates/messaging/_person_newsletter.html:6
 msgid "Wants the newsletter"
 msgstr "Haluaa uutiskirjeen"
 
-#: apps/messaging/forms.py:270
+#: apps/messaging/forms.py:274
 msgid "Does not want it"
 msgstr "Ei halua sitä"
 
-#: apps/messaging/forms.py:275
+#: apps/messaging/forms.py:279
 msgid "How it was given"
 msgstr "Miten suostumus annettiin"
 
-#: apps/messaging/forms.py:278
+#: apps/messaging/forms.py:282
 msgid "For example: signed form at the annual meeting."
 msgstr "Esimerkiksi: allekirjoitettu lomake vuosikokouksessa."
 
@@ -2404,7 +2414,7 @@ msgstr "SMS"
 msgid "Self-service links"
 msgstr "Itsepalvelulinkit"
 
-#: apps/messaging/models.py:38 apps/messaging/models.py:220
+#: apps/messaging/models.py:38 apps/messaging/models.py:221
 msgid "Reminder"
 msgstr "Muistutus"
 
@@ -2427,144 +2437,148 @@ msgid "Units missing a reading"
 msgstr "Yksiköt, joilta puuttuu lukema"
 
 #: apps/messaging/models.py:53
+msgid "Each person's preferred channel"
+msgstr "Kunkin henkilön ensisijainen kanava"
+
+#: apps/messaging/models.py:54
 msgid "SMS only"
 msgstr "Vain SMS"
 
-#: apps/messaging/models.py:54
+#: apps/messaging/models.py:55
 msgid "Email only"
 msgstr "Vain sähköposti"
 
-#: apps/messaging/models.py:55
+#: apps/messaging/models.py:56
 msgid "SMS, or email for those without a phone"
 msgstr "SMS tai sähköposti niille, joilla ei ole puhelinta"
 
-#: apps/messaging/models.py:56
+#: apps/messaging/models.py:57
 msgid "Both SMS and email"
 msgstr "Sekä SMS että sähköposti"
 
-#: apps/messaging/models.py:59
+#: apps/messaging/models.py:60
 msgid "Waiting to be sent"
 msgstr "Odottaa lähetystä"
 
-#: apps/messaging/models.py:60
+#: apps/messaging/models.py:61
 msgid "Sending"
 msgstr "Lähetetään"
 
-#: apps/messaging/models.py:61
+#: apps/messaging/models.py:62
 msgid "Done"
 msgstr "Valmis"
 
-#: apps/messaging/models.py:64
+#: apps/messaging/models.py:65
 msgid "to"
 msgstr "vastaanottaja"
 
-#: apps/messaging/models.py:67 apps/readings/models.py:83
+#: apps/messaging/models.py:68 apps/readings/models.py:83
 #: apps/selfservice/models.py:68
 msgid "reading round"
 msgstr "lukemakierros"
 
-#: apps/messaging/models.py:87
+#: apps/messaging/models.py:88
 msgid "channels"
 msgstr "kanavat"
 
-#: apps/messaging/models.py:88
+#: apps/messaging/models.py:89
 msgid "email subject"
 msgstr "sähköpostin aihe"
 
-#: apps/messaging/models.py:90
+#: apps/messaging/models.py:91
 msgid "email text"
 msgstr "sähköpostin teksti"
 
-#: apps/messaging/models.py:91
+#: apps/messaging/models.py:92
 msgid "recipients"
 msgstr "vastaanottajat"
 
 #
-#: apps/messaging/models.py:105
+#: apps/messaging/models.py:106
 msgid "file link expires"
 msgstr "tiedostolinkki vanhenee"
 
-#: apps/messaging/models.py:109 apps/messaging/models.py:144
-#: apps/messaging/models.py:329
+#: apps/messaging/models.py:110 apps/messaging/models.py:145
+#: apps/messaging/models.py:330
 msgid "send-out"
 msgstr "lähetys"
 
-#: apps/messaging/models.py:110
+#: apps/messaging/models.py:111
 msgid "send-outs"
 msgstr "lähetykset"
 
-#: apps/messaging/models.py:112
+#: apps/messaging/models.py:113
 msgid "Can send messages and alerts to everyone"
 msgstr "Voi lähettää viestejä ja varoituksia kaikille"
 
-#: apps/messaging/models.py:113
+#: apps/messaging/models.py:114
 msgid "Can send newsletters"
 msgstr "Voi lähettää uutiskirjeitä"
 
 #
-#: apps/messaging/models.py:114
+#: apps/messaging/models.py:115
 msgid "Can send a message to one unit"
 msgstr "Voi lähettää viestin yhdelle yksikölle"
 
-#: apps/messaging/models.py:136
+#: apps/messaging/models.py:137
 msgid "Queued"
 msgstr "Jonossa"
 
-#: apps/messaging/models.py:138
+#: apps/messaging/models.py:139
 msgid "Delivered"
 msgstr "Toimitettu"
 
-#: apps/messaging/models.py:139
+#: apps/messaging/models.py:140
 msgid "Failed"
 msgstr "Epäonnistui"
 
-#: apps/messaging/models.py:140
+#: apps/messaging/models.py:141
 msgid "To print"
 msgstr "Tulostettava"
 
-#: apps/messaging/models.py:152 apps/messaging/models.py:268
+#: apps/messaging/models.py:153 apps/messaging/models.py:269
 #: apps/register/models.py:291 apps/register/models.py:356
 #: apps/selfservice/models.py:62
 msgid "person"
 msgstr "henkilö"
 
-#: apps/messaging/models.py:168 apps/messaging/models.py:230
+#: apps/messaging/models.py:169 apps/messaging/models.py:231
 msgid "subject"
 msgstr "aihe"
 
-#: apps/messaging/models.py:173
+#: apps/messaging/models.py:174
 msgid "provider"
 msgstr "palveluntarjoaja"
 
-#: apps/messaging/models.py:174
+#: apps/messaging/models.py:175
 msgid "provider's id"
 msgstr "palveluntarjoajan tunnus"
 
-#: apps/messaging/models.py:178
+#: apps/messaging/models.py:179
 msgid "status changed"
 msgstr "tila muuttunut"
 
-#: apps/messaging/models.py:183
+#: apps/messaging/models.py:184
 msgid "messages"
 msgstr "viestit"
 
-#: apps/messaging/models.py:219
+#: apps/messaging/models.py:220
 msgid "Self-service link"
 msgstr "Itsepalvelulinkki"
 
-#: apps/messaging/models.py:222
+#: apps/messaging/models.py:223
 msgid "Payment reminder"
 msgstr "Maksumuistutus"
 
-#: apps/messaging/models.py:224
+#: apps/messaging/models.py:225
 msgid "purpose"
 msgstr "tarkoitus"
 
-#: apps/messaging/models.py:230
+#: apps/messaging/models.py:231
 msgid "Email only."
 msgstr "Vain sähköposti."
 
-#: apps/messaging/models.py:234
+#: apps/messaging/models.py:235
 #, python-brace-format
 msgid ""
 "Placeholders: {name}, {first_name}, {link}, {closes}, {period}, "
@@ -2577,84 +2591,84 @@ msgstr ""
 "{organisation_email}, {organisation_website} ja {emergency_phone}. Pidä SMS "
 "lyhyenä: noin 160 merkkiä on yksi viesti."
 
-#: apps/messaging/models.py:243
+#: apps/messaging/models.py:244
 msgid "message template"
 msgstr "viestipohja"
 
-#: apps/messaging/models.py:244
+#: apps/messaging/models.py:245
 msgid "message templates"
 msgstr "viestipohjat"
 
-#: apps/messaging/models.py:263
+#: apps/messaging/models.py:264
 msgid "Self-service page"
 msgstr "Itsepalvelusivu"
 
-#: apps/messaging/models.py:264
+#: apps/messaging/models.py:265
 msgid "Entered by staff"
 msgstr "Henkilökunnan syöttämä"
 
-#: apps/messaging/models.py:265
+#: apps/messaging/models.py:266
 msgid "Unsubscribe link"
 msgstr "Peruutuslinkki"
 
-#: apps/messaging/models.py:270
+#: apps/messaging/models.py:271
 msgid "wants the newsletter"
 msgstr "haluaa uutiskirjeen"
 
-#: apps/messaging/models.py:271 apps/readings/models.py:141
+#: apps/messaging/models.py:272 apps/readings/models.py:141
 msgid "source"
 msgstr "lähde"
 
-#: apps/messaging/models.py:282
+#: apps/messaging/models.py:283
 msgid "For example: signed form, 3 May."
 msgstr "Esimerkiksi: allekirjoitettu lomake, 3. toukokuuta."
 
-#: apps/messaging/models.py:287
+#: apps/messaging/models.py:288
 msgid "newsletter consent"
 msgstr "uutiskirjeen suostumus"
 
-#: apps/messaging/models.py:288
+#: apps/messaging/models.py:289
 msgid "newsletter consents"
 msgstr "uutiskirjeen suostumukset"
 
-#: apps/messaging/models.py:291
+#: apps/messaging/models.py:292
 #: apps/messaging/templates/messaging/_person_newsletter.html:24
 msgid "yes"
 msgstr "kyllä"
 
-#: apps/messaging/models.py:291
+#: apps/messaging/models.py:292
 #: apps/messaging/templates/messaging/_person_newsletter.html:24
 msgid "no"
 msgstr "ei"
 
 #
-#: apps/messaging/models.py:335
+#: apps/messaging/models.py:336
 msgid "file"
 msgstr "tiedosto"
 
-#: apps/messaging/models.py:337
+#: apps/messaging/models.py:338
 msgid "size"
 msgstr "koko"
 
-#: apps/messaging/models.py:338 apps/register/models.py:313
+#: apps/messaging/models.py:339 apps/register/models.py:313
 msgid "type"
 msgstr "tyyppi"
 
 #
-#: apps/messaging/models.py:341
+#: apps/messaging/models.py:342
 msgid "uploaded by"
 msgstr "ladannut"
 
-#: apps/messaging/models.py:347
+#: apps/messaging/models.py:348
 msgid "uploaded"
 msgstr "ladattu"
 
-#: apps/messaging/models.py:351
+#: apps/messaging/models.py:352
 msgid "attachment"
 msgstr "liite"
 
 #
-#: apps/messaging/models.py:352
+#: apps/messaging/models.py:353
 msgid "attachments"
 msgstr "liitteet"
 
@@ -2672,11 +2686,11 @@ msgstr "Tilaus peruutettiin ennen lähetystä."
 msgid "Email is not set up."
 msgstr "Sähköpostia ei ole otettu käyttöön."
 
-#: apps/messaging/sending.py:103
+#: apps/messaging/sending.py:95
 msgid "The unit has no contact person."
 msgstr "Yksiköllä ei ole yhteyshenkilöä."
 
-#: apps/messaging/sending.py:136
+#: apps/messaging/sending.py:128
 msgid "[personal link]"
 msgstr "[henkilökohtainen linkki]"
 
@@ -2772,7 +2786,7 @@ msgid "No messages yet."
 msgstr "Ei vielä viestejä."
 
 #: apps/messaging/templates/messaging/batch_detail.html:17
-#: apps/messaging/templates/messaging/compose.html:90
+#: apps/messaging/templates/messaging/compose.html:106
 msgid "Public notice"
 msgstr "Julkinen tiedote"
 
@@ -2950,11 +2964,15 @@ msgstr "Yksikön %(name)s yhteyshenkilöille."
 msgid "Back to the unit"
 msgstr "Takaisin yksikköön"
 
-#: apps/messaging/templates/messaging/compose.html:97
+#: apps/messaging/templates/messaging/compose.html:81
+msgid "Other options"
+msgstr "Muut vaihtoehdot"
+
+#: apps/messaging/templates/messaging/compose.html:113
 msgid "Check recipients"
 msgstr "Tarkista vastaanottajat"
 
-#: apps/messaging/templates/messaging/compose.html:100
+#: apps/messaging/templates/messaging/compose.html:116
 msgid "Nothing is sent until you have checked the recipients and confirmed."
 msgstr ""
 "Mitään ei lähetetä, ennen kuin olet tarkistanut vastaanottajat ja "
@@ -3074,15 +3092,15 @@ msgstr "Peruuta tilaus"
 msgid "Nobody can be reached with these choices."
 msgstr "Näillä valinnoilla ei tavoiteta ketään."
 
-#: apps/messaging/views.py:201
+#: apps/messaging/views.py:203
 msgid "The notice is no longer shown."
 msgstr "Tiedote ei ole enää näkyvillä."
 
-#: apps/messaging/views.py:224
+#: apps/messaging/views.py:226
 msgid "Everyone who wants the newsletter"
 msgstr "Kaikki, jotka haluavat uutiskirjeen"
 
-#: apps/messaging/views.py:260
+#: apps/messaging/views.py:262
 msgid "Saved the newsletter choice."
 msgstr "Uutiskirjeen valinta tallennettu."
 
@@ -4008,7 +4026,10 @@ msgstr "monikkonimi"
 msgid ""
 "For example \"Households\". Used in the menu and headings when this is the "
 "only unit type. Empty means the general word for units is used."
-msgstr "Esimerkiksi \"Taloudet\". Käytetään valikossa ja otsikoissa, kun tämä on ainoa yksikkötyyppi. Tyhjä tarkoittaa, että käytetään yleistä sanaa yksiköistä."
+msgstr ""
+"Esimerkiksi \"Taloudet\". Käytetään valikossa ja otsikoissa, kun tämä on "
+"ainoa yksikkötyyppi. Tyhjä tarkoittaa, että käytetään yleistä sanaa "
+"yksiköistä."
 
 #: apps/register/models.py:145
 msgid "unit types"
@@ -5484,10 +5505,9 @@ msgstr ""
 "Suojaa tilisi kaksivaiheisella tunnistautumisella. Se vie minuutin "
 "todennussovelluksella puhelimellasi."
 
-#, fuzzy, python-format
-#~| msgid "All types"
-#~ msgid "Add: %(type)s"
-#~ msgstr "Kaikki tyypit"
+#, python-format
+#~ msgid "New %(unit_type)s"
+#~ msgstr "Uusi %(unit_type)s"
 
 #~ msgid "To restore a snapshot, see INSTALL.md, Backup and restore."
 #~ msgstr ""
@@ -5505,3 +5525,8 @@ msgstr ""
 
 #~ msgid "backups"
 #~ msgstr "varmuuskopiot"
+
+#, fuzzy, python-format
+#~| msgid "All types"
+#~ msgid "Add: %(type)s"
+#~ msgstr "Kaikki tyypit"

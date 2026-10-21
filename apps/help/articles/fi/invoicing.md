@@ -41,7 +41,9 @@ negatiivisena maksuna.
 
 **Laskut > Erääntynyt** listaa maksamattomat laskut, joiden eräpäivä on
 ohi. **Lähetä muistutukset valituille** lähettää maksumuistutuksen
-sähköpostilla, tekstiviestillä tai kirjeellä; mukana on muistutusmaksu, jos
+kunkin ensisijaisella kanavalla (sähköposti tai tekstiviesti, tai toinen, jos
+siihen ei ole osoitetta) tai kirjeenä niille, jotka toivovat postia tai joilla
+ei ole kumpaakaan; mukana on muistutusmaksu, jos
 sellainen on määritetty, ja maksuaikaa on vähintään 14 päivää.
 
 ## Kirjanpitäjälle

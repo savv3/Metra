@@ -6,13 +6,20 @@
 med en tagg eller av en typ, eller till enheterna i listan du har filtrerat
 (**Skicka ett meddelande till de här enheterna** under enhetslistan). Välj om
 det går till alla kontakter för varje enhet eller bara huvudkontakten, och
-hur:
+hur. Det vanliga valet är **Enligt var och ens önskade kanal**: de som vill ha
+e-post får e-post och de som vill ha sms får sms, eller det andra om de saknar
+adress för det (eller om det misslyckas). De här meddelandena skickas inte som
+brev, så de som vill ha post får sms, eller annars e-post. Önskad kanal ställs
+in på varje persons sida. Under **Andra alternativ** kan du i stället välja,
+oavsett vad var och en önskar:
 
 - **Endast SMS** eller **Endast e-post**,
 - **SMS, eller e-post till dem som saknar telefon**, eller
 - **Både SMS och e-post**.
 
-Formuläret visar bara de texter som det valda sättet behöver. Platshållare
+Med önskad kanal skriver du både sms-texten och e-postens ämne, eftersom
+mottagarna kan få vilket som helst. Formuläret visar bara de texter som det
+valda sättet behöver. Platshållare
 som `{first_name}` och `{unit}` fylls i för varje person, och en räknare visar
 hur många sms texten blir. Innan något skickas visar en kontrollsida hur
 många som får sms och e-post, och vilka som inte kan nås, så att någon kan
@@ -22,13 +29,13 @@ ringa dem.
 
 **Brådskande varning** (den röda knappen) är för avbrott, som en vattenläcka.
 Den går med sms och e-post till alla kontakter för alla aktiva enheter på en
-gång, och kan också visas som ett anslag på den offentliga sidan.
+gång, oavsett vad de önskar, och kan också visas som ett anslag på den offentliga sidan.
 Utskickets sida visar varje persons leveransstatus medan det pågår.
 
 ## Ett hushåll
 
 På en enhets sida skriver **Skicka meddelande** under **Meddelanden** till
-den enhetens kontakter. Samma avsnitt visar allt de har fått: länkar,
+den enhetens kontakter, i första hand via var och ens önskade kanal. Samma avsnitt visar allt de har fått: länkar,
 påminnelser, fakturor och meddelanden.
 
 ## Bilagor

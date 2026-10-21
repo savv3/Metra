@@ -1,7 +1,9 @@
 """Sending issued invoices: by email with the PDF attached, or in a print batch.
 
 A recipient whose preferred channel is post, or who has no email address,
-gets a letter; so does everyone when email is not set up. Every email is a
+gets a letter; so does everyone when email is not set up. Invoices do not
+go by SMS, so a recipient who prefers SMS gets the email (see
+apps.messaging.preference). Every email is a
 message record in its send-out, so its status shows like any other message.
 """
 
@@ -18,20 +20,17 @@ from apps.messaging.models import (
     MessageTemplate,
     organisation_placeholders,
 )
+from apps.messaging.preference import channel_order
 from apps.messaging.registry import EMAIL, ProviderError, provider_for
-from apps.register.models import Person
 
 from .models import Invoice, InvoiceDelivery
 from .pdf import PDFUnavailable, render_pdf
 
 
 def channel_for(invoice):
-    person = invoice.person
-    if person.preferred_channel == Person.Channel.POST or not person.email:
-        return InvoiceDelivery.Channel.LETTER
-    if provider_for(EMAIL) is None:
-        return InvoiceDelivery.Channel.LETTER
-    return InvoiceDelivery.Channel.EMAIL
+    if channel_order(invoice.person, offered=(EMAIL,)):
+        return InvoiceDelivery.Channel.EMAIL
+    return InvoiceDelivery.Channel.LETTER
 
 
 def unsent(invoices):
