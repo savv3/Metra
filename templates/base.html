@@ -24,7 +24,7 @@
           {% if perms.invoicing.view_invoice %}{% translate "Invoices" as label %}{% nav_link "invoicing:invoice_list" label %}{% endif %}
           {% if perms.messaging.view_messagebatch %}{% translate "Send-outs" as label %}{% nav_link "messaging:batch_list" label %}{% endif %}
           {% plugin_navigation %}
-          {% if user.is_staff %}{% translate "Settings" as label %}{% nav_link "admin:index" label %}{% endif %}
+          {% if user|can_open_settings %}{% translate "Settings" as label %}{% nav_link "core:settings" label %}{% endif %}
           {% help_link %}
         </nav>
         {% notification_bell %}

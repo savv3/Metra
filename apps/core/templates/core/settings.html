@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Settings" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Settings" %}</h1>
+  </div>
+
+  {% for group, links in groups %}
+    <section class="card settings-group" id="settings-{{ group.key }}" aria-labelledby="settings-{{ group.key }}-title">
+      <h2 id="settings-{{ group.key }}-title">{{ group.title }}</h2>
+      {% for url, label, description in links %}
+        <div class="setting-row">
+          <div>
+            <h3><a href="{{ url }}">{{ label }}</a></h3>
+            {% if description %}<p class="help">{{ description }}</p>{% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </section>
+  {% endfor %}
+{% endblock %}

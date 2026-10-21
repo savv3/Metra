@@ -11,7 +11,19 @@ class BillingSettingsAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
     show_auditlog_history_link = True
     fieldsets = [
         (_("VAT"), {"fields": ["vat_registered", "default_vat_rate", "vat_exemption_text"]}),
-        (_("Payment"), {"fields": ["iban", "bic", "payment_terms_days", "late_interest_text"]}),
+        (
+            _("Payment"),
+            {
+                "fields": [
+                    "iban",
+                    "bic",
+                    "payment_terms_days",
+                    "reference_type",
+                    "late_interest_text",
+                ]
+            },
+        ),
+        (_("Payment reminders"), {"fields": ["reminder_fee", "reminder_days"]}),
         (_("Numbering"), {"fields": ["number_prefix", "next_number"]}),
         (_("Invoice text"), {"fields": ["footer"]}),
     ]
@@ -68,6 +80,10 @@ class FeeLineAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
     list_display = ["description", "plan", "kind", "unit_price", "vat_rate"]
     list_filter = ["plan", "kind"]
     inlines = [FeeTierInline]
+
+    def get_model_perms(self, request):
+        # Not listed on its own: a fee line belongs to its plan and is edited there.
+        return {}
 
 
 @admin.register(Invoice)

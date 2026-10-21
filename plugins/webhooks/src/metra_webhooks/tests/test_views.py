@@ -168,6 +168,6 @@ def test_settings_page_links_to_webhooks(client, make_user, settings):
     settings.REQUIRE_MFA = False
     client.force_login(make_user("root", "Admin", is_staff=True))
 
-    page = client.get(reverse("admin:index")).content.decode()
+    page = client.get(reverse("core:settings")).content.decode()
 
     assert reverse("metra_webhooks:endpoint_list") in page

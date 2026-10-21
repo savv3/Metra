@@ -196,7 +196,7 @@ def test_settings_page_lists_plugin_links(client, make_user, settings):
     settings.REQUIRE_MFA = False
     client.force_login(make_user("root", "Admin", is_staff=True))
 
-    page = client.get(reverse("admin:index")).content.decode()
+    page = client.get(reverse("core:settings")).content.decode()
 
     assert 'href="/plugins/example/">Example plugin</a>' in page
     assert "What the example plugin adds." in page

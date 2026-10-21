@@ -14,6 +14,15 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- A Settings page of Metra's own at /settings/, grouped by task:
+  Organisation, Register, Readings, Invoicing, Messages, Users and roles,
+  Integrations, Backups and the Setup wizard, each entry with a short
+  description. Everyone sees only the entries their role may change, and the
+  menu shows Settings to anyone with at least one. The full admin is under
+  Advanced, for superusers only. Links that plugins add with
+  `api.add_settings_link` are listed under Integrations.
+- Invoice settings now include the payment reference type and the reminder
+  fee and days, which could not be changed before.
 - A unit type can have a plural name. With exactly one unit type, the menu,
   the list heading and the buttons use that type's own name instead of
   "Units", and the unit list drops the type filter and column. Adding a unit
@@ -59,6 +68,10 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   days, then weekly for 4 weeks and monthly for 12 months; ones taken by hand
   stay until deleted. A new Backups page lists them, here and offsite.
 - `manage.py backup` is now `manage.py snapshot`.
+- The menu's Settings opens the new Settings page instead of the admin. Fee
+  lines are no longer listed on their own in the admin (they are edited in
+  their fee plan), and the admin's index shows non-superusers only the
+  tables that are settings.
 - New message and Message to one unit send on each person's preferred
   channel by default ("Each person's preferred channel"); SMS only, Email
   only, SMS or email, and Both are under "Other options". Urgent alerts still

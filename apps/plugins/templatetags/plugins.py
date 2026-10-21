@@ -102,10 +102,9 @@ def member_panels(context, member_link):
     return mark_safe("\n".join(html))
 
 
-@register.simple_tag(takes_context=True)
-def plugin_settings_links(context):
-    """(url, label, description) for the plugins' links on the Settings page."""
-    user = context["request"].user
+def settings_links(user):
+    """(url, label, description) for the plugins' links on the Settings page
+    that ``user`` may open."""
     links = []
     for link in hooks.get(SETTINGS_LINKS):
         if not _allowed(user, link.permission):
@@ -115,3 +114,9 @@ def plugin_settings_links(context):
         except NoReverseMatch:
             logger.exception("Plugin settings link %r has no URL", link.label)
     return links
+
+
+@register.simple_tag(takes_context=True)
+def plugin_settings_links(context):
+    """(url, label, description) for the plugins' links on the Settings page."""
+    return settings_links(context["request"].user)

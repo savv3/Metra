@@ -12,7 +12,7 @@ Alla som arbetar i Metra har ett konto med en roll:
 | Läsbehörighet | Se registret |
 
 En administratör lägger till användare under **Inställningar >
-Användare**, eller bjuder in dem med installationsguidens steg **Bjud in
+Användare och roller > Användare**, eller bjuder in dem med installationsguidens steg **Bjud in
 styrelsen**, som skickar en länk för att välja lösenord.
 
 ## Tvåfaktorsinloggning

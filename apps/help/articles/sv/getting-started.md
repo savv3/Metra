@@ -10,7 +10,7 @@ fakturor.
 - **Avläsningar**: avläsningsomgångar, till exempel den årliga avläsningen av vattenmätare.
 - **Fakturor**: faktureringsomgångar, betalningar och påminnelser.
 - **Utskick**: meddelanden, brådskande varningar och nyhetsbrev, med leveransstatus.
-- **Inställningar** (administratörer): organisationen, enhetstyper och fält, användare och roller, meddelandemallar, faktureringsinställningar och säkerhetskopior.
+- **Inställningar**: organisationen, registrets enhetstyper och fält, avläsningstyper, faktureringsinställningar och avgiftsplaner, meddelandemallar, användare och roller, integrationer och säkerhetskopior. Se ”Inställningar” nedan.
 - **Hjälp**: de här guiderna. Hjälplänken på varje sida öppnar guiden för just den sidan.
 
 Ditt eget språk, ljust eller mörkt tema och tvåfaktorsinloggning finns i
@@ -34,8 +34,25 @@ en sida i taget:
 7. **Bjud in styrelsen**: var och en får ett e-postmeddelande med en länk för att välja lösenord.
 
 Alla steg kan hoppas över, och inget ändras förrän ett steg sparas.
-Administratörer kan köra guiden igen under **Inställningar > Kör
-installationsguiden**.
+Administratörer kan köra guiden igen under **Inställningar >
+Installationsguide**.
+
+## Inställningar
+
+**Inställningar** i menyn samlar allt som en administratör ställer in,
+ordnat efter uppgift:
+
+- **Organisation**: namn, FO-nummer, kontaktuppgifter, logotyp och den offentliga sidan.
+- **Register**: enhetstyper och deras fält, fält för personer och taggar.
+- **Avläsningar**: avläsningstyper.
+- **Fakturering**: faktureringsinställningar och avgiftsplaner. Avgiftsraderna ändras i själva avgiftsplanen.
+- **Meddelanden**: meddelandemallar, anslag på den offentliga sidan och samtycken till nyhetsbrev.
+- **Användare och roller**: vem som kan logga in och vad varje roll får göra.
+- **Integrationer**: API-klienter, webhooks och andra kopplingar, när de är påslagna.
+- **Säkerhetskopior** och **Installationsguide**.
+
+Var och en ser bara det som den egna rollen får ändra, och menyn visar
+Inställningar bara för dem som kan ändra något där.
 
 ## Medlemmar
 

@@ -13,6 +13,6 @@
   {% else %}
     <p class="empty">{% blocktranslate trimmed %}
       There are no unit types yet. An administrator must create a unit type first under
-    {% endblocktranslate %} <a href="{% url 'admin:index' %}">{% translate "Settings" %}</a>.</p>
+    {% endblocktranslate %} <a href="{% url 'core:settings' %}">{% translate "Settings" %}</a>.</p>
   {% endif %}
 {% endblock %}

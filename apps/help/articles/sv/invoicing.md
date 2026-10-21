@@ -2,9 +2,9 @@
 
 ## Inställningar och avgifter
 
-Under **Inställningar > Faktureringsinställningar** ställer en administratör
+Under **Inställningar > Fakturering > Faktureringsinställningar** ställer en administratör
 in bankkonto, betalningsvillkor, moms, numrering och texterna på fakturorna.
-**Inställningar > Avgiftsplaner** anger vad enheterna betalar: fasta avgifter
+**Inställningar > Fakturering > Avgiftsplaner** anger vad enheterna betalar: fasta avgifter
 och avgifter per enhet av en avläsning (som per m³), om man vill i
 prisnivåer, var och en med sin momssats.
 

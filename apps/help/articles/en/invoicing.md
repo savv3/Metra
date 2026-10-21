@@ -2,8 +2,8 @@
 
 ## Settings and fees
 
-Under **Settings > Invoice settings** an admin sets the bank account, payment
-terms, VAT, numbering and the texts on invoices. **Settings > Fee plans** says
+Under **Settings > Invoicing > Invoice settings** an admin sets the bank account, payment
+terms, VAT, numbering and the texts on invoices. **Settings > Invoicing > Fee plans** says
 what units pay: fixed fees and fees per unit of a reading (such as per m³),
 optionally in price tiers, each with its VAT rate.
 
