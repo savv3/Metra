@@ -293,3 +293,21 @@ def test_invoices_that_became_overdue_notify_the_treasurer_once(
     Invoice.objects.filter(unit__name="Bystigen 8").update(due_date=TODAY)
     with django_capture_on_commit_callbacks(execute=True):
         assert notify_overdue(TODAY + datetime.timedelta(days=1)) == 1
+
+
+@pytest.mark.parametrize(
+    "person, channel",
+    [
+        ({"phone": "0401", "email": "a@example.com", "preferred_channel": "email"}, "email"),
+        ({"phone": "0401", "email": "a@example.com", "preferred_channel": "sms"}, "sms"),
+        ({"email": "a@example.com", "preferred_channel": "sms"}, "email"),
+        ({"phone": "0401", "preferred_channel": "email"}, "sms"),
+        ({"phone": "0401", "email": "a@example.com", "preferred_channel": "post"}, "letter"),
+        ({"preferred_channel": "sms"}, "letter"),
+    ],
+)
+def test_reminder_channel_follows_the_preference(db, person, channel):
+    from apps.invoicing.payments import channel_for
+    from apps.register.models import Person
+
+    assert channel_for(Person(first_name="Anna", **person)) == channel

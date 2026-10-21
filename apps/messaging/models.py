@@ -50,6 +50,7 @@ class MessageBatch(models.Model):
     class Channels(models.TextChoices):
         """For messages written by staff: which channels each person gets."""
 
+        PREFERRED = "preferred", _("Each person's preferred channel")
         SMS = "sms", _("SMS only")
         EMAIL = "email", _("Email only")
         SMS_OR_EMAIL = "sms_or_email", _("SMS, or email for those without a phone")

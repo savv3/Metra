@@ -60,11 +60,11 @@ def test_the_message_shows_on_the_unit_page(board_client, make_household):
     assert "anna@example.com" in page
 
 
-def test_email_is_the_default_and_sms_an_option(board_client, make_household):
+def test_the_preferred_channel_is_the_default_and_sms_an_option(board_client, make_household):
     unit = make_household("Byvägen 4", first_name="Anna", phone="0401234567")
 
     form = board_client.get(url(unit), HTTP_ACCEPT_LANGUAGE="en").content.decode()
-    assert re.search(r'value="email"[^>]*checked', form)
+    assert re.search(r'value="preferred"[^>]*checked', form)
     assert 'name="scope"' not in form
     assert 'name="urgent"' not in form
 
