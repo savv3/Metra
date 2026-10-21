@@ -69,9 +69,25 @@
         {{ form.filters }}
       {% endif %}
       {% include "register/_field.html" with field=form.contacts %}
-      {% include "register/_field.html" with field=form.channels %}
+      {# The preferred channel is the usual choice; the others wait behind a disclosure, open when one of them is chosen. #}
+      <div class="field{% if form.channels.errors %} field--error{% endif %}">
+        <fieldset class="channel-choice">
+          <legend>{{ form.channels.label }}</legend>
+          {% for radio in form.channels %}{% if radio.data.value == "preferred" %}
+            <label for="{{ radio.id_for_label }}">{{ radio.tag }} {{ radio.choice_label }}</label>
+          {% endif %}{% endfor %}
+          <p class="help" id="{{ form.channels.auto_id }}_helptext">{{ form.channels.help_text }}</p>
+          <details{% if form.channels.value != "preferred" %} open{% endif %}>
+            <summary>{% translate "Other options" %}</summary>
+            {% for radio in form.channels %}{% if radio.data.value != "preferred" %}
+              <label for="{{ radio.id_for_label }}">{{ radio.tag }} {{ radio.choice_label }}</label>
+            {% endif %}{% endfor %}
+          </details>
+        </fieldset>
+        {% if form.channels.errors %}<ul class="errorlist">{% for e in form.channels.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+      </div>
       {# Only the texts the chosen channels need are shown; app.js switches them as the choice changes. #}
-      <div class="field{% if form.body.errors %} field--error{% endif %}" data-channels="sms sms_or_email sms_and_email"{% if form.channels.value == "email" %} hidden{% endif %}>
+      <div class="field{% if form.body.errors %} field--error{% endif %}" data-channels="preferred sms sms_or_email sms_and_email"{% if form.channels.value == "email" %} hidden{% endif %}>
         <label for="{{ form.body.id_for_label }}">{{ form.body.label }}</label>
         <textarea name="body" id="{{ form.body.id_for_label }}" rows="4" maxlength="1600" aria-describedby="sms-count body-help"
                   hx-get="{% url 'messaging:sms_count' %}" hx-trigger="input changed delay:300ms, load" hx-target="#sms-count">{{ form.body.value|default:"" }}</textarea>
@@ -79,7 +95,7 @@
         <p class="help" id="body-help">{{ form.body.help_text }}</p>
         {% if form.body.errors %}<ul class="errorlist">{% for e in form.body.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
       </div>
-      <div data-channels="email sms_or_email sms_and_email"{% if form.channels.value == "sms" %} hidden{% endif %}>
+      <div data-channels="preferred email sms_or_email sms_and_email"{% if form.channels.value == "sms" %} hidden{% endif %}>
         {% include "register/_field.html" with field=form.subject %}
         {% include "register/_field.html" with field=form.email_body %}
       </div>

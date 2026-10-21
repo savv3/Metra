@@ -34,7 +34,7 @@ Recent self-service changes**.
 
 On the round page:
 
-- **Send links to all units** sends each unit's main contact a new link by SMS, or by email if they have no phone. Those with neither, or who prefer post, are listed for printed letters.
+- **Send links to all units** sends each unit's main contact a new link on their preferred channel (email or SMS), or the other one if they have no address for it. Those with neither, or who prefer post, are listed for printed letters.
 - **Send reminder to units missing a reading** does the same for those who have not reported.
 - **Self-service links** prints letters with a QR code for everyone, for those missing a reading, or for those without phone or email.
 

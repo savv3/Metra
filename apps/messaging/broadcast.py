@@ -16,6 +16,7 @@ from apps.selfservice.models import ROLE_PREFERENCE
 
 from . import attachments
 from .models import Channel, Message, MessageBatch, MessageTemplate, organisation_placeholders
+from .preference import channel_order, reachable
 from .registry import EMAIL, SMS, ProviderError, provider_for
 from .sms import segments
 
@@ -84,21 +85,25 @@ def people_for(units, contacts):
     return pairs
 
 
+# Send-outs where each person gets one message, on the first channel that works.
+ONE_EACH = (MessageBatch.Channels.PREFERRED, MessageBatch.Channels.SMS_OR_EMAIL)
+
+
 def channels_for(person, mode):
-    """The channels a person gets in this send-out, given what is set up."""
-    has = {
-        SMS: bool(person.phone) and provider_for(SMS) is not None,
-        EMAIL: bool(person.email) and provider_for(EMAIL) is not None,
-    }
+    """The channels a person gets in this send-out, given what is set up.
+    For one message each, they are tried in order when sending."""
+    if mode == MessageBatch.Channels.PREFERRED:
+        # There are no letters here, so those who prefer post get SMS or email.
+        return channel_order(person, letters=False)
     if mode == MessageBatch.Channels.SMS:
-        return [SMS] if has[SMS] else []
-    if mode == MessageBatch.Channels.EMAIL:
-        return [EMAIL] if has[EMAIL] else []
-    if mode == MessageBatch.Channels.SMS_AND_EMAIL:
-        # Urgent: everyone gets everything they can, whatever they prefer.
-        return [channel for channel in (SMS, EMAIL) if has[channel]]
-    # SMS, or email for those without a phone; tried in that order when sending.
-    return [SMS, EMAIL] if has[SMS] and has[EMAIL] else [c for c in (SMS, EMAIL) if has[c]]
+        wanted = [SMS]
+    elif mode == MessageBatch.Channels.EMAIL:
+        wanted = [EMAIL]
+    else:
+        # Both (urgent: everyone gets everything they can, whatever they
+        # prefer), or SMS and email for those without a phone.
+        wanted = [SMS, EMAIL]
+    return [channel for channel in wanted if reachable(person, channel)]
 
 
 def plan(pairs, mode):
@@ -106,7 +111,7 @@ def plan(pairs, mode):
     for person, unit in pairs:
         channels = channels_for(person, mode)
         (recipients if channels else unreachable).append(Recipient(person, unit, channels))
-    if mode == MessageBatch.Channels.SMS_OR_EMAIL:
+    if mode in ONE_EACH:
         # Counted as what they will get first.
         for recipient in recipients:
             recipient.channels = recipient.channels[:1]
@@ -158,10 +163,7 @@ def send_written(batch):
                 continue
             for channel in channels:
                 message = _send(batch, person, unit, channel)
-                if (
-                    batch.channels == MessageBatch.Channels.SMS_OR_EMAIL
-                    and message.status != Message.Status.FAILED
-                ):
+                if batch.channels in ONE_EACH and message.status != Message.Status.FAILED:
                     break  # one channel is enough, unless it is urgent
 
 

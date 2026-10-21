@@ -38,7 +38,7 @@ omatoimiset muutokset**.
 
 Kierroksen sivulla:
 
-- **Lähetä linkit kaikille yksiköille** lähettää kunkin yksikön pääyhteyshenkilölle uuden linkin tekstiviestillä tai sähköpostilla, jos puhelinta ei ole. Ne, joilla ei ole kumpaakaan tai jotka haluavat postin, listataan painettavia kirjeitä varten.
+- **Lähetä linkit kaikille yksiköille** lähettää kunkin yksikön pääyhteyshenkilölle uuden linkin hänen ensisijaisella kanavallaan (sähköposti tai tekstiviesti) tai toisella, jos siihen ei ole osoitetta. Ne, joilla ei ole kumpaakaan tai jotka haluavat postin, listataan painettavia kirjeitä varten.
 - **Lähetä muistutus yksiköille, joilta puuttuu lukema** tekee saman niille, jotka eivät ole ilmoittaneet lukemaa.
 - **Itsepalvelulinkit** tulostaa kirjeet QR-koodeineen kaikille, niille joilta lukema puuttuu tai niille, joilla ei ole puhelinta eikä sähköpostia.
 

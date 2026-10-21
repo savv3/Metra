@@ -21,9 +21,9 @@ from apps.messaging.models import (
     MessageTemplate,
     organisation_placeholders,
 )
-from apps.messaging.registry import EMAIL, SMS, ProviderError, provider_for
+from apps.messaging.preference import channel_order
+from apps.messaging.registry import EMAIL, ProviderError, provider_for
 from apps.plugins import events
-from apps.register.models import Person
 
 from .delivery import filename
 from .models import BillingSettings, Payment, PaymentReminder
@@ -68,13 +68,9 @@ def reminder_placeholders(invoice, reminder):
 
 
 def channel_for(person):
-    """Email (with the reminder PDF), else SMS, else a printed letter."""
-    if person.preferred_channel != Person.Channel.POST:
-        if person.email and provider_for(EMAIL):
-            return EMAIL
-        if person.phone and provider_for(SMS):
-            return SMS
-    return Channel.LETTER
+    """The person's preferred channel, then the other one, else a printed
+    letter (see apps.messaging.preference). An email has the reminder PDF."""
+    return next(iter(channel_order(person)), Channel.LETTER)
 
 
 def send_reminders(batch, invoices, user=None):

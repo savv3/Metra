@@ -12,6 +12,7 @@ from .models import (
     MessageTemplate,
     organisation_placeholders,
 )
+from .registry import EMAIL
 
 SCOPES = [
     (broadcast.EVERYONE, _("Everyone")),
@@ -118,8 +119,13 @@ class MessageForm(AttachmentsMixin, forms.Form):
     channels = forms.ChoiceField(
         label=_("Send by"),
         choices=MessageBatch.Channels.choices,
-        initial=MessageBatch.Channels.SMS_OR_EMAIL,
+        initial=MessageBatch.Channels.PREFERRED,
         widget=forms.RadioSelect,
+        help_text=_(
+            "Email to those who prefer email and SMS to those who prefer SMS, or the "
+            "other one when they lack an address for it. Those who prefer post get an "
+            "SMS, or else an email."
+        ),
     )
     # The SMS text, and the email's text too unless email_body is given.
     # Which texts are needed depends on the channels; see clean().
@@ -178,8 +184,6 @@ class MessageForm(AttachmentsMixin, forms.Form):
             for name in ("urgent", "scope", "tag", "unit_type", "filters"):
                 del self.fields[name]
             can_publish_notice = urgent = False
-            if not self.is_bound:
-                self.initial["channels"] = MessageBatch.Channels.EMAIL
         if not can_publish_notice:
             for name in ("notice", "notice_text", "notice_until"):
                 del self.fields[name]
@@ -216,11 +220,11 @@ class MessageForm(AttachmentsMixin, forms.Form):
                 cleaned["notice_text"] = text
         return cleaned
 
-    def main_text(self):
+    def main_text(self, channel=None):
         """The text recipients read: the SMS text, or the email's text when
-        the message goes by email only."""
+        the message goes by email only or the ``channel`` is email."""
         data = self.cleaned_data
-        if data["channels"] == MessageBatch.Channels.EMAIL:
+        if data["channels"] == MessageBatch.Channels.EMAIL or channel == EMAIL:
             return data["email_body"] or data["body"]
         return data["body"]
 

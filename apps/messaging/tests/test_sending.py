@@ -20,8 +20,10 @@ def send(round_, kind="links", scope="all"):
     return batch
 
 
-def test_sms_first_then_email_then_letter(open_round, make_household):
-    sms = make_household("A", first_name="Anna", phone="040 123 4567", email="a@example.com")
+def test_preferred_channel_then_the_other_then_letter(open_round, make_household):
+    sms = make_household(
+        "A", first_name="Anna", phone="040 123 4567", email="a@example.com", preferred_channel="sms"
+    )
     email = make_household("B", first_name="Bo", email="bo@example.com")
     letter = make_household("C", first_name="Cia")
     nobody = make_household("D")
@@ -54,7 +56,9 @@ def test_messages_carry_a_working_link_that_is_not_stored(open_round, make_house
 
 
 def test_failed_sms_falls_back_to_email_and_its_link_is_stopped(open_round, make_household):
-    make_household("A", first_name="Anna", phone="+000", email="anna@example.com")
+    make_household(
+        "A", first_name="Anna", phone="+000", email="anna@example.com", preferred_channel="sms"
+    )
 
     batch = send(open_round)
 
@@ -65,15 +69,46 @@ def test_failed_sms_falls_back_to_email_and_its_link_is_stopped(open_round, make
     assert LINK.search(mail.outbox[0].body)
 
 
-def test_sms_comes_first_whatever_the_preference_except_post(open_round, make_household):
+def test_the_preferred_channel_comes_first(open_round, make_household):
     prefers_email = make_household(
         "A", first_name="A", phone="0401234567", email="a@example.com", preferred_channel="email"
     )
-    prefers_post = make_household("B", first_name="B", phone="0402345678", preferred_channel="post")
+    prefers_sms = make_household(
+        "B", first_name="B", phone="0402345678", email="b@example.com", preferred_channel="sms"
+    )
+    prefers_post = make_household(
+        "C", first_name="C", phone="0403456789", email="c@example.com", preferred_channel="post"
+    )
+    email_but_no_address = make_household(
+        "D", first_name="D", phone="0404567890", preferred_channel="email"
+    )
+    sms_but_no_phone = make_household(
+        "E", first_name="E", email="e@example.com", preferred_channel="sms"
+    )
 
     batch = send(open_round)
 
-    assert batch.messages.get(unit=prefers_email).channel == "sms"
+    channel = {m.unit: m.channel for m in batch.messages.all()}
+    assert channel == {
+        prefers_email: "email",
+        prefers_sms: "sms",
+        prefers_post: "letter",
+        email_but_no_address: "sms",
+        sms_but_no_phone: "email",
+    }
+
+
+def test_reminders_follow_the_preference_too(open_round, make_household):
+    prefers_email = make_household(
+        "A", first_name="A", phone="0401234567", email="a@example.com", preferred_channel="email"
+    )
+    prefers_post = make_household(
+        "B", first_name="B", phone="0402345678", email="b@example.com", preferred_channel="post"
+    )
+
+    batch = send(open_round, kind="reminder", scope="missing")
+
+    assert batch.messages.get(unit=prefers_email).channel == "email"
     assert batch.messages.get(unit=prefers_post).channel == "letter"
 
 

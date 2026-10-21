@@ -72,6 +72,10 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   two-factor login see one banner, not two.
 - Fee plans and invoice settings are linked from the setup wizard's invoicing
   step, the invoice run pages and the overdue page.
+- New message and Message to one unit send on each person's preferred
+  channel by default ("Each person's preferred channel"); SMS only, Email
+  only, SMS or email, and Both are under "Other options". Urgent alerts still
+  go by SMS and email to everyone.
 
 ### Upgrade notes
 
@@ -85,6 +89,13 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 - The help index listed every article twice.
 - The setup wizard's email and SMS step shows a description of the SMS
   provider instead of its code name.
+- Every send-out now follows each person's preferred channel, using one rule:
+  those who prefer email get email and those who prefer SMS get an SMS, or
+  the other one when they lack an address for it, and those who prefer post
+  get a letter. Reading links and reminders used to go by SMS to everyone
+  with a phone, and payment reminders by email to everyone with an address.
+  Since email is the default preference, check people's preferred channel
+  before the next send-out.
 - New message and Message to one unit no longer ask for an SMS text when the
   message goes by email only: the form shows only the texts the chosen
   channels need, and checks only those.
