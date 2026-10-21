@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% if unit %}{% blocktranslate %}Edit {{ unit }}{% endblocktranslate %}{% else %}{% blocktranslate %}New {{ unit_type }}{% endblocktranslate %}{% endif %}{% endblock %}
+{% block title %}{% if unit %}{% blocktranslate %}Edit {{ unit }}{% endblocktranslate %}{% else %}{% blocktranslate %}Add: {{ unit_type }}{% endblocktranslate %}{% endif %}{% endblock %}
 {% block content %}
-  <h1>{% if unit %}{% blocktranslate %}Edit {{ unit }}{% endblocktranslate %}{% else %}{% blocktranslate %}New {{ unit_type }}{% endblocktranslate %}{% endif %}</h1>
+  <h1>{% if unit %}{% blocktranslate %}Edit {{ unit }}{% endblocktranslate %}{% else %}{% blocktranslate %}Add: {{ unit_type }}{% endblocktranslate %}{% endif %}</h1>
   <form method="post" class="form" novalidate>
     {% csrf_token %}
     <input type="hidden" name="unit_type" value="{{ unit_type.pk }}">

@@ -29,7 +29,7 @@
     {% endfor %}
   </dl>
 
-  <h2>{% translate "Units" %}</h2>
+  <h2>{{ unit_word_plural }}</h2>
   {% if unit_contacts %}
     <ul class="plain-list">
       {% for c in unit_contacts %}

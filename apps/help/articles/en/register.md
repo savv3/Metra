@@ -11,6 +11,11 @@ its own fields, such as a property ID or meter number. Fields can also be
 added for every person. Deleting a unit type or a field takes a backup first,
 because it removes that data from every unit.
 
+Give a unit type a plural name too (for example "Cabin" and "Cabins"). When
+you have only one unit type, the menu, headings and buttons use its own name
+instead of "Units", and the list drops the type filter and column. With
+several types the general wording stays.
+
 ## Working with units and people
 
 - **Units** and **People** list the register. Search and filter the list, then use **Export as CSV** to download what you see.

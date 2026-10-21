@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load i18n static %}
-{% block title %}{% translate "Import units from CSV" %}{% endblock %}
+{% block title %}{% if single_unit_type %}{% blocktranslate with word=unit_word_plural %}Import CSV: {{ word }}{% endblocktranslate %}{% else %}{% translate "Import units from CSV" %}{% endif %}{% endblock %}
 {% block content %}
-  <h1>{% translate "Import units from CSV" %}</h1>
+  <h1>{% if single_unit_type %}{% blocktranslate with word=unit_word_plural %}Import CSV: {{ word }}{% endblocktranslate %}{% else %}{% translate "Import units from CSV" %}{% endif %}</h1>
   <p>{% blocktranslate trimmed %}
     Each row becomes one unit, optionally with one contact person. You choose which
     column goes where in the next step, and see every row checked before anything is saved.
