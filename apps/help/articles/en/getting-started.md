@@ -73,5 +73,5 @@ done on the server; see the installation guide.
 
 To send SMS, open the **46elks SMS** add-on's **Settings**, enter the API
 username and password from your 46elks account and the sender shown on the
-phone (up to 11 letters and digits), and send a test SMS from the setup
-wizard. **Test mode** lets 46elks check messages without sending them.
+phone (up to 11 letters and digits), and send a test SMS from the same
+page or the setup wizard. **Test mode** lets 46elks check messages without sending them.

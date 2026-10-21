@@ -27,8 +27,8 @@ email the recipient marked as spam is noted on the message.
 
 ## Writing to many households
 
-**Send-outs > New message** writes one message to everyone, to units with a
-tag or of a type, or to the units in the list you have filtered (**Send a
+**Send-outs > New message** writes one message to everyone, to units or
+people with a tag, to units of a type, or to the units in the list you have filtered (**Send a
 message to these units** under the unit list). Choose whether it goes to all
 contacts of each unit or only the main contact, and how. The usual choice is
 **Each person's preferred channel**: those who prefer email get an email and
@@ -41,6 +41,11 @@ prefer:
 - **SMS only** or **Email only**,
 - **SMS, or email for those without a phone**, or
 - **Both SMS and email**.
+
+A tag reaches the contacts of the units that have it and the people who
+carry it themselves, even if they are not a contact of any unit. When nobody
+matches, the check page says why, for example that the tagged unit has no
+contacts yet.
 
 With the preferred channel, write both the SMS text and the email subject,
 since people may get either. The form shows only the texts the chosen way

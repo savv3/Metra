@@ -9,6 +9,7 @@ from dataclasses import dataclass, field
 
 from django.utils import timezone, translation
 from django.utils.translation import gettext as _
+from django.utils.translation import ngettext
 
 from apps.register.models import Person, Unit, UnitContact
 from apps.register.views import filter_units
@@ -60,9 +61,18 @@ def audience_units(scope, value="", filters=None):
     return units.order_by("name", "pk").distinct()
 
 
-def people_for(units, contacts):
-    """(person, unit) pairs: every active contact, or each unit's main contact.
-    A person who is a contact of several units is listed once."""
+def audience_people(scope, value=""):
+    """People picked for a scope on their own, not through a unit: those who
+    carry the tag themselves."""
+    if scope != TAG:
+        return Person.objects.none()
+    return Person.objects.active().filter(tags__id=value).order_by("last_name", "first_name", "pk")
+
+
+def people_for(units, contacts, people=()):
+    """(person, unit) pairs: every active contact, or each unit's main contact,
+    then the ``people`` picked on their own (with one of their active units, if
+    they have one). A person who is a contact of several units is listed once."""
     pairs, seen = [], set()
     links = (
         UnitContact.objects.filter(unit__in=units, person__archived_at__isnull=True)
@@ -82,7 +92,48 @@ def people_for(units, contacts):
         if link.person_id not in seen:
             seen.add(link.person_id)
             pairs.append((link.person, link.unit))
+    people = [person for person in people if person.pk not in seen]
+    own_unit = {}
+    for link in (
+        UnitContact.objects.filter(
+            person__in=people,
+            unit__archived_at__isnull=True,
+            unit__status=Unit.Status.ACTIVE,
+        )
+        .select_related("unit")
+        .order_by("unit__name", "unit_id")
+    ):
+        own_unit.setdefault(link.person_id, link.unit)
+    for person in people:
+        seen.add(person.pk)
+        pairs.append((person, own_unit.get(person.pk)))
     return pairs
+
+
+def why_nobody(scope, units):
+    """Why nobody matches the choices, as sentences for the check page, and the
+    matching units that have no contacts (so staff can add some)."""
+    units = list(units)
+    without_contacts = [
+        unit
+        for unit in units
+        if not unit.unit_contacts.filter(person__archived_at__isnull=True).exists()
+    ]
+    reasons = []
+    if not units and scope == TAG:
+        reasons.append(_("No active unit has this tag, and nobody carries it themselves."))
+    elif not units:
+        reasons.append(_("No active unit matches these choices."))
+    if without_contacts:
+        reasons.append(
+            ngettext(
+                "The unit that matches has no contacts. Add them on the unit's page.",
+                "The %(count)s units that match have no contacts. Add them on each unit's page.",
+                len(without_contacts),
+            )
+            % {"count": len(without_contacts)}
+        )
+    return reasons, without_contacts
 
 
 # Send-outs where each person gets one message, on the first channel that works.

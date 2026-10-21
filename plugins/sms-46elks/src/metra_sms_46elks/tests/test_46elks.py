@@ -195,3 +195,37 @@ def test_delivery_report_with_wrong_secret_is_refused(client, db):
     message.refresh_from_db()
     assert response.status_code == 404
     assert message.status == "queued"
+
+
+def test_a_test_sms_from_the_add_on_settings_page(role_client, monkeypatch, settings, elks):
+    settings.LANGUAGE_CODE = "en"
+    # Another provider is chosen for sending; the test still goes through 46elks.
+    settings.MESSAGING = {**settings.MESSAGING, "sms_provider": "console"}
+    client = role_client("Admin")
+    assert "Send test SMS" in client.get(SETTINGS).content.decode()
+    calls = []
+
+    def fake_urlopen(request, timeout):
+        calls.append(request)
+        return FakeResponse(json.dumps({"id": "s9"}).encode())
+
+    monkeypatch.setattr("urllib.request.urlopen", fake_urlopen)
+    response = client.post(
+        SETTINGS, {"action": "test", "channel": "sms", "to": "040 1234567"}, follow=True
+    )
+
+    assert "Test sent to 040 1234567." in response.content.decode()
+    sent = urllib.parse.parse_qs(calls[0].data.decode())
+    assert sent["to"] == ["+358401234567"]
+
+
+def test_a_failed_test_sms_says_why(role_client, monkeypatch, settings, no_elks_env):
+    settings.LANGUAGE_CODE = "en"
+    client = role_client("Admin")
+
+    response = client.post(
+        SETTINGS, {"action": "test", "channel": "sms", "to": "040 1234567"}, follow=True
+    )
+
+    assert "The test failed: Enter the 46elks API user and password" in (response.content.decode())
+    assert client.post(SETTINGS, {"action": "test", "channel": "email"}).status_code == 404
