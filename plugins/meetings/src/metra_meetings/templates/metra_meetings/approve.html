@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Approve the minutes" %} – {{ meeting.title }}{% endblock %}
+{% block content %}
+  <h1>{% translate "Approve the minutes" %}</h1>
+  <p class="subtitle"><a href="{{ meeting.get_absolute_url }}">{{ meeting.title }}</a>, {{ meeting.starts_at|date:"DATETIME_FORMAT" }}{% if meeting.place %}, {{ meeting.place }}{% endif %}</p>
+  <p>{% translate "Read the minutes below or as a PDF. When every minute checker has approved them, they can no longer be changed." %}
+    <a href="{% url 'metra_meetings:minutes_pdf' meeting.pk %}">{% translate "Minutes (PDF)" %}</a></p>
+  {% include "metra_meetings/_minutes.html" %}
+  {% if attendances %}
+    <h2>{% translate "Present" %}</h2>
+    <ul class="plain-list">
+      {% for present in attendances %}<li>{{ present.name }}{% if present.unit_name %}, {{ present.unit_name }}{% endif %}{% if present.votes != 1 %} ({% blocktranslate count count=present.votes %}{{ count }} vote{% plural %}{{ count }} votes{% endblocktranslate %}){% endif %}</li>{% endfor %}
+    </ul>
+  {% endif %}
+  <form method="post" class="actions">
+    {% csrf_token %}
+    <button type="submit" class="button button--primary">{% translate "Approve the minutes" %}</button>
+    <a class="button" href="{{ meeting.get_absolute_url }}">{% translate "Not now" %}</a>
+  </form>
+  <p class="help">{% translate "If something is wrong, do not approve: tell the secretary, who corrects the minutes." %}</p>
+{% endblock %}

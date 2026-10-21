@@ -1,0 +1,781 @@
+# Finnish translation of the Metra meetings plugin.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-21 10:34+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps.py:9 apps.py:27 templates/metra_meetings/meeting_list.html:3
+#: templates/metra_meetings/meeting_list.html:6
+msgid "Meetings"
+msgstr "Kokoukset"
+
+#: apps.py:31
+msgid "Meeting minutes"
+msgstr "Kokousten pöytäkirjat"
+
+#: documents.py:55
+msgid "agenda"
+msgstr "esityslista"
+
+#: documents.py:59 models.py:200
+msgid "minutes"
+msgstr "pöytäkirja"
+
+#: documents.py:78
+#, python-format
+msgid "Notice: %(title)s on %(date)s"
+msgstr "Kokouskutsu: %(title)s %(date)s"
+
+#: documents.py:81
+#, python-format
+msgid "Welcome to %(title)s on %(date)s at %(time)s, %(place)s. The agenda is in the attached file."
+msgstr "Tervetuloa: %(title)s %(date)s klo %(time)s, %(place)s. Esityslista on liitetiedostossa."
+
+#: documents.py:87
+#, python-brace-format
+msgid "Dear {first_name},"
+msgstr "Hei {first_name},"
+
+#: documents.py:89
+#, python-format
+msgid "You are welcome to %(title)s (%(kind)s)."
+msgstr "Tervetuloa: %(title)s (%(kind)s)."
+
+#: documents.py:91
+#, python-format
+msgid "Date: %(date)s"
+msgstr "Päivämäärä: %(date)s"
+
+#: documents.py:92
+#, python-format
+msgid "Time: %(time)s"
+msgstr "Aika: %(time)s"
+
+#: documents.py:93
+#, python-format
+msgid "Place: %(place)s"
+msgstr "Paikka: %(place)s"
+
+#: documents.py:99
+msgid "Agenda:"
+msgstr "Esityslista:"
+
+#: documents.py:101
+msgid "The agenda is attached as a PDF."
+msgstr "Esityslista on liitteenä PDF-tiedostona."
+
+#: documents.py:101
+msgid "Welcome!"
+msgstr "Tervetuloa!"
+
+#: forms.py:26 templates/metra_meetings/_meeting_table.html:9
+msgid "Date and time"
+msgstr "Päivämäärä ja aika"
+
+#: forms.py:30 templates/metra_meetings/_minutes.html:3
+#: templates/metra_meetings/pdf/minutes.html:18
+#: templates/metra_meetings/pdf/minutes.html:59
+msgid "Chair"
+msgstr "Puheenjohtaja"
+
+#: forms.py:31 templates/metra_meetings/_minutes.html:4
+#: templates/metra_meetings/pdf/minutes.html:19
+#: templates/metra_meetings/pdf/minutes.html:60
+msgid "Secretary"
+msgstr "Sihteeri"
+
+#: forms.py:33 templates/metra_meetings/_minutes.html:5
+#: templates/metra_meetings/pdf/minutes.html:20
+msgid "Minute checkers"
+msgstr "Pöytäkirjantarkastajat"
+
+#: forms.py:37
+msgid "They approve the minutes in Metra. Everyone ticked must approve."
+msgstr "He tarkastavat pöytäkirjan Metrassa. Jokaisen valitun on hyväksyttävä se."
+
+#: forms.py:96
+msgid "Person"
+msgstr "Henkilö"
+
+#: forms.py:98 templates/metra_meetings/attendance.html:22
+#: templates/metra_meetings/pdf/minutes.html:26
+msgid "Unit"
+msgstr "Yksikkö"
+
+#: forms.py:101
+msgid "Empty: the person's unit, if they have only one."
+msgstr "Tyhjä: henkilön yksikkö, jos hänellä on vain yksi."
+
+#: forms.py:119
+msgid "Empty: one vote for the first person present for a unit, none for the others."
+msgstr "Tyhjä: yksi ääni yksikön ensimmäiselle läsnäolijalle, ei ääntä muille."
+
+#: forms.py:121
+msgid "Empty: one vote."
+msgstr "Tyhjä: yksi ääni."
+
+#: forms.py:134
+msgid "This person is already on the list."
+msgstr "Henkilö on jo listalla."
+
+#: forms.py:145
+msgid "Only units have votes at this meeting."
+msgstr "Tässä kokouksessa vain yksiköillä on ääniä."
+
+#: forms.py:149
+#, python-format
+msgid "%(name)s already carries the vote of %(unit)s."
+msgstr "%(name)s käyttää jo yksikön %(unit)s ääntä."
+
+#: forms.py:154
+msgid "A unit has one vote. Note the proxy for any votes beyond it."
+msgstr "Yksiköllä on yksi ääni. Merkitse valtakirja sitä useammille äänille."
+
+#: models.py:22 views.py:29
+msgid "The minutes are approved and can no longer be changed."
+msgstr "Pöytäkirja on tarkastettu, eikä sitä voi enää muuttaa."
+
+#: models.py:34
+msgid "Annual meeting"
+msgstr "Vuosikokous"
+
+#: models.py:35
+msgid "Extraordinary meeting"
+msgstr "Ylimääräinen kokous"
+
+#: models.py:36
+msgid "Board meeting"
+msgstr "Hallituksen kokous"
+
+#: models.py:39
+msgid "Being prepared"
+msgstr "Valmistelussa"
+
+#: models.py:40
+msgid "Called"
+msgstr "Kutsuttu koolle"
+
+#: models.py:41
+msgid "Held"
+msgstr "Pidetty"
+
+#: models.py:42
+msgid "Minutes approved"
+msgstr "Pöytäkirja tarkastettu"
+
+#: models.py:44
+msgid "kind"
+msgstr "laji"
+
+#: models.py:45 models.py:196
+msgid "title"
+msgstr "otsikko"
+
+#: models.py:46
+msgid "date and time"
+msgstr "päivämäärä ja aika"
+
+#: models.py:47
+msgid "place"
+msgstr "paikka"
+
+#: models.py:49
+msgid "other information"
+msgstr "muut tiedot"
+
+#: models.py:51
+msgid "Shown in the notice and on the agenda, for example how to attend online."
+msgstr "Näytetään kokouskutsussa ja esityslistalla, esimerkiksi miten etäosallistuminen onnistuu."
+
+#: models.py:54 templates/metra_meetings/_minutes.html:8
+msgid "one vote per unit"
+msgstr "yksi ääni yksikköä kohden"
+
+#: models.py:57
+msgid "Each unit has one vote, carried by one of the people present for it. Otherwise everyone present has a vote."
+msgstr "Jokaisella yksiköllä on yksi ääni, jota käyttää yksi sen läsnäolijoista. Muuten jokaisella läsnäolijalla on ääni."
+
+#: models.py:62
+msgid "show the approved minutes to members"
+msgstr "näytä tarkastettu pöytäkirja jäsenille"
+
+#: models.py:64
+msgid "On the members' personal pages, once the minutes are approved."
+msgstr "Jäsenten henkilökohtaisilla sivuilla, kun pöytäkirja on tarkastettu."
+
+#: models.py:68
+msgid "chair"
+msgstr "puheenjohtaja"
+
+#: models.py:76
+msgid "secretary"
+msgstr "sihteeri"
+
+#: models.py:84
+msgid "minute checkers"
+msgstr "pöytäkirjantarkastajat"
+
+#: models.py:87
+msgid "They approve the minutes in Metra. Everyone listed must approve."
+msgstr "He tarkastavat pöytäkirjan Metrassa. Jokaisen valitun on hyväksyttävä se."
+
+#: models.py:90
+msgid "status"
+msgstr "tila"
+
+#: models.py:92
+msgid "minutes approved"
+msgstr "pöytäkirja tarkastettu"
+
+#: models.py:95
+msgid "created by"
+msgstr "luonut"
+
+#: models.py:101
+msgid "created"
+msgstr "luotu"
+
+#: models.py:105 models.py:191 models.py:229 models.py:291
+msgid "meeting"
+msgstr "kokous"
+
+#: models.py:106
+msgid "meetings"
+msgstr "kokoukset"
+
+#: models.py:166
+msgid "You cannot approve these minutes."
+msgstr "Et voi tarkastaa tätä pöytäkirjaa."
+
+#: models.py:194
+msgid "order"
+msgstr "järjestys"
+
+#: models.py:194
+msgid "Items are listed from the lowest number."
+msgstr "Asiat luetellaan pienimmästä numerosta alkaen."
+
+#: models.py:198
+msgid "description"
+msgstr "kuvaus"
+
+#: models.py:198
+msgid "Shown on the agenda sent with the notice."
+msgstr "Näytetään kokouskutsun mukana lähetettävällä esityslistalla."
+
+#: models.py:200
+msgid "What was discussed."
+msgstr "Mitä käsiteltiin."
+
+#: models.py:201
+msgid "decision"
+msgstr "päätös"
+
+#: models.py:205
+msgid "agenda item"
+msgstr "asia"
+
+#: models.py:206
+msgid "agenda items"
+msgstr "asiat"
+
+#: models.py:233
+msgid "person"
+msgstr "henkilö"
+
+#: models.py:240
+msgid "unit"
+msgstr "yksikkö"
+
+#: models.py:245
+msgid "The unit the person represents, if any."
+msgstr "Yksikkö, jota henkilö edustaa, jos mikään."
+
+#: models.py:247
+msgid "name"
+msgstr "nimi"
+
+#: models.py:248
+msgid "unit name"
+msgstr "yksikön nimi"
+
+#: models.py:249
+msgid "votes"
+msgstr "äänet"
+
+#: models.py:251
+msgid "proxy"
+msgstr "valtakirja"
+
+#: models.py:254
+msgid "If the person attends for someone else, for whom and how it was shown."
+msgstr "Jos henkilö osallistuu jonkun toisen puolesta: kenen ja miten se osoitettiin."
+
+#: models.py:259 models.py:260
+msgid "attendance"
+msgstr "läsnäolo"
+
+#: models.py:295
+msgid "minute checker"
+msgstr "pöytäkirjantarkastaja"
+
+#: models.py:299
+msgid "approved"
+msgstr "hyväksytty"
+
+#: models.py:303
+msgid "approval"
+msgstr "hyväksyntä"
+
+#: models.py:304
+msgid "approvals"
+msgstr "hyväksynnät"
+
+#: templates/metra_meetings/_meeting_table.html:7
+msgid "Meeting"
+msgstr "Kokous"
+
+#: templates/metra_meetings/_meeting_table.html:8
+msgid "Kind"
+msgstr "Laji"
+
+#: templates/metra_meetings/_meeting_table.html:10
+#: templates/metra_meetings/pdf/agenda.html:16
+#: templates/metra_meetings/pdf/minutes.html:17
+msgid "Place"
+msgstr "Paikka"
+
+#: templates/metra_meetings/_meeting_table.html:11
+msgid "Status"
+msgstr "Tila"
+
+#: templates/metra_meetings/_meeting_table.html:28
+msgid "None."
+msgstr "Ei yhtään."
+
+#: templates/metra_meetings/_minutes.html:6
+#, python-format
+msgid "approved %(date)s"
+msgstr "hyväksynyt %(date)s"
+
+#: templates/metra_meetings/_minutes.html:7
+#: templates/metra_meetings/approve.html:11
+#: templates/metra_meetings/attendance.html:17
+#: templates/metra_meetings/pdf/minutes.html:23
+msgid "Present"
+msgstr "Läsnä"
+
+#: templates/metra_meetings/_minutes.html:8
+#, python-format
+msgid "%(count)s person"
+msgid_plural "%(count)s people"
+msgstr[0] "%(count)s henkilö"
+msgstr[1] "%(count)s henkilöä"
+
+#: templates/metra_meetings/_minutes.html:8
+#: templates/metra_meetings/approve.html:13
+#, python-format
+msgid "%(count)s vote"
+msgid_plural "%(count)s votes"
+msgstr[0] "%(count)s ääni"
+msgstr[1] "%(count)s ääntä"
+
+#: templates/metra_meetings/_minutes.html:9
+msgid "Other information"
+msgstr "Muut tiedot"
+
+#: templates/metra_meetings/_minutes.html:15
+#: templates/metra_meetings/attendance.html:37
+#: templates/metra_meetings/meeting_detail.html:9
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: templates/metra_meetings/_minutes.html:18
+#: templates/metra_meetings/pdf/minutes.html:43
+msgid "Decision:"
+msgstr "Päätös:"
+
+#: templates/metra_meetings/_minutes.html:23
+#: templates/metra_meetings/pdf/agenda.html:25
+msgid "No agenda items yet."
+msgstr "Ei vielä asioita."
+
+#: templates/metra_meetings/approve.html:3
+#: templates/metra_meetings/approve.html:5
+#: templates/metra_meetings/approve.html:18
+msgid "Approve the minutes"
+msgstr "Tarkasta pöytäkirja"
+
+#: templates/metra_meetings/approve.html:7
+msgid "Read the minutes below or as a PDF. When every minute checker has approved them, they can no longer be changed."
+msgstr "Lue pöytäkirja alta tai PDF-tiedostona. Kun kaikki pöytäkirjantarkastajat ovat hyväksyneet sen, sitä ei voi enää muuttaa."
+
+#: templates/metra_meetings/approve.html:8
+#: templates/metra_meetings/meeting_detail.html:30
+msgid "Minutes (PDF)"
+msgstr "Pöytäkirja (PDF)"
+
+#: templates/metra_meetings/approve.html:19
+msgid "Not now"
+msgstr "Ei nyt"
+
+#: templates/metra_meetings/approve.html:21
+msgid "If something is wrong, do not approve: tell the secretary, who corrects the minutes."
+msgstr "Jos jokin on väärin, älä hyväksy: kerro sihteerille, joka korjaa pöytäkirjan."
+
+#: templates/metra_meetings/attendance.html:3
+#: templates/metra_meetings/attendance.html:6
+#: templates/metra_meetings/meeting_detail.html:32
+msgid "Attendance"
+msgstr "Läsnäolo"
+
+#: templates/metra_meetings/attendance.html:10
+#: templates/metra_meetings/pdf/minutes.html:32
+#, python-format
+msgid "%(count)s person present"
+msgid_plural "%(count)s people present"
+msgstr[0] "%(count)s läsnäolija"
+msgstr[1] "%(count)s läsnäolijaa"
+
+#: templates/metra_meetings/attendance.html:11
+#, python-format
+msgid "%(count)s unit"
+msgid_plural "%(count)s units"
+msgstr[0] "%(count)s yksikkö"
+msgstr[1] "%(count)s yksikköä"
+
+#: templates/metra_meetings/attendance.html:12
+#, python-format
+msgid "%(count)s vote in total"
+msgid_plural "%(count)s votes in total"
+msgstr[0] "yhteensä %(count)s ääni"
+msgstr[1] "yhteensä %(count)s ääntä"
+
+#: templates/metra_meetings/attendance.html:13
+#: templates/metra_meetings/pdf/minutes.html:34
+msgid "Each unit has one vote."
+msgstr "Jokaisella yksiköllä on yksi ääni."
+
+#: templates/metra_meetings/attendance.html:13
+#: templates/metra_meetings/pdf/minutes.html:34
+msgid "Everyone present has a vote."
+msgstr "Jokaisella läsnäolijalla on ääni."
+
+#: templates/metra_meetings/attendance.html:21
+#: templates/metra_meetings/pdf/minutes.html:26
+msgid "Name"
+msgstr "Nimi"
+
+#: templates/metra_meetings/attendance.html:23
+#: templates/metra_meetings/pdf/minutes.html:26
+msgid "Votes"
+msgstr "Äänet"
+
+#: templates/metra_meetings/attendance.html:24
+#: templates/metra_meetings/pdf/minutes.html:26
+msgid "Proxy"
+msgstr "Valtakirja"
+
+#: templates/metra_meetings/attendance.html:25
+msgid "Actions"
+msgstr "Toiminnot"
+
+#: templates/metra_meetings/attendance.html:41
+msgid "Remove"
+msgstr "Poista"
+
+#: templates/metra_meetings/attendance.html:52
+msgid "Nobody is marked present yet."
+msgstr "Ketään ei ole vielä merkitty läsnä olevaksi."
+
+#: templates/metra_meetings/attendance.html:57
+msgid "Add someone present"
+msgstr "Lisää läsnäolija"
+
+#: templates/metra_meetings/attendance.html:63
+msgid "Add"
+msgstr "Lisää"
+
+#: templates/metra_meetings/attendance.html:66
+msgid "Type the first letters of a name in the list to find the person."
+msgstr "Kirjoita nimen ensimmäiset kirjaimet listaan löytääksesi henkilön."
+
+#: templates/metra_meetings/attendance_form.html:3
+#: templates/metra_meetings/attendance_form.html:5
+msgid "Edit attendance"
+msgstr "Muokkaa läsnäoloa"
+
+#: templates/metra_meetings/attendance_form.html:12
+#: templates/metra_meetings/item_form.html:14
+#: templates/metra_meetings/meeting_form.html:13
+#: templates/metra_meetings/minutes_form.html:23
+msgid "Save"
+msgstr "Tallenna"
+
+#: templates/metra_meetings/attendance_form.html:13
+#: templates/metra_meetings/item_form.html:16
+#: templates/metra_meetings/meeting_confirm_delete.html:10
+#: templates/metra_meetings/meeting_form.html:14
+#: templates/metra_meetings/minutes_form.html:25
+msgid "Cancel"
+msgstr "Peruuta"
+
+#: templates/metra_meetings/item_form.html:3
+#: templates/metra_meetings/item_form.html:6
+msgid "Edit agenda item"
+msgstr "Muokkaa asiaa"
+
+#: templates/metra_meetings/item_form.html:3
+#: templates/metra_meetings/item_form.html:6
+msgid "New agenda item"
+msgstr "Uusi asia"
+
+#: templates/metra_meetings/item_form.html:15
+msgid "Save and add another"
+msgstr "Tallenna ja lisää toinen"
+
+#: templates/metra_meetings/item_form.html:22
+msgid "Remove from the agenda"
+msgstr "Poista esityslistalta"
+
+#: templates/metra_meetings/meeting_confirm_delete.html:3
+#: templates/metra_meetings/meeting_confirm_delete.html:5
+msgid "Delete meeting"
+msgstr "Poista kokous"
+
+#: templates/metra_meetings/meeting_confirm_delete.html:6
+#, python-format
+msgid "Delete %(title)s with its agenda, attendance and minutes?"
+msgstr "Poistetaanko %(title)s esityslistoineen, läsnäoloineen ja pöytäkirjoineen?"
+
+#: templates/metra_meetings/meeting_confirm_delete.html:9
+#: templates/metra_meetings/meeting_detail.html:12
+msgid "Delete"
+msgstr "Poista"
+
+#: templates/metra_meetings/meeting_detail.html:20
+msgid "You are a minute checker"
+msgstr "Olet pöytäkirjantarkastaja"
+
+#: templates/metra_meetings/meeting_detail.html:21
+msgid "Read the minutes and approve them when they are right."
+msgstr "Lue pöytäkirja ja hyväksy se, kun se on oikein."
+
+#: templates/metra_meetings/meeting_detail.html:22
+msgid "Check and approve the minutes"
+msgstr "Lue ja tarkasta pöytäkirja"
+
+#: templates/metra_meetings/meeting_detail.html:27
+msgid "Documents and steps"
+msgstr "Asiakirjat ja vaiheet"
+
+#: templates/metra_meetings/meeting_detail.html:29
+msgid "Agenda (PDF)"
+msgstr "Esityslista (PDF)"
+
+#: templates/metra_meetings/meeting_detail.html:35
+msgid "Write the minutes"
+msgstr "Kirjoita pöytäkirja"
+
+#: templates/metra_meetings/meeting_detail.html:43
+msgid "Send the notice"
+msgstr "Lähetä kokouskutsu"
+
+#: templates/metra_meetings/meeting_detail.html:49
+msgid "Mark as called"
+msgstr "Merkitse kutsutuksi"
+
+#: templates/metra_meetings/meeting_detail.html:52
+msgid "Mark as held"
+msgstr "Merkitse pidetyksi"
+
+#: templates/metra_meetings/meeting_detail.html:54
+msgid "Not held yet"
+msgstr "Ei vielä pidetty"
+
+#: templates/metra_meetings/meeting_detail.html:58
+msgid "The notice opens as a new message with the agenda attached, so you can choose who gets it and check it before sending."
+msgstr "Kokouskutsu avautuu uutena viestinä esityslista liitteenä, joten voit valita vastaanottajat ja tarkistaa sen ennen lähettämistä."
+
+#: templates/metra_meetings/meeting_detail.html:64
+msgid "Approval of the minutes"
+msgstr "Pöytäkirjan tarkastus"
+
+#: templates/metra_meetings/meeting_detail.html:66
+#, python-format
+msgid "Approved on %(date)s. The minutes can no longer be changed."
+msgstr "Tarkastettu %(date)s. Pöytäkirjaa ei voi enää muuttaa."
+
+#: templates/metra_meetings/meeting_detail.html:67
+msgid "Members can read them on their personal page."
+msgstr "Jäsenet voivat lukea sen henkilökohtaiselta sivultaan."
+
+#: templates/metra_meetings/meeting_detail.html:69
+msgid "No minute checkers are chosen. Edit the meeting to add them."
+msgstr "Pöytäkirjantarkastajia ei ole valittu. Lisää heidät muokkaamalla kokousta."
+
+#: templates/metra_meetings/meeting_detail.html:71
+msgid "Waiting for:"
+msgstr "Odotetaan:"
+
+#: templates/metra_meetings/meeting_detail.html:78
+msgid "Agenda and minutes"
+msgstr "Esityslista ja pöytäkirja"
+
+#: templates/metra_meetings/meeting_detail.html:80
+msgid "Add an item"
+msgstr "Lisää asia"
+
+#: templates/metra_meetings/meeting_form.html:3
+#: templates/metra_meetings/meeting_form.html:6
+msgid "Edit meeting"
+msgstr "Muokkaa kokousta"
+
+#: templates/metra_meetings/meeting_form.html:3
+#: templates/metra_meetings/meeting_form.html:6
+#: templates/metra_meetings/meeting_list.html:8
+msgid "New meeting"
+msgstr "Uusi kokous"
+
+#: templates/metra_meetings/meeting_list.html:14
+msgid "Minutes for you to approve"
+msgstr "Sinun tarkastettavasi pöytäkirjat"
+
+#: templates/metra_meetings/meeting_list.html:23
+msgid "Upcoming"
+msgstr "Tulevat"
+
+#: templates/metra_meetings/meeting_list.html:24
+msgid "Upcoming meetings"
+msgstr "Tulevat kokoukset"
+
+#: templates/metra_meetings/meeting_list.html:25
+msgid "Past"
+msgstr "Menneet"
+
+#: templates/metra_meetings/meeting_list.html:26
+msgid "Past meetings"
+msgstr "Menneet kokoukset"
+
+#: templates/metra_meetings/minutes_form.html:3
+#: templates/metra_meetings/minutes_form.html:6
+#: templates/metra_meetings/pdf/minutes.html:6
+#: templates/metra_meetings/pdf/minutes.html:13
+msgid "Minutes"
+msgstr "Pöytäkirja"
+
+#: templates/metra_meetings/minutes_form.html:24
+msgid "Save and keep writing"
+msgstr "Tallenna ja jatka kirjoittamista"
+
+#: templates/metra_meetings/minutes_form.html:29
+msgid "Add the agenda first."
+msgstr "Lisää ensin esityslista."
+
+#: templates/metra_meetings/pdf/agenda.html:6
+#: templates/metra_meetings/pdf/agenda.html:12
+msgid "Agenda"
+msgstr "Esityslista"
+
+#: templates/metra_meetings/pdf/agenda.html:14
+#: templates/metra_meetings/pdf/minutes.html:15
+msgid "Date"
+msgstr "Päivämäärä"
+
+#: templates/metra_meetings/pdf/agenda.html:15
+#: templates/metra_meetings/pdf/minutes.html:16
+msgid "Time"
+msgstr "Aika"
+
+#: templates/metra_meetings/pdf/minutes.html:10
+msgid "NOT APPROVED"
+msgstr "EI TARKASTETTU"
+
+#: templates/metra_meetings/pdf/minutes.html:49
+msgid "The minutes are approved"
+msgstr "Pöytäkirja on tarkastettu"
+
+#: templates/metra_meetings/pdf/minutes.html:52
+#, python-format
+msgid "approved in Metra on %(date)s"
+msgstr "hyväksynyt Metrassa %(date)s"
+
+#: views.py:41
+msgid "The minutes changed, so the checkers' approvals so far were removed."
+msgstr "Pöytäkirja muuttui, joten tarkastajien tähänastiset hyväksynnät poistettiin."
+
+#: views.py:49 views.py:336
+msgid "PDFs cannot be made on this server (WeasyPrint is missing)."
+msgstr "Tällä palvelimella ei voi tehdä PDF-tiedostoja (WeasyPrint puuttuu)."
+
+#: views.py:86
+msgid "The meeting was added. Now add the agenda."
+msgstr "Kokous lisättiin. Lisää nyt esityslista."
+
+#: views.py:115
+msgid "The meeting was saved."
+msgstr "Kokous tallennettiin."
+
+#: views.py:126
+msgid "The meeting was deleted."
+msgstr "Kokous poistettiin."
+
+#: views.py:147
+#, python-format
+msgid "The meeting is now: %(status)s."
+msgstr "Kokouksen tila on nyt: %(status)s."
+
+#: views.py:166
+msgid "The item was added to the agenda."
+msgstr "Asia lisättiin esityslistalle."
+
+#: views.py:186
+msgid "The item was saved."
+msgstr "Asia tallennettiin."
+
+#: views.py:202
+msgid "The item was removed from the agenda."
+msgstr "Asia poistettiin esityslistalta."
+
+#: views.py:217
+msgid "The minutes were saved."
+msgstr "Pöytäkirja tallennettiin."
+
+#: views.py:270
+#, python-format
+msgid "%(name)s was added as present."
+msgstr "%(name)s merkittiin läsnä olevaksi."
+
+#: views.py:287
+msgid "The attendance was saved."
+msgstr "Läsnäolo tallennettiin."
+
+#: views.py:305
+#, python-format
+msgid "%(name)s was removed from the list."
+msgstr "%(name)s poistettiin listalta."
+
+#: views.py:353
+msgid "The notice is ready with the agenda attached. Choose who gets it, check and send. Then mark the meeting as called."
+msgstr "Kokouskutsu on valmis, ja esityslista on liitteenä. Valitse vastaanottajat, tarkista ja lähetä. Merkitse sitten kokous kutsutuksi."
+
+#: views.py:375
+msgid "The minutes are approved by every checker and can no longer be changed."
+msgstr "Kaikki tarkastajat ovat hyväksyneet pöytäkirjan, eikä sitä voi enää muuttaa."
+
+#: views.py:379
+msgid "Thank you. The minutes are approved when every checker has approved."
+msgstr "Kiitos. Pöytäkirja on tarkastettu, kun kaikki tarkastajat ovat hyväksyneet sen."

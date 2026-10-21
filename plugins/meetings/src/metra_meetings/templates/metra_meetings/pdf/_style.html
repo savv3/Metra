@@ -1,0 +1,24 @@
+<style>
+  @page { size: A4; margin: 18mm 18mm 20mm; @bottom-center { content: counter(page) " / " counter(pages); font-size: 8pt; color: #555; } }
+  body { font-family: "DejaVu Sans", "Helvetica", "Arial", sans-serif; font-size: 10pt; color: #000; line-height: 1.4; }
+  .organisation { font-size: 9pt; color: #333; margin-bottom: 6mm; }
+  h1 { font-size: 16pt; margin: 0 0 1mm; }
+  h2 { font-size: 11.5pt; margin: 6mm 0 1.5mm; page-break-after: avoid; }
+  .kind { font-size: 10.5pt; margin: 0 0 4mm; }
+  table.meta { border-collapse: collapse; margin-bottom: 4mm; }
+  table.meta th { text-align: left; font-weight: normal; color: #444; padding: 0.6mm 5mm 0.6mm 0; vertical-align: top; }
+  table.meta td { padding: 0.6mm 0; }
+  table.people { width: 100%; border-collapse: collapse; font-size: 9pt; }
+  table.people th { text-align: left; border-bottom: 1px solid #000; padding: 1mm; }
+  table.people td { padding: 1mm; border-bottom: 0.5px solid #bbb; vertical-align: top; }
+  table.people tfoot td { font-weight: bold; border-bottom: 0; border-top: 1px solid #000; }
+  .num { text-align: right; white-space: nowrap; }
+  .item { page-break-inside: avoid; }
+  .description { color: #333; }
+  .decision { margin-top: 1.5mm; }
+  .signatures { margin-top: 10mm; page-break-inside: avoid; }
+  .signatures td { width: 50%; padding: 12mm 6mm 1mm 0; vertical-align: bottom; }
+  .signatures .line { border-top: 0.5px solid #000; padding-top: 1mm; font-size: 9pt; }
+  .approved { margin-top: 8mm; border: 1px solid #000; padding: 3mm 4mm; page-break-inside: avoid; }
+  .draft { position: fixed; top: 110mm; left: 0; right: 0; text-align: center; font-size: 54pt; color: rgba(200, 0, 0, 0.13); transform: rotate(-25deg); }
+</style>

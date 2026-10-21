@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Attendance" %} – {{ meeting.title }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Attendance" %}</h1>
+  </div>
+  <p class="subtitle"><a href="{{ meeting.get_absolute_url }}">{{ meeting.title }}</a>, {{ meeting.starts_at|date:"DATE_FORMAT" }}</p>
+  <p>
+    {% blocktranslate count count=attendances|length %}{{ count }} person present{% plural %}{{ count }} people present{% endblocktranslate %},
+    {% blocktranslate count count=units_present %}{{ count }} unit{% plural %}{{ count }} units{% endblocktranslate %},
+    <strong>{% blocktranslate count count=total_votes %}{{ count }} vote in total{% plural %}{{ count }} votes in total{% endblocktranslate %}</strong>.
+    {% if meeting.votes_by_unit %}{% translate "Each unit has one vote." %}{% else %}{% translate "Everyone present has a vote." %}{% endif %}
+  </p>
+
+  {% if attendances %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Present' %}">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">{% translate "Name" %}</th>
+            <th scope="col">{% translate "Unit" %}</th>
+            <th scope="col" class="num">{% translate "Votes" %}</th>
+            <th scope="col">{% translate "Proxy" %}</th>
+            {% if not meeting.is_approved %}<th scope="col"><span class="visually-hidden">{% translate "Actions" %}</span></th>{% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for present in attendances %}
+            <tr>
+              <th scope="row">{% if present.person_id and perms.register.view_person %}<a href="{% url 'register:person_detail' present.person_id %}">{{ present.name }}</a>{% else %}{{ present.name }}{% endif %}</th>
+              <td>{{ present.unit_name|default:"–" }}</td>
+              <td class="num">{{ present.votes }}</td>
+              <td>{{ present.proxy|default:"–" }}</td>
+              {% if not meeting.is_approved %}
+                <td>
+                  {% if perms.metra_meetings.change_attendance %}<a class="button button--small" href="{% url 'metra_meetings:attendance_edit' meeting.pk present.pk %}">{% translate "Edit" %}<span class="visually-hidden"> {{ present.name }}</span></a>{% endif %}
+                  {% if perms.metra_meetings.change_attendance %}
+                    <form method="post" action="{% url 'metra_meetings:attendance_remove' meeting.pk present.pk %}" class="inline-form">
+                      {% csrf_token %}
+                      <button type="submit" class="button button--small">{% translate "Remove" %}<span class="visually-hidden"> {{ present.name }}</span></button>
+                    </form>
+                  {% endif %}
+                </td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "Nobody is marked present yet." %}</p>
+  {% endif %}
+
+  {% if form %}
+    <section class="card" aria-labelledby="attendance-add">
+      <h2 id="attendance-add">{% translate "Add someone present" %}</h2>
+      <form method="post" action="{% url 'metra_meetings:attendance_add' meeting.pk %}" class="form" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+        <div class="actions">
+          <button type="submit" class="button button--primary">{% translate "Add" %}</button>
+        </div>
+      </form>
+      <p class="help">{% translate "Type the first letters of a name in the list to find the person." %}</p>
+    </section>
+  {% endif %}
+{% endblock %}

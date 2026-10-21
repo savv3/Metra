@@ -1,9 +1,4 @@
-"""Invoice PDFs, made with WeasyPrint from an HTML template.
-
-WeasyPrint needs the Pango library (installed in the Docker image; on a Mac
-``brew install pango``). It is imported only when a PDF is made, so the rest
-of the app works without it.
-"""
+"""Invoice PDFs, made with WeasyPrint from an HTML template (see apps.core.pdf)."""
 
 import base64
 import io
@@ -15,13 +10,12 @@ from barcode.writer import SVGWriter
 from django.template.loader import render_to_string
 from django.utils import translation
 
+from apps.core.pdf import PDFUnavailable, html_to_pdf
 from apps.register.models import Organisation
 
 from .reference import rf_reference, virtual_barcode
 
-
-class PDFUnavailable(RuntimeError):
-    """WeasyPrint or its system libraries are missing."""
+__all__ = ["PDFUnavailable", "render_pdf", "invoice_html"]
 
 
 def _data_uri(content, mime):
@@ -134,12 +128,6 @@ def _draft_seller(invoice, organisation):
 
 def render_pdf(invoices, preview=False, language=None, reminders=None):
     """PDF bytes for one or more invoices (a print batch is many)."""
-    try:
-        from weasyprint import HTML
-    except (ImportError, OSError) as error:
-        raise PDFUnavailable(
-            "Making PDFs needs WeasyPrint and the Pango library (see README)."
-        ) from error
     with translation.override(language or translation.get_language()):
         html = invoice_html(invoices, preview=preview, reminders=reminders)
-    return HTML(string=html).write_pdf()
+    return html_to_pdf(html)

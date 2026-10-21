@@ -1,0 +1,65 @@
+{% load i18n %}<!doctype html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+<meta charset="utf-8">
+<title>{% translate "Minutes" %} – {{ meeting.title }}</title>
+{% include "metra_meetings/pdf/_style.html" %}
+</head>
+<body>
+  {% if not meeting.is_approved %}<div class="draft">{% translate "NOT APPROVED" %}</div>{% endif %}
+  {% if organisation %}<div class="organisation"><strong>{{ organisation.name }}</strong>{% if organisation.business_id %} &middot; {{ organisation.business_id }}{% endif %}</div>{% endif %}
+  <h1>{{ meeting.title }}</h1>
+  <p class="kind">{% translate "Minutes" %} &middot; {{ meeting.get_kind_display }}</p>
+  <table class="meta">
+    <tr><th>{% translate "Date" %}</th><td>{{ meeting.starts_at|date:"DATE_FORMAT" }}</td></tr>
+    <tr><th>{% translate "Time" %}</th><td>{{ meeting.starts_at|time:"TIME_FORMAT" }}</td></tr>
+    <tr><th>{% translate "Place" %}</th><td>{{ meeting.place|default:"–" }}</td></tr>
+    <tr><th>{% translate "Chair" %}</th><td>{{ meeting.chair_name|default:"–" }}</td></tr>
+    <tr><th>{% translate "Secretary" %}</th><td>{{ meeting.secretary_name|default:"–" }}</td></tr>
+    <tr><th>{% translate "Minute checkers" %}</th><td>{% for checker, approval in checkers %}{{ checker.get_full_name|default:checker.get_username }}{% if not forloop.last %}, {% endif %}{% empty %}–{% endfor %}</td></tr>
+  </table>
+
+  <h2>{% translate "Present" %}</h2>
+  {% if attendances %}
+    <table class="people">
+      <thead><tr><th>{% translate "Name" %}</th><th>{% translate "Unit" %}</th><th>{% translate "Proxy" %}</th><th class="num">{% translate "Votes" %}</th></tr></thead>
+      <tbody>
+        {% for present in attendances %}
+          <tr><td>{{ present.name }}</td><td>{{ present.unit_name|default:"–" }}</td><td>{{ present.proxy|default:"–" }}</td><td class="num">{{ present.votes }}</td></tr>
+        {% endfor %}
+      </tbody>
+      <tfoot><tr><td colspan="3">{% blocktranslate count count=attendances|length %}{{ count }} person present{% plural %}{{ count }} people present{% endblocktranslate %}</td><td class="num">{{ total_votes }}</td></tr></tfoot>
+    </table>
+    <p>{% if meeting.votes_by_unit %}{% translate "Each unit has one vote." %}{% else %}{% translate "Everyone present has a vote." %}{% endif %}</p>
+  {% else %}
+    <p>–</p>
+  {% endif %}
+
+  {% for number, item in items %}
+    <div class="item">
+      <h2>§ {{ number }}. {{ item.title }}</h2>
+      {% if item.minutes %}<p>{{ item.minutes|linebreaksbr }}</p>{% elif item.description %}<p class="description">{{ item.description|linebreaksbr }}</p>{% endif %}
+      {% if item.decision %}<p class="decision"><strong>{% translate "Decision:" %}</strong> {{ item.decision|linebreaksbr }}</p>{% endif %}
+    </div>
+  {% endfor %}
+
+  {% if meeting.is_approved %}
+    <div class="approved">
+      <strong>{% translate "The minutes are approved" %}</strong>
+      <table class="meta">
+        {% for checker, approval in checkers %}
+          <tr><th>{{ checker.get_full_name|default:checker.get_username }}</th><td>{% if approval %}{% blocktranslate with date=approval.approved_at|date:"DATETIME_FORMAT" %}approved in Metra on {{ date }}{% endblocktranslate %}{% endif %}</td></tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% else %}
+    <table class="signatures">
+      <tr>
+        <td><div class="line">{% translate "Chair" %}{% if meeting.chair %}: {{ meeting.chair_name }}{% endif %}</div></td>
+        <td><div class="line">{% translate "Secretary" %}{% if meeting.secretary %}: {{ meeting.secretary_name }}{% endif %}</div></td>
+      </tr>
+    </table>
+  {% endif %}
+</body>
+</html>

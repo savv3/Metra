@@ -106,14 +106,15 @@ development, and CI runs their tests with the app's. The official ones are
 listed in `BUNDLED` in `config/plugins.py`, installed in the Docker image and
 on by default; `METRA_PLUGINS_DISABLED` turns one off. The example plugin is
 installed only for development and tests. The [webhooks plugin](webhooks.md)
-is official but off by default: it is installed in the Docker image, and
-`METRA_PLUGINS=webhooks` turns it on.
+and the meetings plugin are official but off by default: they are installed
+in the Docker image, and `METRA_PLUGINS=webhooks,meetings` turns them on.
 
 | Plugin | Name | What it does |
 | --- | --- | --- |
 | [metra-sms-46elks](../plugins/sms-46elks) | `46elks` | SMS through 46elks, with delivery reports. Bundled, on by default |
 | [metra-api](../plugins/api) | `api` | The REST API ([docs](api.md)). Off until `METRA_PLUGINS=api` |
 | [metra-webhooks](../plugins/webhooks) | `webhooks` | Signed webhooks to outside systems ([docs](webhooks.md)). Off until `METRA_PLUGINS=webhooks` |
+| [metra-meetings](../plugins/meetings) | `meetings` | Meetings: notice with the agenda, attendance and votes, minutes approved by the minute checkers and shown to members. Off until `METRA_PLUGINS=meetings` |
 
 So that each can later move to its own repository, a plugin in plugins/:
 
@@ -136,7 +137,53 @@ So that each can later move to its own repository, a plugin in plugins/:
 | Person panels | `api.add_person_panel(Panel(...))` | The same, on person pages |
 | SMS and email providers | `api.add_messaging_provider(ProviderClass)` | An `api.Provider` subclass with `channel` (`api.SMS` or `api.EMAIL`), `name` and `send()`. Chosen with `METRA_SMS_PROVIDER=<name>`, or automatically when `is_configured()` returns true. `api.sms_sender()`, `api.sms_country_code()`, `api.normalise_phone()` and `api.record_delivery()` help SMS providers |
 | Settings links | `api.add_settings_link(SettingsLink(label, url_name, permission, description))` | A link on the Settings page to the plugin's own settings or tools |
+| Member page panels | `api.add_member_panel(MemberPanel(template, title, context))` | A section on the member page behind a personal link, below the page's own sections. The template gets `unit`, `person`, `token`, `title`, `request` and whatever `context(request, member_link)` returns. Members are not users, so no permission applies: show only what the member may see. See "Serving members" below |
 | Webhook events | `api.add_webhook_event(WebhookEvent(name, label, signal, payload))` | An event that webhook endpoints can subscribe to. `signal` is a Django signal sent after commit; `payload(**signal_kwargs)` returns a dict of ids and non-personal facts (never names, emails, phones or addresses). Works whether or not the webhooks plugin is enabled, and whichever plugin loads first. A plugin that sends webhooks reads them with `api.webhook_events()` and `api.on_webhook_event(listener)` |
+
+## PDFs and messages
+
+`api.render_pdf(html)` turns a complete HTML document (CSS inline, images as
+`data:` URIs) into PDF bytes with WeasyPrint, as invoices are made. It raises
+`api.PDFUnavailable` when WeasyPrint or its Pango library is missing, so
+catch it and tell the user.
+
+`api.message_draft(request, subject, body, files=[(filename, bytes,
+mimetype)], email_body="")` prepares a message for the current user and
+returns the address of the New message form, filled in and with the files
+attached and ticked. Redirect to it: staff choose the recipients, check and
+send as usual, so a plugin never sends to everyone on its own. `body` is the
+SMS text (and the email's, unless `email_body` is given); the usual
+placeholders such as `{first_name}` work. The form needs the
+`messaging.send_broadcast` permission, so show the button only to users with
+it. Files must be types the form accepts (PDF, images, office documents) and
+within its size limits, or `ValidationError` is raised. The draft is kept in
+the user's session for a few hours.
+
+## Serving members
+
+The member page is opened through a personal link with no login. A plugin
+that shows members something more, such as a file to download, adds a
+`MemberPanel` (above) with links to its own views under the same token, and
+answers in those views like this:
+
+```python
+@never_cache
+def member_file(request, token, pk):
+    link = api.member_link(request, token)
+    if link is None:
+        return api.member_unavailable(request)
+    thing = ...  # only what this member (link.unit, link.person) may see
+    link.log_access(request, thing)  # in the audit log, as the member pages do
+    return api.member_response(HttpResponse(...))
+```
+
+`api.member_link` counts against the member pages' rate limit and records a
+failure for a token that does not work, so guessing is slow; it returns
+None for unknown, expired and revoked links and when there were too many
+tries. `api.member_unavailable` gives the same page the member pages give
+then. `api.member_response` adds their privacy headers: not cached, not
+indexed, and no referrer to other sites. `api.member_page_url(token)` is the
+full address of the member page.
 
 ## Records
 
@@ -146,6 +193,7 @@ helpers in `api.RECORDS`, never `apps.*` modules:
 | Name | What it is |
 | --- | --- |
 | `api.Unit`, `api.Person`, `api.UnitContact`, `api.UnitType`, `api.CustomField`, `api.Tag` | The register's models |
+| `api.Organisation` | The organisation's own details; `Organisation.current()` is the one in use, or None |
 | `api.ReadingType`, `api.ReadingRound`, `api.Reading` | Readings |
 | `api.Invoice`, `api.InvoiceLine`, `api.Payment` | Invoicing. Issued invoices and payments never change: only read them |
 | `api.UnitForm`, `api.PersonForm`, `api.UnitContactForm`, `api.ReadingForm` | The forms staff use. Check data from outside with them, so a plugin never stores what the web pages would refuse (custom fields included) |

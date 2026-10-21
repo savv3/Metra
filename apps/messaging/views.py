@@ -13,7 +13,7 @@ from apps.core.models import Notice
 from apps.readings.models import ReadingRound
 from apps.register.models import Unit
 
-from . import attachments, broadcast, newsletter
+from . import attachments, broadcast, drafts, newsletter
 from .forms import ConsentForm, MessageForm, NewsletterForm
 from .models import Attachment, ConsentRecord, Message, MessageBatch, MessageTemplate
 from .registry import EMAIL, SMS, provider_for
@@ -89,6 +89,9 @@ def compose(request):
     initial = {"filters": request.GET.get("filters", "")}
     if initial["filters"]:
         initial["scope"] = broadcast.FILTERED
+    if draft := drafts.get(request, request.GET.get("draft")):
+        # Prepared elsewhere, for example a plugin's meeting notice.
+        initial |= {key: draft[key] for key in ("subject", "body", "email_body", "attachments")}
     form = MessageForm(
         request.POST or None,
         request.FILES or None,

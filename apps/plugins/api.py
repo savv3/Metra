@@ -16,6 +16,7 @@ the same API_VERSION; anything else in the app may change.
             api.add_webhook_event(
                 api.WebhookEvent("thing.saved", "A thing was saved", thing_saved, thing_payload)
             )
+            api.add_member_panel(api.MemberPanel("my_plugin/member.html", "Mine"))
 
     @receiver(api.events.invoice_issued)
     def on_issue(sender, invoice, **kwargs): ...
@@ -32,10 +33,19 @@ from importlib import import_module
 
 from django.dispatch import Signal
 
+from apps.core.pdf import PDFUnavailable
 from apps.messaging.registry import EMAIL, SMS, Provider, ProviderError, SendResult, registry
 
 from . import events
-from .hooks import NAVIGATION, PERSON_PANELS, SETTINGS_LINKS, UNIT_PANELS, WEBHOOK_EVENTS, hooks
+from .hooks import (
+    MEMBER_PANELS,
+    NAVIGATION,
+    PERSON_PANELS,
+    SETTINGS_LINKS,
+    UNIT_PANELS,
+    WEBHOOK_EVENTS,
+    hooks,
+)
 from .roles import grant_to_roles
 
 # Bump API_VERSION only for a breaking change; additions keep it. The previous
@@ -47,7 +57,9 @@ SUPPORTED_API_VERSIONS = (1,)
 # Records: name -> module. A plugin reads and changes Metra's data through
 # these, so it never imports app modules whose layout may change.
 RECORDS = {
-    # The register (apps/register/models.py)
+    # The register (apps/register/models.py). Organisation.current() is the
+    # organisation's own details (name, address, contact), or None.
+    "Organisation": "apps.register.models",
     "Tag": "apps.register.models",
     "UnitType": "apps.register.models",
     "CustomField": "apps.register.models",
@@ -92,13 +104,16 @@ __all__ = [
     "SUPPORTED_API_VERSIONS",
     "EMAIL",
     "SMS",
+    "MemberPanel",
     "NavItem",
+    "PDFUnavailable",
     "Panel",
     "Provider",
     "ProviderError",
     "SendResult",
     "SettingsLink",
     "WebhookEvent",
+    "add_member_panel",
     "add_messaging_provider",
     "add_navigation",
     "add_person_panel",
@@ -108,9 +123,15 @@ __all__ = [
     "events",
     "grant_to_roles",
     *RECORDS,
+    "member_link",
+    "member_page_url",
+    "member_response",
+    "member_unavailable",
+    "message_draft",
     "normalise_phone",
     "on_webhook_event",
     "record_delivery",
+    "render_pdf",
     "sms_country_code",
     "sms_sender",
     "webhook_events",
@@ -236,3 +257,86 @@ def record_delivery(provider, provider_id, delivered):
     from apps.messaging.delivery_reports import record
 
     return record(provider, provider_id, delivered)
+
+
+# PDFs.
+
+
+def render_pdf(html):
+    """PDF bytes for an HTML document (a full page, with its CSS inline and
+    images as data: URIs), made with WeasyPrint. Raises ``PDFUnavailable``
+    when WeasyPrint or its Pango library is missing."""
+    from apps.core.pdf import html_to_pdf
+
+    return html_to_pdf(html)
+
+
+# Messages.
+
+
+def message_draft(request, subject, body, files=(), email_body=""):
+    """The address of the New message form, filled in for the current user
+    with ``subject``, ``body`` (the SMS text, and the email's unless
+    ``email_body`` is given) and ``files``, a list of (filename, bytes,
+    mimetype) attached and ticked. Staff then choose the recipients, check
+    and send as usual. Redirect to it. Opening the form needs the
+    ``messaging.send_broadcast`` permission, so show the button only to users
+    with it. Raises django.core.exceptions.ValidationError for a file that
+    cannot be attached (type or size)."""
+    from apps.messaging.drafts import create
+
+    return create(request, subject, body, files=files, email_body=email_body)
+
+
+# The member page behind personal links.
+
+
+@dataclass
+class MemberPanel:
+    """A section on the member page, the page members open with their personal
+    link. The template gets ``unit``, ``person``, ``token`` (for links to the
+    plugin's member views), ``title``, ``request`` and whatever
+    ``context(request, member_link)`` returns. No permission applies: members
+    are not users, so show only what the member may see."""
+
+    template: str
+    title: str = ""
+    context: Callable | None = field(default=None)
+
+
+def add_member_panel(panel):
+    return hooks.register(MEMBER_PANELS, panel)
+
+
+def member_link(request, token):
+    """For a plugin's own member views, such as a file download under the
+    personal link: an object with ``unit``, ``person``, ``token`` and
+    ``log_access(request, obj)``, or None for an unknown, expired or revoked
+    token or too many tries (it counts against the member page's rate limit).
+    Answer None with ``member_unavailable(request)`` and wrap every other
+    response in ``member_response``."""
+    from apps.selfservice.public import member_link
+
+    return member_link(request, token)
+
+
+def member_unavailable(request):
+    """The member pages' answer for a link that does not work."""
+    from apps.selfservice.public import member_unavailable
+
+    return member_unavailable(request)
+
+
+def member_response(response):
+    """``response`` with the member pages' privacy headers (not cached, not
+    indexed, no referrer to other sites)."""
+    from apps.selfservice.public import member_response
+
+    return member_response(response)
+
+
+def member_page_url(token):
+    """The full address of the member page for a personal link's token."""
+    from apps.selfservice.public import member_page_url
+
+    return member_page_url(token)

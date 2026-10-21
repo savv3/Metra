@@ -7,6 +7,7 @@ members = [
     "metra",
     "metra-api",
     "metra-example-plugin",
+    "metra-meetings",
     "metra-sms-46elks",
     "metra-webhooks",
 ]
@@ -453,6 +454,7 @@ dependencies = [
     { name = "gunicorn" },
     { name = "huey" },
     { name = "metra-api" },
+    { name = "metra-meetings" },
     { name = "metra-sms-46elks" },
     { name = "metra-webhooks" },
     { name = "python-barcode" },
@@ -477,6 +479,7 @@ requires-dist = [
     { name = "gunicorn", specifier = ">=26.2.0" },
     { name = "huey", specifier = ">=3.4.0" },
     { name = "metra-api", editable = "plugins/api" },
+    { name = "metra-meetings", editable = "plugins/meetings" },
     { name = "metra-sms-46elks", editable = "plugins/sms-46elks" },
     { name = "metra-webhooks", editable = "plugins/webhooks" },
     { name = "python-barcode", specifier = ">=0.16.1" },
@@ -512,6 +515,11 @@ requires-dist = [
 name = "metra-example-plugin"
 version = "0.1.0"
 source = { editable = "plugins/example" }
+
+[[package]]
+name = "metra-meetings"
+version = "0.1.0"
+source = { editable = "plugins/meetings" }
 
 [[package]]
 name = "metra-sms-46elks"
