@@ -15,7 +15,10 @@ def water_association():
     again adds nothing new."""
     household, _created = UnitType.objects.get_or_create(
         name=_("Household"),
-        defaults={"description": _("A property connected to the water network.")},
+        defaults={
+            "name_plural": _("Households"),
+            "description": _("A property connected to the water network."),
+        },
     )
     fields = [
         ("property_id", _("Property ID"), CustomField.FieldType.TEXT, "", True),

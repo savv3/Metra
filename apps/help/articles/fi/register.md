@@ -12,6 +12,11 @@ kullekin omat kenttänsä, kuten kiinteistötunnus tai mittarin numero. Kenttiä
 voi lisätä myös kaikille henkilöille. Yksikkötyypin tai kentän poistamista
 edeltää varmuuskopio, koska poisto vie tiedot jokaiselta yksiköltä.
 
+Anna yksikkötyypille myös monikkonimi (esimerkiksi "Mökki" ja "Mökit"). Jos
+yksikkötyyppejä on vain yksi, valikko, otsikot ja painikkeet käyttävät sen
+omaa nimeä sanan "Yksiköt" sijaan, eikä luettelossa ole tyyppisuodatinta eikä
+tyyppisaraketta. Useamman tyypin kanssa yleiset sanat säilyvät.
+
 ## Yksiköiden ja henkilöiden käsittely
 
 - **Yksiköt** ja **Henkilöt** listaavat rekisterin. Hae ja suodata listaa ja lataa sitten näkemäsi **Vie CSV-tiedostona** -toiminnolla.

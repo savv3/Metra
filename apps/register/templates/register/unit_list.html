@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% translate "Units" %}{% endblock %}
+{% block title %}{{ unit_word_plural }}{% endblock %}
 {% block content %}
   <div class="page-head">
-    <h1>{% translate "Units" %}</h1>
+    <h1>{{ unit_word_plural }}</h1>
     <div class="actions">
       {% if perms.register.add_unit and perms.register.add_person and perms.register.add_unitcontact %}<a class="button" href="{% url 'register:unit_import' %}">{% translate "Import CSV" %}</a>{% endif %}
-      {% if perms.register.add_unit %}<a class="button button--primary" href="{% url 'register:unit_create' %}">{% translate "Add unit" %}</a>{% endif %}
+      {% if perms.register.add_unit %}<a class="button button--primary" href="{% url 'register:unit_create' %}">{% if single_unit_type %}{% blocktranslate with unit_type=unit_word_singular %}Add: {{ unit_type }}{% endblocktranslate %}{% else %}{% translate "Add unit" %}{% endif %}</a>{% endif %}
     </div>
   </div>
   <form class="filters" method="get" action="{% url 'register:unit_list' %}" role="search"
@@ -16,13 +16,13 @@
       <label for="f-q">{% translate "Search" %}</label>
       <input type="search" id="f-q" name="q" value="{{ filters.q }}">
     </div>
-    <div class="field">
+    {% if not single_unit_type %}<div class="field">
       <label for="f-type">{% translate "Type" %}</label>
       <select id="f-type" name="type">
         <option value="">{% translate "All types" %}</option>
         {% for t in unit_types %}<option value="{{ t.pk }}"{% if filters.type == t.pk|stringformat:"d" %} selected{% endif %}>{{ t.name }}</option>{% endfor %}
       </select>
-    </div>
+    </div>{% endif %}
     <div class="field">
       <label for="f-status">{% translate "Status" %}</label>
       <select id="f-status" name="status">

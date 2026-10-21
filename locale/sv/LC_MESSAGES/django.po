@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 15:06+0300\n"
+"POT-Creation-Date: 2026-10-21 15:16+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/accounts/admin.py:13 apps/register/models.py:349
+#: apps/accounts/admin.py:13 apps/register/models.py:358
 msgid "role"
 msgstr "roll"
 
 #: apps/accounts/admin.py:28 apps/invoicing/models.py:143
 #: apps/messaging/models.py:336 apps/readings/models.py:24
 #: apps/register/models.py:57 apps/register/models.py:115
-#: apps/register/models.py:129 apps/register/models.py:306
+#: apps/register/models.py:129 apps/register/models.py:315
 msgid "name"
 msgstr "namn"
 
@@ -75,7 +75,7 @@ msgstr "Uppgifter"
 msgid "Username"
 msgstr "Användarnamn"
 
-#: apps/accounts/templates/accounts/profile.html:15 apps/register/csv_io.py:465
+#: apps/accounts/templates/accounts/profile.html:15 apps/register/csv_io.py:466
 #: apps/register/templates/register/_person_results.html:7
 #: apps/register/templates/register/_unit_results.html:7
 #: apps/register/templates/register/import_preview.html:36
@@ -86,7 +86,7 @@ msgstr "Namn"
 #: apps/core/templates/core/_contact.html:14 apps/invoicing/models.py:728
 #: apps/messaging/models.py:29
 #: apps/messaging/templates/messaging/compose.html:20
-#: apps/register/csv_io.py:520 apps/register/models.py:265
+#: apps/register/csv_io.py:521 apps/register/models.py:274
 #: apps/register/templates/register/_person_results.html:8
 #: apps/register/templates/register/person_detail.html:19
 #: apps/register/templates/register/unit_detail.html:39 apps/setup/forms.py:142
@@ -515,11 +515,7 @@ msgstr "Nu"
 msgid "In the snapshot"
 msgstr "I säkerhetskopian"
 
-#: apps/backups/templates/backups/restore.html:32 apps/register/csv_io.py:531
-#: apps/register/templates/register/_unit_results.html:3
-#: apps/register/templates/register/person_detail.html:32
-#: apps/register/templates/register/unit_list.html:3
-#: apps/register/templates/register/unit_list.html:6 templates/base.html:21
+#: apps/backups/templates/backups/restore.html:32 apps/register/unitwords.py:23
 msgid "Units"
 msgstr "Enheter"
 
@@ -686,7 +682,7 @@ msgstr "skapad av"
 #: apps/invoicing/models.py:402 apps/invoicing/models.py:743
 #: apps/messaging/models.py:84 apps/messaging/models.py:176
 #: apps/notifications/models.py:28 apps/readings/models.py:111
-#: apps/register/models.py:227 apps/selfservice/models.py:76
+#: apps/register/models.py:236 apps/selfservice/models.py:76
 msgid "created"
 msgstr "skapad"
 
@@ -702,7 +698,7 @@ msgstr "anslag"
 msgid "Emergencies"
 msgstr "Akuta ärenden"
 
-#: apps/core/templates/core/_contact.html:13 apps/register/csv_io.py:521
+#: apps/core/templates/core/_contact.html:13 apps/register/csv_io.py:522
 #: apps/register/templates/register/_person_results.html:9
 #: apps/register/templates/register/person_detail.html:21
 #: apps/register/templates/register/unit_detail.html:40
@@ -991,7 +987,7 @@ msgid "Number %(number)s is already used; numbers cannot repeat."
 msgstr "Numret %(number)s används redan; nummer kan inte upprepas."
 
 #: apps/invoicing/models.py:145 apps/readings/models.py:27
-#: apps/register/models.py:135 apps/register/models.py:159
+#: apps/register/models.py:144 apps/register/models.py:168
 msgid "unit type"
 msgstr "enhetstyp"
 
@@ -1004,7 +1000,7 @@ msgid "in use"
 msgstr "i bruk"
 
 #: apps/invoicing/models.py:156 apps/invoicing/models.py:673
-#: apps/readings/models.py:46 apps/register/models.py:130
+#: apps/readings/models.py:46 apps/register/models.py:139
 msgid "description"
 msgstr "beskrivning"
 
@@ -1061,8 +1057,8 @@ msgstr "Endast fasta avgifter."
 
 #: apps/invoicing/models.py:202 apps/invoicing/models.py:362
 #: apps/invoicing/models.py:675 apps/messaging/models.py:160
-#: apps/readings/models.py:200 apps/register/models.py:321
-#: apps/register/models.py:344 apps/selfservice/models.py:58
+#: apps/readings/models.py:200 apps/register/models.py:330
+#: apps/register/models.py:353 apps/selfservice/models.py:58
 msgid "unit"
 msgstr "enhet"
 
@@ -1100,7 +1096,7 @@ msgid "For example Sommar."
 msgstr "Till exempel Sommar."
 
 #: apps/invoicing/models.py:229 apps/invoicing/models.py:692
-#: apps/register/models.py:131 apps/register/models.py:179
+#: apps/register/models.py:140 apps/register/models.py:188
 msgid "order"
 msgstr "ordning"
 
@@ -1206,7 +1202,7 @@ msgid "Credit note"
 msgstr "Kreditnota"
 
 #: apps/invoicing/models.py:351 apps/messaging/models.py:74
-#: apps/messaging/models.py:171 apps/register/models.py:308
+#: apps/messaging/models.py:171 apps/register/models.py:317
 msgid "status"
 msgstr "status"
 
@@ -1449,7 +1445,7 @@ msgstr "Fakturor"
 #: apps/invoicing/templates/invoicing/_invoice_results.html:7
 #: apps/invoicing/templates/invoicing/overdue_list.html:16
 #: apps/invoicing/templates/invoicing/run_detail.html:33
-#: apps/invoicing/views.py:431 apps/register/models.py:151
+#: apps/invoicing/views.py:431 apps/register/models.py:160
 msgid "Number"
 msgstr "Nummer"
 
@@ -1461,7 +1457,8 @@ msgstr "Nummer"
 #: apps/invoicing/views.py:436
 #: apps/messaging/templates/messaging/batch_detail.html:65
 #: apps/readings/templates/readings/_round_results.html:7
-#: apps/readings/views.py:145 apps/register/models.py:146
+#: apps/readings/views.py:145 apps/register/models.py:155
+#: apps/register/unitwords.py:22
 #: apps/selfservice/templates/selfservice/print.html:26
 #: apps/selfservice/templates/selfservice/round_links.html:39
 msgid "Unit"
@@ -1477,7 +1474,7 @@ msgid "Recipient"
 msgstr "Mottagare"
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:10
-#: apps/invoicing/views.py:491 apps/register/models.py:152
+#: apps/invoicing/views.py:491 apps/register/models.py:161
 msgid "Date"
 msgstr "Datum"
 
@@ -1501,7 +1498,7 @@ msgstr "Summa"
 #: apps/messaging/templates/messaging/batch_detail.html:68
 #: apps/messaging/templates/messaging/batch_list.html:25
 #: apps/readings/templates/readings/round_list.html:22
-#: apps/register/csv_io.py:467
+#: apps/register/csv_io.py:468
 #: apps/register/templates/register/_unit_results.html:10
 #: apps/register/templates/register/unit_list.html:27
 #: apps/selfservice/templates/selfservice/round_links.html:43
@@ -1823,7 +1820,9 @@ msgid ""
 "Reminders have no fee (see <a href=\"%(billing_url)s\">invoice settings</a>) "
 "and give %(days)s days to pay."
 msgstr ""
-"Påminnelser har ingen avgift (se <a href=\"%(billing_url)s\">faktureringsinställningarna</a>) och ger %(days)s dagar att betala."
+"Påminnelser har ingen avgift (se <a "
+"href=\"%(billing_url)s\">faktureringsinställningarna</a>) och ger %(days)s "
+"dagar att betala."
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:36
 #, python-format
@@ -2010,7 +2009,6 @@ msgstr ""
 
 #: apps/invoicing/templates/invoicing/run_form.html:7
 #: apps/setup/templates/setup/invoicing.html:5
-#, 
 msgid "Open the fee plans"
 msgstr "Öppna avgiftsplanerna"
 
@@ -2019,7 +2017,6 @@ msgid "Make draft invoices"
 msgstr "Skapa fakturautkast"
 
 #: apps/invoicing/templates/invoicing/run_list.html:9
-#, 
 msgid "Fee plans"
 msgstr "Avgiftsplaner"
 
@@ -2029,7 +2026,8 @@ msgid ""
 "Fill in the <a href=\"%(billing_url)s\">invoice settings</a> (IBAN, payment "
 "terms, VAT) before issuing invoices."
 msgstr ""
-"Fyll i <a href=\"%(billing_url)s\">faktureringsinställningarna</a> (IBAN, betalningsvillkor, moms) innan du utfärdar fakturor."
+"Fyll i <a href=\"%(billing_url)s\">faktureringsinställningarna</a> (IBAN, "
+"betalningsvillkor, moms) innan du utfärdar fakturor."
 
 #: apps/invoicing/templates/invoicing/run_list.html:13
 msgid ""
@@ -2363,7 +2361,7 @@ msgstr "Skriv anslaget utan personliga platshållare."
 msgid "Subject"
 msgstr "Ämne"
 
-#: apps/messaging/forms.py:252 apps/register/models.py:150
+#: apps/messaging/forms.py:252 apps/register/models.py:159
 msgid "Text"
 msgstr "Text"
 
@@ -2402,7 +2400,7 @@ msgstr "Till exempel: underskriven blankett vid årsmötet."
 
 #: apps/messaging/models.py:28
 #: apps/messaging/templates/messaging/compose.html:19
-#: apps/register/models.py:266 apps/setup/templates/setup/messaging.html:8
+#: apps/register/models.py:275 apps/setup/templates/setup/messaging.html:8
 msgid "SMS"
 msgstr "SMS"
 
@@ -2530,7 +2528,7 @@ msgid "To print"
 msgstr "Ska skrivas ut"
 
 #: apps/messaging/models.py:152 apps/messaging/models.py:268
-#: apps/register/models.py:282 apps/register/models.py:347
+#: apps/register/models.py:291 apps/register/models.py:356
 #: apps/selfservice/models.py:62
 msgid "person"
 msgstr "person"
@@ -2643,7 +2641,7 @@ msgstr "fil"
 msgid "size"
 msgstr "storlek"
 
-#: apps/messaging/models.py:338 apps/register/models.py:304
+#: apps/messaging/models.py:338 apps/register/models.py:313
 msgid "type"
 msgstr "typ"
 
@@ -2765,7 +2763,7 @@ msgstr "När"
 
 #: apps/messaging/templates/messaging/_unit_messages.html:14
 #: apps/messaging/templates/messaging/batch_detail.html:66
-#: apps/register/models.py:147
+#: apps/register/models.py:156
 #: apps/register/templates/register/unit_detail.html:37
 #: apps/selfservice/templates/selfservice/print.html:27
 #: apps/selfservice/templates/selfservice/round_links.html:40
@@ -3195,7 +3193,7 @@ msgid "group"
 msgstr "grupp"
 
 #: apps/notifications/models.py:29 apps/readings/models.py:112
-#: apps/register/models.py:228
+#: apps/register/models.py:237
 msgid "updated"
 msgstr "uppdaterad"
 
@@ -3387,7 +3385,6 @@ msgstr "avläsningstyper"
 
 #
 #: apps/readings/models.py:88
-#, 
 msgid "Not yet open"
 msgstr "Ännu inte öppen"
 
@@ -3412,7 +3409,6 @@ msgid "closes"
 msgstr "stänger"
 
 #: apps/readings/models.py:104
-#, 
 msgid "draft"
 msgstr "utkast"
 
@@ -3421,7 +3417,8 @@ msgid ""
 "A draft is never open. Clear this to publish the round: it then opens and "
 "closes on its dates."
 msgstr ""
-"Ett utkast är aldrig öppet. Avmarkera för att publicera omgången: den öppnar och stänger då på sina datum."
+"Ett utkast är aldrig öppet. Avmarkera för att publicera omgången: den öppnar "
+"och stänger då på sina datum."
 
 #: apps/readings/models.py:134
 msgid "The round closes before it opens."
@@ -3671,105 +3668,105 @@ msgstr ""
 msgid "Register"
 msgstr "Register"
 
-#: apps/register/csv_io.py:41
+#: apps/register/csv_io.py:42
 msgid "The file is larger than 2 MB. Split it into smaller files."
 msgstr "Filen är större än 2 MB. Dela upp den i mindre filer."
 
-#: apps/register/csv_io.py:45
+#: apps/register/csv_io.py:46
 msgid "The file is not UTF-8. In Excel, save it as “CSV UTF-8”."
 msgstr "Filen är inte i UTF-8. Spara den i Excel som ”CSV UTF-8”."
 
-#: apps/register/csv_io.py:50
+#: apps/register/csv_io.py:51
 msgid "The file needs a header row and at least one row of data."
 msgstr "Filen behöver en rubrikrad och minst en rad med data."
 
-#: apps/register/csv_io.py:52
+#: apps/register/csv_io.py:53
 #, python-format
 msgid "The file has more than %(max)s rows."
 msgstr "Filen har fler än %(max)s rader."
 
-#: apps/register/csv_io.py:93 apps/register/models.py:341
+#: apps/register/csv_io.py:94 apps/register/models.py:350
 #: apps/register/templates/register/import_preview.html:38
 msgid "Contact"
 msgstr "Kontakt"
 
-#: apps/register/csv_io.py:218
+#: apps/register/csv_io.py:219
 #, python-format
 msgid "Tags: “%(name)s” does not exist. Add it under Settings first."
 msgstr ""
 "Taggar: “%(name)s” finns inte. Lägg först till den under Inställningar."
 
-#: apps/register/csv_io.py:244
+#: apps/register/csv_io.py:245
 #, python-format
 msgid "%(label)s: write yes or no, not “%(value)s”."
 msgstr "%(label)s: skriv ja eller nej, inte ”%(value)s”."
 
-#: apps/register/csv_io.py:327
+#: apps/register/csv_io.py:328
 msgid "The row has more values than the header has columns."
 msgstr "Raden har fler värden än rubrikraden har kolumner."
 
-#: apps/register/csv_io.py:335
+#: apps/register/csv_io.py:336
 #, python-format
 msgid "The name is also used on line %(line)s."
 msgstr "Namnet används också på rad %(line)s."
 
-#: apps/register/csv_io.py:351
+#: apps/register/csv_io.py:352
 #, python-format
 msgid "Same person as line %(line)s"
 msgstr "Samma person som på rad %(line)s"
 
-#: apps/register/csv_io.py:355
+#: apps/register/csv_io.py:356
 msgid "A role is given but no contact details."
 msgstr "En roll är angiven men inga kontaktuppgifter."
 
-#: apps/register/csv_io.py:366
+#: apps/register/csv_io.py:367
 #, python-format
 msgid "Role: “%(value)s” is not one of owner, billing contact or contact."
 msgstr "Roll: ”%(value)s” är inte ägare, faktureringskontakt eller kontakt."
 
-#: apps/register/csv_io.py:372
+#: apps/register/csv_io.py:373
 #, python-format
 msgid "Existing person: %(name)s"
 msgstr "Befintlig person: %(name)s"
 
-#: apps/register/csv_io.py:383
+#: apps/register/csv_io.py:384
 #, python-format
 msgid "New person: %(name)s"
 msgstr "Ny person: %(name)s"
 
-#: apps/register/csv_io.py:466
+#: apps/register/csv_io.py:467
 #: apps/register/templates/register/_unit_results.html:8
 #: apps/register/templates/register/unit_list.html:20
 msgid "Type"
 msgstr "Typ"
 
-#: apps/register/csv_io.py:468 apps/register/csv_io.py:523
+#: apps/register/csv_io.py:469 apps/register/csv_io.py:524
 msgid "Street address"
 msgstr "Gatuadress"
 
-#: apps/register/csv_io.py:469 apps/register/csv_io.py:524
+#: apps/register/csv_io.py:470 apps/register/csv_io.py:525
 msgid "Postal code"
 msgstr "Postnummer"
 
-#: apps/register/csv_io.py:470 apps/register/csv_io.py:525
+#: apps/register/csv_io.py:471 apps/register/csv_io.py:526
 msgid "City"
 msgstr "Ort"
 
-#: apps/register/csv_io.py:471 apps/register/csv_io.py:526
+#: apps/register/csv_io.py:472 apps/register/csv_io.py:527
 msgid "Country"
 msgstr "Land"
 
-#: apps/register/csv_io.py:472
+#: apps/register/csv_io.py:473
 #: apps/register/templates/register/unit_detail.html:21
 msgid "Start date"
 msgstr "Startdatum"
 
-#: apps/register/csv_io.py:473
+#: apps/register/csv_io.py:474
 #: apps/register/templates/register/unit_detail.html:22
 msgid "End date"
 msgstr "Slutdatum"
 
-#: apps/register/csv_io.py:474 apps/register/csv_io.py:527
+#: apps/register/csv_io.py:475 apps/register/csv_io.py:528
 #: apps/register/templates/register/_person_results.html:11
 #: apps/register/templates/register/_unit_results.html:11
 #: apps/register/templates/register/person_detail.html:24
@@ -3777,13 +3774,13 @@ msgstr "Slutdatum"
 msgid "Tags"
 msgstr "Taggar"
 
-#: apps/register/csv_io.py:475 apps/register/csv_io.py:528
+#: apps/register/csv_io.py:476 apps/register/csv_io.py:529
 #: apps/register/templates/register/person_detail.html:26
 #: apps/register/templates/register/unit_detail.html:25
 msgid "Notes"
 msgstr "Anteckningar"
 
-#: apps/register/csv_io.py:476 apps/register/csv_io.py:529
+#: apps/register/csv_io.py:477 apps/register/csv_io.py:530
 #: apps/register/templates/register/_person_results.html:18
 #: apps/register/templates/register/_show_select.html:6
 #: apps/register/templates/register/_unit_results.html:18
@@ -3792,26 +3789,26 @@ msgstr "Anteckningar"
 msgid "Archived"
 msgstr "Arkiverad"
 
-#: apps/register/csv_io.py:478
+#: apps/register/csv_io.py:479
 #: apps/register/templates/register/unit_detail.html:31
 #: apps/register/templates/register/unit_detail.html:33
 msgid "Contacts"
 msgstr "Kontakter"
 
-#: apps/register/csv_io.py:518 apps/setup/forms.py:140
+#: apps/register/csv_io.py:519 apps/setup/forms.py:140
 msgid "First name"
 msgstr "Förnamn"
 
-#: apps/register/csv_io.py:519 apps/setup/forms.py:141
+#: apps/register/csv_io.py:520 apps/setup/forms.py:141
 msgid "Last name"
 msgstr "Efternamn"
 
-#: apps/register/csv_io.py:522
+#: apps/register/csv_io.py:523
 #: apps/register/templates/register/person_detail.html:22
 msgid "Preferred channel"
 msgstr "Önskad kanal"
 
-#: apps/register/csv_io.py:564
+#: apps/register/csv_io.py:565
 #, python-format
 msgid "CSV export of %(count)s %(things)s"
 msgstr "CSV-export av %(count)s %(things)s"
@@ -3943,27 +3940,27 @@ msgstr "Filen är inte en bild i PNG-, JPEG- eller WebP-format."
 msgid "business ID"
 msgstr "FO-nummer"
 
-#: apps/register/models.py:60 apps/register/models.py:271
+#: apps/register/models.py:60 apps/register/models.py:280
 msgid "email"
 msgstr "e-post"
 
-#: apps/register/models.py:61 apps/register/models.py:272
+#: apps/register/models.py:61 apps/register/models.py:281
 msgid "phone"
 msgstr "telefon"
 
-#: apps/register/models.py:62 apps/register/models.py:249
+#: apps/register/models.py:62 apps/register/models.py:258
 msgid "street address"
 msgstr "gatuadress"
 
-#: apps/register/models.py:63 apps/register/models.py:250
+#: apps/register/models.py:63 apps/register/models.py:259
 msgid "postal code"
 msgstr "postnummer"
 
-#: apps/register/models.py:64 apps/register/models.py:251
+#: apps/register/models.py:64 apps/register/models.py:260
 msgid "city"
 msgstr "ort"
 
-#: apps/register/models.py:65 apps/register/models.py:252
+#: apps/register/models.py:65 apps/register/models.py:261
 msgid "country"
 msgstr "land"
 
@@ -4028,147 +4025,159 @@ msgstr "organisation"
 msgid "tag"
 msgstr "tagg"
 
-#: apps/register/models.py:120 apps/register/models.py:278
-#: apps/register/models.py:314
+#: apps/register/models.py:120 apps/register/models.py:287
+#: apps/register/models.py:323
 msgid "tags"
 msgstr "taggar"
 
-#: apps/register/models.py:136
+#: apps/register/models.py:131
+msgid "plural name"
+msgstr "pluralnamn"
+
+#: apps/register/models.py:135
+msgid ""
+"For example \"Households\". Used in the menu and headings when this is the "
+"only unit type. Empty means the general word for units is used."
+msgstr ""
+"Till exempel \"Hushåll\". Används i menyn och rubrikerna när detta är den "
+"enda enhetstypen. Tomt betyder att det allmänna ordet för enheter används."
+
+#: apps/register/models.py:145
 msgid "unit types"
 msgstr "enhetstyper"
 
-#: apps/register/models.py:153
+#: apps/register/models.py:162
 msgid "Choice"
 msgstr "Val"
 
-#: apps/register/models.py:154
+#: apps/register/models.py:163
 msgid "Yes/no"
 msgstr "Ja/nej"
 
-#: apps/register/models.py:156
+#: apps/register/models.py:165
 msgid "applies to"
 msgstr "gäller för"
 
-#: apps/register/models.py:166
+#: apps/register/models.py:175
 msgid "key"
 msgstr "nyckel"
 
-#: apps/register/models.py:168
+#: apps/register/models.py:177
 msgid "Short identifier used in CSV files and the API, e.g. meter_number."
 msgstr ""
 "Kort identifierare som används i CSV-filer och i API:et, t.ex. meter_number."
 
-#: apps/register/models.py:170
+#: apps/register/models.py:179
 msgid "label"
 msgstr "etikett"
 
-#: apps/register/models.py:172
+#: apps/register/models.py:181
 msgid "field type"
 msgstr "fälttyp"
 
-#: apps/register/models.py:175
+#: apps/register/models.py:184
 msgid "choices"
 msgstr "alternativ"
 
-#: apps/register/models.py:175
+#: apps/register/models.py:184
 msgid "For choice fields: one option per line."
 msgstr "För valfält: ett alternativ per rad."
 
-#: apps/register/models.py:177
+#: apps/register/models.py:186
 msgid "required"
 msgstr "obligatoriskt"
 
-#: apps/register/models.py:178
+#: apps/register/models.py:187
 msgid "help text"
 msgstr "hjälptext"
 
-#: apps/register/models.py:183
+#: apps/register/models.py:192
 msgid "custom field"
 msgstr "eget fält"
 
-#: apps/register/models.py:184 apps/register/models.py:277
-#: apps/register/models.py:313
+#: apps/register/models.py:193 apps/register/models.py:286
+#: apps/register/models.py:322
 msgid "custom fields"
 msgstr "egna fält"
 
-#: apps/register/models.py:203
+#: apps/register/models.py:212
 msgid "Choose the unit type this field belongs to."
 msgstr "Välj den enhetstyp som fältet hör till."
 
-#: apps/register/models.py:205
+#: apps/register/models.py:214
 msgid "Person fields apply to everyone."
 msgstr "Fält för personer gäller alla."
 
-#: apps/register/models.py:207
+#: apps/register/models.py:216
 msgid "Add at least one option."
 msgstr "Lägg till minst ett alternativ."
 
-#: apps/register/models.py:226
+#: apps/register/models.py:235
 msgid "archived"
 msgstr "arkiverad"
 
-#: apps/register/models.py:267
+#: apps/register/models.py:276
 msgid "Post"
 msgstr "Post"
 
-#: apps/register/models.py:269
+#: apps/register/models.py:278
 msgid "first name"
 msgstr "förnamn"
 
-#: apps/register/models.py:270
+#: apps/register/models.py:279
 msgid "last name"
 msgstr "efternamn"
 
-#: apps/register/models.py:274
+#: apps/register/models.py:283
 msgid "preferred channel"
 msgstr "önskad kanal"
 
-#: apps/register/models.py:276 apps/register/models.py:312
+#: apps/register/models.py:285 apps/register/models.py:321
 msgid "notes"
 msgstr "anteckningar"
 
-#: apps/register/models.py:283
+#: apps/register/models.py:292
 msgid "people"
 msgstr "personer"
 
-#: apps/register/models.py:300
+#: apps/register/models.py:309
 #: apps/register/templates/register/_show_select.html:5
 msgid "Active"
 msgstr "Aktiv"
 
-#: apps/register/models.py:301
+#: apps/register/models.py:310
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: apps/register/models.py:310
+#: apps/register/models.py:319
 msgid "start date"
 msgstr "startdatum"
 
-#: apps/register/models.py:311
+#: apps/register/models.py:320
 msgid "end date"
 msgstr "slutdatum"
 
-#: apps/register/models.py:316 apps/register/models.py:354
+#: apps/register/models.py:325 apps/register/models.py:363
 msgid "contacts"
 msgstr "kontakter"
 
-#: apps/register/models.py:322
+#: apps/register/models.py:331
 msgid "units"
 msgstr "enheter"
 
-#: apps/register/models.py:332
+#: apps/register/models.py:341
 msgid "The end date is before the start date."
 msgstr "Slutdatumet är före startdatumet."
 
-#: apps/register/models.py:339
+#: apps/register/models.py:348
 msgid "Owner"
 msgstr "Ägare"
 
-#: apps/register/models.py:340
+#: apps/register/models.py:349
 msgid "Billing contact"
 msgstr "Faktureringskontakt"
 
-#: apps/register/models.py:353
+#: apps/register/models.py:362
 msgid "contact"
 msgstr "kontakt"
 
@@ -4240,6 +4249,11 @@ msgstr "Inga personer hittades."
 #: apps/register/templates/register/_unit_results.html:30
 msgid "Send a message to these units"
 msgstr "Skicka ett meddelande till de här enheterna"
+
+#: apps/register/templates/register/_unit_results.html:33
+#, python-format
+msgid "Export CSV: %(count)s %(word)s"
+msgstr "Exportera CSV: %(count)s %(word)s"
 
 #: apps/register/templates/register/_unit_results.html:33
 #, python-format
@@ -4358,6 +4372,12 @@ msgstr "Fel"
 
 #: apps/register/templates/register/import_upload.html:3
 #: apps/register/templates/register/import_upload.html:5
+#, python-format
+msgid "Import CSV: %(word)s"
+msgstr "Importera CSV: %(word)s"
+
+#: apps/register/templates/register/import_upload.html:3
+#: apps/register/templates/register/import_upload.html:5
 msgid "Import units from CSV"
 msgstr "Importera enheter från CSV"
 
@@ -4451,9 +4471,10 @@ msgstr "Redigera %(unit)s"
 
 #: apps/register/templates/register/unit_form.html:3
 #: apps/register/templates/register/unit_form.html:5
+#: apps/register/templates/register/unit_list.html:9
 #, python-format
-msgid "New %(unit_type)s"
-msgstr "Ny %(unit_type)s"
+msgid "Add: %(unit_type)s"
+msgstr "Lägg till: %(unit_type)s"
 
 #: apps/register/templates/register/unit_list.html:8
 msgid "Import CSV"
@@ -4939,41 +4960,45 @@ msgstr "Installation"
 msgid "Household"
 msgstr "Hushåll"
 
-#: apps/setup/examples.py:18
+#: apps/setup/examples.py:19
+msgid "Households"
+msgstr "Hushåll"
+
+#: apps/setup/examples.py:20
 msgid "A property connected to the water network."
 msgstr "En fastighet ansluten till vattennätet."
 
-#: apps/setup/examples.py:21
+#: apps/setup/examples.py:24
 msgid "Property ID"
 msgstr "Fastighetsbeteckning"
 
 #
-#: apps/setup/examples.py:22
+#: apps/setup/examples.py:25
 msgid "Meter number"
 msgstr "Mätarnummer"
 
-#: apps/setup/examples.py:23
+#: apps/setup/examples.py:26
 msgid "Year connected"
 msgstr "Anslutningsår"
 
-#: apps/setup/examples.py:26
+#: apps/setup/examples.py:29
 msgid "Connection"
 msgstr "Anslutning"
 
-#: apps/setup/examples.py:28
+#: apps/setup/examples.py:31
 msgid "Water"
 msgstr "Vatten"
 
-#: apps/setup/examples.py:28
+#: apps/setup/examples.py:31
 msgid "Water and sewage"
 msgstr "Vatten och avlopp"
 
-#: apps/setup/examples.py:31
+#: apps/setup/examples.py:34
 msgid "Number of residents"
 msgstr "Antal boende"
 
 #
-#: apps/setup/examples.py:47
+#: apps/setup/examples.py:50
 msgid "Water meter"
 msgstr "Vattenmätare"
 
@@ -5153,13 +5178,14 @@ msgid "Finish and go to the register"
 msgstr "Slutför och gå till registret"
 
 #: apps/setup/templates/setup/invoicing.html:4
-#, 
 msgid ""
 "What every invoice needs: your bank account, payment terms, VAT and "
 "numbering. Fee plans, which say what each unit is charged, are set up "
 "afterwards under Settings."
 msgstr ""
-"Det som varje faktura behöver: bankkonto, betalningsvillkor, moms och numrering. Avgiftsplaner, som anger vad varje enhet debiteras, ställs in efteråt under Inställningar."
+"Det som varje faktura behöver: bankkonto, betalningsvillkor, moms och "
+"numrering. Avgiftsplaner, som anger vad varje enhet debiteras, ställs in "
+"efteråt under Inställningar."
 
 #: apps/setup/templates/setup/language.html:4
 msgid ""
@@ -5419,15 +5445,15 @@ msgstr "Inbjudan skickad till %(email)s."
 msgid "Setup is done. You can run it again from Settings."
 msgstr "Inställningen är klar. Du kan köra den igen från Inställningar."
 
-#: config/settings.py:180
+#: config/settings.py:181
 msgid "Swedish"
 msgstr "Svenska"
 
-#: config/settings.py:181
+#: config/settings.py:182
 msgid "English"
 msgstr "Engelska"
 
-#: config/settings.py:182
+#: config/settings.py:183
 msgid "Finnish (machine translated)"
 msgstr "Finska (maskinöversatt)"
 
@@ -5496,6 +5522,17 @@ msgstr ""
 "autentiseringsapp i telefonen."
 
 #, python-format
+#~ msgid "New %(unit_type)s"
+#~ msgstr "Ny %(unit_type)s"
+
+#~ msgid ""
+#~ "What every invoice needs: your bank account, payment terms, VAT and "
+#~ "numbering. Fees are set up later under Invoices."
+#~ msgstr ""
+#~ "Det som varje faktura behöver: bankkonto, betalningsvillkor, moms och "
+#~ "numrering. Avgifterna ställs in senare under Fakturor."
+
+#, python-format
 #~ msgid "Last successful backup %(when)s (%(size)s) to %(target)s."
 #~ msgstr "Senaste lyckade säkerhetskopia %(when)s (%(size)s) till %(target)s."
 
@@ -5526,3 +5563,8 @@ msgstr ""
 
 #~ msgid "backups"
 #~ msgstr "säkerhetskopior"
+
+#, fuzzy, python-format
+#~| msgid "All types"
+#~ msgid "Add: %(type)s"
+#~ msgstr "Alla typer"
