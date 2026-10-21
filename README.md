@@ -75,6 +75,7 @@ docker compose up -d --build
 - [Webhooks](docs/webhooks.md): tell outside systems when something changes
 - [Meetings](plugins/meetings/README.md): call, minute and approve meetings
 - [AGENTS.md](AGENTS.md): conventions for contributors
+- [SECURITY.md](SECURITY.md): reporting a security problem
 
 ## Licence
 

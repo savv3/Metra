@@ -79,6 +79,7 @@ Den övriga dokumentationen finns på engelska:
 - [Tillägg](docs/plugins.md)
 - [REST-API](docs/api.md): tillägget `api`, för andra system med tokens
 - [AGENTS.md](AGENTS.md): regler för den som bidrar med kod
+- [SECURITY.md](SECURITY.md): rapportera ett säkerhetsproblem
 
 ## Licens
 

@@ -12,6 +12,11 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+### Added
+
+- `SECURITY.md`: how to report a security problem privately, and which
+  versions get fixes.
+
 ## [0.3.0] - 2026-10-21
 
 ### Added

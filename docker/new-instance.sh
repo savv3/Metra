@@ -13,7 +13,7 @@ set -eu
 
 usage() {
     echo "usage: $0 NAME HOSTNAME PORT [FOLDER]" >&2
-    echo "  e.g. $0 vatten register.vattenlag.ax 8001" >&2
+    echo "  e.g. $0 vatten register.example.org 8001" >&2
     exit 2
 }
 

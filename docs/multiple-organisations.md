@@ -28,7 +28,7 @@ organisation:
 
 ```sh
 cd ~/metra
-./new-instance.sh vatten register.vattenlag.ax 8001
+./new-instance.sh vatten register.example.org 8001
 ```
 
 The arguments are a short name (lower-case letters, digits, `-` or `_`), the
@@ -50,7 +50,7 @@ podman-compose up -d web worker
 podman-compose exec web python manage.py createsuperuser
 ```
 
-In Cloudflare, add the public hostname `register.vattenlag.ax` with service
+In Cloudflare, add the public hostname `register.example.org` with service
 `http://localhost:8001`. Use a separate host name (a subdomain is fine) for
 each organisation; installs cannot share one host name under different paths.
 
@@ -62,7 +62,7 @@ of each install's `caddy` service (they would all want ports 80 and 443).
 For example a host Caddyfile:
 
 ```
-register.vattenlag.ax {
+register.example.org {
 	reverse_proxy 127.0.0.1:8001
 }
 golf.example.com {
