@@ -2,6 +2,7 @@
 {% if show %}
   <section class="status-panel{% if failed or stale %} status-panel--warning{% endif %}" aria-labelledby="backup-status">
     <h2 id="backup-status">{% translate "Backups" %}</h2>
+    <p><a href="{% url 'backups:list' %}">{% translate "Snapshots and backups" %}</a></p>
     {% if last_success %}
       <p>{% blocktranslate with when=last_success.finished_at|date:"SHORT_DATETIME_FORMAT" size=last_success.size|filesizeformat target=last_success.target trimmed %}
         Last successful backup {{ when }} ({{ size }}) to {{ target }}.

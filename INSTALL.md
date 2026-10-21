@@ -34,27 +34,39 @@ through the rest.
 
 ## Backup and restore
 
-Every night at 02:30 (`METRA_BACKUP_TIME`, local time) the worker makes a
-backup: a consistent copy of the database, taken with SQLite's online backup
-while the app runs, and all uploaded files, in one
-`metra-backup-YYYYMMDD-HHMMSS.tar.gz` archive. The newest 14
-(`METRA_BACKUP_KEEP`) are kept in `/data/backups`. Admins see the last backup,
-its size and any error at the top of the Units page; every run is also listed
-under **Settings > Backups**.
+Metra keeps **snapshots**: a consistent copy of the database, taken with
+SQLite's online backup while the app runs, together with all uploaded files,
+in one `metra-snapshot-<date>-<time>-<why>-<version>.tar.gz` file in
+`/data/snapshots`. A snapshot is taken
 
-Those local copies are on the same disk as the data, so also set a remote in
-`.env` (see `.env.example`): `METRA_BACKUP_REMOTE_TYPE` is `s3`, `sftp` or
-`ftps`, with its address, credentials and `METRA_BACKUP_REMOTE_PATH`. Archives
-are encrypted with `METRA_BACKUP_ENCRYPTION_PASSWORD` (rclone crypt) before
-they leave the server, and the remote also keeps the newest
-`METRA_BACKUP_KEEP`. **Keep a copy of the encryption password somewhere other
-than the server**: without it the remote backups cannot be read.
+- every night at 02:30 (`METRA_BACKUP_TIME`, local time),
+- when a new version starts, before it changes the database,
+- before a CSV import, before deleting a unit type or a field, and before a
+  restore (if no snapshot can be taken, the action is stopped),
+- whenever an admin clicks **Take a snapshot now** on the Backups page, or
+  runs `manage.py snapshot`.
 
-Make a backup now, or list the ones on the remote:
+Every snapshot is kept for 7 days, then the newest of each week for 4 weeks
+and the newest of each month for 12 months (`METRA_BACKUP_KEEP_DAYS`,
+`METRA_BACKUP_KEEP_WEEKS`, `METRA_BACKUP_KEEP_MONTHS`). Snapshots taken by hand
+on the Backups page are kept until an admin deletes them. Admins see the
+snapshots, here and offsite, under **Settings > Backups** (also linked from the
+backup status on the Units page).
+
+The snapshots on the server are on the same disk as the data, so also set a
+remote in `.env` (see `.env.example`): `METRA_BACKUP_REMOTE_TYPE` is `s3`,
+`sftp` or `ftps`, with its address, credentials and
+`METRA_BACKUP_REMOTE_PATH`. Every snapshot is then also sent offsite,
+encrypted with `METRA_BACKUP_ENCRYPTION_PASSWORD` (rclone crypt) before it
+leaves the server, and the remote keeps snapshots on the same schedule.
+**Keep a copy of the encryption password somewhere other than the server**:
+without it the offsite snapshots cannot be read.
+
+Take a snapshot now, or list the ones offsite:
 
 ```sh
-docker compose exec web python manage.py backup
-docker compose exec web python manage.py backup --list-remote
+docker compose exec web python manage.py snapshot
+docker compose exec web python manage.py snapshot --list-remote
 ```
 
 ### Restore onto a fresh install
@@ -64,27 +76,29 @@ docker compose exec web python manage.py backup --list-remote
    password), and start it once: `docker compose up -d --build`.
 2. Stop the app so nothing writes during the restore:
    `docker compose stop web worker`
-3. Restore the backup you want, from the remote:
+3. Restore the snapshot you want, from offsite:
 
    ```sh
-   docker compose run --rm web python manage.py restore --remote metra-backup-20261018-023000.tar.gz
+   docker compose run --rm web python manage.py restore --remote metra-snapshot-20261018-023000-nightly-0.2.0.tar.gz
    ```
 
-   or from an archive file on the host:
+   or from a snapshot file on the host:
 
    ```sh
-   docker compose run --rm -v "$PWD/metra-backup-20261018-023000.tar.gz:/tmp/restore.tar.gz:ro" web python manage.py restore /tmp/restore.tar.gz
+   docker compose run --rm -v "$PWD/metra-snapshot-20261018-023000-nightly-0.2.0.tar.gz:/tmp/restore.tar.gz:ro" web python manage.py restore /tmp/restore.tar.gz
    ```
 
 4. Start again: `docker compose up -d`, and log in as before.
 
-`restore` replaces the database and all uploaded files with the backup's,
+`restore` replaces the database and all uploaded files with the snapshot's,
 then brings the database up to date with `migrate`. It refuses to run when
 the database already has users or register data; add `--force` to restore
-over an install that is in use (for example to go back to last night).
+over an install that is in use (for example to go back to last night). It
+then first takes a snapshot of the current data; `--skip-snapshot` restores
+without one, for a database too damaged to copy.
 
-To copy a local backup off the server:
-`docker compose cp web:/data/backups/metra-backup-20261018-023000.tar.gz .`
+To copy a snapshot off the server:
+`docker compose cp web:/data/snapshots/metra-snapshot-20261018-023000-nightly-0.2.0.tar.gz .`
 
 ## Email and SMS
 

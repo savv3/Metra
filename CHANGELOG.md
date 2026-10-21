@@ -12,6 +12,21 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+### Changed
+
+- Backups are now snapshots: a copy of the database and uploads taken every
+  night, when a new version starts, before a CSV import, before deleting a
+  unit type or field, before a restore, and on demand. They are kept for 7
+  days, then weekly for 4 weeks and monthly for 12 months; ones taken by hand
+  stay until deleted. A new Backups page lists them, here and offsite.
+- `manage.py backup` is now `manage.py snapshot`.
+
+### Upgrade notes
+
+- `METRA_BACKUP_KEEP` and `METRA_BACKUP_DIR` are replaced by
+  `METRA_BACKUP_KEEP_DAYS`, `METRA_BACKUP_KEEP_WEEKS` and
+  `METRA_BACKUP_KEEP_MONTHS`; snapshots are kept in `/data/snapshots`.
+
 ### Fixed
 
 - New message and Message to one unit no longer ask for an SMS text when the

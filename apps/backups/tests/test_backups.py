@@ -13,10 +13,12 @@ from django.utils import timezone
 from apps.backups import archive
 from apps.backups.models import BackupRun
 from apps.backups.rclone import RcloneError, Remote
-from apps.backups.service import run_backup
-from apps.backups.tasks import nightly_backup, schedule_time
+from apps.backups.retention import Policy
+from apps.backups.service import SnapshotFailed, take_snapshot
+from apps.backups.tasks import nightly_snapshot, schedule_time
 
 MOMENT = datetime.datetime(2026, 10, 18, 2, 30, tzinfo=datetime.UTC)
+MOMENT_LOCAL = datetime.datetime(2026, 10, 21, 12, 0)
 SECRET = "very-secret-crypt-password"
 REMOTE = {
     "remote_type": "s3",
@@ -123,9 +125,9 @@ def test_archive_holds_database_media_and_manifest(tmp_path):
     (media / "uploads").mkdir(parents=True)
     (media / "uploads" / "karta.pdf").write_bytes(b"%PDF")
 
-    path = archive.create_archive(db, media, tmp_path / "backups", MOMENT)
+    path = archive.create_archive(db, media, tmp_path / "backups", MOMENT, "nightly", "0.1.0")
 
-    assert path.name == "metra-backup-20261018-023000.tar.gz"
+    assert path.name == "metra-snapshot-20261018-023000-nightly-0.1.0.tar.gz"
     assert path.stat().st_mode & 0o777 == 0o600
     with tarfile.open(path) as tar:
         names = set(tar.getnames())
@@ -166,28 +168,77 @@ def test_extract_refuses_files_that_are_not_backups(tmp_path):
         archive.extract_archive(bogus, tmp_path / "out")
 
 
-def test_local_retention_keeps_the_newest(tmp_path):
-    for day in range(1, 6):
-        (tmp_path / f"metra-backup-202610{day:02d}-023000.tar.gz").write_bytes(b"x")
+def snap(day, trigger="nightly", month=10, hour=2):
+    return f"metra-snapshot-2026{month:02d}{day:02d}-{hour:02d}3000-{trigger}-0.1.0.tar.gz"
+
+
+def test_snapshot_names_say_when_why_and_which_version():
+    name = archive.archive_name(MOMENT, "delete", "0.3.0+dev")
+
+    assert name == "metra-snapshot-20261018-023000-delete-0.3.0dev.tar.gz"
+    info = archive.parse_name(name)
+    assert (info.taken, info.trigger, info.version) == (
+        datetime.datetime(2026, 10, 18, 2, 30),
+        "delete",
+        "0.3.0dev",
+    )
+    assert archive.parse_name("metra-backup-20261018-023000.tar.gz") is None
+    assert archive.parse_name("notes.txt") is None
+
+
+def test_retention_keeps_days_then_weeks_then_months_and_manual_ones():
+    now = datetime.datetime(2026, 10, 21, 12, 0)
+    names = [snap(d) for d in range(1, 22)]  # every night in October
+    names += [snap(28, month=9), snap(29, month=9, hour=3), snap(15, month=8)]
+    names += [snap(1, month=1), snap(10, month=1, trigger="manual")]
+
+    deleted = Policy(days=7, weeks=4, months=12).to_delete(names, now)
+    kept = set(names) - set(deleted)
+
+    # Every snapshot of the last 7 days.
+    assert {snap(d) for d in range(15, 22)} <= kept
+    assert snap(14) not in kept
+    # Older: the newest of each week for 4 weeks...
+    assert snap(11) in kept and snap(4) in kept  # Sundays of the two weeks before
+    assert snap(10) not in kept and snap(5) not in kept
+    # ...and the newest of each month for 12 months.
+    assert snap(29, month=9, hour=3) in kept and snap(28, month=9) not in kept
+    assert snap(15, month=8) in kept and snap(1, month=1) in kept
+    # Taken by hand: kept until deleted.
+    assert snap(10, month=1, trigger="manual") in kept
+    assert deleted == sorted(deleted, key=archive.archive_time)  # oldest first
+
+
+def test_retention_drops_snapshots_older_than_a_year():
+    now = datetime.datetime(2026, 10, 21)
+    old = "metra-snapshot-20251001-023000-nightly-0.1.0.tar.gz"
+
+    assert Policy().to_delete([old], now) == [old]
+
+
+def test_local_pruning_follows_the_policy(tmp_path):
+    tmp_path = tmp_path / "snapshots"
+    tmp_path.mkdir()
+    for day in range(1, 22):
+        (tmp_path / snap(day)).write_bytes(b"x")
     (tmp_path / "unrelated.txt").write_text("keep me")
 
-    removed = archive.prune_local(tmp_path, keep=2)
+    removed = archive.prune_local(tmp_path, Policy(days=3, weeks=0, months=0), MOMENT_LOCAL)
 
-    assert [p.name for p in removed] == [
-        f"metra-backup-202610{day:02d}-023000.tar.gz" for day in (1, 2, 3)
-    ]
     assert sorted(p.name for p in tmp_path.iterdir()) == [
-        "metra-backup-20261004-023000.tar.gz",
-        "metra-backup-20261005-023000.tar.gz",
+        snap(19),
+        snap(20),
+        snap(21),
         "unrelated.txt",
     ]
+    assert len(removed) == 18
 
 
 def test_rclone_is_configured_through_the_environment_only():
     runner = FakeRclone()
     remote = Remote(REMOTE, runner)
 
-    remote.upload(archive.Path("/data/backups/metra-backup-20261018-023000.tar.gz"))
+    remote.upload(archive.Path("/data/backups/metra-snapshot-20261018-023000-nightly-0.1.0.tar.gz"))
 
     obscure, upload = runner.calls
     assert obscure["command"] == ["rclone", "obscure", "-"]
@@ -195,8 +246,8 @@ def test_rclone_is_configured_through_the_environment_only():
     assert upload["command"] == [
         "rclone",
         "copyto",
-        "/data/backups/metra-backup-20261018-023000.tar.gz",
-        "metracrypt:metra-backup-20261018-023000.tar.gz",
+        "/data/backups/metra-snapshot-20261018-023000-nightly-0.1.0.tar.gz",
+        "metracrypt:metra-snapshot-20261018-023000-nightly-0.1.0.tar.gz",
     ]
     env = upload["env"]
     assert env["RCLONE_CONFIG_METRAREMOTE_TYPE"] == "s3"
@@ -223,13 +274,21 @@ def test_sftp_and_ftps_remotes(kind, rclone_type):
     assert (env.get("RCLONE_CONFIG_METRAREMOTE_EXPLICIT_TLS") == "true") == (kind == "ftps")
 
 
-def test_remote_retention_deletes_the_oldest():
-    listing = "\n".join(f"metra-backup-202610{d:02d}-023000.tar.gz" for d in (3, 1, 2)) + "\nother"
+def test_remote_lists_snapshots_with_sizes():
+    listing = f"{snap(3)};300\n{snap(1)};100\nother;5\n"
+
+    sizes = Remote(REMOTE, FakeRclone(listing=listing)).sizes()
+
+    assert sizes == {snap(1): 100, snap(3): 300}
+
+
+def test_remote_retention_follows_the_policy():
+    listing = "\n".join(f"{snap(d)};1" for d in (3, 1, 2)) + "\nother;1"
     runner = FakeRclone(listing=listing)
 
-    removed = Remote(REMOTE, runner).prune(keep=1)
+    removed = Remote(REMOTE, runner).prune(Policy(days=0, weeks=0, months=0), MOMENT_LOCAL)
 
-    assert removed == ["metra-backup-20261001-023000.tar.gz", "metra-backup-20261002-023000.tar.gz"]
+    assert removed == [snap(1), snap(2), snap(3)]
     deletes = [c["command"] for c in runner.calls if c["command"][1] == "deletefile"]
     assert deletes == [["rclone", "deletefile", f"metracrypt:{name}"] for name in removed]
 
@@ -243,7 +302,7 @@ def test_rclone_errors_never_show_secrets():
     remote = Remote(REMOTE, FakeRclone(fail="copyto"))
 
     with pytest.raises(RcloneError) as error:
-        remote.upload(archive.Path("/x/metra-backup-1.tar.gz"))
+        remote.upload(archive.Path("/x/metra-snapshot-20261018-023000-manual-0.1.0.tar.gz"))
 
     assert SECRET not in str(error.value)
     assert "s3-secret-value" not in str(error.value)
@@ -252,45 +311,58 @@ def test_rclone_errors_never_show_secrets():
 # Running a backup
 
 
+BACKUP = dict(REMOTE, remote_type="", keep_days=7, keep_weeks=4, keep_months=12, time="02:30")
+
+
 @pytest.fixture
 def live_db(tmp_path, settings, monkeypatch):
-    """Point the backup at a real SQLite file (the test database lives in memory)."""
+    """Point snapshots at a real SQLite file (the test database lives in memory)."""
     db = tmp_path / "db.sqlite3"
     make_database(db, rows=5).close()
     monkeypatch.setattr("apps.backups.service.database_path", lambda: db)
     settings.MEDIA_ROOT = tmp_path / "media"
-    settings.BACKUP = dict(REMOTE, remote_type="", dir=tmp_path / "backups", keep=2, time="02:30")
+    settings.BACKUP = dict(BACKUP, dir=tmp_path / "snapshots")
+    settings.DATA_DIR = tmp_path
     return db
 
 
 @pytest.mark.django_db
-def test_local_backup_is_recorded(live_db, settings):
-    run = run_backup()
+def test_local_snapshot_is_recorded(live_db, settings, make_user):
+    admin = make_user("admin")
 
-    assert run.success
-    assert (settings.BACKUP["dir"] / run.archive_name).stat().st_size == run.size
+    path, run = take_snapshot(BackupRun.Trigger.MANUAL, admin)
+
+    assert run.success and run.started_by == admin
+    assert path.parent == settings.BACKUP["dir"]
+    assert path.name == run.archive_name and path.stat().st_size == run.size
+    assert run.version == settings.METRA_VERSION
+    info = archive.parse_name(path.name)
+    assert (info.trigger, info.version) == ("manual", settings.METRA_VERSION)
     assert run.target == str(settings.BACKUP["dir"])
+    assert run.uploaded_at is None
     assert LogEntry.objects.get_for_object(run).exists()
 
 
 @pytest.mark.django_db
-def test_backup_uploads_and_prunes_when_a_remote_is_set(live_db, settings):
+def test_snapshot_is_sent_offsite_when_a_remote_is_set(live_db, settings):
     settings.BACKUP = dict(settings.BACKUP, remote_type="s3")
     runner = FakeRclone()
 
-    run = run_backup(runner=runner)
+    _path, run = take_snapshot(BackupRun.Trigger.NIGHTLY, runner=runner)
 
-    assert run.success
+    assert run.success and run.uploaded_at is not None
     assert runner.verbs() == ["obscure", "copyto", "lsf"]
     assert "S3 s3.example.com bucket/metra (encrypted)" in run.target
 
 
 @pytest.mark.django_db
-def test_failed_backup_is_recorded_without_secrets(live_db, settings):
+def test_failed_upload_is_recorded_without_secrets(live_db, settings):
     settings.BACKUP = dict(settings.BACKUP, remote_type="s3")
 
-    run = run_backup(runner=FakeRclone(fail="copyto"))
+    path, run = take_snapshot(BackupRun.Trigger.NIGHTLY, runner=FakeRclone(fail="copyto"))
 
+    assert path.is_file()  # the snapshot is still kept here
+    run.refresh_from_db()
     assert not run.success
     assert "access denied" in run.error
     assert SECRET not in run.error and "s3-secret-value" not in run.error
@@ -299,19 +371,57 @@ def test_failed_backup_is_recorded_without_secrets(live_db, settings):
 
 
 @pytest.mark.django_db
-def test_backup_command_fails_loudly(live_db, settings):
+def test_a_snapshot_that_cannot_be_taken_raises_and_is_recorded(live_db, settings, monkeypatch):
+    # A directory is no database: the copy fails.
+    monkeypatch.setattr("apps.backups.service.database_path", lambda: settings.DATA_DIR)
+
+    with pytest.raises(SnapshotFailed):
+        take_snapshot(BackupRun.Trigger.NIGHTLY)
+
+    run = BackupRun.objects.get()
+    assert not run.success and run.error
+
+
+@pytest.mark.django_db
+def test_snapshot_command_fails_loudly(live_db, settings):
     settings.BACKUP = dict(settings.BACKUP, remote_type="nfs")
 
     with pytest.raises(CommandError, match="must be one of"):
-        call_command("backup")
+        call_command("snapshot")
 
-    assert BackupRun.objects.get().success is False
+
+@pytest.mark.django_db
+def test_snapshot_before_an_upgrade_only_when_the_version_changed(live_db, settings):
+    version_file = settings.DATA_DIR / ".metra-version"
+
+    call_command("snapshot", "--before-upgrade")  # the first start with this feature
+    assert version_file.read_text() == settings.METRA_VERSION
+    assert BackupRun.objects.get().trigger == "upgrade"
+
+    call_command("snapshot", "--before-upgrade")  # same version: nothing to do
+    assert BackupRun.objects.count() == 1
+
+    version_file.write_text("0.0.1")
+    call_command("snapshot", "--before-upgrade")
+    assert BackupRun.objects.count() == 2
+
+
+@pytest.mark.django_db
+def test_no_upgrade_snapshot_for_a_new_install(live_db, settings, monkeypatch):
+    monkeypatch.setattr("apps.backups.service.database_path", lambda: settings.DATA_DIR / "new")
+
+    call_command("snapshot", "--before-upgrade")
+
+    assert not BackupRun.objects.exists()
+    assert (settings.DATA_DIR / ".metra-version").read_text() == settings.METRA_VERSION
 
 
 def test_nightly_schedule_defaults_to_half_past_two():
     assert schedule_time("02:30") == (2, 30)
-    assert nightly_backup.task_class().validate_datetime(datetime.datetime(2026, 10, 18, 2, 30))
-    assert not nightly_backup.task_class().validate_datetime(datetime.datetime(2026, 10, 18, 3, 30))
+    assert nightly_snapshot.task_class().validate_datetime(datetime.datetime(2026, 10, 18, 2, 30))
+    assert not nightly_snapshot.task_class().validate_datetime(
+        datetime.datetime(2026, 10, 18, 3, 30)
+    )
     with pytest.raises(ValueError):
         schedule_time("25:00")
 
@@ -359,7 +469,7 @@ def test_restore_into_a_fresh_database(backup_file, restored):
 
 @pytest.mark.django_db
 def test_restore_downloads_from_the_remote(backup_file, restored, settings, monkeypatch):
-    settings.BACKUP = dict(REMOTE, dir=backup_file.parent, keep=2, time="02:30")
+    settings.BACKUP = dict(BACKUP, remote_type="s3", dir=backup_file.parent)
 
     def download(self, name, destination):
         destination.write_bytes(backup_file.read_bytes())

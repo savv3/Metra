@@ -1,6 +1,8 @@
 from auditlog.mixins import AuditlogHistoryAdminMixin
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.db import models
+from django.shortcuts import redirect
+from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
 from .models import CustomField, Organisation, Person, Tag, Unit, UnitContact, UnitType
@@ -63,8 +65,47 @@ class OrganisationAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
         return not Organisation.objects.exists()
 
 
+class SnapshotBeforeDeleteMixin:
+    """Deleting a unit type or a field also deletes data on every unit, so a
+    snapshot is taken first. If none can be taken, nothing is deleted."""
+
+    def snapshot_first(self, request):
+        from apps.backups.models import BackupRun
+        from apps.backups.service import SnapshotFailed, snapshot_before
+
+        try:
+            snapshot_before(BackupRun.Trigger.DELETE, request.user)
+        except SnapshotFailed as error:
+            messages.error(
+                request,
+                gettext("Nothing was deleted: a snapshot could not be taken first (%(error)s).")
+                % {"error": error},
+            )
+            return False
+        return True
+
+    def delete_view(self, request, object_id, extra_context=None):
+        if request.method == "POST" and not self.snapshot_first(request):
+            return redirect(request.path)
+        return super().delete_view(request, object_id, extra_context)
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        if "delete_selected" in actions:
+            delete_selected, name, description = actions["delete_selected"]
+
+            def snapshot_then_delete(modeladmin, request, queryset):
+                # The action asks first; "post" is set once the deletion is confirmed.
+                if request.POST.get("post") and not modeladmin.snapshot_first(request):
+                    return None
+                return delete_selected(modeladmin, request, queryset)
+
+            actions["delete_selected"] = (snapshot_then_delete, name, description)
+        return actions
+
+
 @admin.register(UnitType)
-class UnitTypeAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
+class UnitTypeAdmin(SnapshotBeforeDeleteMixin, AuditlogHistoryAdminMixin, admin.ModelAdmin):
     show_auditlog_history_link = True
     list_display = ["name", "order"]
     inlines = [UnitCustomFieldInline]
@@ -73,12 +114,13 @@ class UnitTypeAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
         for obj in formset.save(commit=False):
             obj.target = CustomField.Target.UNIT
             obj.save()
-        for obj in formset.deleted_objects:
-            obj.delete()
+        if formset.deleted_objects and self.snapshot_first(request):
+            for obj in formset.deleted_objects:
+                obj.delete()
 
 
 @admin.register(CustomField)
-class CustomFieldAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
+class CustomFieldAdmin(SnapshotBeforeDeleteMixin, AuditlogHistoryAdminMixin, admin.ModelAdmin):
     show_auditlog_history_link = True
     list_display = ["label", "key", "target", "unit_type", "field_type", "required", "order"]
     list_filter = ["target", "unit_type"]

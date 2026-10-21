@@ -123,6 +123,24 @@ def unit_import_map(request):
     return render(request, "register/import_map.html", context)
 
 
+def _snapshot_first(request):
+    """A snapshot before the import changes the register; False (with a
+    message) if none could be taken, and then nothing is imported."""
+    from apps.backups.models import BackupRun
+    from apps.backups.service import SnapshotFailed, snapshot_before
+
+    try:
+        snapshot_before(BackupRun.Trigger.IMPORT, request.user)
+    except SnapshotFailed as error:
+        messages.error(
+            request,
+            _("Nothing was imported: a snapshot could not be taken first (%(error)s).")
+            % {"error": error},
+        )
+        return False
+    return True
+
+
 @login_required
 @permission_required(IMPORT_PERMISSIONS, raise_exception=True)
 def unit_import_preview(request):
@@ -142,7 +160,7 @@ def unit_import_preview(request):
             data["skip_existing"],
         )
         errors = [r for r in results if r.status == "error"]
-        if request.method == "POST" and not errors:
+        if request.method == "POST" and not errors and _snapshot_first(request):
             units, people = csv_io.import_rows(results)
             del request.session[SESSION_KEY]
             skipped = sum(1 for r in results if r.status == "skip")

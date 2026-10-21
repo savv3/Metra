@@ -108,7 +108,7 @@ which the copy does not touch.
 
 ## Remove an organisation
 
-Take a last backup first (`podman-compose exec web python manage.py backup`
+Take a last snapshot first (`podman-compose exec web python manage.py snapshot`
 and copy it off the server), then, in its folder:
 
 ```sh

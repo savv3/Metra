@@ -1,21 +1,33 @@
-"""Backup archives: a consistent copy of the SQLite database plus media files.
+"""Snapshots: a consistent copy of the SQLite database plus uploaded files,
+in one archive.
 
 The database is copied with SQLite's online backup API, which gives a
-consistent snapshot while the app keeps writing. Copying the file itself is
+consistent copy while the app keeps writing. Copying the file itself is
 never safe for a database in WAL mode.
+
+A snapshot's file name says when it was taken, what triggered it and which
+version of Metra took it, for example
+``metra-snapshot-20261021-023000-nightly-0.3.0.tar.gz``, so snapshots can be
+listed and kept on a schedule from their names alone, here and offsite.
 """
 
+import datetime
 import json
 import os
+import re
 import shutil
 import sqlite3
 import tarfile
 import tempfile
+from dataclasses import dataclass
 from pathlib import Path
 
-PREFIX = "metra-backup-"
+PREFIX = "metra-snapshot-"
 SUFFIX = ".tar.gz"
-FORMAT = 1
+FORMAT = 2
+NAME = re.compile(
+    r"^metra-snapshot-(?P<time>\d{8}-\d{6})-(?P<trigger>[a-z]+)-(?P<version>[0-9A-Za-z.]+)\.tar\.gz$"
+)
 DB_NAME = "db.sqlite3"
 MEDIA_NAME = "media"
 MANIFEST_NAME = "manifest.json"
@@ -25,16 +37,36 @@ class ArchiveError(Exception):
     pass
 
 
-def archive_name(moment):
-    return f"{PREFIX}{moment:%Y%m%d-%H%M%S}{SUFFIX}"
+@dataclass(frozen=True)
+class Info:
+    """What a snapshot's file name says about it."""
+
+    name: str
+    taken: datetime.datetime  # local time, without a time zone
+    trigger: str
+    version: str
+
+
+def archive_name(moment, trigger, version):
+    version = re.sub(r"[^0-9A-Za-z.]", "", version) or "0"
+    return f"{PREFIX}{moment:%Y%m%d-%H%M%S}-{trigger}-{version}{SUFFIX}"
+
+
+def parse_name(name):
+    """The Info in a snapshot's name, or None for any other file."""
+    match = NAME.match(name)
+    if not match:
+        return None
+    taken = datetime.datetime.strptime(match["time"], "%Y%m%d-%H%M%S")
+    return Info(name, taken, match["trigger"], match["version"])
 
 
 def is_archive_name(name):
-    return name.startswith(PREFIX) and name.endswith(SUFFIX)
+    return parse_name(name) is not None
 
 
 def archive_time(name):
-    """The time stamp in an archive name; sorts archives oldest first."""
+    """The time stamp in a snapshot's name; sorts snapshots oldest first."""
     return name.removeprefix(PREFIX)
 
 
@@ -53,17 +85,26 @@ def copy_database(source, destination):
         src.close()
 
 
-def create_archive(db_path, media_dir, out_dir, moment):
-    """Write ``<out_dir>/metra-backup-<time>.tar.gz`` and return its path."""
+def create_archive(db_path, media_dir, out_dir, moment, trigger="manual", version="0"):
+    """Write a snapshot into ``out_dir`` and return its path."""
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    target = out_dir / archive_name(moment)
+    target = out_dir / archive_name(moment, trigger, version)
     partial = target.with_name(target.name + ".partial")
     with tempfile.TemporaryDirectory(dir=out_dir) as tmp:
         db_copy = Path(tmp) / DB_NAME
         copy_database(db_path, db_copy)
         manifest = Path(tmp) / MANIFEST_NAME
-        manifest.write_text(json.dumps({"format": FORMAT, "created": moment.isoformat()}))
+        manifest.write_text(
+            json.dumps(
+                {
+                    "format": FORMAT,
+                    "created": moment.isoformat(),
+                    "trigger": trigger,
+                    "version": version,
+                }
+            )
+        )
         with tarfile.open(partial, "w:gz") as tar:
             tar.add(manifest, MANIFEST_NAME)
             tar.add(db_copy, DB_NAME)
@@ -83,10 +124,10 @@ def local_archives(out_dir):
     return sorted(archives, key=lambda p: archive_time(p.name))
 
 
-def prune_local(out_dir, keep):
-    """Delete all but the ``keep`` newest archives; return the deleted paths."""
-    archives = local_archives(out_dir)
-    old = archives[:-keep] if keep > 0 else archives
+def prune_local(out_dir, policy, now):
+    """Delete the snapshots ``policy`` no longer keeps; return the deleted paths."""
+    archives = {path.name: path for path in local_archives(out_dir)}
+    old = [archives[name] for name in policy.to_delete(archives, now)]
     for path in old:
         path.unlink()
     return old

@@ -68,7 +68,7 @@ def test_upgrade_backs_up_and_switches_image(install):
     assert env.read_text() == "METRA_SECRET_KEY=secret\nMETRA_IMAGE=metra:0.2.0\n"
     assert stat.S_IMODE(env.stat().st_mode) == 0o600
     log = (install / "log").read_text()
-    assert log.index("manage.py backup") < log.index("podman load")
+    assert log.index("manage.py snapshot") < log.index("podman load")
     assert "up -d --force-recreate web worker" in log
 
 

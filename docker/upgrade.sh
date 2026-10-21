@@ -70,10 +70,10 @@ healthy() {
 }
 
 if podman-compose exec -T web true >/dev/null 2>&1; then
-    echo "Taking a backup first."
-    podman-compose exec -T web python manage.py backup
+    echo "Taking a snapshot first."
+    podman-compose exec -T web python manage.py snapshot
 else
-    echo "The web container is not running, so no backup was taken."
+    echo "The web container is not running, so no snapshot was taken (the new version takes one before migrating)."
 fi
 
 podman load -i "$tar"

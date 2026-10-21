@@ -210,8 +210,13 @@ HUEY = {
 # Backups: a consistent copy of the database plus media, kept locally and,
 # when a remote is set, encrypted and uploaded with rclone. See INSTALL.md.
 BACKUP = {
-    "dir": Path(os.environ.get("METRA_BACKUP_DIR") or DATA_DIR / "backups"),
-    "keep": int(os.environ.get("METRA_BACKUP_KEEP") or 14),
+    # Snapshots live here and are also sent offsite when a remote is set.
+    "dir": DATA_DIR / "snapshots",
+    # Keep every automatic snapshot this many days, then the newest of each
+    # week and of each month this long. Snapshots taken by hand stay until deleted.
+    "keep_days": int(os.environ.get("METRA_BACKUP_KEEP_DAYS") or 7),
+    "keep_weeks": int(os.environ.get("METRA_BACKUP_KEEP_WEEKS") or 4),
+    "keep_months": int(os.environ.get("METRA_BACKUP_KEEP_MONTHS") or 12),
     "time": os.environ.get("METRA_BACKUP_TIME") or "02:30",
     "remote_type": os.environ.get("METRA_BACKUP_REMOTE_TYPE", "").strip().lower(),
     "remote_path": os.environ.get("METRA_BACKUP_REMOTE_PATH", ""),

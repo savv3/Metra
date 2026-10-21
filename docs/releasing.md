@@ -20,7 +20,7 @@ through a full season.
 
 **Upgrade path.** You can upgrade from any release of the previous major
 version straight to the new one. Migrations are squashed only in a major
-release. Take a backup before upgrading (`manage.py backup`).
+release. The app takes a snapshot itself before a new version migrates the database.
 
 ## Docker images
 
