@@ -136,6 +136,31 @@ as locked. When `METRA_EMAIL_HOST` or `METRA_EMAIL_BACKEND` is set, the
 environment also decides how email is sent, so an existing install keeps
 working unchanged.
 
+**Mailgun** is an add-on for sending through [Mailgun](https://www.mailgun.com)
+instead of SMTP, with delivery and bounce reports. It comes with Metra and is
+on by default, but sends only once chosen:
+
+1. At Mailgun, add and verify a sending domain (for example `mg.example.fi`),
+   in the EU region unless the account is in the US, and create a sending API
+   key for it.
+2. In Metra, open **Settings > Add-ons > Mailgun** and enter the **Sending
+   domain**, **API key** and **Region**.
+3. At Mailgun, under *Webhooks*, add `<METRA_BASE_URL>/plugins/mailgun/events/`
+   for *Delivered messages*, *Permanent failure* and *Spam complaints*, and
+   copy the **HTTP webhook signing key** into **Webhook signing key** in
+   Metra.
+4. Under **Settings > Email** choose **Mailgun**, set the from address (on
+   the sending domain) and send a test email.
+
+Mailgun then reports each email: delivered, bounced (the message is marked
+failed and the person's address is flagged as bouncing until it is changed)
+or marked as spam. Each send-out's email is tagged `send-out-<id>` at Mailgun.
+The settings can instead be set with `METRA_MAILGUN_DOMAIN`,
+`METRA_MAILGUN_API_KEY`, `METRA_MAILGUN_REGION` (`eu` or `us`) and
+`METRA_MAILGUN_WEBHOOK_KEY`, which win over the page. Mailgun receives each
+recipient's address and the email's text; list it as a processor in your GDPR
+records.
+
 **SMS** goes through [46elks](https://46elks.com):
 
 1. Create an account at 46elks and add credit. Messages are paid per SMS.

@@ -17,7 +17,7 @@ from apps.selfservice.models import ROLE_PREFERENCE
 from . import attachments
 from .models import Channel, Message, MessageBatch, MessageTemplate, organisation_placeholders
 from .preference import channel_order, reachable
-from .registry import EMAIL, SMS, ProviderError, provider_for
+from .registry import EMAIL, SMS, ProviderError, email_headers, provider_for
 from .sms import segments
 
 EVERYONE = "everyone"
@@ -190,7 +190,9 @@ def _send(batch, person, unit, channel):
         provider=provider.name,
     )
     try:
-        extra = attachments.email_kwargs(provider, batch) if channel == EMAIL else {}
+        extra = {}
+        if channel == EMAIL:
+            extra = email_headers(provider, batch) | attachments.email_kwargs(provider, batch)
         result = provider.send(
             recipient,
             body,

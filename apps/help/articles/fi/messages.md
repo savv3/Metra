@@ -14,7 +14,18 @@ testisähköposti** tarkistaa, että lähetys toimii. Tallennettua salasanaa ei
 näytetä enää koskaan: jätä kenttä tyhjäksi, jos haluat säilyttää sen. Harmaa
 kenttä on asetettu palvelimella, eikä sitä voi muuttaa sovelluksessa.
 
-## Viestin lähettäminen usealle taloudelle
+### Mailgun
+
+**Mailgun**-lisäosa lähettää sähköpostin sen sijaan Mailgunin kautta. Anna
+**Lähetysverkkotunnus**, **API-avain** ja **Alue** kohdassa **Asetukset >
+Lisäosat > Mailgun** ja valitse sitten **Mailgun** kohdassa **Asetukset >
+Sähköposti**. Kun **Webhookien allekirjoitusavain** on annettu ja webhook on
+lisätty Mailgunissa (katso asennusohje), jokaisen viestin tila näyttää, onko
+se toimitettu. Kun sähköposti palautuu, viesti merkitään epäonnistuneeksi, ja
+henkilön sivulla näkyy osoitteen vieressä **Palautui** sekä Mailgunin
+ilmoittama syy. Tarkista osoite henkilöltä ja korjaa se; uusi osoite poistaa
+merkinnän. Jos vastaanottaja merkitsi viestin roskapostiksi, se näkyy
+viestissä.
 
 **Lähetykset > Uusi viesti** kirjoittaa yhden viestin kaikille, tunnisteella
 merkityille tai tietyn tyyppisille yksiköille tai suodattamasi listan

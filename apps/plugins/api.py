@@ -45,7 +45,15 @@ from importlib import import_module
 from django.dispatch import Signal
 
 from apps.core.pdf import PDFUnavailable
-from apps.messaging.registry import EMAIL, SMS, Provider, ProviderError, SendResult, registry
+from apps.messaging.registry import (
+    EMAIL,
+    SEND_OUT_HEADER,
+    SMS,
+    Provider,
+    ProviderError,
+    SendResult,
+    registry,
+)
 from apps.notifications.kinds import Kind as NotificationKind
 
 from . import events
@@ -154,6 +162,12 @@ __all__ = [
     "on_webhook_event",
     "plugin_settings",
     "record_delivery",
+    "record_email_event",
+    "email_from",
+    "DELIVERED",
+    "BOUNCED",
+    "COMPLAINED",
+    "SEND_OUT_HEADER",
     "render_pdf",
     "sms_country_code",
     "sms_sender",
@@ -291,6 +305,33 @@ def record_delivery(provider, provider_id, delivered):
     from apps.messaging.delivery_reports import record
 
     return record(provider, provider_id, delivered)
+
+
+# What an email provider reports about an email (see record_email_event).
+DELIVERED = "delivered"
+BOUNCED = "bounced"
+COMPLAINED = "complained"
+# SEND_OUT_HEADER, imported above, carries a send-out's id on its email; a
+# provider may turn it into a tag of its own (see the Mailgun plugin).
+
+
+def record_email_event(provider, provider_id, event, reason=""):
+    """An email provider reported ``event`` (DELIVERED, BOUNCED or
+    COMPLAINED) for the email it calls ``provider_id``. A bounce marks the
+    message failed and flags the person's address; a complaint is noted on
+    the message. For a provider plugin's webhook view; unknown ids are ignored."""
+    from apps.messaging.delivery_reports import record_email
+
+    return record_email(provider, provider_id, event, reason)
+
+
+def email_from():
+    """(from address, Reply-To address or "") of the installation's email,
+    from Settings > Email or METRA_EMAIL_FROM and METRA_EMAIL_REPLY_TO."""
+    from apps.messaging.email_config import current
+
+    config = current()
+    return config.from_email, config.reply_to
 
 
 # PDFs.

@@ -6,6 +6,7 @@ requires-python = ">=3.13"
 members = [
     "metra",
     "metra-api",
+    "metra-email-mailgun",
     "metra-example-plugin",
     "metra-meetings",
     "metra-sms-46elks",
@@ -465,6 +466,7 @@ dependencies = [
     { name = "huey" },
     { name = "markdown" },
     { name = "metra-api" },
+    { name = "metra-email-mailgun" },
     { name = "metra-meetings" },
     { name = "metra-sms-46elks" },
     { name = "metra-webhooks" },
@@ -492,6 +494,7 @@ requires-dist = [
     { name = "huey", specifier = ">=3.4.0" },
     { name = "markdown", specifier = ">=3.11.2" },
     { name = "metra-api", editable = "plugins/api" },
+    { name = "metra-email-mailgun", editable = "plugins/email-mailgun" },
     { name = "metra-meetings", editable = "plugins/meetings" },
     { name = "metra-sms-46elks", editable = "plugins/sms-46elks" },
     { name = "metra-webhooks", editable = "plugins/webhooks" },
@@ -523,6 +526,11 @@ requires-dist = [
     { name = "djangorestframework", specifier = ">=3.16" },
     { name = "drf-spectacular", specifier = ">=0.28" },
 ]
+
+[[package]]
+name = "metra-email-mailgun"
+version = "0.1.0"
+source = { editable = "plugins/email-mailgun" }
 
 [[package]]
 name = "metra-example-plugin"

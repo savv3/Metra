@@ -10,12 +10,16 @@ says it is configured is used, so installing a provider plugin and giving it
 its settings is enough.
 """
 
+import inspect
 from dataclasses import dataclass
 
 from django.conf import settings
 
 SMS = "sms"
 EMAIL = "email"
+# Email of a send-out carries its id in this header, so a provider can tag
+# the messages (Mailgun's o:tag) and group their statistics by send-out.
+SEND_OUT_HEADER = "X-Metra-Send-Out"
 
 
 class ProviderError(Exception):
@@ -120,6 +124,16 @@ class ProviderRegistry:
 
 
 registry = ProviderRegistry()
+
+
+def email_headers(provider, batch, headers=None):
+    """The ``headers`` argument for an email of a send-out: ``headers`` plus
+    the send-out header. Empty for providers written before headers existed
+    (e.g. in a plugin), which still work."""
+    if "headers" not in inspect.signature(provider.send).parameters:
+        return {}
+    return {"headers": {**(headers or {}), SEND_OUT_HEADER: str(batch.pk)}}
+
 
 AUTO = "auto"
 

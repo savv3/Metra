@@ -68,6 +68,7 @@ def test_compose_preview_and_send(admin_client, db):
     assert link
     assert email.extra_headers["List-Unsubscribe"] == f"<{link[0]}>"
     assert email.extra_headers["List-Unsubscribe-Post"] == "List-Unsubscribe=One-Click"
+    assert email.extra_headers["X-Metra-Send-Out"] == str(batch.pk)
 
 
 def test_newsletter_goes_out_in_parts(db, settings, monkeypatch):
