@@ -7,7 +7,14 @@ from django.urls import NoReverseMatch, reverse
 from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 
-from ..hooks import NAVIGATION, PERSON_PANELS, SETTINGS_LINKS, UNIT_PANELS, hooks
+from ..hooks import (
+    MEMBER_PANELS,
+    NAVIGATION,
+    PERSON_PANELS,
+    SETTINGS_LINKS,
+    UNIT_PANELS,
+    hooks,
+)
 
 register = template.Library()
 logger = logging.getLogger(__name__)
@@ -59,6 +66,39 @@ def plugin_panels(context, kind, obj):
             if settings.DEBUG:
                 raise
             logger.exception("Plugin panel %s failed", panel.template)
+    return mark_safe("\n".join(html))
+
+
+@register.simple_tag(takes_context=True)
+def member_panels(context, member_link):
+    """Sections plugins add to the member page behind a personal link.
+
+    The template gets ``unit``, ``person``, ``token``, ``title`` and whatever
+    ``context(request, member_link)`` returns. It fails safe like
+    ``plugin_panels``.
+    """
+    request = context["request"]
+    html = []
+    for panel in hooks.get(MEMBER_PANELS):
+        try:
+            extra = panel.context(request, member_link) if panel.context else {}
+            html.append(
+                render_to_string(
+                    panel.template,
+                    {
+                        "unit": member_link.unit,
+                        "person": member_link.person,
+                        "token": member_link.token,
+                        "title": panel.title,
+                        **extra,
+                    },
+                    request=request,
+                )
+            )
+        except Exception:
+            if settings.DEBUG:
+                raise
+            logger.exception("Plugin member panel %s failed", panel.template)
     return mark_safe("\n".join(html))
 
 

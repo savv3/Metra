@@ -1,0 +1,28 @@
+{% load i18n %}<!doctype html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+<meta charset="utf-8">
+<title>{% translate "Agenda" %} – {{ meeting.title }}</title>
+{% include "metra_meetings/pdf/_style.html" %}
+</head>
+<body>
+  {% if organisation %}<div class="organisation"><strong>{{ organisation.name }}</strong>{% if organisation.business_id %} &middot; {{ organisation.business_id }}{% endif %}</div>{% endif %}
+  <h1>{{ meeting.title }}</h1>
+  <p class="kind">{% translate "Agenda" %} &middot; {{ meeting.get_kind_display }}</p>
+  <table class="meta">
+    <tr><th>{% translate "Date" %}</th><td>{{ meeting.starts_at|date:"DATE_FORMAT" }}</td></tr>
+    <tr><th>{% translate "Time" %}</th><td>{{ meeting.starts_at|time:"TIME_FORMAT" }}</td></tr>
+    <tr><th>{% translate "Place" %}</th><td>{{ meeting.place|default:"–" }}</td></tr>
+  </table>
+  {% if meeting.notes %}<p>{{ meeting.notes|linebreaksbr }}</p>{% endif %}
+  {% for number, item in items %}
+    <div class="item">
+      <h2>§ {{ number }}. {{ item.title }}</h2>
+      {% if item.description %}<p class="description">{{ item.description|linebreaksbr }}</p>{% endif %}
+    </div>
+  {% empty %}
+    <p>{% translate "No agenda items yet." %}</p>
+  {% endfor %}
+</body>
+</html>

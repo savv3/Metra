@@ -92,9 +92,11 @@ def test_help_needs_a_login(client):
 @pytest.fixture
 def plugin_articles(tmp_path):
     (tmp_path / "en").mkdir()
-    (tmp_path / "en" / "meetings.md").write_text("# Meetings\n\nHow to hold the annual meeting.")
+    (tmp_path / "en" / "test-guide.md").write_text(
+        "# Test guide\n\nHow to hold the annual meeting."
+    )
     extra = api.add_help_articles(
-        api.HelpArticles(str(tmp_path), order=["meetings"], pages={"core": "meetings"})
+        api.HelpArticles(str(tmp_path), order=["test-guide"], pages={"core": "test-guide"})
     )
     yield extra
     hooks._items[HELP_ARTICLES].remove(extra)
@@ -102,10 +104,10 @@ def plugin_articles(tmp_path):
 
 def test_plugins_add_articles_and_page_links(board_client, plugin_articles):
     english = board_client.get(reverse("help:index"), HTTP_ACCEPT_LANGUAGE="en").content.decode()
-    assert "Meetings" in english
+    assert "Test guide" in english
 
     # Not written in Swedish: shown in English, saying so.
-    swedish = board_client.get(reverse("help:article", args=["meetings"])).content.decode()
+    swedish = board_client.get(reverse("help:article", args=["test-guide"])).content.decode()
     assert "How to hold the annual meeting." in swedish
     assert 'lang="en"' in swedish
-    assert articles.for_page("core") == "meetings"
+    assert articles.for_page("core") == "test-guide"

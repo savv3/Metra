@@ -11,10 +11,19 @@ UNIT_PANELS = "unit_panels"
 PERSON_PANELS = "person_panels"
 SETTINGS_LINKS = "settings_links"
 WEBHOOK_EVENTS = "webhook_events"
+MEMBER_PANELS = "member_panels"
 
 HELP_ARTICLES = "help_articles"
 
-KNOWN = {NAVIGATION, UNIT_PANELS, PERSON_PANELS, SETTINGS_LINKS, WEBHOOK_EVENTS, HELP_ARTICLES}
+KNOWN = {
+    NAVIGATION,
+    UNIT_PANELS,
+    PERSON_PANELS,
+    SETTINGS_LINKS,
+    WEBHOOK_EVENTS,
+    MEMBER_PANELS,
+    HELP_ARTICLES,
+}
 
 
 class HookRegistry:

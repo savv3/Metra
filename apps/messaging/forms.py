@@ -55,7 +55,11 @@ class AttachmentsMixin:
 
     def add_attachment_fields(self, user):
         self.user = user
-        ids = self.data.getlist("attachments") if self.is_bound else []
+        if self.is_bound:
+            ids = self.data.getlist("attachments")
+        else:
+            # Files a draft brought along (see drafts.py) start out ticked.
+            ids = [str(i) for i in self.initial.get("attachments", [])]
         self.fields["attachments"] = forms.ModelMultipleChoiceField(
             label=_("Attached files"),
             queryset=attachments.unsent(user).filter(pk__in=[i for i in ids if i.isdigit()]),

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ meeting.title }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{{ meeting.title }} <span class="badge">{{ meeting.get_status_display }}</span></h1>
+    <div class="actions">
+      {% if not meeting.is_approved and perms.metra_meetings.change_meeting %}
+        <a class="button" href="{% url 'metra_meetings:meeting_edit' meeting.pk %}">{% translate "Edit" %}</a>
+      {% endif %}
+      {% if not meeting.is_approved and perms.metra_meetings.delete_meeting %}
+        <a class="button button--danger" href="{% url 'metra_meetings:meeting_delete' meeting.pk %}">{% translate "Delete" %}</a>
+      {% endif %}
+    </div>
+  </div>
+  <p class="subtitle">{{ meeting.get_kind_display }} &middot; {{ meeting.starts_at|date:"DATETIME_FORMAT" }}{% if meeting.place %} &middot; {{ meeting.place }}{% endif %}</p>
+
+  {% if can_approve %}
+    <div class="status-panel">
+      <h2>{% translate "You are a minute checker" %}</h2>
+      <p>{% translate "Read the minutes and approve them when they are right." %}</p>
+      <p><a class="button button--primary" href="{% url 'metra_meetings:approve' meeting.pk %}">{% translate "Check and approve the minutes" %}</a></p>
+    </div>
+  {% endif %}
+
+  <section class="card" aria-labelledby="meeting-steps">
+    <h2 id="meeting-steps">{% translate "Documents and steps" %}</h2>
+    <div class="actions">
+      <a class="button" href="{% url 'metra_meetings:agenda_pdf' meeting.pk %}">{% translate "Agenda (PDF)" %}</a>
+      <a class="button" href="{% url 'metra_meetings:minutes_pdf' meeting.pk %}">{% translate "Minutes (PDF)" %}</a>
+      {% if perms.metra_meetings.view_attendance %}
+        <a class="button" href="{% url 'metra_meetings:attendance' meeting.pk %}">{% translate "Attendance" %}</a>
+      {% endif %}
+      {% if not meeting.is_approved and perms.metra_meetings.change_agendaitem and items %}
+        <a class="button" href="{% url 'metra_meetings:minutes_edit' meeting.pk %}">{% translate "Write the minutes" %}</a>
+      {% endif %}
+    </div>
+    {% if not meeting.is_approved and perms.metra_meetings.change_meeting %}
+      <div class="actions">
+        {% if can_send_notice %}
+          <form method="post" action="{% url 'metra_meetings:send_notice' meeting.pk %}" class="inline-form">
+            {% csrf_token %}
+            <button type="submit" class="button">{% translate "Send the notice" %}</button>
+          </form>
+        {% endif %}
+        <form method="post" action="{% url 'metra_meetings:meeting_status' meeting.pk %}" class="inline-form">
+          {% csrf_token %}
+          {% if meeting.status == "draft" %}
+            <button type="submit" name="status" value="called" class="button">{% translate "Mark as called" %}</button>
+          {% endif %}
+          {% if meeting.status == "draft" or meeting.status == "called" %}
+            <button type="submit" name="status" value="held" class="button">{% translate "Mark as held" %}</button>
+          {% elif meeting.status == "held" %}
+            <button type="submit" name="status" value="called" class="button">{% translate "Not held yet" %}</button>
+          {% endif %}
+        </form>
+      </div>
+      {% if can_send_notice %}<p class="help">{% translate "The notice opens as a new message with the agenda attached, so you can choose who gets it and check it before sending." %}</p>{% endif %}
+    {% endif %}
+  </section>
+
+  {% if meeting.status == "held" or meeting.is_approved %}
+    <section class="card" aria-labelledby="meeting-approval">
+      <h2 id="meeting-approval">{% translate "Approval of the minutes" %}</h2>
+      {% if meeting.is_approved %}
+        <p>{% blocktranslate with date=meeting.approved_at|date:"DATETIME_FORMAT" %}Approved on {{ date }}. The minutes can no longer be changed.{% endblocktranslate %}
+        {% if meeting.members_can_read %}{% translate "Members can read them on their personal page." %}{% endif %}</p>
+      {% elif not checkers %}
+        <p>{% translate "No minute checkers are chosen. Edit the meeting to add them." %}</p>
+      {% elif missing %}
+        <p>{% translate "Waiting for:" %} {% for user in missing %}{{ user.get_full_name|default:user.get_username }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+      {% endif %}
+    </section>
+  {% endif %}
+
+  <section class="card" aria-labelledby="meeting-agenda">
+    <div class="page-head">
+      <h2 id="meeting-agenda">{% translate "Agenda and minutes" %}</h2>
+      {% if not meeting.is_approved and perms.metra_meetings.add_agendaitem %}
+        <a class="button" href="{% url 'metra_meetings:item_create' meeting.pk %}">{% translate "Add an item" %}</a>
+      {% endif %}
+    </div>
+    {% include "metra_meetings/_minutes.html" with editable=True %}
+  </section>
+{% endblock %}

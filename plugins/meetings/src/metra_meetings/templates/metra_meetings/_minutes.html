@@ -1,0 +1,24 @@
+{% load i18n %}
+<dl class="details-list">
+  <dt>{% translate "Chair" %}</dt><dd>{{ meeting.chair_name|default:"–" }}</dd>
+  <dt>{% translate "Secretary" %}</dt><dd>{{ meeting.secretary_name|default:"–" }}</dd>
+  <dt>{% translate "Minute checkers" %}</dt>
+  <dd>{% for checker, approval in checkers %}{{ checker.get_full_name|default:checker.get_username }}{% if approval %} ({% blocktranslate with date=approval.approved_at|date:"SHORT_DATETIME_FORMAT" %}approved {{ date }}{% endblocktranslate %}){% endif %}{% if not forloop.last %}, {% endif %}{% empty %}–{% endfor %}</dd>
+  <dt>{% translate "Present" %}</dt>
+  <dd>{% blocktranslate count count=attendances|length %}{{ count }} person{% plural %}{{ count }} people{% endblocktranslate %}, {% blocktranslate count count=total_votes %}{{ count }} vote{% plural %}{{ count }} votes{% endblocktranslate %}{% if meeting.votes_by_unit %} ({% translate "one vote per unit" %}){% endif %}</dd>
+  {% if meeting.notes %}<dt>{% translate "Other information" %}</dt><dd>{{ meeting.notes|linebreaksbr }}</dd>{% endif %}
+</dl>
+{% if items %}
+  <ol class="plain-list meeting-items">
+    {% for number, item in items %}
+      <li>
+        <h3>§ {{ number }}. {{ item.title }}{% if editable and not meeting.is_approved and perms.metra_meetings.change_agendaitem %} <a class="button button--small" href="{% url 'metra_meetings:item_edit' meeting.pk item.pk %}">{% translate "Edit" %}<span class="visually-hidden"> {{ item.title }}</span></a>{% endif %}</h3>
+        {% if item.description %}<p class="help">{{ item.description|linebreaksbr }}</p>{% endif %}
+        {% if item.minutes %}<p>{{ item.minutes|linebreaksbr }}</p>{% endif %}
+        {% if item.decision %}<p><strong>{% translate "Decision:" %}</strong> {{ item.decision|linebreaksbr }}</p>{% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+{% else %}
+  <p class="empty">{% translate "No agenda items yet." %}</p>
+{% endif %}

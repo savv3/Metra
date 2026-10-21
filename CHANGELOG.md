@@ -14,6 +14,17 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- The meetings plugin (`METRA_PLUGINS=meetings`, off by default): annual,
+  extraordinary and board meetings with an agenda, the notice sent as a
+  message with the agenda attached, attendance from the register with votes
+  per unit or per person, minutes and decisions per item, and a minutes PDF
+  that the minute checkers approve in the app. Approved minutes no longer
+  change and are listed on the members' personal pages.
+- For plugin authors: `api.render_pdf`, `api.message_draft` (open the New
+  message form filled in, with files attached), member page panels
+  (`api.add_member_panel`), `api.member_link` and friends for serving
+  members through their personal link, and `api.Organisation`.
+
 - Admins can restore a snapshot from the Backups page, after confirming
   their login again. They see what the restore would remove, confirm
   separately when invoices or payments would be removed, and the site shows

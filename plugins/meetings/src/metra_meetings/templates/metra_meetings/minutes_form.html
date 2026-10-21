@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Minutes" %} – {{ meeting.title }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Minutes" %}</h1>
+  </div>
+  <p class="subtitle"><a href="{{ meeting.get_absolute_url }}">{{ meeting.title }}</a>, {{ meeting.starts_at|date:"DATE_FORMAT" }}</p>
+  {% if numbered_forms %}
+    <form method="post" class="form" novalidate>
+      {% csrf_token %}
+      {{ formset.management_form }}
+      {% for number, form in numbered_forms %}
+        <fieldset>
+          <legend>§ {{ number }}. {{ form.instance.title }}</legend>
+          {% if form.instance.description %}<p class="help">{{ form.instance.description|linebreaksbr }}</p>{% endif %}
+          {{ form.id }}
+          {% include "register/_field.html" with field=form.minutes %}
+          {% include "register/_field.html" with field=form.decision %}
+        </fieldset>
+      {% endfor %}
+      <div class="actions">
+        <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+        <button type="submit" name="stay" value="1" class="button">{% translate "Save and keep writing" %}</button>
+        <a class="button" href="{{ meeting.get_absolute_url }}">{% translate "Cancel" %}</a>
+      </div>
+    </form>
+  {% else %}
+    <p class="empty">{% translate "Add the agenda first." %}</p>
+  {% endif %}
+{% endblock %}

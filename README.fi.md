@@ -60,6 +60,9 @@ tavoittaa kaikki nopeasti. Se tehtiin ensin vesiosuuskunnalle, jossa on noin
   maksun QR-koodilla, hyvityslaskuilla ja maksumuistutuksilla
 - Öiset varmuuskopiot, salattuina ja kopioituina S3:een, SFTP:hen tai
   FTPS:ään
+- Kokoukset (erikseen käyttöön otettava laajennus): kokouskutsu ja
+  esityslista, läsnäolo ja äänet sekä pöytäkirjat, jotka
+  pöytäkirjantarkastajat tarkastavat ja jotka näytetään jäsenille
 - Laajennukset (pluginit) sekä ruotsi, englanti ja suomi sovelluksessa
   (suomenkielinen käännös on konekäännös, jota ei ole tarkistettu, ja
   sovellus kertoo sen)

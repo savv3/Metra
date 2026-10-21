@@ -1,0 +1,29 @@
+{% load i18n %}
+{% if meetings %}
+  <div class="table-wrap" tabindex="0" role="region" aria-label="{{ label }}">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">{% translate "Meeting" %}</th>
+          <th scope="col">{% translate "Kind" %}</th>
+          <th scope="col">{% translate "Date and time" %}</th>
+          <th scope="col">{% translate "Place" %}</th>
+          <th scope="col">{% translate "Status" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for meeting in meetings %}
+          <tr>
+            <th scope="row"><a href="{{ meeting.get_absolute_url }}">{{ meeting.title }}</a></th>
+            <td>{{ meeting.get_kind_display }}</td>
+            <td>{{ meeting.starts_at|date:"SHORT_DATETIME_FORMAT" }}</td>
+            <td>{{ meeting.place|default:"–" }}</td>
+            <td><span class="pill{% if meeting.is_approved %} pill--ok{% endif %}">{{ meeting.get_status_display }}</span></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p class="empty">{% translate "None." %}</p>
+{% endif %}

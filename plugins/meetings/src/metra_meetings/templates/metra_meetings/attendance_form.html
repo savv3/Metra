@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Edit attendance" %}{% endblock %}
+{% block content %}
+  <h1>{% translate "Edit attendance" %}</h1>
+  <p class="subtitle"><a href="{% url 'metra_meetings:attendance' meeting.pk %}">{{ meeting.title }}</a></p>
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+      <a class="button" href="{% url 'metra_meetings:attendance' meeting.pk %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+{% endblock %}

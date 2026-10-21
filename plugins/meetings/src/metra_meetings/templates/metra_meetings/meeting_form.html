@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if meeting %}{% translate "Edit meeting" %}{% else %}{% translate "New meeting" %}{% endif %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% if meeting %}{% translate "Edit meeting" %}{% else %}{% translate "New meeting" %}{% endif %}</h1>
+  </div>
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+      <a class="button" href="{% if meeting %}{{ meeting.get_absolute_url }}{% else %}{% url 'metra_meetings:meeting_list' %}{% endif %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+{% endblock %}

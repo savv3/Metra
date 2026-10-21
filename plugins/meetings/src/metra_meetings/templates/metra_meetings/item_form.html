@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if item %}{% translate "Edit agenda item" %}{% else %}{% translate "New agenda item" %}{% endif %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% if item %}{% translate "Edit agenda item" %}{% else %}{% translate "New agenda item" %}{% endif %}</h1>
+  </div>
+  <p class="subtitle"><a href="{{ meeting.get_absolute_url }}">{{ meeting.title }}</a></p>
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+      {% if not item %}<button type="submit" name="another" value="1" class="button">{% translate "Save and add another" %}</button>{% endif %}
+      <a class="button" href="{{ meeting.get_absolute_url }}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+  {% if item and perms.metra_meetings.change_agendaitem %}
+    <form method="post" action="{% url 'metra_meetings:item_delete' meeting.pk item.pk %}" class="inline-form">
+      {% csrf_token %}
+      <button type="submit" class="button button--danger">{% translate "Remove from the agenda" %}</button>
+    </form>
+  {% endif %}
+{% endblock %}

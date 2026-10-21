@@ -1,0 +1,11 @@
+{% load i18n %}
+{% if meetings %}
+  <section class="member-section" aria-labelledby="meeting-minutes">
+    <h2 id="meeting-minutes">{{ title }}</h2>
+    <ul class="plain-list member-minutes">
+      {% for meeting in meetings %}
+        <li><a href="{% url 'metra_meetings:member_minutes' token meeting.pk %}">{{ meeting.title }} (PDF)</a><br>{{ meeting.get_kind_display }} &middot; {{ meeting.starts_at|date:"DATE_FORMAT" }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %}
