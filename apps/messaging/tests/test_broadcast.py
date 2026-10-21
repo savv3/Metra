@@ -382,3 +382,45 @@ def test_explicit_options_ignore_the_preference(admin_client, make_household):
     assert (response.context["sms_count"], response.context["email_count"]) == (1, 0)
     response = compose(admin_client, channels="sms")
     assert (response.context["sms_count"], response.context["email_count"]) == (1, 0)
+
+
+def test_a_tag_reaches_people_who_carry_it_themselves(admin_client, make_household):
+    sms_test = Tag.objects.create(name="sms-test")
+    tagged_unit = make_household("Tagged", first_name="Unit", last_name="Contact", phone="0401")
+    tagged_unit.tags.add(sms_test)
+    loner = Person.objects.create(first_name="Christian", phone="0402")
+    loner.tags.add(sms_test)
+    member = Person.objects.create(first_name="Member", phone="0403")
+    member.tags.add(sms_test)
+    UnitContact.objects.create(unit=make_household("Own"), person=member, role="owner")
+
+    response = compose(admin_client, scope="tag", tag=sms_test.pk, channels="sms")
+
+    recipients = {r.person.first_name: r.unit for r in response.context["plan"].recipients}
+    assert set(recipients) == {"Unit", "Christian", "Member"}
+    assert recipients["Christian"] is None
+    assert recipients["Member"].name == "Own"
+
+    compose(admin_client, step="confirm", scope="tag", tag=sms_test.pk, channels="sms")
+
+    batch = MessageBatch.objects.get()
+    assert [loner.pk, None] in batch.recipients
+    assert Message.objects.get(person=loner).recipient == "0402"
+
+
+def test_the_check_page_says_why_nobody_matches(admin_client, make_household):
+    sms_test = Tag.objects.create(name="sms-test")
+    make_household("Empty").tags.add(sms_test)
+
+    response = compose(admin_client, scope="tag", tag=sms_test.pk, channels="sms")
+
+    body = response.content.decode()
+    assert "Nobody matches these choices" in body
+    assert "The unit that matches has no contacts." in body
+    assert ">Empty</a>" in body
+
+    unused = Tag.objects.create(name="unused")
+    response = compose(admin_client, scope="tag", tag=unused.pk, channels="sms")
+    assert "No active unit has this tag, and nobody carries it themselves." in (
+        response.content.decode()
+    )

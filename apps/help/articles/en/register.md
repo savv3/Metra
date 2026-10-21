@@ -21,7 +21,7 @@ several types the general wording stays.
 - **Units** and **People** list the register. Search and filter the list, then use **Export as CSV** to download what you see.
 - **Add** a unit or person with the button above the list. On a unit's page, add an existing person as a contact or create a new one.
 - **Archive** instead of deleting: an archived unit or person is kept, but leaves the lists and send-outs.
-- **Tags** group units, for example a village or a pipe section, and messages can go to everyone with a tag.
+- **Tags** group units, for example a village or a pipe section, and messages can go to everyone with a tag. A person can carry a tag too.
 
 Every change, and every time someone opens a unit or person page, is kept in
 the history. Admin and Board see it at the bottom of the page.

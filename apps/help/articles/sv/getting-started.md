@@ -76,5 +76,5 @@ installationsanvisningen.
 För att skicka sms öppnar du **Inställningar** för tillägget **46elks SMS**,
 fyller i API-användarnamnet och lösenordet från ditt konto hos 46elks och
 avsändaren som visas i telefonen (högst 11 bokstäver och siffror), och
-skickar ett test-sms från installationsguiden. Med **Testläge** kontrollerar
+skickar ett test-sms från samma sida eller installationsguiden. Med **Testläge** kontrollerar
 46elks meddelandena utan att skicka dem.

@@ -125,7 +125,7 @@ def _compose(request, form, unit=None):
         data = form.cleaned_data
         files = form.save_attachments()
         context["attachments"] = files
-        pairs = broadcast.people_for(form.units(), data["contacts"])
+        pairs = broadcast.people_for(form.units(), data["contacts"], form.people())
         plan = broadcast.plan(pairs, data["channels"])
         if request.POST.get("step") == "confirm" and "edit" not in request.POST:
             if not plan.recipients:
@@ -140,7 +140,7 @@ def _compose(request, form, unit=None):
                     body=data["body"],
                     email_body=data["email_body"],
                     audience=form.audience_label(),
-                    recipients=[[p.pk, u.pk] for p, u in pairs],
+                    recipients=[[p.pk, u.pk if u else None] for p, u in pairs],
                     created_by=request.user,
                 )
                 form.attach(batch, files)
@@ -173,6 +173,11 @@ def _compose(request, form, unit=None):
                 "sms_total": total,
                 "audience": form.audience_label(),
             }
+            if not pairs:
+                scope = broadcast.EVERYONE if unit else data["scope"]
+                context["nobody"], context["without_contacts"] = broadcast.why_nobody(
+                    scope, form.units()
+                )
     return render(request, "messaging/compose.html", context)
 
 
@@ -338,22 +343,33 @@ def file_download(request, token, pk):
 # Email settings
 
 
-def send_test_email(request, to):
-    """Send a test email through the email settings in effect; True when it went."""
-    provider = provider_for(EMAIL)
+def send_test(request, provider, channel, to):
+    """Send a test message through ``provider`` (None: the channel is not set
+    up) and say how it went; True when it went."""
     try:
         if provider is None:
-            raise ProviderError(_("Email is not set up."))
+            raise ProviderError(
+                _("Email is not set up.") if channel == EMAIL else _("This channel is not set up.")
+            )
+        if not to:
+            raise ProviderError(
+                _("Enter an email address.") if channel == EMAIL else _("Enter a phone number.")
+            )
         provider.send(
             to,
             _("This is a test message from Metra. If you got it, sending works."),
-            subject=_("Test message from Metra"),
+            subject=_("Test message from Metra") if channel == EMAIL else "",
         )
     except ProviderError as error:
         messages.error(request, _("The test failed: %(error)s") % {"error": error})
         return False
     messages.success(request, _("Test sent to %(to)s.") % {"to": to})
     return True
+
+
+def send_test_email(request, to):
+    """Send a test email through the email settings in effect; True when it went."""
+    return send_test(request, provider_for(EMAIL), EMAIL, to)
 
 
 @login_required

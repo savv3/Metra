@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
+from apps.messaging.registry import EMAIL
 from config.plugins import BUNDLED, available
 
 from . import state
@@ -162,6 +163,10 @@ class SettingsForm(forms.Form):
 def plugin_settings(request, name):
     if name not in settings.PLUGIN_APPS or not definitions(name):
         raise Http404
+    providers = _providers(name)
+    if request.method == "POST" and request.POST.get("action") == "test":
+        _send_test(request, name, providers)
+        return redirect("plugins:settings", name=name)
     values = PluginSettings(name)
     form = SettingsForm(request.POST or None, values=values)
     if request.method == "POST" and form.is_valid():
@@ -174,5 +179,33 @@ def plugin_settings(request, name):
         {
             "form": form,
             "plugin": next(p for p in installed() if p.name == name),
+            "tests": [
+                {
+                    "channel": provider_class.channel,
+                    "to": request.user.email if provider_class.channel == EMAIL else "",
+                }
+                for provider_class in providers.values()
+            ],
         },
     )
+
+
+def _providers(name):
+    """The SMS and email providers a plugin adds, by channel, for its test messages."""
+    from apps.messaging.registry import registry
+
+    return {provider_class.channel: provider_class for provider_class in registry.of_plugin(name)}
+
+
+def _send_test(request, name, providers):
+    """A test message through the plugin's own provider, whichever one the
+    installation sends with, so a new set of credentials can be tried."""
+    from apps.messaging.views import send_test
+
+    channel = request.POST.get("channel")
+    if channel not in providers:
+        raise Http404
+    if not state.is_enabled(name):
+        messages.error(request, _("Turn the add-on on to send a test."))
+        return
+    send_test(request, providers[channel](), channel, request.POST.get("to", "").strip())

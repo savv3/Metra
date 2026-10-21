@@ -28,7 +28,7 @@ merkinnän. Jos vastaanottaja merkitsi viestin roskapostiksi, se näkyy
 viestissä.
 
 **Lähetykset > Uusi viesti** kirjoittaa yhden viestin kaikille, tunnisteella
-merkityille tai tietyn tyyppisille yksiköille tai suodattamasi listan
+merkityille yksiköille tai henkilöille, tietyn tyyppisille yksiköille tai suodattamasi listan
 yksiköille (**Lähetä viesti näille yksiköille** yksikkölistan alla). Valitse,
 menevätkö viestit kunkin yksikön kaikille yhteyshenkilöille vai vain
 pääyhteyshenkilölle, ja millä tavalla. Tavallinen valinta on **Kunkin
@@ -42,6 +42,12 @@ sijaan valita toiveista riippumatta:
 - **Vain tekstiviesti** tai **Vain sähköposti**,
 - **Tekstiviesti, tai sähköposti niille, joilla ei ole puhelinta**, tai
 - **Sekä tekstiviesti että sähköposti**.
+
+Tunniste tavoittaa niiden yksiköiden yhteyshenkilöt, joilla tunniste on, sekä
+henkilöt, joilla se on itsellään, vaikka he eivät olisi minkään yksikön
+yhteyshenkilöitä. Jos kukaan ei vastaa valintoja, tarkistussivu kertoo syyn,
+esimerkiksi että tunnisteella merkityllä yksiköllä ei vielä ole
+yhteyshenkilöitä.
 
 Ensisijaista kanavaa käytettäessä kirjoita sekä tekstiviestin teksti että
 sähköpostin aihe, koska vastaanottajat voivat saada kumman tahansa. Lomakkeessa

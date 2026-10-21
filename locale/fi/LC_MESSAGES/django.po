@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 17:46+0000\n"
+"POT-Creation-Date: 2026-10-21 18:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -580,7 +580,7 @@ msgstr "Palauta tämä tilannevedos"
 
 #: apps/backups/templates/backups/restore.html:58
 #: apps/invoicing/templates/invoicing/run_form.html:14
-#: apps/messaging/templates/messaging/compose.html:114
+#: apps/messaging/templates/messaging/compose.html:126
 #: apps/messaging/templates/messaging/newsletter_compose.html:36
 #: apps/plugins/templates/plugins/plugin_settings.html:15
 #: apps/readings/templates/readings/reading_form.html:31
@@ -2273,7 +2273,7 @@ msgstr "Kaikki tämän kierroksen laaditut laskut on lähetetty."
 
 #: apps/invoicing/views.py:353 apps/invoicing/views.py:416
 #: apps/messaging/views.py:54 apps/messaging/views.py:156
-#: apps/messaging/views.py:233
+#: apps/messaging/views.py:238
 msgid "Sending has started. This page shows how it goes."
 msgstr "Lähetys on alkanut. Tällä sivulla näkyy, miten se etenee."
 
@@ -2334,7 +2334,30 @@ msgstr "Tämä sähköpostipalvelu ei voi lähettää liitteitä."
 msgid "Files:"
 msgstr "Tiedostot:"
 
-#: apps/messaging/broadcast.py:161
+#: apps/messaging/broadcast.py:124
+msgid "No active unit has this tag, and nobody carries it themselves."
+msgstr ""
+"Millään aktiivisella yksiköllä ei ole tätä tunnistetta, eikä kenelläkään "
+"henkilöllä ole sitä."
+
+#: apps/messaging/broadcast.py:126
+msgid "No active unit matches these choices."
+msgstr "Mikään aktiivinen yksikkö ei vastaa näitä valintoja."
+
+#: apps/messaging/broadcast.py:130
+#, python-format
+msgid "The unit that matches has no contacts. Add them on the unit's page."
+msgid_plural ""
+"The %(count)s units that match have no contacts. Add them on each unit's "
+"page."
+msgstr[0] ""
+"Valintoja vastaavalla yksiköllä ei ole yhteyshenkilöitä. Lisää ne yksikön "
+"sivulla."
+msgstr[1] ""
+"Valintoja vastaavilla %(count)s yksiköllä ei ole yhteyshenkilöitä. Lisää ne "
+"kunkin yksikön sivulla."
+
+#: apps/messaging/broadcast.py:212
 msgid "No phone number or email address to send to."
 msgstr "Ei puhelinnumeroa tai sähköpostiosoitetta, johon lähettää."
 
@@ -2419,7 +2442,7 @@ msgid "A password is saved. Leave this empty to keep it."
 msgstr ""
 "Salasana on tallennettu. Jätä kenttä tyhjäksi, jos haluat säilyttää sen."
 
-#: apps/messaging/email_forms.py:103 apps/plugins/views.py:108
+#: apps/messaging/email_forms.py:103 apps/plugins/views.py:110
 #, python-format
 msgid ""
 "Set in the server environment (%(variable)s), so it cannot be changed here."
@@ -2440,8 +2463,8 @@ msgid "Everyone"
 msgstr "Kaikki"
 
 #: apps/messaging/forms.py:19
-msgid "Units with a tag"
-msgstr "Yksiköt, joilla on tunniste"
+msgid "Units or people with a tag"
+msgstr "Yksiköt tai henkilöt, joilla on tunniste"
 
 #: apps/messaging/forms.py:20
 msgid "Units of a type"
@@ -2618,15 +2641,15 @@ msgstr "Kirjoita sähköpostin teksti."
 msgid "Write the notice without personal placeholders."
 msgstr "Kirjoita tiedote ilman henkilökohtaisia paikkamerkkejä."
 
-#: apps/messaging/forms.py:254
+#: apps/messaging/forms.py:261
 msgid "Subject"
 msgstr "Aihe"
 
-#: apps/messaging/forms.py:256 apps/register/models.py:159
+#: apps/messaging/forms.py:263 apps/register/models.py:159
 msgid "Text"
 msgstr "Teksti"
 
-#: apps/messaging/forms.py:259
+#: apps/messaging/forms.py:266
 #, python-brace-format
 msgid ""
 "Plain text. You can use {first_name}, {name} and {organisation}. An "
@@ -2635,27 +2658,27 @@ msgstr ""
 "Pelkkää tekstiä. Voit käyttää tunnisteita {first_name}, {name} ja "
 "{organisation}. Jokaisen sähköpostin loppuun lisätään peruutuslinkki."
 
-#: apps/messaging/forms.py:273 apps/messaging/models.py:42
+#: apps/messaging/forms.py:280 apps/messaging/models.py:42
 #: apps/messaging/templates/messaging/_person_newsletter.html:3
 #: apps/messaging/templates/messaging/unsubscribe.html:3
 #: apps/selfservice/templates/selfservice/member.html:62
 msgid "Newsletter"
 msgstr "Uutiskirje"
 
-#: apps/messaging/forms.py:274
+#: apps/messaging/forms.py:281
 #: apps/messaging/templates/messaging/_person_newsletter.html:6
 msgid "Wants the newsletter"
 msgstr "Haluaa uutiskirjeen"
 
-#: apps/messaging/forms.py:274
+#: apps/messaging/forms.py:281
 msgid "Does not want it"
 msgstr "Ei halua sitä"
 
-#: apps/messaging/forms.py:279
+#: apps/messaging/forms.py:286
 msgid "How it was given"
 msgstr "Miten suostumus annettiin"
 
-#: apps/messaging/forms.py:282
+#: apps/messaging/forms.py:289
 msgid "For example: signed form at the annual meeting."
 msgstr "Esimerkiksi: allekirjoitettu lomake vuosikokouksessa."
 
@@ -2986,7 +3009,7 @@ msgstr "Tilaus peruutettiin ennen lähetystä."
 
 #: apps/messaging/newsletter.py:116
 #: apps/messaging/templates/messaging/_send_forms.html:8
-#: apps/messaging/views.py:346
+#: apps/messaging/views.py:352
 msgid "Email is not set up."
 msgstr "Sähköpostia ei ole otettu käyttöön."
 
@@ -3108,7 +3131,7 @@ msgid "No messages yet."
 msgstr "Ei vielä viestejä."
 
 #: apps/messaging/templates/messaging/batch_detail.html:17
-#: apps/messaging/templates/messaging/compose.html:106
+#: apps/messaging/templates/messaging/compose.html:118
 msgid "Public notice"
 msgstr "Julkinen tiedote"
 
@@ -3256,45 +3279,49 @@ msgid "The message, as %(name)s gets it"
 msgstr "Viesti sellaisena kuin %(name)s sen saa"
 
 #: apps/messaging/templates/messaging/compose.html:32
+msgid "Nobody matches these choices"
+msgstr "Kukaan ei vastaa näitä valintoja"
+
+#: apps/messaging/templates/messaging/compose.html:44
 #, python-format
 msgid "%(count)s person cannot be reached this way"
 msgid_plural "%(count)s people cannot be reached this way"
 msgstr[0] "%(count)s henkilöä ei tavoiteta tällä tavalla"
 msgstr[1] "%(count)s henkilöä ei tavoiteta tällä tavalla"
 
-#: apps/messaging/templates/messaging/compose.html:33
+#: apps/messaging/templates/messaging/compose.html:45
 msgid "Call or visit them:"
 msgstr "Soita tai käy heidän luonaan:"
 
-#: apps/messaging/templates/messaging/compose.html:48
+#: apps/messaging/templates/messaging/compose.html:60
 #, python-format
 msgid "Send now to %(count)s person"
 msgid_plural "Send now to %(count)s people"
 msgstr[0] "Lähetä nyt %(count)s henkilölle"
 msgstr[1] "Lähetä nyt %(count)s henkilölle"
 
-#: apps/messaging/templates/messaging/compose.html:49
+#: apps/messaging/templates/messaging/compose.html:61
 msgid "Change the message"
 msgstr "Muokkaa viestiä"
 
-#: apps/messaging/templates/messaging/compose.html:58
+#: apps/messaging/templates/messaging/compose.html:70
 #, python-format
 msgid "To the contacts of %(name)s."
 msgstr "Yksikön %(name)s yhteyshenkilöille."
 
-#: apps/messaging/templates/messaging/compose.html:58
+#: apps/messaging/templates/messaging/compose.html:70
 msgid "Back to the unit"
 msgstr "Takaisin yksikköön"
 
-#: apps/messaging/templates/messaging/compose.html:81
+#: apps/messaging/templates/messaging/compose.html:93
 msgid "Other options"
 msgstr "Muut vaihtoehdot"
 
-#: apps/messaging/templates/messaging/compose.html:113
+#: apps/messaging/templates/messaging/compose.html:125
 msgid "Check recipients"
 msgstr "Tarkista vastaanottajat"
 
-#: apps/messaging/templates/messaging/compose.html:116
+#: apps/messaging/templates/messaging/compose.html:128
 msgid "Nothing is sent until you have checked the recipients and confirmed."
 msgstr ""
 "Mitään ei lähetetä, ennen kuin olet tarkistanut vastaanottajat ja vahvistanut"
@@ -3320,15 +3347,18 @@ msgid "Save"
 msgstr "Tallenna"
 
 #: apps/messaging/templates/messaging/email_settings.html:19
+#: apps/plugins/templates/plugins/plugin_settings.html:19
 msgid "Send a test"
 msgstr "Lähetä testi"
 
 #: apps/messaging/templates/messaging/email_settings.html:23
+#: apps/plugins/templates/plugins/plugin_settings.html:30
 #: apps/setup/templates/setup/messaging.html:16
 msgid "Send a test email to"
 msgstr "Lähetä testisähköposti osoitteeseen"
 
 #: apps/messaging/templates/messaging/email_settings.html:24
+#: apps/plugins/templates/plugins/plugin_settings.html:31
 #: apps/setup/templates/setup/messaging.html:17
 msgid "Send test email"
 msgstr "Lähetä testisähköposti"
@@ -3447,37 +3477,49 @@ msgstr "Peruuta tilaus"
 msgid "Nobody can be reached with these choices."
 msgstr "Näillä valinnoilla ei tavoiteta ketään."
 
-#: apps/messaging/views.py:204
+#: apps/messaging/views.py:209
 msgid "The notice is no longer shown."
 msgstr "Tiedote ei ole enää näkyvillä."
 
-#: apps/messaging/views.py:227
+#: apps/messaging/views.py:232
 msgid "Everyone who wants the newsletter"
 msgstr "Kaikki, jotka haluavat uutiskirjeen"
 
-#: apps/messaging/views.py:263
+#: apps/messaging/views.py:268
 msgid "Saved the newsletter choice."
 msgstr "Uutiskirjeen valinta tallennettu."
 
-#: apps/messaging/views.py:349 apps/setup/views.py:214
+#: apps/messaging/views.py:352
+msgid "This channel is not set up."
+msgstr "Tätä kanavaa ei ole määritetty."
+
+#: apps/messaging/views.py:356
+msgid "Enter an email address."
+msgstr "Anna sähköpostiosoite."
+
+#: apps/messaging/views.py:356
+msgid "Enter a phone number."
+msgstr "Anna puhelinnumero."
+
+#: apps/messaging/views.py:360
 msgid "This is a test message from Metra. If you got it, sending works."
 msgstr "Tämä on Metran testiviesti. Jos sait sen, lähettäminen toimii."
 
-#: apps/messaging/views.py:350
+#: apps/messaging/views.py:361
 msgid "Test message from Metra"
 msgstr "Testiviesti Metrasta"
 
-#: apps/messaging/views.py:353 apps/setup/views.py:216
+#: apps/messaging/views.py:364
 #, python-format
 msgid "The test failed: %(error)s"
 msgstr "Testi epäonnistui: %(error)s"
 
-#: apps/messaging/views.py:355 apps/setup/views.py:218
+#: apps/messaging/views.py:366
 #, python-format
 msgid "Test sent to %(to)s."
 msgstr "Testi lähetetty: %(to)s."
 
-#: apps/messaging/views.py:368 apps/setup/views.py:185
+#: apps/messaging/views.py:384 apps/setup/views.py:185
 msgid "Saved the email settings."
 msgstr "Sähköpostiasetukset tallennettu."
 
@@ -3789,31 +3831,54 @@ msgstr ""
 "Lisäosa ei ole käytössä. Sen asetukset säilyvät ja tulevat voimaan, kun se "
 "otetaan käyttöön."
 
-#: apps/plugins/views.py:82
+#: apps/plugins/templates/plugins/plugin_settings.html:21
+msgid ""
+"Save the settings first. The test goes through this add-on even if another "
+"one is chosen for sending."
+msgstr ""
+"Tallenna asetukset ensin. Testi lähetetään tämän lisäosan kautta, vaikka "
+"lähetyksiin olisi valittu jokin muu."
+
+#: apps/plugins/templates/plugins/plugin_settings.html:27
+#: apps/setup/templates/setup/messaging.html:29
+msgid "Send a test SMS to"
+msgstr "Lähetä testiviesti numeroon"
+
+#: apps/plugins/templates/plugins/plugin_settings.html:28
+#: apps/setup/templates/setup/messaging.html:30
+msgid "Send test SMS"
+msgstr "Lähetä testiviesti"
+
+#: apps/plugins/templates/plugins/plugin_settings.html:35
+#: apps/plugins/views.py:210
+msgid "Turn the add-on on to send a test."
+msgstr "Ota lisäosa käyttöön lähettääksesi testin."
+
+#: apps/plugins/views.py:84
 #, python-format
 msgid "%(plugin)s is on."
 msgstr "%(plugin)s on käytössä."
 
-#: apps/plugins/views.py:84
+#: apps/plugins/views.py:86
 #, python-format
 msgid "%(plugin)s is off. Its data is kept."
 msgstr "%(plugin)s ei ole käytössä. Sen tiedot säilyvät."
 
-#: apps/plugins/views.py:97
+#: apps/plugins/views.py:99
 #, python-format
 msgid "Remove the saved %(setting)s"
 msgstr "Poista tallennettu %(setting)s"
 
-#: apps/plugins/views.py:131
+#: apps/plugins/views.py:133
 msgid "The saved value cannot be read with this server's key; enter it again."
 msgstr ""
 "Tallennettua arvoa ei voi lukea palvelimen avaimella. Anna se uudelleen."
 
-#: apps/plugins/views.py:133
+#: apps/plugins/views.py:135
 msgid "A value is saved. Leave this empty to keep it."
 msgstr "Arvo on tallennettu. Jätä kenttä tyhjäksi, jos haluat säilyttää sen."
 
-#: apps/plugins/views.py:169
+#: apps/plugins/views.py:175
 msgid "Saved the settings."
 msgstr "Asetukset tallennettu."
 
@@ -5106,7 +5171,7 @@ msgid "Print self-service letter"
 msgstr "Tulosta itsepalvelukirje"
 
 #: apps/selfservice/templates/selfservice/base.html:9
-#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:279
+#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:270
 #: templates/base.html:7 templates/base.html:18
 msgid "Metra"
 msgstr "Metra"
@@ -5690,14 +5755,6 @@ msgstr ""
 "Ota tekstiviestilisäosa käyttöön ja anna sen tiedot kohdassa <a "
 "href=\"%(addons)s\">Asetukset &rsaquo; Lisäosat</a>."
 
-#: apps/setup/templates/setup/messaging.html:29
-msgid "Send a test SMS to"
-msgstr "Lähetä testiviesti numeroon"
-
-#: apps/setup/templates/setup/messaging.html:30
-msgid "Send test SMS"
-msgstr "Lähetä testiviesti"
-
 #: apps/setup/templates/setup/organisation.html:4
 msgid ""
 "Who runs this installation. The contact details appear on the public page, on"
@@ -5788,11 +5845,7 @@ msgstr "Logo poistettiin."
 msgid "Added %(name)s with its fields and a water meter."
 msgstr "Lisättiin %(name)s kenttineen ja vesimittari."
 
-#: apps/setup/views.py:213
-msgid "This channel is not set up."
-msgstr "Tätä kanavaa ei ole määritetty."
-
-#: apps/setup/views.py:253
+#: apps/setup/views.py:244
 msgid ""
 "Email is not set up, so no invitation can be sent. Add the person under "
 "Settings."
@@ -5800,12 +5853,12 @@ msgstr ""
 "Sähköpostia ei ole määritetty, joten kutsua ei voi lähettää. Lisää henkilö "
 "kohdassa Asetukset."
 
-#: apps/setup/views.py:284
+#: apps/setup/views.py:275
 #, python-format
 msgid "Your account for %(organisation)s"
 msgstr "Käyttäjätilisi: %(organisation)s"
 
-#: apps/setup/views.py:287
+#: apps/setup/views.py:278
 #, python-format
 msgid ""
 "Hello %(name)s,\n"
@@ -5826,17 +5879,17 @@ msgstr ""
 "\n"
 "Linkki toimii muutaman päivän."
 
-#: apps/setup/views.py:297
+#: apps/setup/views.py:288
 #, python-format
 msgid "The invitation could not be sent: %(error)s"
 msgstr "Kutsua ei voitu lähettää: %(error)s"
 
-#: apps/setup/views.py:299
+#: apps/setup/views.py:290
 #, python-format
 msgid "Invitation sent to %(email)s."
 msgstr "Kutsu lähetetty osoitteeseen %(email)s."
 
-#: apps/setup/views.py:320
+#: apps/setup/views.py:311
 msgid "Setup is done. You can run it again from Settings."
 msgstr ""
 "Käyttöönotto on valmis. Voit käynnistää sen uudelleen kohdasta Asetukset."
