@@ -1,4 +1,4 @@
-{% load i18n nav plugins roles static %}<!doctype html>
+{% load help i18n nav plugins roles static %}<!doctype html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -25,6 +25,7 @@
           {% if perms.messaging.view_messagebatch %}{% translate "Send-outs" as label %}{% nav_link "messaging:batch_list" label %}{% endif %}
           {% plugin_navigation %}
           {% if user.is_staff %}{% translate "Settings" as label %}{% nav_link "admin:index" label %}{% endif %}
+          {% help_link %}
         </nav>
         <details class="user-menu">
           <summary>

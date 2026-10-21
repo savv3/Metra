@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 09:53+0300\n"
+"POT-Creation-Date: 2026-10-21 10:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgstr "Vain luku"
 
 #: apps/accounts/templates/accounts/profile.html:3
 #: apps/accounts/templates/accounts/profile.html:7
-#: templates/allauth/layouts/base.html:9 templates/base.html:39
+#: templates/allauth/layouts/base.html:9 templates/base.html:40
 msgid "My account"
 msgstr "Oma tili"
 
@@ -133,7 +133,7 @@ msgstr "Suojaa tilisi puhelimen todennussovelluksen koodilla."
 msgid "Turn off"
 msgstr "Poista käytöstä"
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:71
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:72
 msgid "Turn on two-factor login"
 msgstr "Ota kaksivaiheinen tunnistautuminen käyttöön"
 
@@ -271,33 +271,33 @@ msgstr "Voi ottaa tilannevedoksen"
 msgid "Can delete snapshots taken by hand"
 msgstr "Voi poistaa käsin otettuja tilannevedoksia"
 
-#: apps/backups/models.py:49
 #
+#: apps/backups/models.py:49
 msgid "Can restore a snapshot"
 msgstr "Voi palauttaa tilannevedoksen"
 
-#: apps/backups/models.py:62
 #
+#: apps/backups/models.py:62
 msgid "snapshot taken before"
 msgstr "ennen otettu tilannevedos"
 
-#: apps/backups/models.py:64
 #
+#: apps/backups/models.py:64
 msgid "restored by"
 msgstr "palauttanut"
 
-#: apps/backups/models.py:72
 #
+#: apps/backups/models.py:72
 msgid "restore"
 msgstr "palautus"
 
-#: apps/backups/models.py:73
 #
+#: apps/backups/models.py:73
 msgid "restores"
 msgstr "palautukset"
 
-#: apps/backups/restore.py:89
 #
+#: apps/backups/restore.py:89
 msgid "That is not a snapshot."
 msgstr "Tämä ei ole tilannevedos."
 
@@ -311,10 +311,12 @@ msgstr "Tilannevedosta %(name)s ei löytynyt."
 msgid ""
 "This snapshot was taken by Metra %(version)s, which is newer than the "
 "version running now (%(running)s), so it cannot be restored here."
-msgstr "Tämän tilannevedoksen otti Metra %(version)s, joka on uudempi kuin nyt käytössä oleva versio (%(running)s), joten sitä ei voi palauttaa tässä."
+msgstr ""
+"Tämän tilannevedoksen otti Metra %(version)s, joka on uudempi kuin nyt "
+"käytössä oleva versio (%(running)s), joten sitä ei voi palauttaa tässä."
 
-#: apps/backups/restore.py:189
 #
+#: apps/backups/restore.py:189
 msgid "A restore is already running."
 msgstr "Palautus on jo käynnissä."
 
@@ -322,7 +324,8 @@ msgstr "Palautus on jo käynnissä."
 msgid ""
 "Confirm that invoices and payments recorded since the snapshot will be "
 "removed."
-msgstr "Vahvista, että tilannevedoksen jälkeen kirjatut laskut ja maksut poistetaan."
+msgstr ""
+"Vahvista, että tilannevedoksen jälkeen kirjatut laskut ja maksut poistetaan."
 
 #: apps/backups/service.py:195
 msgid "Only snapshots taken by hand can be deleted."
@@ -444,8 +447,8 @@ msgstr "Tämä palvelin"
 msgid "Offsite"
 msgstr "Ulkoinen säilö"
 
-#: apps/backups/templates/backups/backup_list.html:63
 #
+#: apps/backups/templates/backups/backup_list.html:63
 msgid "Restore…"
 msgstr "Palauta…"
 
@@ -459,13 +462,13 @@ msgstr "Poista"
 msgid "No snapshot has been taken yet."
 msgstr "Tilannevedosta ei ole vielä otettu."
 
-#: apps/backups/templates/backups/backup_list.html:81
 #
+#: apps/backups/templates/backups/backup_list.html:81
 msgid "Restores"
 msgstr "Palautukset"
 
-#: apps/backups/templates/backups/backup_list.html:85
 #
+#: apps/backups/templates/backups/backup_list.html:85
 msgid "Restored"
 msgstr "Palautettu"
 
@@ -477,11 +480,13 @@ msgstr "Epäonnistui, tiedot palautettiin"
 msgid ""
 "If the app does not start at all, a snapshot can also be restored from the "
 "command line: see INSTALL.md, Backup and restore."
-msgstr "Jos sovellus ei käynnisty lainkaan, tilannevedoksen voi palauttaa myös komentoriviltä: katso INSTALL.md, Backup and restore."
+msgstr ""
+"Jos sovellus ei käynnisty lainkaan, tilannevedoksen voi palauttaa myös "
+"komentoriviltä: katso INSTALL.md, Backup and restore."
 
+#
 #: apps/backups/templates/backups/maintenance.html:8
 #: apps/backups/templates/backups/maintenance.html:13
-#
 msgid "Back in a moment"
 msgstr "Palaamme pian"
 
@@ -489,16 +494,18 @@ msgstr "Palaamme pian"
 msgid ""
 "A snapshot is being restored. The page reloads by itself when it is done, "
 "usually within a minute."
-msgstr "Tilannevedosta palautetaan. Sivu latautuu itsestään uudelleen, kun palautus on valmis, yleensä minuutin kuluessa."
+msgstr ""
+"Tilannevedosta palautetaan. Sivu latautuu itsestään uudelleen, kun palautus "
+"on valmis, yleensä minuutin kuluessa."
 
+#
 #: apps/backups/templates/backups/restore.html:3
 #: apps/backups/templates/backups/restore.html:5
-#
 msgid "Restore a snapshot"
 msgstr "Palauta tilannevedos"
 
-#: apps/backups/templates/backups/restore.html:7
 #
+#: apps/backups/templates/backups/restore.html:7
 msgid "Snapshot"
 msgstr "Tilannevedos"
 
@@ -507,26 +514,30 @@ msgstr "Tilannevedos"
 msgid ""
 "Restoring replaces the whole register and all uploaded files with the "
 "snapshot's. Everything added or changed since %(taken)s is removed."
-msgstr "Palautus korvaa koko rekisterin ja kaikki ladatut tiedostot tilannevedoksen sisällöllä. Kaikki %(taken)s jälkeen lisätty tai muutettu poistetaan."
+msgstr ""
+"Palautus korvaa koko rekisterin ja kaikki ladatut tiedostot tilannevedoksen "
+"sisällöllä. Kaikki %(taken)s jälkeen lisätty tai muutettu poistetaan."
 
 #: apps/backups/templates/backups/restore.html:16
 msgid ""
 "A snapshot of the data as it is now is taken first, so this can be undone by "
 "restoring that one."
-msgstr "Ensin otetaan tilannevedos nykyisistä tiedoista, joten palautuksen voi perua palauttamalla sen."
+msgstr ""
+"Ensin otetaan tilannevedos nykyisistä tiedoista, joten palautuksen voi perua "
+"palauttamalla sen."
 
-#: apps/backups/templates/backups/restore.html:19
 #
+#: apps/backups/templates/backups/restore.html:19
 msgid "What changes"
 msgstr "Mikä muuttuu"
 
-#: apps/backups/templates/backups/restore.html:25
 #
+#: apps/backups/templates/backups/restore.html:25
 msgid "Now"
 msgstr "Nyt"
 
-#: apps/backups/templates/backups/restore.html:26
 #
+#: apps/backups/templates/backups/restore.html:26
 msgid "In the snapshot"
 msgstr "Tilannevedoksessa"
 
@@ -559,8 +570,8 @@ msgstr "Lukemat"
 msgid "Messages"
 msgstr "Viestit"
 
-#: apps/backups/templates/backups/restore.html:32
 #
+#: apps/backups/templates/backups/restore.html:32
 msgid "Issued invoices"
 msgstr "Laaditut laskut"
 
@@ -573,8 +584,8 @@ msgstr "Maksut"
 msgid "Bookkeeping recorded since the snapshot"
 msgstr "Tilannevedoksen jälkeen kirjattu kirjanpito"
 
-#: apps/backups/templates/backups/restore.html:46
 #
+#: apps/backups/templates/backups/restore.html:46
 msgid "Issued invoices that would be removed:"
 msgstr "Poistettavat laaditut laskut:"
 
@@ -593,7 +604,9 @@ msgstr "lasku"
 msgid ""
 "Sent invoices and recorded payments may already be in your bookkeeping. If "
 "you restore, record them again afterwards or correct them with credit notes."
-msgstr "Lähetetyt laskut ja kirjatut maksut voivat jo olla kirjanpidossa. Jos palautat, kirjaa ne uudelleen jälkeenpäin tai korjaa ne hyvityslaskuilla."
+msgstr ""
+"Lähetetyt laskut ja kirjatut maksut voivat jo olla kirjanpidossa. Jos "
+"palautat, kirjaa ne uudelleen jälkeenpäin tai korjaa ne hyvityslaskuilla."
 
 #: apps/backups/templates/backups/restore.html:52
 msgid "I understand that these invoices and payments will be removed."
@@ -604,8 +617,8 @@ msgstr "Ymmärrän, että nämä laskut ja maksut poistetaan."
 msgid "Replace all data with the snapshot from %(taken)s."
 msgstr "Korvaa kaikki tiedot tilannevedoksella ajalta %(taken)s."
 
-#: apps/backups/templates/backups/restore.html:57
 #
+#: apps/backups/templates/backups/restore.html:57
 msgid "Restore this snapshot"
 msgstr "Palauta tämä tilannevedos"
 
@@ -650,7 +663,10 @@ msgstr "Vahvista palautus valitsemalla ruutu."
 msgid ""
 "Restoring %(name)s. The data as it was just before is kept in %(safety)s. "
 "You may need to log in again when it is done."
-msgstr "Palautetaan %(name)s. Juuri ennen palautusta olleet tiedot säilyvät tilannevedoksessa %(safety)s. Sinun on ehkä kirjauduttava uudelleen, kun palautus on valmis."
+msgstr ""
+"Palautetaan %(name)s. Juuri ennen palautusta olleet tiedot säilyvät "
+"tilannevedoksessa %(safety)s. Sinun on ehkä kirjauduttava uudelleen, kun "
+"palautus on valmis."
 
 #: apps/core/apps.py:7
 msgid "General"
@@ -767,6 +783,53 @@ msgstr ""
 #: apps/core/templates/core/public.html:19
 msgid "Staff login"
 msgstr "Henkilökunnan kirjautuminen"
+
+#: apps/help/apps.py:7 apps/help/templates/help/index.html:3
+#: apps/help/templates/help/index.html:5 apps/help/templatetags/help.py:22
+msgid "Help"
+msgstr "Ohje"
+
+#: apps/help/templates/help/_nav.html:2
+msgid "Help articles"
+msgstr "Ohjeartikkelit"
+
+#
+#: apps/help/templates/help/_nav.html:4 apps/help/templates/help/_nav.html:5
+msgid "Search help"
+msgstr "Hae ohjeista"
+
+#: apps/help/templates/help/_nav.html:6
+#: apps/invoicing/templates/invoicing/invoice_list.html:15
+#: apps/readings/templates/readings/round_detail.html:25
+#: apps/register/templates/register/person_list.html:13
+#: apps/register/templates/register/unit_list.html:17
+msgid "Search"
+msgstr "Hae"
+
+#: apps/help/templates/help/article.html:9
+msgid ""
+"This article is not available in your language yet, so it is shown in "
+"English."
+msgstr ""
+"Tätä artikkelia ei ole vielä saatavilla kielelläsi, joten se näytetään "
+"englanniksi."
+
+#: apps/help/templates/help/index.html:10
+#, python-format
+msgid "Search results for “%(query)s”"
+msgstr "Hakutulokset: ”%(query)s”"
+
+#: apps/help/templates/help/index.html:16
+msgid "No help article matches. Try another word."
+msgstr "Mikään ohje ei vastaa hakua. Kokeile toista sanaa."
+
+#: apps/help/templates/help/index.html:19
+msgid ""
+"Short guides to how things are done in Metra. Every page has a Help link in "
+"the menu that opens the guide for that page."
+msgstr ""
+"Lyhyitä ohjeita Metran käyttöön. Jokaisen sivun valikossa on Ohje-linkki, "
+"joka avaa sivun ohjeen."
 
 #: apps/invoicing/admin.py:13 apps/invoicing/models.py:388
 #: apps/invoicing/templates/invoicing/invoice_detail.html:107
@@ -1700,13 +1763,6 @@ msgstr "Hyvityslaskut"
 #: apps/invoicing/templates/invoicing/run_list.html:14
 msgid "Invoice runs"
 msgstr "Laskutuskierrokset"
-
-#: apps/invoicing/templates/invoicing/invoice_list.html:15
-#: apps/readings/templates/readings/round_detail.html:25
-#: apps/register/templates/register/person_list.html:13
-#: apps/register/templates/register/unit_list.html:17
-msgid "Search"
-msgstr "Hae"
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:19
 #: apps/readings/templates/readings/round_detail.html:29
@@ -2807,7 +2863,7 @@ msgstr "Aloitettu"
 msgid "Sent by"
 msgstr "Lähettäjä"
 
-#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:44
+#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:45
 msgid "Automatic"
 msgstr "Automaattinen"
 
@@ -5099,15 +5155,15 @@ msgid "Setup is done. You can run it again from Settings."
 msgstr ""
 "Käyttöönotto on valmis. Voit käynnistää sen uudelleen kohdasta Asetukset."
 
-#: config/settings.py:178
+#: config/settings.py:179
 msgid "Swedish"
 msgstr "Ruotsi"
 
-#: config/settings.py:179
+#: config/settings.py:180
 msgid "English"
 msgstr "Englanti"
 
-#: config/settings.py:180
+#: config/settings.py:181
 msgid "Finnish (machine translated)"
 msgstr "Suomi (konekäännös)"
 
@@ -5143,23 +5199,23 @@ msgstr ""
 msgid "Main"
 msgstr "Päävalikko"
 
-#: templates/base.html:42
+#: templates/base.html:43
 msgid "Theme"
 msgstr "Teema"
 
-#: templates/base.html:45
+#: templates/base.html:46
 msgid "Light"
 msgstr "Vaalea"
 
-#: templates/base.html:46
+#: templates/base.html:47
 msgid "Dark"
 msgstr "Tumma"
 
-#: templates/base.html:51
+#: templates/base.html:52
 msgid "Log out"
 msgstr "Kirjaudu ulos"
 
-#: templates/base.html:65
+#: templates/base.html:66
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
@@ -5168,7 +5224,7 @@ msgstr ""
 "(METRA_REQUIRE_MFA on pois päältä). Ota se käyttöön ennen kuin järjestelmään "
 "syötetään oikeita tietoja."
 
-#: templates/base.html:70
+#: templates/base.html:71
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."

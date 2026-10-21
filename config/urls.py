@@ -20,6 +20,7 @@ urlpatterns = [
     path("", include("apps.invoicing.urls")),
     path("", include("apps.setup.urls")),
     path("", include("apps.backups.urls")),
+    path("", include("apps.help.urls")),
     path("", include("apps.core.urls")),
 ]
 

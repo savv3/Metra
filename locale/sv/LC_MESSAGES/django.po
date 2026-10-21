@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 09:53+0300\n"
+"POT-Creation-Date: 2026-10-21 10:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,7 @@ msgstr "Läsbehörighet"
 
 #: apps/accounts/templates/accounts/profile.html:3
 #: apps/accounts/templates/accounts/profile.html:7
-#: templates/allauth/layouts/base.html:9 templates/base.html:39
+#: templates/allauth/layouts/base.html:9 templates/base.html:40
 msgid "My account"
 msgstr "Mitt konto"
 
@@ -133,7 +133,7 @@ msgstr "Skydda ditt konto med en kod från en autentiseringsapp i telefonen."
 msgid "Turn off"
 msgstr "Stäng av"
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:71
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:72
 msgid "Turn on two-factor login"
 msgstr "Slå på tvåfaktorsinloggning"
 
@@ -270,33 +270,33 @@ msgstr "Kan ta en säkerhetskopia"
 msgid "Can delete snapshots taken by hand"
 msgstr "Kan ta bort manuellt tagna säkerhetskopior"
 
-#: apps/backups/models.py:49
 #
+#: apps/backups/models.py:49
 msgid "Can restore a snapshot"
 msgstr "Kan återställa en säkerhetskopia"
 
-#: apps/backups/models.py:62
 #
+#: apps/backups/models.py:62
 msgid "snapshot taken before"
 msgstr "säkerhetskopia tagen innan"
 
-#: apps/backups/models.py:64
 #
+#: apps/backups/models.py:64
 msgid "restored by"
 msgstr "återställd av"
 
-#: apps/backups/models.py:72
 #
+#: apps/backups/models.py:72
 msgid "restore"
 msgstr "återställning"
 
-#: apps/backups/models.py:73
 #
+#: apps/backups/models.py:73
 msgid "restores"
 msgstr "återställningar"
 
-#: apps/backups/restore.py:89
 #
+#: apps/backups/restore.py:89
 msgid "That is not a snapshot."
 msgstr "Det är ingen säkerhetskopia."
 
@@ -310,10 +310,12 @@ msgstr "Säkerhetskopian %(name)s hittades inte."
 msgid ""
 "This snapshot was taken by Metra %(version)s, which is newer than the "
 "version running now (%(running)s), so it cannot be restored here."
-msgstr "Säkerhetskopian togs av Metra %(version)s, som är nyare än versionen som körs nu (%(running)s), så den kan inte återställas här."
+msgstr ""
+"Säkerhetskopian togs av Metra %(version)s, som är nyare än versionen som "
+"körs nu (%(running)s), så den kan inte återställas här."
 
-#: apps/backups/restore.py:189
 #
+#: apps/backups/restore.py:189
 msgid "A restore is already running."
 msgstr "En återställning pågår redan."
 
@@ -321,7 +323,9 @@ msgstr "En återställning pågår redan."
 msgid ""
 "Confirm that invoices and payments recorded since the snapshot will be "
 "removed."
-msgstr "Bekräfta att fakturor och betalningar som registrerats efter säkerhetskopian tas bort."
+msgstr ""
+"Bekräfta att fakturor och betalningar som registrerats efter säkerhetskopian "
+"tas bort."
 
 #: apps/backups/service.py:195
 msgid "Only snapshots taken by hand can be deleted."
@@ -441,8 +445,8 @@ msgstr "Den här servern"
 msgid "Offsite"
 msgstr "Externt"
 
-#: apps/backups/templates/backups/backup_list.html:63
 #
+#: apps/backups/templates/backups/backup_list.html:63
 msgid "Restore…"
 msgstr "Återställ…"
 
@@ -456,13 +460,13 @@ msgstr "Ta bort"
 msgid "No snapshot has been taken yet."
 msgstr "Ingen säkerhetskopia har tagits ännu."
 
-#: apps/backups/templates/backups/backup_list.html:81
 #
+#: apps/backups/templates/backups/backup_list.html:81
 msgid "Restores"
 msgstr "Återställningar"
 
-#: apps/backups/templates/backups/backup_list.html:85
 #
+#: apps/backups/templates/backups/backup_list.html:85
 msgid "Restored"
 msgstr "Återställd"
 
@@ -474,11 +478,13 @@ msgstr "Misslyckades, uppgifterna återställdes"
 msgid ""
 "If the app does not start at all, a snapshot can also be restored from the "
 "command line: see INSTALL.md, Backup and restore."
-msgstr "Om appen inte startar alls kan en säkerhetskopia också återställas från kommandoraden: se INSTALL.md, Backup and restore."
+msgstr ""
+"Om appen inte startar alls kan en säkerhetskopia också återställas från "
+"kommandoraden: se INSTALL.md, Backup and restore."
 
+#
 #: apps/backups/templates/backups/maintenance.html:8
 #: apps/backups/templates/backups/maintenance.html:13
-#
 msgid "Back in a moment"
 msgstr "Tillbaka om en stund"
 
@@ -486,16 +492,18 @@ msgstr "Tillbaka om en stund"
 msgid ""
 "A snapshot is being restored. The page reloads by itself when it is done, "
 "usually within a minute."
-msgstr "En säkerhetskopia återställs. Sidan laddas om av sig själv när det är klart, oftast inom en minut."
+msgstr ""
+"En säkerhetskopia återställs. Sidan laddas om av sig själv när det är klart, "
+"oftast inom en minut."
 
+#
 #: apps/backups/templates/backups/restore.html:3
 #: apps/backups/templates/backups/restore.html:5
-#
 msgid "Restore a snapshot"
 msgstr "Återställ en säkerhetskopia"
 
-#: apps/backups/templates/backups/restore.html:7
 #
+#: apps/backups/templates/backups/restore.html:7
 msgid "Snapshot"
 msgstr "Säkerhetskopia"
 
@@ -504,26 +512,30 @@ msgstr "Säkerhetskopia"
 msgid ""
 "Restoring replaces the whole register and all uploaded files with the "
 "snapshot's. Everything added or changed since %(taken)s is removed."
-msgstr "Återställningen ersätter hela registret och alla uppladdade filer med säkerhetskopians. Allt som lagts till eller ändrats sedan %(taken)s tas bort."
+msgstr ""
+"Återställningen ersätter hela registret och alla uppladdade filer med "
+"säkerhetskopians. Allt som lagts till eller ändrats sedan %(taken)s tas bort."
 
 #: apps/backups/templates/backups/restore.html:16
 msgid ""
 "A snapshot of the data as it is now is taken first, so this can be undone by "
 "restoring that one."
-msgstr "Först tas en säkerhetskopia av uppgifterna som de är nu, så att återställningen kan ångras genom att återställa den."
+msgstr ""
+"Först tas en säkerhetskopia av uppgifterna som de är nu, så att "
+"återställningen kan ångras genom att återställa den."
 
-#: apps/backups/templates/backups/restore.html:19
 #
+#: apps/backups/templates/backups/restore.html:19
 msgid "What changes"
 msgstr "Vad som ändras"
 
-#: apps/backups/templates/backups/restore.html:25
 #
+#: apps/backups/templates/backups/restore.html:25
 msgid "Now"
 msgstr "Nu"
 
-#: apps/backups/templates/backups/restore.html:26
 #
+#: apps/backups/templates/backups/restore.html:26
 msgid "In the snapshot"
 msgstr "I säkerhetskopian"
 
@@ -556,8 +568,8 @@ msgstr "Avläsningar"
 msgid "Messages"
 msgstr "Meddelanden"
 
-#: apps/backups/templates/backups/restore.html:32
 #
+#: apps/backups/templates/backups/restore.html:32
 msgid "Issued invoices"
 msgstr "Utfärdade fakturor"
 
@@ -570,8 +582,8 @@ msgstr "Betalningar"
 msgid "Bookkeeping recorded since the snapshot"
 msgstr "Bokföring som registrerats efter säkerhetskopian"
 
-#: apps/backups/templates/backups/restore.html:46
 #
+#: apps/backups/templates/backups/restore.html:46
 msgid "Issued invoices that would be removed:"
 msgstr "Utfärdade fakturor som skulle tas bort:"
 
@@ -590,7 +602,10 @@ msgstr "faktura"
 msgid ""
 "Sent invoices and recorded payments may already be in your bookkeeping. If "
 "you restore, record them again afterwards or correct them with credit notes."
-msgstr "Skickade fakturor och registrerade betalningar kan redan finnas i bokföringen. Om du återställer, registrera dem på nytt efteråt eller rätta dem med kreditnotor."
+msgstr ""
+"Skickade fakturor och registrerade betalningar kan redan finnas i "
+"bokföringen. Om du återställer, registrera dem på nytt efteråt eller rätta "
+"dem med kreditnotor."
 
 #: apps/backups/templates/backups/restore.html:52
 msgid "I understand that these invoices and payments will be removed."
@@ -601,8 +616,8 @@ msgstr "Jag förstår att de här fakturorna och betalningarna tas bort."
 msgid "Replace all data with the snapshot from %(taken)s."
 msgstr "Ersätt alla uppgifter med säkerhetskopian från %(taken)s."
 
-#: apps/backups/templates/backups/restore.html:57
 #
+#: apps/backups/templates/backups/restore.html:57
 msgid "Restore this snapshot"
 msgstr "Återställ den här säkerhetskopian"
 
@@ -647,7 +662,9 @@ msgstr "Kryssa i rutan för att bekräfta återställningen."
 msgid ""
 "Restoring %(name)s. The data as it was just before is kept in %(safety)s. "
 "You may need to log in again when it is done."
-msgstr "Återställer %(name)s. Uppgifterna som de var strax innan finns kvar i %(safety)s. Du kan behöva logga in på nytt när det är klart."
+msgstr ""
+"Återställer %(name)s. Uppgifterna som de var strax innan finns kvar i "
+"%(safety)s. Du kan behöva logga in på nytt när det är klart."
 
 #: apps/core/apps.py:7
 msgid "General"
@@ -764,6 +781,52 @@ msgstr ""
 #: apps/core/templates/core/public.html:19
 msgid "Staff login"
 msgstr "Inloggning för personal"
+
+#: apps/help/apps.py:7 apps/help/templates/help/index.html:3
+#: apps/help/templates/help/index.html:5 apps/help/templatetags/help.py:22
+msgid "Help"
+msgstr "Hjälp"
+
+#: apps/help/templates/help/_nav.html:2
+msgid "Help articles"
+msgstr "Hjälpartiklar"
+
+#
+#: apps/help/templates/help/_nav.html:4 apps/help/templates/help/_nav.html:5
+msgid "Search help"
+msgstr "Sök i hjälpen"
+
+#: apps/help/templates/help/_nav.html:6
+#: apps/invoicing/templates/invoicing/invoice_list.html:15
+#: apps/readings/templates/readings/round_detail.html:25
+#: apps/register/templates/register/person_list.html:13
+#: apps/register/templates/register/unit_list.html:17
+msgid "Search"
+msgstr "Sök"
+
+#: apps/help/templates/help/article.html:9
+msgid ""
+"This article is not available in your language yet, so it is shown in "
+"English."
+msgstr ""
+"Den här artikeln finns inte på ditt språk ännu, så den visas på engelska."
+
+#: apps/help/templates/help/index.html:10
+#, python-format
+msgid "Search results for “%(query)s”"
+msgstr "Sökresultat för ”%(query)s”"
+
+#: apps/help/templates/help/index.html:16
+msgid "No help article matches. Try another word."
+msgstr "Ingen hjälpartikel matchar. Prova ett annat ord."
+
+#: apps/help/templates/help/index.html:19
+msgid ""
+"Short guides to how things are done in Metra. Every page has a Help link in "
+"the menu that opens the guide for that page."
+msgstr ""
+"Korta guider till hur man gör saker i Metra. Varje sida har en hjälplänk i "
+"menyn som öppnar guiden för den sidan."
 
 #: apps/invoicing/admin.py:13 apps/invoicing/models.py:388
 #: apps/invoicing/templates/invoicing/invoice_detail.html:107
@@ -1701,13 +1764,6 @@ msgstr "Kreditnotor"
 #: apps/invoicing/templates/invoicing/run_list.html:14
 msgid "Invoice runs"
 msgstr "Faktureringsomgångar"
-
-#: apps/invoicing/templates/invoicing/invoice_list.html:15
-#: apps/readings/templates/readings/round_detail.html:25
-#: apps/register/templates/register/person_list.html:13
-#: apps/register/templates/register/unit_list.html:17
-msgid "Search"
-msgstr "Sök"
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:19
 #: apps/readings/templates/readings/round_detail.html:29
@@ -2801,7 +2857,7 @@ msgstr "Startat"
 msgid "Sent by"
 msgstr "Skickat av"
 
-#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:44
+#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:45
 msgid "Automatic"
 msgstr "Automatiskt"
 
@@ -5087,15 +5143,15 @@ msgstr "Inbjudan skickad till %(email)s."
 msgid "Setup is done. You can run it again from Settings."
 msgstr "Inställningen är klar. Du kan köra den igen från Inställningar."
 
-#: config/settings.py:178
+#: config/settings.py:179
 msgid "Swedish"
 msgstr "Svenska"
 
-#: config/settings.py:179
+#: config/settings.py:180
 msgid "English"
 msgstr "Engelska"
 
-#: config/settings.py:180
+#: config/settings.py:181
 msgid "Finnish (machine translated)"
 msgstr "Finska (maskinöversatt)"
 
@@ -5131,23 +5187,23 @@ msgstr ""
 msgid "Main"
 msgstr "Huvudnavigering"
 
-#: templates/base.html:42
+#: templates/base.html:43
 msgid "Theme"
 msgstr "Tema"
 
-#: templates/base.html:45
+#: templates/base.html:46
 msgid "Light"
 msgstr "Ljust"
 
-#: templates/base.html:46
+#: templates/base.html:47
 msgid "Dark"
 msgstr "Mörkt"
 
-#: templates/base.html:51
+#: templates/base.html:52
 msgid "Log out"
 msgstr "Logga ut"
 
-#: templates/base.html:65
+#: templates/base.html:66
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
@@ -5155,7 +5211,7 @@ msgstr ""
 "Tvåfaktorsinloggning krävs inte i den här installationen (METRA_REQUIRE_MFA "
 "är avstängd). Slå på den innan riktiga uppgifter läggs in."
 
-#: templates/base.html:70
+#: templates/base.html:71
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."

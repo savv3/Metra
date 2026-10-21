@@ -35,7 +35,15 @@ from django.dispatch import Signal
 from apps.messaging.registry import EMAIL, SMS, Provider, ProviderError, SendResult, registry
 
 from . import events
-from .hooks import NAVIGATION, PERSON_PANELS, SETTINGS_LINKS, UNIT_PANELS, WEBHOOK_EVENTS, hooks
+from .hooks import (
+    HELP_ARTICLES,
+    NAVIGATION,
+    PERSON_PANELS,
+    SETTINGS_LINKS,
+    UNIT_PANELS,
+    WEBHOOK_EVENTS,
+    hooks,
+)
 from .roles import grant_to_roles
 
 # Bump API_VERSION only for a breaking change; additions keep it. The previous
@@ -99,6 +107,8 @@ __all__ = [
     "SendResult",
     "SettingsLink",
     "WebhookEvent",
+    "HelpArticles",
+    "add_help_articles",
     "add_messaging_provider",
     "add_navigation",
     "add_person_panel",
@@ -236,3 +246,19 @@ def record_delivery(provider, provider_id, delivered):
     from apps.messaging.delivery_reports import record
 
     return record(provider, provider_id, delivered)
+
+
+@dataclass
+class HelpArticles:
+    """A plugin's help articles: ``folder`` holds ``<language>/<slug>.md`` files
+    (Markdown, starting with ``# Title``), ``order`` lists the slugs in the
+    order the help index shows them, and ``pages`` maps the plugin's URL
+    namespaces to the article its pages' Help link opens."""
+
+    folder: str
+    order: list = field(default_factory=list)
+    pages: dict = field(default_factory=dict)
+
+
+def add_help_articles(articles):
+    return hooks.register(HELP_ARTICLES, articles)
