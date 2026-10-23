@@ -10,6 +10,8 @@ class AccountsConfig(AppConfig):
         from auditlog.registry import auditlog
         from django.contrib.auth import get_user_model
 
+        from . import signals  # noqa: F401
+
         # Log who gives or takes away access, never password hashes.
         auditlog.register(
             get_user_model(),

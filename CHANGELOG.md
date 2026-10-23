@@ -12,6 +12,13 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+### Fixed
+
+- Choosing a password through a setup or reset link marks the person's email
+  address as verified. Before, an admin made by `create_organisation` or
+  invited by email could not turn on two-factor login ("verify your email
+  address first") on an install without email.
+
 ## [0.4.0] - 2026-10-23
 
 ### Upgrade notes
