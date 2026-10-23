@@ -27,6 +27,13 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 - `SECURITY.md`: how to report a security problem privately, and which
   versions get fixes.
 
+### Fixed
+
+- The container health check and `upgrade.sh` now ask `/healthz` with the
+  install's own host name (`METRA_DOMAIN`). With `METRA_ALLOWED_HOSTS` set to
+  only that name, as `new-instance.sh` does, they were refused, so the worker
+  never started and every upgrade went back to the old image.
+
 ## [0.3.0] - 2026-10-21
 
 ### Added
