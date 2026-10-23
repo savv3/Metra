@@ -57,10 +57,12 @@ start() {
     podman-compose up -d --force-recreate web worker
 }
 
+# Asks with the install's own host name, since METRA_ALLOWED_HOSTS may not
+# include 127.0.0.1.
 healthy() {
     tries=0
     while [ $tries -lt 40 ]; do
-        if podman-compose exec -T web python -c "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=4).status == 200 else 1)" >/dev/null 2>&1; then
+        if podman-compose exec -T web python -c "import os,sys,urllib.request as u; r=u.Request('http://127.0.0.1:8000/healthz', headers={'Host': os.environ.get('METRA_DOMAIN') or 'localhost'}); sys.exit(0 if u.urlopen(r, timeout=4).status == 200 else 1)" >/dev/null 2>&1; then
             return 0
         fi
         tries=$((tries + 1))

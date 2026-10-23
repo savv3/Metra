@@ -14,8 +14,27 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- `manage.py create_organisation --name ... --admin-email ...`: names the
+  organisation of a fresh install and creates its first admin, printing a
+  link where they choose a password, so an install can be set up without
+  `createsuperuser`.
+- `/status`: version, backup state and add-ons for a tool that runs many
+  installs, only with the token in `METRA_STATUS_TOKEN` (no personal data).
+  `/healthz` now also reports the version.
+- `manage.py load_demo_data`: fills a fresh installation with a made-up water
+  association (households, contacts, readings, invoices) for demos and trials.
+  It refuses to run when units already exist and sends nothing.
+- Plugin API: `BillingSettings`, `FeePlan` and `FeeLine` records, so an
+  add-on can set up what units are invoiced for.
 - `SECURITY.md`: how to report a security problem privately, and which
   versions get fixes.
+
+### Fixed
+
+- The container health check and `upgrade.sh` now ask `/healthz` with the
+  install's own host name (`METRA_DOMAIN`). With `METRA_ALLOWED_HOSTS` set to
+  only that name, as `new-instance.sh` does, they were refused, so the worker
+  never started and every upgrade went back to the old image.
 
 ## [0.3.0] - 2026-10-21
 
