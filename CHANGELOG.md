@@ -24,6 +24,8 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 - `manage.py load_demo_data`: fills a fresh installation with a made-up water
   association (households, contacts, readings, invoices) for demos and trials.
   It refuses to run when units already exist and sends nothing.
+- Plugin API: `BillingSettings`, `FeePlan` and `FeeLine` records, so an
+  add-on can set up what units are invoiced for.
 - `SECURITY.md`: how to report a security problem privately, and which
   versions get fixes.
 

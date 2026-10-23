@@ -111,6 +111,11 @@ RECORDS = {
     "Invoice": "apps.invoicing.models",
     "InvoiceLine": "apps.invoicing.models",
     "Payment": "apps.invoicing.models",
+    # What units are invoiced for: BillingSettings.current() (VAT and payment
+    # details), fee plans for a unit type (and tag) and their lines.
+    "BillingSettings": "apps.invoicing.models",
+    "FeePlan": "apps.invoicing.models",
+    "FeeLine": "apps.invoicing.models",
 }
 
 

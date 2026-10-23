@@ -241,6 +241,7 @@ helpers in `api.RECORDS`, never `apps.*` modules:
 | `api.Organisation` | The organisation's own details; `Organisation.current()` is the one in use, or None |
 | `api.ReadingType`, `api.ReadingRound`, `api.Reading` | Readings |
 | `api.Invoice`, `api.InvoiceLine`, `api.Payment` | Invoicing. Issued invoices and payments never change: only read them |
+| `api.BillingSettings`, `api.FeePlan`, `api.FeeLine` | What units are invoiced for: `BillingSettings.current()`, fee plans per unit type (and tag) and their lines |
 | `api.UnitForm`, `api.PersonForm`, `api.UnitContactForm`, `api.ReadingForm` | The forms staff use. Check data from outside with them, so a plugin never stores what the web pages would refuse (custom fields included) |
 | `api.log_view(obj)` | Record in the audit log that the current user opened a unit or person, as its page does |
 
