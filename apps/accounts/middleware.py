@@ -39,6 +39,7 @@ class RequireStaffTwoFactorMiddleware:
             "/favicon.ico",
             reverse("set_language"),
             reverse("core:healthz"),
+            reverse("core:status"),
             reverse("core:robots"),
             reverse("core:logo"),
             "/" + settings.STATIC_URL.lstrip("/"),

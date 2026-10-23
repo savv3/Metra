@@ -47,8 +47,25 @@ the same parent folder already uses. Then:
 cd ~/metra/vatten
 # edit .env: email, SMS, backups, time zone
 podman-compose up -d web worker
-podman-compose exec web python manage.py createsuperuser
+podman-compose exec web python manage.py create_organisation \
+    --name "Vattenandelslaget" --admin-email styrelsen@example.org
 ```
+
+`create_organisation` prints a link where the admin chooses a password (it
+works for a few days, once), so you never need to know their password.
+`createsuperuser` also works. On a demo install, run
+`python manage.py load_demo_data` instead to fill it with a made-up
+association.
+
+## Checking installs from a tool
+
+`/healthz` answers `{"status": "ok", "version": "..."}` to anyone. For more,
+set `METRA_STATUS_TOKEN` in an install's `.env` and send it as
+`Authorization: Bearer <token>` to `/status`, which reports the version, the
+organisation's name, whether setup is finished, the add-ons and whether they
+are on, the last backup and offsite copy, the number of active units and
+staff users, and the last staff login. It holds no personal data. Without
+the setting `/status` answers 404. metra-admin uses this.
 
 In Cloudflare, add the public hostname `register.example.org` with service
 `http://localhost:8001`. Use a separate host name (a subdomain is fine) for

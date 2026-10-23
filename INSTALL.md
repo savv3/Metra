@@ -117,6 +117,14 @@ without one, for a database too damaged to copy.
 To copy a snapshot off the server:
 `docker compose cp web:/data/snapshots/metra-snapshot-20261018-023000-nightly-0.2.0.tar.gz .`
 
+## Demo data
+
+To let someone try Metra, run `docker compose exec web python manage.py load_demo_data`
+on a fresh install. It adds a made-up water association (15 households,
+contacts at example.org, readings, invoices and notices) and marks the setup
+wizard as finished. It refuses to run if any unit already exists and never
+sends email or SMS.
+
 ## Email and SMS
 
 **Email** is set up by an admin under **Settings > Email** (also a step of

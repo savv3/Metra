@@ -14,6 +14,16 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- `manage.py create_organisation --name ... --admin-email ...`: names the
+  organisation of a fresh install and creates its first admin, printing a
+  link where they choose a password, so an install can be set up without
+  `createsuperuser`.
+- `/status`: version, backup state and add-ons for a tool that runs many
+  installs, only with the token in `METRA_STATUS_TOKEN` (no personal data).
+  `/healthz` now also reports the version.
+- `manage.py load_demo_data`: fills a fresh installation with a made-up water
+  association (households, contacts, readings, invoices) for demos and trials.
+  It refuses to run when units already exist and sends nothing.
 - `SECURITY.md`: how to report a security problem privately, and which
   versions get fixes.
 

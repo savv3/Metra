@@ -250,6 +250,9 @@ BASE_URL = (
 
 # Member self-service links: valid until the reading round closes, or this
 # many days when the link is not for a round.
+# Token a hosting tool sends to read /status. Unset: /status does not exist.
+STATUS_TOKEN = os.environ.get("METRA_STATUS_TOKEN", "")
+
 SELF_SERVICE_LINK_DAYS = int(os.environ.get("METRA_SELF_SERVICE_LINK_DAYS") or 30)
 
 # Rate limits and other short-lived counters, shared by all web processes
