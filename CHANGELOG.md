@@ -12,6 +12,15 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-23
+
+### Upgrade notes
+
+- Installs made with `docker/new-instance.sh` (several organisations on one
+  server): copy the new `compose.yaml` and `docker/upgrade.sh` into place, as
+  `docs/multiple-organisations.md` describes, so the health check uses the
+  install's own host name.
+
 ### Added
 
 - `manage.py create_organisation --name ... --admin-email ...`: names the
