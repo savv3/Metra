@@ -12,6 +12,8 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-25
+
 ### Added
 
 - `METRA_EMAIL_BACKEND` can name an add-on's email provider, such as
