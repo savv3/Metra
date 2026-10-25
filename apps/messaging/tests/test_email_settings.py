@@ -192,3 +192,26 @@ def test_email_is_not_set_up_while_the_chosen_add_on_is_gone(admin, postbox, db)
         assert provider_for(EMAIL) is None
     finally:
         registry.register(Postbox)
+
+
+@pytest.mark.parametrize(
+    ("backend", "provider"),
+    [("", None), ("none", ""), ("smtp", "django"), ("console", "django"), ("mailgun", "mailgun")],
+)
+def test_metra_email_backend_can_name_an_add_ons_provider(backend, provider):
+    from config.settings import _email_provider
+
+    assert _email_provider(backend) == provider
+
+
+def test_the_environment_can_choose_mailgun(settings, monkeypatch, db):
+    from apps.messaging.registry import EMAIL, provider_for
+
+    monkeypatch.setenv("METRA_MAILGUN_DOMAIN", "mg.example.org")
+    monkeypatch.setenv("METRA_MAILGUN_API_KEY", "key-1")
+    settings.MESSAGING = {**settings.MESSAGING, "email_provider": "mailgun"}
+
+    config = email_config.current()
+    assert (config.provider, config.choice) == ("mailgun", "mailgun")
+    assert "provider" in config.locked
+    assert provider_for(EMAIL).name == "mailgun"

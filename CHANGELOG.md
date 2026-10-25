@@ -12,6 +12,12 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+### Added
+
+- `METRA_EMAIL_BACKEND` can name an add-on's email provider, such as
+  `mailgun`, so a hosting provider can set up Mailgun for a new install with
+  environment variables only.
+
 ### Fixed
 
 - Choosing a password through a setup or reset link marks the person's email

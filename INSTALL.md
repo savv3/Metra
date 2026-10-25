@@ -142,7 +142,9 @@ field (`METRA_EMAIL_HOST`, `METRA_EMAIL_PORT`, `METRA_EMAIL_USER`,
 `METRA_EMAIL_FROM` and `METRA_EMAIL_REPLY_TO`); the page shows those fields
 as locked. When `METRA_EMAIL_HOST` or `METRA_EMAIL_BACKEND` is set, the
 environment also decides how email is sent, so an existing install keeps
-working unchanged.
+working unchanged. `METRA_EMAIL_BACKEND=mailgun` chooses Mailgun this way,
+which a hosting provider can set together with the `METRA_MAILGUN_*`
+variables below so a new install sends email from the start.
 
 **Mailgun** is an add-on for sending through [Mailgun](https://www.mailgun.com)
 instead of SMTP, with delivery and bounce reports. It comes with Metra and is
