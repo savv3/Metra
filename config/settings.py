@@ -283,6 +283,19 @@ DEFAULT_FROM_EMAIL = os.environ.get("METRA_EMAIL_FROM") or "register@localhost"
 _email_backend = os.environ.get("METRA_EMAIL_BACKEND", "").strip().lower() or (
     "smtp" if EMAIL_HOST else ""
 )
+
+
+def _email_provider(backend):
+    """The email provider METRA_EMAIL_BACKEND names: None lets the Email
+    settings page choose, "" is no email, "django" sends with SMTP or the
+    console, and anything else is a provider an add-on adds (e.g. mailgun)."""
+    if not backend:
+        return None
+    if backend == "none":
+        return ""
+    return "django" if backend in ("smtp", "console") else backend
+
+
 # Routes the app's own mail (login codes, password links) the same way.
 EMAIL_BACKEND = "apps.messaging.email_config.ConfiguredBackend"
 
@@ -291,9 +304,7 @@ MESSAGING = {
     # Names in apps.messaging.registry; empty means the channel is not set up.
     # Email: None lets the Email settings page choose; the environment
     # decides when it sets METRA_EMAIL_BACKEND or METRA_EMAIL_HOST.
-    "email_provider": None
-    if not _email_backend
-    else ("" if _email_backend == "none" else "django"),
+    "email_provider": _email_provider(_email_backend),
     "email_transport": "console" if _email_backend == "console" else "smtp",
     # SMS: a provider's name, "none", or "auto" (the default): the first
     # provider that is configured (the bundled 46elks plugin is when its
