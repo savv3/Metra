@@ -6,6 +6,12 @@ fakturor.
 
 ## Menyn
 
+Menyn finns till vänster, uppdelad i avsnitt: **Register**, **Ekonomi**,
+**Kommunikation** och **Tillägg** för tillägg som inte hör till något av de
+andra. Påslagna tillägg som Bokföring och Möten syns under sitt avsnitt.
+**Inställningar** och **Hjälp** finns längst ner. På en telefon öppnar du
+menyn med knappen uppe till vänster.
+
 - **Enheter** och **Personer**: registret. Om ni bara har en enhetstyp används dess eget namn i menyn (till exempel **Stugor**).
 - **Avläsningar**: avläsningsomgångar, till exempel den årliga avläsningen av vattenmätare.
 - **Fakturor**: faktureringsomgångar, betalningar och påminnelser.

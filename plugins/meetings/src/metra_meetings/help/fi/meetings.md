@@ -6,7 +6,7 @@ kokoukset. Tarkastetut pöytäkirjat säilytetään yhdistyksen asiakirjoina, ja
 jäsenet voivat lukea ne henkilökohtaiselta sivultaan.
 
 Lisäosan ottaa käyttöön asennuksen ylläpitäjä
-(`METRA_PLUGINS=meetings`). Sen jälkeen päävalikossa näkyy **Kokoukset**.
+(`METRA_PLUGINS=meetings`). Sen jälkeen päävalikon Viestintä-osiossa näkyy **Kokoukset**.
 
 ## Kuka voi tehdä mitä
 

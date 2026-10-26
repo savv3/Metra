@@ -4,7 +4,6 @@ from django import template
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.urls import NoReverseMatch, reverse
-from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 
 from ..hooks import (
@@ -27,19 +26,17 @@ def _allowed(user, permission):
     return not permission or user.has_perm(permission)
 
 
-@register.simple_tag(takes_context=True)
-def plugin_navigation(context):
-    """Menu links added by plugins."""
-    user = context["request"].user
+def navigation_items(user):
+    """Main menu links added by plugins, as (NavItem, URL) pairs the user may open."""
     links = []
     for item in hooks.get(NAVIGATION):
         if not _allowed(user, item.permission):
             continue
         try:
-            links.append((reverse(item.url_name), item.label))
+            links.append((item, reverse(item.url_name)))
         except NoReverseMatch:
             logger.exception("Plugin menu item %r has no URL", item.label)
-    return format_html_join("\n", '<a href="{}">{}</a>', links)
+    return links
 
 
 @register.simple_tag(takes_context=True)

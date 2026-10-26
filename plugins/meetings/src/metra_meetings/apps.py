@@ -24,7 +24,13 @@ class MeetingsConfig(AppConfig):
         from . import member
 
         api.add_navigation(
-            api.NavItem(_("Meetings"), "metra_meetings:meeting_list", "metra_meetings.view_meeting")
+            api.NavItem(
+                _("Meetings"),
+                "metra_meetings:meeting_list",
+                "metra_meetings.view_meeting",
+                group="communication",
+                icon="calendar",
+            )
         )
         api.add_settings_link(
             api.SettingsLink(

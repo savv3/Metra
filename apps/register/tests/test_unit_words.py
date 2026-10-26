@@ -15,7 +15,7 @@ def cabin(db):
 
 
 def menu(content):
-    start = content.index('<nav class="main-nav"')
+    start = content.index('<nav class="side-nav"')
     return content[start : content.index("</nav>", start)]
 
 

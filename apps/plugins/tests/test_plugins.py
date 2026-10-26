@@ -38,7 +38,8 @@ def test_plugin_menu_item_shows_for_users_with_the_permission(board_client, clie
     client.force_login(make_user("nobody"))
     other = client.get(reverse("register:unit_list"))
 
-    assert '<a href="/plugins/example/">Example</a>' in page
+    assert 'href="/plugins/example/">' in page
+    assert "Example</a>" in page
     assert "/plugins/example/" not in other.content.decode()
 
 

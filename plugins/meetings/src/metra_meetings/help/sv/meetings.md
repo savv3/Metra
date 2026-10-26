@@ -6,7 +6,7 @@ sparas som föreningens handlingar och medlemmarna kan läsa dem på sin
 personliga sida.
 
 Tillägget slås på av den som sköter installationen
-(`METRA_PLUGINS=meetings`). Därefter syns **Möten** i huvudmenyn.
+(`METRA_PLUGINS=meetings`). Därefter syns **Möten** under Kommunikation i huvudmenyn.
 
 ## Vem kan göra vad
 
