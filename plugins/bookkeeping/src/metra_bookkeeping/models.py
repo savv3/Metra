@@ -99,6 +99,16 @@ class FiscalYear(models.Model):
         blank=True,
         help_text=_("A year is 12 months, except when the books start, end or change dates."),
     )
+    staff = models.DecimalField(
+        _("average staff"),
+        max_digits=7,
+        decimal_places=1,
+        default=0,
+        help_text=_(
+            "The average number of employees during the year. With the balance sheet total "
+            "and turnover, it decides the size class of the financial statements."
+        ),
+    )
     created_at = models.DateTimeField(_("created"), auto_now_add=True)
 
     class Meta:
@@ -220,6 +230,14 @@ class Account(models.Model):
     kind = models.CharField(_("kind"), max_length=10, choices=Kind.choices)
     active = models.BooleanField(
         _("in use"), default=True, help_text=_("Accounts not in use cannot get new entries.")
+    )
+    long_term = models.BooleanField(
+        _("long-term"),
+        default=False,
+        help_text=_(
+            "For receivables and liabilities due after more than a year. The balance sheet "
+            "shows them separately; keep the part due within a year on an account of its own."
+        ),
     )
 
     class Meta:
@@ -704,9 +722,21 @@ class VatRegistration(models.Model):
     """A period in which the organisation is VAT registered. VAT can be
     booked only on dates inside one."""
 
+    class Period(models.TextChoices):
+        MONTH = "month", _("Month")
+        QUARTER = "quarter", _("Quarter")
+        YEAR = "year", _("Calendar year")
+
     start = models.DateField(_("registered from"))
     end = models.DateField(
         _("registered until"), null=True, blank=True, help_text=_("Empty while still registered.")
+    )
+    period = models.CharField(
+        _("VAT period"),
+        max_length=10,
+        choices=Period.choices,
+        default=Period.MONTH,
+        help_text=_("How often the VAT return is filed, as agreed with the Tax Administration."),
     )
 
     class Meta:
@@ -735,10 +765,15 @@ class VatRegistration(models.Model):
 
     @classmethod
     def covers(cls, date):
+        return cls.on(date) is not None
+
+    @classmethod
+    def on(cls, date):
+        """The registration in force on ``date``, or None."""
         return (
             cls.objects.filter(start__lte=date)
             .filter(models.Q(end__isnull=True) | models.Q(end__gte=date))
-            .exists()
+            .first()
         )
 
 
@@ -999,6 +1034,33 @@ class Posting(models.Model):
         return []
 
 
+class Budget(models.Model):
+    """The amount budgeted for an income or expense account in a financial
+    year, as a positive number (income expected, or costs expected)."""
+
+    year = models.ForeignKey(
+        FiscalYear,
+        verbose_name=_("financial year"),
+        on_delete=models.CASCADE,
+        related_name="budget",
+    )
+    account = models.ForeignKey(
+        Account, verbose_name=_("account"), on_delete=models.CASCADE, related_name="budget"
+    )
+    amount = models.DecimalField(_("budget"), max_digits=12, decimal_places=2)
+
+    class Meta:
+        ordering = ["account__number"]
+        verbose_name = _("budget line")
+        verbose_name_plural = _("budget lines")
+        constraints = [
+            models.UniqueConstraint(fields=["year", "account"], name="budget_one_per_account")
+        ]
+
+    def __str__(self):
+        return f"{self.year} {self.account}: {self.amount}"
+
+
 @receiver(post_delete, sender=Receipt)
 def _delete_receipt_file(sender, instance, **kwargs):
     instance.file.delete(save=False)
@@ -1014,3 +1076,4 @@ auditlog.register(VatRegistration)
 auditlog.register(PostingSettings)
 auditlog.register(SalesAccount)
 auditlog.register(Posting, exclude_fields=["created_at"])
+auditlog.register(Budget)

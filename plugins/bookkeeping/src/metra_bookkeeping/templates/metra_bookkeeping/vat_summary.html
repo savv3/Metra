@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n bookkeeping %}
+{% block title %}{% translate "VAT summary" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "VAT summary" %}</h1>
+    {% include "metra_bookkeeping/_report_actions.html" %}
+  </div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  {% include "metra_bookkeeping/_report_filter.html" %}
+  {% include "metra_bookkeeping/_vat_table.html" %}
+{% endblock %}

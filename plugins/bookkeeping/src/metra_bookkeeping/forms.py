@@ -4,6 +4,7 @@ from pathlib import Path
 
 from django import forms
 from django.conf import settings
+from django.db import models
 from django.template.defaultfilters import filesizeformat
 from django.utils import timezone, translation
 from django.utils.translation import gettext as _
@@ -14,6 +15,7 @@ from apps.plugins import api
 from . import countries
 from .models import (
     Account,
+    Budget,
     FiscalYear,
     PostingSettings,
     SalesAccount,
@@ -47,8 +49,16 @@ RECEIPT_MB = 20
 class FiscalYearForm(forms.ModelForm):
     class Meta:
         model = FiscalYear
-        fields = ["start", "end", "length_reason"]
+        fields = ["start", "end", "length_reason", "staff"]
         widgets = {"start": DATE, "end": DATE}
+
+
+class YearStaffForm(forms.ModelForm):
+    """What can still change once a year has posted vouchers."""
+
+    class Meta:
+        model = FiscalYear
+        fields = ["staff"]
 
 
 class SetupForm(FiscalYearForm):
@@ -81,7 +91,7 @@ class SetupForm(FiscalYearForm):
 class AccountForm(forms.ModelForm):
     class Meta:
         model = Account
-        fields = ["number", "name", "kind", "active"]
+        fields = ["number", "name", "kind", "active", "long_term"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -280,6 +290,152 @@ class ReportForm(forms.Form):
         return year, max(start, year.start), min(end, year.end)
 
 
+def statement_languages():
+    """The languages statements are kept in, and English as a translation."""
+    names = dict(settings.LANGUAGES)
+    keep = countries.get().STATEMENT_LANGUAGES
+    return [(code, names.get(code, code)) for code in keep] + [
+        ("en", _("English (a translation, not for filing)"))
+    ]
+
+
+def default_statement_language():
+    keep = countries.get().STATEMENT_LANGUAGES
+    language = (translation.get_language() or settings.LANGUAGE_CODE)[:2]
+    if language in keep:
+        return language
+    return settings.LANGUAGE_CODE[:2] if settings.LANGUAGE_CODE[:2] in keep else keep[0]
+
+
+class StatementOptions(forms.Form):
+    """How a statement is shown: its language, the previous year beside it,
+    and the shorter micro-entity format."""
+
+    language = forms.ChoiceField(label=gettext_lazy("Language"), required=False)
+    alone = forms.BooleanField(
+        label=gettext_lazy("Without the previous year"),
+        required=False,
+        help_text=gettext_lazy("The previous financial year is shown beside it when it exists."),
+    )
+    micro = forms.BooleanField(
+        label=gettext_lazy("Micro-entity format"),
+        required=False,
+        help_text=gettext_lazy("Leaves out the breakdowns a micro entity need not show."),
+    )
+
+    def __init__(self, data=None, **kwargs):
+        super().__init__(data, **kwargs)
+        self.fields["language"].choices = statement_languages()
+        self.fields["language"].initial = default_statement_language()
+
+    def options(self, micro_allowed):
+        """(language, compare, micro) asked for; micro only when allowed."""
+        data = self.cleaned_data if self.is_bound and self.is_valid() else {}
+        language = data.get("language") or self.fields["language"].initial
+        return language, not data.get("alone"), bool(data.get("micro")) and micro_allowed
+
+
+class _StatementForm(StatementOptions):
+    year = forms.ModelChoiceField(
+        label=gettext_lazy("Financial year"), queryset=FiscalYear.objects.all(), empty_label=None
+    )
+
+    def __init__(self, data=None, **kwargs):
+        super().__init__(data, **kwargs)
+        current = FiscalYear.current() or FiscalYear.objects.first()
+        self.fields["year"].initial = current.pk if current else None
+
+
+class IncomeStatementForm(_StatementForm):
+    start = forms.DateField(label=gettext_lazy("From"), required=False, widget=DATE)
+    end = forms.DateField(label=gettext_lazy("To"), required=False, widget=DATE)
+    field_order = ["year", "start", "end", "language", "alone", "micro"]
+
+    period = ReportForm.period
+
+
+class BalanceSheetForm(_StatementForm):
+    end = forms.DateField(label=gettext_lazy("At"), required=False, widget=DATE)
+    field_order = ["year", "end", "language", "alone", "micro"]
+
+    def period(self):
+        """(year, the day the balance sheet is at), within the year."""
+        if self.is_bound and self.is_valid():
+            year = self.cleaned_data["year"]
+            end = self.cleaned_data["end"] or year.end
+        else:
+            year = FiscalYear.objects.filter(pk=self.fields["year"].initial).first()
+            if year is None:
+                return None, None
+            end = year.end
+        return year, min(max(end, year.start), year.end)
+
+
+class VatSummaryForm(forms.Form):
+    start = forms.DateField(label=gettext_lazy("From"), required=False, widget=DATE)
+    end = forms.DateField(label=gettext_lazy("To"), required=False, widget=DATE)
+
+    def __init__(self, data=None, **kwargs):
+        super().__init__(data, **kwargs)
+        today = timezone.localdate()
+        self.fields["start"].initial = datetime.date(today.year, 1, 1)
+        self.fields["end"].initial = datetime.date(today.year, 12, 31)
+
+    def period(self):
+        data = self.cleaned_data if self.is_bound and self.is_valid() else {}
+        start = data.get("start") or self.fields["start"].initial
+        end = data.get("end") or self.fields["end"].initial
+        return (start, end) if start <= end else (end, start)
+
+
+class BudgetForm(forms.Form):
+    """A year's budget: an amount per income and expense account, positive
+    for income expected and for costs expected. Empty means no budget."""
+
+    def __init__(self, *args, year, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.year = year
+        budgets = {line.account_id: line for line in year.budget.all()}
+        accounts = Account.objects.filter(
+            kind__in=[Account.Kind.INCOME, Account.Kind.EXPENSE]
+        ).filter(models.Q(active=True) | models.Q(pk__in=budgets))
+        self.rows = []
+        for account in accounts:
+            name = f"account_{account.pk}"
+            line = budgets.get(account.pk)
+            self.fields[name] = forms.DecimalField(
+                label=str(account),
+                required=False,
+                min_value=0,
+                max_digits=12,
+                decimal_places=2,
+                initial=line.amount if line else None,
+                widget=forms.NumberInput(attrs={"inputmode": "decimal", "step": "0.01"}),
+            )
+            self.rows.append((account, name, line))
+
+    def income_fields(self):
+        return [self[name] for account, name, _ in self.rows if account.kind == Account.Kind.INCOME]
+
+    def expense_fields(self):
+        return [
+            self[name] for account, name, _ in self.rows if account.kind == Account.Kind.EXPENSE
+        ]
+
+    def save(self):
+        """Save the changed lines one by one, for the audit log."""
+        for account, name, line in self.rows:
+            amount = self.cleaned_data.get(name)
+            if amount in (None, 0):
+                if line is not None:
+                    line.delete()
+            elif line is None:
+                Budget.objects.create(year=self.year, account=account, amount=amount)
+            elif line.amount != amount:
+                line.amount = amount
+                line.save()
+
+
 class PostingSettingsForm(forms.ModelForm):
     """Where invoices and payments are booked. A series left empty is made
     when the settings are saved."""
@@ -427,5 +583,12 @@ class SalesAccountsForm(forms.Form):
 class VatRegistrationForm(forms.ModelForm):
     class Meta:
         model = VatRegistration
-        fields = ["start", "end"]
+        fields = ["start", "end", "period"]
         widgets = {"start": DATE, "end": DATE}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["period"].required = False
+
+    def clean_period(self):
+        return self.cleaned_data["period"] or VatRegistration.Period.MONTH

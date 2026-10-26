@@ -1,7 +1,7 @@
 """What differs between countries: chart of accounts templates, the length a
-financial year may have, and (in later versions) statement formats,
-retention periods and export formats. The ledger itself is the same
-everywhere; a new country is a new module here.
+financial year may have, statement formats and size classes, and (in later
+versions) retention periods and export formats. The ledger itself is the
+same everywhere; a new country is a new module here.
 
 A country module has:
 
@@ -11,6 +11,11 @@ A country module has:
     FIRST_YEAR_MONTHS = (1, 18)   # how long a first or changed year may be
     VAT_RATES = [VatRate(...), ...]  # the rates in force, with their dates
     POSTING_ACCOUNTS = {...}  # account numbers postings from invoicing use
+    INCOME_STATEMENTS = {"association": Format(...), ...}  # by chart
+    BALANCE_SHEET = Format(...)
+    SIZE_LIMITS = [SizeLimits(...), ...]  # micro and small, with their dates
+    STATEMENT_LANGUAGES = ("fi", "sv")  # the languages statements are kept in
+    TEXTS = {"income_statement": {"fi": ..., "sv": ..., "en": ...}, ...}
 """
 
 import datetime
@@ -73,6 +78,80 @@ class VatRate:
         )
 
 
+@dataclass(frozen=True)
+class Line:
+    """A line of a statement format, with its name in each language as the
+    law words it (``en`` is a translation). Its amount is the sum of the
+    accounts whose numbers fall in ``accounts`` (inclusive (first, last)
+    ranges) and of its ``lines``.
+
+    A ``result`` line (a margin or the profit for the year) is the sum of the
+    lines before it in the same list, or of the whole statement so far when
+    it is at the top. A ``lettered`` line (a), b), ...) is a breakdown a
+    micro entity may leave out. ``computed`` names a value the statement
+    works out itself, such as the result for the year on the balance sheet.
+    ``added`` marks a line the format does not have but the books may need;
+    it shows only when it has an amount."""
+
+    key: str
+    names: dict
+    accounts: tuple = ()
+    lines: tuple = ()
+    result: bool = False
+    lettered: bool = False
+    computed: str = ""
+    added: bool = False
+
+    def name(self, language):
+        return self.names.get(language) or self.names["en"]
+
+    def covers(self, number):
+        return any(
+            len(number) == len(first) and first <= number <= last for first, last in self.accounts
+        )
+
+    def walk(self):
+        yield self
+        for line in self.lines:
+            yield from line.walk()
+
+
+@dataclass(frozen=True)
+class Format:
+    """An income statement or a balance sheet as a law prescribes it: a
+    title and the lines of one or two sides (balance sheet: assets, then
+    equity and liabilities)."""
+
+    key: str
+    names: dict
+    sides: tuple
+    source: str = ""
+
+    def name(self, language):
+        return self.names.get(language) or self.names["en"]
+
+    def line_for(self, number):
+        """The deepest line whose ranges cover ``number``, or None."""
+        found = None
+        for side in self.sides:
+            for line in side.walk():
+                if line.covers(number):
+                    found = line
+        return found
+
+
+@dataclass(frozen=True)
+class SizeLimits:
+    """The limits of a micro and a small entity (balance sheet total,
+    turnover, average staff) for financial years starting on or after
+    ``first``. An entity is in a class while no more than one limit is
+    exceeded."""
+
+    first: datetime.date
+    micro: tuple
+    small: tuple
+
+
 def get(code=None):
     code = code or DEFAULT
     if code not in COUNTRIES:
@@ -87,6 +166,12 @@ def chart_choices(code=None):
 def vat_rate_applies(rate, date, code=None):
     """Whether ``rate`` is a VAT rate in force on ``date``."""
     return any(r.rate == rate and r.applies(date) for r in get(code).VAT_RATES)
+
+
+def size_limits(year_start, code=None):
+    """The size limits for a financial year starting on ``year_start``."""
+    limits = sorted(get(code).SIZE_LIMITS, key=lambda limits: limits.first, reverse=True)
+    return next((item for item in limits if item.first <= year_start), limits[-1])
 
 
 def vat_rates(code=None, since=None):

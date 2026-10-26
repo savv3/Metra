@@ -20,3 +20,11 @@ def money_or_blank(value):
     if not value:
         return ""
     return money(value)
+
+
+@register.filter
+def vat_label(rate, code):
+    """ "Sales 25.5 %" for a rate and a VAT code (sales or purchases)."""
+    from ..models import vat_label as label
+
+    return label(code, Decimal(rate))

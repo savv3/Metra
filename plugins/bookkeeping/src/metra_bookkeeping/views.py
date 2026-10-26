@@ -7,15 +7,21 @@ from django.db import transaction
 from django.db.models import Count, ProtectedError
 from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import get_language, ngettext
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
-from . import countries, postings, reports, timing
+from apps.plugins import api
+
+from . import countries, exports, postings, reports, statements, timing, vat
 from .forms import (
     AccountForm,
+    BalanceSheetForm,
+    BudgetForm,
     FiscalYearForm,
+    IncomeStatementForm,
     LineFormSet,
     PostingSettingsForm,
     ReceiptForm,
@@ -24,8 +30,10 @@ from .forms import (
     SalesAccountsForm,
     SetupForm,
     VatRegistrationForm,
+    VatSummaryForm,
     VoucherForm,
     VoucherSeriesForm,
+    YearStaffForm,
 )
 from .models import (
     Account,
@@ -152,7 +160,8 @@ def year_detail(request, pk):
             "chart_name": getattr(countries.get(year.country).CHARTS.get(year.chart), "name", ""),
             "posted": counts.get(Voucher.Status.POSTED, 0),
             "drafts": counts.get(Voucher.Status.DRAFT, 0),
-            "can_edit": year.is_open and not counts.get(Voucher.Status.POSTED),
+            "can_edit": year.is_open,
+            "dates_fixed": bool(counts.get(Voucher.Status.POSTED)),
         },
     )
 
@@ -161,10 +170,12 @@ def year_detail(request, pk):
 @permission_required(f"{P}.change_fiscalyear", raise_exception=True)
 def year_edit(request, pk):
     year = get_object_or_404(FiscalYear, pk=pk)
-    if not year.is_open or year.vouchers.filter(status=Voucher.Status.POSTED).exists():
-        messages.error(request, _("A year with posted vouchers keeps its dates."))
+    if not year.is_open:
+        messages.error(request, _("The financial year %(year)s is closed.") % {"year": year})
         return redirect(year)
-    form = FiscalYearForm(request.POST or None, instance=year)
+    # A year with posted vouchers keeps its dates; only its staff can change.
+    posted = year.vouchers.filter(status=Voucher.Status.POSTED).exists()
+    form = (YearStaffForm if posted else FiscalYearForm)(request.POST or None, instance=year)
     if request.method == "POST" and form.is_valid():
         form.save()
         messages.success(request, _("The financial year was saved."))
@@ -617,14 +628,53 @@ def post_waiting(request):
 # Reports
 
 
-def _report(request, template, make):
+def _query(request, **changes):
+    query = request.GET.copy()
+    for key, value in changes.items():
+        query[key] = value
+    return f"?{query.urlencode()}"
+
+
+def _deliver(request, template, context, name, csv_rows=None, pdf_template=None):
+    """The report as a page, or as a CSV or PDF file (``?format=``)."""
+    context.setdefault("printed_at", timezone.localtime())
+    wanted = request.GET.get("format")
+    if context.get("year") is not None or context.get("summary") is not None:
+        if wanted == "csv" and csv_rows is not None:
+            header, rows = csv_rows(context)
+            return exports.csv_response(name, header, rows)
+        if wanted == "pdf":
+            try:
+                statement = context.get("statement")
+                return exports.pdf_response(
+                    request,
+                    pdf_template or "metra_bookkeeping/pdf/report.html",
+                    context,
+                    name,
+                    statement.language if statement else None,
+                )
+            except api.PDFUnavailable:
+                messages.error(request, _("PDFs cannot be made on this server."))
+    context["csv_url"] = _query(request, format="csv") if csv_rows is not None else ""
+    context["pdf_url"] = _query(request, format="pdf")
+    return render(request, template, context)
+
+
+def _report(request, template, make, title, csv_rows, body):
     form = ReportForm(request.GET or None)
     year, start, end = form.period()
-    context = {"form": form, "year": year, "start": start, "end": end}
+    context = {"form": form, "year": year, "start": start, "end": end, "title": title}
     if year is not None:
         context |= make(year, start, end)
-    context["printed_at"] = timezone.localtime()
-    return render(request, template, context)
+    context["body"] = body
+    return _deliver(request, template, context, f"{title} {year or ''}", csv_rows)
+
+
+A = exports.amount
+
+
+def _day(date):
+    return date.isoformat() if date else ""
 
 
 @login_required
@@ -634,7 +684,58 @@ def journal(request):
         vouchers, debit, credit = reports.journal(year, start, end)
         return {"vouchers": vouchers, "debit": debit, "credit": credit}
 
-    return _report(request, "metra_bookkeeping/journal.html", make)
+    def rows(context):
+        header = [_("Date"), _("Voucher"), _("Account"), _("Account name"), _("Description")]
+        header += [_("Debit"), _("Credit")]
+        lines = [
+            [
+                _day(voucher.date),
+                voucher.display_number,
+                line.account.number,
+                line.account.name,
+                ": ".join(text for text in (voucher.description, line.description) if text),
+                A(line.debit or ""),
+                A(line.credit or ""),
+            ]
+            for voucher in context["vouchers"]
+            for line in voucher.lines.all()
+        ]
+        return header, lines
+
+    return _report(
+        request,
+        "metra_bookkeeping/journal.html",
+        make,
+        _("Journal"),
+        rows,
+        "metra_bookkeeping/_journal_table.html",
+    )
+
+
+def _ledger_rows(context):
+    header = [_("Account"), _("Account name"), _("Date"), _("Voucher"), _("Description")]
+    header += [_("Debit"), _("Credit"), _("Balance")]
+    rows = []
+    for item in context["accounts"]:
+        account = item.account
+        start = [account.number, account.name, _day(context["start"]), ""]
+        rows.append([*start, _("Balance brought forward"), "", "", A(item.opening)])
+        for line, balance in item.entries:
+            voucher = line.voucher
+            text = ": ".join(t for t in (voucher.description, line.description) if t)
+            rows.append(
+                [
+                    account.number,
+                    account.name,
+                    _day(voucher.date),
+                    voucher.display_number,
+                    text,
+                    A(line.debit or ""),
+                    A(line.credit or ""),
+                    A(balance),
+                ]
+            )
+    return header, rows
 
 
 @login_required
@@ -644,6 +745,9 @@ def ledger(request):
         request,
         "metra_bookkeeping/ledger.html",
         lambda year, start, end: {"accounts": reports.ledger(year, start, end)},
+        _("General ledger"),
+        _ledger_rows,
+        "metra_bookkeeping/_ledger_table.html",
     )
 
 
@@ -658,6 +762,9 @@ def account_ledger(request, pk):
             "accounts": reports.ledger(year, start, end, account),
             "account": account,
         },
+        str(account),
+        _ledger_rows,
+        "metra_bookkeeping/_ledger_table.html",
     )
 
 
@@ -668,4 +775,188 @@ def trial_balance(request):
         rows, totals = reports.trial_balance(year, start, end)
         return {"rows": rows, "totals": totals}
 
-    return _report(request, "metra_bookkeeping/trial_balance.html", make)
+    def rows(context):
+        header = [_("Account"), _("Account name"), _("At the start"), _("Debit"), _("Credit")]
+        header.append(_("At the end"))
+        lines = [
+            [
+                row.account.number,
+                row.account.name,
+                A(row.opening),
+                A(row.debit),
+                A(row.credit),
+                A(row.closing),
+            ]
+            for row in context["rows"]
+        ]
+        return header, lines
+
+    return _report(
+        request,
+        "metra_bookkeeping/trial_balance.html",
+        make,
+        _("Trial balance"),
+        rows,
+        "metra_bookkeeping/_trial_balance_table.html",
+    )
+
+
+# Financial statements
+
+
+def _statement_rows(context):
+    statement = context["statement"]
+    header = [statement.title] + [column.label for column in statement.columns]
+    rows = [
+        ["  " * row.depth + row.name]
+        + ([A(amount) for amount in row.amounts] if row.show_amounts else [""] * len(row.amounts))
+        for row in statement.rows
+    ]
+    return header, rows
+
+
+def _statement_page(request, form, make, template, kind):
+    period = form.period()
+    year = period[0]
+    context = {"form": form, "year": year}
+    if year is not None:
+        size = statements.size_class(year)
+        language, compare, micro = form.options(size.is_micro)
+        statement = make(*period, language, compare, micro)
+        context |= {
+            "statement": statement,
+            "size": size,
+            "start": period[1] if len(period) == 3 else year.start,
+            "end": period[-1],
+            "translation": statement.texts.get("translation", ""),
+        }
+        name = f"{statement.title} {statement.columns[0].label}"
+    else:
+        name = kind
+    return _deliver(
+        request, template, context, name, _statement_rows, "metra_bookkeeping/pdf/statement.html"
+    )
+
+
+@login_required
+@permission_required(f"{P}.view_voucher", raise_exception=True)
+def income_statement(request):
+    return _statement_page(
+        request,
+        IncomeStatementForm(request.GET or None),
+        statements.income_statement,
+        "metra_bookkeeping/income_statement.html",
+        _("Income statement"),
+    )
+
+
+@login_required
+@permission_required(f"{P}.view_voucher", raise_exception=True)
+def balance_sheet(request):
+    return _statement_page(
+        request,
+        BalanceSheetForm(request.GET or None),
+        statements.balance_sheet,
+        "metra_bookkeeping/balance_sheet.html",
+        _("Balance sheet"),
+    )
+
+
+# Budget
+
+
+@login_required
+@permission_required(f"{P}.view_budget", raise_exception=True)
+def budget(request):
+    def make(year, start, end):
+        income, expenses, totals = statements.budget_report(year, start, end)
+        groups = [
+            (_("Income"), income, totals["income"]),
+            (_("Expenses"), expenses, totals["expenses"]),
+        ]
+        return {"income": income, "expenses": expenses, "totals": totals, "budget_groups": groups}
+
+    def rows(context):
+        header = [_("Account"), _("Account name"), _("Budget"), _("Actual"), _("Difference")]
+        header.append(_("Of the budget (%)"))
+        lines = []
+        for group, total in (("income", _("Income")), ("expenses", _("Expenses"))):
+            for row in context[group]:
+                lines.append(
+                    [
+                        row.account.number,
+                        row.account.name,
+                        A(row.budget),
+                        A(row.actual),
+                        A(row.difference),
+                        "" if row.used is None else row.used,
+                    ]
+                )
+            item = context["totals"][group]
+            lines.append(["", total, A(item.budget), A(item.actual), A(item.difference), ""])
+        item = context["totals"]["result"]
+        lines.append(["", _("Result"), A(item.budget), A(item.actual), A(item.difference), ""])
+        return header, lines
+
+    return _report(
+        request,
+        "metra_bookkeeping/budget.html",
+        make,
+        _("Budget follow-up"),
+        rows,
+        "metra_bookkeeping/_budget_table.html",
+    )
+
+
+@login_required
+@permission_required(
+    [f"{P}.add_budget", f"{P}.change_budget", f"{P}.delete_budget"], raise_exception=True
+)
+def budget_edit(request, pk):
+    year = get_object_or_404(FiscalYear, pk=pk)
+    form = BudgetForm(request.POST or None, year=year)
+    if request.method == "POST" and form.is_valid():
+        with transaction.atomic():
+            form.save()
+        messages.success(request, _("The budget was saved."))
+        return redirect(f"{reverse(f'{P}:budget')}?year={year.pk}")
+    return render(request, "metra_bookkeeping/budget_form.html", {"form": form, "year": year})
+
+
+# VAT
+
+
+@login_required
+@permission_required(f"{P}.view_voucher", raise_exception=True)
+def vat_summary(request):
+    form = VatSummaryForm(request.GET or None)
+    start, end = form.period()
+    summary = vat.summary(start, end)
+
+    def rows(context):
+        header = [_("From"), _("To"), _("VAT"), _("Rate (%)"), _("Base"), _("Tax")]
+        lines = []
+        for period in context["summary"].periods:
+            dates = [_day(period.start), _day(period.end)]
+            for rate, amounts in period.sales_rows:
+                lines.append([*dates, _("Sales"), rate, A(amounts.base), A(amounts.vat)])
+            for rate, amounts in period.purchase_rows:
+                lines.append([*dates, _("Purchases"), rate, A(amounts.base), A(amounts.vat)])
+            lines.append([*dates, _("To pay (to get back if negative)"), "", "", A(period.payable)])
+        return header, lines
+
+    context = {
+        "form": form,
+        "summary": summary,
+        "start": start,
+        "end": end,
+        "title": _("VAT summary"),
+    }
+    context["body"] = "metra_bookkeeping/_vat_table.html"
+    return _deliver(
+        request,
+        "metra_bookkeeping/vat_summary.html",
+        context,
+        f"{_('VAT summary')} {start.isoformat()} {end.isoformat()}",
+        rows,
+    )

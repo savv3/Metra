@@ -1,0 +1,24 @@
+{% load i18n bookkeeping %}
+{% if rows %}
+  <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Trial balance' %}">
+    <table>
+      <thead><tr>
+        <th scope="col">{% translate "Account" %}</th>
+        <th scope="col" class="num">{% translate "At the start" %}</th><th scope="col" class="num">{% translate "Debit" %}</th>
+        <th scope="col" class="num">{% translate "Credit" %}</th><th scope="col" class="num">{% translate "At the end" %}</th>
+      </tr></thead>
+      <tbody>
+        {% for row in rows %}
+          <tr>
+            <th scope="row"><a href="{% url 'metra_bookkeeping:account_ledger' row.account.pk %}?year={{ year.pk }}">{{ row.account }}</a></th>
+            <td class="num">{{ row.opening|money }}</td><td class="num">{{ row.debit|money_or_blank }}</td>
+            <td class="num">{{ row.credit|money_or_blank }}</td><td class="num">{{ row.closing|money }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot><tr><th scope="row">{% translate "Total" %}</th><td class="num">{{ totals.opening|money }}</td><td class="num">{{ totals.debit|money }}</td><td class="num">{{ totals.credit|money }}</td><td class="num">{{ totals.closing|money }}</td></tr></tfoot>
+    </table>
+  </div>
+{% else %}
+  <p class="empty">{% translate "No posted vouchers in this period." %}</p>
+{% endif %}

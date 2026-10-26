@@ -1,0 +1,28 @@
+{% load i18n bookkeeping %}
+{% for item in accounts %}
+  <h2><a href="{% url 'metra_bookkeeping:account_ledger' item.account.pk %}?year={{ year.pk }}">{{ item.account }}</a></h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-label="{{ item.account }}">
+    <table>
+      <thead><tr>
+        <th scope="col">{% translate "Date" %}</th><th scope="col">{% translate "Voucher" %}</th><th scope="col">{% translate "Description" %}</th>
+        <th scope="col" class="num">{% translate "Debit" %}</th><th scope="col" class="num">{% translate "Credit" %}</th><th scope="col" class="num">{% translate "Balance" %}</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>{{ start|date:"SHORT_DATE_FORMAT" }}</td><td></td><td>{% translate "Balance brought forward" %}</td><td></td><td></td><td class="num">{{ item.opening|money }}</td></tr>
+        {% for line, balance in item.entries %}
+          <tr>
+            <td>{{ line.voucher.date|date:"SHORT_DATE_FORMAT" }}</td>
+            <td><a href="{{ line.voucher.get_absolute_url }}">{{ line.voucher.display_number }}</a></td>
+            <td>{{ line.voucher.description }}{% if line.description %}: {{ line.description }}{% endif %}</td>
+            <td class="num">{{ line.debit|money_or_blank }}</td>
+            <td class="num">{{ line.credit|money_or_blank }}</td>
+            <td class="num">{{ balance|money }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot><tr><th scope="row" colspan="3">{% translate "Total and balance" %}</th><td class="num">{{ item.debit|money }}</td><td class="num">{{ item.credit|money }}</td><td class="num">{{ item.closing|money }}</td></tr></tfoot>
+    </table>
+  </div>
+{% empty %}
+  <p class="empty">{% translate "No posted vouchers in this period." %}</p>
+{% endfor %}

@@ -1,0 +1,6 @@
+{% load i18n %}
+<div class="actions no-print">
+  <button type="button" class="button" onclick="window.print()">{% translate "Print" %}</button>
+  {% if pdf_url %}<a class="button" href="{{ pdf_url }}">{% translate "PDF" %}</a>{% endif %}
+  {% if csv_url %}<a class="button" href="{{ csv_url }}">{% translate "CSV" %}</a>{% endif %}
+</div>

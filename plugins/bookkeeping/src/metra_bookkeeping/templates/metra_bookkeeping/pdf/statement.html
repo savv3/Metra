@@ -1,0 +1,16 @@
+{% load bookkeeping %}<!doctype html>
+<html lang="{{ statement.language }}">
+<head>
+<meta charset="utf-8">
+<title>{{ statement.title }}</title>
+{% include "metra_bookkeeping/pdf/_style.html" %}
+</head>
+<body>
+  {# Only the statement's own texts here, never the interface's: statutory statements are in Finnish or Swedish as the decree words them (KPL 3 ch.). #}
+  {% if organisation %}<div class="organisation"><strong>{{ organisation.name }}</strong>{% if organisation.business_id %} &middot; {{ statement.texts.business_id }} {{ organisation.business_id }}{% endif %}</div>{% endif %}
+  <h1>{{ statement.title }}</h1>
+  <p class="subtitle">{{ statement.columns.0.label }}</p>
+  {% if translation %}<p class="note">{{ translation }}</p>{% endif %}
+  {% include "metra_bookkeeping/_statement_table.html" %}
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Budget" %} {{ year }}{% endblock %}
+{% block content %}
+  <div class="page-head"><h1>{% translate "Budget" %} {{ year }}</h1></div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  <p class="help">{% translate "The income and costs expected for the whole year, per account, as positive amounts. Leave an account empty for no budget." %}</p>
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <h2>{% translate "Income" %}</h2>
+    {% for field in form.income_fields %}{% include "register/_field.html" %}{% endfor %}
+    <h2>{% translate "Expenses" %}</h2>
+    {% for field in form.expense_fields %}{% include "register/_field.html" %}{% endfor %}
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+      <a class="button" href="{% url 'metra_bookkeeping:budget' %}?year={{ year.pk }}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+{% endblock %}

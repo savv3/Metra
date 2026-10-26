@@ -180,7 +180,7 @@ permissions; phase 6 opens it to outside systems.
 | 6 | Done: plugin groundwork, 46elks SMS, REST API and webhooks as plugins (release 0.2.0) |
 | 7 | Done: snapshots, restore in the app, help pages, meeting protocols plugin, notifications |
 | 8 | Done: plugin chooser and plugin settings, email settings in the app, the Mailgun add-on and 46elks settings in the app |
-| 9 | In progress: A (ledger) done, B (postings from Metra) in review. See the [phase 9 build plan](#phase-9-build-plan) |
+| 9 | In progress: A (ledger) and B (postings from Metra) done, C (financial statements) in review. See the [phase 9 build plan](#phase-9-build-plan) |
 | 10 to 12 | Planned. Each phase gets a build plan with one row per pull request before work starts |
 
 Ideas taken off the plan for now are in [might-do-later.md](might-do-later.md).
@@ -485,6 +485,20 @@ accountant checks them before the first real year is kept in Metra.
   invoices carry a delivery date or period, and each posting keeps it, so
   the VAT summary (C) reports by it; PR D accrues invoices issued after
   year end for supplies of the closed year.
+- **Financial statements.** In Finnish or Swedish, with the line names of
+  the PMA decree (annex IV for associations, annex I for cooperatives and
+  companies, annex V for the balance sheet); English only as a labelled
+  translation. Accounts land on lines by number range, and accounts on no
+  line are listed, never dropped. The size class is worked out on the safe
+  side (micro only when no more than one micro limit is exceeded in each of
+  the two years), and a full small-entity statement is always allowed.
+- **VAT summary.** Per VAT period (month, quarter or year, from the
+  registration), by rate. An invoice counts at the end of its supply
+  period, except the part paid before it, an advance payment, which counts
+  in the month paid; a reversal counts where the voucher it reverses did.
+  Entries without a VAT code (reverse charge, imports) are outside it, and
+  it is marked not ready while such entries on the VAT accounts, drafts
+  with VAT or records waiting from invoicing exist.
 
 ## Plugins
 
