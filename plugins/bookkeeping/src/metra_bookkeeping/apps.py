@@ -22,9 +22,30 @@ class BookkeepingConfig(AppConfig):
     def ready(self):
         from apps.plugins import api
 
+        from . import postings
+
+        postings.connect()
+
         api.add_navigation(
             api.NavItem(
                 _("Bookkeeping"), "metra_bookkeeping:index", "metra_bookkeeping.view_voucher"
+            )
+        )
+        api.add_settings_link(
+            api.SettingsLink(
+                _("Bookkeeping of invoices"),
+                "metra_bookkeeping:posting_settings",
+                "metra_bookkeeping.change_postingsettings",
+                _("The accounts and voucher series invoices and payments are booked to, and VAT."),
+                group="invoicing",
+            )
+        )
+        api.add_invoice_panel(
+            api.Panel(
+                "metra_bookkeeping/invoice_panel.html",
+                title=_("Bookkeeping"),
+                permission="metra_bookkeeping.view_voucher",
+                context=postings.invoice_panel,
             )
         )
         api.add_help_articles(

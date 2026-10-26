@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-26 09:20+0200\n"
+"POT-Creation-Date: 2026-10-26 09:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps.py:9 apps.py:27 templates/metra_bookkeeping/_nav.html:2
+#: apps.py:9 apps.py:31 apps.py:46 templates/metra_bookkeeping/_nav.html:2
 #: templates/metra_bookkeeping/index.html:3
 #: templates/metra_bookkeeping/index.html:6
 msgid "Bookkeeping"
@@ -29,7 +29,20 @@ msgid ""
 msgstr ""
 "Dubbel bokföring med verifikat, dagbok och huvudbok enligt finska regler."
 
-#: apps.py:45
+#: apps.py:36 templates/metra_bookkeeping/_nav.html:9
+#: templates/metra_bookkeeping/posting_settings.html:3
+#: templates/metra_bookkeeping/posting_settings.html:5
+msgid "Bookkeeping of invoices"
+msgstr "Bokföring av fakturor"
+
+#: apps.py:39
+msgid ""
+"The accounts and voucher series invoices and payments are booked to, and VAT."
+msgstr ""
+"Konton och verifikatserier som fakturor och betalningar bokförs på, samt "
+"moms."
+
+#: apps.py:66
 msgid ""
 "The books have posted vouchers, which must be kept readable for the legal "
 "period, so bookkeeping stays on."
@@ -37,15 +50,15 @@ msgstr ""
 "Bokföringen har bokförda verifikat som ska hållas läsbara under den "
 "lagstadgade tiden, så bokföringen kan inte stängas av."
 
-#: countries/fi.py:16
+#: countries/fi.py:19
 msgid "Finland"
 msgstr "Finland"
 
-#: countries/fi.py:139
+#: countries/fi.py:194
 msgid "Association"
 msgstr "Förening"
 
-#: countries/fi.py:141
+#: countries/fi.py:196
 msgid ""
 "For a registered association (yhdistys): activities, fundraising and "
 "membership fees, with a surplus or deficit."
@@ -53,11 +66,11 @@ msgstr ""
 "För en registrerad förening (yhdistys): verksamhet, insamling och "
 "medlemsavgifter, med överskott eller underskott."
 
-#: countries/fi.py:251
+#: countries/fi.py:316
 msgid "Cooperative or company"
 msgstr "Andelslag eller bolag"
 
-#: countries/fi.py:253
+#: countries/fi.py:318
 msgid ""
 "For a cooperative (osuuskunta), such as a water cooperative, or a company: "
 "net sales, with a profit or loss."
@@ -65,70 +78,84 @@ msgstr ""
 "För ett andelslag (osuuskunta), till exempel ett vattenandelslag, eller ett "
 "bolag: omsättning, med vinst eller förlust."
 
-#: forms.py:50 templates/metra_bookkeeping/year_detail.html:13
+#: forms.py:65 templates/metra_bookkeeping/year_detail.html:13
 msgid "Kind of organisation"
 msgstr "Typ av organisation"
 
-#: forms.py:58
+#: forms.py:72
 msgid ""
-"Decides the form of the income statement and the chart of accounts the books"
-" start with. Accounts can then be added, renamed and retired."
+"Decides the form of the income statement and the chart of accounts the books "
+"start with. Accounts can then be added, renamed and retired."
 msgstr ""
 "Avgör resultaträkningens form och den kontoplan bokföringen börjar med. "
 "Konton kan sedan läggas till, döpas om och tas ur bruk."
 
-#: forms.py:77
+#: forms.py:91
 msgid "The account has entries, so this stays."
 msgstr "Kontot har bokföringsposter, så detta ändras inte."
 
-#: forms.py:107
+#: forms.py:121
 msgid "No financial year covers this date."
 msgstr "Ingen räkenskapsperiod omfattar detta datum."
 
-#: forms.py:110 models.py:180 models.py:398 views.py:413
+#: forms.py:124 models.py:201 models.py:419 views.py:436
 #, python-format
 msgid "The financial year %(year)s is closed."
 msgstr "Räkenskapsperioden %(year)s är stängd."
 
-#: forms.py:156
+#: forms.py:145 models.py:601
+#: templates/metra_bookkeeping/voucher_detail.html:53
+#: templates/metra_bookkeeping/voucher_form.html:26
+msgid "VAT"
+msgstr "Moms"
+
+#: forms.py:147
+msgid "The VAT the line is for, when VAT registered."
+msgstr "Momsen som raden gäller, när organisationen är momsregistrerad."
+
+#: forms.py:184
+msgid "Choose a VAT rate from the list."
+msgstr "Välj en momssats i listan."
+
+#: forms.py:198
 msgid "Add the voucher's lines."
 msgstr "Lägg till verifikatets rader."
 
-#: forms.py:171
+#: forms.py:213
 msgid "Receipt"
 msgstr "Kvitto"
 
-#: forms.py:172
+#: forms.py:214
 #, python-format
 msgid "A PDF or a photo of the receipt or bill, up to %(mb)s MB."
 msgstr "En PDF eller ett foto av kvittot eller fakturan, högst %(mb)s MB."
 
-#: forms.py:180
+#: forms.py:222
 msgid "This kind of file cannot be a receipt."
 msgstr "Den här filtypen kan inte vara ett kvitto."
 
-#: forms.py:183
+#: forms.py:225
 #, python-format
 msgid "The file is larger than %(limit)s."
 msgstr "Filen är större än %(limit)s."
 
-#: forms.py:194
+#: forms.py:236
 msgid "Date of the reversal"
 msgstr "Rättelsens datum"
 
-#: forms.py:196
+#: forms.py:238
 msgid "Reason"
 msgstr "Orsak"
 
-#: forms.py:198
+#: forms.py:240
 msgid "Why the voucher is reversed, for example a wrong account."
 msgstr "Varför verifikatet rättas, till exempel fel konto."
 
-#: forms.py:209 models.py:497
+#: forms.py:251 models.py:554
 msgid "There is no open financial year for that date."
 msgstr "Det finns ingen öppen räkenskapsperiod för det datumet."
 
-#: forms.py:217 templates/metra_bookkeeping/_report_head.html:2
+#: forms.py:259 templates/metra_bookkeeping/_report_head.html:2
 #: templates/metra_bookkeeping/index.html:35
 #: templates/metra_bookkeeping/voucher_detail.html:22
 #: templates/metra_bookkeeping/year_detail.html:3
@@ -137,90 +164,138 @@ msgstr "Det finns ingen öppen räkenskapsperiod för det datumet."
 msgid "Financial year"
 msgstr "Räkenskapsperiod"
 
-#: forms.py:219
+#: forms.py:261
 msgid "From"
 msgstr "Från"
 
-#: forms.py:220
+#: forms.py:262
 msgid "To"
 msgstr "Till"
 
-#: models.py:56
+#: forms.py:304
+msgid "Sales invoices"
+msgstr "Försäljningsfakturor"
+
+#: forms.py:305
+msgid "Payments"
+msgstr "Betalningar"
+
+#: forms.py:315
+#, python-format
+msgid "New series: %(code)s %(name)s"
+msgstr "Ny serie: %(code)s %(name)s"
+
+#: forms.py:328
+msgid "Choose a day in an open financial year."
+msgstr "Välj en dag i en öppen räkenskapsperiod."
+
+#: forms.py:341
+#, python-format
+msgid "Choose these accounts before posting starts: %(names)s."
+msgstr "Välj dessa konton innan bokföringen startar: %(names)s."
+
+#: forms.py:348
+msgid ""
+"Sales VAT, purchase VAT and the VAT settlement need accounts of their own."
+msgstr "Utgående moms, ingående moms och momsavräkningen behöver egna konton."
+
+#: forms.py:351
+msgid "Receivables and the bank need accounts of their own."
+msgstr "Kundfordringar och banken behöver egna konton."
+
+#: forms.py:403
+msgid "Default sales account"
+msgstr "Standardkonto för försäljning"
+
+#: models.py:44
+msgid "Sales"
+msgstr "Försäljning"
+
+#: models.py:45
+msgid "Purchases"
+msgstr "Inköp"
+
+#: models.py:54
+#, python-format
+msgid "%(kind)s %(rate)s %%"
+msgstr "%(kind)s %(rate)s %%"
+
+#: models.py:74
 msgid "Open"
 msgstr "Öppen"
 
-#: models.py:57
+#: models.py:75
 msgid "Closed"
 msgstr "Stängd"
 
-#: models.py:59
+#: models.py:77
 msgid "first day"
 msgstr "första dag"
 
-#: models.py:60
+#: models.py:78
 msgid "last day"
 msgstr "sista dag"
 
-#: models.py:62 models.py:303
+#: models.py:80 models.py:324
 msgid "status"
 msgstr "status"
 
-#: models.py:65
+#: models.py:84
 msgid "The first financial year"
 msgstr "Den första räkenskapsperioden"
 
-#: models.py:66
+#: models.py:85
 msgid "The last financial year"
 msgstr "Den sista räkenskapsperioden"
 
-#: models.py:67
+#: models.py:86
 msgid "The closing date changes"
 msgstr "Bokslutsdagen ändras"
 
-#: models.py:69
+#: models.py:88
 msgid "country"
 msgstr "land"
 
-#: models.py:71
+#: models.py:90
 msgid "kind of organisation"
 msgstr "typ av organisation"
 
-#: models.py:74
+#: models.py:93
 msgid "Decides the form of the income statement."
 msgstr "Avgör resultaträkningens form."
 
-#: models.py:77
+#: models.py:96
 msgid "why the year is not 12 months"
 msgstr "varför perioden inte är 12 månader"
 
-#: models.py:81
+#: models.py:100
 msgid "A year is 12 months, except when the books start, end or change dates."
 msgstr ""
-"En räkenskapsperiod är 12 månader, utom när bokföringen börjar, upphör eller"
-" byter datum."
+"En räkenskapsperiod är 12 månader, utom när bokföringen börjar, upphör eller "
+"byter datum."
 
-#: models.py:83 models.py:321
+#: models.py:102 models.py:342 models.py:942
 msgid "created"
 msgstr "skapad"
 
-#: models.py:87 models.py:291
+#: models.py:106 models.py:312
 msgid "financial year"
 msgstr "räkenskapsperiod"
 
-#: models.py:88
+#: models.py:107
 msgid "financial years"
 msgstr "räkenskapsperioder"
 
-#: models.py:139
+#: models.py:158
 msgid "The year must end after it starts."
 msgstr "Perioden måste sluta efter att den börjar."
 
-#: models.py:145
+#: models.py:165
 #, python-format
 msgid "Say why the year is not %(usual)s months."
 msgstr "Ange varför perioden inte är %(usual)s månader."
 
-#: models.py:153
+#: models.py:174
 #, python-format
 msgid ""
 "A financial year is %(usual)s months; a first or changed one %(min)s to "
@@ -229,101 +304,101 @@ msgstr ""
 "En räkenskapsperiod är %(usual)s månader; en första eller ändrad period "
 "%(min)s till %(max)s."
 
-#: models.py:160
+#: models.py:181
 msgid "The year overlaps another financial year."
 msgstr "Perioden överlappar en annan räkenskapsperiod."
 
-#: models.py:165
+#: models.py:186
 #, python-format
 msgid "The year must start the day after the previous one ends (%(day)s)."
 msgstr "Perioden måste börja dagen efter att den föregående slutar (%(day)s)."
 
-#: models.py:172
+#: models.py:193
 msgid "The year must end the day before the next one starts."
 msgstr "Perioden måste sluta dagen före att nästa börjar."
 
-#: models.py:175
+#: models.py:196
 msgid "Some of the year's vouchers would fall outside it."
 msgstr "Några av periodens verifikat skulle hamna utanför den."
 
-#: models.py:186
+#: models.py:207
 msgid "Asset"
 msgstr "Tillgång"
 
-#: models.py:187
+#: models.py:208
 msgid "Liability"
 msgstr "Skuld"
 
-#: models.py:188
+#: models.py:209
 msgid "Equity"
 msgstr "Eget kapital"
 
-#: models.py:189
+#: models.py:210
 msgid "Income"
 msgstr "Intäkt"
 
-#: models.py:190
+#: models.py:211
 msgid "Expense"
 msgstr "Kostnad"
 
-#: models.py:193 models.py:298
+#: models.py:214 models.py:319
 msgid "number"
 msgstr "nummer"
 
-#: models.py:196
+#: models.py:217
 msgid "Use digits only."
 msgstr "Använd bara siffror."
 
-#: models.py:198 models.py:261 models.py:591
+#: models.py:219 models.py:282 models.py:670
 msgid "name"
 msgstr "namn"
 
-#: models.py:199 models.py:301
+#: models.py:220 models.py:322
 msgid "kind"
 msgstr "slag"
 
-#: models.py:201
+#: models.py:222
 msgid "in use"
 msgstr "i bruk"
 
-#: models.py:201
+#: models.py:222
 msgid "Accounts not in use cannot get new entries."
 msgstr "Konton som inte är i bruk kan inte få nya bokföringsposter."
 
-#: models.py:206 models.py:533
+#: models.py:227 models.py:592 models.py:886
 msgid "account"
 msgstr "konto"
 
-#: models.py:207
+#: models.py:228
 msgid "accounts"
 msgstr "konton"
 
-#: models.py:229
+#: models.py:250
 msgid ""
-"The account has entries, so its number and kind stay as they are. Rename it,"
-" or stop using it and add a new one."
+"The account has entries, so its number and kind stay as they are. Rename it, "
+"or stop using it and add a new one."
 msgstr ""
 "Kontot har bokföringsposter, så dess nummer och slag ändras inte. Byt namn "
 "på det, eller ta det ur bruk och lägg till ett nytt."
 
-#: models.py:236
+#: models.py:257
 msgid "An account with entries cannot be deleted."
 msgstr "Ett konto med bokföringsposter kan inte tas bort."
 
-#: models.py:255
+#: models.py:276
 msgid "code"
 msgstr "kod"
 
-#: models.py:259
+#: models.py:280
 msgid ""
 "Shown before the number, for example M for M12. Can be empty for one series."
 msgstr "Visas före numret, till exempel M för M12. Kan vara tom för en serie."
 
-#: models.py:265 models.py:266
+#: models.py:286 models.py:287
 msgid "voucher series"
 msgstr "verifikatserie"
 
-#: models.py:275 templates/metra_bookkeeping/_nav.html:4
+#: models.py:296 templates/metra_bookkeeping/_nav.html:4
 #: templates/metra_bookkeeping/voucher_list.html:3
 #: templates/metra_bookkeeping/voucher_list.html:6
 #: templates/metra_bookkeeping/voucher_list.html:13
@@ -331,114 +406,128 @@ msgstr "verifikatserie"
 msgid "Vouchers"
 msgstr "Verifikat"
 
-#: models.py:281
+#: models.py:302
 msgid "Draft"
 msgstr "Utkast"
 
-#: models.py:282 templates/metra_bookkeeping/voucher_detail.html:44
+#: models.py:303 templates/metra_bookkeeping/voucher_detail.html:45
 msgid "Posted"
 msgstr "Bokförd"
 
-#: models.py:285 templates/metra_bookkeeping/journal.html:17
+#: models.py:306 templates/metra_bookkeeping/journal.html:17
 #: templates/metra_bookkeeping/ledger.html:18
 msgid "Voucher"
 msgstr "Verifikat"
 
-#: models.py:286
+#: models.py:307
 msgid "Opening balances"
 msgstr "Ingående balans"
 
-#: models.py:287
+#: models.py:308
 msgid "Reversal"
 msgstr "Rättelse"
 
-#: models.py:296
+#: models.py:317
 msgid "series"
 msgstr "serie"
 
-#: models.py:299
+#: models.py:320
 msgid "date"
 msgstr "datum"
 
-#: models.py:300 models.py:537
+#: models.py:321 models.py:596
 msgid "description"
 msgstr "beskrivning"
 
-#: models.py:307
+#: models.py:328
 msgid "reverses"
 msgstr "rättar"
 
-#: models.py:315
+#: models.py:336
 msgid "created by"
 msgstr "skapad av"
 
-#: models.py:324
+#: models.py:345
 msgid "posted by"
 msgstr "bokförd av"
 
-#: models.py:330
+#: models.py:351
 msgid "posted"
 msgstr "bokförd"
 
-#: models.py:334 models.py:530 models.py:588
+#: models.py:355 models.py:589 models.py:667 models.py:917
 msgid "voucher"
 msgstr "verifikat"
 
-#: models.py:335
+#: models.py:356
 msgid "vouchers"
 msgstr "verifikat"
 
-#: models.py:345
+#: models.py:366
 msgid "Draft voucher"
 msgstr "Verifikatutkast"
 
-#: models.py:346
+#: models.py:367
 #, python-format
 msgid "Voucher %(number)s"
 msgstr "Verifikat %(number)s"
 
-#: models.py:352
+#: models.py:373
 msgid "Vouchers are posted with post()."
 msgstr "Verifikat bokförs med post()."
 
-#: models.py:381 views.py:310
+#: models.py:402 views.py:327
 msgid "A posted voucher cannot change. Correct it with a reversing voucher."
 msgstr ""
 "Ett bokfört verifikat kan inte ändras. Rätta det med ett rättelseverifikat."
 
-#: models.py:401
+#: models.py:422
 #, python-format
 msgid "The date is outside the financial year %(year)s."
 msgstr "Datumet ligger utanför räkenskapsperioden %(year)s."
 
-#: models.py:405
+#: models.py:426
 msgid "A voucher needs at least two lines."
 msgstr "Ett verifikat behöver minst två rader."
 
-#: models.py:409
+#: models.py:430
 #, python-format
 msgid "Debits (%(debit)s) and credits (%(credit)s) differ."
 msgstr "Debet (%(debit)s) och kredit (%(credit)s) är olika stora."
 
-#: models.py:416
+#: models.py:437
 msgid "The amounts are zero."
 msgstr "Beloppen är noll."
 
-#: models.py:420
+#: models.py:441
 #, python-format
 msgid "Opening balances are dated the first day of the year (%(day)s)."
 msgstr "Ingående balans dateras periodens första dag (%(day)s)."
 
-#: models.py:427
+#: models.py:448
 msgid "The year already has posted opening balances."
 msgstr "Perioden har redan en bokförd ingående balans."
 
-#: models.py:431
+#: models.py:452
 #, python-format
 msgid "The account %(account)s is not in use."
 msgstr "Kontot %(account)s är inte i bruk."
 
-#: models.py:440
+#: models.py:471
+#, python-format
+msgid "The VAT rate %(rate)s is not in force on %(day)s."
+msgstr "Momssatsen %(rate)s gäller inte den %(day)s."
+
+#: models.py:480
+#, python-format
+msgid ""
+"The organisation is not VAT registered on %(day)s, so the voucher can have "
+"no VAT. Check the VAT registration dates in the posting settings."
+msgstr ""
+"Organisationen är inte momsregistrerad den %(day)s, så verifikatet kan inte "
+"ha moms. Kontrollera momsregistreringens datum i bokföringsinställningarna."
+
+#: models.py:497
 msgid ""
 "No receipt is attached. Every entry needs evidence: attach the receipt, or "
 "explain in the description why there is none (a memo voucher)."
@@ -447,82 +536,285 @@ msgstr ""
 "kvittot, eller förklara i beskrivningen varför det saknas (ett "
 "promemoriaverifikat)."
 
-#: models.py:453
+#: models.py:510
 msgid "The voucher is already posted."
 msgstr "Verifikatet är redan bokfört."
 
-#: models.py:493 views.py:380
+#: models.py:550 views.py:403
 msgid "This voucher cannot be reversed."
 msgstr "Det här verifikatet kan inte rättas."
 
-#: models.py:498
+#: models.py:555
 #, python-format
 msgid "Reversal of voucher %(number)s"
 msgstr "Rättelse av verifikat %(number)s"
 
-#: models.py:535
+#: models.py:594
 msgid "debit"
 msgstr "debet"
 
-#: models.py:536
+#: models.py:595
 msgid "credit"
 msgstr "kredit"
 
-#: models.py:538
+#: models.py:604 models.py:883
+msgid "VAT rate (%)"
+msgstr "Momssats (%)"
+
+#: models.py:606
 msgid "order"
 msgstr "ordning"
 
-#: models.py:542
+#: models.py:610
 msgid "voucher line"
 msgstr "verifikatrad"
 
-#: models.py:543
+#: models.py:611
 msgid "voucher lines"
 msgstr "verifikatrader"
 
-#: models.py:571
+#: models.py:650
 msgid "Amounts are positive; use the other column instead."
 msgstr "Beloppen är positiva; använd den andra kolumnen i stället."
 
-#: models.py:573
+#: models.py:652
 msgid "A line is either a debit or a credit, not both."
 msgstr "En rad är antingen debet eller kredit, inte båda."
 
-#: models.py:575
+#: models.py:654
 msgid "Enter a debit or a credit."
 msgstr "Ange debet eller kredit."
 
-#: models.py:590
+#: models.py:669
 msgid "file"
 msgstr "fil"
 
-#: models.py:592
+#: models.py:671
 msgid "size"
 msgstr "storlek"
 
-#: models.py:593
+#: models.py:672
 msgid "type"
 msgstr "typ"
 
-#: models.py:596
+#: models.py:675
 msgid "uploaded by"
 msgstr "uppladdad av"
 
-#: models.py:602
+#: models.py:681
 msgid "uploaded"
 msgstr "uppladdad"
 
-#: models.py:606
+#: models.py:685
 msgid "receipt"
 msgstr "kvitto"
 
-#: models.py:607
+#: models.py:686
 msgid "receipts"
 msgstr "kvitton"
 
-#: models.py:614
+#: models.py:693
 msgid "A receipt cannot be changed."
 msgstr "Ett kvitto kan inte ändras."
+
+#: models.py:705
+msgid "registered from"
+msgstr "registrerad från"
+
+#: models.py:707
+msgid "registered until"
+msgstr "registrerad till"
+
+#: models.py:707
+msgid "Empty while still registered."
+msgstr "Tomt så länge organisationen fortfarande är registrerad."
+
+#: models.py:712 templates/metra_bookkeeping/posting_settings.html:51
+#: templates/metra_bookkeeping/vat_registration_form.html:3
+#: templates/metra_bookkeeping/vat_registration_form.html:5
+msgid "VAT registration"
+msgstr "Momsregistrering"
+
+#: models.py:713
+msgid "VAT registrations"
+msgstr "Momsregistreringar"
+
+#: models.py:718
+#, python-format
+msgid "from %(start)s"
+msgstr "från %(start)s"
+
+#: models.py:724
+msgid "The registration must end after it starts."
+msgstr "Registreringen måste sluta efter att den börjar."
+
+#: models.py:732
+msgid "The period overlaps another VAT registration."
+msgstr "Perioden överlappar en annan momsregistrering."
+
+#: models.py:761
+msgid "post automatically from"
+msgstr "bokför automatiskt från"
+
+#: models.py:765
+msgid ""
+"Invoices, credit notes, payments and reminders dated this day or later are "
+"booked automatically. Choose a day after anything already booked by hand, so "
+"nothing is booked twice. Empty: nothing is posted."
+msgstr ""
+"Fakturor, kreditnotor, betalningar och påminnelser daterade denna dag eller "
+"senare bokförs automatiskt. Välj en dag efter det som redan bokförts för "
+"hand, så att inget bokförs två gånger. Tomt: inget bokförs."
+
+#: models.py:770
+msgid "receivables"
+msgstr "kundfordringar"
+
+#: models.py:770
+msgid "Debited for invoices, credited for payments."
+msgstr "Debiteras vid fakturor, krediteras vid betalningar."
+
+#: models.py:771
+msgid "bank account"
+msgstr "bankkonto"
+
+#: models.py:771
+msgid "Where payments arrive."
+msgstr "Dit betalningarna kommer."
+
+#: models.py:773
+msgid "sales"
+msgstr "försäljning"
+
+#: models.py:773
+msgid "Income for invoice lines without an account of their own below."
+msgstr "Intäkt för fakturarader utan eget konto nedan."
+
+#: models.py:775
+msgid "reminder fees"
+msgstr "påminnelseavgifter"
+
+#: models.py:776
+msgid "VAT on sales"
+msgstr "Utgående moms"
+
+#: models.py:777
+msgid "VAT on purchases"
+msgstr "Ingående moms"
+
+#: models.py:779
+msgid "VAT settlement"
+msgstr "Momsavräkning"
+
+#: models.py:780
+msgid ""
+"The VAT to pay or to get back, from the sales and purchase VAT of each "
+"period."
+msgstr ""
+"Momsen att betala eller få tillbaka, av utgående och ingående moms för varje "
+"period."
+
+#: models.py:784
+msgid "series for invoices"
+msgstr "verifikatserie för fakturor"
+
+#: models.py:789
+msgid "Invoices, credit notes and reminder fees."
+msgstr "Fakturor, kreditnotor och påminnelseavgifter."
+
+#: models.py:793
+msgid "series for payments"
+msgstr "verifikatserie för betalningar"
+
+#: models.py:812 models.py:813
+msgid "posting settings"
+msgstr "bokföringsinställningar"
+
+#: models.py:816
+msgid "Posting settings"
+msgstr "Bokföringsinställningar"
+
+#: models.py:876
+msgid "fee line"
+msgstr "avgiftsrad"
+
+#: models.py:890
+msgid "sales account"
+msgstr "försäljningskonto"
+
+#: models.py:891
+msgid "sales accounts"
+msgstr "försäljningskonton"
+
+#: models.py:911
+msgid "Invoice"
+msgstr "Faktura"
+
+#: models.py:912
+msgid "Credit note"
+msgstr "Kreditnota"
+
+#: models.py:913
+msgid "Payment"
+msgstr "Betalning"
+
+#: models.py:914
+msgid "Reminder fee"
+msgstr "Påminnelseavgift"
+
+#: models.py:919
+msgid "from"
+msgstr "från"
+
+#: models.py:922
+msgid "invoice"
+msgstr "faktura"
+
+#: models.py:928
+msgid "payment"
+msgstr "betalning"
+
+#: models.py:936
+msgid "payment reminder"
+msgstr "betalningspåminnelse"
+
+#: models.py:946
+msgid "posting"
+msgstr "bokföring"
+
+#: models.py:947
+msgid "postings"
+msgstr "bokföringar"
+
+#: models.py:979
+#, python-format
+msgid ""
+"%(invoice)s was issued without VAT, although the organisation is VAT "
+"registered on its date. Check the invoice settings and the VAT registration "
+"dates."
+msgstr ""
+"%(invoice)s utfärdades utan moms, fast organisationen är momsregistrerad på "
+"dess datum. Kontrollera fakturainställningarna och momsregistreringens datum."
+
+#: postings.py:156
+#, python-format
+msgid "Credit note %(number)s for invoice %(credited)s, %(unit)s"
+msgstr "Kreditnota %(number)s för faktura %(credited)s, %(unit)s"
+
+#: postings.py:158
+#, python-format
+msgid "Payment of invoice %(number)s, %(unit)s"
+msgstr "Betalning av faktura %(number)s, %(unit)s"
+
+#: postings.py:160
+#, python-format
+msgid "Reminder fee for invoice %(number)s, %(unit)s"
+msgstr "Påminnelseavgift för faktura %(number)s, %(unit)s"
+
+#: postings.py:162
+#, python-format
+msgid "Invoice %(number)s, %(unit)s"
+msgstr "Faktura %(number)s, %(unit)s"
 
 #: templates/metra_bookkeeping/_nav.html:3
 msgid "Overview"
@@ -558,7 +850,7 @@ msgstr "Saldobalans"
 msgid "Chart of accounts"
 msgstr "Kontoplan"
 
-#: templates/metra_bookkeeping/_nav.html:9
+#: templates/metra_bookkeeping/_nav.html:10
 #: templates/metra_bookkeeping/year_list.html:3
 #: templates/metra_bookkeeping/year_list.html:6
 #: templates/metra_bookkeeping/year_list.html:11
@@ -590,7 +882,7 @@ msgstr "Datum"
 #: templates/metra_bookkeeping/journal.html:18
 #: templates/metra_bookkeeping/ledger.html:18
 #: templates/metra_bookkeeping/voucher_detail.html:39
-#: templates/metra_bookkeeping/voucher_detail.html:51
+#: templates/metra_bookkeeping/voucher_detail.html:52
 #: templates/metra_bookkeeping/voucher_form.html:24
 msgid "Description"
 msgstr "Beskrivning"
@@ -623,15 +915,19 @@ msgid "New account"
 msgstr "Nytt konto"
 
 #: templates/metra_bookkeeping/account_form.html:11
+#: templates/metra_bookkeeping/posting_settings.html:43
 #: templates/metra_bookkeeping/series_form.html:11
+#: templates/metra_bookkeeping/vat_registration_form.html:11
 #: templates/metra_bookkeeping/year_form.html:12
 msgid "Save"
 msgstr "Spara"
 
 #: templates/metra_bookkeeping/account_form.html:12
+#: templates/metra_bookkeeping/posting_settings.html:44
 #: templates/metra_bookkeeping/series_form.html:12
+#: templates/metra_bookkeeping/vat_registration_form.html:12
 #: templates/metra_bookkeeping/voucher_confirm_delete.html:10
-#: templates/metra_bookkeeping/voucher_form.html:45
+#: templates/metra_bookkeeping/voucher_form.html:48
 #: templates/metra_bookkeeping/voucher_reverse.html:16
 #: templates/metra_bookkeeping/year_form.html:13
 msgid "Cancel"
@@ -665,6 +961,7 @@ msgid "Not in use"
 msgstr "Inte i bruk"
 
 #: templates/metra_bookkeeping/account_list.html:24
+#: templates/metra_bookkeeping/posting_settings.html:61
 #: templates/metra_bookkeeping/voucher_detail.html:9
 #: templates/metra_bookkeeping/year_detail.html:7
 msgid "Edit"
@@ -680,6 +977,7 @@ msgid "No accounts yet. They are added when the books are started."
 msgstr "Inga konton ännu. De läggs till när bokföringen startas."
 
 #: templates/metra_bookkeeping/account_list.html:38
+#: templates/metra_bookkeeping/posting_settings.html:29
 msgid "Voucher series"
 msgstr "Verifikatserier"
 
@@ -743,15 +1041,59 @@ msgstr ""
 "månad, och kontantbetalningar dag för dag. Dessa utkast har passerat den "
 "tiden:"
 
-#: templates/metra_bookkeeping/index.html:48
-#: templates/metra_bookkeeping/index.html:49
+#: templates/metra_bookkeeping/index.html:50
+msgid "Waiting from invoicing"
+msgstr "Väntar från faktureringen"
+
+#: templates/metra_bookkeeping/index.html:51
+#, python-format
+msgid "%(count)s invoice, payment or reminder fee has no voucher yet:"
+msgid_plural ""
+"%(count)s invoices, payments and reminder fees have no voucher yet:"
+msgstr[0] ""
+"%(count)s faktura, betalning eller påminnelseavgift saknar verifikat ännu:"
+msgstr[1] ""
+"%(count)s fakturor, betalningar och påminnelseavgifter saknar verifikat ännu:"
+
+#: templates/metra_bookkeeping/index.html:54
+msgid "Post them now"
+msgstr "Bokför dem nu"
+
+#: templates/metra_bookkeeping/index.html:58
+msgid "Set up the bookkeeping of invoices"
+msgstr "Ställ in bokföringen av fakturor"
+
+#: templates/metra_bookkeeping/index.html:58
+msgid "to book invoices, payments and reminder fees without typing."
+msgstr ""
+"för att bokföra fakturor, betalningar och påminnelseavgifter utan att skriva "
+"in dem."
+
+#: templates/metra_bookkeeping/index.html:61
+#: templates/metra_bookkeeping/index.html:62
 msgid "Drafts to post"
 msgstr "Utkast att bokföra"
 
-#: templates/metra_bookkeeping/index.html:50
-#: templates/metra_bookkeeping/index.html:51
+#: templates/metra_bookkeeping/index.html:63
+#: templates/metra_bookkeeping/index.html:64
 msgid "Recently posted"
 msgstr "Nyligen bokförda"
+
+#: templates/metra_bookkeeping/invoice_panel.html:8
+msgid "Draft, not posted yet"
+msgstr "Utkast, inte bokfört än"
+
+#: templates/metra_bookkeeping/invoice_panel.html:11
+msgid "Waiting to be posted"
+msgstr "Väntar på att bokföras"
+
+#: templates/metra_bookkeeping/invoice_panel.html:15
+msgid ""
+"Not in the books: it is dated before automatic posting started, or posting "
+"is off."
+msgstr ""
+"Inte i bokföringen: den är daterad före den automatiska bokföringen "
+"startade, eller så är bokföringen av."
 
 #: templates/metra_bookkeeping/journal.html:12
 msgid "The posted entries in date order."
@@ -759,7 +1101,7 @@ msgstr "De bokförda posterna i datumordning."
 
 #: templates/metra_bookkeeping/journal.html:18
 #: templates/metra_bookkeeping/trial_balance.html:17
-#: templates/metra_bookkeeping/voucher_detail.html:51
+#: templates/metra_bookkeeping/voucher_detail.html:52
 #: templates/metra_bookkeeping/voucher_form.html:24
 msgid "Account"
 msgstr "Konto"
@@ -767,7 +1109,7 @@ msgstr "Konto"
 #: templates/metra_bookkeeping/journal.html:19
 #: templates/metra_bookkeeping/ledger.html:19
 #: templates/metra_bookkeeping/trial_balance.html:18
-#: templates/metra_bookkeeping/voucher_detail.html:52
+#: templates/metra_bookkeeping/voucher_detail.html:54
 #: templates/metra_bookkeeping/voucher_form.html:25
 msgid "Debit"
 msgstr "Debet"
@@ -775,14 +1117,14 @@ msgstr "Debet"
 #: templates/metra_bookkeeping/journal.html:19
 #: templates/metra_bookkeeping/ledger.html:19
 #: templates/metra_bookkeeping/trial_balance.html:19
-#: templates/metra_bookkeeping/voucher_detail.html:52
+#: templates/metra_bookkeeping/voucher_detail.html:54
 #: templates/metra_bookkeeping/voucher_form.html:25
 msgid "Credit"
 msgstr "Kredit"
 
 #: templates/metra_bookkeeping/journal.html:37
 #: templates/metra_bookkeeping/trial_balance.html:30
-#: templates/metra_bookkeeping/voucher_detail.html:66
+#: templates/metra_bookkeeping/voucher_detail.html:69
 msgid "Total"
 msgstr "Summa"
 
@@ -793,8 +1135,7 @@ msgid "No posted vouchers in this period."
 msgstr "Inga bokförda verifikat under perioden."
 
 #: templates/metra_bookkeeping/ledger.html:12
-msgid ""
-"The posted entries account by account. Balances are debit minus credit."
+msgid "The posted entries account by account. Balances are debit minus credit."
 msgstr "De bokförda posterna konto för konto. Saldot är debet minus kredit."
 
 #: templates/metra_bookkeeping/ledger.html:19
@@ -809,6 +1150,95 @@ msgstr "Ingående saldo"
 msgid "Total and balance"
 msgstr "Summa och saldo"
 
+#: templates/metra_bookkeeping/posting_settings.html:7
+msgid ""
+"Issued invoices and credit notes (on their invoice date), payments (on the "
+"day paid) and reminder fees become vouchers of their own, posted at once. "
+"Each voucher points to the invoice it comes from, which is its evidence."
+msgstr ""
+"Utfärdade fakturor och kreditnotor (på fakturadatum), betalningar (på "
+"betalningsdagen) och påminnelseavgifter blir egna verifikat som bokförs "
+"genast. Varje verifikat pekar på fakturan det kommer från, som är dess "
+"underlag."
+
+#: templates/metra_bookkeeping/posting_settings.html:15
+msgid "The chart of accounts lacks accounts that postings use:"
+msgstr "Kontoplanen saknar konton som bokföringen av fakturor använder:"
+
+#: templates/metra_bookkeeping/posting_settings.html:17
+msgid "Add them"
+msgstr "Lägg till dem"
+
+#: templates/metra_bookkeeping/posting_settings.html:26
+msgid "Accounts"
+msgstr "Konton"
+
+#: templates/metra_bookkeeping/posting_settings.html:33
+msgid "Sales accounts"
+msgstr "Försäljningskonton"
+
+#: templates/metra_bookkeeping/posting_settings.html:34
+msgid ""
+"Invoice lines are booked to the account of their fee line, else to the "
+"account of their VAT rate, else to the default sales account."
+msgstr ""
+"Fakturarader bokförs på kontot för sin avgiftsrad, annars på kontot för sin "
+"momssats, annars på standardkontot för försäljning."
+
+#: templates/metra_bookkeeping/posting_settings.html:36
+msgid "Per fee line"
+msgstr "Per avgiftsrad"
+
+#: templates/metra_bookkeeping/posting_settings.html:39
+msgid "Per VAT rate"
+msgstr "Per momssats"
+
+#: templates/metra_bookkeeping/posting_settings.html:48
+#, python-format
+msgid ""
+"%(count)s record from invoicing is waiting to be posted; post it from the "
+"overview."
+msgid_plural ""
+"%(count)s records from invoicing are waiting to be posted; post them from "
+"the overview."
+msgstr[0] ""
+"%(count)s post från faktureringen väntar på att bokföras; bokför den från "
+"översikten."
+msgstr[1] ""
+"%(count)s poster från faktureringen väntar på att bokföras; bokför dem från "
+"översikten."
+
+#: templates/metra_bookkeeping/posting_settings.html:52
+msgid ""
+"VAT is booked only on days the organisation is VAT registered, at the rate "
+"in force on the day. Reverse charge (services from other EU countries, "
+"construction) and imports, also of goods across the Åland tax border, are "
+"not supported yet: book them by hand, and check them with an accountant."
+msgstr ""
+"Moms bokförs bara på dagar då organisationen är momsregistrerad, med den "
+"sats som gäller den dagen. Omvänd skattskyldighet (tjänster från andra EU-"
+"länder, byggtjänster) och import, även av varor över Ålands skattegräns, "
+"stöds inte ännu: bokför dem för hand och låt en bokförare granska dem."
+
+#: templates/metra_bookkeeping/posting_settings.html:60
+msgid "VAT registered"
+msgstr "Momsregistrerad"
+
+#: templates/metra_bookkeeping/posting_settings.html:62
+#: templates/metra_bookkeeping/voucher_detail.html:81
+#: templates/metra_bookkeeping/voucher_form.html:26
+#: templates/metra_bookkeeping/voucher_form.html:32
+msgid "Remove"
+msgstr "Ta bort"
+
+#: templates/metra_bookkeeping/posting_settings.html:64
+msgid "Not VAT registered."
+msgstr "Inte momsregistrerad."
+
+#: templates/metra_bookkeeping/posting_settings.html:70
+msgid "Add a VAT registration"
+msgstr "Lägg till en momsregistrering"
+
 #: templates/metra_bookkeeping/series_form.html:3
 #: templates/metra_bookkeeping/series_form.html:5
 msgid "Edit voucher series"
@@ -816,8 +1246,8 @@ msgstr "Redigera verifikatserie"
 
 #: templates/metra_bookkeeping/trial_balance.html:12
 msgid ""
-"Every account's balance at the start and end of the period, and the period's"
-" debits and credits. Balances are debit minus credit; they add up to zero."
+"Every account's balance at the start and end of the period, and the period's "
+"debits and credits. Balances are debit minus credit; they add up to zero."
 msgstr ""
 "Varje kontos saldo vid periodens början och slut samt periodens debet och "
 "kredit. Saldot är debet minus kredit; saldona summerar till noll."
@@ -861,50 +1291,52 @@ msgid "Before posting"
 msgstr "Före bokföring"
 
 #: templates/metra_bookkeeping/voucher_detail.html:40
+msgid "Booked from"
+msgstr "Bokfört från"
+
+#: templates/metra_bookkeeping/voucher_detail.html:40
+msgid "Made by Metra from the invoice, which is the evidence for this voucher."
+msgstr "Gjort av Metra utifrån fakturan, som är underlag för verifikatet."
+
+#: templates/metra_bookkeeping/voucher_detail.html:41
 msgid "Series"
 msgstr "Serie"
 
-#: templates/metra_bookkeeping/voucher_detail.html:41
+#: templates/metra_bookkeeping/voucher_detail.html:42
 msgid "Reverses"
 msgstr "Rättar"
 
-#: templates/metra_bookkeeping/voucher_detail.html:42
+#: templates/metra_bookkeeping/voucher_detail.html:43
 msgid "Reversed by"
 msgstr "Rättad med"
 
-#: templates/metra_bookkeeping/voucher_detail.html:43
+#: templates/metra_bookkeeping/voucher_detail.html:44
 msgid "Created"
 msgstr "Skapad"
 
-#: templates/metra_bookkeeping/voucher_detail.html:47
 #: templates/metra_bookkeeping/voucher_detail.html:48
+#: templates/metra_bookkeeping/voucher_detail.html:49
 msgid "Entries"
 msgstr "Bokföringsposter"
 
-#: templates/metra_bookkeeping/voucher_detail.html:63
+#: templates/metra_bookkeeping/voucher_detail.html:66
 msgid "No lines yet."
 msgstr "Inga rader ännu."
 
-#: templates/metra_bookkeeping/voucher_detail.html:70
+#: templates/metra_bookkeeping/voucher_detail.html:73
 msgid "Receipts"
 msgstr "Kvitton"
 
-#: templates/metra_bookkeeping/voucher_detail.html:78
-#: templates/metra_bookkeeping/voucher_form.html:26
-#: templates/metra_bookkeeping/voucher_form.html:32
-msgid "Remove"
-msgstr "Ta bort"
-
-#: templates/metra_bookkeeping/voucher_detail.html:85
+#: templates/metra_bookkeeping/voucher_detail.html:88
 msgid "No receipt attached."
 msgstr "Inget kvitto bifogat."
 
-#: templates/metra_bookkeeping/voucher_detail.html:91
+#: templates/metra_bookkeeping/voucher_detail.html:94
 msgid "The voucher is posted: a receipt added now cannot be removed."
 msgstr ""
 "Verifikatet är bokfört: ett kvitto som läggs till nu kan inte tas bort."
 
-#: templates/metra_bookkeeping/voucher_detail.html:92
+#: templates/metra_bookkeeping/voucher_detail.html:95
 msgid "Attach"
 msgstr "Bifoga"
 
@@ -919,8 +1351,8 @@ msgid ""
 "must add up to the same amount before the voucher can be posted. A receipt "
 "can be attached once the draft is saved."
 msgstr ""
-"Varje rad hör till ett konto, som debet eller kredit. Debet och kredit måste"
-" vara lika stora innan verifikatet kan bokföras. Ett kvitto kan bifogas när "
+"Varje rad hör till ett konto, som debet eller kredit. Debet och kredit måste "
+"vara lika stora innan verifikatet kan bokföras. Ett kvitto kan bifogas när "
 "utkastet är sparat."
 
 #: templates/metra_bookkeeping/voucher_form.html:18
@@ -932,11 +1364,20 @@ msgstr "Rader"
 msgid "Save to get more empty lines."
 msgstr "Spara för att få fler tomma rader."
 
-#: templates/metra_bookkeeping/voucher_form.html:43
+#: templates/metra_bookkeeping/voucher_form.html:41
+msgid ""
+"VAT: mark the line with the price without VAT (for example the expense) and "
+"the VAT line with the same VAT code, at the rate in force on the voucher's "
+"date."
+msgstr ""
+"Moms: märk raden med priset utan moms (till exempel utgiften) och momsraden "
+"med samma momskod, med den sats som gäller på verifikatets datum."
+
+#: templates/metra_bookkeeping/voucher_form.html:46
 msgid "Save draft"
 msgstr "Spara utkast"
 
-#: templates/metra_bookkeeping/voucher_form.html:44
+#: templates/metra_bookkeeping/voucher_form.html:47
 msgid "Save and post"
 msgstr "Spara och bokför"
 
@@ -1036,84 +1477,128 @@ msgstr ""
 "slutar. Den första perioden, eller en vars datum ändras, kan vara 1 till 18 "
 "månader."
 
-#: views.py:83
-msgid ""
-"The books are started. Enter the opening balances as the first voucher."
+#: views.py:100
+msgid "The books are started. Enter the opening balances as the first voucher."
 msgstr ""
 "Bokföringen är startad. Ange ingående balans som det första verifikatet."
 
-#: views.py:118
+#: views.py:135
 #, python-format
 msgid "The financial year %(year)s was added."
 msgstr "Räkenskapsperioden %(year)s lades till."
 
-#: views.py:148
+#: views.py:165
 msgid "A year with posted vouchers keeps its dates."
 msgstr "En period med bokförda verifikat behåller sina datum."
 
-#: views.py:153
+#: views.py:170
 msgid "The financial year was saved."
 msgstr "Räkenskapsperioden sparades."
 
-#: views.py:178
+#: views.py:195
 #, python-format
 msgid "The account %(account)s was added."
 msgstr "Kontot %(account)s lades till."
 
-#: views.py:190
+#: views.py:207
 msgid "The account was saved."
 msgstr "Kontot sparades."
 
-#: views.py:206
+#: views.py:223
 msgid "An account with entries cannot be deleted. Stop using it instead."
 msgstr ""
 "Ett konto med bokföringsposter kan inte tas bort. Ta det ur bruk i stället."
 
-#: views.py:209
+#: views.py:226
 msgid "The account was deleted."
 msgstr "Kontot togs bort."
 
-#: views.py:219
+#: views.py:236
 msgid "The voucher series was added."
 msgstr "Verifikatserien lades till."
 
-#: views.py:231
+#: views.py:248
 msgid "The series has posted vouchers, so its code stays."
 msgstr "Serien har bokförda verifikat, så dess kod ändras inte."
 
-#: views.py:234
+#: views.py:251
 msgid "The voucher series was saved."
 msgstr "Verifikatserien sparades."
 
-#: views.py:279
+#: views.py:296
 msgid "The draft voucher was saved."
 msgstr "Verifikatutkastet sparades."
 
-#: views.py:292
+#: views.py:309
 msgid "Add a financial year first."
 msgstr "Lägg först till en räkenskapsperiod."
 
-#: views.py:352
+#: views.py:375
 #, python-format
 msgid "Voucher %(number)s was posted."
 msgstr "Verifikat %(number)s bokfördes."
 
-#: views.py:370
+#: views.py:393
 msgid "The draft voucher was deleted."
 msgstr "Verifikatutkastet togs bort."
 
-#: views.py:394
+#: views.py:417
 #, python-format
-msgid ""
-"Voucher %(number)s reverses it. Enter the right entry as a new voucher."
+msgid "Voucher %(number)s reverses it. Enter the right entry as a new voucher."
 msgstr ""
 "Verifikat %(number)s rättar det. Ange den rätta bokföringsposten som ett "
 "nytt verifikat."
 
-#: views.py:427
+#: views.py:450
 msgid "The receipt was added."
 msgstr "Kvittot lades till."
 
-#: views.py:462
+#: views.py:485
 msgid "The receipt was removed."
 msgstr "Kvittot togs bort."
+
+#: views.py:502
+msgid "The posting settings were saved."
+msgstr "Bokföringsinställningarna sparades."
+
+#: views.py:531
+#, python-format
+msgid "Added the accounts %(accounts)s."
+msgstr "Kontona %(accounts)s lades till."
+
+#: views.py:544 views.py:559
+msgid "The VAT registration was saved."
+msgstr "Momsregistreringen sparades."
+
+#: views.py:573
+msgid "The VAT registration was removed."
+msgstr "Momsregistreringen togs bort."
+
+#: views.py:587
+#, python-format
+msgid "%(count)s voucher was made from invoicing."
+msgid_plural "%(count)s vouchers were made from invoicing."
+msgstr[0] "%(count)s verifikat gjordes från faktureringen."
+msgstr[1] "%(count)s verifikat gjordes från faktureringen."
+
+#: views.py:597
+#, python-format
+msgid "%(count)s of them could not be posted; it is among the drafts."
+msgid_plural ""
+"%(count)s of them could not be posted; they are among the drafts."
+msgstr[0] "%(count)s av dem kunde inte bokföras; det finns bland utkasten."
+msgstr[1] "%(count)s av dem kunde inte bokföras; de finns bland utkasten."
+
+#: views.py:607
+#, python-format
+msgid ""
+"%(count)s record is still waiting: no open financial year covers its date."
+msgid_plural ""
+"%(count)s records are still waiting: no open financial year covers their "
+"date."
+msgstr[0] ""
+"%(count)s post väntar fortfarande: ingen öppen räkenskapsperiod täcker dess "
+"datum."
+msgstr[1] ""
+"%(count)s poster väntar fortfarande: ingen öppen räkenskapsperiod täcker "
+"deras datum."

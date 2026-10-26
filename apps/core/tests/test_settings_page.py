@@ -124,10 +124,24 @@ def test_admin_entries_need_staff_status(client, make_user):
     page = get(client, make_user("admin", "Admin")).content.decode()
 
     assert "admin/" not in page.split('<main id="main">')[1]
-    assert groups(page) == ["organisation", "messages", "integrations", "backups", "setup"]
+    assert groups(page) == [
+        "organisation",
+        "invoicing",  # the bookkeeping add-on's accounts for invoices
+        "messages",
+        "integrations",
+        "backups",
+        "setup",
+    ]
 
 
-@pytest.mark.parametrize("role", ["Read-only", "Treasurer"])
+def test_treasurer_sets_the_bookkeeping_of_invoices(client, make_user):
+    page = get(client, make_user("treasurer", "Treasurer")).content.decode()
+
+    assert groups(page) == ["invoicing"]
+    assert reverse("metra_bookkeeping:posting_settings") in page
+
+
+@pytest.mark.parametrize("role", ["Read-only"])
 def test_users_with_nothing_to_set_are_refused(client, make_user, role):
     user = make_user("someone", role)
 

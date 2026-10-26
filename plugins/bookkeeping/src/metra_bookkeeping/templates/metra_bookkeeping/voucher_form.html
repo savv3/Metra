@@ -23,7 +23,7 @@
         <thead><tr>
           <th scope="col">{% translate "Account" %}</th><th scope="col">{% translate "Description" %}</th>
           <th scope="col">{% translate "Debit" %}</th><th scope="col">{% translate "Credit" %}</th>
-          <th scope="col">{% translate "Remove" %}</th>
+          <th scope="col">{% translate "VAT" %}</th><th scope="col">{% translate "Remove" %}</th>
         </tr></thead>
         <tbody>
           {% for line_form in formset %}
@@ -33,12 +33,15 @@
               {% endfor %}
               {% for hidden in line_form.hidden_fields %}{{ hidden }}{% endfor %}
             </tr>
-            {% if line_form.non_field_errors %}<tr><td colspan="5">{{ line_form.non_field_errors }}</td></tr>{% endif %}
+            {% if line_form.non_field_errors %}<tr><td colspan="6">{{ line_form.non_field_errors }}</td></tr>{% endif %}
           {% endfor %}
         </tbody>
       </table>
     </div>
-    <p class="help">{% translate "Save to get more empty lines." %}</p>
+    <p class="help">{% translate "Save to get more empty lines." %} {% blocktranslate trimmed %}
+      VAT: mark the line with the price without VAT (for example the expense) and the VAT line
+      with the same VAT code, at the rate in force on the voucher's date.
+    {% endblocktranslate %}</p>
     <div class="actions">
       <button type="submit" class="button">{% translate "Save draft" %}</button>
       {% if perms.metra_bookkeeping.post_voucher %}<button type="submit" name="post" value="1" class="button button--primary">{% translate "Save and post" %}</button>{% endif %}

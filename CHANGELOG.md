@@ -18,11 +18,20 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   double-entry books under the Finnish Accounting Act, with a chart of
   accounts from a template for an association or a cooperative, financial
   years, numbered vouchers with receipts, corrections by reversing
-  vouchers, and the journal, general ledger and trial balance. Income
-  statement, balance sheet and postings from invoices follow.
+  vouchers, and the journal, general ledger and trial balance. Issued
+  invoices, credit notes, payments and reminder fees are booked
+  automatically once the treasurer chooses the accounts and the start day
+  under Settings > Bookkeeping of invoices, each voucher pointing to its
+  invoice and the invoice page showing its vouchers. VAT is booked at the
+  rate in force on the day, with dated VAT registration and separate
+  accounts for sales VAT, purchase VAT and the VAT settlement. Income
+  statement, balance sheet and the year-end follow.
 - Plugin authors: an add-on's AppConfig can define `turn_off_refused()` to
   keep it from being turned off, with the reason shown under Settings >
   Add-ons.
+- Plugin authors: the `api.events.reminder_sent` event, sent when a payment
+  reminder is made; `api.add_invoice_panel` for a section on invoice pages;
+  and `api.PaymentReminder` among the records.
 
 ## [0.5.0] - 2026-10-25
 

@@ -16,6 +16,14 @@ following the Finnish Accounting Act (kirjanpitolaki):
   never deleted;
 - the journal (päiväkirja), general ledger (pääkirja) and trial balance,
   for a year or part of it, printable;
+- postings from Metra: issued invoices and credit notes (on the accrual
+  basis), payments and reminder fees become vouchers in their own series
+  automatically, each pointing to the invoice that is its evidence, with
+  accounts chosen per fee line or VAT rate;
+- VAT on voucher lines, with the rate in force on the voucher's date
+  stored on each line, dated VAT registration, and separate accounts for
+  sales VAT, purchase VAT and the VAT settlement. Reverse charge and
+  imports are not supported yet;
 - a list of drafts past the legal booking time (four months after the end
   of their month), and on each year the dates until which its books and
   vouchers must be kept.
@@ -28,8 +36,8 @@ Removing it from `METRA_PLUGINS` on the server is not stopped: keep the books
 another way first (reports, receipts and a backup). The tables stay in the database.
 
 What differs between countries is in `countries/` (Finland in `fi.py`).
-The plan for the rest (postings from invoices and payments, VAT, financial
-statements, budget, year-end and exports) is the phase 9 build plan in
+The plan for the rest (financial statements, the VAT summary, budget,
+year-end and exports) is the phase 9 build plan in
 [docs/architecture.md](../../docs/architecture.md#phase-9-build-plan).
 
 Personal data: voucher descriptions and receipts can name people. They are

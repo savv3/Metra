@@ -45,6 +45,19 @@
       </div>
     {% endif %}
 
+    {% if waiting_count %}
+      <div class="status-panel status-panel--warning">
+        <h2>{% translate "Waiting from invoicing" %}</h2>
+        <p>{% blocktranslate count count=waiting_count trimmed %}{{ count }} invoice, payment or reminder fee has no voucher yet:{% plural %}{{ count }} invoices, payments and reminder fees have no voucher yet:{% endblocktranslate %}</p>
+        <ul>{% for record in waiting %}<li><a href="{{ record.invoice.get_absolute_url }}">{{ record.date|date:"SHORT_DATE_FORMAT" }} {{ record.invoice }}</a></li>{% endfor %}</ul>
+        {% if perms.metra_bookkeeping.add_voucher and perms.metra_bookkeeping.post_voucher %}
+          <form method="post" action="{% url 'metra_bookkeeping:post_waiting' %}">{% csrf_token %}<button type="submit" class="button button--primary">{% translate "Post them now" %}</button></form>
+        {% endif %}
+      </div>
+    {% elif not posting_settings.is_on and perms.metra_bookkeeping.change_postingsettings %}
+      <p class="help"><a href="{% url 'metra_bookkeeping:posting_settings' %}">{% translate "Set up the bookkeeping of invoices" %}</a> {% translate "to book invoices, payments and reminder fees without typing." %}</p>
+    {% endif %}
+
     <h2>{% translate "Drafts to post" %}</h2>
     {% include "metra_bookkeeping/_voucher_table.html" with vouchers=drafts label=_("Drafts to post") %}
     <h2>{% translate "Recently posted" %}</h2>

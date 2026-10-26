@@ -45,6 +45,70 @@ kontrolleras att verifikatet balanserar, det får nästa nummer och låses.
 Numren har inga luckor: utkast har inget nummer, så när du tar bort ett
 utkast blir det ingen lucka.
 
+## Moms
+
+Om organisationen är momsregistrerad lägger du till datumen för
+registreringen under **Bokföring av fakturor** > **Momsregistrering**. Moms
+kan då bokföras på dagar inom en registrering, och bara med en sats som
+gäller på verifikatets datum: den reducerade satsen var till exempel 14 %
+till och med 31.12.2025 och är 13,5 % från och med 1.1.2026. Varje rad
+behåller den sats den bokfördes med.
+
+På ett verifikat märker du raden med priset utan moms och momsraden med
+samma momskod. För ett inköp på 100 € + 25,5 % moms:
+
+| Konto | Debet | Kredit | Moms |
+| --- | --- | --- | --- |
+| 4000 Material och förnödenheter | 100,00 | | Inköp 25,5 % |
+| 1765 Ingående moms | 25,50 | | Inköp 25,5 % |
+| 1910 Bankkonto | | 125,50 | |
+
+Utgående moms, ingående moms och momsen som ska betalas har egna konton.
+För varje momsperiod flyttar du den utgående och ingående momsen till
+momsavräkningskontot (2939 Momsskuld (redovisas)) med ett verifikat, och
+bokför betalningen av skatten mot det.
+
+Omvänd skattskyldighet (tjänster som köps från andra EU-länder,
+byggtjänster) och import, även av varor över Ålands skattegräns, stöds inte
+ännu. Bokför dem för hand utan momskod och låt en bokförare granska dem.
+
+## Fakturor och betalningar
+
+Metra kan bokföra faktureringen åt dig. Under **Bokföring av fakturor**
+väljer du den dag då den automatiska bokföringen startar och kontona:
+
+- varje utfärdad faktura bokförs på fakturadatumet: kundfordringar på
+  debetsidan, försäljning (och utgående moms) på kreditsidan;
+- en kreditnota bokförs på samma sätt, men åt andra hållet;
+- en betalning bokförs den dag den betalades: bankkonto på debetsidan,
+  kundfordringar på kreditsidan;
+- en påminnelseavgift bokförs på påminnelsens dag, på kontot för
+  påminnelseavgifter, utan moms.
+
+Försäljningen går till det konto som valts för fakturaradens avgiftsrad,
+annars till det konto som valts för dess momssats, annars till
+standardkontot för försäljning. Fakturor går till en egen verifikatserie
+(L) och betalningar till en annan (S).
+
+Varje sådant verifikat bokförs genast och visar fakturan det kommer från;
+fakturan är dess underlag, och fakturans sida visar dess verifikat. Om ett
+inte kan bokföras (till exempel för att ett konto inte längre används)
+förblir det ett utkast som du rättar och bokför. Fakturor och betalningar
+som gjorts medan bokföringen var av, eller som är daterade i ingen öppen
+räkenskapsperiod, listas på sidan Bokföring; **Bokför dem nu** bokför dem,
+en enda gång.
+
+Välj startdagen efter det som redan bokförts för hand, så att inget bokförs
+två gånger. Fakturor från före startdagen ingår i ingångsbalanserna: deras
+betalningar, om de görs efter startdagen, bokförs som vanligt mot kontot
+för kundfordringar.
+
+Kontot för kundfordringar motsvarar då det som är obetalt på fakturorna:
+fakturor minus kreditnotor och betalningar, plus påminnelseavgifter.
+
+Ett felaktigt automatiskt verifikat rättas som alla andra: upphäv det och
+ange den rätta bokföringsposten som ett nytt verifikat.
+
 ## Rätta ett misstag
 
 Ett bokfört verifikat ändras aldrig och kan inte tas bort. För att rätta
@@ -82,6 +146,5 @@ de förblir läsbara.
 
 En administratör som tar bort tillägget från servern (ur `METRA_PLUGINS`) måste först spara bokföringen under den lagstadgade tiden på annat sätt: spara rapporterna och kvittona, och behåll en säkerhetskopia. Uppgifterna finns kvar i databasen, men kan inte läsas i Metra medan tillägget inte är installerat.
 
-Resultaträkning, balansräkning, budget, automatiska bokföringsposter från
-fakturor och betalningar samt avslutning av året kommer i senare versioner
-av tillägget.
+Resultaträkning, balansräkning, budget, momssammanställningen och
+avslutning av året kommer i senare versioner av tillägget.
