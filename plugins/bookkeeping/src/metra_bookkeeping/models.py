@@ -61,7 +61,26 @@ class FiscalYear(models.Model):
     status = models.CharField(
         _("status"), max_length=10, choices=Status.choices, default=Status.OPEN
     )
+
+    class Length(models.TextChoices):
+        FIRST = "first", _("The first financial year")
+        LAST = "last", _("The last financial year")
+        CHANGE = "change", _("The closing date changes")
+
     country = models.CharField(_("country"), max_length=2, default=countries.DEFAULT)
+    chart = models.CharField(
+        _("kind of organisation"),
+        max_length=20,
+        default="association",
+        help_text=_("Decides the form of the income statement."),
+    )
+    length_reason = models.CharField(
+        _("why the year is not 12 months"),
+        max_length=10,
+        choices=Length.choices,
+        blank=True,
+        help_text=_("A year is 12 months, except when the books start, end or change dates."),
+    )
     created_at = models.DateTimeField(_("created"), auto_now_add=True)
 
     class Meta:
@@ -122,6 +141,15 @@ class FiscalYear(models.Model):
         rules = countries.get(self.country)
         shortest, longest = rules.FIRST_YEAR_MONTHS
         months = months_between(self.start, self.end)
+        if months != rules.YEAR_MONTHS and not self.length_reason:
+            raise ValidationError(
+                {
+                    "length_reason": _("Say why the year is not %(usual)s months.")
+                    % {"usual": rules.YEAR_MONTHS}
+                }
+            )
+        if months == rules.YEAR_MONTHS:
+            self.length_reason = ""
         if not shortest <= months <= longest:
             raise ValidationError(
                 _(
@@ -389,12 +417,34 @@ class Voucher(models.Model):
             )
         elif debit == ZERO and lines:
             problems.append(gettext("The amounts are zero."))
+        if self.kind == self.Kind.OPENING:
+            if self.date != year.start:
+                problems.append(
+                    gettext("Opening balances are dated the first day of the year (%(day)s).")
+                    % {"day": formats.date_format(year.start, "SHORT_DATE_FORMAT")}
+                )
+            others = Voucher.objects.filter(
+                year=year, kind=self.Kind.OPENING, status=self.Status.POSTED
+            ).exclude(pk=self.pk)
+            if others.exists():
+                problems.append(gettext("The year already has posted opening balances."))
         for line in lines:
             if not line.account.active:
                 problems.append(
                     gettext("The account %(account)s is not in use.") % {"account": line.account}
                 )
         return problems
+
+    def warnings(self):
+        """What does not stop posting but should be checked."""
+        if self.kind == self.Kind.NORMAL and not self.receipts.exists():
+            return [
+                gettext(
+                    "No receipt is attached. Every entry needs evidence: attach the receipt, "
+                    "or explain in the description why there is none (a memo voucher)."
+                )
+            ]
+        return []
 
     def post(self, user=None):
         """Number and lock the voucher. Raises ValidationError when it cannot be posted."""

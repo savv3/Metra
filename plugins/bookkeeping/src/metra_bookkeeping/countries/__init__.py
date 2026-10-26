@@ -41,6 +41,16 @@ class Chart:
     name: object
     description: object
     accounts: list = field(default_factory=list)
+    # Income statement sections by account number range: (first, last, key).
+    # The statements (a later version) are built from these, so an account
+    # added by the treasurer lands in the section its number falls in.
+    sections: list = field(default_factory=list)
+
+    def section(self, number):
+        for first, last, key in self.sections:
+            if len(number) == len(first) and first <= number <= last:
+                return key
+        return None
 
 
 def get(code=None):

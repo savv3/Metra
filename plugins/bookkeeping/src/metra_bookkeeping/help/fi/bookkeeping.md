@@ -37,7 +37,7 @@ Esimerkiksi pankkitililtä maksettu sähkölasku 84,50 €:
 
 | Tili | Debet | Kredit |
 | --- | --- | --- |
-| 7100 Sähkö | 84,50 | |
+| 4610 Sähkö | 84,50 | |
 | 1910 Pankkitili | | 84,50 |
 
 Tosite on luonnos, kunnes kirjaat sen. Liitä kuitti (PDF tai valokuva)
@@ -80,6 +80,8 @@ aineistoista 10 vuotta tilikauden päättymisestä; tositteet ja kuitit 6
 vuotta sen kalenterivuoden lopusta, jona tilikausi päättyi. Mitään ei
 poisteta automaattisesti. Kun kirjanpidossa on kirjattuja tositteita,
 lisäosaa ei voi poistaa käytöstä, jotta ne pysyvät luettavina.
+
+Ylläpitäjän, joka poistaa lisäosan palvelimelta (`METRA_PLUGINS`-asetuksesta), on ensin säilytettävä kirjanpito lakisääteisen ajan muulla tavoin: tallenna raportit ja kuitit ja säilytä varmuuskopio. Tiedot jäävät tietokantaan, mutta niitä ei voi lukea Metrassa, kun lisäosa ei ole asennettuna.
 
 Tuloslaskelma, tase, budjetti, laskuista ja maksuista tehtävät automaattiset
 kirjaukset sekä tilikauden päättäminen tulevat lisäosan myöhempiin

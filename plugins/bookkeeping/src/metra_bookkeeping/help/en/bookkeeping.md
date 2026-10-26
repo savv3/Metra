@@ -36,7 +36,7 @@ For example, an electricity bill of 84.50 € paid from the bank account:
 
 | Account | Debit | Credit |
 | --- | --- | --- |
-| 7100 Electricity | 84.50 | |
+| 4610 Electricity | 84.50 | |
 | 1910 Bank account | | 84.50 |
 
 A voucher is a draft until you post it. Attach the receipt (a PDF or a
@@ -77,6 +77,8 @@ from the end of the financial year; vouchers and receipts 6 years from the
 end of the calendar year in which the financial year ended. Nothing is
 deleted automatically. Once the books have posted vouchers, the add-on
 cannot be turned off, so that they stay readable.
+
+An administrator who removes the add-on from the server (from `METRA_PLUGINS`) must first keep the books for the legal period another way: save the reports and receipts, and keep a backup. The data stays in the database, but cannot be read in Metra while the add-on is not installed.
 
 Income statement, balance sheet, budget, automatic entries from invoices
 and payments, and closing the year come in later versions of the add-on.

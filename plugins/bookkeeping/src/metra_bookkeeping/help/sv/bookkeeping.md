@@ -36,7 +36,7 @@ Till exempel en elräkning på 84,50 € som betalas från bankkontot:
 
 | Konto | Debet | Kredit |
 | --- | --- | --- |
-| 7100 El | 84,50 | |
+| 4610 El | 84,50 | |
 | 1910 Bankkonto | | 84,50 |
 
 Ett verifikat är ett utkast tills du bokför det. Bifoga kvittot (en PDF
@@ -79,6 +79,8 @@ utgången av räkenskapsperioden; verifikat och kvitton 6 år från utgången av
 det kalenderår då räkenskapsperioden slutade. Inget tas bort automatiskt.
 När bokföringen har bokförda verifikat kan tillägget inte slås av, så att
 de förblir läsbara.
+
+En administratör som tar bort tillägget från servern (ur `METRA_PLUGINS`) måste först spara bokföringen under den lagstadgade tiden på annat sätt: spara rapporterna och kvittona, och behåll en säkerhetskopia. Uppgifterna finns kvar i databasen, men kan inte läsas i Metra medan tillägget inte är installerat.
 
 Resultaträkning, balansräkning, budget, automatiska bokföringsposter från
 fakturor och betalningar samt avslutning av året kommer i senare versioner

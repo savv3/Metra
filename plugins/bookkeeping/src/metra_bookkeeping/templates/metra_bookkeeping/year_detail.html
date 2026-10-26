@@ -10,6 +10,8 @@
   <dl class="details-list">
     <dt>{% translate "First day" %}</dt><dd>{{ year.start|date:"DATE_FORMAT" }}</dd>
     <dt>{% translate "Last day" %}</dt><dd>{{ year.end|date:"DATE_FORMAT" }}</dd>
+    <dt>{% translate "Kind of organisation" %}</dt><dd>{{ chart_name }}</dd>
+    {% if year.length_reason %}<dt>{% translate "Not 12 months because" %}</dt><dd>{{ year.get_length_reason_display }}</dd>{% endif %}
     <dt>{% translate "Posted vouchers" %}</dt><dd>{{ posted }}</dd>
     <dt>{% translate "Drafts" %}</dt><dd>{{ drafts }}</dd>
     <dt>{% translate "Books kept until" %}</dt><dd>{{ year.books_kept_until|date:"DATE_FORMAT" }}<span class="help">{% translate "Financial statements, journal, ledger, chart of accounts and list of books: 10 years from the end of the financial year." %}</span></dd>

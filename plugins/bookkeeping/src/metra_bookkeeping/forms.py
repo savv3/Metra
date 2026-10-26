@@ -32,31 +32,35 @@ RECEIPT_MB = 20
 class FiscalYearForm(forms.ModelForm):
     class Meta:
         model = FiscalYear
-        fields = ["start", "end"]
+        fields = ["start", "end", "length_reason"]
         widgets = {"start": DATE, "end": DATE}
 
 
 class SetupForm(FiscalYearForm):
-    """Starting the books: the first financial year and a chart of accounts."""
+    """Starting the books: the first financial year, the kind of organisation
+    and, unless there are accounts already, a chart of accounts for it."""
 
-    chart = forms.ChoiceField(
-        label=gettext_lazy("Chart of accounts"),
-        widget=forms.RadioSelect,
-        help_text=gettext_lazy("A starting point; accounts can be added, renamed and retired."),
-    )
+    class Meta(FiscalYearForm.Meta):
+        fields = ["chart", "start", "end", "length_reason"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         rules = countries.get()
-        self.fields["chart"].choices = [
-            (key, f"{chart.name}: {chart.description}") for key, chart in rules.CHARTS.items()
-        ]
-        self.fields["chart"].initial = next(iter(rules.CHARTS))
+        self.fields["chart"] = forms.ChoiceField(
+            label=gettext_lazy("Kind of organisation"),
+            widget=forms.RadioSelect,
+            choices=[
+                (key, f"{chart.name}: {chart.description}") for key, chart in rules.CHARTS.items()
+            ],
+            initial=next(iter(rules.CHARTS)),
+            help_text=gettext_lazy(
+                "Decides the form of the income statement and the chart of accounts the books "
+                "start with. Accounts can then be added, renamed and retired."
+            ),
+        )
         year = timezone.localdate().year
         self.fields["start"].initial = datetime.date(year, 1, 1)
         self.fields["end"].initial = datetime.date(year, 12, 31)
-        if Account.objects.exists():
-            del self.fields["chart"]
 
 
 class AccountForm(forms.ModelForm):

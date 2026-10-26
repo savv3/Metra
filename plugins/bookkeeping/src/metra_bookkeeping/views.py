@@ -74,10 +74,9 @@ def setup(request):
     form = SetupForm(request.POST)
     if form.is_valid():
         with transaction.atomic():
-            form.save()
-            if "chart" in form.cleaned_data:
-                chart = countries.get().CHARTS[form.cleaned_data["chart"]]
-                Account.create_chart(chart, get_language())
+            year = form.save()
+            if not Account.objects.exists():
+                Account.create_chart(countries.get().CHARTS[year.chart], get_language())
             VoucherSeries.default()
         messages.success(
             request,
@@ -108,7 +107,12 @@ def year_create(request):
             "start": start,
             "end": start.replace(year=start.year + 1) - datetime.timedelta(1),
         }
-    form = FiscalYearForm(request.POST or None, initial=initial)
+    form = FiscalYearForm(
+        request.POST or None,
+        initial=initial,
+        # A new year keeps the kind of organisation of the one before.
+        instance=FiscalYear(chart=latest.chart) if latest else None,
+    )
     if request.method == "POST" and form.is_valid():
         year = form.save()
         messages.success(request, _("The financial year %(year)s was added.") % {"year": year})
@@ -128,6 +132,7 @@ def year_detail(request, pk):
         "metra_bookkeeping/year_detail.html",
         {
             "year": year,
+            "chart_name": getattr(countries.get(year.country).CHARTS.get(year.chart), "name", ""),
             "posted": counts.get(Voucher.Status.POSTED, 0),
             "drafts": counts.get(Voucher.Status.DRAFT, 0),
             "can_edit": year.is_open and not counts.get(Voucher.Status.POSTED),
@@ -329,6 +334,7 @@ def voucher_detail(request, pk):
             "debit": debit,
             "credit": credit,
             "problems": voucher.problems() if voucher.is_draft else [],
+            "warnings": voucher.warnings(),
             "receipt_form": ReceiptForm(),
         },
     )

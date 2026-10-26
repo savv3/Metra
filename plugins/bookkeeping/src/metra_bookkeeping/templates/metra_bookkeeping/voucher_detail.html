@@ -28,6 +28,12 @@
     </div>
   {% endif %}
 
+  {% if warnings %}
+    <div class="status-panel status-panel--warning">
+      <ul>{% for warning in warnings %}<li>{{ warning }}</li>{% endfor %}</ul>
+    </div>
+  {% endif %}
+
   <dl class="details-list">
     <dt>{% translate "Date" %}</dt><dd>{{ voucher.date|date:"SHORT_DATE_FORMAT" }}</dd>
     <dt>{% translate "Description" %}</dt><dd>{{ voucher.description }}</dd>

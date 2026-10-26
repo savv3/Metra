@@ -24,6 +24,8 @@ Official, but off until `METRA_PLUGINS=bookkeeping`. Admin and Treasurer
 keep the books; Board and Read-only (for example the auditor) read them.
 Once the books have posted vouchers, the add-on cannot be turned off under
 Settings > Add-ons, so that they stay readable for the legal period.
+Removing it from `METRA_PLUGINS` on the server is not stopped: keep the books
+another way first (reports, receipts and a backup). The tables stay in the database.
 
 What differs between countries is in `countries/` (Finland in `fi.py`).
 The plan for the rest (postings from invoices and payments, VAT, financial
