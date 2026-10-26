@@ -180,7 +180,8 @@ permissions; phase 6 opens it to outside systems.
 | 6 | Done: plugin groundwork, 46elks SMS, REST API and webhooks as plugins (release 0.2.0) |
 | 7 | Done: snapshots, restore in the app, help pages, meeting protocols plugin, notifications |
 | 8 | Done: plugin chooser and plugin settings, email settings in the app, the Mailgun add-on and 46elks settings in the app |
-| 9 to 12 | Planned. Each phase gets a build plan with one row per pull request before work starts |
+| 9 | In progress: A (ledger). See the [phase 9 build plan](#phase-9-build-plan) |
+| 10 to 12 | Planned. Each phase gets a build plan with one row per pull request before work starts |
 
 Ideas taken off the plan for now are in [might-do-later.md](might-do-later.md).
 
@@ -189,20 +190,8 @@ Ideas taken off the plan for now are in [might-do-later.md](might-do-later.md).
 Outlines only; each becomes a build plan like the ones below when it is
 next.
 
-- **Phase 9: Bookkeeping plugin.** `metra-bookkeeping` under `plugins/`,
-  off by default, for associations that keep their own books. Simple to
-  use but complete: double-entry books with a ready chart of accounts for
-  a small Finnish association (editable, and per country later); invoices,
-  credit notes, payments and reminder fees from Metra posted
-  automatically; other income and expenses entered as numbered vouchers
-  with the receipt attached; VAT only when the organisation is registered
-  for it. Reports: journal and general ledger (as the Accounting Act requires), income
-  statement, balance sheet, and budget against actual per account. A
-  closed period is locked, and mistakes are corrected with a reversing
-  voucher, never an edit. Year-end closing carries balances to the next
-  year and produces the papers the auditor (toiminnantarkastaja) needs.
-  Exports as CSV and SIE, so an accountant can take over. Vouchers are
-  kept for the legal period and are excluded from erasure.
+- **Phase 9: Bookkeeping plugin.** See the
+  [phase 9 build plan](#phase-9-build-plan).
 - **Phase 10: Sweden.** Country rules become a setting per organisation:
   Swedish VAT and invoice details, Bankgiro and OCR references, Swish
   payment requests and QR codes, and Swedish bookkeeping retention (7
@@ -433,6 +422,55 @@ server's environment. It ships as four pull requests.
 Restoring a snapshot on another server needs the same `METRA_SETTINGS_KEY`;
 without it the saved secrets cannot be read and have to be entered again.
 The restore guide says so.
+
+## Phase 9 build plan
+
+Phase 9 is done when a small Finnish association or cooperative can keep its
+own books in Metra for a whole financial year and hand the auditor
+(toiminnantarkastaja or tilintarkastaja) everything they need. The add-on is
+`metra-bookkeeping` in `plugins/bookkeeping`, called `bookkeeping` in
+`METRA_PLUGINS`, off by default. What differs between countries (chart
+templates, the length of a year, and later statement formats, size classes,
+retention and export) lives in a country module, `fi` first, so Sweden adds
+a module instead of changing the ledger. It ships as five pull requests.
+
+| PR | Contents | Done when |
+| --- | --- | --- |
+| A. Ledger | Financial years (12 months, 1 to 18 for a first or changed one, each starting the day after the previous one); a chart of accounts from a template (association, or cooperative and company), editable, with account kinds; an account with entries keeps its number and kind and cannot be deleted; voucher series; vouchers (tositteet) with a date, a description, debit and credit lines and attached receipts; posting checks the balance, gives the next number in the series and year (drafts have none, so numbers have no gaps) and locks the voucher; a mistake is corrected with a reversing voucher that points to the original; journal (päiväkirja), general ledger (pääkirja) and trial balance pages, printable; drafts past the four-month booking time are listed; each year shows how long its books and vouchers are kept; the add-on cannot be turned off once it has posted vouchers, so the books stay readable; roles (Treasurer and Admin keep the books, Board and Read-only read them); audit log | The treasurer enters a year's opening balances and a dozen receipts, and the journal and ledger agree |
+| B. Postings from Metra | Account settings for receivables, sales per fee line, reminder fees and the bank account; VAT codes with validity dates and the rate stored on each posted line (rates change on dates, registration starts and ends on dates; reverse-charge and import codes for the Åland tax border, or a plain statement that they are not supported); issued invoices, credit notes, payments and reminder fees become vouchers in their own series automatically (accrual basis for invoices), each pointing to the invoice it comes from, which is its evidence; existing issued invoices of the open year can be posted once; Metra gets a `reminder_sent` event in the plugin API | Issuing the 2026 run and marking payments fills the ledger without typing, and the receivables account equals what is outstanding |
+| C. Financial statements | Income statement and balance sheet in the PMA decree's formats (Annex IV for associations, the small and micro formats for cooperatives and companies; no extraordinary items), with the decree's own Finnish and Swedish line names, never machine translated; size class worked out from dated thresholds; any date range with the previous year beside it; budget per account and budget against actual; VAT summary per period when registered; PDF and CSV of every report | The board sees the result so far and the budget follow-up at any meeting |
+| D. Locking and year-end | Months are locked once reported; a closed year never reopens, and errors found later are corrected in the open year, material ones against retained earnings; a fixed asset register with acquisition cost, date and depreciation plan, and a year-end step that proposes the depreciation voucher; closing the year posts the result to equity, locks the year and opens the next one with the balances carried over; the year-end package as one PDF: income statement, balance sheet, balance sheet specifications (tase-erittelyt, including fixed assets), notes (liitetiedot), the chart of accounts, the list of books and material (luettelo kirjanpidoista ja aineistoista, naming Metra and its version), journal and ledger, and a signature page; the four-month deadline for the statements and, for cooperatives, the Trade Register filing | The 2026 year is closed, 2027 opens with the right balances, and the auditor gets one file |
+| E. Exports and retention | Export of a year as CSV (and SIE 4 if an accountant asks for it; the format Finnish accountants import is to be confirmed); a retention view of what may be removed once the legal periods have passed, never removed automatically; vouchers and receipts excluded from erasure (erasing a person leaves the books as booked) | An accountant takes the year into their own software |
+
+### Bookkeeping rules (Finland)
+
+From the Accounting Act (kirjanpitolaki 1336/1997), the Accounting Decree
+and the PMA decree for small and micro entities (1753/2015), as reviewed
+in the project's compliance review; not legal advice. A Finnish authorised
+accountant checks them before the first real year is kept in Metra.
+
+- **Double entry.** Every voucher balances (debits equal credits), in euros
+  with cents. Entries are kept in date order (the journal) and in account
+  order (the ledger).
+- **Vouchers.** Every entry rests on a dated voucher, numbered without gaps
+  within its series and year when it is posted. A receipt can be attached;
+  a voucher of the add-on's own making points to the record it comes from.
+  The voucher shows the accounts it was booked to.
+- **Audit trail.** From a report line to the ledger, to the voucher, to the
+  receipt or invoice, and back (kirjausketju).
+- **Corrections.** A posted voucher never changes and is never deleted. A
+  mistake gets a new voucher that reverses it, and both stay in the books.
+- **Timing.** Cash entries promptly, day by day, others at the latest four
+  months after the end of their month. Not enforced; late drafts are shown.
+- **Financial year** is 12 months, a first or changed one 1 to 18.
+- **Retention.** Financial statements, balance sheet specifications,
+  journal, ledger, chart of accounts and list of books 10 years from the
+  end of the financial year; vouchers and receipts 6 years from the end of
+  the calendar year in which the financial year ended. These are minimums:
+  nothing is deleted automatically, and the add-on cannot be turned off
+  while it holds posted vouchers. Receipts are stored under
+  `METRA_DATA_DIR`, so backups include them.
+- **VAT** only when the organisation is VAT registered, with dated rates.
 
 ## Plugins
 

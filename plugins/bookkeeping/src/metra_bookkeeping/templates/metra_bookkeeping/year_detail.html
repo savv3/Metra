@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Financial year" %} {{ year }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Financial year" %} {{ year }} <span class="badge">{{ year.get_status_display }}</span></h1>
+    <div class="actions">{% if can_edit and perms.metra_bookkeeping.change_fiscalyear %}<a class="button" href="{% url 'metra_bookkeeping:year_edit' year.pk %}">{% translate "Edit" %}</a>{% endif %}</div>
+  </div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  <dl class="details-list">
+    <dt>{% translate "First day" %}</dt><dd>{{ year.start|date:"DATE_FORMAT" }}</dd>
+    <dt>{% translate "Last day" %}</dt><dd>{{ year.end|date:"DATE_FORMAT" }}</dd>
+    <dt>{% translate "Posted vouchers" %}</dt><dd>{{ posted }}</dd>
+    <dt>{% translate "Drafts" %}</dt><dd>{{ drafts }}</dd>
+    <dt>{% translate "Books kept until" %}</dt><dd>{{ year.books_kept_until|date:"DATE_FORMAT" }}<span class="help">{% translate "Financial statements, journal, ledger, chart of accounts and list of books: 10 years from the end of the financial year." %}</span></dd>
+    <dt>{% translate "Vouchers kept until" %}</dt><dd>{{ year.vouchers_kept_until|date:"DATE_FORMAT" }}<span class="help">{% translate "Vouchers and receipts: 6 years from the end of the calendar year in which the financial year ended." %}</span></dd>
+  </dl>
+  <p class="help">{% translate "These are the shortest times the law allows. Nothing is deleted automatically." %}</p>
+  <div class="actions">
+    <a class="button" href="{% url 'metra_bookkeeping:journal' %}?year={{ year.pk }}">{% translate "Journal" %}</a>
+    <a class="button" href="{% url 'metra_bookkeeping:ledger' %}?year={{ year.pk }}">{% translate "General ledger" %}</a>
+    <a class="button" href="{% url 'metra_bookkeeping:trial_balance' %}?year={{ year.pk }}">{% translate "Trial balance" %}</a>
+  </div>
+{% endblock %}

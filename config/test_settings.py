@@ -10,7 +10,7 @@ os.environ.setdefault("METRA_REQUIRE_MFA", "true")
 # installation would load it, so the tests cover the real plugin path. The API
 # webhooks and meetings plugins (plugins/) are off by default, so the tests
 # enable them the same way.
-os.environ.setdefault("METRA_PLUGINS", "example,api,webhooks,meetings")
+os.environ.setdefault("METRA_PLUGINS", "example,api,webhooks,meetings,bookkeeping")
 
 from config.settings import *  # noqa: E402, F403
 

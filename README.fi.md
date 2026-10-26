@@ -65,6 +65,9 @@ tavoittaa kaikki nopeasti. Se tehtiin ensin vesiosuuskunnalle, jossa on noin
 - Kokoukset (erikseen käyttöön otettava laajennus): kokouskutsu ja
   esityslista, läsnäolo ja äänet sekä pöytäkirjat, jotka
   pöytäkirjantarkastajat tarkastavat ja jotka näytetään jäsenille
+- Kirjanpito (erikseen käyttöön otettava laajennus): kahdenkertainen
+  kirjanpito kirjanpitolain mukaan, numeroidut tositteet ja kuitit,
+  päiväkirja ja pääkirja
 - Laajennukset (pluginit) sekä ruotsi, englanti ja suomi sovelluksessa
   (suomenkielinen käännös on konekäännös, jota ei ole tarkistettu, ja
   sovellus kertoo sen)

@@ -28,6 +28,8 @@ class Installed:
     enabled: bool
     bundled: bool
     has_settings: bool
+    # Why the plugin cannot be turned off now, if it says so.
+    keep_on: str = ""
 
 
 def has_pages(name):
@@ -40,6 +42,14 @@ def _config(name):
 
     package = settings.PLUGIN_APPS[name].split(".")[0]
     return next(c for c in apps.get_app_configs() if c.name.split(".")[0] == package)
+
+
+def turn_off_refused(name):
+    """A plugin may refuse to be turned off, for example while it holds
+    records the law says must stay readable: its AppConfig's
+    ``turn_off_refused()`` returns the reason, or None."""
+    check = getattr(_config(name), "turn_off_refused", None)
+    return str(check() or "") if check else ""
 
 
 def installed():
@@ -59,6 +69,7 @@ def installed():
                 enabled=state.is_enabled(name),
                 bundled=name in BUNDLED,
                 has_settings=bool(definitions(name)) or has_pages(name),
+                keep_on=turn_off_refused(name) if state.is_enabled(name) else "",
             )
         )
     return result
@@ -77,6 +88,9 @@ def plugin_toggle(request, name):
     if name not in settings.PLUGIN_APPS:
         raise Http404
     enabled = request.POST.get("enabled") == "1"
+    if not enabled and (reason := turn_off_refused(name)):
+        messages.error(request, reason)
+        return redirect("plugins:list")
     plugin, created = PluginState.objects.get_or_create(name=name)
     if plugin.enabled != enabled or created:
         plugin.enabled = enabled

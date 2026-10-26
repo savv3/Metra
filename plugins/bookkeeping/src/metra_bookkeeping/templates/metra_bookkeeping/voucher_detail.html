@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load i18n bookkeeping %}
+{% block title %}{{ voucher }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{{ voucher }} <span class="badge">{{ voucher.get_status_display }}</span></h1>
+    <div class="actions no-print">
+      {% if voucher.is_draft %}
+        {% if perms.metra_bookkeeping.change_voucher %}<a class="button" href="{% url 'metra_bookkeeping:voucher_edit' voucher.pk %}">{% translate "Edit" %}</a>{% endif %}
+        {% if perms.metra_bookkeeping.post_voucher %}
+          <form method="post" action="{% url 'metra_bookkeeping:voucher_post' voucher.pk %}" class="inline-form">
+            {% csrf_token %}
+            <button type="submit" class="button button--primary"{% if problems %} disabled aria-describedby="post-problems"{% endif %}>{% translate "Post" %}</button>
+          </form>
+        {% endif %}
+        {% if perms.metra_bookkeeping.delete_voucher %}<a class="button button--danger" href="{% url 'metra_bookkeeping:voucher_delete' voucher.pk %}">{% translate "Delete draft" %}</a>{% endif %}
+      {% elif voucher.can_be_reversed and perms.metra_bookkeeping.post_voucher and perms.metra_bookkeeping.add_voucher %}
+        <a class="button" href="{% url 'metra_bookkeeping:voucher_reverse' voucher.pk %}">{% translate "Reverse" %}</a>
+      {% endif %}
+    </div>
+  </div>
+  <p class="subtitle">{{ voucher.get_kind_display }} &middot; {% translate "Financial year" %} <a href="{{ voucher.year.get_absolute_url }}">{{ voucher.year }}</a></p>
+
+  {% if problems %}
+    <div class="status-panel status-panel--warning" id="post-problems">
+      <h2>{% translate "Before posting" %}</h2>
+      <ul>{% for problem in problems %}<li>{{ problem }}</li>{% endfor %}</ul>
+    </div>
+  {% endif %}
+
+  <dl class="details-list">
+    <dt>{% translate "Date" %}</dt><dd>{{ voucher.date|date:"SHORT_DATE_FORMAT" }}</dd>
+    <dt>{% translate "Description" %}</dt><dd>{{ voucher.description }}</dd>
+    {% if voucher.series.code %}<dt>{% translate "Series" %}</dt><dd>{{ voucher.series }}</dd>{% endif %}
+    {% if voucher.reverses %}<dt>{% translate "Reverses" %}</dt><dd><a href="{{ voucher.reverses.get_absolute_url }}">{{ voucher.reverses }}</a></dd>{% endif %}
+    {% for reversal in reversals %}<dt>{% translate "Reversed by" %}</dt><dd><a href="{{ reversal.get_absolute_url }}">{{ reversal }}</a>, {{ reversal.date|date:"SHORT_DATE_FORMAT" }}</dd>{% endfor %}
+    <dt>{% translate "Created" %}</dt><dd>{{ voucher.created_at|date:"SHORT_DATETIME_FORMAT" }}{% if voucher.created_by %}, {{ voucher.created_by }}{% endif %}</dd>
+    {% if voucher.posted_at %}<dt>{% translate "Posted" %}</dt><dd>{{ voucher.posted_at|date:"SHORT_DATETIME_FORMAT" }}{% if voucher.posted_by %}, {{ voucher.posted_by }}{% endif %}</dd>{% endif %}
+  </dl>
+
+  <h2>{% translate "Entries" %}</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Entries' %}">
+    <table>
+      <thead><tr>
+        <th scope="col">{% translate "Account" %}</th><th scope="col">{% translate "Description" %}</th>
+        <th scope="col" class="num">{% translate "Debit" %}</th><th scope="col" class="num">{% translate "Credit" %}</th>
+      </tr></thead>
+      <tbody>
+        {% for line in lines %}
+          <tr>
+            <td><a href="{{ line.account.get_absolute_url }}?year={{ voucher.year_id }}">{{ line.account }}</a></td>
+            <td>{{ line.description }}</td>
+            <td class="num">{{ line.debit|money_or_blank }}</td>
+            <td class="num">{{ line.credit|money_or_blank }}</td>
+          </tr>
+        {% empty %}
+          <tr><td colspan="4">{% translate "No lines yet." %}</td></tr>
+        {% endfor %}
+      </tbody>
+      <tfoot><tr><th scope="row" colspan="2">{% translate "Total" %}</th><td class="num">{{ debit|money }}</td><td class="num">{{ credit|money }}</td></tr></tfoot>
+    </table>
+  </div>
+
+  <h2>{% translate "Receipts" %}</h2>
+  {% if receipts %}
+    <ul class="plain-list">
+      {% for receipt in receipts %}
+        <li><a href="{% url 'metra_bookkeeping:receipt_download' voucher.pk receipt.pk %}">{{ receipt }}</a>
+          <span class="help">{{ receipt.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}{% if receipt.uploaded_by %}, {{ receipt.uploaded_by }}{% endif %}</span>
+          {% if voucher.is_draft and perms.metra_bookkeeping.change_voucher %}
+            <form method="post" action="{% url 'metra_bookkeeping:receipt_delete' voucher.pk receipt.pk %}" class="inline-form no-print">
+              {% csrf_token %}<button type="submit" class="button">{% translate "Remove" %}</button>
+            </form>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">{% translate "No receipt attached." %}</p>
+  {% endif %}
+  {% if perms.metra_bookkeeping.change_voucher and voucher.year.is_open %}
+    <form method="post" action="{% url 'metra_bookkeeping:receipt_upload' voucher.pk %}" enctype="multipart/form-data" class="form no-print">
+      {% csrf_token %}
+      {% for field in receipt_form %}{% include "register/_field.html" %}{% endfor %}
+      {% if not voucher.is_draft %}<p class="help">{% translate "The voucher is posted: a receipt added now cannot be removed." %}</p>{% endif %}
+      <div class="actions"><button type="submit" class="button">{% translate "Attach" %}</button></div>
+    </form>
+  {% endif %}
+{% endblock %}

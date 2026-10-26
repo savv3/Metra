@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load i18n bookkeeping %}
+{% block title %}{% translate "Journal" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Journal" %}</h1>
+    <div class="actions no-print"><button type="button" class="button" onclick="window.print()">{% translate "Print" %}</button></div>
+  </div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  {% include "metra_bookkeeping/_report_filter.html" %}
+  {% include "metra_bookkeeping/_report_head.html" %}
+  <p class="help">{% translate "The posted entries in date order." %}</p>
+  {% if vouchers %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Journal' %}">
+      <table>
+        <thead><tr>
+          <th scope="col">{% translate "Date" %}</th><th scope="col">{% translate "Voucher" %}</th>
+          <th scope="col">{% translate "Account" %}</th><th scope="col">{% translate "Description" %}</th>
+          <th scope="col" class="num">{% translate "Debit" %}</th><th scope="col" class="num">{% translate "Credit" %}</th>
+        </tr></thead>
+        {% for voucher in vouchers %}
+          <tbody>
+            {% for line in voucher.lines.all %}
+              <tr>
+                {% if forloop.first %}
+                  <td>{{ voucher.date|date:"SHORT_DATE_FORMAT" }}</td>
+                  <th scope="row"><a href="{{ voucher.get_absolute_url }}">{{ voucher.display_number }}</a></th>
+                {% else %}<td></td><td></td>{% endif %}
+                <td>{{ line.account }}</td>
+                <td>{% if forloop.first %}{{ voucher.description }}{% if line.description %}: {% endif %}{% endif %}{{ line.description }}</td>
+                <td class="num">{{ line.debit|money_or_blank }}</td>
+                <td class="num">{{ line.credit|money_or_blank }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        {% endfor %}
+        <tfoot><tr><th scope="row" colspan="4">{% translate "Total" %}</th><td class="num">{{ debit|money }}</td><td class="num">{{ credit|money }}</td></tr></tfoot>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "No posted vouchers in this period." %}</p>
+  {% endif %}
+{% endblock %}

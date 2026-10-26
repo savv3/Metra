@@ -1,0 +1,18 @@
+[project]
+name = "metra-bookkeeping"
+version = "0.1.0"
+description = "Metra plugin: double-entry books for small associations and cooperatives, following the Finnish Accounting Act."
+requires-python = ">=3.13"
+license = "MIT"
+dependencies = []
+
+# METRA_PLUGINS=bookkeeping enables it.
+[project.entry-points."metra.plugins"]
+bookkeeping = "metra_bookkeeping"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/metra_bookkeeping"]
