@@ -11,6 +11,7 @@ from . import state
 NAVIGATION = "navigation"
 UNIT_PANELS = "unit_panels"
 PERSON_PANELS = "person_panels"
+INVOICE_PANELS = "invoice_panels"
 SETTINGS_LINKS = "settings_links"
 WEBHOOK_EVENTS = "webhook_events"
 MEMBER_PANELS = "member_panels"
@@ -22,6 +23,7 @@ KNOWN = {
     NAVIGATION,
     UNIT_PANELS,
     PERSON_PANELS,
+    INVOICE_PANELS,
     SETTINGS_LINKS,
     WEBHOOK_EVENTS,
     HELP_ARTICLES,

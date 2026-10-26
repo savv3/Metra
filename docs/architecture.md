@@ -180,7 +180,7 @@ permissions; phase 6 opens it to outside systems.
 | 6 | Done: plugin groundwork, 46elks SMS, REST API and webhooks as plugins (release 0.2.0) |
 | 7 | Done: snapshots, restore in the app, help pages, meeting protocols plugin, notifications |
 | 8 | Done: plugin chooser and plugin settings, email settings in the app, the Mailgun add-on and 46elks settings in the app |
-| 9 | In progress: A (ledger). See the [phase 9 build plan](#phase-9-build-plan) |
+| 9 | In progress: A (ledger) done, B (postings from Metra) in review. See the [phase 9 build plan](#phase-9-build-plan) |
 | 10 to 12 | Planned. Each phase gets a build plan with one row per pull request before work starts |
 
 Ideas taken off the plan for now are in [might-do-later.md](might-do-later.md).
@@ -470,7 +470,21 @@ accountant checks them before the first real year is kept in Metra.
   nothing is deleted automatically, and the add-on cannot be turned off
   while it holds posted vouchers. Receipts are stored under
   `METRA_DATA_DIR`, so backups include them.
-- **VAT** only when the organisation is VAT registered, with dated rates.
+- **VAT** only on days the organisation is VAT registered (dated
+  registration periods), at the rate in force on the voucher's date, which
+  is stored on each line. Sales VAT, purchase VAT and the VAT settlement
+  have accounts of their own. Reverse charge and imports (also across the
+  Åland tax border) are not supported yet and are booked by hand.
+- **Postings from Metra.** Issued invoices and credit notes are booked on
+  the accrual basis on their invoice date, payments on the day paid and
+  reminder fees on the day of the reminder (without VAT, as compensation
+  for collection costs), each in a voucher of its own that points to the
+  invoice, its evidence. Records dated before the chosen start day belong
+  to the opening balances, which are checked against what those invoices
+  had outstanding. The VAT period and rate follow the supply (AVL 15 §):
+  invoices carry a delivery date or period, and each posting keeps it, so
+  the VAT summary (C) reports by it; PR D accrues invoices issued after
+  year end for supplies of the closed year.
 
 ## Plugins
 

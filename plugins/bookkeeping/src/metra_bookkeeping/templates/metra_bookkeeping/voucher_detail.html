@@ -37,6 +37,7 @@
   <dl class="details-list">
     <dt>{% translate "Date" %}</dt><dd>{{ voucher.date|date:"SHORT_DATE_FORMAT" }}</dd>
     <dt>{% translate "Description" %}</dt><dd>{{ voucher.description }}</dd>
+    {% if posting %}<dt>{% translate "Booked from" %}</dt><dd>{% if perms.invoicing.view_invoice %}<a href="{{ posting.invoice.get_absolute_url }}">{{ posting.invoice }}</a>{% else %}{{ posting.invoice }}{% endif %} &middot; {{ posting.get_source_display }}{% if posting.payment %}, {{ posting.payment.paid_on|date:"SHORT_DATE_FORMAT" }}{% endif %}{% if posting.reminder %}, {{ posting.reminder.created_at|date:"SHORT_DATE_FORMAT" }}{% endif %}<br>{% if posting.supply_end %}{% translate "Supplied" %} {% if posting.supply_start and posting.supply_start != posting.supply_end %}{{ posting.supply_start|date:"SHORT_DATE_FORMAT" }}–{% endif %}{{ posting.supply_end|date:"SHORT_DATE_FORMAT" }} &middot; {% translate "VAT is due for the month the supply ends in." %}<br>{% endif %}<span class="help">{% translate "Made by Metra from the invoice, which is the evidence for this voucher." %}</span></dd>{% endif %}
     {% if voucher.series.code %}<dt>{% translate "Series" %}</dt><dd>{{ voucher.series }}</dd>{% endif %}
     {% if voucher.reverses %}<dt>{% translate "Reverses" %}</dt><dd><a href="{{ voucher.reverses.get_absolute_url }}">{{ voucher.reverses }}</a></dd>{% endif %}
     {% for reversal in reversals %}<dt>{% translate "Reversed by" %}</dt><dd><a href="{{ reversal.get_absolute_url }}">{{ reversal }}</a>, {{ reversal.date|date:"SHORT_DATE_FORMAT" }}</dd>{% endfor %}
@@ -49,6 +50,7 @@
     <table>
       <thead><tr>
         <th scope="col">{% translate "Account" %}</th><th scope="col">{% translate "Description" %}</th>
+        <th scope="col">{% translate "VAT" %}</th>
         <th scope="col" class="num">{% translate "Debit" %}</th><th scope="col" class="num">{% translate "Credit" %}</th>
       </tr></thead>
       <tbody>
@@ -56,14 +58,15 @@
           <tr>
             <td><a href="{{ line.account.get_absolute_url }}?year={{ voucher.year_id }}">{{ line.account }}</a></td>
             <td>{{ line.description }}</td>
+            <td>{{ line.vat_display }}</td>
             <td class="num">{{ line.debit|money_or_blank }}</td>
             <td class="num">{{ line.credit|money_or_blank }}</td>
           </tr>
         {% empty %}
-          <tr><td colspan="4">{% translate "No lines yet." %}</td></tr>
+          <tr><td colspan="5">{% translate "No lines yet." %}</td></tr>
         {% endfor %}
       </tbody>
-      <tfoot><tr><th scope="row" colspan="2">{% translate "Total" %}</th><td class="num">{{ debit|money }}</td><td class="num">{{ credit|money }}</td></tr></tfoot>
+      <tfoot><tr><th scope="row" colspan="3">{% translate "Total" %}</th><td class="num">{{ debit|money }}</td><td class="num">{{ credit|money }}</td></tr></tfoot>
     </table>
   </div>
 

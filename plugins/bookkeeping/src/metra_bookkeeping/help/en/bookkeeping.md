@@ -44,6 +44,76 @@ photo) to the draft, then press **Post**. Posting checks that the voucher
 balances, gives it the next number and locks it. Numbers have no gaps:
 drafts have no number, so deleting a draft leaves no gap.
 
+## VAT
+
+If the organisation is VAT registered, add the dates of its registration
+under **Bookkeeping of invoices** > **VAT registration**. VAT can then be
+booked on days inside a registration, and only at a rate in force on the
+voucher's date: the reduced rate, for example, was 14 % until 31.12.2025
+and is 13.5 % from 1.1.2026. Each line keeps the rate it was booked with.
+
+On a voucher, mark the line with the price without VAT and the VAT line
+with the same VAT code. For a purchase of 100 € + 25.5 % VAT:
+
+| Account | Debit | Credit | VAT |
+| --- | --- | --- | --- |
+| 4000 Materials and supplies | 100.00 | | Purchases 25.5 % |
+| 1765 VAT on purchases | 25.50 | | Purchases 25.5 % |
+| 1910 Bank account | | 125.50 | |
+
+Sales VAT, purchase VAT and the VAT to pay have accounts of their own.
+For each VAT period, move the sales and purchase VAT to the VAT settlement
+account (2939) with a voucher, and book the payment of the tax against it.
+
+Reverse charge (services bought from other EU countries, construction) and
+imports, including goods across the Åland tax border, are not supported
+yet. Book them by hand without a VAT code, and check them with an
+accountant.
+
+## Invoices and payments
+
+Metra can book invoicing for you. Under **Bookkeeping of invoices**,
+choose the day automatic posting starts and the accounts:
+
+- each issued invoice is booked on its invoice date: receivables on the
+  debit side, sales (and sales VAT) on the credit side;
+- a credit note is booked the same way, the other way round;
+- a payment is booked on the day it was paid: bank account on the debit
+  side, receivables on the credit side;
+- a reminder fee is booked on the day of the reminder, to the reminder
+  fees account, without VAT.
+
+Sales go to the account chosen for the invoice line's fee line, else to
+the account chosen for its VAT rate, else to the default sales account.
+Invoices go to their own voucher series (L) and payments to another (S).
+
+An invoice's voucher is dated the invoice date, but its VAT belongs to the
+month of the invoice's delivery date or the end of its delivery period,
+which the voucher shows. An invoice issued in January for last year's water
+therefore has its VAT in last December's period, at last year's rate.
+
+The settings page checks that the receivables account, when automatic
+posting starts, equals what the invoices issued before then had
+outstanding, and warns when they differ.
+
+Each such voucher is posted at once and shows the invoice it comes from;
+the invoice is its evidence, and the invoice page shows its vouchers. If
+one cannot be posted (an account no longer in use, say), it stays a draft
+for you to fix and post. Invoices and payments made while posting was off,
+or dated in no open financial year, are listed on the Bookkeeping page;
+**Post them now** books them, once.
+
+Choose the start day after anything already booked by hand, so nothing is
+booked twice. Invoices from before the start day are part of the opening
+balances: their payments, if made after the start day, are booked against
+the receivables account as usual.
+
+The receivables account then equals what is outstanding on the invoices:
+invoices less credit notes and payments, plus reminder fees.
+
+A wrong automatic voucher is corrected like any other: reverse it, and
+enter the right entry as a new voucher.
+
 ## Correcting a mistake
 
 A posted voucher never changes and cannot be deleted. To correct one, open
@@ -80,5 +150,5 @@ cannot be turned off, so that they stay readable.
 
 An administrator who removes the add-on from the server (from `METRA_PLUGINS`) must first keep the books for the legal period another way: save the reports and receipts, and keep a backup. The data stays in the database, but cannot be read in Metra while the add-on is not installed.
 
-Income statement, balance sheet, budget, automatic entries from invoices
-and payments, and closing the year come in later versions of the add-on.
+Income statement, balance sheet, budget, the VAT summary and closing the
+year come in later versions of the add-on.

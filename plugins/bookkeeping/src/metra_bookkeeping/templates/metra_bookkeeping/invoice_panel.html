@@ -1,0 +1,17 @@
+{% load i18n %}
+<section aria-labelledby="bookkeeping-panel">
+  <h2 id="bookkeeping-panel">{{ title }}</h2>
+  {% if postings or waiting %}
+    <ul class="plain-list">
+      {% for posting in postings %}
+        <li><a href="{{ posting.voucher.get_absolute_url }}">{{ posting.voucher }}</a>
+          &middot; {{ posting.get_source_display }} &middot; {{ posting.voucher.date|date:"SHORT_DATE_FORMAT" }}{% if posting.voucher.is_draft %} &middot; {% translate "Draft, not posted yet" %}{% endif %}</li>
+      {% endfor %}
+      {% for record in waiting %}
+        <li>{{ record.date|date:"SHORT_DATE_FORMAT" }} &middot; {% translate "Waiting to be posted" %}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">{% translate "Not in the books: it is dated before automatic posting started, or posting is off." %}</p>
+  {% endif %}
+</section>

@@ -9,9 +9,13 @@ A country module has:
     NAME = gettext_lazy("Finland")
     CHARTS = {"association": Chart(...), ...}
     FIRST_YEAR_MONTHS = (1, 18)   # how long a first or changed year may be
+    VAT_RATES = [VatRate(...), ...]  # the rates in force, with their dates
+    POSTING_ACCOUNTS = {...}  # account numbers postings from invoicing use
 """
 
+import datetime
 from dataclasses import dataclass, field
+from decimal import Decimal
 from importlib import import_module
 
 from django.conf import settings
@@ -53,6 +57,22 @@ class Chart:
         return None
 
 
+@dataclass(frozen=True)
+class VatRate:
+    """A VAT rate (in per cent) and the days it applies, both inclusive;
+    None for no limit. When a rate changes, the old one gets a last day and
+    the new one is added, so entries keep the rate of their own date."""
+
+    rate: Decimal
+    first: datetime.date | None = None
+    last: datetime.date | None = None
+
+    def applies(self, date):
+        return (self.first is None or self.first <= date) and (
+            self.last is None or date <= self.last
+        )
+
+
 def get(code=None):
     code = code or DEFAULT
     if code not in COUNTRIES:
@@ -62,3 +82,17 @@ def get(code=None):
 
 def chart_choices(code=None):
     return [(key, chart.name) for key, chart in get(code).CHARTS.items()]
+
+
+def vat_rate_applies(rate, date, code=None):
+    """Whether ``rate`` is a VAT rate in force on ``date``."""
+    return any(r.rate == rate and r.applies(date) for r in get(code).VAT_RATES)
+
+
+def vat_rates(code=None, since=None):
+    """The rates in force on or after ``since`` (all of them by default),
+    highest first, without repeats."""
+    rates = {
+        r.rate for r in get(code).VAT_RATES if since is None or r.last is None or r.last >= since
+    }
+    return sorted(rates, reverse=True)

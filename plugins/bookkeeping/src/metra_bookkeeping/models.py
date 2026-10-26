@@ -36,6 +36,24 @@ class LockedError(ValidationError):
     """A posted voucher, or a closed year, cannot change."""
 
 
+class VatCode(models.TextChoices):
+    """What a line's VAT is for. Reverse charge (EU services, construction)
+    and imports, including goods across the Åland tax border, are not
+    supported yet: such entries are made by hand, without a VAT code."""
+
+    SALES = "sales", _("Sales")
+    PURCHASES = "purchases", _("Purchases")
+
+
+def vat_label(code, rate):
+    """ "Sales 25.5 %", in the reader's language."""
+    text = f"{rate:f}"
+    if "." in text:
+        text = text.rstrip("0").rstrip(".")
+    rate = formats.number_format(Decimal(text))
+    return gettext("%(kind)s %(rate)s %%") % {"kind": VatCode(code).label, "rate": rate}
+
+
 def months_between(start, end):
     """How many months a period from ``start`` to ``end`` (inclusive) covers,
     counting a started month as a whole one."""
@@ -433,10 +451,48 @@ class Voucher(models.Model):
                 problems.append(
                     gettext("The account %(account)s is not in use.") % {"account": line.account}
                 )
+        if not self.is_automatic and self.kind != self.Kind.REVERSAL:
+            problems.extend(self.vat_problems(lines))
+        return problems
+
+    @property
+    def is_automatic(self):
+        """Made from an invoice, payment or reminder (see Posting)."""
+        return self.pk is not None and Posting.objects.filter(voucher_id=self.pk).exists()
+
+    def vat_problems(self, lines, date=None):
+        """VAT on lines dated (``date``, by default the voucher's) when the
+        rate is not in force, or when the organisation is not VAT registered."""
+        date = date or self.date
+        problems = []
+        with_vat = [line for line in lines if line.vat_code]
+        for line in with_vat:
+            if not countries.vat_rate_applies(line.vat_rate, date, self.year.country):
+                problems.append(
+                    gettext("The VAT rate %(rate)s is not in force on %(day)s.")
+                    % {
+                        "rate": line.vat_display,
+                        "day": formats.date_format(date, "SHORT_DATE_FORMAT"),
+                    }
+                )
+        if with_vat and not VatRegistration.covers(date):
+            problems.append(
+                gettext(
+                    "The organisation is not VAT registered on %(day)s, so the voucher can have "
+                    "no VAT. Check the VAT registration dates in the posting settings."
+                )
+                % {"day": formats.date_format(date, "SHORT_DATE_FORMAT")}
+            )
         return problems
 
     def warnings(self):
         """What does not stop posting but should be checked."""
+        if self.is_automatic:
+            # The invoice, payment or reminder is the evidence; what it says
+            # is booked as it is, and anything odd is pointed out.
+            lines = list(self.lines.all())
+            posting = self.posting
+            return self.vat_problems(lines, posting.vat_date) + posting.warnings(lines)
         if self.kind == self.Kind.NORMAL and not self.receipts.exists():
             return [
                 gettext(
@@ -519,6 +575,8 @@ class Voucher(models.Model):
                         debit=line.credit,
                         credit=line.debit,
                         description=line.description,
+                        vat_code=line.vat_code,
+                        vat_rate=line.vat_rate,
                         order=line.order,
                     )
                     for line in self.lines.all()
@@ -538,6 +596,15 @@ class VoucherLine(models.Model):
     debit = models.DecimalField(_("debit"), max_digits=12, decimal_places=2, default=ZERO)
     credit = models.DecimalField(_("credit"), max_digits=12, decimal_places=2, default=ZERO)
     description = models.CharField(_("description"), max_length=200, blank=True)
+    # The VAT the line is for: the kind (sales or purchases) and the rate in
+    # force on the voucher's date, stored on the line so a later rate change
+    # never alters it. Both are empty for lines without VAT.
+    vat_code = models.CharField(
+        _("VAT"), max_length=10, choices=VatCode.choices, blank=True, default=""
+    )
+    vat_rate = models.DecimalField(
+        _("VAT rate (%)"), max_digits=5, decimal_places=2, null=True, blank=True
+    )
     order = models.PositiveIntegerField(_("order"), default=0)
 
     class Meta:
@@ -549,7 +616,12 @@ class VoucherLine(models.Model):
                 condition=models.Q(debit__gte=0, credit__gte=0)
                 & (models.Q(debit=0) | models.Q(credit=0)),
                 name="voucherline_one_side",
-            )
+            ),
+            models.CheckConstraint(
+                condition=models.Q(vat_code="", vat_rate__isnull=True)
+                | (~models.Q(vat_code="") & models.Q(vat_rate__isnull=False)),
+                name="voucherline_vat_code_and_rate",
+            ),
         ]
 
     def __str__(self):
@@ -567,6 +639,12 @@ class VoucherLine(models.Model):
     def amount(self):
         """Debit as positive, credit as negative."""
         return self.debit - self.credit
+
+    @property
+    def vat_display(self):
+        if not self.vat_code:
+            return ""
+        return vat_label(self.vat_code, self.vat_rate)
 
     def clean(self):
         debit, credit = self.debit or ZERO, self.credit or ZERO
@@ -622,6 +700,305 @@ class Receipt(models.Model):
         return super().delete(*args, **kwargs)
 
 
+class VatRegistration(models.Model):
+    """A period in which the organisation is VAT registered. VAT can be
+    booked only on dates inside one."""
+
+    start = models.DateField(_("registered from"))
+    end = models.DateField(
+        _("registered until"), null=True, blank=True, help_text=_("Empty while still registered.")
+    )
+
+    class Meta:
+        ordering = ["start"]
+        verbose_name = _("VAT registration")
+        verbose_name_plural = _("VAT registrations")
+
+    def __str__(self):
+        start = formats.date_format(self.start, "SHORT_DATE_FORMAT")
+        if self.end is None:
+            return gettext("from %(start)s") % {"start": start}
+        end = formats.date_format(self.end, "SHORT_DATE_FORMAT")
+        return f"{start}–{end}"
+
+    def clean(self):
+        if self.start and self.end and self.end < self.start:
+            raise ValidationError({"end": _("The registration must end after it starts.")})
+        if self.start:
+            others = VatRegistration.objects.exclude(pk=self.pk)
+            far = datetime.date.max
+            if any(
+                self.start <= (other.end or far) and other.start <= (self.end or far)
+                for other in others
+            ):
+                raise ValidationError(_("The period overlaps another VAT registration."))
+
+    @classmethod
+    def covers(cls, date):
+        return (
+            cls.objects.filter(start__lte=date)
+            .filter(models.Q(end__isnull=True) | models.Q(end__gte=date))
+            .exists()
+        )
+
+
+def _account(name, help_text=""):
+    return models.ForeignKey(
+        Account,
+        verbose_name=name,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="+",
+        help_text=help_text,
+    )
+
+
+class PostingSettings(models.Model):
+    """Where issued invoices, credit notes, payments and reminder fees are
+    booked. One row. Nothing is posted until ``start`` is set and the
+    accounts and series are chosen."""
+
+    start = models.DateField(
+        _("post automatically from"),
+        null=True,
+        blank=True,
+        help_text=_(
+            "Invoices, credit notes, payments and reminders dated this day or later are "
+            "booked automatically. Choose a day after anything already booked by hand, so "
+            "nothing is booked twice. Empty: nothing is posted."
+        ),
+    )
+    receivables = _account(_("receivables"), _("Debited for invoices, credited for payments."))
+    bank = _account(_("bank account"), _("Where payments arrive."))
+    sales = _account(
+        _("sales"), _("Income for invoice lines without an account of their own below.")
+    )
+    reminder_fees = _account(_("reminder fees"))
+    sales_vat = _account(_("VAT on sales"))
+    purchase_vat = _account(_("VAT on purchases"))
+    vat_settlement = _account(
+        _("VAT settlement"),
+        _("The VAT to pay or to get back, from the sales and purchase VAT of each period."),
+    )
+    invoice_series = models.ForeignKey(
+        VoucherSeries,
+        verbose_name=_("series for invoices"),
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="+",
+        help_text=_("Invoices, credit notes and reminder fees."),
+    )
+    payment_series = models.ForeignKey(
+        VoucherSeries,
+        verbose_name=_("series for payments"),
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="+",
+    )
+
+    REQUIRED = [
+        "receivables",
+        "bank",
+        "sales",
+        "reminder_fees",
+        "sales_vat",
+        "vat_settlement",
+        "invoice_series",
+        "payment_series",
+    ]
+
+    class Meta:
+        verbose_name = _("posting settings")
+        verbose_name_plural = _("posting settings")
+
+    def __str__(self):
+        return gettext("Posting settings")
+
+    @classmethod
+    def current(cls):
+        """The settings, or unsaved ones suggested from the chart."""
+        settings_row = cls.objects.order_by("pk").first()
+        if settings_row is not None:
+            return settings_row
+        suggested = cls()
+        year = FiscalYear.current()
+        if year is not None:
+            numbers = countries.get(year.country).POSTING_ACCOUNTS.get(year.chart, {})
+            for name, number in numbers.items():
+                setattr(suggested, name, Account.objects.filter(number=number).first())
+        return suggested
+
+    @staticmethod
+    def template_accounts_missing():
+        """Accounts of the chart template that postings use but the chart of
+        accounts lacks (books started before they were in the template)."""
+        year = FiscalYear.current()
+        if year is None:
+            return []
+        rules = countries.get(year.country)
+        numbers = set(rules.POSTING_ACCOUNTS.get(year.chart, {}).values())
+        existing = set(Account.objects.filter(number__in=numbers).values_list("number", flat=True))
+        chart = rules.CHARTS.get(year.chart)
+        return [a for a in chart.accounts if a.number in numbers - existing] if chart else []
+
+    def missing(self):
+        """The fields still to fill in before anything is posted."""
+        return [name for name in self.REQUIRED if getattr(self, f"{name}_id") is None]
+
+    @property
+    def is_on(self):
+        return self.pk is not None and self.start is not None and not self.missing()
+
+    def applies(self, date):
+        return self.is_on and date >= self.start
+
+    def sales_account(self, fee_line_id, vat_rate):
+        """The income account for an invoice line: its fee line's, else its
+        VAT rate's, else the default."""
+        rules = {(rule.fee_line_id, rule.vat_rate): rule.account for rule in self._rules()}
+        if fee_line_id is not None and (fee_line_id, None) in rules:
+            return rules[(fee_line_id, None)]
+        return rules.get((None, vat_rate)) or self.sales
+
+    def _rules(self):
+        if not hasattr(self, "_rule_cache"):
+            self._rule_cache = list(SalesAccount.objects.select_related("account"))
+        return self._rule_cache
+
+
+class SalesAccount(models.Model):
+    """An income account for the invoice lines of one fee line, or of one VAT
+    rate. Lines with neither go to the default sales account."""
+
+    fee_line = models.OneToOneField(
+        "invoicing.FeeLine",
+        verbose_name=_("fee line"),
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="+",
+    )
+    vat_rate = models.DecimalField(
+        _("VAT rate (%)"), max_digits=5, decimal_places=2, null=True, blank=True, unique=True
+    )
+    account = models.ForeignKey(
+        Account, verbose_name=_("account"), on_delete=models.PROTECT, related_name="+"
+    )
+
+    class Meta:
+        verbose_name = _("sales account")
+        verbose_name_plural = _("sales accounts")
+        constraints = [
+            models.CheckConstraint(
+                condition=models.Q(fee_line__isnull=True, vat_rate__isnull=False)
+                | models.Q(fee_line__isnull=False, vat_rate__isnull=True),
+                name="salesaccount_fee_line_or_rate",
+            )
+        ]
+
+    def __str__(self):
+        return str(self.account)
+
+
+class Posting(models.Model):
+    """The link from a voucher the add-on made to the invoice, credit note,
+    payment or reminder it books. That record is the voucher's evidence (a
+    memo voucher of Metra's own making); it never changes, and is kept as
+    long as the voucher."""
+
+    class Source(models.TextChoices):
+        INVOICE = "invoice", _("Invoice")
+        CREDIT_NOTE = "credit_note", _("Credit note")
+        PAYMENT = "payment", _("Payment")
+        REMINDER = "reminder", _("Reminder fee")
+
+    voucher = models.OneToOneField(
+        Voucher, verbose_name=_("voucher"), on_delete=models.CASCADE, related_name="posting"
+    )
+    source = models.CharField(_("from"), max_length=12, choices=Source.choices)
+    invoice = models.ForeignKey(
+        "invoicing.Invoice",
+        verbose_name=_("invoice"),
+        on_delete=models.PROTECT,
+        related_name="+",
+    )
+    payment = models.OneToOneField(
+        "invoicing.Payment",
+        verbose_name=_("payment"),
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="+",
+    )
+    reminder = models.OneToOneField(
+        "invoicing.PaymentReminder",
+        verbose_name=_("payment reminder"),
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="+",
+    )
+    # For invoices and credit notes: the supply date or period stated on the
+    # invoice. VAT is due for the month the supply is made (AVL 15 §; a
+    # continuous supply at the end of its period), which can differ from the
+    # voucher's date, the invoice date. The VAT summary goes by these.
+    supply_start = models.DateField(_("supplied from"), null=True, blank=True)
+    supply_end = models.DateField(_("supplied until"), null=True, blank=True)
+    created_at = models.DateTimeField(_("created"), auto_now_add=True)
+
+    class Meta:
+        ordering = ["pk"]
+        verbose_name = _("posting")
+        verbose_name_plural = _("postings")
+        constraints = [
+            models.UniqueConstraint(
+                fields=["invoice"],
+                condition=models.Q(source__in=["invoice", "credit_note"]),
+                name="posting_one_per_invoice",
+            ),
+            models.CheckConstraint(
+                condition=models.Q(
+                    source__in=["invoice", "credit_note"],
+                    payment__isnull=True,
+                    reminder__isnull=True,
+                )
+                | models.Q(source="payment", payment__isnull=False, reminder__isnull=True)
+                | models.Q(source="reminder", payment__isnull=True, reminder__isnull=False),
+                name="posting_source_matches",
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.get_source_display()} – {self.invoice}"
+
+    @property
+    def vat_date(self):
+        """The date that decides the VAT period and rate: the supply date for
+        invoices and credit notes, else the voucher's date."""
+        return self.supply_end or self.voucher.date
+
+    def warnings(self, lines):
+        """Where the record and the books' VAT registration disagree."""
+        if self.source not in (self.Source.INVOICE, self.Source.CREDIT_NOTE):
+            return []
+        registered = VatRegistration.covers(self.vat_date)
+        if self.invoice.vat_registered and not registered:
+            return []  # vat_problems() already says so for lines with VAT
+        if not self.invoice.vat_registered and registered:
+            return [
+                gettext(
+                    "%(invoice)s was issued without VAT, although the organisation is VAT "
+                    "registered on its date. Check the invoice settings and the VAT "
+                    "registration dates."
+                )
+                % {"invoice": self.invoice}
+            ]
+        return []
+
+
 @receiver(post_delete, sender=Receipt)
 def _delete_receipt_file(sender, instance, **kwargs):
     instance.file.delete(save=False)
@@ -633,3 +1010,7 @@ auditlog.register(VoucherSeries)
 auditlog.register(Voucher, exclude_fields=["created_at"])
 auditlog.register(VoucherLine)
 auditlog.register(Receipt, exclude_fields=["file"])
+auditlog.register(VatRegistration)
+auditlog.register(PostingSettings)
+auditlog.register(SalesAccount)
+auditlog.register(Posting, exclude_fields=["created_at"])

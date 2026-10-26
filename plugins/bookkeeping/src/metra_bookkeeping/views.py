@@ -8,23 +8,35 @@ from django.db.models import Count, ProtectedError
 from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from django.utils.translation import get_language
+from django.utils.translation import get_language, ngettext
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
-from . import countries, reports, timing
+from . import countries, postings, reports, timing
 from .forms import (
     AccountForm,
     FiscalYearForm,
     LineFormSet,
+    PostingSettingsForm,
     ReceiptForm,
     ReportForm,
     ReverseForm,
+    SalesAccountsForm,
     SetupForm,
+    VatRegistrationForm,
     VoucherForm,
     VoucherSeriesForm,
 )
-from .models import Account, FiscalYear, Receipt, Voucher, VoucherSeries
+from .models import (
+    Account,
+    FiscalYear,
+    Posting,
+    PostingSettings,
+    Receipt,
+    VatRegistration,
+    Voucher,
+    VoucherSeries,
+)
 
 P = "metra_bookkeeping"
 
@@ -50,11 +62,16 @@ def index(request):
             {"year": None, "setup_form": SetupForm() if can_setup else None},
         )
     vouchers = Voucher.objects.filter(year=year).select_related("series")
+    posting_settings = PostingSettings.current()
+    waiting = postings.waiting(posting_settings)
     return render(
         request,
         "metra_bookkeeping/index.html",
         {
             "year": year,
+            "posting_settings": posting_settings,
+            "waiting": waiting[:20],
+            "waiting_count": len(waiting),
             "drafts": vouchers.filter(status=Voucher.Status.DRAFT).order_by("date", "pk"),
             "recent": vouchers.filter(status=Voucher.Status.POSTED).order_by("-posted_at", "-pk")[
                 :10
@@ -323,11 +340,17 @@ def voucher_detail(request, pk):
         pk=pk,
     )
     debit, credit = voucher.totals()
+    posting = (
+        Posting.objects.filter(voucher=voucher)
+        .select_related("invoice", "payment", "reminder")
+        .first()
+    )
     return render(
         request,
         "metra_bookkeeping/voucher_detail.html",
         {
             "voucher": voucher,
+            "posting": posting,
             "lines": voucher.lines.select_related("account"),
             "receipts": voucher.receipts.all(),
             "reversals": voucher.reversals.select_related("series"),
@@ -461,6 +484,134 @@ def receipt_delete(request, pk, receipt_pk):
     else:
         messages.success(request, _("The receipt was removed."))
     return redirect(receipt.voucher)
+
+
+# Postings from invoicing
+
+
+@login_required
+@permission_required(f"{P}.change_postingsettings", raise_exception=True)
+def posting_settings(request):
+    settings_row = PostingSettings.current()
+    form = PostingSettingsForm(request.POST or None, instance=settings_row)
+    accounts_form = SalesAccountsForm(request.POST or None)
+    if request.method == "POST" and form.is_valid() and accounts_form.is_valid():
+        with transaction.atomic():
+            form.save()
+            accounts_form.save()
+        messages.success(request, _("The posting settings were saved."))
+        return redirect(f"{P}:posting_settings")
+    return render(
+        request,
+        "metra_bookkeeping/posting_settings.html",
+        {
+            "form": form,
+            "accounts_form": accounts_form,
+            "registrations": VatRegistration.objects.all(),
+            "registration_form": VatRegistrationForm(),
+            "waiting_count": len(postings.waiting(settings_row)),
+            "template_missing": PostingSettings.template_accounts_missing(),
+            "opening": postings.opening_receivables(settings_row),
+        },
+    )
+
+
+@login_required
+@permission_required(f"{P}.add_account", raise_exception=True)
+@require_POST
+def posting_accounts_add(request):
+    """Add the accounts postings need from the chart template, for books
+    started before the template had them."""
+    added = [
+        Account.objects.create(number=account.number, name=account.name(), kind=account.kind)
+        for account in PostingSettings.template_accounts_missing()
+    ]
+    if added:
+        messages.success(
+            request,
+            _("Added the accounts %(accounts)s.")
+            % {"accounts": ", ".join(str(account) for account in added)},
+        )
+    return redirect(f"{P}:posting_settings")
+
+
+@login_required
+@permission_required(f"{P}.add_vatregistration", raise_exception=True)
+@require_POST
+def vat_registration_add(request):
+    form = VatRegistrationForm(request.POST)
+    if form.is_valid():
+        form.save()
+        messages.success(request, _("The VAT registration was saved."))
+    else:
+        for errors in form.errors.values():
+            for message in errors:
+                messages.error(request, message)
+    return redirect(f"{P}:posting_settings")
+
+
+@login_required
+@permission_required(f"{P}.change_vatregistration", raise_exception=True)
+def vat_registration_edit(request, pk):
+    registration = get_object_or_404(VatRegistration, pk=pk)
+    form = VatRegistrationForm(request.POST or None, instance=registration)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, _("The VAT registration was saved."))
+        return redirect(f"{P}:posting_settings")
+    return render(
+        request,
+        "metra_bookkeeping/vat_registration_form.html",
+        {"form": form, "registration": registration},
+    )
+
+
+@login_required
+@permission_required(f"{P}.delete_vatregistration", raise_exception=True)
+@require_POST
+def vat_registration_delete(request, pk):
+    get_object_or_404(VatRegistration, pk=pk).delete()
+    messages.success(request, _("The VAT registration was removed."))
+    return redirect(f"{P}:posting_settings")
+
+
+@login_required
+@permission_required([f"{P}.add_voucher", f"{P}.post_voucher"], raise_exception=True)
+@require_POST
+def post_waiting(request):
+    made, left = postings.book_waiting(request.user)
+    drafts = sum(1 for voucher in made if voucher.is_draft)
+    if made:
+        messages.success(
+            request,
+            ngettext(
+                "%(count)s voucher was made from invoicing.",
+                "%(count)s vouchers were made from invoicing.",
+                len(made),
+            )
+            % {"count": len(made)},
+        )
+    if drafts:
+        messages.warning(
+            request,
+            ngettext(
+                "%(count)s of them could not be posted; it is among the drafts.",
+                "%(count)s of them could not be posted; they are among the drafts.",
+                drafts,
+            )
+            % {"count": drafts},
+        )
+    if left:
+        messages.warning(
+            request,
+            ngettext(
+                "%(count)s record is still waiting: no open financial year covers its date.",
+                "%(count)s records are still waiting: no open financial year covers their date.",
+                left,
+            )
+            % {"count": left},
+        )
+    return redirect(f"{P}:index")
 
 
 # Reports

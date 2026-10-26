@@ -148,6 +148,8 @@ def build_run(run):
             rebuilt += 1
         invoice.person = person
         invoice.period_label = run.period_label
+        invoice.supply_start = run.supply_start
+        invoice.supply_end = run.supply_end
         invoice.problems = problems
         invoice.save()
         for order, line in enumerate(lines):

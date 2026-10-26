@@ -8,9 +8,12 @@ treasurer adds, renames and retires accounts in the app. From general
 knowledge of the law, not legal advice.
 """
 
+import datetime
+from decimal import Decimal
+
 from django.utils.translation import gettext_lazy as _
 
-from . import Account, Chart
+from . import Account, Chart, VatRate
 
 CODE = "fi"
 NAME = _("Finland")
@@ -21,6 +24,44 @@ YEAR_MONTHS = 12
 FIRST_YEAR_MONTHS = (1, 18)
 
 ASSET, LIABILITY, EQUITY, INCOME, EXPENSE = "asset", "liability", "equity", "income", "expense"
+
+# VAT rates (arvonlisäverolaki 1501/1993) with the days they apply: the
+# general rate went from 24 % to 25.5 % on 1.9.2024 and the reduced rate from
+# 14 % to 13.5 % on 1.1.2026 (vero.fi). 0 % is for sales without VAT.
+VAT_RATES = [
+    VatRate(Decimal("25.5"), first=datetime.date(2024, 9, 1)),
+    VatRate(Decimal("24"), first=datetime.date(2013, 1, 1), last=datetime.date(2024, 8, 31)),
+    VatRate(Decimal("14"), first=datetime.date(2013, 1, 1), last=datetime.date(2025, 12, 31)),
+    VatRate(Decimal("13.5"), first=datetime.date(2026, 1, 1)),
+    VatRate(Decimal("10"), first=datetime.date(2013, 1, 1)),
+    VatRate(Decimal("0")),
+]
+
+# The accounts postings from invoicing go to, by number, for each chart; the
+# treasurer can choose others. Sales VAT, purchase VAT and the VAT settlement
+# have accounts of their own, so the VAT return can be checked against the
+# books: each month (or VAT period) the sales and purchase VAT are moved to
+# the settlement account, and paying the tax clears it.
+POSTING_ACCOUNTS = {
+    "association": {
+        "receivables": "1700",
+        "bank": "1910",
+        "sales": "3000",
+        "reminder_fees": "3100",
+        "sales_vat": "2935",
+        "purchase_vat": "1765",
+        "vat_settlement": "2939",
+    },
+    "cooperative": {
+        "receivables": "1700",
+        "bank": "1910",
+        "sales": "3000",
+        "reminder_fees": "3600",
+        "sales_vat": "2935",
+        "purchase_vat": "1765",
+        "vat_settlement": "2939",
+    },
+}
 
 
 def _a(number, kind, fi, sv, en):
@@ -47,6 +88,13 @@ ASSETS = [
     _a("1700", ASSET, "Myyntisaamiset", "Kundfordringar", "Trade receivables"),
     _a("1760", ASSET, "Siirtosaamiset", "Resultatregleringar (aktiva)", "Accrued income"),
     _a("1763", ASSET, "Arvonlisäverosaaminen", "Momsfordran", "VAT receivable"),
+    _a(
+        "1765",
+        ASSET,
+        "Ostojen arvonlisävero",
+        "Ingående moms",
+        "VAT on purchases",
+    ),
     _a("1790", ASSET, "Muut saamiset", "Övriga fordringar", "Other receivables"),
     _a("1900", ASSET, "Käteisvarat", "Kassa", "Cash"),
     _a("1910", ASSET, "Pankkitili", "Bankkonto", "Bank account"),
@@ -64,7 +112,14 @@ LIABILITIES = [
     _a("2870", LIABILITY, "Saadut ennakot", "Erhållna förskott", "Advances received"),
     _a("2871", LIABILITY, "Ostovelat", "Leverantörsskulder", "Trade payables"),
     _a("2920", LIABILITY, "Muut velat", "Övriga skulder", "Other liabilities"),
-    _a("2939", LIABILITY, "Arvonlisäverovelka", "Momsskuld", "VAT payable"),
+    _a("2935", LIABILITY, "Myynnin arvonlisävero", "Utgående moms", "VAT on sales"),
+    _a(
+        "2939",
+        LIABILITY,
+        "Arvonlisäverovelka (tilitettävä)",
+        "Momsskuld (redovisas)",
+        "VAT payable (settlement)",
+    ),
     _a("2960", LIABILITY, "Siirtovelat", "Resultatregleringar (passiva)", "Accrued expenses"),
 ]
 
@@ -164,6 +219,9 @@ ASSOCIATION = Chart(
         _a(
             "3000", INCOME, "Toiminnan tuotot", "Intäkter av verksamheten", "Income from activities"
         ),
+        # Reminder fees go with the activity the invoices are for (an
+        # accountant to confirm).
+        _a("3100", INCOME, "Muistutusmaksut", "Påminnelseavgifter", "Reminder fees"),
         _a("3200", INCOME, "Toiminta-avustukset", "Verksamhetsbidrag", "Grants for activities"),
         _a(
             "4000",
@@ -231,7 +289,6 @@ ASSOCIATION = Chart(
         ),
         # Investment and financing (sijoitus- ja rahoitustoiminta).
         _a("7000", INCOME, "Korkotuotot", "Ränteintäkter", "Interest income"),
-        _a("7100", INCOME, "Muistutusmaksut", "Påminnelseavgifter", "Reminder fees"),
         _a("7500", EXPENSE, "Korkokulut", "Räntekostnader", "Interest expenses"),
         # General grants (yleisavustukset) and income taxes.
         _a("8000", INCOME, "Yleisavustukset", "Allmänna understöd", "General grants"),

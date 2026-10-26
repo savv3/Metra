@@ -108,12 +108,13 @@ def test_roles_have_the_agreed_permissions():
             "codename", flat=True
         )
     )
-    # With the bookkeeping add-on, the treasurer also keeps the books.
+    # With the bookkeeping add-on, the treasurer also keeps the books. The
+    # links from vouchers to invoices are made by the add-on only.
     books = set(
         Permission.objects.filter(content_type__app_label="metra_bookkeeping").values_list(
             "codename", flat=True
         )
-    )
+    ) - {"add_posting", "change_posting", "delete_posting"}
     assert codenames("Treasurer") == codenames("Read-only") | invoicing | books
     assert not codenames("Read-only") & invoicing
     assert {name for name in invoicing if name.startswith("view_")} <= codenames("Board")

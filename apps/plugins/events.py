@@ -48,6 +48,9 @@ reading_saved = Signal()
 invoice_issued = Signal()
 # payment: a payment was recorded on an invoice.
 payment_recorded = Signal()
+# reminder: a payment reminder was made for an overdue invoice, with its fee
+# (which may be zero).
+reminder_sent = Signal()
 
 ALL = {
     "unit_saved": unit_saved,
@@ -55,6 +58,7 @@ ALL = {
     "reading_saved": reading_saved,
     "invoice_issued": invoice_issued,
     "payment_recorded": payment_recorded,
+    "reminder_sent": reminder_sent,
 }
 
 

@@ -125,6 +125,25 @@ def test_reminders_go_by_email_sms_or_letter_with_fee(invoices, billing):
     assert batch.messages.get(channel="letter").status == "to_print"
 
 
+def test_a_reminder_tells_plugins(invoices, django_capture_on_commit_callbacks):
+    from apps.plugins import events
+
+    sent = []
+
+    def receiver(sender, reminder, **kwargs):
+        sent.append(reminder)
+
+    events.reminder_sent.connect(receiver)
+    try:
+        batch = MessageBatch.objects.create(kind=MessageBatch.Kind.PAYMENT_REMINDERS)
+        with django_capture_on_commit_callbacks(execute=True):
+            send_reminders(batch, Invoice.objects.filter(unit__name="Bystigen 6"))
+    finally:
+        events.reminder_sent.disconnect(receiver)
+
+    assert sent == [PaymentReminder.objects.get()]
+
+
 def test_paid_invoices_get_no_reminder(invoices):
     record_payment(invoices["Bystigen 4"], D("183"), TODAY)
     batch = MessageBatch.objects.create(kind=MessageBatch.Kind.PAYMENT_REMINDERS)

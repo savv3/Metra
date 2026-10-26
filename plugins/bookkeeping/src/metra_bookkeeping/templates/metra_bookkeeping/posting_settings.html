@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load i18n bookkeeping %}
+{% block title %}{% translate "Bookkeeping of invoices" %}{% endblock %}
+{% block content %}
+  <div class="page-head"><h1>{% translate "Bookkeeping of invoices" %}</h1></div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  <p class="help">{% blocktranslate trimmed %}
+    Issued invoices and credit notes (on their invoice date), payments (on the day paid) and
+    reminder fees become vouchers of their own, posted at once. Each voucher points to the
+    invoice it comes from, which is its evidence.
+  {% endblocktranslate %}</p>
+
+  {% if template_missing and perms.metra_bookkeeping.add_account %}
+    <div class="status-panel status-panel--warning">
+      <p>{% translate "The chart of accounts lacks accounts that postings use:" %}
+        {% for account in template_missing %}{{ account.number }} {{ account.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
+      <form method="post" action="{% url 'metra_bookkeeping:posting_accounts_add' %}">{% csrf_token %}<button type="submit" class="button">{% translate "Add them" %}</button></form>
+    </div>
+  {% endif %}
+
+  {% if opening %}{% with booked=opening.0 open=opening.1 %}{% if booked != open %}
+    <div class="status-panel status-panel--warning">
+      <p>{% blocktranslate trimmed with booked=booked|money open=open|money %}
+        The receivables account is {{ booked }} € when automatic posting starts, but the
+        invoices issued before then had {{ open }} € outstanding. Payments of those invoices are
+        booked against the receivables account, so check the opening balances.
+      {% endblocktranslate %}</p>
+    </div>
+  {% endif %}{% endwith %}{% endif %}
+
+  <form method="post" class="form form--wide" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% include "register/_field.html" with field=form.start %}
+
+    <h2>{% translate "Accounts" %}</h2>
+    {% for field in form %}{% if field.name != "start" and field.name != "invoice_series" and field.name != "payment_series" %}{% include "register/_field.html" %}{% endif %}{% endfor %}
+
+    <h2>{% translate "Voucher series" %}</h2>
+    {% include "register/_field.html" with field=form.invoice_series %}
+    {% include "register/_field.html" with field=form.payment_series %}
+
+    <h2>{% translate "Sales accounts" %}</h2>
+    <p class="help">{% translate "Invoice lines are booked to the account of their fee line, else to the account of their VAT rate, else to the default sales account." %}</p>
+    {% if accounts_form.fee_fields %}
+      <h3>{% translate "Per fee line" %}</h3>
+      {% for field in accounts_form.fee_fields %}{% include "register/_field.html" %}{% endfor %}
+    {% endif %}
+    <h3>{% translate "Per VAT rate" %}</h3>
+    {% for field in accounts_form.rate_fields %}{% include "register/_field.html" %}{% endfor %}
+
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+      <a class="button" href="{% url 'metra_bookkeeping:index' %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+  {% if waiting_count %}
+    <p class="help">{% blocktranslate count count=waiting_count trimmed %}{{ count }} record from invoicing is waiting to be posted; post it from the overview.{% plural %}{{ count }} records from invoicing are waiting to be posted; post them from the overview.{% endblocktranslate %}</p>
+  {% endif %}
+
+  <h2 id="vat">{% translate "VAT registration" %}</h2>
+  <p class="help">{% blocktranslate trimmed %}
+    VAT is booked only on days the organisation is VAT registered, at the rate in force on the
+    day. Reverse charge (services from other EU countries, construction) and imports, also of
+    goods across the Åland tax border, are not supported yet: book them by hand, and check them
+    with an accountant.
+  {% endblocktranslate %}</p>
+  <ul class="plain-list">
+    {% for registration in registrations %}
+      <li>{% translate "VAT registered" %} {{ registration }}
+        {% if perms.metra_bookkeeping.change_vatregistration %}<a class="button" href="{% url 'metra_bookkeeping:vat_registration_edit' registration.pk %}">{% translate "Edit" %}</a>{% endif %}
+        {% if perms.metra_bookkeeping.delete_vatregistration %}<form method="post" action="{% url 'metra_bookkeeping:vat_registration_delete' registration.pk %}" class="inline-form">{% csrf_token %}<button type="submit" class="button">{% translate "Remove" %}</button></form>{% endif %}
+      </li>
+    {% empty %}<li>{% translate "Not VAT registered." %}</li>{% endfor %}
+  </ul>
+  {% if perms.metra_bookkeeping.add_vatregistration %}
+    <form method="post" action="{% url 'metra_bookkeeping:vat_registration_add' %}" class="form form--inline" novalidate>
+      {% csrf_token %}
+      {% for field in registration_form %}{% include "register/_field.html" %}{% endfor %}
+      <button type="submit" class="button">{% translate "Add a VAT registration" %}</button>
+    </form>
+  {% endif %}
+{% endblock %}

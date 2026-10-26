@@ -163,7 +163,7 @@ default: they are installed in the Docker image, and
 | [metra-email-mailgun](../plugins/email-mailgun) | `mailgun` | Email through Mailgun, with delivery, bounce and spam reports. Bundled, on by default; sends once chosen under Settings > Email |
 | [metra-api](../plugins/api) | `api` | The REST API ([docs](api.md)). Off until `METRA_PLUGINS=api` |
 | [metra-webhooks](../plugins/webhooks) | `webhooks` | Signed webhooks to outside systems ([docs](webhooks.md)). Off until `METRA_PLUGINS=webhooks` |
-| [metra-bookkeeping](../plugins/bookkeeping) | `bookkeeping` | Double-entry books under Finnish rules: chart of accounts, numbered vouchers with receipts, reversing corrections, journal, ledger and trial balance. Off until `METRA_PLUGINS=bookkeeping` |
+| [metra-bookkeeping](../plugins/bookkeeping) | `bookkeeping` | Double-entry books under Finnish rules: chart of accounts, numbered vouchers with receipts, reversing corrections, journal, ledger and trial balance, dated VAT, and vouchers made automatically from invoices, credit notes, payments and reminder fees. Off until `METRA_PLUGINS=bookkeeping` |
 | [metra-meetings](../plugins/meetings) | `meetings` | Meetings: notice with the agenda, attendance and votes, minutes approved by the minute checkers and shown to members. Off until `METRA_PLUGINS=meetings` |
 
 So that each can later move to its own repository, a plugin in plugins/:
@@ -185,6 +185,7 @@ So that each can later move to its own repository, a plugin in plugins/:
 | Navigation | `api.add_navigation(NavItem(label, url_name, permission))` | A main-menu link, shown to users with the permission |
 | Unit panels | `api.add_unit_panel(Panel(template, title, permission, context))` | A section on unit pages. The template gets `object`, `title`, `perms`, `request` and whatever `context(request, unit)` returns |
 | Person panels | `api.add_person_panel(Panel(...))` | The same, on person pages |
+| Invoice panels | `api.add_invoice_panel(Panel(...))` | The same, on the pages of issued invoices and credit notes; `object` is the invoice |
 | SMS and email providers | `api.add_messaging_provider(ProviderClass)` | An `api.Provider` subclass with `channel` (`api.SMS` or `api.EMAIL`), `name` and `send()`. An SMS provider is chosen with `METRA_SMS_PROVIDER=<name>`, or automatically when `is_configured()` returns true; an email provider is chosen by an admin under Settings > Email, and then also gets the app's own mail (login codes, invitations) through `send_email_message(message)`, which by default sends the plain text with `send()` and can be overridden to send the whole Django `EmailMessage`. `api.sms_sender()`, `api.sms_country_code()`, `api.normalise_phone()` and `api.record_delivery()` help SMS providers. Email providers are chosen under Settings > Email; `api.email_from()` gives the from and Reply-To addresses, the email of a send-out carries its id in the `api.SEND_OUT_HEADER` header, and `api.record_email_event(provider, provider_id, event, reason)` records `api.DELIVERED`, `api.BOUNCED` (the message fails and the person's address is flagged) or `api.COMPLAINED`. A plugin with settings and a provider gets a "Send a test" form on its settings page, which sends through that provider |
 | Settings links | `api.add_settings_link(SettingsLink(label, url_name, permission, description, group))` | A link on the Settings page to the plugin's own settings or tools, listed in the section named by `group` (one of `api.SETTINGS_GROUPS`, such as `"organisation"` or `"messages"`; **Integrations** by default) with its `description` below it, and on the plugin's own page under **Settings > Add-ons**. It is shown only to users with `permission` (no permission: everyone who can open Settings). Give it a name people understand, such as "API clients"; the page never calls them plugins |
 | Member page panels | `api.add_member_panel(MemberPanel(template, title, context))` | A section on the member page behind a personal link, below the page's own sections. The template gets `unit`, `person`, `token`, `title`, `request` and whatever `context(request, member_link)` returns. Members are not users, so no permission applies: show only what the member may see. See "Serving members" below |
@@ -247,7 +248,7 @@ helpers in `api.RECORDS`, never `apps.*` modules:
 | `api.Unit`, `api.Person`, `api.UnitContact`, `api.UnitType`, `api.CustomField`, `api.Tag` | The register's models |
 | `api.Organisation` | The organisation's own details; `Organisation.current()` is the one in use, or None |
 | `api.ReadingType`, `api.ReadingRound`, `api.Reading` | Readings |
-| `api.Invoice`, `api.InvoiceLine`, `api.Payment` | Invoicing. Issued invoices and payments never change: only read them |
+| `api.Invoice`, `api.InvoiceLine`, `api.Payment`, `api.PaymentReminder` | Invoicing. Issued invoices, payments and payment reminders never change: only read them |
 | `api.BillingSettings`, `api.FeePlan`, `api.FeeLine` | What units are invoiced for: `BillingSettings.current()`, fee plans per unit type (and tag) and their lines |
 | `api.UnitForm`, `api.PersonForm`, `api.UnitContactForm`, `api.ReadingForm` | The forms staff use. Check data from outside with them, so a plugin never stores what the web pages would refuse (custom fields included) |
 | `api.log_view(obj)` | Record in the audit log that the current user opened a unit or person, as its page does |
@@ -269,6 +270,7 @@ database, so a receiver never sees a change that was rolled back:
 | `api.events.reading_saved` | `reading`, `created` (entered by staff or a member) |
 | `api.events.invoice_issued` | `invoice` (an invoice or a credit note got its number) |
 | `api.events.payment_recorded` | `payment` |
+| `api.events.reminder_sent` | `reminder` (a payment reminder, with its `fee`, which may be zero) |
 
 ```python
 from django.dispatch import receiver

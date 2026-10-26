@@ -16,6 +16,13 @@ enhet, adresserat till faktureringskontakten eller ägaren. Utkast där
 avläsningen saknas eller ser konstig ut markeras **Kontrollera**: mata in
 avläsningen och bygg om utkastet, eller redigera raderna.
 
+Omgången anger också leveransperioden: den första och sista dagen som
+avgifterna gäller, till exempel 1.1–31.12. Den skrivs ut på varje faktura.
+Momsen följer den och inte fakturadatumet: för vatten och andra fortlöpande
+leveranser ska momsen redovisas för den månad då perioden slutar, med den
+momssats som gäller då. En enskild faktura kan ha ett eget leveransdatum
+eller en egen period; utan det gäller fakturadatumet.
+
 **Utfärda alla kontrollerade utkast** på omgångens sida, eller **Utfärda
 fakturan** på ett enskilt utkast, ger varje faktura dess nummer och datum och
 låser den. En utfärdad faktura ändras aldrig: ett fel rättas med en

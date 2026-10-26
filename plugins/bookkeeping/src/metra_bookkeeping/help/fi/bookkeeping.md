@@ -46,6 +46,79 @@ tosite täsmää, se saa seuraavan numeron ja lukitaan. Numeroissa ei ole
 aukkoja: luonnoksilla ei ole numeroa, joten luonnoksen poistaminen ei jätä
 aukkoa.
 
+## ALV
+
+Jos organisaatio on arvonlisäverovelvollinen, lisää rekisteröinnin
+päivämäärät kohdassa **Laskujen kirjanpito** > **ALV-rekisteröinti**. ALV
+voidaan sen jälkeen kirjata rekisteröinnin aikaisille päiville, ja vain
+tositteen päivänä voimassa olevalla kannalla: alennettu kanta oli esimerkiksi
+14 % 31.12.2025 asti ja on 13,5 % 1.1.2026 alkaen. Jokainen rivi säilyttää
+kannan, jolla se kirjattiin.
+
+Merkitse tositteella rivi, jolla on veroton hinta, ja ALV-rivi samalla
+ALV-koodilla. Ostosta 100 € + 25,5 % ALV:
+
+| Tili | Debet | Kredit | ALV |
+| --- | --- | --- | --- |
+| 4000 Aineet ja tarvikkeet | 100,00 | | Ostot 25,5 % |
+| 1765 Ostojen arvonlisävero | 25,50 | | Ostot 25,5 % |
+| 1910 Pankkitili | | 125,50 | |
+
+Myynnin ALV:lla, ostojen ALV:lla ja maksettavalla ALV:lla on omat tilinsä.
+Siirrä kunkin ALV-kauden myynnin ja ostojen ALV tositteella ALV-tilitystilille
+(2939 Arvonlisäverovelka (tilitettävä)) ja kirjaa veron maksu sitä vastaan.
+
+Käännettyä verovelvollisuutta (muista EU-maista ostetut palvelut,
+rakennuspalvelut) ja tuontia, myös tavaroita Ahvenanmaan verorajan yli, ei
+vielä tueta. Kirjaa ne käsin ilman ALV-koodia ja tarkistuta ne
+kirjanpitäjällä.
+
+## Laskut ja suoritukset
+
+Metra voi kirjata laskutuksen puolestasi. Kohdassa **Laskujen kirjanpito**
+valitset päivän, jona automaattinen kirjaaminen alkaa, sekä tilit:
+
+- jokainen annettu lasku kirjataan laskun päivälle: myyntisaamiset
+  debetpuolelle, myynti (ja myynnin ALV) kreditpuolelle;
+- hyvityslasku kirjataan samoin, mutta toisin päin;
+- suoritus kirjataan maksupäivälle: pankkitili debetpuolelle,
+  myyntisaamiset kreditpuolelle;
+- muistutusmaksu kirjataan muistutuksen päivälle muistutusmaksujen tilille,
+  ilman ALV:a.
+
+Myynti kirjataan laskurivin maksurivin tilille, muuten sen ALV-kannan
+tilille, muuten myynnin oletustilille. Laskut menevät omaan tositesarjaansa
+(L) ja suoritukset toiseen (S).
+
+Laskun tosite päivätään laskun päivämäärälle, mutta sen arvonlisävero
+kuuluu laskun toimituspäivän tai toimitusjakson päättymisen kuukaudelle,
+jonka tosite näyttää. Tammikuussa viime vuoden vedestä laadittu lasku
+kuuluu siis arvonlisäverossa viime joulukuun jaksoon viime vuoden
+verokannalla.
+
+Asetussivu tarkistaa, että myyntisaamisten tili automaattisen kirjauksen
+alkaessa vastaa sitä, mitä ennen sitä laaditut laskut olivat avoinna, ja
+varoittaa, jos ne eroavat.
+
+Jokainen tällainen tosite kirjataan heti ja näyttää laskun, josta se on
+peräisin; lasku on sen todiste, ja laskun sivu näyttää sen tositteet. Jos
+tositetta ei voi kirjata (esimerkiksi koska tili ei ole enää käytössä), se
+jää luonnokseksi, jonka korjaat ja kirjaat. Laskut ja suoritukset, jotka on
+tehty kirjaamisen ollessa pois päältä tai jotka on päivätty ilman avointa
+tilikautta, luetellaan Kirjanpito-sivulla; **Kirjaa ne nyt** kirjaa ne
+kerran.
+
+Valitse aloituspäivä käsin jo kirjatun jälkeen, jotta mitään ei kirjata
+kahdesti. Ennen aloituspäivää annetut laskut kuuluvat avaaviin saldoihin:
+niiden suoritukset, jos ne tehdään aloituspäivän jälkeen, kirjataan
+tavalliseen tapaan myyntisaamisten tiliä vastaan.
+
+Myyntisaamisten tili vastaa tällöin laskuilla avoinna olevaa määrää:
+laskut miinus hyvityslaskut ja suoritukset, plus muistutusmaksut.
+
+Virheellinen automaattinen tosite oikaistaan kuten muutkin: kumoa se ja
+kirjaa oikea kirjaus uutena tositteena.
+
 ## Virheen oikaiseminen
 
 Kirjattu tosite ei koskaan muutu eikä sitä voi poistaa. Voit oikaista sen
@@ -83,6 +156,5 @@ lisäosaa ei voi poistaa käytöstä, jotta ne pysyvät luettavina.
 
 Ylläpitäjän, joka poistaa lisäosan palvelimelta (`METRA_PLUGINS`-asetuksesta), on ensin säilytettävä kirjanpito lakisääteisen ajan muulla tavoin: tallenna raportit ja kuitit ja säilytä varmuuskopio. Tiedot jäävät tietokantaan, mutta niitä ei voi lukea Metrassa, kun lisäosa ei ole asennettuna.
 
-Tuloslaskelma, tase, budjetti, laskuista ja maksuista tehtävät automaattiset
-kirjaukset sekä tilikauden päättäminen tulevat lisäosan myöhempiin
-versioihin.
+Tuloslaskelma, tase, budjetti, ALV-yhteenveto ja tilikauden päättäminen
+tulevat lisäosan myöhempiin versioihin.

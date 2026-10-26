@@ -60,6 +60,7 @@ from apps.notifications.kinds import Kind as NotificationKind
 from . import events
 from .hooks import (
     HELP_ARTICLES,
+    INVOICE_PANELS,
     MEMBER_PANELS,
     NAVIGATION,
     PERSON_PANELS,
@@ -106,11 +107,12 @@ RECORDS = {
     "ReadingType": "apps.readings.models",
     "ReadingRound": "apps.readings.models",
     "Reading": "apps.readings.models",
-    # Invoicing (apps/invoicing/models.py). Issued invoices and payments
-    # never change: read them, do not edit them.
+    # Invoicing (apps/invoicing/models.py). Issued invoices, payments and
+    # payment reminders never change: read them, do not edit them.
     "Invoice": "apps.invoicing.models",
     "InvoiceLine": "apps.invoicing.models",
     "Payment": "apps.invoicing.models",
+    "PaymentReminder": "apps.invoicing.models",
     # What units are invoiced for: BillingSettings.current() (VAT and payment
     # details), fee plans for a unit type (and tag) and their lines.
     "BillingSettings": "apps.invoicing.models",
@@ -149,6 +151,7 @@ __all__ = [
     "NotificationKind",
     "add_member_panel",
     "add_help_articles",
+    "add_invoice_panel",
     "add_notification_kind",
     "add_messaging_provider",
     "add_navigation",
@@ -215,6 +218,11 @@ def add_unit_panel(panel):
 
 def add_person_panel(panel):
     return hooks.register(PERSON_PANELS, panel)
+
+
+def add_invoice_panel(panel):
+    """A section on invoice and credit note pages; ``object`` is the invoice."""
+    return hooks.register(INVOICE_PANELS, panel)
 
 
 def add_messaging_provider(provider_class):

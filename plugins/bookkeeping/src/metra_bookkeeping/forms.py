@@ -1,14 +1,29 @@
 import datetime
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 from django import forms
+from django.conf import settings
 from django.template.defaultfilters import filesizeformat
-from django.utils import timezone
+from django.utils import timezone, translation
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
 
+from apps.plugins import api
+
 from . import countries
-from .models import Account, FiscalYear, Voucher, VoucherLine, VoucherSeries
+from .models import (
+    Account,
+    FiscalYear,
+    PostingSettings,
+    SalesAccount,
+    VatCode,
+    VatRegistration,
+    Voucher,
+    VoucherLine,
+    VoucherSeries,
+    vat_label,
+)
 
 DATE = forms.DateInput(attrs={"type": "date"}, format="%Y-%m-%d")
 
@@ -116,13 +131,35 @@ class VoucherForm(forms.ModelForm):
         return super().save(commit)
 
 
+def vat_choices():
+    """("sales:25.5", "Sales 25.5 %") and so on for the rates of the open years."""
+    first_open = FiscalYear.objects.filter(status=FiscalYear.Status.OPEN).order_by("start").first()
+    rates = countries.vat_rates(since=first_open.start if first_open else None)
+    return [("", "–")] + [
+        (f"{code}:{rate}", vat_label(code, rate)) for code in VatCode.values for rate in rates
+    ]
+
+
 class VoucherLineForm(forms.ModelForm):
+    vat = forms.ChoiceField(
+        label=gettext_lazy("VAT"),
+        required=False,
+        help_text=gettext_lazy("The VAT the line is for, when VAT registered."),
+    )
+
     class Meta:
         model = VoucherLine
-        fields = ["account", "description", "debit", "credit"]
+        fields = ["account", "description", "debit", "credit", "vat"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        choices = vat_choices()
+        if self.instance.vat_code:
+            current = f"{self.instance.vat_code}:{self.instance.vat_rate}"
+            self.initial["vat"] = current
+            if current not in dict(choices):
+                choices.append((current, self.instance.vat_display))
+        self.fields["vat"].choices = choices
         accounts = Account.objects.filter(active=True)
         if self.instance.pk:
             accounts = accounts | Account.objects.filter(pk=self.instance.account_id)
@@ -140,6 +177,12 @@ class VoucherLineForm(forms.ModelForm):
         for name in ("debit", "credit"):
             if cleaned.get(name) is None:
                 cleaned[name] = 0
+        code, _sep, rate = (cleaned.get("vat") or "").partition(":")
+        try:
+            self.instance.vat_rate = Decimal(rate) if code else None
+        except InvalidOperation:
+            raise forms.ValidationError({"vat": _("Choose a VAT rate from the list.")}) from None
+        self.instance.vat_code = code
         return cleaned
 
 
@@ -235,3 +278,154 @@ class ReportForm(forms.Form):
                 return None, None, None
             start, end = year.start, year.end
         return year, max(start, year.start), min(end, year.end)
+
+
+class PostingSettingsForm(forms.ModelForm):
+    """Where invoices and payments are booked. A series left empty is made
+    when the settings are saved."""
+
+    class Meta:
+        model = PostingSettings
+        fields = [
+            "start",
+            "receivables",
+            "bank",
+            "sales",
+            "reminder_fees",
+            "sales_vat",
+            "purchase_vat",
+            "vat_settlement",
+            "invoice_series",
+            "payment_series",
+        ]
+        widgets = {"start": DATE}
+
+    NEW_SERIES = {
+        "invoice_series": ("L", gettext_lazy("Sales invoices")),
+        "payment_series": ("S", gettext_lazy("Payments")),
+    }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        accounts = Account.objects.filter(active=True)
+        for name in PostingSettings.REQUIRED + ["purchase_vat"]:
+            field = self.fields[name]
+            if name in self.NEW_SERIES:
+                code, label = self.NEW_SERIES[name]
+                field.empty_label = _("New series: %(code)s %(name)s") % {
+                    "code": code,
+                    "name": label,
+                }
+            else:
+                current = getattr(self.instance, f"{name}_id")
+                field.queryset = accounts | Account.objects.filter(pk=current)
+
+    def clean_start(self):
+        start = self.cleaned_data["start"]
+        if start is not None:
+            year = FiscalYear.for_date(start)
+            if year is None or not year.is_open:
+                raise forms.ValidationError(_("Choose a day in an open financial year."))
+        return start
+
+    def clean(self):
+        cleaned = super().clean()
+        if cleaned.get("start"):
+            missing = [
+                self.fields[name].label
+                for name in PostingSettings.REQUIRED
+                if name not in self.NEW_SERIES and not cleaned.get(name)
+            ]
+            if missing:
+                raise forms.ValidationError(
+                    _("Choose these accounts before posting starts: %(names)s.")
+                    % {"names": ", ".join(str(name) for name in missing)}
+                )
+        vat = [cleaned.get(name) for name in ("sales_vat", "purchase_vat", "vat_settlement")]
+        vat = [account for account in vat if account]
+        if len(set(vat)) != len(vat):
+            raise forms.ValidationError(
+                _("Sales VAT, purchase VAT and the VAT settlement need accounts of their own.")
+            )
+        if cleaned.get("receivables") and cleaned.get("receivables") == cleaned.get("bank"):
+            raise forms.ValidationError(_("Receivables and the bank need accounts of their own."))
+        return cleaned
+
+    def save(self, commit=True):
+        for name, (code, label) in self.NEW_SERIES.items():
+            if getattr(self.instance, f"{name}_id") is None:
+                taken = set(VoucherSeries.objects.values_list("code", flat=True))
+                free = next(
+                    c for c in [code, *(f"{code}{n}" for n in range(2, 100))] if c not in taken
+                )
+                # Named in the organisation's language, like the vouchers.
+                with translation.override(settings.LANGUAGE_CODE):
+                    series = VoucherSeries.objects.create(code=free, name=str(label))
+                setattr(self.instance, name, series)
+        return super().save(commit)
+
+
+class SalesAccountsForm(forms.Form):
+    """An income account per fee line and per VAT rate; empty for the
+    default sales account."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        accounts = Account.objects.filter(active=True, kind=Account.Kind.INCOME)
+        rules = {(rule.fee_line_id, rule.vat_rate): rule for rule in SalesAccount.objects.all()}
+        self.rows = []
+        lines = api.FeeLine.objects.filter(plan__active=True).select_related("plan")
+        for line in lines:
+            rule = rules.get((line.pk, None))
+            self._add(f"fee_{line.pk}", f"{line.plan} – {line.description}", accounts, rule)
+            self.rows.append(("fee", line.pk, f"fee_{line.pk}"))
+        for rate in self._rates(rules):
+            rule = rules.get((None, rate))
+            name = f"rate_{rate}"
+            self._add(name, vat_label(VatCode.SALES, rate), accounts, rule)
+            self.rows.append(("rate", rate, name))
+
+    @staticmethod
+    def _rates(rules):
+        first_open = (
+            FiscalYear.objects.filter(status=FiscalYear.Status.OPEN).order_by("start").first()
+        )
+        rates = set(countries.vat_rates(since=first_open.start if first_open else None))
+        rates |= {rate for _line, rate in rules if rate is not None}
+        return sorted({Decimal(rate).quantize(Decimal("0.01")) for rate in rates}, reverse=True)
+
+    def _add(self, name, label, accounts, rule):
+        queryset = accounts | Account.objects.filter(pk=rule.account_id) if rule else accounts
+        self.fields[name] = forms.ModelChoiceField(
+            label=label,
+            queryset=queryset,
+            required=False,
+            empty_label=_("Default sales account"),
+            initial=rule.account_id if rule else None,
+        )
+
+    def fee_fields(self):
+        return [self[name] for kind, _key, name in self.rows if kind == "fee"]
+
+    def rate_fields(self):
+        return [self[name] for kind, _key, name in self.rows if kind == "rate"]
+
+    def save(self):
+        for kind, key, name in self.rows:
+            account = self.cleaned_data.get(name)
+            match = {"fee_line_id": key} if kind == "fee" else {"vat_rate": key}
+            if account is None:
+                for rule in SalesAccount.objects.filter(**match):
+                    rule.delete()  # one by one, for the audit log
+            else:
+                rule = SalesAccount.objects.filter(**match).first() or SalesAccount(**match)
+                if rule.account_id != account.pk:
+                    rule.account = account
+                    rule.save()
+
+
+class VatRegistrationForm(forms.ModelForm):
+    class Meta:
+        model = VatRegistration
+        fields = ["start", "end"]
+        widgets = {"start": DATE, "end": DATE}

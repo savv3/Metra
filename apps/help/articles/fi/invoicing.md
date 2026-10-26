@@ -17,6 +17,13 @@ Luonnokset, joista lukema puuttuu tai joiden lukema on outo, merkitään
 **Tarkista**: syötä lukema ja muodosta luonnos uudelleen tai muokkaa sen
 rivejä.
 
+Kierros antaa myös toimitusjakson: ensimmäisen ja viimeisen päivän, jota
+maksut koskevat, esimerkiksi 1.1.–31.12. Se tulostetaan jokaiseen laskuun.
+Arvonlisävero määräytyy sen eikä laskun päivämäärän mukaan: veden ja muiden
+jatkuvien toimitusten vero kohdistuu kuukaudelle, jolloin jakso päättyy,
+silloin voimassa olevalla verokannalla. Yksittäisellä laskulla voi olla oma
+toimituspäivä tai -jakso; ilman sitä käytetään laskun päivämäärää.
+
 **Laadi kaikki tarkistetut luonnokset** ajon sivulla tai **Laadi lasku**
 yksittäisellä luonnoksella antaa jokaiselle laskulle numeron ja päivämäärät
 ja lukitsee sen. Laadittua laskua ei koskaan muuteta: virhe korjataan

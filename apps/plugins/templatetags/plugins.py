@@ -8,6 +8,7 @@ from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 
 from ..hooks import (
+    INVOICE_PANELS,
     MEMBER_PANELS,
     NAVIGATION,
     PERSON_PANELS,
@@ -19,7 +20,7 @@ from ..hooks import (
 register = template.Library()
 logger = logging.getLogger(__name__)
 
-PANELS = {"unit": UNIT_PANELS, "person": PERSON_PANELS}
+PANELS = {"unit": UNIT_PANELS, "person": PERSON_PANELS, "invoice": INVOICE_PANELS}
 
 
 def _allowed(user, permission):
@@ -43,7 +44,8 @@ def plugin_navigation(context):
 
 @register.simple_tag(takes_context=True)
 def plugin_panels(context, kind, obj):
-    """Sections plugins add to unit ("unit") or person ("person") pages.
+    """Sections plugins add to unit ("unit"), person ("person") or invoice
+    ("invoice") pages.
 
     A plugin that fails while rendering is left out (and logged) rather than
     breaking the page, except in development, where the error shows.

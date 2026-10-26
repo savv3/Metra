@@ -92,6 +92,7 @@ def send_reminders(batch, invoices, user=None):
                     channel=channel_for(invoice.person),
                     sent_by=user,
                 )
+                events.send_on_commit(events.reminder_sent, PaymentReminder, reminder=reminder)
             _deliver(batch, invoice, reminder)
     batch.status = MessageBatch.Status.DONE
     batch.finished_at = timezone.now()
