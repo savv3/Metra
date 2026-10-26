@@ -29,8 +29,14 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   under Settings > Bookkeeping of invoices, each voucher pointing to its
   invoice and the invoice page showing its vouchers. VAT is booked at the
   rate in force on the day, with dated VAT registration and separate
-  accounts for sales VAT, purchase VAT and the VAT settlement. Income
-  statement, balance sheet and the year-end follow.
+  accounts for sales VAT, purchase VAT and the VAT settlement. The
+  income statement and balance sheet follow the PMA decree's formats
+  (the non-profit format for associations), in Finnish or Swedish with
+  the previous year beside them, and show the size class; a budget per
+  account is followed up against the books; a VAT summary per VAT period
+  counts VAT by the supply date and advance payments, and says when it is
+  not ready for the return. Every report is also a PDF and a CSV file.
+  The year-end follows.
 - Plugin authors: an add-on's AppConfig can define `turn_off_refused()` to
   keep it from being turned off, with the reason shown under Settings >
   Add-ons.

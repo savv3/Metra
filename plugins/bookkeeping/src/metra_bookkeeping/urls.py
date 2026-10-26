@@ -49,4 +49,9 @@ urlpatterns = [
     path("journal/", views.journal, name="journal"),
     path("ledger/", views.ledger, name="ledger"),
     path("trial-balance/", views.trial_balance, name="trial_balance"),
+    path("income-statement/", views.income_statement, name="income_statement"),
+    path("balance-sheet/", views.balance_sheet, name="balance_sheet"),
+    path("budget/", views.budget, name="budget"),
+    path("years/<int:pk>/budget/", views.budget_edit, name="budget_edit"),
+    path("vat/", views.vat_summary, name="vat_summary"),
 ]

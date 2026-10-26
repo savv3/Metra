@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n bookkeeping %}
+{% block title %}{% translate "Budget follow-up" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Budget follow-up" %}</h1>
+    {% include "metra_bookkeeping/_report_actions.html" %}
+    {% if year and perms.metra_bookkeeping.change_budget %}<div class="actions no-print"><a class="button button--primary" href="{% url 'metra_bookkeeping:budget_edit' year.pk %}">{% translate "Edit the budget" %}</a></div>{% endif %}
+  </div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  {% include "metra_bookkeeping/_report_filter.html" %}
+  {% include "metra_bookkeeping/_report_head.html" %}
+  <p class="help">{% translate "The year's budget against what is booked in the period. Income and costs are both positive; for a part of the year, compare with the share of the year that has passed." %}</p>
+  {% include "metra_bookkeeping/_budget_table.html" %}
+{% endblock %}

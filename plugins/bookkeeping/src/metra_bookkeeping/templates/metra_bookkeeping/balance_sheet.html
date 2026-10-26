@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n bookkeeping %}
+{% block title %}{% translate "Balance sheet" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Balance sheet" %}</h1>
+    {% include "metra_bookkeeping/_report_actions.html" %}
+  </div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  {% include "metra_bookkeeping/_report_filter.html" %}
+  {% if statement %}
+    {% include "metra_bookkeeping/_report_head.html" %}
+    <p class="help">{% translate "The balances at the day chosen, from the posted vouchers. The profit or surplus for the year is worked out from the income and expense accounts." %}</p>
+    {% include "metra_bookkeeping/_statement_notes.html" %}
+    {% include "metra_bookkeeping/_statement_table.html" %}
+  {% else %}
+    <p class="empty">{% translate "The books have not been started yet." %}</p>
+  {% endif %}
+{% endblock %}

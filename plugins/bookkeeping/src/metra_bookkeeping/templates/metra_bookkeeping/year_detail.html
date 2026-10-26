@@ -12,6 +12,7 @@
     <dt>{% translate "Last day" %}</dt><dd>{{ year.end|date:"DATE_FORMAT" }}</dd>
     <dt>{% translate "Kind of organisation" %}</dt><dd>{{ chart_name }}</dd>
     {% if year.length_reason %}<dt>{% translate "Not 12 months because" %}</dt><dd>{{ year.get_length_reason_display }}</dd>{% endif %}
+    <dt>{% translate "Average staff" %}</dt><dd>{{ year.staff }}</dd>
     <dt>{% translate "Posted vouchers" %}</dt><dd>{{ posted }}</dd>
     <dt>{% translate "Drafts" %}</dt><dd>{{ drafts }}</dd>
     <dt>{% translate "Books kept until" %}</dt><dd>{{ year.books_kept_until|date:"DATE_FORMAT" }}<span class="help">{% translate "Financial statements, journal, ledger, chart of accounts and list of books: 10 years from the end of the financial year." %}</span></dd>
@@ -22,5 +23,8 @@
     <a class="button" href="{% url 'metra_bookkeeping:journal' %}?year={{ year.pk }}">{% translate "Journal" %}</a>
     <a class="button" href="{% url 'metra_bookkeeping:ledger' %}?year={{ year.pk }}">{% translate "General ledger" %}</a>
     <a class="button" href="{% url 'metra_bookkeeping:trial_balance' %}?year={{ year.pk }}">{% translate "Trial balance" %}</a>
+    <a class="button" href="{% url 'metra_bookkeeping:income_statement' %}?year={{ year.pk }}">{% translate "Income statement" %}</a>
+    <a class="button" href="{% url 'metra_bookkeeping:balance_sheet' %}?year={{ year.pk }}">{% translate "Balance sheet" %}</a>
+    {% if perms.metra_bookkeeping.view_budget %}<a class="button" href="{% url 'metra_bookkeeping:budget' %}?year={{ year.pk }}">{% translate "Budget follow-up" %}</a>{% endif %}
   </div>
 {% endblock %}

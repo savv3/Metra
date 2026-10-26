@@ -1,0 +1,14 @@
+{% load bookkeeping %}
+<div class="table-wrap" tabindex="0" role="region" aria-label="{{ statement.title }}">
+  <table class="statement">
+    <thead><tr><th scope="col"></th>{% for column in statement.columns %}<th scope="col" class="num">{{ column.label }}</th>{% endfor %}</tr></thead>
+    <tbody>
+      {% for row in statement.rows %}
+        <tr class="{{ row.kind }} depth-{{ row.depth }}">
+          <th scope="row">{{ row.name }}</th>
+          {% for amount in row.amounts %}<td class="num">{% if row.show_amounts %}{{ amount|money }}{% endif %}</td>{% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

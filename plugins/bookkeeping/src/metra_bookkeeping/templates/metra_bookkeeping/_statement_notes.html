@@ -1,0 +1,24 @@
+{% load i18n bookkeeping %}
+{% if statement.unmapped %}
+  <div class="status-panel status-panel--warning">
+    <h2>{% translate "Accounts outside the format" %}</h2>
+    <p>{% translate "These accounts have entries but their numbers fall on no line of the statement, so the statement leaves them out. Give them numbers in the right range (see the help), or move the entries." %}</p>
+    <ul>{% for account in statement.unmapped %}<li><a href="{% url 'metra_bookkeeping:account_ledger' account.pk %}?year={{ year.pk }}">{{ account }}</a></li>{% endfor %}</ul>
+  </div>
+{% endif %}
+{% if statement.difference and not statement.balances %}
+  <div class="status-panel status-panel--warning">
+    <p>{% blocktranslate with difference=statement.difference.0|money trimmed %}Assets and equity and liabilities differ by {{ difference }}. Check the accounts outside the format, and that the opening balances balance.{% endblocktranslate %}</p>
+  </div>
+{% endif %}
+{% if translation %}<p class="help"><strong>{{ translation }}</strong></p>{% endif %}
+{% if size %}
+  <p class="help">
+    {% if size.key == "micro" %}{% translate "Size class: micro entity. The micro-entity format may be used, which leaves out the breakdowns; the full format is always allowed." %}
+    {% elif size.key == "small" %}{% translate "Size class: small entity. The full format of the decree on small and micro entities applies." %}
+    {% else %}{% translate "The limits of a small entity are exceeded: the decree on small and micro entities no longer applies. Ask an accountant which formats to use." %}{% endif %}
+    {% for item in size.years %}<br>{% blocktranslate with year=item.year total=item.balance_total|money turnover=item.turnover|money staff=item.staff trimmed %}{{ year }}: balance sheet total {{ total }}, turnover {{ turnover }}, staff {{ staff }}.{% endblocktranslate %}{% endfor %}
+    {% if size.provisional %}<br>{% translate "The figures of an open year are those booked so far." %}{% endif %}
+  </p>
+{% endif %}
+<p class="help">{% blocktranslate with source=statement.format.source trimmed %}Format: {{ source }}. The line names are the decree's own, in Finnish or Swedish.{% endblocktranslate %}</p>

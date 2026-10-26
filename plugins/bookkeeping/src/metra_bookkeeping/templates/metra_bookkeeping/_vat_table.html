@@ -1,0 +1,53 @@
+{% load i18n bookkeeping %}
+{% if not summary.registered %}
+  <p class="empty">{% translate "The organisation is not VAT registered on these dates. Add the VAT registration in the bookkeeping of invoices." %}</p>
+{% else %}
+  {% if summary.ready %}
+    <div class="status-panel">
+      <p>{% translate "Nothing known is missing: the entries with a VAT code are all posted." %}</p>
+    </div>
+  {% else %}
+    <div class="status-panel status-panel--warning">
+      <h2>{% translate "Not ready for the VAT return" %}</h2>
+      <ul>
+        {% if summary.accounts_missing %}<li>{% translate "Choose the VAT accounts in the bookkeeping of invoices, so VAT can be told from the base." %}</li>{% endif %}
+        {% if summary.uncoded %}<li>{% translate "These vouchers have entries on the VAT accounts without a VAT code, so they are not in the summary:" %}
+          {% for voucher in summary.uncoded %}<a href="{{ voucher.get_absolute_url }}">{{ voucher.display_number }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</li>{% endif %}
+        {% if summary.drafts %}<li>{% translate "Draft vouchers with VAT are not posted yet:" %}
+          {% for voucher in summary.drafts %}<a href="{{ voucher.get_absolute_url }}">{{ voucher.date|date:"SHORT_DATE_FORMAT" }} {{ voucher.description }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</li>{% endif %}
+        {% if summary.waiting %}<li>{% blocktranslate count count=summary.waiting|length trimmed %}{{ count }} invoice, payment or reminder fee from invoicing has no voucher yet.{% plural %}{{ count }} invoices, payments and reminder fees from invoicing have no voucher yet.{% endblocktranslate %}</li>{% endif %}
+      </ul>
+    </div>
+  {% endif %}
+  <p class="help">{% translate "Only entries with a VAT code are included. Reverse charge, imports (also goods across the Åland tax border) and anything booked without a VAT code are not: add those to the return yourself." %}</p>
+  <p class="help">{% translate "VAT follows the supply: invoices count at the end of their supply period, and the part paid before it as an advance payment in the month it was paid. Receipts entered by hand count on the voucher's date, and a reversal where the voucher it reverses counted." %}</p>
+  {% for warning in summary.rate_warnings %}
+    <p class="status-panel status-panel--warning">{% blocktranslate with voucher=warning.0.display_number rate=warning.1 day=warning.2|date:"SHORT_DATE_FORMAT" trimmed %}Voucher {{ voucher }}: an advance payment received on {{ day }}, when the VAT rate {{ rate }} % was not in force. Check the rate with an accountant.{% endblocktranslate %}</p>
+  {% endfor %}
+  {% for period in summary.periods %}
+    <h2>{{ period.start|date:"SHORT_DATE_FORMAT" }}–{{ period.end|date:"SHORT_DATE_FORMAT" }}</h2>
+    <p class="help">{% blocktranslate with due=period.due|date:"DATE_FORMAT" trimmed %}The return and the tax are due {{ due }}.{% endblocktranslate %}</p>
+    {% if period.late %}
+      <p class="status-panel status-panel--warning">{% translate "Posted after the period ended, so not in a return filed before then:" %}
+        {% for voucher in period.late %}<a href="{{ voucher.get_absolute_url }}">{{ voucher.display_number }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    {% endif %}
+    {% if period.is_empty %}
+      <p class="empty">{% translate "No VAT in this period." %}</p>
+    {% else %}
+      <div class="table-wrap" tabindex="0" role="region" aria-label="{{ period.start|date:'SHORT_DATE_FORMAT' }}–{{ period.end|date:'SHORT_DATE_FORMAT' }}">
+        <table>
+          <thead><tr><th scope="col">{% translate "VAT" %}</th><th scope="col" class="num">{% translate "Base" %}</th><th scope="col" class="num">{% translate "Tax" %}</th></tr></thead>
+          <tbody>
+            {% for rate, amounts in period.sales_rows %}<tr><th scope="row">{{ rate|vat_label:"sales" }}</th><td class="num">{{ amounts.base|money }}</td><td class="num">{{ amounts.vat|money }}</td></tr>{% endfor %}
+            {% for rate, amounts in period.purchase_rows %}<tr><th scope="row">{{ rate|vat_label:"purchases" }}</th><td class="num">{{ amounts.base|money }}</td><td class="num">{{ amounts.vat|money }}</td></tr>{% endfor %}
+          </tbody>
+          <tfoot>
+            <tr><th scope="row">{% translate "VAT on sales" %}</th><td></td><td class="num">{{ period.sales_vat|money }}</td></tr>
+            <tr><th scope="row">{% translate "Deductible VAT on purchases" %}</th><td></td><td class="num">{{ period.purchase_vat|money }}</td></tr>
+            <tr><th scope="row">{% if period.payable < 0 %}{% translate "To get back" %}{% else %}{% translate "To pay" %}{% endif %}</th><td></td><td class="num">{{ period.payable|money }}</td></tr>
+          </tfoot>
+        </table>
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}

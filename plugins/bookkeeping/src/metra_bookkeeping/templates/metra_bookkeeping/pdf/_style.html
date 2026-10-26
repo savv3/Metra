@@ -1,0 +1,23 @@
+<style>
+  @page { size: A4; margin: 16mm 14mm 18mm; @bottom-center { content: counter(page) " / " counter(pages); font-size: 8pt; color: #555; } }
+  body { font-family: "DejaVu Sans", "Helvetica", "Arial", sans-serif; font-size: 9pt; color: #000; line-height: 1.35; }
+  .organisation { font-size: 9pt; color: #333; margin-bottom: 4mm; }
+  h1 { font-size: 15pt; margin: 0 0 1mm; }
+  h2 { font-size: 10.5pt; margin: 5mm 0 1.5mm; page-break-after: avoid; }
+  .subtitle, .note { font-size: 8.5pt; color: #333; margin: 0 0 3mm; }
+  a { color: inherit; text-decoration: none; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 0.8mm 1.2mm; border-bottom: 0.4px solid #ccc; vertical-align: top; }
+  thead th { border-bottom: 1px solid #000; }
+  tfoot th, tfoot td { font-weight: bold; border-top: 1px solid #000; border-bottom: 0; }
+  .num { text-align: right; white-space: nowrap; }
+  tr { page-break-inside: avoid; }
+  .no-print, .help { display: none; }
+  .statement td, .statement th { border-bottom: 0; padding: 0.5mm 1.2mm; font-weight: normal; }
+  .statement thead th { border-bottom: 1px solid #000; font-weight: bold; }
+  .statement .heading th, .statement .total th, .statement .total td { font-weight: bold; }
+  .statement .result th, .statement .result td { font-weight: bold; border-top: 0.4px solid #000; }
+  .statement .total th, .statement .total td { border-top: 1px solid #000; border-bottom: 1px solid #000; }
+  .statement .note th { font-style: italic; font-weight: normal; }
+  .depth-1 th { padding-left: 4mm; } .depth-2 th { padding-left: 8mm; } .depth-3 th { padding-left: 12mm; } .depth-4 th { padding-left: 16mm; }
+</style>

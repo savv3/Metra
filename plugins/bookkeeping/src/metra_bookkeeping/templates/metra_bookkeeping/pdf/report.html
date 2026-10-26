@@ -1,0 +1,19 @@
+{% load i18n %}<!doctype html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+<meta charset="utf-8">
+<title>{{ title }}</title>
+{% include "metra_bookkeeping/pdf/_style.html" %}
+</head>
+<body>
+  {% if organisation %}<div class="organisation"><strong>{{ organisation.name }}</strong>{% if organisation.business_id %} &middot; {{ organisation.business_id }}{% endif %}</div>{% endif %}
+  <h1>{{ title }}</h1>
+  {% if year %}
+    <p class="subtitle">{% translate "Financial year" %} {{ year }} &middot; {{ start|date:"SHORT_DATE_FORMAT" }}–{{ end|date:"SHORT_DATE_FORMAT" }} &middot; {% blocktranslate with when=printed_at|date:"SHORT_DATETIME_FORMAT" %}Made {{ when }}{% endblocktranslate %}</p>
+  {% else %}
+    <p class="subtitle">{{ start|date:"SHORT_DATE_FORMAT" }}–{{ end|date:"SHORT_DATE_FORMAT" }} &middot; {% blocktranslate with when=printed_at|date:"SHORT_DATETIME_FORMAT" %}Made {{ when }}{% endblocktranslate %}</p>
+  {% endif %}
+  {% include body %}
+</body>
+</html>

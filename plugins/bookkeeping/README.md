@@ -24,6 +24,15 @@ following the Finnish Accounting Act (kirjanpitolaki):
   stored on each line, dated VAT registration, and separate accounts for
   sales VAT, purchase VAT and the VAT settlement. Reverse charge and
   imports are not supported yet;
+- the income statement and balance sheet in the formats of the decree on
+  small and micro entities (PMA 1753/2015; the non-profit format for
+  associations), with the decree's own Finnish and Swedish line names, the
+  previous year beside them, the size class and the shorter micro-entity
+  format. Accounts land on lines by their number;
+- a budget per account and year, followed up against the books;
+- a VAT summary per VAT period by rate, dated by the supply and by advance
+  payments, that says when it is not ready for the return;
+- every report as a PDF and a CSV file;
 - a list of drafts past the legal booking time (four months after the end
   of their month), and on each year the dates until which its books and
   vouchers must be kept.
@@ -36,8 +45,7 @@ Removing it from `METRA_PLUGINS` on the server is not stopped: keep the books
 another way first (reports, receipts and a backup). The tables stay in the database.
 
 What differs between countries is in `countries/` (Finland in `fi.py`).
-The plan for the rest (financial statements, the VAT summary, budget,
-year-end and exports) is the phase 9 build plan in
+The plan for the rest (year-end and exports) is the phase 9 build plan in
 [docs/architecture.md](../../docs/architecture.md#phase-9-build-plan).
 
 Personal data: voucher descriptions and receipts can name people. They are

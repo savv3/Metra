@@ -1,0 +1,28 @@
+{% load i18n bookkeeping %}
+{% if income or expenses %}
+  <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Budget follow-up' %}">
+    <table>
+      <thead><tr>
+        <th scope="col">{% translate "Account" %}</th><th scope="col" class="num">{% translate "Budget" %}</th>
+        <th scope="col" class="num">{% translate "Actual" %}</th><th scope="col" class="num">{% translate "Difference" %}</th>
+        <th scope="col" class="num">{% translate "Of the budget" %}</th>
+      </tr></thead>
+      {% for group, rows, total in budget_groups %}
+        <tbody>
+          <tr><th scope="rowgroup" colspan="5">{{ group }}</th></tr>
+          {% for row in rows %}
+            <tr>
+              <th scope="row"><a href="{% url 'metra_bookkeeping:account_ledger' row.account.pk %}?year={{ year.pk }}">{{ row.account }}</a></th>
+              <td class="num">{{ row.budget|money_or_blank }}</td><td class="num">{{ row.actual|money }}</td>
+              <td class="num">{{ row.difference|money }}</td><td class="num">{% if row.used is not None %}{{ row.used }} %{% endif %}</td>
+            </tr>
+          {% endfor %}
+          <tr class="total"><th scope="row">{% translate "Total" %}</th><td class="num">{{ total.budget|money }}</td><td class="num">{{ total.actual|money }}</td><td class="num">{{ total.difference|money }}</td><td></td></tr>
+        </tbody>
+      {% endfor %}
+      <tfoot><tr><th scope="row">{% translate "Result" %}</th><td class="num">{{ totals.result.budget|money }}</td><td class="num">{{ totals.result.actual|money }}</td><td class="num">{{ totals.result.difference|money }}</td><td></td></tr></tfoot>
+    </table>
+  </div>
+{% else %}
+  <p class="empty">{% translate "No budget and no entries in this period." %}</p>
+{% endif %}
