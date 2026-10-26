@@ -5987,6 +5987,22 @@ msgstr ""
 msgid "Main"
 msgstr "Päävalikko"
 
+#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
+msgid "Finance"
+msgstr "Talous"
+
+#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
+msgid "Communication"
+msgstr "Viestintä"
+
+#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
+msgid "Menu"
+msgstr "Valikko"
+
+#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
+msgid "Close menu"
+msgstr "Sulje valikko"
+
 #: templates/base.html:45
 msgid "Theme"
 msgstr "Teema"

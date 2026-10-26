@@ -1,0 +1,15 @@
+{% load i18n nav %}<nav class="side-nav" id="main-menu" aria-label="{% translate 'Main' %}">
+  <a class="side-nav__close" href="#">{% translate "Close menu" %}</a>
+  {% for title, items in sections %}
+    <h2>{{ title }}</h2>
+    <ul>
+      {% for item in items %}
+        <li><a href="{{ item.url }}"{% if item.current %} aria-current="page"{% endif %}>{% menu_icon item.icon %}{{ item.label }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+  <ul class="side-nav__end">
+    {% if settings_item %}<li><a href="{{ settings_item.url }}"{% if settings_item.current %} aria-current="page"{% endif %}>{% menu_icon "settings" %}{{ settings_item.label }}</a></li>{% endif %}
+    <li><a href="{{ help.url }}" class="help-link"{% if help.current %} aria-current="page"{% endif %}>{% menu_icon "help" %}{% translate "Help" %}</a></li>
+  </ul>
+</nav>

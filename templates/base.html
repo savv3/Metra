@@ -1,4 +1,4 @@
-{% load help i18n nav notifications plugins roles static %}<!doctype html>
+{% load i18n nav notifications roles static %}<!doctype html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -15,18 +15,14 @@
   <a class="skip-link" href="#main">{% translate "Skip to content" %}</a>
   <header class="site-header">
     <div class="site-header__bar">
+      {% if user.is_authenticated %}
+        <a class="menu-button" href="#main-menu" aria-controls="main-menu">
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          <span class="visually-hidden">{% translate "Menu" %}</span>
+        </a>
+      {% endif %}
       <a class="brand" href="/"><img src="{% static 'favicon.svg' %}" alt="" width="28" height="28">{% translate "Metra" %}</a>
       {% if user.is_authenticated %}
-        <nav class="main-nav" aria-label="{% translate 'Main' %}">
-          {% if perms.register.view_unit %}{% firstof unit_word_plural as label %}{% nav_link "register:unit_list" label %}{% endif %}
-          {% if perms.register.view_person %}{% translate "People" as label %}{% nav_link "register:person_list" label %}{% endif %}
-          {% if perms.readings.view_readinground %}{% translate "Readings" as label %}{% nav_link "readings:round_list" label %}{% endif %}
-          {% if perms.invoicing.view_invoice %}{% translate "Invoices" as label %}{% nav_link "invoicing:invoice_list" label %}{% endif %}
-          {% if perms.messaging.view_messagebatch %}{% translate "Send-outs" as label %}{% nav_link "messaging:batch_list" label %}{% endif %}
-          {% plugin_navigation %}
-          {% if user|can_open_settings %}{% translate "Settings" as label %}{% nav_link "core:settings" label %}{% endif %}
-          {% help_link %}
-        </nav>
         {% notification_bell %}
         <details class="user-menu">
           <summary>
@@ -61,6 +57,8 @@
       {% endif %}
     </div>
   </header>
+  <div class="app-layout{% if user.is_authenticated %} app-layout--menu{% endif %}">
+  {% if user.is_authenticated %}{% main_menu %}{% endif %}
   <main id="main">
     {% include "_machine_translation_notice.html" %}
     {# One two-factor banner at a time: the installation-wide warning for staff when it is off, else the personal nudge. #}
@@ -85,5 +83,6 @@
     {% block before_content %}{% endblock %}
     {% block content %}{% endblock %}
   </main>
+  </div>
 </body>
 </html>

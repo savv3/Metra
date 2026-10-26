@@ -178,24 +178,61 @@ td a:hover, th a:hover { text-decoration: underline; }
 .site-header__bar > .lang-form { margin-left: auto; }
 .lang-form { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
 .lang-form select { width: auto; min-height: 2.25rem; padding: 0.25rem 0.5rem; }
-.main-nav {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.25rem;
-  flex: 1;
+/* Main menu: a sidebar beside the page for signed-in users. On phones it is
+   hidden and the menu button opens it (as #main-menu:target, so it works
+   without JavaScript). */
+.app-layout--menu {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  align-items: start;
 }
-.main-nav a {
-  display: inline-block;
-  padding: 0.45rem 0.8rem;
-  border-radius: 999px;
+.app-layout--menu main { width: 100%; margin: 0; padding-left: 2rem; padding-right: 2rem; }
+.site-header:has(+ .app-layout--menu) .site-header__bar { max-width: none; padding-left: 1.25rem; padding-right: 1.25rem; }
+.side-nav {
+  position: sticky;
+  top: 4rem;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 4rem);
+  overflow-y: auto;
+  padding: 1rem 0.75rem;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+}
+.side-nav h2 {
+  margin: 1.1rem 0.75rem 0.35rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.side-nav h2:first-of-type { margin-top: 0.25rem; }
+.side-nav ul { list-style: none; margin: 0; padding: 0; }
+.side-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-small);
   color: var(--muted);
   font-weight: 600;
-  font-size: 0.975rem;
+  font-size: 0.96rem;
   text-decoration: none;
 }
-.main-nav a:hover { color: var(--text); background: var(--surface-muted); }
-.main-nav a[aria-current="page"] { color: var(--primary); background: var(--primary-soft); }
+.side-nav a:hover { color: var(--text); background: var(--surface-muted); }
+.side-nav a[aria-current="page"] { color: var(--primary); background: var(--primary-soft); }
+.menu-icon { flex: none; }
+.side-nav__end { margin-top: auto !important; padding-top: 0.5rem !important; border-top: 1px solid var(--border); }
+.side-nav .side-nav__close, .menu-button { display: none; }
+.menu-button {
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-left: -0.5rem;
+  border-radius: 50%;
+  color: var(--text);
+}
+.menu-button:hover { background: var(--surface-muted); }
 
 /* Account menu: a native disclosure, so it works without JavaScript. */
 .user-menu { position: relative; margin-left: auto; }
@@ -458,9 +495,21 @@ tbody th { font-weight: 600; }
 .choice-list .help { display: block; }
 
 @media (max-width: 48rem) {
-  /* The menu gets its own row under the name and scrolls sideways. */
-  .main-nav { order: 3; flex: 1 0 100%; flex-wrap: nowrap; overflow-x: auto; margin: 0 -0.25rem; padding-bottom: 0.25rem; scrollbar-width: none; }
-  .main-nav a { white-space: nowrap; }
+  /* The menu slides in from the left when the menu button is pressed. */
+  .app-layout--menu { display: block; }
+  .app-layout--menu main { padding-left: 1rem; padding-right: 1rem; }
+  .menu-button { display: inline-grid; }
+  .side-nav { display: none; }
+  .side-nav:target {
+    display: flex;
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 20;
+    width: min(18rem, 85vw);
+    height: auto;
+    box-shadow: var(--shadow-raised);
+  }
+  .side-nav:target .side-nav__close { display: block; margin-bottom: 0.5rem; color: var(--primary); }
   .user-menu__name { display: none; }
 }
 @media (max-width: 36rem) {
@@ -568,5 +617,6 @@ th.num, td.num { text-align: right; white-space: nowrap; }
 
 /* Printing reports: leave out the controls. */
 @media print {
-  .no-print { display: none !important; }
+  .no-print, .side-nav, .menu-button { display: none !important; }
+  .app-layout--menu { display: block; }
 }

@@ -137,6 +137,8 @@ __all__ = [
     "EMAIL",
     "SMS",
     "MemberPanel",
+    "NAV_GROUPS",
+    "NAV_ICONS",
     "NavItem",
     "PDFUnavailable",
     "Panel",
@@ -187,11 +189,36 @@ __all__ = [
 
 @dataclass
 class NavItem:
-    """A link in the main menu. ``permission`` hides it from users without it."""
+    """A link in the main menu. ``permission`` hides it from users without it.
+
+    ``group`` is the menu section it goes in (see NAV_GROUPS); a link with
+    another group goes under "Add-ons". ``icon`` names one of NAV_ICONS; an
+    unknown name gets a plain box.
+    """
 
     label: str
     url_name: str
     permission: str = ""
+    group: str = ""
+    icon: str = ""
+
+
+# The sections of the main menu a NavItem can go in, and the icons it can use.
+NAV_GROUPS = ("register", "finance", "communication")
+NAV_ICONS = (
+    "book",
+    "box",
+    "calendar",
+    "chart",
+    "gauge",
+    "home",
+    "invoice",
+    "list",
+    "mail",
+    "people",
+    "send",
+    "server",
+)
 
 
 @dataclass

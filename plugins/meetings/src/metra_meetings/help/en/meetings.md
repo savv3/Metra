@@ -6,7 +6,7 @@ meetings. Approved minutes are kept as the association's records and members
 can read them on their personal page.
 
 The plugin is turned on by the person running the installation
-(`METRA_PLUGINS=meetings`). **Meetings** then shows in the main menu.
+(`METRA_PLUGINS=meetings`). **Meetings** then shows under Communication in the main menu.
 
 ## Who can do what
 

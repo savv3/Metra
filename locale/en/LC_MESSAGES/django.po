@@ -5732,6 +5732,22 @@ msgstr ""
 msgid "Main"
 msgstr ""
 
+#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
+msgid "Finance"
+msgstr ""
+
+#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
+msgid "Communication"
+msgstr ""
+
+#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
+msgid "Menu"
+msgstr ""
+
+#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
+msgid "Close menu"
+msgstr ""
+
 #: templates/base.html:45
 msgid "Theme"
 msgstr ""

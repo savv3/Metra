@@ -14,6 +14,10 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- `NavItem` takes a `group` (one of `api.NAV_GROUPS`) and an `icon` (one of
+  `api.NAV_ICONS`), so an add-on's menu link goes in the right section of the
+  sidebar.
+
 - Invoices state their delivery date or period, printed on the invoice
   (AVL 209 e §). An invoice run asks for the period its fees are for, and
   a single draft can have its own; without one, the invoice date counts.
@@ -43,6 +47,13 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 - Plugin authors: the `api.events.reminder_sent` event, sent when a payment
   reminder is made; `api.add_invoice_panel` for a section on invoice pages;
   and `api.PaymentReminder` among the records.
+
+### Changed
+
+- The main menu is a sidebar on the left, in sections (Register, Finance,
+  Communication and Add-ons) with Settings and Help at the bottom, so it no
+  longer overflows when add-ons add links. On phones the menu button in the
+  top bar opens it.
 
 ## [0.5.0] - 2026-10-25
 

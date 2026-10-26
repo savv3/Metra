@@ -81,7 +81,11 @@ change between releases.
 def ready(self):
     from apps.plugins import api
 
-    api.add_navigation(api.NavItem("Cards", "my_plugin:index", "register.view_person"))
+    api.add_navigation(
+        api.NavItem(
+            "Cards", "my_plugin:index", "register.view_person", group="register", icon="list"
+        )
+    )
     api.add_person_panel(api.Panel("my_plugin/card.html", title="Card"))
     api.add_messaging_provider(MySMSProvider)
 ```
@@ -182,7 +186,7 @@ So that each can later move to its own repository, a plugin in plugins/:
 
 | Extension point | API | What it takes |
 | --- | --- | --- |
-| Navigation | `api.add_navigation(NavItem(label, url_name, permission))` | A main-menu link, shown to users with the permission |
+| Navigation | `api.add_navigation(NavItem(label, url_name, permission, group, icon))` | A link in the main menu (the sidebar), shown to users with the permission. `group` is the section it goes in, one of `api.NAV_GROUPS` (`"register"`, `"finance"`, `"communication"`); without one it goes under **Add-ons**. `icon` is one of `api.NAV_ICONS`, such as `"book"` or `"calendar"`; without one it gets a plain box |
 | Unit panels | `api.add_unit_panel(Panel(template, title, permission, context))` | A section on unit pages. The template gets `object`, `title`, `perms`, `request` and whatever `context(request, unit)` returns |
 | Person panels | `api.add_person_panel(Panel(...))` | The same, on person pages |
 | Invoice panels | `api.add_invoice_panel(Panel(...))` | The same, on the pages of issued invoices and credit notes; `object` is the invoice |

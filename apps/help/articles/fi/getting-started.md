@@ -5,6 +5,12 @@ kerää lukemat, lähettää viestejä ja uutiskirjeitä sekä tekee laskut.
 
 ## Valikko
 
+Valikko on vasemmalla, osioihin jaettuna: **Rekisteri**, **Talous**,
+**Viestintä** sekä **Lisäosat** niille lisäosille, jotka eivät kuulu muihin.
+Käyttöön otetut lisäosat, kuten Kirjanpito ja Kokoukset, näkyvät omassa
+osiossaan. **Asetukset** ja **Ohje** ovat alimpana. Puhelimessa valikko
+avautuu vasemman yläkulman painikkeesta.
+
 - **Yksiköt** ja **Henkilöt**: rekisteri. Jos yksikkötyyppejä on vain yksi, valikko käyttää sen omaa nimeä (esimerkiksi **Mökit**).
 - **Lukemat**: lukemakierrokset, esimerkiksi vuosittainen vesimittarin luenta.
 - **Laskut**: laskutusajot, maksut ja muistutukset.

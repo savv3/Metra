@@ -28,7 +28,11 @@ class BookkeepingConfig(AppConfig):
 
         api.add_navigation(
             api.NavItem(
-                _("Bookkeeping"), "metra_bookkeeping:index", "metra_bookkeeping.view_voucher"
+                _("Bookkeeping"),
+                "metra_bookkeeping:index",
+                "metra_bookkeeping.view_voucher",
+                group="finance",
+                icon="book",
             )
         )
         api.add_settings_link(

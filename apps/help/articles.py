@@ -10,6 +10,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 import markdown
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import get_language
 
@@ -135,3 +136,15 @@ def search(query, language=None):
 def for_page(namespace):
     """The slug of the article that fits a page, or None for the help index."""
     return library().pages.get(namespace)
+
+
+def url_for_request(request):
+    """The URL of the help page that fits the current page, and whether the
+    current page is itself a help page."""
+    match = getattr(request, "resolver_match", None)
+    slug = for_page(match.namespace) if match else None
+    if slug and get(slug):
+        url = reverse("help:article", args=[slug])
+    else:
+        url = reverse("help:index")
+    return url, bool(match and match.namespace == "help")
