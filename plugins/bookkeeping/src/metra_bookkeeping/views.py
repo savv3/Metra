@@ -807,7 +807,14 @@ def trial_balance(request):
 def _statement_rows(context):
     statement = context["statement"]
     header = [statement.title] + [column.label for column in statement.columns]
-    rows = [
+    notes = []
+    if problems := statement.problems:
+        texts = statement.texts
+        notes = [[texts["preliminary"]], *([reason] for reason in problems)]
+        notes.append([texts["not_statements"]])
+    if note := statement.texts.get("translation"):
+        notes.append([note])
+    rows = notes + [
         ["  " * row.depth + row.name]
         + ([A(amount) for amount in row.amounts] if row.show_amounts else [""] * len(row.amounts))
         for row in statement.rows

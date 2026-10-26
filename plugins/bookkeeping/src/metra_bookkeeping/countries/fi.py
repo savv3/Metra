@@ -1324,7 +1324,35 @@ SIZE_LIMITS = [
 STATEMENT_LANGUAGES = ("fi", "sv")
 
 # The words around the statements' lines, in the statements' languages.
+# The Swedish line names above are not yet checked against the Swedish text
+# of the decree, which Swedish output says (the "translation" text).
 TEXTS = {
+    "preliminary": {"fi": "KESKENERÄINEN", "sv": "PRELIMINÄR", "en": "PRELIMINARY"},
+    "open_year": {
+        "fi": "Tilikausi on vielä avoinna.",
+        "sv": "Räkenskapsperioden är ännu öppen.",
+        "en": "The financial year is still open.",
+    },
+    "part_of_year": {
+        "fi": "Laskelma kattaa vain osan tilikaudesta.",
+        "sv": "Uppställningen gäller bara en del av räkenskapsperioden.",
+        "en": "The statement covers only part of the financial year.",
+    },
+    "unmapped": {
+        "fi": "Kaikki tilit eivät sisälly laskelmaan:",
+        "sv": "Alla konton ingår inte i uppställningen:",
+        "en": "Not all accounts are included:",
+    },
+    "unbalanced": {
+        "fi": "Vastaavaa ja vastattavaa eivät täsmää.",
+        "sv": "Aktiva och passiva stämmer inte överens.",
+        "en": "Assets do not equal equity and liabilities.",
+    },
+    "not_statements": {
+        "fi": "Tämä ei ole allekirjoitettava tilinpäätös.",
+        "sv": "Detta är inte ett bokslut att underteckna.",
+        "en": "This is not the financial statements to be signed.",
+    },
     "total_assets": {"fi": "Vastaavaa yhteensä", "sv": "Aktiva sammanlagt", "en": "Total assets"},
     "total_equity_and_liabilities": {
         "fi": "Vastattavaa yhteensä",
@@ -1344,7 +1372,8 @@ TEXTS = {
     "business_id": {"fi": "Y-tunnus", "sv": "FO-nummer", "en": "Business ID"},
     "translation": {
         "fi": "",
-        "sv": "",
+        "sv": "Radnamnen på svenska är ännu inte granskade mot förordningens svenska text "
+        "(FFS 1753/2015). Kontrollera dem före inlämning.",
         "en": "Translation. The statements are kept in Finnish or Swedish; this English "
         "version is not for filing.",
     },

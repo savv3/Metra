@@ -21,4 +21,5 @@
     {% if size.provisional %}<br>{% translate "The figures of an open year are those booked so far." %}{% endif %}
   </p>
 {% endif %}
-<p class="help">{% blocktranslate with source=statement.format.source trimmed %}Format: {{ source }}. The line names are the decree's own, in Finnish or Swedish.{% endblocktranslate %}</p>
+<p class="help">{% blocktranslate with source=statement.format.source trimmed %}Format: {{ source }}. The Finnish line names are the decree's own; the Swedish ones are yet to be checked against the decree's Swedish text.{% endblocktranslate %}</p>
+{% if statement.problems %}<p class="help">{% translate "The PDF and CSV say the statement is preliminary, and why: only a closed year's signed financial statements are final." %}</p>{% endif %}

@@ -102,3 +102,32 @@ def test_a_year_with_vouchers_still_takes_its_staff(treasurer, booked):
     booked.refresh_from_db()
     assert booked.staff == Decimal("2.5")
     assert booked.start == D(2026, 1, 1)  # the dates stay
+
+
+def test_a_preliminary_statement_says_so_on_the_file(treasurer, booked, chart):
+    """An open year, left-out accounts or an unbalanced sheet are printed on
+    the CSV and PDF too, not only on the screen."""
+    csv = treasurer.get(
+        reverse(URL + "income_statement"), {"year": booked.pk, "language": "fi", "format": "csv"}
+    ).content.decode("utf-8-sig")
+    assert "KESKENERÄINEN" in csv
+    assert "Tilikausi on vielä avoinna." in csv
+    assert "Tämä ei ole allekirjoitettava tilinpäätös." in csv
+
+    swedish = treasurer.get(
+        reverse(URL + "balance_sheet"), {"year": booked.pk, "language": "sv", "format": "csv"}
+    ).content.decode("utf-8-sig")
+    assert "PRELIMINÄR" in swedish
+    assert "ännu inte granskade mot förordningens svenska text" in swedish
+
+
+def test_left_out_accounts_are_a_reason(make_voucher, booked):
+    from metra_bookkeeping import statements
+    from metra_bookkeeping.models import Account
+
+    booked.status = booked.Status.CLOSED  # as if closed, to see the other reasons
+    statement = statements.income_statement(booked, booked.start, booked.end)
+    assert statement.problems == []
+    odd = Account.objects.create(number="39999", name="Odd", kind="income")
+    statement.unmapped = [odd]
+    assert statement.problems == ["Kaikki tilit eivät sisälly laskelmaan: 39999 Odd"]
