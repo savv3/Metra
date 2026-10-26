@@ -168,8 +168,10 @@ ja rahoitustoiminta, kukin ylijäämineen tai alijäämineen; osuuskunta tai
 yhtiö saa tavallisen tuloslaskelman, jossa on liikevaihto ja liikevoitto.
 Tase on molemmille sama.
 
-Rivien nimet ovat asetuksen omat, suomeksi tai ruotsiksi: valitse kieli
-kohdasta **Kieli**. Tilinpäätös laaditaan suomeksi tai ruotsiksi;
+Valitse kieli kohdasta **Kieli**. Suomenkieliset rivien nimet ovat
+asetuksen omat; ruotsinkieliset ovat vakiintuneita suomenruotsalaisia
+termejä, joita ei ole vielä tarkistettu asetuksen ruotsinkielistä tekstiä
+vasten, ja ruotsinkielinen laskelma kertoo sen. Tilinpäätös laaditaan suomeksi tai ruotsiksi;
 englanninkielinen versio voidaan näyttää, mutta se on käännös eikä sitä ole
 tarkoitettu toimitettavaksi viranomaiselle. Edellinen tilikausi näytetään
 jakson vieressä, kun se on Metrassa.
@@ -185,6 +187,10 @@ erääntyvä osa omalla tilillään.
 
 Tilikauden voitto tai ylijäämä lasketaan tuotto- ja kulutileistä, joten tase
 täsmää jo ennen tilikauden päättämistä.
+Kunnes tilikausi on päätetty, laskelman PDF- ja CSV-tiedosto merkitään
+keskeneräiseksi syineen (tilikausi on avoinna, laskelma kattaa osan
+tilikaudesta, tilejä puuttuu tai tase ei täsmää): vain päätetyn tilikauden
+allekirjoitettu tilinpäätös on lopullinen.
 
 ### Kokoluokka
 

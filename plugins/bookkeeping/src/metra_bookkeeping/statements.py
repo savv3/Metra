@@ -133,6 +133,26 @@ class Statement:
     def balances(self):
         return not any(self.difference)
 
+    @property
+    def problems(self):
+        """Why the statement is preliminary, in its own language. Printed on
+        the PDF and CSV too, so an unfinished statement is never taken for
+        the financial statements to be signed (KPL 3:1, 3:7). Until a year
+        can be closed, every statement has one."""
+        texts = self.texts
+        reasons = []
+        first = self.columns[0]
+        if first.year.is_open:
+            reasons.append(texts["open_year"])
+        if (first.start, first.end) != (first.year.start, first.year.end):
+            reasons.append(texts["part_of_year"])
+        if self.unmapped:
+            accounts = ", ".join(str(account) for account in self.unmapped)
+            reasons.append(f"{texts['unmapped']} {accounts}")
+        if not self.balances:
+            reasons.append(texts["unbalanced"])
+        return reasons
+
 
 def _rules(year):
     return countries.get(year.country)

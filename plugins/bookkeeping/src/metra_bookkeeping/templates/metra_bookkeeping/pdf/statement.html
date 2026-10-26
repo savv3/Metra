@@ -10,6 +10,11 @@
   {% if organisation %}<div class="organisation"><strong>{{ organisation.name }}</strong>{% if organisation.business_id %} &middot; {{ statement.texts.business_id }} {{ organisation.business_id }}{% endif %}</div>{% endif %}
   <h1>{{ statement.title }}</h1>
   <p class="subtitle">{{ statement.columns.0.label }}</p>
+  {% if statement.problems %}
+    <div class="preliminary"><strong>{{ statement.texts.preliminary }}</strong>
+      {% for reason in statement.problems %}<br>{{ reason }}{% endfor %}
+      <br>{{ statement.texts.not_statements }}</div>
+  {% endif %}
   {% if translation %}<p class="note">{{ translation }}</p>{% endif %}
   {% include "metra_bookkeeping/_statement_table.html" %}
 </body>

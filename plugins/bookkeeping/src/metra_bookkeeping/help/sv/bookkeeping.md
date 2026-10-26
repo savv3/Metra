@@ -168,8 +168,9 @@ insamling samt placerings- och finansieringsverksamhet, var och en med
 resultaträkningen med omsättning och rörelsevinst. Balansräkningen är den
 samma för båda.
 
-Radnamnen är förordningens egna, på finska eller svenska: välj språk under
-**Språk**. Bokslutet förs på finska eller svenska; en engelsk version kan
+Välj språk under **Språk**. Radnamnen på finska är förordningens egna;
+de svenska är de vanliga finlandssvenska termerna och ännu inte granskade
+mot förordningens svenska text, vilket en svensk uppställning säger. Bokslutet förs på finska eller svenska; en engelsk version kan
 visas, men den är en översättning och inte avsedd för inlämning. Den
 föregående räkenskapsperioden visas bredvid perioden när den finns i Metra.
 
@@ -184,6 +185,10 @@ del som förfaller inom ett år på ett eget konto.
 
 Årets vinst eller överskott räknas ut från intäkts- och kostnadskontona, så
 balansräkningen går ihop redan innan året har avslutats.
+Tills året är avslutat märks pdf- och csv-filen av en uppställning som
+preliminär, med skälen (året är öppet, den gäller en del av året, konton
+saknas eller den går inte ihop): bara det avslutade årets undertecknade
+bokslut är slutligt.
 
 ### Storleksklass
 

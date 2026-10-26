@@ -162,8 +162,10 @@ surplus or deficit; a cooperative or company gets the standard income
 statement with net sales and operating profit. The balance sheet is the
 same for both.
 
-The line names are the decree's own, in Finnish or Swedish: choose the
-language under **Language**. The statements are kept in Finnish or
+Choose the language under **Language**. The Finnish line names are the
+decree's own; the Swedish ones are the usual Finland-Swedish terms and are
+yet to be checked against the decree's Swedish text, which Swedish output
+says. The statements are kept in Finnish or
 Swedish; an English version can be shown, but it is a translation and not
 for filing. The previous financial year is shown beside the period when it
 is in Metra.
@@ -179,6 +181,10 @@ within a year on an account of its own.
 
 The profit or surplus for the year is worked out from the income and
 expense accounts, so the balance sheet balances before the year is closed.
+Until the year is closed, the PDF and CSV of a statement are marked
+preliminary, with the reasons (the year is open, it covers part of the
+year, accounts are left out, or it does not balance): only the closed
+year's signed financial statements are final.
 
 ### Size class
 
