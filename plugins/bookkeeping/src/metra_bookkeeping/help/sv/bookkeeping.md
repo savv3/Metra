@@ -90,6 +90,16 @@ annars till det konto som valts för dess momssats, annars till
 standardkontot för försäljning. Fakturor går till en egen verifikatserie
 (L) och betalningar till en annan (S).
 
+En fakturas verifikat dateras med fakturadatumet, men dess moms hör till
+månaden för fakturans leveransdatum eller slutet av dess leveransperiod,
+som verifikatet visar. En faktura som utfärdas i januari för förra årets
+vatten har därför sin moms i förra decembers period, med förra årets
+momssats.
+
+Inställningssidan kontrollerar att kontot för kundfordringar, när den
+automatiska bokföringen startar, motsvarar det som fakturorna som utfärdats
+före dess hade obetalt, och varnar om de skiljer sig.
+
 Varje sådant verifikat bokförs genast och visar fakturan det kommer från;
 fakturan är dess underlag, och fakturans sida visar dess verifikat. Om ett
 inte kan bokföras (till exempel för att ett konto inte längre används)

@@ -14,6 +14,13 @@ and the reading round, and makes a draft invoice for each unit, addressed to
 its billing contact or owner. Drafts with a missing or odd reading are marked
 **Check**: enter the reading and rebuild the draft, or edit its lines.
 
+The run also gives the supply period: the first and last day the fees are
+for, such as 1.1.–31.12. It is printed on each invoice as the delivery
+period. VAT follows it rather than the invoice date: for water and other
+continuous supplies, VAT is due for the month the period ends in, at the
+rate in force then. A single invoice can have its own delivery date or
+period; without one, the invoice date counts.
+
 **Issue all checked drafts** on the run page, or **Issue invoice** on a single
 draft, gives each invoice its number and dates and locks it. An issued
 invoice is never changed: a mistake is corrected with a credit note (**Make a

@@ -13,11 +13,29 @@ def run(treasurer_client, plan, rounds, make_household, billing):
     make_household("Bystigen 6", [(last, "100")], first_name="Bo")
     response = treasurer_client.post(
         reverse("invoicing:run_create"),
-        {"period_label": "2026", "plans": [plan.pk], "rounds": [current.pk]},
+        {
+            "period_label": "2026",
+            "supply_start": "2026-01-01",
+            "supply_end": "2026-12-31",
+            "plans": [plan.pk],
+            "rounds": [current.pk],
+        },
     )
     run = InvoiceRun.objects.get()
     assert response.url == run.get_absolute_url()
     return run
+
+
+def test_a_run_says_what_period_it_supplies(treasurer_client, run):
+    invoice = run.invoices.first()
+    assert (str(invoice.supply_start), str(invoice.supply_end)) == ("2026-01-01", "2026-12-31")
+    assert invoice.supply_display == "1.1.2026–31.12.2026"
+    response = treasurer_client.post(
+        reverse("invoicing:run_create"),
+        {"period_label": "2027", "supply_start": "2027-12-31", "supply_end": "2027-01-01"},
+    )
+    assert InvoiceRun.objects.count() == 1
+    assert response.status_code == 200
 
 
 def test_run_page_lists_drafts_to_check(treasurer_client, run):

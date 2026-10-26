@@ -228,6 +228,34 @@ def test_issued_invoices_keep_what_they_said(plan, rounds, make_household, billi
     assert invoice.seller["iban"] == "FI21 1234 5600 0007 85"
 
 
+def test_the_supply_period_is_kept_and_credited(plan, rounds, make_household, billing):
+    """VAT follows the supply (AVL 15 §), so the invoice states it (AVL 209 e §)."""
+    last, current = rounds
+    make_household("A", [(last, "1"), (current, "2")], first_name="Anna")
+    build_run(make_run(plan, [current]))
+    invoice = Invoice.objects.get()
+    invoice.supply_end = datetime.date(2026, 12, 31)
+    invoice.save()
+    invoice.issue()
+
+    assert invoice.supply_start == invoice.supply_end == datetime.date(2026, 12, 31)
+    assert invoice.supply_date == datetime.date(2026, 12, 31)
+    note = invoice.make_credit_note()
+    assert note.supply_end == invoice.supply_end
+
+
+def test_without_a_supply_period_the_invoice_date_is_the_supply_date(
+    plan, rounds, make_household, billing
+):
+    last, current = rounds
+    make_household("A", [(last, "1"), (current, "2")], first_name="Anna")
+    build_run(make_run(plan, [current]))
+    invoice = Invoice.objects.get()
+    invoice.issue()
+
+    assert invoice.supply_start == invoice.supply_end == invoice.issue_date
+
+
 def test_an_invoice_that_cannot_be_issued_says_why(make_household, billing, household):
     unit = make_household("A", first_name="Anna")
     unit.street_address = unit.city = unit.postal_code = ""

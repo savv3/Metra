@@ -173,3 +173,34 @@ def test_older_books_get_the_accounts_postings_need(treasurer, this_year, chart)
     assert Account.objects.get(number="2935").kind == "liability"
     assert Account.objects.get(number="3100").name == "Reminder fees"
     assert "Add them" not in treasurer.get(SETTINGS).content.decode()
+
+
+def test_opening_receivables_are_checked_against_open_invoices(
+    treasurer, books, make_invoice, pay, this_year
+):
+    import datetime
+
+    from django.utils import timezone
+
+    from metra_bookkeeping import postings
+
+    today = timezone.localdate()
+    books.start = today + datetime.timedelta(days=1)
+    books.save()
+    invoice = make_invoice([("Grundavgift", "1", "120", "0")])
+    pay(invoice, "20")
+
+    assert postings.opening_receivables() == (Decimal("0.00"), Decimal("100.00"))
+    assert "check the opening balances" in treasurer.get(SETTINGS).content.decode()
+
+    opening = Voucher.objects.create(
+        year=this_year,
+        series=VoucherSeries.default(),
+        date=today,
+        description="Opening receivables",
+    )
+    for number, debit, credit in [("1700", 100, 0), ("2250", 0, 100)]:
+        opening.lines.create(account=Account.objects.get(number=number), debit=debit, credit=credit)
+    opening.post()
+    assert postings.opening_receivables() == (Decimal("100.00"), Decimal("100.00"))
+    assert "check the opening balances" not in treasurer.get(SETTINGS).content.decode()

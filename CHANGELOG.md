@@ -14,6 +14,11 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- Invoices state their delivery date or period, printed on the invoice
+  (AVL 209 e §). An invoice run asks for the period its fees are for, and
+  a single draft can have its own; without one, the invoice date counts.
+  VAT follows the delivery, not the invoice date.
+
 - The Bookkeeping add-on (`METRA_PLUGINS=bookkeeping`, off by default):
   double-entry books under the Finnish Accounting Act, with a chart of
   accounts from a template for an association or a cooperative, financial

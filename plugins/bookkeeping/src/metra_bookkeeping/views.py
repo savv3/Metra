@@ -511,6 +511,7 @@ def posting_settings(request):
             "registration_form": VatRegistrationForm(),
             "waiting_count": len(postings.waiting(settings_row)),
             "template_missing": PostingSettings.template_accounts_missing(),
+            "opening": postings.opening_receivables(settings_row),
         },
     )
 

@@ -10,7 +10,9 @@ year, or made while the add-on was off, are listed as waiting and can be
 posted from the overview.
 
     invoice      receivables Dr total; sales Cr net, per account and VAT
-                 rate; VAT on sales Cr the VAT of each rate
+                 rate; VAT on sales Cr the VAT of each rate. The voucher is
+                 dated the invoice date; the supply date or period, which
+                 decides the VAT period (AVL 15 §), is kept on the Posting
     credit note  the same, with the sides turned (its amounts are negative)
     payment      bank Dr amount; receivables Cr amount (a negative payment,
                  which undoes one, turns the sides)
@@ -29,6 +31,7 @@ from dataclasses import dataclass
 from django.conf import settings as django_settings
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError, transaction
+from django.db.models import Sum
 from django.utils import timezone, translation
 from django.utils.translation import gettext as _
 
@@ -206,12 +209,16 @@ def book(record, settings=None, user=None):
                     for order, entry in enumerate(entries, start=1)
                 ]
             )
+            supplied = record.source in INVOICES
+            invoice = record.invoice
             Posting.objects.create(
                 voucher=voucher,
                 source=record.source,
-                invoice=record.invoice,
+                invoice=invoice,
                 payment=record.payment,
                 reminder=record.reminder,
+                supply_start=(invoice.supply_start or invoice.supply_date) if supplied else None,
+                supply_end=invoice.supply_date if supplied else None,
             )
     except IntegrityError:
         # Booked meanwhile by another request or worker.
@@ -268,6 +275,33 @@ def book_waiting(user=None):
         if voucher is not None:
             made.append(voucher)
     return made, len(waiting(settings))
+
+
+def opening_receivables(settings=None):
+    """(the receivables account before automatic posting starts, what the
+    invoices issued before then had outstanding on that day), or None while
+    postings are off. Payments of those invoices are booked against the
+    receivables account, so the two must agree."""
+    settings = settings or PostingSettings.current()
+    if not settings.is_on:
+        return None
+    start = settings.start
+    lines = VoucherLine.objects.filter(
+        account=settings.receivables,
+        voucher__status=Voucher.Status.POSTED,
+        voucher__date__lte=start,
+        voucher__posting__isnull=True,
+    ).aggregate(debit=Sum("debit"), credit=Sum("credit"))
+    booked = (lines["debit"] or ZERO) - (lines["credit"] or ZERO)
+    before = api.Invoice.objects.issued().filter(issue_date__lt=start)
+    invoiced = before.aggregate(total=Sum("total"))["total"] or ZERO
+    fees = api.PaymentReminder.objects.filter(
+        invoice__in=before, created_at__date__lt=start
+    ).aggregate(total=Sum("fee"))["total"]
+    paid = api.Payment.objects.filter(invoice__in=before, paid_on__lt=start).aggregate(
+        total=Sum("amount")
+    )["total"]
+    return booked, invoiced + (fees or ZERO) - (paid or ZERO)
 
 
 def invoice_panel(request, invoice):

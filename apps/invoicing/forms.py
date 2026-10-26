@@ -7,12 +7,16 @@ from apps.readings.models import ReadingRound
 
 from .models import FeePlan, Invoice, InvoiceLine, InvoiceRun
 
+DATE = forms.DateInput(attrs={"type": "date"}, format="%Y-%m-%d")
+
 
 class RunForm(forms.ModelForm):
     class Meta:
         model = InvoiceRun
-        fields = ["period_label", "plans", "rounds"]
+        fields = ["period_label", "supply_start", "supply_end", "plans", "rounds"]
         widgets = {
+            "supply_start": DATE,
+            "supply_end": DATE,
             "plans": forms.CheckboxSelectMultiple,
             "rounds": forms.CheckboxSelectMultiple,
         }
@@ -22,6 +26,9 @@ class RunForm(forms.ModelForm):
         self.fields["plans"].queryset = FeePlan.objects.filter(active=True)
         self.fields["plans"].initial = list(self.fields["plans"].queryset)
         self.fields["rounds"].queryset = ReadingRound.objects.select_related("reading_type")
+        # The VAT period follows the supply, so a run says what it is for.
+        for name in ("supply_start", "supply_end"):
+            self.fields[name].required = True
 
     def clean(self):
         cleaned = super().clean()
@@ -29,14 +36,27 @@ class RunForm(forms.ModelForm):
         types = [r.reading_type_id for r in rounds]
         if len(types) != len(set(types)):
             raise forms.ValidationError(_("Choose at most one round per reading type."))
+        start, end = cleaned.get("supply_start"), cleaned.get("supply_end")
+        if start and end and end < start:
+            raise forms.ValidationError({"supply_end": _("The period ends before it starts.")})
         return cleaned
 
 
 class InvoiceForm(forms.ModelForm):
     class Meta:
         model = Invoice
-        fields = ["note"]
-        widgets = {"note": forms.Textarea(attrs={"rows": 2})}
+        fields = ["supply_start", "supply_end", "note"]
+        widgets = {
+            "supply_start": DATE,
+            "supply_end": DATE,
+            "note": forms.Textarea(attrs={"rows": 2}),
+        }
+        help_texts = {
+            "supply_end": _(
+                "The day of delivery, or the last day of the period the invoice is for; "
+                "VAT is due for its month. Empty: the invoice date."
+            ),
+        }
 
 
 class LineForm(forms.ModelForm):

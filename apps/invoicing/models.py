@@ -286,6 +286,21 @@ class InvoiceRun(models.Model):
         _("period"), max_length=50, help_text=_("Shown on the invoices, for example 2026.")
     )
     plans = models.ManyToManyField(FeePlan, verbose_name=_("fee plans"), related_name="runs")
+    supply_start = models.DateField(
+        _("supplied from"),
+        null=True,
+        blank=True,
+        help_text=_("The first day of the period the fees are for."),
+    )
+    supply_end = models.DateField(
+        _("supplied until"),
+        null=True,
+        blank=True,
+        help_text=_(
+            "The last day of that period. VAT is due for the month the period ends in, "
+            "whenever the invoices are issued."
+        ),
+    )
     rounds = models.ManyToManyField(
         ReadingRound,
         verbose_name=_("reading rounds"),
@@ -373,6 +388,12 @@ class Invoice(models.Model):
         related_name="credit_notes",
     )
     period_label = models.CharField(_("period"), max_length=50, blank=True)
+    # The date or period of supply (AVL 209 e §): it decides the VAT period
+    # and rate, which follow the supply, not the invoice date. A continuous
+    # supply, such as water, counts as made at the end of its period. Empty
+    # at issue means supplied on the invoice date.
+    supply_start = models.DateField(_("supplied from"), null=True, blank=True)
+    supply_end = models.DateField(_("supplied until"), null=True, blank=True)
     # Set when issued, never changed afterwards.
     sequence = models.PositiveIntegerField(_("sequence number"), null=True, blank=True, unique=True)
     number = models.CharField(_("number"), max_length=40, blank=True)
@@ -460,6 +481,23 @@ class Invoice(models.Model):
         return due is not None and due < timezone.localdate()
 
     @property
+    def supply_date(self):
+        """When the supply counts as made, for VAT: the end of the supply
+        period (the invoice date when none was given)."""
+        return self.supply_end or self.issue_date
+
+    @property
+    def supply_display(self):
+        """ "1.1.2026–31.12.2026", or one date."""
+        if self.supply_end is None:
+            return ""
+        end = f"{self.supply_end.day}.{self.supply_end.month}.{self.supply_end.year}"
+        start = self.supply_start
+        if start is None or start == self.supply_end:
+            return end
+        return f"{start.day}.{start.month}.{start.year}–{end}"
+
+    @property
     def current_due_date(self):
         """The due date, or the latest reminder's new one."""
         reminder = self.reminders.first() if self.pk else None
@@ -514,6 +552,8 @@ class Invoice(models.Model):
                 problems.append(_("It credits more than is left of the invoice."))
         elif self.total_from_lines() < 0:
             problems.append(_("An invoice's total cannot be negative; use a credit note."))
+        if self.supply_start and self.supply_end and self.supply_end < self.supply_start:
+            problems.append(_("The supply period ends before it starts."))
         return problems
 
     def total_from_lines(self):
@@ -594,6 +634,11 @@ class Invoice(models.Model):
                 reference = rf_reference(reference)
             self.reference = reference
         self.issue_date = today
+        if self.supply_end is None:
+            # Supplied on the invoice date, stated as such on the invoice.
+            self.supply_start = self.supply_end = today
+        elif self.supply_start is None:
+            self.supply_start = self.supply_end
         self.due_date = (
             today + datetime.timedelta(days=billing.payment_terms_days)
             if self.kind == self.Kind.INVOICE
@@ -649,6 +694,9 @@ class Invoice(models.Model):
             person=self.person,
             credits=self,
             period_label=self.period_label,
+            # A credit note corrects the supply of the invoice it credits.
+            supply_start=self.supply_start,
+            supply_end=self.supply_end,
             note=str(_("Credit note for invoice %(number)s.") % {"number": self.number}),
         )
         for line in self.lines.all():

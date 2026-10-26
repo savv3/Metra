@@ -215,7 +215,11 @@ class Command(BaseCommand):
                 reading_type=reading_type,
                 order=order,
             )
-        run = InvoiceRun.objects.create(period_label=latest_round.period_label)
+        run = InvoiceRun.objects.create(
+            period_label=latest_round.period_label,
+            supply_start=datetime.date(latest_round.opens_on.year, 1, 1),
+            supply_end=datetime.date(latest_round.opens_on.year, 12, 31),
+        )
         run.plans.add(plan)
         run.rounds.add(latest_round)
         build_run(run)

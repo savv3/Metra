@@ -480,7 +480,11 @@ accountant checks them before the first real year is kept in Metra.
   reminder fees on the day of the reminder (without VAT, as compensation
   for collection costs), each in a voucher of its own that points to the
   invoice, its evidence. Records dated before the chosen start day belong
-  to the opening balances.
+  to the opening balances, which are checked against what those invoices
+  had outstanding. The VAT period and rate follow the supply (AVL 15 §):
+  invoices carry a delivery date or period, and each posting keeps it, so
+  the VAT summary (C) reports by it; PR D accrues invoices issued after
+  year end for supplies of the closed year.
 
 ## Plugins
 

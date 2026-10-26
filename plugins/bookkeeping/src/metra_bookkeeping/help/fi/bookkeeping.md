@@ -90,6 +90,16 @@ Myynti kirjataan laskurivin maksurivin tilille, muuten sen ALV-kannan
 tilille, muuten myynnin oletustilille. Laskut menevät omaan tositesarjaansa
 (L) ja suoritukset toiseen (S).
 
+Laskun tosite päivätään laskun päivämäärälle, mutta sen arvonlisävero
+kuuluu laskun toimituspäivän tai toimitusjakson päättymisen kuukaudelle,
+jonka tosite näyttää. Tammikuussa viime vuoden vedestä laadittu lasku
+kuuluu siis arvonlisäverossa viime joulukuun jaksoon viime vuoden
+verokannalla.
+
+Asetussivu tarkistaa, että myyntisaamisten tili automaattisen kirjauksen
+alkaessa vastaa sitä, mitä ennen sitä laaditut laskut olivat avoinna, ja
+varoittaa, jos ne eroavat.
+
 Jokainen tällainen tosite kirjataan heti ja näyttää laskun, josta se on
 peräisin; lasku on sen todiste, ja laskun sivu näyttää sen tositteet. Jos
 tositetta ei voi kirjata (esimerkiksi koska tili ei ole enää käytössä), se

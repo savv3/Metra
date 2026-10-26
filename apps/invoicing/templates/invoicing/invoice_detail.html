@@ -49,6 +49,7 @@
     <dt>{% translate "Unit" %}</dt><dd><a href="{{ invoice.unit.get_absolute_url }}">{{ invoice.unit.name }}</a></dd>
     {% if invoice.reference %}<dt>{% translate "Reference" %}</dt><dd>{{ invoice.reference_display }}</dd>{% endif %}
     {% if invoice.issue_date %}<dt>{% translate "Invoice date" %}</dt><dd>{{ invoice.issue_date|date:"SHORT_DATE_FORMAT" }}</dd>{% endif %}
+    {% if invoice.supply_display %}<dt>{% translate "Delivery date or period" %}</dt><dd>{{ invoice.supply_display }}</dd>{% endif %}
     {% if invoice.due_date %}<dt>{% translate "Due date" %}</dt><dd>{{ invoice.due_date|date:"SHORT_DATE_FORMAT" }}</dd>{% endif %}
     {% if invoice.issued_by %}<dt>{% translate "Issued by" %}</dt><dd>{{ invoice.issued_by }}</dd>{% endif %}
   </dl>
@@ -77,6 +78,8 @@
           </tbody>
         </table>
       </div>
+      {% include "register/_field.html" with field=form.supply_start %}
+      {% include "register/_field.html" with field=form.supply_end %}
       {% include "register/_field.html" with field=form.note %}
       <button type="submit" class="button button--primary">{% translate "Save the draft" %}</button>
     </form>

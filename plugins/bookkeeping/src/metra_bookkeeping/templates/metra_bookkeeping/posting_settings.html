@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n bookkeeping %}
 {% block title %}{% translate "Bookkeeping of invoices" %}{% endblock %}
 {% block content %}
   <div class="page-head"><h1>{% translate "Bookkeeping of invoices" %}</h1></div>
@@ -17,6 +17,16 @@
       <form method="post" action="{% url 'metra_bookkeeping:posting_accounts_add' %}">{% csrf_token %}<button type="submit" class="button">{% translate "Add them" %}</button></form>
     </div>
   {% endif %}
+
+  {% if opening %}{% with booked=opening.0 open=opening.1 %}{% if booked != open %}
+    <div class="status-panel status-panel--warning">
+      <p>{% blocktranslate trimmed with booked=booked|money open=open|money %}
+        The receivables account is {{ booked }} € when automatic posting starts, but the
+        invoices issued before then had {{ open }} € outstanding. Payments of those invoices are
+        booked against the receivables account, so check the opening balances.
+      {% endblocktranslate %}</p>
+    </div>
+  {% endif %}{% endwith %}{% endif %}
 
   <form method="post" class="form form--wide" novalidate>
     {% csrf_token %}

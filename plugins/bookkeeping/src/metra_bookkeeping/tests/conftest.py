@@ -142,8 +142,15 @@ def make_invoice(seller, unit, person, django_capture_on_commit_callbacks):
     person.street_address = "Byvägen 4"
     person.save()
 
-    def make(lines, kind="invoice", credits=None, fee_line=None):
-        invoice = api.Invoice.objects.create(unit=unit, person=person, kind=kind, credits=credits)
+    def make(lines, kind="invoice", credits=None, fee_line=None, supplied=(None, None)):
+        invoice = api.Invoice.objects.create(
+            unit=unit,
+            person=person,
+            kind=kind,
+            credits=credits,
+            supply_start=supplied[0],
+            supply_end=supplied[1],
+        )
         for order, (text, quantity, price, rate) in enumerate(lines):
             api.InvoiceLine.objects.create(
                 invoice=invoice,

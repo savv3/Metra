@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 21:48+0300\n"
+"POT-Creation-Date: 2026-10-26 10:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,7 +83,7 @@ msgstr ""
 
 #: apps/accounts/templates/accounts/profile.html:16
 #: apps/core/settings_page.py:147 apps/core/templates/core/_contact.html:14
-#: apps/invoicing/models.py:728 apps/messaging/models.py:29
+#: apps/invoicing/models.py:776 apps/messaging/models.py:29
 #: apps/messaging/templates/messaging/compose.html:20
 #: apps/register/csv_io.py:521 apps/register/models.py:274
 #: apps/register/templates/register/_person_results.html:8
@@ -509,7 +509,7 @@ msgid "Issued invoices"
 msgstr ""
 
 #: apps/backups/templates/backups/restore.html:32
-#: apps/invoicing/templates/invoicing/invoice_detail.html:115
+#: apps/invoicing/templates/invoicing/invoice_detail.html:118
 msgid "Payments"
 msgstr ""
 
@@ -526,9 +526,9 @@ msgid "Payments that would be removed:"
 msgstr ""
 
 #: apps/backups/templates/backups/restore.html:49 apps/invoicing/delivery.py:59
-#: apps/invoicing/models.py:408 apps/invoicing/models.py:671
-#: apps/invoicing/models.py:732 apps/invoicing/models.py:772
-#: apps/invoicing/models.py:812
+#: apps/invoicing/models.py:429 apps/invoicing/models.py:719
+#: apps/invoicing/models.py:780 apps/invoicing/models.py:820
+#: apps/invoicing/models.py:860
 msgid "invoice"
 msgstr ""
 
@@ -630,13 +630,13 @@ msgstr ""
 msgid "Empty: until it is removed."
 msgstr ""
 
-#: apps/core/models.py:31 apps/invoicing/models.py:298
+#: apps/core/models.py:31 apps/invoicing/models.py:313
 #: apps/selfservice/models.py:79
 msgid "created by"
 msgstr ""
 
-#: apps/core/models.py:37 apps/invoicing/models.py:304
-#: apps/invoicing/models.py:402 apps/invoicing/models.py:743
+#: apps/core/models.py:37 apps/invoicing/models.py:319
+#: apps/invoicing/models.py:423 apps/invoicing/models.py:791
 #: apps/messaging/models.py:85 apps/messaging/models.py:177
 #: apps/notifications/models.py:28 apps/readings/models.py:111
 #: apps/register/models.py:236 apps/selfservice/models.py:76
@@ -928,16 +928,16 @@ msgstr ""
 msgid "Pick a guide from the list, or search for a word."
 msgstr ""
 
-#: apps/invoicing/admin.py:13 apps/invoicing/models.py:388
-#: apps/invoicing/templates/invoicing/invoice_detail.html:107
-#: apps/invoicing/templates/invoicing/invoice_detail.html:109
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:112
+#: apps/invoicing/admin.py:13 apps/invoicing/models.py:409
+#: apps/invoicing/templates/invoicing/invoice_detail.html:110
+#: apps/invoicing/templates/invoicing/invoice_detail.html:112
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:113
 #: apps/invoicing/views.py:439
 msgid "VAT"
 msgstr ""
 
 #: apps/invoicing/admin.py:15
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:134
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:135
 #: apps/invoicing/views.py:502
 msgid "Payment"
 msgstr ""
@@ -971,42 +971,52 @@ msgstr ""
 msgid "This email provider cannot attach the invoice PDF."
 msgstr ""
 
-#: apps/invoicing/forms.py:31
+#: apps/invoicing/forms.py:38
 msgid "Choose at most one round per reading type."
 msgstr ""
 
-#: apps/invoicing/forms.py:71
+#: apps/invoicing/forms.py:41
+msgid "The period ends before it starts."
+msgstr ""
+
+#: apps/invoicing/forms.py:56
+msgid ""
+"The day of delivery, or the last day of the period the invoice is for; VAT "
+"is due for its month. Empty: the invoice date."
+msgstr ""
+
+#: apps/invoicing/forms.py:91
 msgid "Amount (€)"
 msgstr ""
 
-#: apps/invoicing/forms.py:74
+#: apps/invoicing/forms.py:94
 msgid "Paid on"
 msgstr ""
 
-#: apps/invoicing/forms.py:76
+#: apps/invoicing/forms.py:96
 msgid "Reference given"
 msgstr ""
 
-#: apps/invoicing/forms.py:77 apps/invoicing/views.py:496
+#: apps/invoicing/forms.py:97 apps/invoicing/views.py:496
 #: apps/readings/views.py:155
 msgid "Note"
 msgstr ""
 
-#: apps/invoicing/forms.py:82 apps/invoicing/models.py:803
+#: apps/invoicing/forms.py:102 apps/invoicing/models.py:851
 msgid "Enter an amount other than zero."
 msgstr ""
 
-#: apps/invoicing/forms.py:88
+#: apps/invoicing/forms.py:108
 msgid "From"
 msgstr ""
 
-#: apps/invoicing/forms.py:91
+#: apps/invoicing/forms.py:111
 #: apps/messaging/templates/messaging/batch_detail.html:8
 #: apps/messaging/templates/messaging/compose.html:17
 msgid "To"
 msgstr ""
 
-#: apps/invoicing/models.py:45 apps/invoicing/models.py:384
+#: apps/invoicing/models.py:45 apps/invoicing/models.py:405
 msgid "VAT registered"
 msgstr ""
 
@@ -1060,7 +1070,7 @@ msgstr ""
 msgid "International RF creditor reference"
 msgstr ""
 
-#: apps/invoicing/models.py:85 apps/invoicing/models.py:379
+#: apps/invoicing/models.py:85 apps/invoicing/models.py:400
 msgid "payment reference"
 msgstr ""
 
@@ -1072,7 +1082,7 @@ msgstr ""
 msgid "invoice footer"
 msgstr ""
 
-#: apps/invoicing/models.py:97 apps/invoicing/models.py:814
+#: apps/invoicing/models.py:97 apps/invoicing/models.py:862
 msgid "reminder fee"
 msgstr ""
 
@@ -1112,7 +1122,7 @@ msgstr ""
 msgid "in use"
 msgstr ""
 
-#: apps/invoicing/models.py:156 apps/invoicing/models.py:673
+#: apps/invoicing/models.py:156 apps/invoicing/models.py:721
 #: apps/readings/models.py:46 apps/register/models.py:139
 msgid "description"
 msgstr ""
@@ -1137,13 +1147,13 @@ msgstr ""
 msgid "Usage"
 msgstr ""
 
-#: apps/invoicing/models.py:182 apps/invoicing/models.py:349
+#: apps/invoicing/models.py:182 apps/invoicing/models.py:364
 #: apps/messaging/models.py:64 apps/notifications/models.py:22
 #: apps/notifications/models.py:104
 msgid "kind"
 msgstr ""
 
-#: apps/invoicing/models.py:184 apps/invoicing/models.py:401
+#: apps/invoicing/models.py:184 apps/invoicing/models.py:422
 msgid "text on the invoice"
 msgstr ""
 
@@ -1160,7 +1170,7 @@ msgstr ""
 msgid "Without VAT. For usage: the price per unit, for example per m³."
 msgstr ""
 
-#: apps/invoicing/models.py:195 apps/invoicing/models.py:674
+#: apps/invoicing/models.py:195 apps/invoicing/models.py:722
 msgid "quantity"
 msgstr ""
 
@@ -1168,8 +1178,8 @@ msgstr ""
 msgid "Fixed fees only."
 msgstr ""
 
-#: apps/invoicing/models.py:202 apps/invoicing/models.py:362
-#: apps/invoicing/models.py:675 apps/messaging/models.py:161
+#: apps/invoicing/models.py:202 apps/invoicing/models.py:377
+#: apps/invoicing/models.py:723 apps/messaging/models.py:161
 #: apps/readings/models.py:200 apps/register/models.py:348
 #: apps/register/models.py:371 apps/selfservice/models.py:58
 msgid "unit"
@@ -1179,7 +1189,7 @@ msgstr ""
 msgid "For example pcs."
 msgstr ""
 
-#: apps/invoicing/models.py:205 apps/invoicing/models.py:678
+#: apps/invoicing/models.py:205 apps/invoicing/models.py:726
 msgid "VAT rate (%)"
 msgstr ""
 
@@ -1208,13 +1218,13 @@ msgstr ""
 msgid "For example Sommar."
 msgstr ""
 
-#: apps/invoicing/models.py:229 apps/invoicing/models.py:692
+#: apps/invoicing/models.py:229 apps/invoicing/models.py:740
 #: apps/register/models.py:140 apps/register/models.py:188
 msgid "order"
 msgstr ""
 
 #: apps/invoicing/models.py:233 apps/invoicing/models.py:261
-#: apps/invoicing/models.py:686
+#: apps/invoicing/models.py:734
 msgid "fee line"
 msgstr ""
 
@@ -1247,7 +1257,7 @@ msgstr ""
 msgid "price tier"
 msgstr ""
 
-#: apps/invoicing/models.py:286 apps/invoicing/models.py:375
+#: apps/invoicing/models.py:286 apps/invoicing/models.py:390
 #: apps/readings/models.py:99
 msgid "period"
 msgstr ""
@@ -1256,265 +1266,287 @@ msgstr ""
 msgid "Shown on the invoices, for example 2026."
 msgstr ""
 
-#: apps/invoicing/models.py:291 apps/readings/models.py:119
+#: apps/invoicing/models.py:290 apps/invoicing/models.py:395
+msgid "supplied from"
+msgstr ""
+
+#: apps/invoicing/models.py:293
+msgid "The first day of the period the fees are for."
+msgstr ""
+
+#: apps/invoicing/models.py:296 apps/invoicing/models.py:396
+msgid "supplied until"
+msgstr ""
+
+#: apps/invoicing/models.py:300
+msgid ""
+"The last day of that period. VAT is due for the month the period ends in, "
+"whenever the invoices are issued."
+msgstr ""
+
+#: apps/invoicing/models.py:306 apps/readings/models.py:119
 msgid "reading rounds"
 msgstr ""
 
-#: apps/invoicing/models.py:294
+#: apps/invoicing/models.py:309
 msgid "Where usage fees take their readings from."
 msgstr ""
 
-#: apps/invoicing/models.py:308 apps/invoicing/models.py:355
+#: apps/invoicing/models.py:323 apps/invoicing/models.py:370
 msgid "invoice run"
 msgstr ""
 
-#: apps/invoicing/models.py:309
+#: apps/invoicing/models.py:324
 msgid "invoice runs"
 msgstr ""
 
-#: apps/invoicing/models.py:312
+#: apps/invoicing/models.py:327
 #, python-format
 msgid "Invoices %(period)s"
 msgstr ""
 
-#: apps/invoicing/models.py:340
+#: apps/invoicing/models.py:355
 #: apps/invoicing/templates/invoicing/_invoice_results.html:19
 #: apps/readings/models.py:87
 msgid "Draft"
 msgstr ""
 
-#: apps/invoicing/models.py:341
+#: apps/invoicing/models.py:356
 #: apps/invoicing/templates/invoicing/run_list.html:17
 msgid "Issued"
 msgstr ""
 
-#: apps/invoicing/models.py:342
+#: apps/invoicing/models.py:357
 #: apps/invoicing/templates/invoicing/invoice_list.html:24
 #: apps/invoicing/views.py:442
 msgid "Paid"
 msgstr ""
 
-#: apps/invoicing/models.py:343
+#: apps/invoicing/models.py:358
 #: apps/invoicing/templates/invoicing/invoice_list.html:26
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:121
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:122
 #: apps/invoicing/views.py:441
 msgid "Credited"
 msgstr ""
 
-#: apps/invoicing/models.py:346
+#: apps/invoicing/models.py:361
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:6
 #: apps/invoicing/views.py:493 apps/messaging/models.py:222
 msgid "Invoice"
 msgstr ""
 
-#: apps/invoicing/models.py:347
+#: apps/invoicing/models.py:362
 #: apps/invoicing/templates/invoicing/_invoice_results.html:19
 msgid "Credit note"
 msgstr ""
 
-#: apps/invoicing/models.py:351 apps/messaging/models.py:75
+#: apps/invoicing/models.py:366 apps/messaging/models.py:75
 #: apps/messaging/models.py:172 apps/register/models.py:335
 msgid "status"
 msgstr ""
 
-#: apps/invoicing/models.py:365 apps/messaging/models.py:168
+#: apps/invoicing/models.py:380 apps/messaging/models.py:168
 msgid "recipient"
 msgstr ""
 
-#: apps/invoicing/models.py:369
+#: apps/invoicing/models.py:384
 msgid "credits invoice"
 msgstr ""
 
-#: apps/invoicing/models.py:377
+#: apps/invoicing/models.py:398
 msgid "sequence number"
 msgstr ""
 
-#: apps/invoicing/models.py:378
+#: apps/invoicing/models.py:399
 msgid "number"
 msgstr ""
 
-#: apps/invoicing/models.py:380
+#: apps/invoicing/models.py:401
 msgid "invoice date"
 msgstr ""
 
-#: apps/invoicing/models.py:381
+#: apps/invoicing/models.py:402
 msgid "due date"
 msgstr ""
 
-#: apps/invoicing/models.py:382
+#: apps/invoicing/models.py:403
 msgid "seller"
 msgstr ""
 
-#: apps/invoicing/models.py:383
+#: apps/invoicing/models.py:404
 msgid "buyer"
 msgstr ""
 
-#: apps/invoicing/models.py:386
+#: apps/invoicing/models.py:407
 msgid "total without VAT"
 msgstr ""
 
-#: apps/invoicing/models.py:389
+#: apps/invoicing/models.py:410
 msgid "total"
 msgstr ""
 
-#: apps/invoicing/models.py:392
+#: apps/invoicing/models.py:413
 msgid "issued by"
 msgstr ""
 
-#: apps/invoicing/models.py:398
+#: apps/invoicing/models.py:419
 msgid "issued"
 msgstr ""
 
-#: apps/invoicing/models.py:400
+#: apps/invoicing/models.py:421
 msgid "to check"
 msgstr ""
 
-#: apps/invoicing/models.py:409
+#: apps/invoicing/models.py:430
 msgid "invoices"
 msgstr ""
 
-#: apps/invoicing/models.py:410
+#: apps/invoicing/models.py:431
 msgid "Can issue invoices and credit notes"
 msgstr ""
 
-#: apps/invoicing/models.py:495
+#: apps/invoicing/models.py:533
 msgid "It is already issued."
 msgstr ""
 
-#: apps/invoicing/models.py:497
+#: apps/invoicing/models.py:535
 msgid "It has no lines."
 msgstr ""
 
-#: apps/invoicing/models.py:499
+#: apps/invoicing/models.py:537
 msgid "The recipient has no address."
 msgstr ""
 
-#: apps/invoicing/models.py:505
+#: apps/invoicing/models.py:543
 msgid ""
 "Fill in the organisation's name, address and business ID under Settings."
 msgstr ""
 
-#: apps/invoicing/models.py:508
+#: apps/invoicing/models.py:546
 msgid "A VAT registered organisation needs its VAT number under Settings."
 msgstr ""
 
-#: apps/invoicing/models.py:512
+#: apps/invoicing/models.py:550
 msgid "A credit note's total must be negative."
 msgstr ""
 
-#: apps/invoicing/models.py:514
+#: apps/invoicing/models.py:552
 msgid "It credits more than is left of the invoice."
 msgstr ""
 
-#: apps/invoicing/models.py:516
+#: apps/invoicing/models.py:554
 msgid "An invoice's total cannot be negative; use a credit note."
 msgstr ""
 
-#: apps/invoicing/models.py:645
+#: apps/invoicing/models.py:556
+msgid "The supply period ends before it starts."
+msgstr ""
+
+#: apps/invoicing/models.py:690
 msgid "Only issued invoices can be credited."
 msgstr ""
 
-#: apps/invoicing/models.py:652
+#: apps/invoicing/models.py:700
 #, python-format
 msgid "Credit note for invoice %(number)s."
 msgstr ""
 
-#: apps/invoicing/models.py:676
+#: apps/invoicing/models.py:724
 msgid "unit price"
 msgstr ""
 
-#: apps/invoicing/models.py:696
+#: apps/invoicing/models.py:744
 msgid "invoice line"
 msgstr ""
 
-#: apps/invoicing/models.py:697
+#: apps/invoicing/models.py:745
 msgid "invoice lines"
 msgstr ""
 
-#: apps/invoicing/models.py:729 apps/messaging/models.py:30
+#: apps/invoicing/models.py:777 apps/messaging/models.py:30
 msgid "Letter"
 msgstr ""
 
-#: apps/invoicing/models.py:734 apps/invoicing/models.py:816
+#: apps/invoicing/models.py:782 apps/invoicing/models.py:864
 #: apps/messaging/models.py:167 apps/messaging/models.py:227
 msgid "channel"
 msgstr ""
 
-#: apps/invoicing/models.py:737 apps/invoicing/models.py:819
+#: apps/invoicing/models.py:785 apps/invoicing/models.py:867
 #: apps/messaging/models.py:183
 msgid "message"
 msgstr ""
 
-#: apps/invoicing/models.py:747
+#: apps/invoicing/models.py:795
 msgid "invoice delivery"
 msgstr ""
 
-#: apps/invoicing/models.py:748
+#: apps/invoicing/models.py:796
 msgid "invoice deliveries"
 msgstr ""
 
-#: apps/invoicing/models.py:775
+#: apps/invoicing/models.py:823
 msgid "amount"
 msgstr ""
 
-#: apps/invoicing/models.py:778
+#: apps/invoicing/models.py:826
 msgid "Negative to reverse a payment recorded by mistake."
 msgstr ""
 
-#: apps/invoicing/models.py:780
+#: apps/invoicing/models.py:828
 msgid "paid on"
 msgstr ""
 
-#: apps/invoicing/models.py:781
+#: apps/invoicing/models.py:829
 msgid "reference given"
 msgstr ""
 
-#: apps/invoicing/models.py:782 apps/messaging/models.py:283
+#: apps/invoicing/models.py:830 apps/messaging/models.py:283
 #: apps/readings/models.py:224
 msgid "note"
 msgstr ""
 
-#: apps/invoicing/models.py:785 apps/messaging/models.py:276
+#: apps/invoicing/models.py:833 apps/messaging/models.py:276
 msgid "recorded by"
 msgstr ""
 
-#: apps/invoicing/models.py:791 apps/messaging/models.py:273
+#: apps/invoicing/models.py:839 apps/messaging/models.py:273
 msgid "recorded"
 msgstr ""
 
-#: apps/invoicing/models.py:795
+#: apps/invoicing/models.py:843
 msgid "payment"
 msgstr ""
 
-#: apps/invoicing/models.py:796
+#: apps/invoicing/models.py:844
 msgid "payments"
 msgstr ""
 
-#: apps/invoicing/models.py:805
+#: apps/invoicing/models.py:853
 msgid "Payments are recorded on issued invoices."
 msgstr ""
 
-#: apps/invoicing/models.py:815
+#: apps/invoicing/models.py:863
 msgid "new due date"
 msgstr ""
 
-#: apps/invoicing/models.py:827 apps/messaging/models.py:79
+#: apps/invoicing/models.py:875 apps/messaging/models.py:79
 msgid "sent by"
 msgstr ""
 
-#: apps/invoicing/models.py:833 apps/messaging/models.py:178
+#: apps/invoicing/models.py:881 apps/messaging/models.py:178
 msgid "sent"
 msgstr ""
 
-#: apps/invoicing/models.py:837
+#: apps/invoicing/models.py:885
 msgid "payment reminder"
 msgstr ""
 
-#: apps/invoicing/models.py:838
+#: apps/invoicing/models.py:886
 msgid "payment reminders"
 msgstr ""
 
-#: apps/invoicing/payments.py:122 apps/messaging/sending.py:32
+#: apps/invoicing/payments.py:123 apps/messaging/sending.py:32
 msgid "There is no message template for this. Add one under Settings."
 msgstr ""
 
@@ -1560,7 +1592,7 @@ msgstr ""
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:8
 #: apps/invoicing/templates/invoicing/invoice_detail.html:49
-#: apps/invoicing/templates/invoicing/invoice_detail.html:65
+#: apps/invoicing/templates/invoicing/invoice_detail.html:66
 #: apps/invoicing/templates/invoicing/overdue_list.html:16
 #: apps/invoicing/templates/invoicing/run_detail.html:33
 #: apps/invoicing/views.py:436
@@ -1576,7 +1608,7 @@ msgstr ""
 #: apps/invoicing/templates/invoicing/_invoice_results.html:9
 #: apps/invoicing/templates/invoicing/invoice_detail.html:46
 #: apps/invoicing/templates/invoicing/overdue_list.html:16
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:137
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:138
 #: apps/invoicing/templates/invoicing/run_detail.html:33
 #: apps/invoicing/views.py:435
 msgid "Recipient"
@@ -1593,7 +1625,7 @@ msgid "Due"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:12
-#: apps/invoicing/templates/invoicing/invoice_detail.html:100
+#: apps/invoicing/templates/invoicing/invoice_detail.html:103
 #: apps/invoicing/templates/invoicing/run_detail.html:33
 #: apps/invoicing/templates/invoicing/run_list.html:17
 #: apps/invoicing/views.py:440
@@ -1695,7 +1727,7 @@ msgstr ""
 
 #: apps/invoicing/templates/invoicing/invoice_detail.html:50
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:74
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:140
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:141
 #: apps/invoicing/views.py:437 apps/invoicing/views.py:494
 #: apps/selfservice/templates/selfservice/member.html:54
 msgid "Reference"
@@ -1708,135 +1740,140 @@ msgid "Invoice date"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/invoice_detail.html:52
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:80
+msgid "Delivery date or period"
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/invoice_detail.html:53
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:73
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:141
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:142
 #: apps/invoicing/views.py:434
 msgid "Due date"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:53
+#: apps/invoicing/templates/invoicing/invoice_detail.html:54
 msgid "Issued by"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:56
-#: apps/invoicing/templates/invoicing/invoice_detail.html:62
-#: apps/invoicing/templates/invoicing/invoice_detail.html:84
+#: apps/invoicing/templates/invoicing/invoice_detail.html:57
+#: apps/invoicing/templates/invoicing/invoice_detail.html:63
+#: apps/invoicing/templates/invoicing/invoice_detail.html:87
 msgid "Lines"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:65
-#: apps/invoicing/templates/invoicing/invoice_detail.html:87
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:86
+#: apps/invoicing/templates/invoicing/invoice_detail.html:66
+#: apps/invoicing/templates/invoicing/invoice_detail.html:90
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:87
 msgid "Description"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:65
-#: apps/invoicing/templates/invoicing/invoice_detail.html:87
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:87
+#: apps/invoicing/templates/invoicing/invoice_detail.html:66
+#: apps/invoicing/templates/invoicing/invoice_detail.html:90
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:88
 msgid "Quantity"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:66
-#: apps/invoicing/templates/invoicing/invoice_detail.html:88
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:88
+#: apps/invoicing/templates/invoicing/invoice_detail.html:67
+#: apps/invoicing/templates/invoicing/invoice_detail.html:91
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:89
 msgid "Unit price"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:66
-#: apps/invoicing/templates/invoicing/invoice_detail.html:88
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:89
+#: apps/invoicing/templates/invoicing/invoice_detail.html:67
+#: apps/invoicing/templates/invoicing/invoice_detail.html:91
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:90
 #, python-format
 msgid "VAT %%"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:66
-#: apps/invoicing/templates/invoicing/invoice_detail.html:72
+#: apps/invoicing/templates/invoicing/invoice_detail.html:67
+#: apps/invoicing/templates/invoicing/invoice_detail.html:73
 #: apps/register/templates/register/unit_detail.html:55
 msgid "Remove"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:81
+#: apps/invoicing/templates/invoicing/invoice_detail.html:84
 msgid "Save the draft"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:88
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:90
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:142
+#: apps/invoicing/templates/invoicing/invoice_detail.html:91
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:91
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:143
 #: apps/invoicing/views.py:495
 msgid "Amount"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:104
+#: apps/invoicing/templates/invoicing/invoice_detail.html:107
 #, python-format
 msgid "VAT %(rate)s %%"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:104
+#: apps/invoicing/templates/invoicing/invoice_detail.html:107
 #, python-format
 msgid "%(vat)s € on %(base)s €"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:106
+#: apps/invoicing/templates/invoicing/invoice_detail.html:109
 #: apps/invoicing/views.py:438
 msgid "Without VAT"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:109
+#: apps/invoicing/templates/invoicing/invoice_detail.html:112
 msgid "Not VAT registered"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:111
+#: apps/invoicing/templates/invoicing/invoice_detail.html:114
 #: apps/invoicing/templates/invoicing/overdue_list.html:17
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:119
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:121
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:120
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:122
 msgid "To pay"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:117
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:115
+#: apps/invoicing/templates/invoicing/invoice_detail.html:120
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:116
 msgid "Invoice total"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:119
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:116
+#: apps/invoicing/templates/invoicing/invoice_detail.html:122
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:117
 #, python-format
 msgid "Paid %(date)s"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:120
+#: apps/invoicing/templates/invoicing/invoice_detail.html:123
 #, python-format
 msgid "Reminder %(date)s"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:120
+#: apps/invoicing/templates/invoicing/invoice_detail.html:123
 #, python-format
 msgid "new due date %(date)s"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:121
+#: apps/invoicing/templates/invoicing/invoice_detail.html:124
 #: apps/invoicing/views.py:444
 msgid "Outstanding"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:124
+#: apps/invoicing/templates/invoicing/invoice_detail.html:127
 msgid "Record a payment"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:128
+#: apps/invoicing/templates/invoicing/invoice_detail.html:131
 msgid ""
 "Payments cannot be changed. To undo one, record the same amount as negative."
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:129
+#: apps/invoicing/templates/invoicing/invoice_detail.html:132
 msgid "Record payment"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:135
+#: apps/invoicing/templates/invoicing/invoice_detail.html:138
 #: apps/messaging/models.py:138
 msgid "Sent"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:140
+#: apps/invoicing/templates/invoicing/invoice_detail.html:143
 #: apps/invoicing/templates/invoicing/invoice_list.html:27
 msgid "Credit notes"
 msgstr ""
@@ -1988,30 +2025,30 @@ msgstr ""
 msgid "Period"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:90
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:91
 msgid "Amount excl. VAT"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:109
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:110
 #, python-format
 msgid "VAT %(rate)s %% on %(base)s €"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:111
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:112
 msgid "Total excl. VAT"
-msgstr ""
-
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:117
-#, python-format
-msgid "Credit note %(number)s"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:118
 #, python-format
+msgid "Credit note %(number)s"
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:119
+#, python-format
 msgid "Reminder fee %(date)s"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:124
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:125
 #, python-format
 msgid ""
 "We have not received payment for this invoice, which was due on %(due)s. "
@@ -2019,15 +2056,15 @@ msgid ""
 "reminder."
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:138
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:139
 msgid "Account (IBAN)"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:144
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:145
 msgid "Payment QR code"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/pdf/invoices.html:149
+#: apps/invoicing/templates/invoicing/pdf/invoices.html:150
 msgid "Virtual barcode"
 msgstr ""
 
@@ -2352,7 +2389,7 @@ msgstr ""
 msgid "A password is saved. Leave this empty to keep it."
 msgstr ""
 
-#: apps/messaging/email_forms.py:103 apps/plugins/views.py:115
+#: apps/messaging/email_forms.py:103 apps/plugins/views.py:129
 #, python-format
 msgid ""
 "Set in the server environment (%(variable)s), so it cannot be changed here."
@@ -3654,22 +3691,22 @@ msgstr ""
 msgid "Add-on"
 msgstr ""
 
-#: apps/plugins/templates/plugins/plugin_list.html:35
+#: apps/plugins/templates/plugins/plugin_list.html:37
 #, python-format
 msgid "Turn off<span class=\"visually-hidden\"> %(plugin)s</span>"
 msgstr ""
 
-#: apps/plugins/templates/plugins/plugin_list.html:38
+#: apps/plugins/templates/plugins/plugin_list.html:40
 #, python-format
 msgid "Turn on<span class=\"visually-hidden\"> %(plugin)s</span>"
 msgstr ""
 
-#: apps/plugins/templates/plugins/plugin_list.html:41
+#: apps/plugins/templates/plugins/plugin_list.html:43
 #, python-format
 msgid "Settings<span class=\"visually-hidden\"> for %(plugin)s</span>"
 msgstr ""
 
-#: apps/plugins/templates/plugins/plugin_list.html:49
+#: apps/plugins/templates/plugins/plugin_list.html:51
 msgid "No add-ons are installed."
 msgstr ""
 
@@ -3709,34 +3746,34 @@ msgid "Send test SMS"
 msgstr ""
 
 #: apps/plugins/templates/plugins/plugin_settings.html:52
-#: apps/plugins/views.py:220
+#: apps/plugins/views.py:234
 msgid "Turn the add-on on to send a test."
 msgstr ""
 
-#: apps/plugins/views.py:89
+#: apps/plugins/views.py:103
 #, python-format
 msgid "%(plugin)s is on."
 msgstr ""
 
-#: apps/plugins/views.py:91
+#: apps/plugins/views.py:105
 #, python-format
 msgid "%(plugin)s is off. Its data is kept."
 msgstr ""
 
-#: apps/plugins/views.py:104
+#: apps/plugins/views.py:118
 #, python-format
 msgid "Remove the saved %(setting)s"
 msgstr ""
 
-#: apps/plugins/views.py:138
+#: apps/plugins/views.py:152
 msgid "The saved value cannot be read with this server's key; enter it again."
 msgstr ""
 
-#: apps/plugins/views.py:140
+#: apps/plugins/views.py:154
 msgid "A value is saved. Leave this empty to keep it."
 msgstr ""
 
-#: apps/plugins/views.py:184
+#: apps/plugins/views.py:198
 msgid "Saved the settings."
 msgstr ""
 

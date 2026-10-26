@@ -460,27 +460,28 @@ class Voucher(models.Model):
         """Made from an invoice, payment or reminder (see Posting)."""
         return self.pk is not None and Posting.objects.filter(voucher_id=self.pk).exists()
 
-    def vat_problems(self, lines):
-        """VAT on lines dated when the rate is not in force, or when the
-        organisation is not VAT registered."""
+    def vat_problems(self, lines, date=None):
+        """VAT on lines dated (``date``, by default the voucher's) when the
+        rate is not in force, or when the organisation is not VAT registered."""
+        date = date or self.date
         problems = []
         with_vat = [line for line in lines if line.vat_code]
         for line in with_vat:
-            if not countries.vat_rate_applies(line.vat_rate, self.date, self.year.country):
+            if not countries.vat_rate_applies(line.vat_rate, date, self.year.country):
                 problems.append(
                     gettext("The VAT rate %(rate)s is not in force on %(day)s.")
                     % {
                         "rate": line.vat_display,
-                        "day": formats.date_format(self.date, "SHORT_DATE_FORMAT"),
+                        "day": formats.date_format(date, "SHORT_DATE_FORMAT"),
                     }
                 )
-        if with_vat and not VatRegistration.covers(self.date):
+        if with_vat and not VatRegistration.covers(date):
             problems.append(
                 gettext(
                     "The organisation is not VAT registered on %(day)s, so the voucher can have "
                     "no VAT. Check the VAT registration dates in the posting settings."
                 )
-                % {"day": formats.date_format(self.date, "SHORT_DATE_FORMAT")}
+                % {"day": formats.date_format(date, "SHORT_DATE_FORMAT")}
             )
         return problems
 
@@ -490,7 +491,8 @@ class Voucher(models.Model):
             # The invoice, payment or reminder is the evidence; what it says
             # is booked as it is, and anything odd is pointed out.
             lines = list(self.lines.all())
-            return self.vat_problems(lines) + self.posting.warnings(lines)
+            posting = self.posting
+            return self.vat_problems(lines, posting.vat_date) + posting.warnings(lines)
         if self.kind == self.Kind.NORMAL and not self.receipts.exists():
             return [
                 gettext(
@@ -939,6 +941,12 @@ class Posting(models.Model):
         blank=True,
         related_name="+",
     )
+    # For invoices and credit notes: the supply date or period stated on the
+    # invoice. VAT is due for the month the supply is made (AVL 15 §; a
+    # continuous supply at the end of its period), which can differ from the
+    # voucher's date, the invoice date. The VAT summary goes by these.
+    supply_start = models.DateField(_("supplied from"), null=True, blank=True)
+    supply_end = models.DateField(_("supplied until"), null=True, blank=True)
     created_at = models.DateTimeField(_("created"), auto_now_add=True)
 
     class Meta:
@@ -966,11 +974,17 @@ class Posting(models.Model):
     def __str__(self):
         return f"{self.get_source_display()} – {self.invoice}"
 
+    @property
+    def vat_date(self):
+        """The date that decides the VAT period and rate: the supply date for
+        invoices and credit notes, else the voucher's date."""
+        return self.supply_end or self.voucher.date
+
     def warnings(self, lines):
         """Where the record and the books' VAT registration disagree."""
         if self.source not in (self.Source.INVOICE, self.Source.CREDIT_NOTE):
             return []
-        registered = VatRegistration.covers(self.voucher.date)
+        registered = VatRegistration.covers(self.vat_date)
         if self.invoice.vat_registered and not registered:
             return []  # vat_problems() already says so for lines with VAT
         if not self.invoice.vat_registered and registered:

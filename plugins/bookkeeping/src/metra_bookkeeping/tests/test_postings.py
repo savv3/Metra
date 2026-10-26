@@ -228,6 +228,30 @@ def test_an_invoice_at_a_rate_no_longer_in_force_is_booked_with_a_warning(
         assert "not in force" in " ".join(voucher.warnings())
 
 
+def test_vat_follows_the_supply_period_not_the_invoice_date(books, vat_registered, make_invoice):
+    """Water for 2025 invoiced now: the 14 % rate of 2025 is right, and the
+    VAT belongs to December 2025 (AVL 15 §), whatever the invoice date."""
+    invoice = make_invoice(
+        [("Vatten 2025", "1", "100", "14")], supplied=(D(2025, 1, 1), D(2025, 12, 31))
+    )
+
+    voucher = voucher_of(invoice)
+    assert voucher.date == invoice.issue_date  # booked on the invoice date
+    posting = voucher.posting
+    assert (posting.supply_start, posting.supply_end) == (D(2025, 1, 1), D(2025, 12, 31))
+    assert posting.vat_date == D(2025, 12, 31)
+    assert voucher.warnings() == []
+    this_year = make_invoice([("Vatten 2026", "1", "100", "14")], supplied=(None, D(2026, 6, 30)))
+    assert "not in force" in " ".join(voucher_of(this_year).warnings())
+
+
+def test_without_a_supply_period_the_invoice_date_counts(books, make_invoice):
+    invoice = make_invoice([("Grundavgift", "1", "120", "0")])
+
+    posting = voucher_of(invoice).posting
+    assert posting.supply_start == posting.supply_end == invoice.issue_date
+
+
 def test_an_invoice_without_vat_while_registered_is_pointed_out(books, seller, make_invoice):
     VatRegistration.objects.create(start=D(2020, 1, 1))
 
@@ -257,6 +281,7 @@ def test_database_keeps_what_posted_entries_depend_on(books, make_invoice):
         lambda: Posting.objects.filter(pk=posting.pk).update(source="payment"),
         lambda: Posting.objects.filter(pk=posting.pk).delete(),
         lambda: VoucherLine.objects.filter(voucher=voucher).update(vat_rate=1, vat_code="sales"),
+        lambda: Posting.objects.filter(pk=posting.pk).update(supply_end=D(2020, 1, 1)),
     ]
     for attempt in attempts:
         with pytest.raises(DatabaseError), transaction.atomic():

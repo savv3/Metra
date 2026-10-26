@@ -87,6 +87,15 @@ Sales go to the account chosen for the invoice line's fee line, else to
 the account chosen for its VAT rate, else to the default sales account.
 Invoices go to their own voucher series (L) and payments to another (S).
 
+An invoice's voucher is dated the invoice date, but its VAT belongs to the
+month of the invoice's delivery date or the end of its delivery period,
+which the voucher shows. An invoice issued in January for last year's water
+therefore has its VAT in last December's period, at last year's rate.
+
+The settings page checks that the receivables account, when automatic
+posting starts, equals what the invoices issued before then had
+outstanding, and warns when they differ.
+
 Each such voucher is posted at once and shows the invoice it comes from;
 the invoice is its evidence, and the invoice page shows its vouchers. If
 one cannot be posted (an account no longer in use, say), it stays a draft

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-26 09:52+0200\n"
+"POT-Creation-Date: 2026-10-26 10:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,7 +93,7 @@ msgstr ""
 msgid "The financial year %(year)s is closed."
 msgstr ""
 
-#: forms.py:145 models.py:601
+#: forms.py:145 models.py:603
 #: templates/metra_bookkeeping/voucher_detail.html:53
 #: templates/metra_bookkeeping/voucher_form.html:26
 msgid "VAT"
@@ -141,7 +141,7 @@ msgstr ""
 msgid "Why the voucher is reversed, for example a wrong account."
 msgstr ""
 
-#: forms.py:251 models.py:554
+#: forms.py:251 models.py:556
 msgid "There is no open financial year for that date."
 msgstr ""
 
@@ -262,7 +262,7 @@ msgstr ""
 msgid "A year is 12 months, except when the books start, end or change dates."
 msgstr ""
 
-#: models.py:102 models.py:342 models.py:942
+#: models.py:102 models.py:342 models.py:950
 msgid "created"
 msgstr ""
 
@@ -335,7 +335,7 @@ msgstr ""
 msgid "Use digits only."
 msgstr ""
 
-#: models.py:219 models.py:282 models.py:670
+#: models.py:219 models.py:282 models.py:672
 msgid "name"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgstr ""
 msgid "Accounts not in use cannot get new entries."
 msgstr ""
 
-#: models.py:227 models.py:592 models.py:886
+#: models.py:227 models.py:594 models.py:888
 msgid "account"
 msgstr ""
 
@@ -419,7 +419,7 @@ msgstr ""
 msgid "date"
 msgstr ""
 
-#: models.py:321 models.py:596
+#: models.py:321 models.py:598
 msgid "description"
 msgstr ""
 
@@ -439,7 +439,7 @@ msgstr ""
 msgid "posted"
 msgstr ""
 
-#: models.py:355 models.py:589 models.py:667 models.py:917
+#: models.py:355 models.py:591 models.py:669 models.py:919
 msgid "voucher"
 msgstr ""
 
@@ -496,270 +496,278 @@ msgstr ""
 msgid "The account %(account)s is not in use."
 msgstr ""
 
-#: models.py:471
+#: models.py:472
 #, python-format
 msgid "The VAT rate %(rate)s is not in force on %(day)s."
 msgstr ""
 
-#: models.py:480
+#: models.py:481
 #, python-format
 msgid ""
 "The organisation is not VAT registered on %(day)s, so the voucher can have "
 "no VAT. Check the VAT registration dates in the posting settings."
 msgstr ""
 
-#: models.py:497
+#: models.py:499
 msgid ""
 "No receipt is attached. Every entry needs evidence: attach the receipt, or "
 "explain in the description why there is none (a memo voucher)."
 msgstr ""
 
-#: models.py:510
+#: models.py:512
 msgid "The voucher is already posted."
 msgstr ""
 
-#: models.py:550 views.py:403
+#: models.py:552 views.py:403
 msgid "This voucher cannot be reversed."
 msgstr ""
 
-#: models.py:555
+#: models.py:557
 #, python-format
 msgid "Reversal of voucher %(number)s"
 msgstr ""
 
-#: models.py:594
+#: models.py:596
 msgid "debit"
 msgstr ""
 
-#: models.py:595
+#: models.py:597
 msgid "credit"
 msgstr ""
 
-#: models.py:604 models.py:883
+#: models.py:606 models.py:885
 msgid "VAT rate (%)"
 msgstr ""
 
-#: models.py:606
+#: models.py:608
 msgid "order"
 msgstr ""
 
-#: models.py:610
+#: models.py:612
 msgid "voucher line"
 msgstr ""
 
-#: models.py:611
+#: models.py:613
 msgid "voucher lines"
 msgstr ""
 
-#: models.py:650
+#: models.py:652
 msgid "Amounts are positive; use the other column instead."
 msgstr ""
 
-#: models.py:652
+#: models.py:654
 msgid "A line is either a debit or a credit, not both."
 msgstr ""
 
-#: models.py:654
+#: models.py:656
 msgid "Enter a debit or a credit."
 msgstr ""
 
-#: models.py:669
+#: models.py:671
 msgid "file"
 msgstr ""
 
-#: models.py:671
+#: models.py:673
 msgid "size"
 msgstr ""
 
-#: models.py:672
+#: models.py:674
 msgid "type"
 msgstr ""
 
-#: models.py:675
+#: models.py:677
 msgid "uploaded by"
 msgstr ""
 
-#: models.py:681
+#: models.py:683
 msgid "uploaded"
 msgstr ""
 
-#: models.py:685
+#: models.py:687
 msgid "receipt"
 msgstr ""
 
-#: models.py:686
+#: models.py:688
 msgid "receipts"
 msgstr ""
 
-#: models.py:693
+#: models.py:695
 msgid "A receipt cannot be changed."
 msgstr ""
 
-#: models.py:705
+#: models.py:707
 msgid "registered from"
 msgstr ""
 
-#: models.py:707
+#: models.py:709
 msgid "registered until"
 msgstr ""
 
-#: models.py:707
+#: models.py:709
 msgid "Empty while still registered."
 msgstr ""
 
-#: models.py:712 templates/metra_bookkeeping/posting_settings.html:51
+#: models.py:714 templates/metra_bookkeeping/posting_settings.html:61
 #: templates/metra_bookkeeping/vat_registration_form.html:3
 #: templates/metra_bookkeeping/vat_registration_form.html:5
 msgid "VAT registration"
 msgstr ""
 
-#: models.py:713
+#: models.py:715
 msgid "VAT registrations"
 msgstr ""
 
-#: models.py:718
+#: models.py:720
 #, python-format
 msgid "from %(start)s"
 msgstr ""
 
-#: models.py:724
+#: models.py:726
 msgid "The registration must end after it starts."
 msgstr ""
 
-#: models.py:732
+#: models.py:734
 msgid "The period overlaps another VAT registration."
 msgstr ""
 
-#: models.py:761
+#: models.py:763
 msgid "post automatically from"
 msgstr ""
 
-#: models.py:765
+#: models.py:767
 msgid ""
 "Invoices, credit notes, payments and reminders dated this day or later are "
 "booked automatically. Choose a day after anything already booked by hand, so "
 "nothing is booked twice. Empty: nothing is posted."
 msgstr ""
 
-#: models.py:770
+#: models.py:772
 msgid "receivables"
 msgstr ""
 
-#: models.py:770
+#: models.py:772
 msgid "Debited for invoices, credited for payments."
 msgstr ""
 
-#: models.py:771
+#: models.py:773
 msgid "bank account"
 msgstr ""
 
-#: models.py:771
+#: models.py:773
 msgid "Where payments arrive."
 msgstr ""
 
-#: models.py:773
+#: models.py:775
 msgid "sales"
 msgstr ""
 
-#: models.py:773
+#: models.py:775
 msgid "Income for invoice lines without an account of their own below."
 msgstr ""
 
-#: models.py:775
+#: models.py:777
 msgid "reminder fees"
 msgstr ""
 
-#: models.py:776
+#: models.py:778
 msgid "VAT on sales"
 msgstr ""
 
-#: models.py:777
+#: models.py:779
 msgid "VAT on purchases"
 msgstr ""
 
-#: models.py:779
+#: models.py:781
 msgid "VAT settlement"
 msgstr ""
 
-#: models.py:780
+#: models.py:782
 msgid ""
 "The VAT to pay or to get back, from the sales and purchase VAT of each "
 "period."
 msgstr ""
 
-#: models.py:784
+#: models.py:786
 msgid "series for invoices"
 msgstr ""
 
-#: models.py:789
+#: models.py:791
 msgid "Invoices, credit notes and reminder fees."
 msgstr ""
 
-#: models.py:793
+#: models.py:795
 msgid "series for payments"
 msgstr ""
 
-#: models.py:812 models.py:813
+#: models.py:814 models.py:815
 msgid "posting settings"
 msgstr ""
 
-#: models.py:816
+#: models.py:818
 msgid "Posting settings"
 msgstr ""
 
-#: models.py:876
+#: models.py:878
 msgid "fee line"
 msgstr ""
 
-#: models.py:890
+#: models.py:892
 msgid "sales account"
 msgstr ""
 
-#: models.py:891
+#: models.py:893
 msgid "sales accounts"
 msgstr ""
 
-#: models.py:911
+#: models.py:913
 msgid "Invoice"
 msgstr ""
 
-#: models.py:912
+#: models.py:914
 msgid "Credit note"
 msgstr ""
 
-#: models.py:913
+#: models.py:915
 msgid "Payment"
 msgstr ""
 
-#: models.py:914
+#: models.py:916
 msgid "Reminder fee"
 msgstr ""
 
-#: models.py:919
+#: models.py:921
 msgid "from"
 msgstr ""
 
-#: models.py:922
+#: models.py:924
 msgid "invoice"
 msgstr ""
 
-#: models.py:928
+#: models.py:930
 msgid "payment"
 msgstr ""
 
-#: models.py:936
+#: models.py:938
 msgid "payment reminder"
 msgstr ""
 
-#: models.py:946
+#: models.py:948
+msgid "supplied from"
+msgstr ""
+
+#: models.py:949
+msgid "supplied until"
+msgstr ""
+
+#: models.py:954
 msgid "posting"
 msgstr ""
 
-#: models.py:947
+#: models.py:955
 msgid "postings"
 msgstr ""
 
-#: models.py:979
+#: models.py:993
 #, python-format
 msgid ""
 "%(invoice)s was issued without VAT, although the organisation is VAT "
@@ -767,22 +775,22 @@ msgid ""
 "dates."
 msgstr ""
 
-#: postings.py:156
+#: postings.py:159
 #, python-format
 msgid "Credit note %(number)s for invoice %(credited)s, %(unit)s"
 msgstr ""
 
-#: postings.py:158
+#: postings.py:161
 #, python-format
 msgid "Payment of invoice %(number)s, %(unit)s"
 msgstr ""
 
-#: postings.py:160
+#: postings.py:163
 #, python-format
 msgid "Reminder fee for invoice %(number)s, %(unit)s"
 msgstr ""
 
-#: postings.py:162
+#: postings.py:165
 #, python-format
 msgid "Invoice %(number)s, %(unit)s"
 msgstr ""
@@ -886,7 +894,7 @@ msgid "New account"
 msgstr ""
 
 #: templates/metra_bookkeeping/account_form.html:11
-#: templates/metra_bookkeeping/posting_settings.html:43
+#: templates/metra_bookkeeping/posting_settings.html:53
 #: templates/metra_bookkeeping/series_form.html:11
 #: templates/metra_bookkeeping/vat_registration_form.html:11
 #: templates/metra_bookkeeping/year_form.html:12
@@ -894,7 +902,7 @@ msgid "Save"
 msgstr ""
 
 #: templates/metra_bookkeeping/account_form.html:12
-#: templates/metra_bookkeeping/posting_settings.html:44
+#: templates/metra_bookkeeping/posting_settings.html:54
 #: templates/metra_bookkeeping/series_form.html:12
 #: templates/metra_bookkeeping/vat_registration_form.html:12
 #: templates/metra_bookkeeping/voucher_confirm_delete.html:10
@@ -932,7 +940,7 @@ msgid "Not in use"
 msgstr ""
 
 #: templates/metra_bookkeeping/account_list.html:24
-#: templates/metra_bookkeeping/posting_settings.html:61
+#: templates/metra_bookkeeping/posting_settings.html:71
 #: templates/metra_bookkeeping/voucher_detail.html:9
 #: templates/metra_bookkeeping/year_detail.html:7
 msgid "Edit"
@@ -948,7 +956,7 @@ msgid "No accounts yet. They are added when the books are started."
 msgstr ""
 
 #: templates/metra_bookkeeping/account_list.html:38
-#: templates/metra_bookkeeping/posting_settings.html:29
+#: templates/metra_bookkeeping/posting_settings.html:39
 msgid "Voucher series"
 msgstr ""
 
@@ -1121,29 +1129,38 @@ msgstr ""
 msgid "Add them"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:26
+#: templates/metra_bookkeeping/posting_settings.html:23
+#, python-format
+msgid ""
+"The receivables account is %(booked)s € when automatic posting starts, but "
+"the invoices issued before then had %(open)s € outstanding. Payments of "
+"those invoices are booked against the receivables account, so check the "
+"opening balances."
+msgstr ""
+
+#: templates/metra_bookkeeping/posting_settings.html:36
 msgid "Accounts"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:33
+#: templates/metra_bookkeeping/posting_settings.html:43
 msgid "Sales accounts"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:34
+#: templates/metra_bookkeeping/posting_settings.html:44
 msgid ""
 "Invoice lines are booked to the account of their fee line, else to the "
 "account of their VAT rate, else to the default sales account."
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:36
+#: templates/metra_bookkeeping/posting_settings.html:46
 msgid "Per fee line"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:39
+#: templates/metra_bookkeeping/posting_settings.html:49
 msgid "Per VAT rate"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:48
+#: templates/metra_bookkeeping/posting_settings.html:58
 #, python-format
 msgid ""
 "%(count)s record from invoicing is waiting to be posted; post it from the "
@@ -1154,7 +1171,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/metra_bookkeeping/posting_settings.html:52
+#: templates/metra_bookkeeping/posting_settings.html:62
 msgid ""
 "VAT is booked only on days the organisation is VAT registered, at the rate "
 "in force on the day. Reverse charge (services from other EU countries, "
@@ -1162,22 +1179,22 @@ msgid ""
 "not supported yet: book them by hand, and check them with an accountant."
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:60
+#: templates/metra_bookkeeping/posting_settings.html:70
 msgid "VAT registered"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:62
+#: templates/metra_bookkeeping/posting_settings.html:72
 #: templates/metra_bookkeeping/voucher_detail.html:81
 #: templates/metra_bookkeeping/voucher_form.html:26
 #: templates/metra_bookkeeping/voucher_form.html:32
 msgid "Remove"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:64
+#: templates/metra_bookkeeping/posting_settings.html:74
 msgid "Not VAT registered."
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:70
+#: templates/metra_bookkeeping/posting_settings.html:80
 msgid "Add a VAT registration"
 msgstr ""
 
@@ -1230,6 +1247,14 @@ msgstr ""
 
 #: templates/metra_bookkeeping/voucher_detail.html:40
 msgid "Booked from"
+msgstr ""
+
+#: templates/metra_bookkeeping/voucher_detail.html:40
+msgid "Supplied"
+msgstr ""
+
+#: templates/metra_bookkeeping/voucher_detail.html:40
+msgid "VAT is due for the month the supply ends in."
 msgstr ""
 
 #: templates/metra_bookkeeping/voucher_detail.html:40
@@ -1478,27 +1503,27 @@ msgstr ""
 msgid "The posting settings were saved."
 msgstr ""
 
-#: views.py:531
+#: views.py:532
 #, python-format
 msgid "Added the accounts %(accounts)s."
 msgstr ""
 
-#: views.py:544 views.py:559
+#: views.py:545 views.py:560
 msgid "The VAT registration was saved."
 msgstr ""
 
-#: views.py:573
+#: views.py:574
 msgid "The VAT registration was removed."
 msgstr ""
 
-#: views.py:587
+#: views.py:588
 #, python-format
 msgid "%(count)s voucher was made from invoicing."
 msgid_plural "%(count)s vouchers were made from invoicing."
 msgstr[0] ""
 msgstr[1] ""
 
-#: views.py:597
+#: views.py:598
 #, python-format
 msgid "%(count)s of them could not be posted; it is among the drafts."
 msgid_plural ""
@@ -1506,7 +1531,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: views.py:607
+#: views.py:608
 #, python-format
 msgid ""
 "%(count)s record is still waiting: no open financial year covers its date."
