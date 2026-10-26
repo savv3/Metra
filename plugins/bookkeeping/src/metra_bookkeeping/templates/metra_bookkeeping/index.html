@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load i18n bookkeeping %}
+{% block title %}{% translate "Bookkeeping" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Bookkeeping" %}</h1>
+    <div class="actions">
+      {% if year and perms.metra_bookkeeping.add_voucher %}
+        <a class="button button--primary" href="{% url 'metra_bookkeeping:voucher_create' %}">{% translate "New voucher" %}</a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if not year %}
+    {% if setup_form %}
+      <section class="card" aria-labelledby="setup">
+        <h2 id="setup">{% translate "Start the books" %}</h2>
+        <p>{% blocktranslate trimmed %}
+          Choose the first financial year and a chart of accounts. Then enter the balances the
+          year starts with (from last year's balance sheet) as the first voucher, of the kind
+          "Opening balances".
+        {% endblocktranslate %}</p>
+        <form method="post" action="{% url 'metra_bookkeeping:setup' %}" class="form" novalidate>
+          {% csrf_token %}
+          {{ setup_form.non_field_errors }}
+          {% for field in setup_form %}{% include "register/_field.html" %}{% endfor %}
+          <div class="actions"><button type="submit" class="button button--primary">{% translate "Start the books" %}</button></div>
+        </form>
+      </section>
+    {% else %}
+      <p class="empty">{% translate "The books have not been started yet, or no financial year is open." %}</p>
+    {% endif %}
+  {% else %}
+    {% include "metra_bookkeeping/_nav.html" %}
+    <p class="subtitle">{% translate "Financial year" %} <a href="{{ year.get_absolute_url }}">{{ year }}</a> &middot; {% blocktranslate count count=posted_count trimmed %}{{ count }} posted voucher{% plural %}{{ count }} posted vouchers{% endblocktranslate %}</p>
+
+    {% if late %}
+      <div class="status-panel status-panel--warning">
+        <h2>{% translate "Late entries" %}</h2>
+        <p>{% blocktranslate trimmed %}
+          Entries are to be booked at the latest four months after the end of their month, and
+          cash payments day by day. These drafts are past that:
+        {% endblocktranslate %}</p>
+        <ul>{% for voucher in late %}<li><a href="{{ voucher.get_absolute_url }}">{{ voucher.date|date:"SHORT_DATE_FORMAT" }} {{ voucher.description }}</a></li>{% endfor %}</ul>
+      </div>
+    {% endif %}
+
+    <h2>{% translate "Drafts to post" %}</h2>
+    {% include "metra_bookkeeping/_voucher_table.html" with vouchers=drafts label=_("Drafts to post") %}
+    <h2>{% translate "Recently posted" %}</h2>
+    {% include "metra_bookkeeping/_voucher_table.html" with vouchers=recent label=_("Recently posted") %}
+  {% endif %}
+{% endblock %}

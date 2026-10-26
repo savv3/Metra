@@ -1,0 +1,5 @@
+{% load i18n %}
+<form class="filters no-print" method="get">
+  {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+  <div class="field field--submit"><button type="submit" class="button">{% translate "Show" %}</button></div>
+</form>

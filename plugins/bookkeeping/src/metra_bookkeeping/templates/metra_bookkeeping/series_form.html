@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if series %}{% translate "Edit voucher series" %}{% else %}{% translate "New voucher series" %}{% endif %}{% endblock %}
+{% block content %}
+  <div class="page-head"><h1>{% if series %}{% translate "Edit voucher series" %}{% else %}{% translate "New voucher series" %}{% endif %}</h1></div>
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+      <a class="button" href="{% url 'metra_bookkeeping:account_list' %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+{% endblock %}

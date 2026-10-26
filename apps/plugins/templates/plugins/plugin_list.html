@@ -30,7 +30,9 @@
               <td>
                 <form method="post" action="{% url 'plugins:toggle' plugin.name %}" class="inline-form">
                   {% csrf_token %}
-                  {% if plugin.enabled %}
+                  {% if plugin.enabled and plugin.keep_on %}
+                    <span class="help">{{ plugin.keep_on }}</span>
+                  {% elif plugin.enabled %}
                     <input type="hidden" name="enabled" value="0">
                     <button type="submit" class="button">{% blocktranslate with plugin=plugin.label %}Turn off<span class="visually-hidden"> {{ plugin }}</span>{% endblocktranslate %}</button>
                   {% else %}

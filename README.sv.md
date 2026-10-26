@@ -54,6 +54,8 @@ först för ett vattenandelslag med ungefär 50 hushåll. Andra som passar bra:
 - Möten (ett tillägg att slå på): kallelse med föredragningslista, närvaro
   och röster, protokoll som justeras av protokolljusterarna och visas för
   medlemmarna
+- Bokföring (ett tillägg att slå på): dubbel bokföring enligt den finska
+  bokföringslagen, med numrerade verifikat och kvitton, dagbok och huvudbok
 - Tillägg (plugins), och svenska, engelska och finska i appen (den finska
   är maskinöversatt och ogranskad, och appen säger det)
 

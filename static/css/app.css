@@ -565,3 +565,8 @@ th.num, td.num { text-align: right; white-space: nowrap; }
 .notification .button--link.notification__text { min-height: 0; padding: 0; color: var(--primary); text-align: left; }
 .notification__time { display: block; color: var(--muted); font-size: 0.85rem; }
 .notification__actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+/* Printing reports: leave out the controls. */
+@media print {
+  .no-print { display: none !important; }
+}

@@ -51,6 +51,8 @@ first for a water association with about 50 households. Other good fits:
   could not be delivered, with each person choosing what they get
 - Meetings (an optional plugin): the notice with the agenda, attendance
   and votes, minutes approved by the minute checkers and shown to members
+- Bookkeeping (an optional plugin): double-entry books under the Finnish
+  Accounting Act, with numbered vouchers and receipts, journal and ledger
 - Plugins, and Swedish, English and Finnish in the app (the Finnish is
   machine translated and unreviewed, and the app says so)
 
@@ -74,6 +76,7 @@ docker compose up -d --build
 - [REST API](docs/api.md): the `api` plugin, for other systems with tokens
 - [Webhooks](docs/webhooks.md): tell outside systems when something changes
 - [Meetings](plugins/meetings/README.md): call, minute and approve meetings
+- [Bookkeeping](plugins/bookkeeping/README.md): the organisation's books
 - [AGENTS.md](AGENTS.md): conventions for contributors
 - [SECURITY.md](SECURITY.md): reporting a security problem
 

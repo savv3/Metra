@@ -31,6 +31,11 @@ events, messaging providers, event receivers and pages under
 `/plugins/<name>/` are left out, and its data is kept. Each process reads
 the on/off states again within two seconds of a change.
 
+A plugin can refuse to be turned off while that would hide records that
+must stay readable, as the bookkeeping plugin does once its books have
+posted vouchers: its AppConfig defines `turn_off_refused()`, which returns
+the reason (shown on the Add-ons page instead of the button) or `None`.
+
 ## Writing a plugin
 
 Start from [plugins/example](../plugins/example), which the tests load. A
@@ -148,8 +153,9 @@ development, and CI runs their tests with the app's. The official ones are
 listed in `BUNDLED` in `config/plugins.py`, installed in the Docker image and
 on by default; `METRA_PLUGINS_DISABLED` turns one off. The example plugin is
 installed only for development and tests. The [webhooks plugin](webhooks.md)
-and the meetings plugin are official but off by default: they are installed
-in the Docker image, and `METRA_PLUGINS=webhooks,meetings` turns them on.
+the meetings plugin and the bookkeeping plugin are official but off by
+default: they are installed in the Docker image, and
+`METRA_PLUGINS=webhooks,meetings,bookkeeping` turns them on.
 
 | Plugin | Name | What it does |
 | --- | --- | --- |
@@ -157,6 +163,7 @@ in the Docker image, and `METRA_PLUGINS=webhooks,meetings` turns them on.
 | [metra-email-mailgun](../plugins/email-mailgun) | `mailgun` | Email through Mailgun, with delivery, bounce and spam reports. Bundled, on by default; sends once chosen under Settings > Email |
 | [metra-api](../plugins/api) | `api` | The REST API ([docs](api.md)). Off until `METRA_PLUGINS=api` |
 | [metra-webhooks](../plugins/webhooks) | `webhooks` | Signed webhooks to outside systems ([docs](webhooks.md)). Off until `METRA_PLUGINS=webhooks` |
+| [metra-bookkeeping](../plugins/bookkeeping) | `bookkeeping` | Double-entry books under Finnish rules: chart of accounts, numbered vouchers with receipts, reversing corrections, journal, ledger and trial balance. Off until `METRA_PLUGINS=bookkeeping` |
 | [metra-meetings](../plugins/meetings) | `meetings` | Meetings: notice with the agenda, attendance and votes, minutes approved by the minute checkers and shown to members. Off until `METRA_PLUGINS=meetings` |
 
 So that each can later move to its own repository, a plugin in plugins/:

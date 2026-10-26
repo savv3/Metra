@@ -1,0 +1,2 @@
+{% load i18n %}
+<p class="subtitle">{% if year %}{% translate "Financial year" %} {{ year }} &middot; {{ start|date:"SHORT_DATE_FORMAT" }}–{{ end|date:"SHORT_DATE_FORMAT" }} &middot; {% blocktranslate with when=printed_at|date:"SHORT_DATETIME_FORMAT" %}Made {{ when }}{% endblocktranslate %}{% endif %}</p>

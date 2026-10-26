@@ -1,0 +1,10 @@
+{% load i18n %}
+<nav class="actions no-print" aria-label="{% translate 'Bookkeeping' %}">
+  <a class="button" href="{% url 'metra_bookkeeping:index' %}">{% translate "Overview" %}</a>
+  <a class="button" href="{% url 'metra_bookkeeping:voucher_list' %}">{% translate "Vouchers" %}</a>
+  <a class="button" href="{% url 'metra_bookkeeping:journal' %}">{% translate "Journal" %}</a>
+  <a class="button" href="{% url 'metra_bookkeeping:ledger' %}">{% translate "General ledger" %}</a>
+  <a class="button" href="{% url 'metra_bookkeeping:trial_balance' %}">{% translate "Trial balance" %}</a>
+  {% if perms.metra_bookkeeping.view_account %}<a class="button" href="{% url 'metra_bookkeeping:account_list' %}">{% translate "Chart of accounts" %}</a>{% endif %}
+  {% if perms.metra_bookkeeping.view_fiscalyear %}<a class="button" href="{% url 'metra_bookkeeping:year_list' %}">{% translate "Financial years" %}</a>{% endif %}
+</nav>

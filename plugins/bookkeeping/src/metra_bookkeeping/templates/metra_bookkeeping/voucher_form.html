@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if voucher %}{% translate "Edit draft voucher" %}{% else %}{% translate "New voucher" %}{% endif %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% if voucher %}{% translate "Edit draft voucher" %}{% else %}{% translate "New voucher" %}{% endif %}</h1>
+  </div>
+  <p class="help">{% blocktranslate trimmed %}
+    Each line goes to one account, as a debit or a credit. Debits and credits must add up to the
+    same amount before the voucher can be posted. A receipt can be attached once the draft is saved.
+  {% endblocktranslate %}</p>
+  <form method="post" class="form form--wide" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form.visible_fields %}{% include "register/_field.html" %}{% endfor %}
+    {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+
+    <h2>{% translate "Lines" %}</h2>
+    {{ formset.management_form }}
+    {% if formset.non_form_errors %}<div class="errorlist-box" role="alert">{{ formset.non_form_errors }}</div>{% endif %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Lines' %}">
+      <table class="line-table">
+        <thead><tr>
+          <th scope="col">{% translate "Account" %}</th><th scope="col">{% translate "Description" %}</th>
+          <th scope="col">{% translate "Debit" %}</th><th scope="col">{% translate "Credit" %}</th>
+          <th scope="col">{% translate "Remove" %}</th>
+        </tr></thead>
+        <tbody>
+          {% for line_form in formset %}
+            <tr>
+              {% for field in line_form.visible_fields %}
+                <td><label class="visually-hidden" for="{{ field.id_for_label }}">{% if field.name == "DELETE" %}{% translate "Remove" %}{% else %}{{ field.label }}{% endif %}</label>{{ field }}{% for error in field.errors %}<span class="errorlist">{{ error }}</span>{% endfor %}</td>
+              {% endfor %}
+              {% for hidden in line_form.hidden_fields %}{{ hidden }}{% endfor %}
+            </tr>
+            {% if line_form.non_field_errors %}<tr><td colspan="5">{{ line_form.non_field_errors }}</td></tr>{% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="help">{% translate "Save to get more empty lines." %}</p>
+    <div class="actions">
+      <button type="submit" class="button">{% translate "Save draft" %}</button>
+      {% if perms.metra_bookkeeping.post_voucher %}<button type="submit" name="post" value="1" class="button button--primary">{% translate "Save and post" %}</button>{% endif %}
+      <a class="button" href="{% if voucher %}{{ voucher.get_absolute_url }}{% else %}{% url 'metra_bookkeeping:index' %}{% endif %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+{% endblock %}

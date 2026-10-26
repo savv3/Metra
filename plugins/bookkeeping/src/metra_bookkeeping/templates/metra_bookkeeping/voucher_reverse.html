@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Reverse voucher" %}{% endblock %}
+{% block content %}
+  <div class="page-head"><h1>{% blocktranslate with voucher=voucher %}Reverse {{ voucher }}{% endblocktranslate %}</h1></div>
+  <p>{% blocktranslate trimmed %}
+    A posted voucher never changes. To correct it, a new voucher with the same lines on the opposite
+    side cancels it, and both stay in the books. Then enter the right entry as a new voucher.
+  {% endblocktranslate %}</p>
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Post the reversal" %}</button>
+      <a class="button" href="{{ voucher.get_absolute_url }}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+{% endblock %}

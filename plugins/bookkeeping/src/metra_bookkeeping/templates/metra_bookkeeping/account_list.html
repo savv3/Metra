@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Chart of accounts" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Chart of accounts" %}</h1>
+    <div class="actions no-print">
+      {% if perms.metra_bookkeeping.add_account %}<a class="button button--primary" href="{% url 'metra_bookkeeping:account_create' %}">{% translate "New account" %}</a>{% endif %}
+      <button type="button" class="button" onclick="window.print()">{% translate "Print" %}</button>
+    </div>
+  </div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  {% if accounts %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Chart of accounts' %}">
+      <table>
+        <thead><tr><th scope="col">{% translate "Number" %}</th><th scope="col">{% translate "Name" %}</th><th scope="col">{% translate "Kind" %}</th><th scope="col">{% translate "Status" %}</th><th scope="col" class="no-print"><span class="visually-hidden">{% translate "Actions" %}</span></th></tr></thead>
+        <tbody>
+          {% for account in accounts %}
+            <tr>
+              <th scope="row"><a href="{{ account.get_absolute_url }}">{{ account.number }}</a></th>
+              <td>{{ account.name }}</td><td>{{ account.get_kind_display }}</td>
+              <td>{% if account.active %}{% translate "In use" %}{% else %}{% translate "Not in use" %}{% endif %}</td>
+              <td class="no-print">
+                {% if perms.metra_bookkeeping.change_account %}<a class="button" href="{% url 'metra_bookkeeping:account_edit' account.pk %}">{% translate "Edit" %}</a>{% endif %}
+                {% if perms.metra_bookkeeping.delete_account and not account.entry_count %}
+                  <form method="post" action="{% url 'metra_bookkeeping:account_delete' account.pk %}" class="inline-form">{% csrf_token %}<button type="submit" class="button">{% translate "Delete" %}</button></form>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "No accounts yet. They are added when the books are started." %}</p>
+  {% endif %}
+
+  <h2>{% translate "Voucher series" %}</h2>
+  <p class="help">{% translate "Vouchers are numbered without gaps within each series and financial year." %}</p>
+  <ul class="plain-list">
+    {% for item in series %}
+      <li>{% if perms.metra_bookkeeping.change_voucherseries %}<a href="{% url 'metra_bookkeeping:series_edit' item.pk %}">{{ item }}</a>{% else %}{{ item }}{% endif %}</li>
+    {% empty %}<li>{% translate "None." %}</li>{% endfor %}
+  </ul>
+  {% if perms.metra_bookkeeping.add_voucherseries %}<p class="no-print"><a class="button" href="{% url 'metra_bookkeeping:series_create' %}">{% translate "New voucher series" %}</a></p>{% endif %}
+{% endblock %}

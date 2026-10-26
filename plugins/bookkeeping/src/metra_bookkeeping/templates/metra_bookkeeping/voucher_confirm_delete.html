@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Delete draft voucher" %}{% endblock %}
+{% block content %}
+  <div class="page-head"><h1>{% translate "Delete draft voucher" %}</h1></div>
+  <p>{% blocktranslate with description=voucher.description trimmed %}Delete the draft "{{ description }}" and its receipts? Drafts have no number, so this leaves no gap.{% endblocktranslate %}</p>
+  <form method="post" class="actions">
+    {% csrf_token %}
+    <button type="submit" class="button button--danger">{% translate "Delete" %}</button>
+    <a class="button" href="{{ voucher.get_absolute_url }}">{% translate "Cancel" %}</a>
+  </form>
+{% endblock %}

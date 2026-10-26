@@ -12,6 +12,18 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+### Added
+
+- The Bookkeeping add-on (`METRA_PLUGINS=bookkeeping`, off by default):
+  double-entry books under the Finnish Accounting Act, with a chart of
+  accounts from a template for an association or a cooperative, financial
+  years, numbered vouchers with receipts, corrections by reversing
+  vouchers, and the journal, general ledger and trial balance. Income
+  statement, balance sheet and postings from invoices follow.
+- Plugin authors: an add-on's AppConfig can define `turn_off_refused()` to
+  keep it from being turned off, with the reason shown under Settings >
+  Add-ons.
+
 ## [0.5.0] - 2026-10-25
 
 ### Added

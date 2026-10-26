@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Vouchers" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Vouchers" %}</h1>
+    <div class="actions">
+      {% if perms.metra_bookkeeping.add_voucher %}<a class="button button--primary" href="{% url 'metra_bookkeeping:voucher_create' %}">{% translate "New voucher" %}</a>{% endif %}
+    </div>
+  </div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  {% include "metra_bookkeeping/_report_filter.html" %}
+  {% include "metra_bookkeeping/_voucher_table.html" with label=_("Vouchers") %}
+{% endblock %}

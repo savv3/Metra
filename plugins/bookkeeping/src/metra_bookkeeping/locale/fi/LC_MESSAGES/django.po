@@ -1,0 +1,1116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-26 09:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps.py:9 apps.py:27 templates/metra_bookkeeping/_nav.html:2
+#: templates/metra_bookkeeping/index.html:3
+#: templates/metra_bookkeeping/index.html:6
+msgid "Bookkeeping"
+msgstr "Kirjanpito"
+
+#: apps.py:10
+msgid ""
+"Double-entry books with vouchers, journal and ledger, under Finnish rules."
+msgstr ""
+"Kahdenkertainen kirjanpito tositteineen, päiväkirjoineen ja pääkirjoineen "
+"Suomen sääntöjen mukaan."
+
+#: apps.py:45
+msgid ""
+"The books have posted vouchers, which must be kept readable for the legal "
+"period, so bookkeeping stays on."
+msgstr ""
+"Kirjanpidossa on kirjattuja tositteita, joiden on pysyttävä luettavina "
+"lakisääteinen aika, joten kirjanpitoa ei voi poistaa käytöstä."
+
+#: countries/fi.py:16
+msgid "Finland"
+msgstr "Suomi"
+
+#: countries/fi.py:139
+msgid "Association"
+msgstr "Yhdistys"
+
+#: countries/fi.py:141
+msgid ""
+"For a registered association (yhdistys): activities, fundraising and "
+"membership fees, with a surplus or deficit."
+msgstr ""
+"Rekisteröidylle yhdistykselle: toiminta, varainhankinta ja jäsenmaksut, "
+"tuloksena ylijäämä tai alijäämä."
+
+#: countries/fi.py:251
+msgid "Cooperative or company"
+msgstr "Osuuskunta tai yhtiö"
+
+#: countries/fi.py:253
+msgid ""
+"For a cooperative (osuuskunta), such as a water cooperative, or a company: "
+"net sales, with a profit or loss."
+msgstr ""
+"Osuuskunnalle, esimerkiksi vesiosuuskunnalle, tai yhtiölle: liikevaihto, "
+"tuloksena voitto tai tappio."
+
+#: forms.py:50 templates/metra_bookkeeping/year_detail.html:13
+msgid "Kind of organisation"
+msgstr "Organisaation tyyppi"
+
+#: forms.py:58
+msgid ""
+"Decides the form of the income statement and the chart of accounts the books"
+" start with. Accounts can then be added, renamed and retired."
+msgstr ""
+"Määrää tuloslaskelman kaavan ja tilikartan, jolla kirjanpito aloitetaan. "
+"Tilejä voi sen jälkeen lisätä, nimetä uudelleen ja poistaa käytöstä."
+
+#: forms.py:77
+msgid "The account has entries, so this stays."
+msgstr "Tilillä on kirjauksia, joten tämä pysyy ennallaan."
+
+#: forms.py:107
+msgid "No financial year covers this date."
+msgstr "Mikään tilikausi ei kata tätä päivää."
+
+#: forms.py:110 models.py:180 models.py:398 views.py:413
+#, python-format
+msgid "The financial year %(year)s is closed."
+msgstr "Tilikausi %(year)s on suljettu."
+
+#: forms.py:156
+msgid "Add the voucher's lines."
+msgstr "Lisää tositteen rivit."
+
+#: forms.py:171
+msgid "Receipt"
+msgstr "Kuitti"
+
+#: forms.py:172
+#, python-format
+msgid "A PDF or a photo of the receipt or bill, up to %(mb)s MB."
+msgstr "PDF tai valokuva kuitista tai laskusta, enintään %(mb)s Mt."
+
+#: forms.py:180
+msgid "This kind of file cannot be a receipt."
+msgstr "Tämän tyyppinen tiedosto ei kelpaa kuitiksi."
+
+#: forms.py:183
+#, python-format
+msgid "The file is larger than %(limit)s."
+msgstr "Tiedosto on suurempi kuin %(limit)s."
+
+#: forms.py:194
+msgid "Date of the reversal"
+msgstr "Vastakirjauksen päivämäärä"
+
+#: forms.py:196
+msgid "Reason"
+msgstr "Syy"
+
+#: forms.py:198
+msgid "Why the voucher is reversed, for example a wrong account."
+msgstr "Miksi tosite oikaistaan, esimerkiksi väärä tili."
+
+#: forms.py:209 models.py:497
+msgid "There is no open financial year for that date."
+msgstr "Tälle päivälle ei ole avointa tilikautta."
+
+#: forms.py:217 templates/metra_bookkeeping/_report_head.html:2
+#: templates/metra_bookkeeping/index.html:35
+#: templates/metra_bookkeeping/voucher_detail.html:22
+#: templates/metra_bookkeeping/year_detail.html:3
+#: templates/metra_bookkeeping/year_detail.html:6
+#: templates/metra_bookkeeping/year_list.html:13
+msgid "Financial year"
+msgstr "Tilikausi"
+
+#: forms.py:219
+msgid "From"
+msgstr "Alkaen"
+
+#: forms.py:220
+msgid "To"
+msgstr "Asti"
+
+#: models.py:56
+msgid "Open"
+msgstr "Avoin"
+
+#: models.py:57
+msgid "Closed"
+msgstr "Suljettu"
+
+#: models.py:59
+msgid "first day"
+msgstr "ensimmäinen päivä"
+
+#: models.py:60
+msgid "last day"
+msgstr "viimeinen päivä"
+
+#: models.py:62 models.py:303
+msgid "status"
+msgstr "tila"
+
+#: models.py:65
+msgid "The first financial year"
+msgstr "Ensimmäinen tilikausi"
+
+#: models.py:66
+msgid "The last financial year"
+msgstr "Viimeinen tilikausi"
+
+#: models.py:67
+msgid "The closing date changes"
+msgstr "Tilinpäätöspäivä muuttuu"
+
+#: models.py:69
+msgid "country"
+msgstr "maa"
+
+#: models.py:71
+msgid "kind of organisation"
+msgstr "organisaation tyyppi"
+
+#: models.py:74
+msgid "Decides the form of the income statement."
+msgstr "Määrää tuloslaskelman kaavan."
+
+#: models.py:77
+msgid "why the year is not 12 months"
+msgstr "miksi tilikausi ei ole 12 kuukautta"
+
+#: models.py:81
+msgid "A year is 12 months, except when the books start, end or change dates."
+msgstr ""
+"Tilikausi on 12 kuukautta, paitsi kun kirjanpito alkaa, päättyy tai sen "
+"ajankohta muuttuu."
+
+#: models.py:83 models.py:321
+msgid "created"
+msgstr "luotu"
+
+#: models.py:87 models.py:291
+msgid "financial year"
+msgstr "tilikausi"
+
+#: models.py:88
+msgid "financial years"
+msgstr "tilikaudet"
+
+#: models.py:139
+msgid "The year must end after it starts."
+msgstr "Tilikauden on päätyttävä sen alkamisen jälkeen."
+
+#: models.py:145
+#, python-format
+msgid "Say why the year is not %(usual)s months."
+msgstr "Kerro, miksi tilikausi ei ole %(usual)s kuukautta."
+
+#: models.py:153
+#, python-format
+msgid ""
+"A financial year is %(usual)s months; a first or changed one %(min)s to "
+"%(max)s."
+msgstr ""
+"Tilikausi on %(usual)s kuukautta; ensimmäinen tai muutettu tilikausi "
+"%(min)s–%(max)s kuukautta."
+
+#: models.py:160
+msgid "The year overlaps another financial year."
+msgstr "Tilikausi menee päällekkäin toisen tilikauden kanssa."
+
+#: models.py:165
+#, python-format
+msgid "The year must start the day after the previous one ends (%(day)s)."
+msgstr ""
+"Tilikauden on alettava edellisen päättymistä seuraavana päivänä (%(day)s)."
+
+#: models.py:172
+msgid "The year must end the day before the next one starts."
+msgstr "Tilikauden on päätyttävä päivää ennen seuraavan alkamista."
+
+#: models.py:175
+msgid "Some of the year's vouchers would fall outside it."
+msgstr "Osa tilikauden tositteista jäisi sen ulkopuolelle."
+
+#: models.py:186
+msgid "Asset"
+msgstr "Vastaavaa"
+
+#: models.py:187
+msgid "Liability"
+msgstr "Velka"
+
+#: models.py:188
+msgid "Equity"
+msgstr "Oma pääoma"
+
+#: models.py:189
+msgid "Income"
+msgstr "Tuotto"
+
+#: models.py:190
+msgid "Expense"
+msgstr "Kulu"
+
+#: models.py:193 models.py:298
+msgid "number"
+msgstr "numero"
+
+#: models.py:196
+msgid "Use digits only."
+msgstr "Käytä vain numeroita."
+
+#: models.py:198 models.py:261 models.py:591
+msgid "name"
+msgstr "nimi"
+
+#: models.py:199 models.py:301
+msgid "kind"
+msgstr "laji"
+
+#: models.py:201
+msgid "in use"
+msgstr "käytössä"
+
+#: models.py:201
+msgid "Accounts not in use cannot get new entries."
+msgstr "Käyttämättömille tileille ei voi tehdä uusia kirjauksia."
+
+#: models.py:206 models.py:533
+msgid "account"
+msgstr "tili"
+
+#: models.py:207
+msgid "accounts"
+msgstr "tilit"
+
+#: models.py:229
+msgid ""
+"The account has entries, so its number and kind stay as they are. Rename it,"
+" or stop using it and add a new one."
+msgstr ""
+"Tilillä on kirjauksia, joten sen numero ja laji pysyvät ennallaan. Nimeä se "
+"uudelleen tai poista se käytöstä ja lisää uusi."
+
+#: models.py:236
+msgid "An account with entries cannot be deleted."
+msgstr "Tiliä, jolla on kirjauksia, ei voi poistaa."
+
+#: models.py:255
+msgid "code"
+msgstr "tunnus"
+
+#: models.py:259
+msgid ""
+"Shown before the number, for example M for M12. Can be empty for one series."
+msgstr ""
+"Näytetään ennen numeroa, esimerkiksi M tunnukselle M12. Voi olla tyhjä "
+"yhdelle sarjalle."
+
+#: models.py:265 models.py:266
+msgid "voucher series"
+msgstr "tositesarja"
+
+#: models.py:275 templates/metra_bookkeeping/_nav.html:4
+#: templates/metra_bookkeeping/voucher_list.html:3
+#: templates/metra_bookkeeping/voucher_list.html:6
+#: templates/metra_bookkeeping/voucher_list.html:13
+#: templates/metra_bookkeeping/year_list.html:13
+msgid "Vouchers"
+msgstr "Tositteet"
+
+#: models.py:281
+msgid "Draft"
+msgstr "Luonnos"
+
+#: models.py:282 templates/metra_bookkeeping/voucher_detail.html:44
+msgid "Posted"
+msgstr "Kirjattu"
+
+#: models.py:285 templates/metra_bookkeeping/journal.html:17
+#: templates/metra_bookkeeping/ledger.html:18
+msgid "Voucher"
+msgstr "Tosite"
+
+#: models.py:286
+msgid "Opening balances"
+msgstr "Avaavat saldot"
+
+#: models.py:287
+msgid "Reversal"
+msgstr "Vastakirjaus"
+
+#: models.py:296
+msgid "series"
+msgstr "sarja"
+
+#: models.py:299
+msgid "date"
+msgstr "päivämäärä"
+
+#: models.py:300 models.py:537
+msgid "description"
+msgstr "kuvaus"
+
+#: models.py:307
+msgid "reverses"
+msgstr "oikaisee"
+
+#: models.py:315
+msgid "created by"
+msgstr "luonut"
+
+#: models.py:324
+msgid "posted by"
+msgstr "kirjannut"
+
+#: models.py:330
+msgid "posted"
+msgstr "kirjattu"
+
+#: models.py:334 models.py:530 models.py:588
+msgid "voucher"
+msgstr "tosite"
+
+#: models.py:335
+msgid "vouchers"
+msgstr "tositteet"
+
+#: models.py:345
+msgid "Draft voucher"
+msgstr "Tositeluonnos"
+
+#: models.py:346
+#, python-format
+msgid "Voucher %(number)s"
+msgstr "Tosite %(number)s"
+
+#: models.py:352
+msgid "Vouchers are posted with post()."
+msgstr "Tositteet kirjataan post()-metodilla."
+
+#: models.py:381 views.py:310
+msgid "A posted voucher cannot change. Correct it with a reversing voucher."
+msgstr "Kirjattua tositetta ei voi muuttaa. Oikaise se vastakirjauksella."
+
+#: models.py:401
+#, python-format
+msgid "The date is outside the financial year %(year)s."
+msgstr "Päivämäärä on tilikauden %(year)s ulkopuolella."
+
+#: models.py:405
+msgid "A voucher needs at least two lines."
+msgstr "Tositteella on oltava vähintään kaksi riviä."
+
+#: models.py:409
+#, python-format
+msgid "Debits (%(debit)s) and credits (%(credit)s) differ."
+msgstr "Debet (%(debit)s) ja kredit (%(credit)s) eivät täsmää."
+
+#: models.py:416
+msgid "The amounts are zero."
+msgstr "Summat ovat nolla."
+
+#: models.py:420
+#, python-format
+msgid "Opening balances are dated the first day of the year (%(day)s)."
+msgstr "Avaavat saldot päivätään tilikauden ensimmäiselle päivälle (%(day)s)."
+
+#: models.py:427
+msgid "The year already has posted opening balances."
+msgstr "Tilikaudella on jo kirjatut avaavat saldot."
+
+#: models.py:431
+#, python-format
+msgid "The account %(account)s is not in use."
+msgstr "Tili %(account)s ei ole käytössä."
+
+#: models.py:440
+msgid ""
+"No receipt is attached. Every entry needs evidence: attach the receipt, or "
+"explain in the description why there is none (a memo voucher)."
+msgstr ""
+"Kuittia ei ole liitetty. Jokainen kirjaus tarvitsee tositteen: liitä kuitti "
+"tai kerro kuvauksessa, miksi sitä ei ole (muistiotosite)."
+
+#: models.py:453
+msgid "The voucher is already posted."
+msgstr "Tosite on jo kirjattu."
+
+#: models.py:493 views.py:380
+msgid "This voucher cannot be reversed."
+msgstr "Tätä tositetta ei voi oikaista."
+
+#: models.py:498
+#, python-format
+msgid "Reversal of voucher %(number)s"
+msgstr "Tositteen %(number)s vastakirjaus"
+
+#: models.py:535
+msgid "debit"
+msgstr "debet"
+
+#: models.py:536
+msgid "credit"
+msgstr "kredit"
+
+#: models.py:538
+msgid "order"
+msgstr "järjestys"
+
+#: models.py:542
+msgid "voucher line"
+msgstr "tositerivi"
+
+#: models.py:543
+msgid "voucher lines"
+msgstr "tositerivit"
+
+#: models.py:571
+msgid "Amounts are positive; use the other column instead."
+msgstr "Summat ovat positiivisia; käytä sen sijaan toista saraketta."
+
+#: models.py:573
+msgid "A line is either a debit or a credit, not both."
+msgstr "Rivi on joko debet tai kredit, ei molempia."
+
+#: models.py:575
+msgid "Enter a debit or a credit."
+msgstr "Anna debet tai kredit."
+
+#: models.py:590
+msgid "file"
+msgstr "tiedosto"
+
+#: models.py:592
+msgid "size"
+msgstr "koko"
+
+#: models.py:593
+msgid "type"
+msgstr "tyyppi"
+
+#: models.py:596
+msgid "uploaded by"
+msgstr "lähettänyt"
+
+#: models.py:602
+msgid "uploaded"
+msgstr "lähetetty"
+
+#: models.py:606
+msgid "receipt"
+msgstr "kuitti"
+
+#: models.py:607
+msgid "receipts"
+msgstr "kuitit"
+
+#: models.py:614
+msgid "A receipt cannot be changed."
+msgstr "Kuittia ei voi muuttaa."
+
+#: templates/metra_bookkeeping/_nav.html:3
+msgid "Overview"
+msgstr "Yleiskatsaus"
+
+#: templates/metra_bookkeeping/_nav.html:5
+#: templates/metra_bookkeeping/journal.html:3
+#: templates/metra_bookkeeping/journal.html:6
+#: templates/metra_bookkeeping/journal.html:14
+#: templates/metra_bookkeeping/year_detail.html:22
+msgid "Journal"
+msgstr "Päiväkirja"
+
+#: templates/metra_bookkeeping/_nav.html:6
+#: templates/metra_bookkeeping/ledger.html:3
+#: templates/metra_bookkeeping/ledger.html:6
+#: templates/metra_bookkeeping/year_detail.html:23
+msgid "General ledger"
+msgstr "Pääkirja"
+
+#: templates/metra_bookkeeping/_nav.html:7
+#: templates/metra_bookkeeping/trial_balance.html:3
+#: templates/metra_bookkeeping/trial_balance.html:6
+#: templates/metra_bookkeeping/trial_balance.html:14
+#: templates/metra_bookkeeping/year_detail.html:24
+msgid "Trial balance"
+msgstr "Saldoluettelo"
+
+#: templates/metra_bookkeeping/_nav.html:8
+#: templates/metra_bookkeeping/account_list.html:3
+#: templates/metra_bookkeeping/account_list.html:6
+#: templates/metra_bookkeeping/account_list.html:14
+msgid "Chart of accounts"
+msgstr "Tilikartta"
+
+#: templates/metra_bookkeeping/_nav.html:9
+#: templates/metra_bookkeeping/year_list.html:3
+#: templates/metra_bookkeeping/year_list.html:6
+#: templates/metra_bookkeeping/year_list.html:11
+msgid "Financial years"
+msgstr "Tilikaudet"
+
+#: templates/metra_bookkeeping/_report_filter.html:4
+msgid "Show"
+msgstr "Näytä"
+
+#: templates/metra_bookkeeping/_report_head.html:2
+#, python-format
+msgid "Made %(when)s"
+msgstr "Laadittu %(when)s"
+
+#: templates/metra_bookkeeping/_voucher_table.html:6
+#: templates/metra_bookkeeping/account_list.html:16
+msgid "Number"
+msgstr "Numero"
+
+#: templates/metra_bookkeeping/_voucher_table.html:7
+#: templates/metra_bookkeeping/journal.html:17
+#: templates/metra_bookkeeping/ledger.html:18
+#: templates/metra_bookkeeping/voucher_detail.html:38
+msgid "Date"
+msgstr "Päivämäärä"
+
+#: templates/metra_bookkeeping/_voucher_table.html:8
+#: templates/metra_bookkeeping/journal.html:18
+#: templates/metra_bookkeeping/ledger.html:18
+#: templates/metra_bookkeeping/voucher_detail.html:39
+#: templates/metra_bookkeeping/voucher_detail.html:51
+#: templates/metra_bookkeeping/voucher_form.html:24
+msgid "Description"
+msgstr "Kuvaus"
+
+#: templates/metra_bookkeeping/_voucher_table.html:9
+msgid "Amount"
+msgstr "Summa"
+
+#: templates/metra_bookkeeping/_voucher_table.html:10
+#: templates/metra_bookkeeping/account_list.html:16
+#: templates/metra_bookkeeping/year_list.html:13
+msgid "Status"
+msgstr "Tila"
+
+#: templates/metra_bookkeeping/_voucher_table.html:26
+#: templates/metra_bookkeeping/account_list.html:43
+#: templates/metra_bookkeeping/year_list.html:26
+msgid "None."
+msgstr "Ei yhtään."
+
+#: templates/metra_bookkeeping/account_form.html:3
+#: templates/metra_bookkeeping/account_form.html:5
+msgid "Edit account"
+msgstr "Muokkaa tiliä"
+
+#: templates/metra_bookkeeping/account_form.html:3
+#: templates/metra_bookkeeping/account_form.html:5
+#: templates/metra_bookkeeping/account_list.html:8
+msgid "New account"
+msgstr "Uusi tili"
+
+#: templates/metra_bookkeeping/account_form.html:11
+#: templates/metra_bookkeeping/series_form.html:11
+#: templates/metra_bookkeeping/year_form.html:12
+msgid "Save"
+msgstr "Tallenna"
+
+#: templates/metra_bookkeeping/account_form.html:12
+#: templates/metra_bookkeeping/series_form.html:12
+#: templates/metra_bookkeeping/voucher_confirm_delete.html:10
+#: templates/metra_bookkeeping/voucher_form.html:45
+#: templates/metra_bookkeeping/voucher_reverse.html:16
+#: templates/metra_bookkeeping/year_form.html:13
+msgid "Cancel"
+msgstr "Peruuta"
+
+#: templates/metra_bookkeeping/account_list.html:9
+#: templates/metra_bookkeeping/journal.html:7
+#: templates/metra_bookkeeping/ledger.html:7
+#: templates/metra_bookkeeping/trial_balance.html:7
+msgid "Print"
+msgstr "Tulosta"
+
+#: templates/metra_bookkeeping/account_list.html:16
+msgid "Name"
+msgstr "Nimi"
+
+#: templates/metra_bookkeeping/account_list.html:16
+msgid "Kind"
+msgstr "Laji"
+
+#: templates/metra_bookkeeping/account_list.html:16
+msgid "Actions"
+msgstr "Toiminnot"
+
+#: templates/metra_bookkeeping/account_list.html:22
+msgid "In use"
+msgstr "Käytössä"
+
+#: templates/metra_bookkeeping/account_list.html:22
+msgid "Not in use"
+msgstr "Ei käytössä"
+
+#: templates/metra_bookkeeping/account_list.html:24
+#: templates/metra_bookkeeping/voucher_detail.html:9
+#: templates/metra_bookkeeping/year_detail.html:7
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: templates/metra_bookkeeping/account_list.html:26
+#: templates/metra_bookkeeping/voucher_confirm_delete.html:9
+msgid "Delete"
+msgstr "Poista"
+
+#: templates/metra_bookkeeping/account_list.html:35
+msgid "No accounts yet. They are added when the books are started."
+msgstr "Ei vielä tilejä. Ne lisätään, kun kirjanpito aloitetaan."
+
+#: templates/metra_bookkeeping/account_list.html:38
+msgid "Voucher series"
+msgstr "Tositesarjat"
+
+#: templates/metra_bookkeeping/account_list.html:39
+msgid ""
+"Vouchers are numbered without gaps within each series and financial year."
+msgstr ""
+"Tositteet numeroidaan ilman aukkoja kunkin sarjan ja tilikauden sisällä."
+
+#: templates/metra_bookkeeping/account_list.html:45
+#: templates/metra_bookkeeping/series_form.html:3
+#: templates/metra_bookkeeping/series_form.html:5
+msgid "New voucher series"
+msgstr "Uusi tositesarja"
+
+#: templates/metra_bookkeeping/index.html:9
+#: templates/metra_bookkeeping/voucher_form.html:3
+#: templates/metra_bookkeeping/voucher_form.html:6
+#: templates/metra_bookkeeping/voucher_list.html:8
+msgid "New voucher"
+msgstr "Uusi tosite"
+
+#: templates/metra_bookkeeping/index.html:17
+#: templates/metra_bookkeeping/index.html:27
+msgid "Start the books"
+msgstr "Aloita kirjanpito"
+
+#: templates/metra_bookkeeping/index.html:18
+msgid ""
+"Choose the first financial year and a chart of accounts. Then enter the "
+"balances the year starts with (from last year's balance sheet) as the first "
+"voucher, of the kind \"Opening balances\"."
+msgstr ""
+"Valitse ensimmäinen tilikausi ja tilikartta. Anna sitten tilikauden "
+"alkusaldot (edellisen vuoden taseesta) ensimmäisenä tositteena, lajiltaan "
+"\"Avaavat saldot\"."
+
+#: templates/metra_bookkeeping/index.html:31
+msgid "The books have not been started yet, or no financial year is open."
+msgstr ""
+"Kirjanpitoa ei ole vielä aloitettu tai yhtään tilikautta ei ole avoinna."
+
+#: templates/metra_bookkeeping/index.html:35
+#, python-format
+msgid "%(count)s posted voucher"
+msgid_plural "%(count)s posted vouchers"
+msgstr[0] "%(count)s kirjattu tosite"
+msgstr[1] "%(count)s kirjattua tositetta"
+
+#: templates/metra_bookkeeping/index.html:39
+msgid "Late entries"
+msgstr "Myöhästyneet kirjaukset"
+
+#: templates/metra_bookkeeping/index.html:40
+msgid ""
+"Entries are to be booked at the latest four months after the end of their "
+"month, and cash payments day by day. These drafts are past that:"
+msgstr ""
+"Kirjaukset on tehtävä viimeistään neljän kuukauden kuluttua kuukauden "
+"päättymisestä ja käteismaksut päiväkohtaisesti. Nämä luonnokset ovat "
+"ylittäneet määräajan:"
+
+#: templates/metra_bookkeeping/index.html:48
+#: templates/metra_bookkeeping/index.html:49
+msgid "Drafts to post"
+msgstr "Kirjattavat luonnokset"
+
+#: templates/metra_bookkeeping/index.html:50
+#: templates/metra_bookkeeping/index.html:51
+msgid "Recently posted"
+msgstr "Viimeksi kirjatut"
+
+#: templates/metra_bookkeeping/journal.html:12
+msgid "The posted entries in date order."
+msgstr "Kirjatut kirjaukset päivämääräjärjestyksessä."
+
+#: templates/metra_bookkeeping/journal.html:18
+#: templates/metra_bookkeeping/trial_balance.html:17
+#: templates/metra_bookkeeping/voucher_detail.html:51
+#: templates/metra_bookkeeping/voucher_form.html:24
+msgid "Account"
+msgstr "Tili"
+
+#: templates/metra_bookkeeping/journal.html:19
+#: templates/metra_bookkeeping/ledger.html:19
+#: templates/metra_bookkeeping/trial_balance.html:18
+#: templates/metra_bookkeeping/voucher_detail.html:52
+#: templates/metra_bookkeeping/voucher_form.html:25
+msgid "Debit"
+msgstr "Debet"
+
+#: templates/metra_bookkeeping/journal.html:19
+#: templates/metra_bookkeeping/ledger.html:19
+#: templates/metra_bookkeeping/trial_balance.html:19
+#: templates/metra_bookkeeping/voucher_detail.html:52
+#: templates/metra_bookkeeping/voucher_form.html:25
+msgid "Credit"
+msgstr "Kredit"
+
+#: templates/metra_bookkeeping/journal.html:37
+#: templates/metra_bookkeeping/trial_balance.html:30
+#: templates/metra_bookkeeping/voucher_detail.html:66
+msgid "Total"
+msgstr "Yhteensä"
+
+#: templates/metra_bookkeeping/journal.html:41
+#: templates/metra_bookkeeping/ledger.html:38
+#: templates/metra_bookkeeping/trial_balance.html:34
+msgid "No posted vouchers in this period."
+msgstr "Ei kirjattuja tositteita tällä jaksolla."
+
+#: templates/metra_bookkeeping/ledger.html:12
+msgid ""
+"The posted entries account by account. Balances are debit minus credit."
+msgstr "Kirjatut kirjaukset tileittäin. Saldo on debet miinus kredit."
+
+#: templates/metra_bookkeeping/ledger.html:19
+msgid "Balance"
+msgstr "Saldo"
+
+#: templates/metra_bookkeeping/ledger.html:22
+msgid "Balance brought forward"
+msgstr "Alkusaldo"
+
+#: templates/metra_bookkeeping/ledger.html:34
+msgid "Total and balance"
+msgstr "Yhteensä ja saldo"
+
+#: templates/metra_bookkeeping/series_form.html:3
+#: templates/metra_bookkeeping/series_form.html:5
+msgid "Edit voucher series"
+msgstr "Muokkaa tositesarjaa"
+
+#: templates/metra_bookkeeping/trial_balance.html:12
+msgid ""
+"Every account's balance at the start and end of the period, and the period's"
+" debits and credits. Balances are debit minus credit; they add up to zero."
+msgstr ""
+"Kunkin tilin saldo jakson alussa ja lopussa sekä jakson debetit ja kreditit."
+" Saldo on debet miinus kredit; saldojen summa on nolla."
+
+#: templates/metra_bookkeeping/trial_balance.html:18
+msgid "At the start"
+msgstr "Alussa"
+
+#: templates/metra_bookkeeping/trial_balance.html:19
+msgid "At the end"
+msgstr "Lopussa"
+
+#: templates/metra_bookkeeping/voucher_confirm_delete.html:3
+#: templates/metra_bookkeeping/voucher_confirm_delete.html:5
+msgid "Delete draft voucher"
+msgstr "Poista tositeluonnos"
+
+#: templates/metra_bookkeeping/voucher_confirm_delete.html:6
+#, python-format
+msgid ""
+"Delete the draft \"%(description)s\" and its receipts? Drafts have no "
+"number, so this leaves no gap."
+msgstr ""
+"Poistetaanko luonnos \"%(description)s\" ja sen kuitit? Luonnoksilla ei ole "
+"numeroa, joten numerointiin ei jää aukkoa."
+
+#: templates/metra_bookkeeping/voucher_detail.html:13
+msgid "Post"
+msgstr "Kirjaa"
+
+#: templates/metra_bookkeeping/voucher_detail.html:16
+msgid "Delete draft"
+msgstr "Poista luonnos"
+
+#: templates/metra_bookkeeping/voucher_detail.html:18
+msgid "Reverse"
+msgstr "Tee vastakirjaus"
+
+#: templates/metra_bookkeeping/voucher_detail.html:26
+msgid "Before posting"
+msgstr "Ennen kirjaamista"
+
+#: templates/metra_bookkeeping/voucher_detail.html:40
+msgid "Series"
+msgstr "Sarja"
+
+#: templates/metra_bookkeeping/voucher_detail.html:41
+msgid "Reverses"
+msgstr "Oikaisee"
+
+#: templates/metra_bookkeeping/voucher_detail.html:42
+msgid "Reversed by"
+msgstr "Oikaistu tositteella"
+
+#: templates/metra_bookkeeping/voucher_detail.html:43
+msgid "Created"
+msgstr "Luotu"
+
+#: templates/metra_bookkeeping/voucher_detail.html:47
+#: templates/metra_bookkeeping/voucher_detail.html:48
+msgid "Entries"
+msgstr "Kirjaukset"
+
+#: templates/metra_bookkeeping/voucher_detail.html:63
+msgid "No lines yet."
+msgstr "Ei vielä rivejä."
+
+#: templates/metra_bookkeeping/voucher_detail.html:70
+msgid "Receipts"
+msgstr "Kuitit"
+
+#: templates/metra_bookkeeping/voucher_detail.html:78
+#: templates/metra_bookkeeping/voucher_form.html:26
+#: templates/metra_bookkeeping/voucher_form.html:32
+msgid "Remove"
+msgstr "Poista"
+
+#: templates/metra_bookkeeping/voucher_detail.html:85
+msgid "No receipt attached."
+msgstr "Kuittia ei ole liitetty."
+
+#: templates/metra_bookkeeping/voucher_detail.html:91
+msgid "The voucher is posted: a receipt added now cannot be removed."
+msgstr "Tosite on kirjattu: nyt lisättyä kuittia ei voi poistaa."
+
+#: templates/metra_bookkeeping/voucher_detail.html:92
+msgid "Attach"
+msgstr "Liitä"
+
+#: templates/metra_bookkeeping/voucher_form.html:3
+#: templates/metra_bookkeeping/voucher_form.html:6
+msgid "Edit draft voucher"
+msgstr "Muokkaa tositeluonnosta"
+
+#: templates/metra_bookkeeping/voucher_form.html:8
+msgid ""
+"Each line goes to one account, as a debit or a credit. Debits and credits "
+"must add up to the same amount before the voucher can be posted. A receipt "
+"can be attached once the draft is saved."
+msgstr ""
+"Jokainen rivi kuuluu yhdelle tilille, debetinä tai kreditinä. Debetin ja "
+"kreditin summien on oltava yhtä suuret, ennen kuin tosite voidaan kirjata. "
+"Kuitin voi liittää, kun luonnos on tallennettu."
+
+#: templates/metra_bookkeeping/voucher_form.html:18
+#: templates/metra_bookkeeping/voucher_form.html:21
+msgid "Lines"
+msgstr "Rivit"
+
+#: templates/metra_bookkeeping/voucher_form.html:41
+msgid "Save to get more empty lines."
+msgstr "Tallenna saadaksesi lisää tyhjiä rivejä."
+
+#: templates/metra_bookkeeping/voucher_form.html:43
+msgid "Save draft"
+msgstr "Tallenna luonnos"
+
+#: templates/metra_bookkeeping/voucher_form.html:44
+msgid "Save and post"
+msgstr "Tallenna ja kirjaa"
+
+#: templates/metra_bookkeeping/voucher_reverse.html:3
+msgid "Reverse voucher"
+msgstr "Tee tositteen vastakirjaus"
+
+#: templates/metra_bookkeeping/voucher_reverse.html:5
+#, python-format
+msgid "Reverse %(voucher)s"
+msgstr "Tee vastakirjaus: %(voucher)s"
+
+#: templates/metra_bookkeeping/voucher_reverse.html:6
+msgid ""
+"A posted voucher never changes. To correct it, a new voucher with the same "
+"lines on the opposite side cancels it, and both stay in the books. Then "
+"enter the right entry as a new voucher."
+msgstr ""
+"Kirjattu tosite ei koskaan muutu. Sen oikaisemiseksi uusi tosite, jonka "
+"rivit ovat samat vastakkaisella puolella, mitätöi sen, ja molemmat jäävät "
+"kirjanpitoon. Anna sitten oikea kirjaus uutena tositteena."
+
+#: templates/metra_bookkeeping/voucher_reverse.html:15
+msgid "Post the reversal"
+msgstr "Kirjaa vastakirjaus"
+
+#: templates/metra_bookkeeping/year_detail.html:11
+msgid "First day"
+msgstr "Ensimmäinen päivä"
+
+#: templates/metra_bookkeeping/year_detail.html:12
+msgid "Last day"
+msgstr "Viimeinen päivä"
+
+#: templates/metra_bookkeeping/year_detail.html:14
+msgid "Not 12 months because"
+msgstr "Ei 12 kuukautta, koska"
+
+#: templates/metra_bookkeeping/year_detail.html:15
+msgid "Posted vouchers"
+msgstr "Kirjatut tositteet"
+
+#: templates/metra_bookkeeping/year_detail.html:16
+msgid "Drafts"
+msgstr "Luonnokset"
+
+#: templates/metra_bookkeeping/year_detail.html:17
+#: templates/metra_bookkeeping/year_list.html:13
+msgid "Books kept until"
+msgstr "Kirjanpito säilytetään"
+
+#: templates/metra_bookkeeping/year_detail.html:17
+msgid ""
+"Financial statements, journal, ledger, chart of accounts and list of books: "
+"10 years from the end of the financial year."
+msgstr ""
+"Tilinpäätös, päiväkirja, pääkirja, tilikartta ja luettelo kirjanpidoista ja "
+"aineistoista: 10 vuotta tilikauden päättymisestä."
+
+#: templates/metra_bookkeeping/year_detail.html:18
+#: templates/metra_bookkeeping/year_list.html:13
+msgid "Vouchers kept until"
+msgstr "Tositteet säilytetään"
+
+#: templates/metra_bookkeeping/year_detail.html:18
+msgid ""
+"Vouchers and receipts: 6 years from the end of the calendar year in which "
+"the financial year ended."
+msgstr ""
+"Tositteet ja kuitit: 6 vuotta sen kalenterivuoden lopusta, jona tilikausi "
+"päättyi."
+
+#: templates/metra_bookkeeping/year_detail.html:20
+msgid ""
+"These are the shortest times the law allows. Nothing is deleted "
+"automatically."
+msgstr ""
+"Nämä ovat lyhimmät lain sallimat ajat. Mitään ei poisteta automaattisesti."
+
+#: templates/metra_bookkeeping/year_form.html:3
+#: templates/metra_bookkeeping/year_form.html:5
+msgid "Edit financial year"
+msgstr "Muokkaa tilikautta"
+
+#: templates/metra_bookkeeping/year_form.html:3
+#: templates/metra_bookkeeping/year_form.html:5
+#: templates/metra_bookkeeping/year_list.html:7
+msgid "New financial year"
+msgstr "Uusi tilikausi"
+
+#: templates/metra_bookkeeping/year_form.html:6
+msgid ""
+"A financial year is 12 months and starts the day after the previous one "
+"ends. The first year, or one whose dates change, can be 1 to 18 months."
+msgstr ""
+"Tilikausi on 12 kuukautta ja alkaa edellisen päättymistä seuraavana päivänä."
+" Ensimmäinen tilikausi tai tilikausi, jonka päivämäärät muuttuvat, voi olla "
+"1–18 kuukautta."
+
+#: views.py:83
+msgid ""
+"The books are started. Enter the opening balances as the first voucher."
+msgstr "Kirjanpito on aloitettu. Anna avaavat saldot ensimmäisenä tositteena."
+
+#: views.py:118
+#, python-format
+msgid "The financial year %(year)s was added."
+msgstr "Tilikausi %(year)s lisättiin."
+
+#: views.py:148
+msgid "A year with posted vouchers keeps its dates."
+msgstr "Tilikausi, jolla on kirjattuja tositteita, säilyttää päivämääränsä."
+
+#: views.py:153
+msgid "The financial year was saved."
+msgstr "Tilikausi tallennettiin."
+
+#: views.py:178
+#, python-format
+msgid "The account %(account)s was added."
+msgstr "Tili %(account)s lisättiin."
+
+#: views.py:190
+msgid "The account was saved."
+msgstr "Tili tallennettiin."
+
+#: views.py:206
+msgid "An account with entries cannot be deleted. Stop using it instead."
+msgstr ""
+"Tiliä, jolla on kirjauksia, ei voi poistaa. Poista se sen sijaan käytöstä."
+
+#: views.py:209
+msgid "The account was deleted."
+msgstr "Tili poistettiin."
+
+#: views.py:219
+msgid "The voucher series was added."
+msgstr "Tositesarja lisättiin."
+
+#: views.py:231
+msgid "The series has posted vouchers, so its code stays."
+msgstr "Sarjalla on kirjattuja tositteita, joten sen tunnus pysyy ennallaan."
+
+#: views.py:234
+msgid "The voucher series was saved."
+msgstr "Tositesarja tallennettiin."
+
+#: views.py:279
+msgid "The draft voucher was saved."
+msgstr "Tositeluonnos tallennettiin."
+
+#: views.py:292
+msgid "Add a financial year first."
+msgstr "Lisää ensin tilikausi."
+
+#: views.py:352
+#, python-format
+msgid "Voucher %(number)s was posted."
+msgstr "Tosite %(number)s kirjattiin."
+
+#: views.py:370
+msgid "The draft voucher was deleted."
+msgstr "Tositeluonnos poistettiin."
+
+#: views.py:394
+#, python-format
+msgid ""
+"Voucher %(number)s reverses it. Enter the right entry as a new voucher."
+msgstr "Tosite %(number)s oikaisee sen. Anna oikea kirjaus uutena tositteena."
+
+#: views.py:427
+msgid "The receipt was added."
+msgstr "Kuitti lisättiin."
+
+#: views.py:462
+msgid "The receipt was removed."
+msgstr "Kuitti poistettiin."
