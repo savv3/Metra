@@ -179,9 +179,9 @@ permissions; phase 6 opens it to outside systems.
 | 5 | A to C done (email a unit, attachments, setup wizard). D, email deliverability, is replaced by phase 8 |
 | 6 | Done: plugin groundwork, 46elks SMS, REST API and webhooks as plugins (release 0.2.0) |
 | 7 | Done: snapshots, restore in the app, help pages, meeting protocols plugin, notifications |
-| 8 | Done: plugin chooser and plugin settings, email settings in the app, the Mailgun add-on and 46elks settings in the app |
-| 9 | In progress: A (ledger) and B (postings from Metra) done, C (financial statements) in review. See the [phase 9 build plan](#phase-9-build-plan) |
-| 10 to 12 | Planned. Each phase gets a build plan with one row per pull request before work starts |
+| 8 | Done: plugin chooser and plugin settings, email settings in the app, the Mailgun add-on and 46elks settings in the app (releases 0.3.0 to 0.5.0). Since then also a left sidebar menu |
+| 9 | In progress: A (ledger), B (postings from Metra) and C (financial statements, budget and VAT summary) done; D (locking and year-end) and E (exports and retention) not started. See the [phase 9 build plan](#phase-9-build-plan) |
+| 10 to 12 | Planned. Each phase gets a build plan with one row per pull request before work starts. The orchestrator (phase 11) has already been started in its own repository, `metra-admin` |
 
 Ideas taken off the plan for now are in [might-do-later.md](might-do-later.md).
 
