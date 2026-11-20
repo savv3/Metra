@@ -154,6 +154,8 @@ AUTO = "auto"
 
 def provider_for(channel):
     """The installation's provider for a channel, or None when it is not set up."""
+    if settings.DEMO:
+        return None  # a demo site sends nothing to anyone
     if channel == EMAIL:
         from .email_config import current
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-26 10:58+0200\n"
+"POT-Creation-Date: 2026-11-20 20:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: plugins/bookkeeping/src/metra_bookkeeping/apps.py:9
 #: plugins/bookkeeping/src/metra_bookkeeping/apps.py:31
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:46
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:50
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:2
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:6
@@ -33,20 +33,20 @@ msgstr ""
 "Kahdenkertainen kirjanpito tositteineen, päiväkirjoineen ja pääkirjoineen "
 "Suomen sääntöjen mukaan."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:36
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:40
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:13
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:5
 msgid "Bookkeeping of invoices"
 msgstr "Laskujen kirjanpito"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:39
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:43
 msgid ""
 "The accounts and voucher series invoices and payments are booked to, and VAT."
 msgstr ""
 "Tilit ja tositesarjat, joille laskut ja suoritukset kirjataan, sekä ALV."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:66
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:70
 msgid ""
 "The books have posted vouchers, which must be kept readable for the legal "
 "period, so bookkeeping stays on."
@@ -333,8 +333,8 @@ msgstr "henkilöstön keskimääräinen lukumäärä"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:108
 msgid ""
-"The average number of employees during the year. With the balance sheet total"
-" and turnover, it decides the size class of the financial statements."
+"The average number of employees during the year. With the balance sheet "
+"total and turnover, it decides the size class of the financial statements."
 msgstr ""
 "Työntekijöiden keskimääräinen lukumäärä vuoden aikana. Yhdessä taseen "
 "loppusumman ja liikevaihdon kanssa se ratkaisee tilinpäätöksen kokoluokan."
@@ -370,8 +370,8 @@ msgid ""
 "A financial year is %(usual)s months; a first or changed one %(min)s to "
 "%(max)s."
 msgstr ""
-"Tilikausi on %(usual)s kuukautta; ensimmäinen tai muutettu tilikausi "
-"%(min)s–%(max)s kuukautta."
+"Tilikausi on %(usual)s kuukautta; ensimmäinen tai muutettu tilikausi %(min)s–"
+"%(max)s kuukautta."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:191
 msgid "The year overlaps another financial year."
@@ -448,12 +448,12 @@ msgstr "pitkäaikainen"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:238
 msgid ""
-"For receivables and liabilities due after more than a year. The balance sheet"
-" shows them separately; keep the part due within a year on an account of its "
-"own."
+"For receivables and liabilities due after more than a year. The balance "
+"sheet shows them separately; keep the part due within a year on an account "
+"of its own."
 msgstr ""
-"Saamisille ja veloille, jotka erääntyvät yli vuoden kuluttua. Tase näyttää ne"
-" erikseen; pidä vuoden sisällä erääntyvä osa omalla tilillään."
+"Saamisille ja veloille, jotka erääntyvät yli vuoden kuluttua. Tase näyttää "
+"ne erikseen; pidä vuoden sisällä erääntyvä osa omalla tilillään."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:245
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:612
@@ -626,8 +626,8 @@ msgstr "ALV-kanta %(rate)s ei ole voimassa %(day)s."
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:499
 #, python-format
 msgid ""
-"The organisation is not VAT registered on %(day)s, so the voucher can have no"
-" VAT. Check the VAT registration dates in the posting settings."
+"The organisation is not VAT registered on %(day)s, so the voucher can have "
+"no VAT. Check the VAT registration dates in the posting settings."
 msgstr ""
 "Organisaatio ei ole arvonlisäverovelvollinen %(day)s, joten tositteella ei "
 "voi olla ALV:a. Tarkista ALV-rekisteröinnin päivämäärät kirjausasetuksista."
@@ -1199,8 +1199,8 @@ msgid ""
 "Assets and equity and liabilities differ by %(difference)s. Check the "
 "accounts outside the format, and that the opening balances balance."
 msgstr ""
-"Vastaavaa ja vastattavaa eroavat %(difference)s. Tarkista muodon ulkopuoliset"
-" tilit ja että avaussaldot täsmäävät."
+"Vastaavaa ja vastattavaa eroavat %(difference)s. Tarkista muodon "
+"ulkopuoliset tilit ja että avaussaldot täsmäävät."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_statement_notes.html:17
 msgid ""
@@ -1223,8 +1223,8 @@ msgid ""
 "The limits of a small entity are exceeded: the decree on small and micro "
 "entities no longer applies. Ask an accountant which formats to use."
 msgstr ""
-"Pienyrityksen rajat ylittyvät: pien- ja mikroyrityksiä koskeva asetus ei enää"
-" päde. Kysy kirjanpitäjältä, mitä muotoja käytetään."
+"Pienyrityksen rajat ylittyvät: pien- ja mikroyrityksiä koskeva asetus ei "
+"enää päde. Kysy kirjanpitäjältä, mitä muotoja käytetään."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_statement_notes.html:20
 #, python-format
@@ -1309,8 +1309,8 @@ msgstr "ALV:llisia tositeluonnoksia ei ole vielä kirjattu:"
 msgid ""
 "%(count)s invoice, payment or reminder fee from invoicing has no voucher yet."
 msgid_plural ""
-"%(count)s invoices, payments and reminder fees from invoicing have no voucher"
-" yet."
+"%(count)s invoices, payments and reminder fees from invoicing have no "
+"voucher yet."
 msgstr[0] ""
 "%(count)s laskulla, suorituksella tai muistutusmaksulla laskutuksesta ei ole "
 "vielä tositetta."
@@ -1321,8 +1321,8 @@ msgstr[1] ""
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:22
 msgid ""
 "Only entries with a VAT code are included. Reverse charge, imports (also "
-"goods across the Åland tax border) and anything booked without a VAT code are"
-" not: add those to the return yourself."
+"goods across the Åland tax border) and anything booked without a VAT code "
+"are not: add those to the return yourself."
 msgstr ""
 "Mukana ovat vain ALV-koodilliset kirjaukset. Käännetty verovelvollisuus, "
 "maahantuonti (myös Ahvenanmaan verorajan yli tuodut tavarat) ja kaikki ilman "
@@ -1330,8 +1330,8 @@ msgstr ""
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:23
 msgid ""
-"VAT follows the supply: invoices count at the end of their supply period, and"
-" the part paid before it as an advance payment in the month it was paid. "
+"VAT follows the supply: invoices count at the end of their supply period, "
+"and the part paid before it as an advance payment in the month it was paid. "
 "Receipts entered by hand count on the voucher's date, and a reversal where "
 "the voucher it reverses counted."
 msgstr ""
@@ -1523,8 +1523,8 @@ msgid ""
 "The income and costs expected for the whole year, per account, as positive "
 "amounts. Leave an account empty for no budget."
 msgstr ""
-"Koko vuodelle odotetut tuotot ja kulut tileittäin positiivisina summina. Jätä"
-" tili tyhjäksi, jos sillä ei ole talousarviota."
+"Koko vuodelle odotetut tuotot ja kulut tileittäin positiivisina summina. "
+"Jätä tili tyhjäksi, jos sillä ei ole talousarviota."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget_form.html:13
 #: plugins/bookkeeping/src/metra_bookkeeping/views.py:882
@@ -1637,8 +1637,8 @@ msgstr "Odottaa kirjaamista"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/invoice_panel.html:15
 msgid ""
-"Not in the books: it is dated before automatic posting started, or posting is"
-" off."
+"Not in the books: it is dated before automatic posting started, or posting "
+"is off."
 msgstr ""
 "Ei kirjanpidossa: se on päivätty ennen automaattisen kirjaamisen alkua tai "
 "kirjaus on pois päältä."
@@ -1674,9 +1674,9 @@ msgstr "Lisää ne"
 #, python-format
 msgid ""
 "The receivables account is %(booked)s € when automatic posting starts, but "
-"the invoices issued before then had %(open)s € outstanding. Payments of those"
-" invoices are booked against the receivables account, so check the opening "
-"balances."
+"the invoices issued before then had %(open)s € outstanding. Payments of "
+"those invoices are booked against the receivables account, so check the "
+"opening balances."
 msgstr ""
 "Myyntisaamisten tilillä on %(booked)s € automaattisen kirjauksen alkaessa, "
 "mutta sitä ennen laadituissa laskuissa oli avoinna %(open)s €. Näiden "
@@ -1713,8 +1713,8 @@ msgid ""
 "%(count)s record from invoicing is waiting to be posted; post it from the "
 "overview."
 msgid_plural ""
-"%(count)s records from invoicing are waiting to be posted; post them from the"
-" overview."
+"%(count)s records from invoicing are waiting to be posted; post them from "
+"the overview."
 msgstr[0] ""
 "%(count)s laskutuksen tietue odottaa kirjaamista; kirjaa se "
 "yleiskatsauksesta."
@@ -1724,10 +1724,10 @@ msgstr[1] ""
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:62
 msgid ""
-"VAT is booked only on days the organisation is VAT registered, at the rate in"
-" force on the day. Reverse charge (services from other EU countries, "
-"construction) and imports, also of goods across the Åland tax border, are not"
-" supported yet: book them by hand, and check them with an accountant."
+"VAT is booked only on days the organisation is VAT registered, at the rate "
+"in force on the day. Reverse charge (services from other EU countries, "
+"construction) and imports, also of goods across the Åland tax border, are "
+"not supported yet: book them by hand, and check them with an accountant."
 msgstr ""
 "ALV kirjataan vain päiville, jolloin organisaatio on "
 "arvonlisäverovelvollinen, kyseisenä päivänä voimassa olevalla kannalla. "
@@ -1775,8 +1775,8 @@ msgstr "Poista tositeluonnos"
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_confirm_delete.html:6
 #, python-format
 msgid ""
-"Delete the draft \"%(description)s\" and its receipts? Drafts have no number,"
-" so this leaves no gap."
+"Delete the draft \"%(description)s\" and its receipts? Drafts have no "
+"number, so this leaves no gap."
 msgstr ""
 "Poistetaanko luonnos \"%(description)s\" ja sen kuitit? Luonnoksilla ei ole "
 "numeroa, joten numerointiin ei jää aukkoa."
@@ -1907,11 +1907,11 @@ msgstr "Tee vastakirjaus: %(voucher)s"
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_reverse.html:6
 msgid ""
 "A posted voucher never changes. To correct it, a new voucher with the same "
-"lines on the opposite side cancels it, and both stay in the books. Then enter"
-" the right entry as a new voucher."
+"lines on the opposite side cancels it, and both stay in the books. Then "
+"enter the right entry as a new voucher."
 msgstr ""
-"Kirjattu tosite ei koskaan muutu. Sen oikaisemiseksi uusi tosite, jonka rivit"
-" ovat samat vastakkaisella puolella, mitätöi sen, ja molemmat jäävät "
+"Kirjattu tosite ei koskaan muutu. Sen oikaisemiseksi uusi tosite, jonka "
+"rivit ovat samat vastakkaisella puolella, mitätöi sen, ja molemmat jäävät "
 "kirjanpitoon. Anna sitten oikea kirjaus uutena tositteena."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_reverse.html:15
@@ -1962,8 +1962,8 @@ msgstr "Tositteet säilytetään"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:19
 msgid ""
-"Vouchers and receipts: 6 years from the end of the calendar year in which the"
-" financial year ended."
+"Vouchers and receipts: 6 years from the end of the calendar year in which "
+"the financial year ended."
 msgstr ""
 "Tositteet ja kuitit: 6 vuotta sen kalenterivuoden lopusta, jona tilikausi "
 "päättyi."
@@ -1988,12 +1988,12 @@ msgstr "Uusi tilikausi"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_form.html:6
 msgid ""
-"A financial year is 12 months and starts the day after the previous one ends."
-" The first year, or one whose dates change, can be 1 to 18 months."
+"A financial year is 12 months and starts the day after the previous one "
+"ends. The first year, or one whose dates change, can be 1 to 18 months."
 msgstr ""
 "Tilikausi on 12 kuukautta ja alkaa edellisen päättymistä seuraavana päivänä. "
-"Ensimmäinen tilikausi tai tilikausi, jonka päivämäärät muuttuvat, voi olla "
-"1–18 kuukautta."
+"Ensimmäinen tilikausi tai tilikausi, jonka päivämäärät muuttuvat, voi olla 1–"
+"18 kuukautta."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/views.py:108
 msgid "The books are started. Enter the opening balances as the first voucher."

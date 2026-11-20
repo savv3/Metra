@@ -14,6 +14,12 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- Demo sites: with `METRA_DEMO=true` an install becomes a public demo with a
+  demo/demo login shown on the login page, a banner on every page, no email
+  or SMS, and locked accounts. The worker deletes everything and loads the
+  made-up demo data again every night (`METRA_DEMO_RESET_TIME`, default
+  03:00); `manage.py reset_demo` does it by hand and refuses to run on any
+  other install.
 - `NavItem` takes a `group` (one of `api.NAV_GROUPS`) and an `icon` (one of
   `api.NAV_ICONS`), so an add-on's menu link goes in the right section of the
   sidebar.

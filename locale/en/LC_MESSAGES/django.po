@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-26 10:07+0200\n"
+"POT-Creation-Date: 2026-11-20 20:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,7 +59,7 @@ msgstr ""
 
 #: apps/accounts/templates/accounts/profile.html:3
 #: apps/accounts/templates/accounts/profile.html:7
-#: templates/allauth/layouts/base.html:9 templates/base.html:41
+#: templates/allauth/layouts/base.html:9 templates/base.html:37
 msgid "My account"
 msgstr ""
 
@@ -134,8 +134,8 @@ msgstr ""
 msgid "Turn off"
 msgstr ""
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:70
-#: templates/base.html:75
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:73
+#: templates/base.html:78
 msgid "Turn on two-factor login"
 msgstr ""
 
@@ -482,17 +482,18 @@ msgid "Units"
 msgstr ""
 
 #: apps/backups/templates/backups/restore.html:32
+#: apps/core/templatetags/nav.py:21
 #: apps/register/templates/register/_person_results.html:3
 #: apps/register/templates/register/person_list.html:3
-#: apps/register/templates/register/person_list.html:6 templates/base.html:22
+#: apps/register/templates/register/person_list.html:6
 msgid "People"
 msgstr ""
 
 #: apps/backups/templates/backups/restore.html:32
-#: apps/core/settings_page.py:111 apps/readings/apps.py:7
+#: apps/core/settings_page.py:111 apps/core/templatetags/nav.py:22
+#: apps/readings/apps.py:7
 #: apps/readings/templates/readings/_round_results.html:3
 #: apps/readings/templates/readings/_unit_readings.html:3
-#: templates/base.html:23
 msgid "Readings"
 msgstr ""
 
@@ -599,6 +600,10 @@ msgstr ""
 msgid "General"
 msgstr ""
 
+#: apps/core/middleware.py:55
+msgid "Accounts and passwords cannot be changed on the demo site."
+msgstr ""
+
 #: apps/core/models.py:20
 msgid "Information"
 msgstr ""
@@ -663,7 +668,8 @@ msgstr ""
 msgid "Name, business ID, contact details, logo and the public page."
 msgstr ""
 
-#: apps/core/settings_page.py:84 apps/register/apps.py:7
+#: apps/core/settings_page.py:84 apps/core/templatetags/nav.py:11
+#: apps/register/apps.py:7
 msgid "Register"
 msgstr ""
 
@@ -773,8 +779,8 @@ msgstr ""
 msgid "Integrations"
 msgstr ""
 
-#: apps/core/settings_page.py:200 apps/plugins/apps.py:7
-#: apps/plugins/templates/plugins/plugin_list.html:3
+#: apps/core/settings_page.py:200 apps/core/templatetags/nav.py:14
+#: apps/plugins/apps.py:7 apps/plugins/templates/plugins/plugin_list.html:3
 #: apps/plugins/templates/plugins/plugin_list.html:6
 #: apps/plugins/templates/plugins/plugin_list.html:18
 #: apps/plugins/templates/plugins/plugin_settings.html:7
@@ -855,7 +861,7 @@ msgid "Keep track of your members and clients in one place."
 msgstr ""
 
 #: apps/core/templates/core/home.html:7 templates/account/login.html:3
-#: templates/account/login.html:6 templates/account/login.html:19
+#: templates/account/login.html:6 templates/account/login.html:24
 msgid "Log in"
 msgstr ""
 
@@ -874,16 +880,39 @@ msgid "Staff login"
 msgstr ""
 
 #: apps/core/templates/core/settings.html:3
-#: apps/core/templates/core/settings.html:6
+#: apps/core/templates/core/settings.html:6 apps/core/templatetags/nav.py:103
 #: apps/messaging/templates/messaging/email_settings.html:7
 #: apps/plugins/templates/plugins/plugin_list.html:7
 #: apps/register/templates/register/unit_type_choose.html:16
-#: templates/base.html:27
 msgid "Settings"
 msgstr ""
 
+#: apps/core/templatetags/nav.py:12
+msgid "Finance"
+msgstr ""
+
+#: apps/core/templatetags/nav.py:13
+msgid "Communication"
+msgstr ""
+
+#: apps/core/templatetags/nav.py:23
+#: apps/invoicing/templates/invoicing/_invoice_results.html:3
+#: apps/invoicing/templates/invoicing/invoice_list.html:3
+#: apps/invoicing/templates/invoicing/invoice_list.html:6
+#: apps/invoicing/templates/invoicing/run_detail.html:31
+#: apps/messaging/models.py:43 apps/setup/views.py:46
+msgid "Invoices"
+msgstr ""
+
+#: apps/core/templatetags/nav.py:27
+#: apps/messaging/templates/messaging/batch_list.html:3
+#: apps/messaging/templates/messaging/batch_list.html:6
+#: apps/messaging/templates/messaging/batch_list.html:17
+msgid "Send-outs"
+msgstr ""
+
 #: apps/help/apps.py:7 apps/help/templates/help/index.html:3
-#: apps/help/templates/help/index.html:5 apps/help/templatetags/help.py:22
+#: apps/help/templates/help/index.html:5 templates/_main_menu.html:13
 msgid "Help"
 msgstr ""
 
@@ -1573,14 +1602,6 @@ msgstr ""
 #: apps/invoicing/runs.py:82
 #, python-format
 msgid "%(type)s is lower than the previous reading."
-msgstr ""
-
-#: apps/invoicing/templates/invoicing/_invoice_results.html:3
-#: apps/invoicing/templates/invoicing/invoice_list.html:3
-#: apps/invoicing/templates/invoicing/invoice_list.html:6
-#: apps/invoicing/templates/invoicing/run_detail.html:31
-#: apps/messaging/models.py:43 apps/setup/views.py:46 templates/base.html:24
-msgid "Invoices"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:7
@@ -3108,12 +3129,6 @@ msgstr ""
 msgid "Sending…"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_list.html:3
-#: apps/messaging/templates/messaging/batch_list.html:6
-#: apps/messaging/templates/messaging/batch_list.html:17 templates/base.html:25
-msgid "Send-outs"
-msgstr ""
-
 #: apps/messaging/templates/messaging/batch_list.html:9
 #: apps/messaging/templates/messaging/newsletter_compose.html:3
 #: apps/messaging/templates/messaging/newsletter_compose.html:5
@@ -3138,7 +3153,7 @@ msgstr ""
 msgid "Sent by"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:47
+#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:43
 msgid "Automatic"
 msgstr ""
 
@@ -3584,7 +3599,7 @@ msgstr ""
 #: apps/notifications/templates/notifications/list.html:15
 #: apps/notifications/templates/notifications/settings.html:3
 #: apps/notifications/templates/notifications/settings.html:6
-#: templates/base.html:42
+#: templates/base.html:38
 msgid "Notification settings"
 msgstr ""
 
@@ -5027,7 +5042,7 @@ msgstr ""
 
 #: apps/selfservice/templates/selfservice/base.html:9
 #: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:270
-#: templates/base.html:7 templates/base.html:18
+#: templates/base.html:7 templates/base.html:24
 msgid "Metra"
 msgstr ""
 
@@ -5692,15 +5707,15 @@ msgstr ""
 msgid "Setup is done. You can run it again from Settings."
 msgstr ""
 
-#: config/settings.py:185
+#: config/settings.py:195
 msgid "Swedish"
 msgstr ""
 
-#: config/settings.py:186
+#: config/settings.py:196
 msgid "English"
 msgstr ""
 
-#: config/settings.py:187
+#: config/settings.py:197
 msgid "Finnish (machine translated)"
 msgstr ""
 
@@ -5728,49 +5743,55 @@ msgid ""
 "wording may be wrong."
 msgstr ""
 
-#: templates/base.html:20
+#: templates/_main_menu.html:1
 msgid "Main"
 msgstr ""
 
-#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
-msgid "Finance"
-msgstr ""
-
-#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
-msgid "Communication"
-msgstr ""
-
-#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
-msgid "Menu"
-msgstr ""
-
-#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
+#: templates/_main_menu.html:2
 msgid "Close menu"
 msgstr ""
 
-#: templates/base.html:45
+#: templates/account/login.html:9
+#, python-format
+msgid ""
+"Try Metra: log in with the username <strong>%(username)s</strong> and the "
+"password <strong>%(password)s</strong>."
+msgstr ""
+
+#: templates/base.html:21
+msgid "Menu"
+msgstr ""
+
+#: templates/base.html:41
 msgid "Theme"
 msgstr ""
 
-#: templates/base.html:48
+#: templates/base.html:44
 msgid "Light"
 msgstr ""
 
-#: templates/base.html:49
+#: templates/base.html:45
 msgid "Dark"
 msgstr ""
 
-#: templates/base.html:54
+#: templates/base.html:50
 msgid "Log out"
 msgstr ""
 
-#: templates/base.html:69
+#: templates/base.html:66
+#, python-format
+msgid ""
+"This is a demo site with made-up data. Everything you change is reset every "
+"night at %(time)s. Do not enter real personal data."
+msgstr ""
+
+#: templates/base.html:72
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
 msgstr ""
 
-#: templates/base.html:74
+#: templates/base.html:77
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."

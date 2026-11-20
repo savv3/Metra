@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-26 10:07+0200\n"
+"POT-Creation-Date: 2026-11-20 20:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,8 +36,8 @@ msgstr "Käyttöoikeudet"
 #: apps/accounts/middleware.py:28
 msgid "Set up two-factor login with an authenticator app before you continue."
 msgstr ""
-"Ota kaksivaiheinen tunnistautuminen käyttöön todennussovelluksella ennen kuin"
-" jatkat."
+"Ota kaksivaiheinen tunnistautuminen käyttöön todennussovelluksella ennen "
+"kuin jatkat."
 
 #: apps/accounts/roles.py:12
 msgctxt "role"
@@ -61,7 +61,7 @@ msgstr "Vain luku"
 
 #: apps/accounts/templates/accounts/profile.html:3
 #: apps/accounts/templates/accounts/profile.html:7
-#: templates/allauth/layouts/base.html:9 templates/base.html:41
+#: templates/allauth/layouts/base.html:9 templates/base.html:37
 msgid "My account"
 msgstr "Oma tili"
 
@@ -136,8 +136,8 @@ msgstr "Suojaa tilisi puhelimen todennussovelluksen koodilla."
 msgid "Turn off"
 msgstr "Poista käytöstä"
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:70
-#: templates/base.html:75
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:73
+#: templates/base.html:78
 msgid "Turn on two-factor login"
 msgstr "Ota kaksivaiheinen tunnistautuminen käyttöön"
 
@@ -306,8 +306,8 @@ msgstr "Tilannevedosta %(name)s ei löytynyt."
 #: apps/backups/restore.py:118
 #, python-format
 msgid ""
-"This snapshot was taken by Metra %(version)s, which is newer than the version"
-" running now (%(running)s), so it cannot be restored here."
+"This snapshot was taken by Metra %(version)s, which is newer than the "
+"version running now (%(running)s), so it cannot be restored here."
 msgstr ""
 "Tämän tilannevedoksen otti Metra %(version)s, joka on uudempi kuin nyt "
 "käytössä oleva versio (%(running)s), joten sitä ei voi palauttaa tässä."
@@ -347,12 +347,12 @@ msgstr ""
 #, python-format
 msgid ""
 "Every snapshot is kept for %(days)s days, then the newest of each week for "
-"%(weeks)s weeks and the newest of each month for %(months)s months. Snapshots"
-" taken by hand stay until you delete them."
+"%(weeks)s weeks and the newest of each month for %(months)s months. "
+"Snapshots taken by hand stay until you delete them."
 msgstr ""
 "Jokainen tilannevedos säilytetään %(days)s päivää, sen jälkeen kunkin viikon "
-"uusin %(weeks)s viikkoa ja kunkin kuukauden uusin %(months)s kuukautta. Käsin"
-" otetut tilannevedokset säilyvät, kunnes poistat ne."
+"uusin %(weeks)s viikkoa ja kunkin kuukauden uusin %(months)s kuukautta. "
+"Käsin otetut tilannevedokset säilyvät, kunnes poistat ne."
 
 #: apps/backups/templates/backups/backup_list.html:23
 #, python-format
@@ -507,17 +507,18 @@ msgid "Units"
 msgstr "Yksiköt"
 
 #: apps/backups/templates/backups/restore.html:32
+#: apps/core/templatetags/nav.py:21
 #: apps/register/templates/register/_person_results.html:3
 #: apps/register/templates/register/person_list.html:3
-#: apps/register/templates/register/person_list.html:6 templates/base.html:22
+#: apps/register/templates/register/person_list.html:6
 msgid "People"
 msgstr "Henkilöt"
 
 #: apps/backups/templates/backups/restore.html:32
-#: apps/core/settings_page.py:111 apps/readings/apps.py:7
+#: apps/core/settings_page.py:111 apps/core/templatetags/nav.py:22
+#: apps/readings/apps.py:7
 #: apps/readings/templates/readings/_round_results.html:3
 #: apps/readings/templates/readings/_unit_readings.html:3
-#: templates/base.html:23
 msgid "Readings"
 msgstr "Lukemat"
 
@@ -618,8 +619,8 @@ msgstr "Vahvista palautus valitsemalla ruutu."
 #: apps/backups/views.py:96
 #, python-format
 msgid ""
-"Restoring %(name)s. The data as it was just before is kept in %(safety)s. You"
-" may need to log in again when it is done."
+"Restoring %(name)s. The data as it was just before is kept in %(safety)s. "
+"You may need to log in again when it is done."
 msgstr ""
 "Palautetaan %(name)s. Juuri ennen palautusta olleet tiedot säilyvät "
 "tilannevedoksessa %(safety)s. Sinun on ehkä kirjauduttava uudelleen, kun "
@@ -628,6 +629,10 @@ msgstr ""
 #: apps/core/apps.py:7
 msgid "General"
 msgstr "Yleinen"
+
+#: apps/core/middleware.py:55
+msgid "Accounts and passwords cannot be changed on the demo site."
+msgstr "Tilejä ja salasanoja ei voi muuttaa esittelysivustolla."
 
 #: apps/core/models.py:20
 msgid "Information"
@@ -693,7 +698,8 @@ msgstr "Organisaation tiedot"
 msgid "Name, business ID, contact details, logo and the public page."
 msgstr "Nimi, Y-tunnus, yhteystiedot, logo ja julkinen sivu."
 
-#: apps/core/settings_page.py:84 apps/register/apps.py:7
+#: apps/core/settings_page.py:84 apps/core/templatetags/nav.py:11
+#: apps/register/apps.py:7
 msgid "Register"
 msgstr "Rekisteri"
 
@@ -808,8 +814,8 @@ msgstr "Mitä kukin rooli saa nähdä ja tehdä."
 msgid "Integrations"
 msgstr "Integraatiot"
 
-#: apps/core/settings_page.py:200 apps/plugins/apps.py:7
-#: apps/plugins/templates/plugins/plugin_list.html:3
+#: apps/core/settings_page.py:200 apps/core/templatetags/nav.py:14
+#: apps/plugins/apps.py:7 apps/plugins/templates/plugins/plugin_list.html:3
 #: apps/plugins/templates/plugins/plugin_list.html:6
 #: apps/plugins/templates/plugins/plugin_list.html:18
 #: apps/plugins/templates/plugins/plugin_settings.html:7
@@ -892,7 +898,7 @@ msgid "Keep track of your members and clients in one place."
 msgstr "Pidä jäsenet ja asiakkaat järjestyksessä yhdessä paikassa."
 
 #: apps/core/templates/core/home.html:7 templates/account/login.html:3
-#: templates/account/login.html:6 templates/account/login.html:19
+#: templates/account/login.html:6 templates/account/login.html:24
 msgid "Log in"
 msgstr "Kirjaudu sisään"
 
@@ -913,16 +919,39 @@ msgid "Staff login"
 msgstr "Henkilökunnan kirjautuminen"
 
 #: apps/core/templates/core/settings.html:3
-#: apps/core/templates/core/settings.html:6
+#: apps/core/templates/core/settings.html:6 apps/core/templatetags/nav.py:103
 #: apps/messaging/templates/messaging/email_settings.html:7
 #: apps/plugins/templates/plugins/plugin_list.html:7
 #: apps/register/templates/register/unit_type_choose.html:16
-#: templates/base.html:27
 msgid "Settings"
 msgstr "Asetukset"
 
+#: apps/core/templatetags/nav.py:12
+msgid "Finance"
+msgstr "Talous"
+
+#: apps/core/templatetags/nav.py:13
+msgid "Communication"
+msgstr "Viestintä"
+
+#: apps/core/templatetags/nav.py:23
+#: apps/invoicing/templates/invoicing/_invoice_results.html:3
+#: apps/invoicing/templates/invoicing/invoice_list.html:3
+#: apps/invoicing/templates/invoicing/invoice_list.html:6
+#: apps/invoicing/templates/invoicing/run_detail.html:31
+#: apps/messaging/models.py:43 apps/setup/views.py:46
+msgid "Invoices"
+msgstr "Laskut"
+
+#: apps/core/templatetags/nav.py:27
+#: apps/messaging/templates/messaging/batch_list.html:3
+#: apps/messaging/templates/messaging/batch_list.html:6
+#: apps/messaging/templates/messaging/batch_list.html:17
+msgid "Send-outs"
+msgstr "Lähetykset"
+
 #: apps/help/apps.py:7 apps/help/templates/help/index.html:3
-#: apps/help/templates/help/index.html:5 apps/help/templatetags/help.py:22
+#: apps/help/templates/help/index.html:5 templates/_main_menu.html:13
 msgid "Help"
 msgstr "Ohje"
 
@@ -1024,8 +1053,8 @@ msgstr "Jakso päättyy ennen kuin se alkaa."
 
 #: apps/invoicing/forms.py:56
 msgid ""
-"The day of delivery, or the last day of the period the invoice is for; VAT is"
-" due for its month. Empty: the invoice date."
+"The day of delivery, or the last day of the period the invoice is for; VAT "
+"is due for its month. Empty: the invoice date."
 msgstr ""
 "Toimituspäivä tai laskun koskeman jakson viimeinen päivä; arvonlisävero "
 "kohdistuu sen kuukaudelle. Tyhjä: laskun päivämäärä."
@@ -1071,8 +1100,8 @@ msgid ""
 "small-business limit): invoices then show no VAT and carry the text below."
 msgstr ""
 "Poista valinta, jos organisaatio ei ole ALV-velvollinen (esimerkiksi alle "
-"vähäisen toiminnan rajan): laskuissa ei silloin näy ALV:tä, ja niissä on alla"
-" oleva teksti."
+"vähäisen toiminnan rajan): laskuissa ei silloin näy ALV:tä, ja niissä on "
+"alla oleva teksti."
 
 #: apps/invoicing/models.py:53
 msgid "text when not VAT registered"
@@ -1630,14 +1659,6 @@ msgstr "Ei aiempaa lajin %(type)s lukemaa, josta kulutus voitaisiin laskea."
 msgid "%(type)s is lower than the previous reading."
 msgstr "%(type)s on pienempi kuin edellinen lukema."
 
-#: apps/invoicing/templates/invoicing/_invoice_results.html:3
-#: apps/invoicing/templates/invoicing/invoice_list.html:3
-#: apps/invoicing/templates/invoicing/invoice_list.html:6
-#: apps/invoicing/templates/invoicing/run_detail.html:31
-#: apps/messaging/models.py:43 apps/setup/views.py:46 templates/base.html:24
-msgid "Invoices"
-msgstr "Laskut"
-
 #: apps/invoicing/templates/invoicing/_invoice_results.html:7
 #: apps/invoicing/templates/invoicing/overdue_list.html:16
 #: apps/invoicing/templates/invoicing/run_detail.html:33
@@ -2122,9 +2143,9 @@ msgid ""
 "Please pay by %(new)s. If you have already paid, you can ignore this "
 "reminder."
 msgstr ""
-"Emme ole saaneet maksua tästä laskusta, jonka eräpäivä oli %(due)s. Maksathan"
-" viimeistään %(new)s. Jos olet jo maksanut, voit jättää tämän muistutuksen "
-"huomiotta."
+"Emme ole saaneet maksua tästä laskusta, jonka eräpäivä oli %(due)s. "
+"Maksathan viimeistään %(new)s. Jos olet jo maksanut, voit jättää tämän "
+"muistutuksen huomiotta."
 
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:139
 msgid "Account (IBAN)"
@@ -2271,8 +2292,8 @@ msgstr "Luonnos poistettu."
 msgid ""
 "A draft credit note was made. Change it to credit only part, then issue it."
 msgstr ""
-"Hyvityslaskuluonnos tehtiin. Muokkaa sitä hyvittääksesi vain osan ja laadi se"
-" sitten."
+"Hyvityslaskuluonnos tehtiin. Muokkaa sitä hyvittääksesi vain osan ja laadi "
+"se sitten."
 
 #: apps/invoicing/views.py:194
 #, python-format
@@ -2554,8 +2575,8 @@ msgid ""
 "PDF, images or office documents, up to %(file)s MB each and %(total)s MB "
 "together. Email recipients get the files attached; SMS recipients get a link."
 msgstr ""
-"PDF-tiedostoja, kuvia tai toimisto-asiakirjoja, enintään %(file)s Mt kukin ja"
-" %(total)s Mt yhteensä. Sähköpostin vastaanottajat saavat tiedostot "
+"PDF-tiedostoja, kuvia tai toimisto-asiakirjoja, enintään %(file)s Mt kukin "
+"ja %(total)s Mt yhteensä. Sähköpostin vastaanottajat saavat tiedostot "
 "liitteinä, tekstiviestin vastaanottajat linkin."
 
 #: apps/messaging/forms.py:103 apps/messaging/models.py:41
@@ -2596,9 +2617,9 @@ msgstr "Lähetystapa"
 
 #: apps/messaging/forms.py:125
 msgid ""
-"Email to those who prefer email and SMS to those who prefer SMS, or the other"
-" one when they lack an address for it. Those who prefer post get an SMS, or "
-"else an email."
+"Email to those who prefer email and SMS to those who prefer SMS, or the "
+"other one when they lack an address for it. Those who prefer post get an "
+"SMS, or else an email."
 msgstr ""
 "Sähköposti niille, jotka toivovat sähköpostia, ja tekstiviesti niille, jotka "
 "toivovat tekstiviestiä, tai toinen, jos siihen ei ole osoitetta. Postia "
@@ -3081,8 +3102,8 @@ msgstr "SMTP"
 
 #: apps/messaging/templates/messaging/_email_settings_fields.html:5
 msgid ""
-"Only used when email goes through SMTP. Your email provider or IT support can"
-" tell you these."
+"Only used when email goes through SMTP. Your email provider or IT support "
+"can tell you these."
 msgstr ""
 "Käytössä vain, kun sähköposti lähetetään SMTP:n kautta. Sähköpostin "
 "tarjoajasi tai IT-tukesi osaa kertoa nämä."
@@ -3233,12 +3254,6 @@ msgstr "Tulosta heidän kirjeensä"
 msgid "Sending…"
 msgstr "Lähetetään…"
 
-#: apps/messaging/templates/messaging/batch_list.html:3
-#: apps/messaging/templates/messaging/batch_list.html:6
-#: apps/messaging/templates/messaging/batch_list.html:17 templates/base.html:25
-msgid "Send-outs"
-msgstr "Lähetykset"
-
 #: apps/messaging/templates/messaging/batch_list.html:9
 #: apps/messaging/templates/messaging/newsletter_compose.html:3
 #: apps/messaging/templates/messaging/newsletter_compose.html:5
@@ -3263,7 +3278,7 @@ msgstr "Aloitettu"
 msgid "Sent by"
 msgstr "Lähettäjä"
 
-#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:47
+#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:43
 msgid "Automatic"
 msgstr "Automaattinen"
 
@@ -3365,8 +3380,8 @@ msgstr "Tarkista vastaanottajat"
 #: apps/messaging/templates/messaging/compose.html:128
 msgid "Nothing is sent until you have checked the recipients and confirmed."
 msgstr ""
-"Mitään ei lähetetä, ennen kuin olet tarkistanut vastaanottajat ja vahvistanut"
-" lähetyksen."
+"Mitään ei lähetetä, ennen kuin olet tarkistanut vastaanottajat ja "
+"vahvistanut lähetyksen."
 
 #: apps/messaging/templates/messaging/email_settings.html:9
 msgid ""
@@ -3498,8 +3513,8 @@ msgid ""
 "You will not get the newsletter any more. Messages about the service itself, "
 "such as disruptions, still reach you."
 msgstr ""
-"Et saa enää uutiskirjettä. Palvelua koskevat viestit, kuten häiriötiedotteet,"
-" tavoittavat sinut edelleen."
+"Et saa enää uutiskirjettä. Palvelua koskevat viestit, kuten "
+"häiriötiedotteet, tavoittavat sinut edelleen."
 
 #: apps/messaging/templates/messaging/unsubscribe.html:12
 msgid "Unsubscribe from the newsletter?"
@@ -3726,7 +3741,7 @@ msgstr "Merkitse kaikki luetuiksi"
 #: apps/notifications/templates/notifications/list.html:15
 #: apps/notifications/templates/notifications/settings.html:3
 #: apps/notifications/templates/notifications/settings.html:6
-#: templates/base.html:42
+#: templates/base.html:38
 msgid "Notification settings"
 msgstr "Ilmoitusasetukset"
 
@@ -4997,8 +5012,8 @@ msgid ""
 "There are no unit types yet. An administrator must create one under Settings "
 "first."
 msgstr ""
-"Yksikkötyyppejä ei ole vielä. Ylläpitäjän on ensin luotava sellainen kohdassa"
-" Asetukset."
+"Yksikkötyyppejä ei ole vielä. Ylläpitäjän on ensin luotava sellainen "
+"kohdassa Asetukset."
 
 #: apps/register/templates/register/person_detail.html:12
 #: apps/register/templates/register/unit_detail.html:12
@@ -5020,8 +5035,8 @@ msgid ""
 "Email to this address could not be delivered. Check the address with the "
 "person and correct it."
 msgstr ""
-"Sähköpostia tähän osoitteeseen ei voitu toimittaa. Tarkista osoite henkilöltä"
-" ja korjaa se."
+"Sähköpostia tähän osoitteeseen ei voitu toimittaa. Tarkista osoite "
+"henkilöltä ja korjaa se."
 
 #: apps/register/templates/register/person_detail.html:40
 msgid "Not linked to any unit."
@@ -5221,7 +5236,7 @@ msgstr "Tulosta itsepalvelukirje"
 
 #: apps/selfservice/templates/selfservice/base.html:9
 #: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:270
-#: templates/base.html:7 templates/base.html:18
+#: templates/base.html:7 templates/base.html:24
 msgid "Metra"
 msgstr "Metra"
 
@@ -5425,8 +5440,8 @@ msgid ""
 "Readings and contact details members changed through their personal links, "
 "newest first."
 msgstr ""
-"Jäsenten henkilökohtaisten linkkien kautta tekemät lukemien ja yhteystietojen"
-" muutokset, uusimmat ensin."
+"Jäsenten henkilökohtaisten linkkien kautta tekemät lukemien ja "
+"yhteystietojen muutokset, uusimmat ensin."
 
 #: apps/selfservice/templates/selfservice/recent_changes.html:40
 msgid "No changes through self-service links yet."
@@ -5524,8 +5539,8 @@ msgid ""
 "The link may be old or mistyped, or a newer letter or message may have "
 "replaced it."
 msgstr ""
-"Linkki voi olla vanha tai kirjoitettu väärin, tai uudempi kirje tai viesti on"
-" voinut korvata sen."
+"Linkki voi olla vanha tai kirjoitettu väärin, tai uudempi kirje tai viesti "
+"on voinut korvata sen."
 
 #: apps/selfservice/templates/selfservice/unavailable.html:7
 msgid ""
@@ -5682,13 +5697,14 @@ msgid ""
 "Nothing changes until you save a step. You can run the wizard again from "
 "Settings."
 msgstr ""
-"Mikään ei muutu ennen kuin tallennat vaiheen. Voit käyttää ohjattua toimintoa"
-" uudelleen kohdasta Asetukset."
+"Mikään ei muutu ennen kuin tallennat vaiheen. Voit käyttää ohjattua "
+"toimintoa uudelleen kohdasta Asetukset."
 
 #: apps/setup/templates/setup/board.html:4
 msgid ""
-"Invite the people who work in Metra. Each gets an email with a link to choose"
-" a password. Members do not need accounts: they use their personal links."
+"Invite the people who work in Metra. Each gets an email with a link to "
+"choose a password. Members do not need accounts: they use their personal "
+"links."
 msgstr ""
 "Kutsu Metraa käyttävät henkilöt. Jokainen saa sähköpostin, jossa on linkki "
 "salasanan valitsemiseen. Jäsenet eivät tarvitse käyttäjätiliä, vaan he "
@@ -5708,8 +5724,8 @@ msgstr "Lähetä kutsu"
 
 #: apps/setup/templates/setup/board.html:19
 msgid ""
-"Email is not set up, so invitations cannot be sent. Add people under Settings"
-" instead."
+"Email is not set up, so invitations cannot be sent. Add people under "
+"Settings instead."
 msgstr ""
 "Sähköpostia ei ole määritetty, joten kutsuja ei voi lähettää. Lisää henkilöt "
 "sen sijaan kohdassa Asetukset."
@@ -5806,9 +5822,9 @@ msgstr ""
 
 #: apps/setup/templates/setup/organisation.html:4
 msgid ""
-"Who runs this installation. The contact details appear on the public page, on"
-" members' pages and in letters, so use the organisation's own details, not a "
-"person's."
+"Who runs this installation. The contact details appear on the public page, "
+"on members' pages and in letters, so use the organisation's own details, not "
+"a person's."
 msgstr ""
 "Kuka ylläpitää tätä asennusta. Yhteystiedot näkyvät julkisella sivulla, "
 "jäsenten sivuilla ja kirjeissä, joten käytä organisaation omia tietoja, älä "
@@ -5816,8 +5832,8 @@ msgstr ""
 
 #: apps/setup/templates/setup/types.html:4
 msgid ""
-"A unit is what you keep a record of: a household, a property, a boat berth or"
-" a member. Each unit type has its own fields; people can have fields too."
+"A unit is what you keep a record of: a household, a property, a boat berth "
+"or a member. Each unit type has its own fields; people can have fields too."
 msgstr ""
 "Yksikkö on se, mistä pidätte rekisteriä: talous, kiinteistö, venepaikka tai "
 "jäsen. Jokaisella yksikkötyypillä on omat kenttänsä, ja myös henkilöillä voi "
@@ -5912,7 +5928,8 @@ msgstr "Käyttäjätilisi: %(organisation)s"
 msgid ""
 "Hello %(name)s,\n"
 "\n"
-"%(inviter)s has made you an account for %(organisation)s in Metra. Your username is %(username)s.\n"
+"%(inviter)s has made you an account for %(organisation)s in Metra. Your "
+"username is %(username)s.\n"
 "\n"
 "Choose your password here:\n"
 "%(link)s\n"
@@ -5921,7 +5938,8 @@ msgid ""
 msgstr ""
 "Hei %(name)s,\n"
 "\n"
-"%(inviter)s on luonut sinulle käyttäjätilin Metraan (%(organisation)s). Käyttäjätunnuksesi on %(username)s.\n"
+"%(inviter)s on luonut sinulle käyttäjätilin Metraan (%(organisation)s). "
+"Käyttäjätunnuksesi on %(username)s.\n"
 "\n"
 "Valitse salasanasi täällä:\n"
 "%(link)s\n"
@@ -5943,15 +5961,15 @@ msgid "Setup is done. You can run it again from Settings."
 msgstr ""
 "Käyttöönotto on valmis. Voit käynnistää sen uudelleen kohdasta Asetukset."
 
-#: config/settings.py:185
+#: config/settings.py:195
 msgid "Swedish"
 msgstr "Ruotsi"
 
-#: config/settings.py:186
+#: config/settings.py:196
 msgid "English"
 msgstr "Englanti"
 
-#: config/settings.py:187
+#: config/settings.py:197
 msgid "Finnish (machine translated)"
 msgstr "Suomi (konekäännös)"
 
@@ -5983,43 +6001,49 @@ msgstr ""
 "Tämä käännös on luotu automaattisesti, eikä sitä ole tarkistettu. Joissakin "
 "sanamuodoissa voi olla virheitä."
 
-#: templates/base.html:20
+#: templates/_main_menu.html:1
 msgid "Main"
 msgstr "Päävalikko"
 
-#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
-msgid "Finance"
-msgstr "Talous"
-
-#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
-msgid "Communication"
-msgstr "Viestintä"
-
-#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
-msgid "Menu"
-msgstr "Valikko"
-
-#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
+#: templates/_main_menu.html:2
 msgid "Close menu"
 msgstr "Sulje valikko"
 
-#: templates/base.html:45
+#: templates/account/login.html:9
+#, python-format
+msgid ""
+"Try Metra: log in with the username <strong>%(username)s</strong> and the "
+"password <strong>%(password)s</strong>."
+msgstr "Kokeile Metraa: kirjaudu käyttäjätunnuksella <strong>%(username)s</strong> ja salasanalla <strong>%(password)s</strong>."
+
+#: templates/base.html:21
+msgid "Menu"
+msgstr "Valikko"
+
+#: templates/base.html:41
 msgid "Theme"
 msgstr "Teema"
 
-#: templates/base.html:48
+#: templates/base.html:44
 msgid "Light"
 msgstr "Vaalea"
 
-#: templates/base.html:49
+#: templates/base.html:45
 msgid "Dark"
 msgstr "Tumma"
 
-#: templates/base.html:54
+#: templates/base.html:50
 msgid "Log out"
 msgstr "Kirjaudu ulos"
 
-#: templates/base.html:69
+#: templates/base.html:66
+#, python-format
+msgid ""
+"This is a demo site with made-up data. Everything you change is reset every "
+"night at %(time)s. Do not enter real personal data."
+msgstr "Tämä on esittelysivusto, jonka tiedot ovat keksittyjä. Kaikki muutokset palautetaan joka yö klo %(time)s. Älä syötä oikeita henkilötietoja."
+
+#: templates/base.html:72
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
@@ -6028,7 +6052,7 @@ msgstr ""
 "(METRA_REQUIRE_MFA on pois päältä). Ota se käyttöön ennen kuin järjestelmään "
 "syötetään oikeita tietoja."
 
-#: templates/base.html:74
+#: templates/base.html:77
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."
@@ -6038,16 +6062,17 @@ msgstr ""
 
 #~ msgid "SMS settings are described in INSTALL.md, under Email and SMS."
 #~ msgstr ""
-#~ "Tekstiviestiasetukset on kuvattu tiedostossa INSTALL.md, kohdassa Email and "
-#~ "SMS."
+#~ "Tekstiviestiasetukset on kuvattu tiedostossa INSTALL.md, kohdassa Email "
+#~ "and SMS."
 
 #~ msgid ""
-#~ "Email and SMS are set by whoever installed Metra, in the server's settings "
-#~ "file (.env). Here you can see what is set up and send yourself a test."
+#~ "Email and SMS are set by whoever installed Metra, in the server's "
+#~ "settings file (.env). Here you can see what is set up and send yourself a "
+#~ "test."
 #~ msgstr ""
 #~ "Sähköpostin ja tekstiviestit määrittää Metran asentaja palvelimen "
-#~ "asetustiedostossa (.env). Tässä näet, mitä on määritetty, ja voit lähettää "
-#~ "itsellesi testin."
+#~ "asetustiedostossa (.env). Tässä näet, mitä on määritetty, ja voit "
+#~ "lähettää itsellesi testin."
 
 #, python-format
 #~ msgid "Sent from %(sender)s"
@@ -6073,7 +6098,8 @@ msgstr ""
 #, python-format
 #~ msgid "Last successful backup %(when)s (%(size)s) to %(target)s."
 #~ msgstr ""
-#~ "Viimeisin onnistunut varmuuskopio %(when)s (%(size)s) kohteeseen %(target)s."
+#~ "Viimeisin onnistunut varmuuskopio %(when)s (%(size)s) kohteeseen "
+#~ "%(target)s."
 
 #~ msgid "No backup has been made yet."
 #~ msgstr "Varmuuskopiota ei ole vielä tehty."

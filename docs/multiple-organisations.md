@@ -55,7 +55,8 @@ podman-compose exec web python manage.py create_organisation \
 works for a few days, once), so you never need to know their password.
 `createsuperuser` also works. On a demo install, run
 `python manage.py load_demo_data` instead to fill it with a made-up
-association.
+association, or set `METRA_DEMO=true` in its `.env` for a public demo with a
+demo/demo login that resets every night (see INSTALL.md, "Demo data").
 
 ## Checking installs from a tool
 

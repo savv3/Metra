@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-26 10:58+0200\n"
+"POT-Creation-Date: 2026-11-20 20:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: plugins/bookkeeping/src/metra_bookkeeping/apps.py:9
 #: plugins/bookkeeping/src/metra_bookkeeping/apps.py:31
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:46
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:50
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:2
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:6
@@ -32,21 +32,21 @@ msgid ""
 msgstr ""
 "Dubbel bokföring med verifikat, dagbok och huvudbok enligt finska regler."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:36
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:40
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:13
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:5
 msgid "Bookkeeping of invoices"
 msgstr "Bokföring av fakturor"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:39
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:43
 msgid ""
 "The accounts and voucher series invoices and payments are booked to, and VAT."
 msgstr ""
 "Konton och verifikatserier som fakturor och betalningar bokförs på, samt "
 "moms."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:66
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:70
 msgid ""
 "The books have posted vouchers, which must be kept readable for the legal "
 "period, so bookkeeping stays on."
@@ -333,8 +333,8 @@ msgstr "genomsnittligt antal anställda"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:108
 msgid ""
-"The average number of employees during the year. With the balance sheet total"
-" and turnover, it decides the size class of the financial statements."
+"The average number of employees during the year. With the balance sheet "
+"total and turnover, it decides the size class of the financial statements."
 msgstr ""
 "Det genomsnittliga antalet anställda under året. Tillsammans med "
 "balansomslutningen och omsättningen avgör det bokslutets storleksklass."
@@ -447,12 +447,13 @@ msgstr "långfristig"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:238
 msgid ""
-"For receivables and liabilities due after more than a year. The balance sheet"
-" shows them separately; keep the part due within a year on an account of its "
-"own."
+"For receivables and liabilities due after more than a year. The balance "
+"sheet shows them separately; keep the part due within a year on an account "
+"of its own."
 msgstr ""
-"För fordringar och skulder som förfaller efter mer än ett år. Balansräkningen"
-" visar dem separat; håll den del som förfaller inom ett år på ett eget konto."
+"För fordringar och skulder som förfaller efter mer än ett år. "
+"Balansräkningen visar dem separat; håll den del som förfaller inom ett år på "
+"ett eget konto."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:245
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:612
@@ -470,8 +471,8 @@ msgid ""
 "The account has entries, so its number and kind stay as they are. Rename it, "
 "or stop using it and add a new one."
 msgstr ""
-"Kontot har bokföringsposter, så dess nummer och slag ändras inte. Byt namn på"
-" det, eller ta det ur bruk och lägg till ett nytt."
+"Kontot har bokföringsposter, så dess nummer och slag ändras inte. Byt namn "
+"på det, eller ta det ur bruk och lägg till ett nytt."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:275
 msgid "An account with entries cannot be deleted."
@@ -624,8 +625,8 @@ msgstr "Momssatsen %(rate)s gäller inte den %(day)s."
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:499
 #, python-format
 msgid ""
-"The organisation is not VAT registered on %(day)s, so the voucher can have no"
-" VAT. Check the VAT registration dates in the posting settings."
+"The organisation is not VAT registered on %(day)s, so the voucher can have "
+"no VAT. Check the VAT registration dates in the posting settings."
 msgstr ""
 "Organisationen är inte momsregistrerad den %(day)s, så verifikatet kan inte "
 "ha moms. Kontrollera momsregistreringens datum i bokföringsinställningarna."
@@ -1295,8 +1296,8 @@ msgid ""
 "These vouchers have entries on the VAT accounts without a VAT code, so they "
 "are not in the summary:"
 msgstr ""
-"Dessa verifikat har konteringar på momskontona utan momskod, så de ingår inte"
-" i sammandraget:"
+"Dessa verifikat har konteringar på momskontona utan momskod, så de ingår "
+"inte i sammandraget:"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:16
 msgid "Draft vouchers with VAT are not posted yet:"
@@ -1307,11 +1308,11 @@ msgstr "Verifikatutkast med moms är inte bokförda än:"
 msgid ""
 "%(count)s invoice, payment or reminder fee from invoicing has no voucher yet."
 msgid_plural ""
-"%(count)s invoices, payments and reminder fees from invoicing have no voucher"
-" yet."
+"%(count)s invoices, payments and reminder fees from invoicing have no "
+"voucher yet."
 msgstr[0] ""
-"%(count)s faktura, betalning eller påminnelseavgift från faktureringen saknar"
-" verifikat ännu."
+"%(count)s faktura, betalning eller påminnelseavgift från faktureringen "
+"saknar verifikat ännu."
 msgstr[1] ""
 "%(count)s fakturor, betalningar och påminnelseavgifter från faktureringen "
 "saknar verifikat ännu."
@@ -1319,24 +1320,24 @@ msgstr[1] ""
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:22
 msgid ""
 "Only entries with a VAT code are included. Reverse charge, imports (also "
-"goods across the Åland tax border) and anything booked without a VAT code are"
-" not: add those to the return yourself."
+"goods across the Åland tax border) and anything booked without a VAT code "
+"are not: add those to the return yourself."
 msgstr ""
 "Endast konteringar med momskod ingår. Omvänd skatteskyldighet, import (även "
-"varor över Ålands skattegräns) och allt som bokförts utan momskod ingår inte:"
-" lägg till dem i deklarationen själv."
+"varor över Ålands skattegräns) och allt som bokförts utan momskod ingår "
+"inte: lägg till dem i deklarationen själv."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:23
 msgid ""
-"VAT follows the supply: invoices count at the end of their supply period, and"
-" the part paid before it as an advance payment in the month it was paid. "
+"VAT follows the supply: invoices count at the end of their supply period, "
+"and the part paid before it as an advance payment in the month it was paid. "
 "Receipts entered by hand count on the voucher's date, and a reversal where "
 "the voucher it reverses counted."
 msgstr ""
-"Momsen följer leveransen: fakturor räknas vid slutet av leveransperioden, och"
-" den del som betalats före det räknas som förskottsbetalning i den månad den "
-"betalades. Inbetalningar som matats in för hand räknas på verifikatets datum,"
-" och en rättelse där verifikatet den rättar räknades."
+"Momsen följer leveransen: fakturor räknas vid slutet av leveransperioden, "
+"och den del som betalats före det räknas som förskottsbetalning i den månad "
+"den betalades. Inbetalningar som matats in för hand räknas på verifikatets "
+"datum, och en rättelse där verifikatet den rättar räknades."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:25
 #, python-format
@@ -1635,11 +1636,11 @@ msgstr "Väntar på att bokföras"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/invoice_panel.html:15
 msgid ""
-"Not in the books: it is dated before automatic posting started, or posting is"
-" off."
+"Not in the books: it is dated before automatic posting started, or posting "
+"is off."
 msgstr ""
-"Inte i bokföringen: den är daterad före den automatiska bokföringen startade,"
-" eller så är bokföringen av."
+"Inte i bokföringen: den är daterad före den automatiska bokföringen "
+"startade, eller så är bokföringen av."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/journal.html:12
 msgid "The posted entries in date order."
@@ -1672,9 +1673,9 @@ msgstr "Lägg till dem"
 #, python-format
 msgid ""
 "The receivables account is %(booked)s € when automatic posting starts, but "
-"the invoices issued before then had %(open)s € outstanding. Payments of those"
-" invoices are booked against the receivables account, so check the opening "
-"balances."
+"the invoices issued before then had %(open)s € outstanding. Payments of "
+"those invoices are booked against the receivables account, so check the "
+"opening balances."
 msgstr ""
 "Kontot för kundfordringar är %(booked)s € när den automatiska bokföringen "
 "startar, men fakturorna som utfärdats före dess hade %(open)s € obetalt. "
@@ -1711,8 +1712,8 @@ msgid ""
 "%(count)s record from invoicing is waiting to be posted; post it from the "
 "overview."
 msgid_plural ""
-"%(count)s records from invoicing are waiting to be posted; post them from the"
-" overview."
+"%(count)s records from invoicing are waiting to be posted; post them from "
+"the overview."
 msgstr[0] ""
 "%(count)s post från faktureringen väntar på att bokföras; bokför den från "
 "översikten."
@@ -1722,15 +1723,15 @@ msgstr[1] ""
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:62
 msgid ""
-"VAT is booked only on days the organisation is VAT registered, at the rate in"
-" force on the day. Reverse charge (services from other EU countries, "
-"construction) and imports, also of goods across the Åland tax border, are not"
-" supported yet: book them by hand, and check them with an accountant."
+"VAT is booked only on days the organisation is VAT registered, at the rate "
+"in force on the day. Reverse charge (services from other EU countries, "
+"construction) and imports, also of goods across the Åland tax border, are "
+"not supported yet: book them by hand, and check them with an accountant."
 msgstr ""
-"Moms bokförs bara på dagar då organisationen är momsregistrerad, med den sats"
-" som gäller den dagen. Omvänd skattskyldighet (tjänster från andra EU-länder,"
-" byggtjänster) och import, även av varor över Ålands skattegräns, stöds inte "
-"ännu: bokför dem för hand och låt en bokförare granska dem."
+"Moms bokförs bara på dagar då organisationen är momsregistrerad, med den "
+"sats som gäller den dagen. Omvänd skattskyldighet (tjänster från andra EU-"
+"länder, byggtjänster) och import, även av varor över Ålands skattegräns, "
+"stöds inte ännu: bokför dem för hand och låt en bokförare granska dem."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:70
 msgid "VAT registered"
@@ -1772,8 +1773,8 @@ msgstr "Ta bort verifikatutkast"
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_confirm_delete.html:6
 #, python-format
 msgid ""
-"Delete the draft \"%(description)s\" and its receipts? Drafts have no number,"
-" so this leaves no gap."
+"Delete the draft \"%(description)s\" and its receipts? Drafts have no "
+"number, so this leaves no gap."
 msgstr ""
 "Ta bort utkastet \"%(description)s\" och dess kvitton? Utkast har inget "
 "nummer, så det blir ingen lucka."
@@ -1905,8 +1906,8 @@ msgstr "Gör rättelse av %(voucher)s"
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_reverse.html:6
 msgid ""
 "A posted voucher never changes. To correct it, a new voucher with the same "
-"lines on the opposite side cancels it, and both stay in the books. Then enter"
-" the right entry as a new voucher."
+"lines on the opposite side cancels it, and both stay in the books. Then "
+"enter the right entry as a new voucher."
 msgstr ""
 "Ett bokfört verifikat ändras aldrig. För att rätta det upphäver ett nytt "
 "verifikat med samma rader på motsatt sida det, och båda finns kvar i "
@@ -1960,8 +1961,8 @@ msgstr "Verifikaten sparas till"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:19
 msgid ""
-"Vouchers and receipts: 6 years from the end of the calendar year in which the"
-" financial year ended."
+"Vouchers and receipts: 6 years from the end of the calendar year in which "
+"the financial year ended."
 msgstr ""
 "Verifikat och kvitton: 6 år från utgången av det kalenderår då "
 "räkenskapsperioden slutade."
@@ -1986,8 +1987,8 @@ msgstr "Ny räkenskapsperiod"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_form.html:6
 msgid ""
-"A financial year is 12 months and starts the day after the previous one ends."
-" The first year, or one whose dates change, can be 1 to 18 months."
+"A financial year is 12 months and starts the day after the previous one "
+"ends. The first year, or one whose dates change, can be 1 to 18 months."
 msgstr ""
 "En räkenskapsperiod är 12 månader och börjar dagen efter att den föregående "
 "slutar. Den första perioden, eller en vars datum ändras, kan vara 1 till 18 "
@@ -2058,8 +2059,8 @@ msgstr "Verifikatutkastet togs bort."
 #, python-format
 msgid "Voucher %(number)s reverses it. Enter the right entry as a new voucher."
 msgstr ""
-"Verifikat %(number)s rättar det. Ange den rätta bokföringsposten som ett nytt"
-" verifikat."
+"Verifikat %(number)s rättar det. Ange den rätta bokföringsposten som ett "
+"nytt verifikat."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/views.py:461
 msgid "The receipt was added."

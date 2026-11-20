@@ -8,6 +8,8 @@ case "$role" in
     # A snapshot before a new version changes the database (only after an upgrade).
     python manage.py snapshot --before-upgrade
     python manage.py migrate --noinput
+    # A demo site (METRA_DEMO=true) gets its demo data on first start.
+    python manage.py reset_demo --if-new
     exec gunicorn config.wsgi:application \
       --bind 0.0.0.0:8000 \
       --workers "${GUNICORN_WORKERS:-3}" \
