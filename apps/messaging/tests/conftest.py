@@ -25,7 +25,7 @@ def open_round(household):
         reading_type=meter,
         period_label="2026",
         opens_on=today - datetime.timedelta(days=5),
-        closes_on=datetime.date(2026, 10, 31),
+        closes_on=today + datetime.timedelta(days=30),
         is_draft=False,
     )
 

@@ -51,7 +51,9 @@ def test_messages_carry_a_working_link_that_is_not_stored(open_round, make_house
     assert (link.unit, link.round) == (unit, open_round)
     stored = batch.messages.get()
     assert token not in stored.body
-    assert "Anna" in stored.body and "31.10.2026" in stored.body
+    day = open_round.closes_on
+    closes = f"{day.day}.{day.month}.{day.year}"
+    assert "Anna" in stored.body and closes in stored.body
     assert "[" in stored.body  # the link placeholder
 
 
