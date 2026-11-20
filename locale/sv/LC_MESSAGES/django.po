@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-26 10:07+0200\n"
+"POT-Creation-Date: 2026-11-20 20:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,7 @@ msgstr "Läsbehörighet"
 
 #: apps/accounts/templates/accounts/profile.html:3
 #: apps/accounts/templates/accounts/profile.html:7
-#: templates/allauth/layouts/base.html:9 templates/base.html:41
+#: templates/allauth/layouts/base.html:9 templates/base.html:37
 msgid "My account"
 msgstr "Mitt konto"
 
@@ -136,8 +136,8 @@ msgstr "Skydda ditt konto med en kod från en autentiseringsapp i telefonen."
 msgid "Turn off"
 msgstr "Stäng av"
 
-#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:70
-#: templates/base.html:75
+#: apps/accounts/templates/accounts/profile.html:44 templates/base.html:73
+#: templates/base.html:78
 msgid "Turn on two-factor login"
 msgstr "Slå på tvåfaktorsinloggning"
 
@@ -305,11 +305,11 @@ msgstr "Säkerhetskopian %(name)s hittades inte."
 #: apps/backups/restore.py:118
 #, python-format
 msgid ""
-"This snapshot was taken by Metra %(version)s, which is newer than the version"
-" running now (%(running)s), so it cannot be restored here."
+"This snapshot was taken by Metra %(version)s, which is newer than the "
+"version running now (%(running)s), so it cannot be restored here."
 msgstr ""
-"Säkerhetskopian togs av Metra %(version)s, som är nyare än versionen som körs"
-" nu (%(running)s), så den kan inte återställas här."
+"Säkerhetskopian togs av Metra %(version)s, som är nyare än versionen som "
+"körs nu (%(running)s), så den kan inte återställas här."
 
 #: apps/backups/restore.py:189
 msgid "A restore is already running."
@@ -338,16 +338,16 @@ msgid ""
 "taken every night at %(time)s, before every upgrade, before a CSV import, "
 "before deleting a unit type or field, and whenever you take one here."
 msgstr ""
-"En säkerhetskopia är en kopia av hela registret och alla uppladdade filer. En"
-" tas varje natt kl. %(time)s, före varje uppdatering, före en CSV-import, "
+"En säkerhetskopia är en kopia av hela registret och alla uppladdade filer. "
+"En tas varje natt kl. %(time)s, före varje uppdatering, före en CSV-import, "
 "före borttagning av en enhetstyp eller ett fält, och när du tar en här."
 
 #: apps/backups/templates/backups/backup_list.html:18
 #, python-format
 msgid ""
 "Every snapshot is kept for %(days)s days, then the newest of each week for "
-"%(weeks)s weeks and the newest of each month for %(months)s months. Snapshots"
-" taken by hand stay until you delete them."
+"%(weeks)s weeks and the newest of each month for %(months)s months. "
+"Snapshots taken by hand stay until you delete them."
 msgstr ""
 "Varje säkerhetskopia sparas i %(days)s dagar, därefter den senaste för varje "
 "vecka i %(weeks)s veckor och den senaste för varje månad i %(months)s "
@@ -506,17 +506,18 @@ msgid "Units"
 msgstr "Enheter"
 
 #: apps/backups/templates/backups/restore.html:32
+#: apps/core/templatetags/nav.py:21
 #: apps/register/templates/register/_person_results.html:3
 #: apps/register/templates/register/person_list.html:3
-#: apps/register/templates/register/person_list.html:6 templates/base.html:22
+#: apps/register/templates/register/person_list.html:6
 msgid "People"
 msgstr "Personer"
 
 #: apps/backups/templates/backups/restore.html:32
-#: apps/core/settings_page.py:111 apps/readings/apps.py:7
+#: apps/core/settings_page.py:111 apps/core/templatetags/nav.py:22
+#: apps/readings/apps.py:7
 #: apps/readings/templates/readings/_round_results.html:3
 #: apps/readings/templates/readings/_unit_readings.html:3
-#: templates/base.html:23
 msgid "Readings"
 msgstr "Avläsningar"
 
@@ -618,8 +619,8 @@ msgstr "Kryssa i rutan för att bekräfta återställningen."
 #: apps/backups/views.py:96
 #, python-format
 msgid ""
-"Restoring %(name)s. The data as it was just before is kept in %(safety)s. You"
-" may need to log in again when it is done."
+"Restoring %(name)s. The data as it was just before is kept in %(safety)s. "
+"You may need to log in again when it is done."
 msgstr ""
 "Återställer %(name)s. Uppgifterna som de var strax innan finns kvar i "
 "%(safety)s. Du kan behöva logga in på nytt när det är klart."
@@ -627,6 +628,10 @@ msgstr ""
 #: apps/core/apps.py:7
 msgid "General"
 msgstr "Allmänt"
+
+#: apps/core/middleware.py:55
+msgid "Accounts and passwords cannot be changed on the demo site."
+msgstr "Konton och lösenord kan inte ändras på demosidan."
 
 #: apps/core/models.py:20
 msgid "Information"
@@ -692,7 +697,8 @@ msgstr "Organisationens uppgifter"
 msgid "Name, business ID, contact details, logo and the public page."
 msgstr "Namn, FO-nummer, kontaktuppgifter, logotyp och den offentliga sidan."
 
-#: apps/core/settings_page.py:84 apps/register/apps.py:7
+#: apps/core/settings_page.py:84 apps/core/templatetags/nav.py:11
+#: apps/register/apps.py:7
 msgid "Register"
 msgstr "Register"
 
@@ -810,8 +816,8 @@ msgstr "Vad varje roll får se och göra."
 msgid "Integrations"
 msgstr "Integrationer"
 
-#: apps/core/settings_page.py:200 apps/plugins/apps.py:7
-#: apps/plugins/templates/plugins/plugin_list.html:3
+#: apps/core/settings_page.py:200 apps/core/templatetags/nav.py:14
+#: apps/plugins/apps.py:7 apps/plugins/templates/plugins/plugin_list.html:3
 #: apps/plugins/templates/plugins/plugin_list.html:6
 #: apps/plugins/templates/plugins/plugin_list.html:18
 #: apps/plugins/templates/plugins/plugin_settings.html:7
@@ -896,7 +902,7 @@ msgid "Keep track of your members and clients in one place."
 msgstr "Håll ordning på dina medlemmar och kunder på ett ställe."
 
 #: apps/core/templates/core/home.html:7 templates/account/login.html:3
-#: templates/account/login.html:6 templates/account/login.html:19
+#: templates/account/login.html:6 templates/account/login.html:24
 msgid "Log in"
 msgstr "Logga in"
 
@@ -917,16 +923,39 @@ msgid "Staff login"
 msgstr "Inloggning för personal"
 
 #: apps/core/templates/core/settings.html:3
-#: apps/core/templates/core/settings.html:6
+#: apps/core/templates/core/settings.html:6 apps/core/templatetags/nav.py:103
 #: apps/messaging/templates/messaging/email_settings.html:7
 #: apps/plugins/templates/plugins/plugin_list.html:7
 #: apps/register/templates/register/unit_type_choose.html:16
-#: templates/base.html:27
 msgid "Settings"
 msgstr "Inställningar"
 
+#: apps/core/templatetags/nav.py:12
+msgid "Finance"
+msgstr "Ekonomi"
+
+#: apps/core/templatetags/nav.py:13
+msgid "Communication"
+msgstr "Kommunikation"
+
+#: apps/core/templatetags/nav.py:23
+#: apps/invoicing/templates/invoicing/_invoice_results.html:3
+#: apps/invoicing/templates/invoicing/invoice_list.html:3
+#: apps/invoicing/templates/invoicing/invoice_list.html:6
+#: apps/invoicing/templates/invoicing/run_detail.html:31
+#: apps/messaging/models.py:43 apps/setup/views.py:46
+msgid "Invoices"
+msgstr "Fakturor"
+
+#: apps/core/templatetags/nav.py:27
+#: apps/messaging/templates/messaging/batch_list.html:3
+#: apps/messaging/templates/messaging/batch_list.html:6
+#: apps/messaging/templates/messaging/batch_list.html:17
+msgid "Send-outs"
+msgstr "Utskick"
+
 #: apps/help/apps.py:7 apps/help/templates/help/index.html:3
-#: apps/help/templates/help/index.html:5 apps/help/templatetags/help.py:22
+#: apps/help/templates/help/index.html:5 templates/_main_menu.html:13
 msgid "Help"
 msgstr "Hjälp"
 
@@ -1027,8 +1056,8 @@ msgstr "Perioden slutar innan den börjar."
 
 #: apps/invoicing/forms.py:56
 msgid ""
-"The day of delivery, or the last day of the period the invoice is for; VAT is"
-" due for its month. Empty: the invoice date."
+"The day of delivery, or the last day of the period the invoice is for; VAT "
+"is due for its month. Empty: the invoice date."
 msgstr ""
 "Leveransdagen, eller den sista dagen i perioden som fakturan gäller; momsen "
 "redovisas för dess månad. Tomt: fakturadatumet."
@@ -1074,8 +1103,8 @@ msgid ""
 "small-business limit): invoices then show no VAT and carry the text below."
 msgstr ""
 "Avmarkera om organisationen inte är momsregistrerad (till exempel under "
-"gränsen för småföretag). Fakturorna visar då ingen moms och innehåller texten"
-" nedan."
+"gränsen för småföretag). Fakturorna visar då ingen moms och innehåller "
+"texten nedan."
 
 #: apps/invoicing/models.py:53
 msgid "text when not VAT registered"
@@ -1307,8 +1336,8 @@ msgstr "upp till"
 msgid ""
 "Units of usage this tier covers up to, in total. Empty for the last tier."
 msgstr ""
-"Antal enheter förbrukning som nivån omfattar upp till, sammanlagt. Lämna tomt"
-" för den sista nivån."
+"Antal enheter förbrukning som nivån omfattar upp till, sammanlagt. Lämna "
+"tomt för den sista nivån."
 
 #: apps/invoicing/models.py:275
 msgid "price tier"
@@ -1635,14 +1664,6 @@ msgstr "Ingen tidigare %(type)s-avläsning att räkna förbrukningen från."
 #, python-format
 msgid "%(type)s is lower than the previous reading."
 msgstr "%(type)s är lägre än föregående avläsning."
-
-#: apps/invoicing/templates/invoicing/_invoice_results.html:3
-#: apps/invoicing/templates/invoicing/invoice_list.html:3
-#: apps/invoicing/templates/invoicing/invoice_list.html:6
-#: apps/invoicing/templates/invoicing/run_detail.html:31
-#: apps/messaging/models.py:43 apps/setup/views.py:46 templates/base.html:24
-msgid "Invoices"
-msgstr "Fakturor"
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:7
 #: apps/invoicing/templates/invoicing/overdue_list.html:16
@@ -2045,8 +2066,8 @@ msgstr ""
 msgid ""
 "A reminder goes by email with a PDF, else by SMS, else as a letter to print."
 msgstr ""
-"En påminnelse skickas via e-post med PDF, annars via sms, annars som brev att"
-" skriva ut."
+"En påminnelse skickas via e-post med PDF, annars via sms, annars som brev "
+"att skriva ut."
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:38
 msgid "Send reminders to the chosen"
@@ -2169,8 +2190,8 @@ msgid ""
 "Issued invoices go by email with the PDF attached. Recipients without email, "
 "or who prefer post, are listed for printing."
 msgstr ""
-"Utfärdade fakturor skickas per e-post med PDF bifogad. Mottagare utan e-post,"
-" eller som föredrar post, listas för utskrift."
+"Utfärdade fakturor skickas per e-post med PDF bifogad. Mottagare utan e-"
+"post, eller som föredrar post, listas för utskrift."
 
 #: apps/invoicing/templates/invoicing/run_detail.html:22
 #, python-format
@@ -2553,9 +2574,9 @@ msgid ""
 "PDF, images or office documents, up to %(file)s MB each and %(total)s MB "
 "together. Email recipients get the files attached; SMS recipients get a link."
 msgstr ""
-"PDF, bilder eller kontorsdokument, högst %(file)s MB per fil och %(total)s MB"
-" tillsammans. Den som får e-post får filerna bifogade, den som får sms får en"
-" länk."
+"PDF, bilder eller kontorsdokument, högst %(file)s MB per fil och %(total)s "
+"MB tillsammans. Den som får e-post får filerna bifogade, den som får sms får "
+"en länk."
 
 #: apps/messaging/forms.py:103 apps/messaging/models.py:41
 #: apps/messaging/templates/messaging/batch_list.html:12
@@ -2595,9 +2616,9 @@ msgstr "Skicka via"
 
 #: apps/messaging/forms.py:125
 msgid ""
-"Email to those who prefer email and SMS to those who prefer SMS, or the other"
-" one when they lack an address for it. Those who prefer post get an SMS, or "
-"else an email."
+"Email to those who prefer email and SMS to those who prefer SMS, or the "
+"other one when they lack an address for it. Those who prefer post get an "
+"SMS, or else an email."
 msgstr ""
 "E-post till dem som vill ha e-post och sms till dem som vill ha sms, eller "
 "det andra om de saknar adress för det. De som vill ha post får sms, eller "
@@ -3080,8 +3101,8 @@ msgstr "SMTP"
 
 #: apps/messaging/templates/messaging/_email_settings_fields.html:5
 msgid ""
-"Only used when email goes through SMTP. Your email provider or IT support can"
-" tell you these."
+"Only used when email goes through SMTP. Your email provider or IT support "
+"can tell you these."
 msgstr ""
 "Används bara när e-posten skickas via SMTP. Din e-postleverantör eller IT-"
 "support kan berätta vad du ska ange."
@@ -3228,12 +3249,6 @@ msgstr "Skriv ut deras brev"
 msgid "Sending…"
 msgstr "Skickas…"
 
-#: apps/messaging/templates/messaging/batch_list.html:3
-#: apps/messaging/templates/messaging/batch_list.html:6
-#: apps/messaging/templates/messaging/batch_list.html:17 templates/base.html:25
-msgid "Send-outs"
-msgstr "Utskick"
-
 #: apps/messaging/templates/messaging/batch_list.html:9
 #: apps/messaging/templates/messaging/newsletter_compose.html:3
 #: apps/messaging/templates/messaging/newsletter_compose.html:5
@@ -3258,7 +3273,7 @@ msgstr "Startat"
 msgid "Sent by"
 msgstr "Skickat av"
 
-#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:47
+#: apps/messaging/templates/messaging/batch_list.html:33 templates/base.html:43
 msgid "Automatic"
 msgstr "Automatiskt"
 
@@ -3717,7 +3732,7 @@ msgstr "Markera alla som lästa"
 #: apps/notifications/templates/notifications/list.html:15
 #: apps/notifications/templates/notifications/settings.html:3
 #: apps/notifications/templates/notifications/settings.html:6
-#: templates/base.html:42
+#: templates/base.html:38
 msgid "Notification settings"
 msgstr "Inställningar för aviseringar"
 
@@ -3758,8 +3773,8 @@ msgid ""
 "Choose which notifications you get under the bell. Only the kinds your role "
 "can see are listed."
 msgstr ""
-"Välj vilka aviseringar du får under klockan. Bara de slag som din roll kan se"
-" finns med."
+"Välj vilka aviseringar du får under klockan. Bara de slag som din roll kan "
+"se finns med."
 
 #: apps/notifications/templates/notifications/settings.html:12
 msgid "Notify me when"
@@ -3815,9 +3830,9 @@ msgid ""
 "Add-ons add features to Metra. Turning one off hides its pages, menu items "
 "and sections at once, and its data is kept for when it is turned on again."
 msgstr ""
-"Tillägg ger Metra fler funktioner. När du slår av ett tillägg försvinner dess"
-" sidor, menyval och avsnitt direkt, och dess data sparas till nästa gång det "
-"slås på."
+"Tillägg ger Metra fler funktioner. När du slår av ett tillägg försvinner "
+"dess sidor, menyval och avsnitt direkt, och dess data sparas till nästa gång "
+"det slås på."
 
 #: apps/plugins/templates/plugins/plugin_list.html:13
 msgid ""
@@ -3875,8 +3890,8 @@ msgid ""
 "Save the settings first. The test goes through this add-on even if another "
 "one is chosen for sending."
 msgstr ""
-"Spara inställningarna först. Testet skickas via det här tillägget även om ett"
-" annat är valt för utskick."
+"Spara inställningarna först. Testet skickas via det här tillägget även om "
+"ett annat är valt för utskick."
 
 #: apps/plugins/templates/plugins/plugin_settings.html:44
 #: apps/setup/templates/setup/messaging.html:29
@@ -4971,9 +4986,9 @@ msgid ""
 "which column goes where in the next step, and see every row checked before "
 "anything is saved."
 msgstr ""
-"Varje rad blir en enhet, eventuellt med en kontaktperson. I nästa steg väljer"
-" du vilken kolumn som ska vart, och du ser att varje rad kontrolleras innan "
-"något sparas."
+"Varje rad blir en enhet, eventuellt med en kontaktperson. I nästa steg "
+"väljer du vilken kolumn som ska vart, och du ser att varje rad kontrolleras "
+"innan något sparas."
 
 #: apps/register/templates/register/import_upload.html:10
 msgid "Example for the water association setup:"
@@ -5207,7 +5222,7 @@ msgstr "Skriv ut brev med länk"
 
 #: apps/selfservice/templates/selfservice/base.html:9
 #: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:270
-#: templates/base.html:7 templates/base.html:18
+#: templates/base.html:7 templates/base.html:24
 msgid "Metra"
 msgstr "Metra"
 
@@ -5289,8 +5304,8 @@ msgid ""
 "We sometimes send a newsletter by email about what is going on. Messages "
 "about the service itself, such as disruptions, reach you either way."
 msgstr ""
-"Vi skickar ibland ett nyhetsbrev via e-post om vad som händer. Meddelanden om"
-" tjänsten själv, till exempel störningar, når dig ändå."
+"Vi skickar ibland ett nyhetsbrev via e-post om vad som händer. Meddelanden "
+"om tjänsten själv, till exempel störningar, når dig ändå."
 
 #: apps/selfservice/templates/selfservice/member.html:68
 msgid "Do you want the newsletter?"
@@ -5415,8 +5430,8 @@ msgid ""
 "Readings and contact details members changed through their personal links, "
 "newest first."
 msgstr ""
-"Avläsningar och kontaktuppgifter som medlemmar har ändrat via sina personliga"
-" länkar, senast först."
+"Avläsningar och kontaktuppgifter som medlemmar har ändrat via sina "
+"personliga länkar, senast först."
 
 #: apps/selfservice/templates/selfservice/recent_changes.html:40
 msgid "No changes through self-service links yet."
@@ -5675,8 +5690,9 @@ msgstr ""
 
 #: apps/setup/templates/setup/board.html:4
 msgid ""
-"Invite the people who work in Metra. Each gets an email with a link to choose"
-" a password. Members do not need accounts: they use their personal links."
+"Invite the people who work in Metra. Each gets an email with a link to "
+"choose a password. Members do not need accounts: they use their personal "
+"links."
 msgstr ""
 "Bjud in dem som arbetar i Metra. Var och en får ett e-postmeddelande med en "
 "länk för att välja lösenord. Medlemmar behöver inga konton, de använder sina "
@@ -5696,11 +5712,11 @@ msgstr "Skicka inbjudan"
 
 #: apps/setup/templates/setup/board.html:19
 msgid ""
-"Email is not set up, so invitations cannot be sent. Add people under Settings"
-" instead."
+"Email is not set up, so invitations cannot be sent. Add people under "
+"Settings instead."
 msgstr ""
-"E-post är inte inställd, så inbjudningar kan inte skickas. Lägg till personer"
-" under Inställningar i stället."
+"E-post är inte inställd, så inbjudningar kan inte skickas. Lägg till "
+"personer under Inställningar i stället."
 
 #: apps/setup/templates/setup/board.html:21
 #: apps/setup/templates/setup/messaging.html:33
@@ -5768,8 +5784,8 @@ msgid ""
 "Settings > Email."
 msgstr ""
 "All e-post från Metra skickas på det här sättet: meddelanden, nyhetsbrev, "
-"fakturor och påminnelser samt inloggningskoder och inbjudningar. Du kan ändra"
-" det senare under Inställningar > E-post."
+"fakturor och påminnelser samt inloggningskoder och inbjudningar. Du kan "
+"ändra det senare under Inställningar > E-post."
 
 #: apps/setup/templates/setup/messaging.html:10
 msgid "Save email settings"
@@ -5795,18 +5811,18 @@ msgstr ""
 
 #: apps/setup/templates/setup/organisation.html:4
 msgid ""
-"Who runs this installation. The contact details appear on the public page, on"
-" members' pages and in letters, so use the organisation's own details, not a "
-"person's."
+"Who runs this installation. The contact details appear on the public page, "
+"on members' pages and in letters, so use the organisation's own details, not "
+"a person's."
 msgstr ""
 "Vem som driver den här installationen. Kontaktuppgifterna visas på den "
-"offentliga sidan, på medlemmarnas sidor och i brev, så använd organisationens"
-" egna uppgifter, inte en persons."
+"offentliga sidan, på medlemmarnas sidor och i brev, så använd "
+"organisationens egna uppgifter, inte en persons."
 
 #: apps/setup/templates/setup/types.html:4
 msgid ""
-"A unit is what you keep a record of: a household, a property, a boat berth or"
-" a member. Each unit type has its own fields; people can have fields too."
+"A unit is what you keep a record of: a household, a property, a boat berth "
+"or a member. Each unit type has its own fields; people can have fields too."
 msgstr ""
 "En enhet är det ni för register över: ett hushåll, en fastighet, en båtplats "
 "eller en medlem. Varje enhetstyp har sina egna fält, och personer kan också "
@@ -5901,7 +5917,8 @@ msgstr "Ditt konto för %(organisation)s"
 msgid ""
 "Hello %(name)s,\n"
 "\n"
-"%(inviter)s has made you an account for %(organisation)s in Metra. Your username is %(username)s.\n"
+"%(inviter)s has made you an account for %(organisation)s in Metra. Your "
+"username is %(username)s.\n"
 "\n"
 "Choose your password here:\n"
 "%(link)s\n"
@@ -5910,7 +5927,8 @@ msgid ""
 msgstr ""
 "Hej %(name)s,\n"
 "\n"
-"%(inviter)s har skapat ett konto åt dig för %(organisation)s i Metra. Ditt användarnamn är %(username)s.\n"
+"%(inviter)s har skapat ett konto åt dig för %(organisation)s i Metra. Ditt "
+"användarnamn är %(username)s.\n"
 "\n"
 "Välj ditt lösenord här:\n"
 "%(link)s\n"
@@ -5931,15 +5949,15 @@ msgstr "Inbjudan skickad till %(email)s."
 msgid "Setup is done. You can run it again from Settings."
 msgstr "Inställningen är klar. Du kan köra den igen från Inställningar."
 
-#: config/settings.py:185
+#: config/settings.py:195
 msgid "Swedish"
 msgstr "Svenska"
 
-#: config/settings.py:186
+#: config/settings.py:196
 msgid "English"
 msgstr "Engelska"
 
-#: config/settings.py:187
+#: config/settings.py:197
 msgid "Finnish (machine translated)"
 msgstr "Finska (maskinöversatt)"
 
@@ -5952,8 +5970,8 @@ msgid ""
 "Your role does not allow you to open this page. Ask an admin if you need "
 "access."
 msgstr ""
-"Din roll tillåter inte att du öppnar den här sidan. Fråga en administratör om"
-" du behöver åtkomst."
+"Din roll tillåter inte att du öppnar den här sidan. Fråga en administratör "
+"om du behöver åtkomst."
 
 #: templates/403.html:7
 msgid "Go to the start page"
@@ -5971,43 +5989,49 @@ msgstr ""
 "Den här översättningen är gjord automatiskt och har inte granskats. En del "
 "formuleringar kan vara fel."
 
-#: templates/base.html:20
+#: templates/_main_menu.html:1
 msgid "Main"
 msgstr "Huvudnavigering"
 
-#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
-msgid "Finance"
-msgstr "Ekonomi"
-
-#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
-msgid "Communication"
-msgstr "Kommunikation"
-
-#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
-msgid "Menu"
-msgstr "Meny"
-
-#: apps/core/templatetags/nav.py templates/_main_menu.html templates/base.html
+#: templates/_main_menu.html:2
 msgid "Close menu"
 msgstr "Stäng menyn"
 
-#: templates/base.html:45
+#: templates/account/login.html:9
+#, python-format
+msgid ""
+"Try Metra: log in with the username <strong>%(username)s</strong> and the "
+"password <strong>%(password)s</strong>."
+msgstr "Prova Metra: logga in med användarnamnet <strong>%(username)s</strong> och lösenordet <strong>%(password)s</strong>."
+
+#: templates/base.html:21
+msgid "Menu"
+msgstr "Meny"
+
+#: templates/base.html:41
 msgid "Theme"
 msgstr "Tema"
 
-#: templates/base.html:48
+#: templates/base.html:44
 msgid "Light"
 msgstr "Ljust"
 
-#: templates/base.html:49
+#: templates/base.html:45
 msgid "Dark"
 msgstr "Mörkt"
 
-#: templates/base.html:54
+#: templates/base.html:50
 msgid "Log out"
 msgstr "Logga ut"
 
-#: templates/base.html:69
+#: templates/base.html:66
+#, python-format
+msgid ""
+"This is a demo site with made-up data. Everything you change is reset every "
+"night at %(time)s. Do not enter real personal data."
+msgstr "Det här är en demosida med påhittade uppgifter. Allt du ändrar återställs varje natt kl. %(time)s. Skriv inte in riktiga personuppgifter."
+
+#: templates/base.html:72
 msgid ""
 "Two-factor login is not required on this installation (METRA_REQUIRE_MFA is "
 "off). Turn it on before real data goes in."
@@ -6015,7 +6039,7 @@ msgstr ""
 "Tvåfaktorsinloggning krävs inte i den här installationen (METRA_REQUIRE_MFA "
 "är avstängd). Slå på den innan riktiga uppgifter läggs in."
 
-#: templates/base.html:74
+#: templates/base.html:77
 msgid ""
 "Protect your account with two-factor login. It takes a minute with an "
 "authenticator app on your phone."
@@ -6027,8 +6051,9 @@ msgstr ""
 #~ msgstr "Sms-inställningar beskrivs i INSTALL.md, under Email and SMS."
 
 #~ msgid ""
-#~ "Email and SMS are set by whoever installed Metra, in the server's settings "
-#~ "file (.env). Here you can see what is set up and send yourself a test."
+#~ "Email and SMS are set by whoever installed Metra, in the server's "
+#~ "settings file (.env). Here you can see what is set up and send yourself a "
+#~ "test."
 #~ msgstr ""
 #~ "E-post och sms ställs in av den som installerade Metra, i serverns "
 #~ "inställningsfil (.env). Här ser du vad som är inställt och kan skicka ett "
@@ -6068,7 +6093,8 @@ msgstr ""
 
 #~ msgid "The last successful backup is more than a day and a half old."
 #~ msgstr ""
-#~ "Den senaste lyckade säkerhetskopian är mer än ett och ett halvt dygn gammal."
+#~ "Den senaste lyckade säkerhetskopian är mer än ett och ett halvt dygn "
+#~ "gammal."
 
 #~ msgid "To restore a snapshot, see INSTALL.md, Backup and restore."
 #~ msgstr ""

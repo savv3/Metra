@@ -125,6 +125,19 @@ contacts at example.org, readings, invoices and notices) and marks the setup
 wizard as finished. It refuses to run if any unit already exists and never
 sends email or SMS.
 
+### A public demo site that resets every night
+
+Set `METRA_DEMO=true` in the `.env` of a separate install that holds no real
+data, and leave `METRA_PLUGINS` empty for a basic site. On its first start it
+loads the demo data and a shared login, **demo** with the password **demo**,
+which the login page shows. Every page then says it is a demo, no email or
+SMS leaves it, two-factor login is off, and nobody can change passwords,
+two-factor login, users or roles. Every night at 03:00 (local time,
+`METRA_DEMO_RESET_TIME`) the worker deletes everything (database, uploads and
+snapshots) and loads the demo data again. To reset it by hand, run
+`docker compose exec web python manage.py reset_demo`; it refuses to run
+unless `METRA_DEMO` is on.
+
 ## Email and SMS
 
 **Email** is set up by an admin under **Settings > Email** (also a step of

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-26 10:58+0200\n"
+"POT-Creation-Date: 2026-11-20 20:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: plugins/bookkeeping/src/metra_bookkeeping/apps.py:9
 #: plugins/bookkeeping/src/metra_bookkeeping/apps.py:31
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:46
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:50
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:2
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:6
@@ -32,19 +32,19 @@ msgid ""
 "Double-entry books with vouchers, journal and ledger, under Finnish rules."
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:36
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:40
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:13
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:5
 msgid "Bookkeeping of invoices"
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:39
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:43
 msgid ""
 "The accounts and voucher series invoices and payments are booked to, and VAT."
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:66
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:70
 msgid ""
 "The books have posted vouchers, which must be kept readable for the legal "
 "period, so bookkeeping stays on."

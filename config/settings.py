@@ -30,6 +30,14 @@ def env_list(name, default=""):
 
 DEBUG = env_bool("METRA_DEBUG")
 
+# A public demo site: anyone logs in as demo/demo, every page says it is a
+# demo, no email or SMS leaves it, and the worker puts the made-up demo data
+# back every night (manage.py reset_demo). Never turn it on for real data.
+DEMO = env_bool("METRA_DEMO")
+DEMO_RESET_TIME = os.environ.get("METRA_DEMO_RESET_TIME") or "03:00"
+DEMO_USERNAME = "demo"
+DEMO_PASSWORD = "demo"
+
 SECRET_KEY = os.environ.get("METRA_SECRET_KEY", "")
 if not SECRET_KEY:
     if not DEBUG:
@@ -101,6 +109,7 @@ MIDDLEWARE = [
     "apps.accounts.middleware.RequireStaffTwoFactorMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "apps.core.middleware.NoIndexMiddleware",
+    "apps.core.middleware.DemoMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -141,7 +150,8 @@ MFA_ADAPTER = "apps.accounts.adapter.MFAAdapter"
 MFA_FORMS = {"activate_totp": "apps.accounts.forms.ActivateTOTPForm"}
 # Staff (who can open Settings) must use two-factor login. On by default in
 # production and off in development (METRA_DEBUG=true); an explicit value wins.
-REQUIRE_MFA = env_bool("METRA_REQUIRE_MFA", not DEBUG)
+# A demo site never requires it: everyone shares the demo account.
+REQUIRE_MFA = env_bool("METRA_REQUIRE_MFA", not DEBUG) and not DEMO
 MFA_SUPPORTED_TYPES = ["totp", "recovery_codes"]
 MFA_TOTP_ISSUER = "Metra"
 

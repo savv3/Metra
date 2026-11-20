@@ -110,6 +110,8 @@ def current():
         config.locked.add("security")
 
     from_environment = settings.MESSAGING.get("email_provider")
+    if settings.DEMO:
+        from_environment = ""  # a demo site sends no email, whatever is set
     if from_environment is not None:
         # METRA_EMAIL_BACKEND or METRA_EMAIL_HOST decide, as they always have.
         config.locked.add("provider")
