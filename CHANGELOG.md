@@ -12,6 +12,8 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-20
+
 ### Added
 
 - Demo sites: with `METRA_DEMO=true` an install becomes a public demo with a
