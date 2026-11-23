@@ -3,8 +3,12 @@
 Annual meetings, extraordinary meetings and board meetings in Metra:
 
 - the meeting's date, time, place and agenda;
-- the notice of meeting, opened as a new message with the agenda attached
-  as a PDF, so staff choose the recipients and check it before sending;
+- invitations (the notice of meeting), opened as a new email with the
+  agenda PDF and a calendar file attached, so staff choose the recipients
+  and check it before sending;
+- a reminder to everyone invited a set number of days before the meeting
+  (or sent by hand), and an updated invitation with a new calendar file when
+  the date, time or place changes;
 - attendance from the register, with one vote per unit or one per person
   present, proxies and the total of votes;
 - minutes and a decision for each agenda item, with the chair, the
@@ -21,7 +25,7 @@ Annual meetings, extraordinary meetings and board meetings in Metra:
 Official, but off until `METRA_PLUGINS=meetings`. The Admin role can do
 everything, Board runs meetings (but cannot delete them), Treasurer and
 Read-only can look. Each meeting's minute checkers approve its minutes,
-whatever their role. Sending the notice to everyone needs the
+whatever their role. Sending invitations and reminders needs the
 `messaging.send_broadcast` permission (Admin by default).
 
 Personal data: the attendance (who was present, for which unit, with how

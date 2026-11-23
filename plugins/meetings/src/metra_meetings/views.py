@@ -12,7 +12,7 @@ from django.views.decorators.http import require_POST
 
 from apps.plugins import api
 
-from . import documents
+from . import documents, invitations
 from .forms import (
     AgendaItemForm,
     AgendaTemplateForm,
@@ -115,6 +115,12 @@ def meeting_detail(request, pk):
         "missing": meeting.missing_approvals(),
         "can_send_notice": request.user.has_perm(f"{PREFIX}.change_meeting")
         and request.user.has_perm("messaging.send_broadcast"),
+        "can_view_messages": request.user.has_perm("messaging.view_messagebatch"),
+        "send_outs": meeting.send_outs(),
+        "invitee_count": len(meeting.invitees()),
+        "reminder_date": meeting.reminder_date(),
+        "needs_update": meeting.needs_update(),
+        "is_future": meeting.starts_at > timezone.now(),
     }
     return render(request, "metra_meetings/meeting_detail.html", context)
 
@@ -123,13 +129,24 @@ def meeting_detail(request, pk):
 @permission_required(f"{PREFIX}.change_meeting", raise_exception=True)
 @open_meeting
 def meeting_edit(request, meeting):
+    old_starts_at = meeting.starts_at
     form = MeetingForm(request.POST or None, instance=meeting)
     if request.method == "POST" and form.is_valid():
+        moved = {"starts_at", "place"} & set(form.changed_data)
         with transaction.atomic():
             form.save()
             if form.has_changed():
                 _changed(request, meeting)
+            moved = moved and invitations.details_changed(meeting, old_starts_at)
         messages.success(request, _("The meeting was saved."))
+        if moved:
+            messages.warning(
+                request,
+                _(
+                    "The invitations have already gone out. Send an updated invitation "
+                    "so that everyone knows about the change."
+                ),
+            )
         return redirect(meeting)
     return render(request, "metra_meetings/meeting_form.html", {"form": form, "meeting": meeting})
 
@@ -345,33 +362,71 @@ def minutes_pdf(request, pk):
 @permission_required(f"{PREFIX}.change_meeting", raise_exception=True)
 @permission_required("messaging.send_broadcast", raise_exception=True)
 def send_notice(request, pk):
-    """Open the New message form with the notice written and the agenda attached."""
+    """Open the New message form with the invitation written and the agenda
+    and calendar file attached."""
     meeting = get_object_or_404(Meeting, pk=pk)
     try:
-        pdf = documents.agenda_pdf(meeting)
-    except api.PDFUnavailable:
+        url = invitations.invitation_url(request, meeting)
+    except invitations.PDFMissing:
         messages.error(request, _("PDFs cannot be made on this server (WeasyPrint is missing)."))
         return redirect(meeting)
-    subject, short, email = documents.notice_texts(meeting)
-    try:
-        url = api.message_draft(
-            request,
-            subject,
-            short,
-            files=[(documents.agenda_filename(meeting), pdf, "application/pdf")],
-            email_body=email,
-        )
     except ValidationError as error:
         messages.error(request, " ".join(error.messages))
         return redirect(meeting)
     messages.info(
         request,
         _(
-            "The notice is ready with the agenda attached. Choose who gets it, check and send. "
-            "Then mark the meeting as called."
+            "The invitation is ready with the agenda and a calendar file attached. "
+            "Choose who gets it, check and send. The meeting is then marked as called."
         ),
     )
     return redirect(url)
+
+
+def _send_to_invitees(request, meeting, send, sent_message):
+    if not meeting.invitations().exists():
+        messages.error(request, _("No invitations have been sent for this meeting yet."))
+        return redirect(meeting)
+    try:
+        batch = send(meeting, request.user)
+    except ValidationError as error:
+        messages.error(request, " ".join(error.messages))
+        return redirect(meeting)
+    if batch is None:
+        messages.error(request, _("Nobody who was invited can be reached any more."))
+        return redirect(meeting)
+    messages.success(request, sent_message)
+    return redirect(meeting)
+
+
+@require_POST
+@login_required
+@permission_required(f"{PREFIX}.change_meeting", raise_exception=True)
+@permission_required("messaging.send_broadcast", raise_exception=True)
+@open_meeting
+def send_reminder(request, meeting):
+    """Remind everyone invited now, without waiting for the automatic reminder."""
+    return _send_to_invitees(
+        request,
+        meeting,
+        invitations.send_reminder,
+        _("The reminder is being sent to everyone invited."),
+    )
+
+
+@require_POST
+@login_required
+@permission_required(f"{PREFIX}.change_meeting", raise_exception=True)
+@permission_required("messaging.send_broadcast", raise_exception=True)
+@open_meeting
+def send_update(request, meeting):
+    """Tell everyone invited the new date, time or place."""
+    return _send_to_invitees(
+        request,
+        meeting,
+        invitations.send_update,
+        _("The updated invitation is being sent to everyone invited."),
+    )
 
 
 # Approval by the minute checkers.

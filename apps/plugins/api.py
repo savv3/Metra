@@ -118,6 +118,10 @@ RECORDS = {
     "BillingSettings": "apps.invoicing.models",
     "FeePlan": "apps.invoicing.models",
     "FeeLine": "apps.invoicing.models",
+    # Send-outs (apps/messaging/models.py): read them, for example a
+    # plugin's own by ``source`` (see send_message); ``recipients`` holds the
+    # [person id, unit id] pairs it went to. Messages are sent by Metra.
+    "MessageBatch": "apps.messaging.models",
 }
 
 
@@ -169,6 +173,8 @@ __all__ = [
     "member_response",
     "member_unavailable",
     "message_draft",
+    "plugin_enabled",
+    "send_message",
     "normalise_phone",
     "notify",
     "on_webhook_event",
@@ -408,18 +414,96 @@ def render_pdf(html):
 # Messages.
 
 
-def message_draft(request, subject, body, files=(), email_body=""):
+def message_draft(request, subject, body, files=(), email_body="", channels="", source=""):
     """The address of the New message form, filled in for the current user
     with ``subject``, ``body`` (the SMS text, and the email's unless
     ``email_body`` is given) and ``files``, a list of (filename, bytes,
-    mimetype) attached and ticked. Staff then choose the recipients, check
-    and send as usual. Redirect to it. Opening the form needs the
-    ``messaging.send_broadcast`` permission, so show the button only to users
-    with it. Raises django.core.exceptions.ValidationError for a file that
-    cannot be attached (type or size)."""
+    mimetype) attached and ticked. ``channels`` (a MessageBatch.Channels
+    value, such as "email") is chosen to start with. Staff then choose the
+    recipients, check and send as usual. Redirect to it. Opening the form
+    needs the ``messaging.send_broadcast`` permission, so show the button only
+    to users with it. Raises django.core.exceptions.ValidationError for a file
+    that cannot be attached (type or size).
+
+    ``source`` (at most 100 characters, starting with the plugin's app name)
+    is stored on the send-out if staff send it, so the plugin can find it
+    again among ``MessageBatch.objects.filter(source=...)``, for example to
+    remind the same people later, and ``events.message_sent`` is sent."""
     from apps.messaging.drafts import create
 
-    return create(request, subject, body, files=files, email_body=email_body)
+    return create(
+        request,
+        subject,
+        body,
+        files=files,
+        email_body=email_body,
+        channels=channels,
+        source=source,
+    )
+
+
+def send_message(
+    recipients,
+    subject,
+    email_body,
+    body="",
+    channels="email",
+    files=(),
+    source="",
+    audience="",
+    created_by=None,
+):
+    """Send a message to ``recipients``, (person, unit) pairs (the unit may be
+    None), as staff would from the New message form, for example to people
+    who got an earlier send-out. ``channels`` is a MessageBatch.Channels
+    value; ``body`` is the SMS text, needed for channels other than "email".
+    ``files`` are (filename, bytes, mimetype) attached to emails. The texts
+    may hold the form's placeholders, such as {first_name}. ``source`` and
+    ``audience`` (who it went to, in words) are stored on the send-out.
+
+    Sending happens in the background once the current transaction commits;
+    the send-out (a MessageBatch, shown under Messages) is returned and
+    ``events.message_sent`` is sent. Raises
+    django.core.exceptions.ValidationError for a file that cannot be attached
+    or a channel that does not exist."""
+    from django.core.exceptions import ValidationError
+    from django.core.files.base import ContentFile
+    from django.db import transaction
+
+    from apps.messaging import attachments
+    from apps.messaging.models import MessageBatch
+    from apps.messaging.tasks import send_batch_task
+
+    if channels not in MessageBatch.Channels.values:
+        raise ValidationError(f"Unknown channels: {channels!r}")
+    uploads = [ContentFile(content, name=name) for name, content, _mimetype in files]
+    attachments.validate(uploads)
+    with transaction.atomic():
+        batch = MessageBatch.objects.create(
+            kind=MessageBatch.Kind.BROADCAST,
+            channels=channels,
+            subject=subject[:200],
+            body=body,
+            email_body=email_body,
+            audience=audience[:300],
+            recipients=[[person.pk, unit.pk if unit else None] for person, unit in recipients],
+            created_by=created_by,
+            source=source[:100],
+        )
+        for attachment in attachments.save(uploads, created_by):
+            attachment.batch = batch
+            attachment.save(update_fields=["batch"])
+        transaction.on_commit(lambda: send_batch_task(batch.pk))
+        events.send_on_commit(events.message_sent, MessageBatch, batch=batch)
+    return batch
+
+
+def plugin_enabled(name):
+    """Whether the plugin ``name`` (as in METRA_PLUGINS) is installed and on,
+    for work that runs outside a request, such as a periodic task."""
+    from . import state
+
+    return state.is_enabled(name)
 
 
 # The member page behind personal links.

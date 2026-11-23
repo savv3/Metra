@@ -10,7 +10,9 @@ from apps.selfservice.models import SelfServiceLink
 from metra_meetings.models import Meeting
 
 
-def test_send_the_notice_with_the_agenda(admin, meeting, make_household, fake_pdf):
+def test_send_the_notice_with_the_agenda(
+    admin, meeting, make_household, fake_pdf, django_capture_on_commit_callbacks
+):
     make_household("Byvägen 4", first_name="Anna", email="anna@example.com")
     make_household("Strandvägen 1", first_name="Bo", email="bo@example.com")
     url = reverse("metra_meetings:send_notice", args=[meeting.pk])
@@ -24,7 +26,9 @@ def test_send_the_notice_with_the_agenda(admin, meeting, make_household, fake_pd
     assert "Village hall" in form
     assert "§ 2. Accounts for 2025" in form
     ticked = re.findall(r'name="attachments" value="(\d+)"[^>]*checked', form)
-    assert len(ticked) == 1 and "agenda-2026-04-20-annual-meeting-2026.pdf" in form
+    assert len(ticked) == 2 and "agenda-2026-04-20-annual-meeting-2026.pdf" in form
+    assert "annual-meeting-2026-2026-04-20.ics" in form
+    assert re.search(r'name="channels" value="email"[^>]*checked', form)
 
     # Staff choose the recipients and send as with any message.
     data = {
@@ -38,16 +42,21 @@ def test_send_the_notice_with_the_agenda(admin, meeting, make_household, fake_pd
     compose = response["Location"]
     preview = admin.post(compose, {**data, "step": "preview"}).content.decode()
     assert "Send now to 2 people" in preview
-    admin.post(compose, {**data, "step": "confirm"})
+    with django_capture_on_commit_callbacks(execute=True):
+        admin.post(compose, {**data, "step": "confirm"})
 
     batch = MessageBatch.objects.get()
+    assert batch.source == f"metra_meetings:meeting:{meeting.pk}:invitation"
     assert [a.name for a in batch.attachments.all()] == [
-        "agenda-2026-04-20-annual-meeting-2026.pdf"
+        "agenda-2026-04-20-annual-meeting-2026.pdf",
+        "annual-meeting-2026-2026-04-20.ics",
     ]
     assert sorted(m.to[0] for m in mail.outbox) == ["anna@example.com", "bo@example.com"]
-    assert mail.outbox[0].attachments == [
-        ("agenda-2026-04-20-annual-meeting-2026.pdf", fake_pdf, "application/pdf")
-    ]
+    pdf, ics = mail.outbox[0].attachments
+    assert pdf == ("agenda-2026-04-20-annual-meeting-2026.pdf", fake_pdf, "application/pdf")
+    assert ics[0] == "annual-meeting-2026-2026-04-20.ics" and ics[2] == "text/calendar"
+    meeting.refresh_from_db()
+    assert meeting.status == Meeting.Status.CALLED
     assert "Dear Anna" in next(m for m in mail.outbox if m.to == ["anna@example.com"]).body
 
 

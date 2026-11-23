@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 20:57+0000\n"
+"POT-Creation-Date: 2026-11-23 18:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,14 +18,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: plugins/meetings/src/metra_meetings/apps.py:9
-#: plugins/meetings/src/metra_meetings/apps.py:28
+#: plugins/meetings/src/metra_meetings/apps.py:32
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_list.html:3
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_list.html:6
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/template_list.html:9
 msgid "Meetings"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/apps.py:37
+#: plugins/meetings/src/metra_meetings/apps.py:41
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_list.html:12
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/template_list.html:3
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/template_list.html:6
@@ -33,17 +33,17 @@ msgstr ""
 msgid "Agenda templates"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/apps.py:40
+#: plugins/meetings/src/metra_meetings/apps.py:44
 msgid ""
 "The usual agenda of each kind of meeting, which new meetings start from."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/apps.py:46
+#: plugins/meetings/src/metra_meetings/apps.py:50
 msgid "Meeting minutes"
 msgstr ""
 
 #: plugins/meetings/src/metra_meetings/defaults.py:12
-#: plugins/meetings/src/metra_meetings/models.py:34
+#: plugins/meetings/src/metra_meetings/models.py:40
 msgid "Annual meeting"
 msgstr ""
 
@@ -98,7 +98,7 @@ msgid "Closing of the meeting"
 msgstr ""
 
 #: plugins/meetings/src/metra_meetings/defaults.py:31
-#: plugins/meetings/src/metra_meetings/models.py:36
+#: plugins/meetings/src/metra_meetings/models.py:42
 msgid "Board meeting"
 msgstr ""
 
@@ -110,62 +110,105 @@ msgstr ""
 msgid "Next meeting"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/documents.py:55
+#: plugins/meetings/src/metra_meetings/documents.py:56
 msgid "agenda"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/documents.py:59
-#: plugins/meetings/src/metra_meetings/models.py:200
+#: plugins/meetings/src/metra_meetings/documents.py:60
+#: plugins/meetings/src/metra_meetings/models.py:273
 msgid "minutes"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/documents.py:78
+#: plugins/meetings/src/metra_meetings/documents.py:81
+#, python-format
+msgid "Date: %(date)s"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/documents.py:82
+#, python-format
+msgid "Time: %(time)s"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/documents.py:83
+#, python-format
+msgid "Place: %(place)s"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/documents.py:89
+#: plugins/meetings/src/metra_meetings/ical.py:63
+msgid "Agenda:"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/documents.py:97
+msgid "The agenda is attached as a PDF."
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/documents.py:98
+msgid "Open the attached calendar file to add the meeting to your calendar."
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/documents.py:107
 #, python-format
 msgid "Notice: %(title)s on %(date)s"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/documents.py:81
+#: plugins/meetings/src/metra_meetings/documents.py:110
 #, python-format
 msgid ""
 "Welcome to %(title)s on %(date)s at %(time)s, %(place)s. The agenda is in "
 "the attached file."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/documents.py:87
+#: plugins/meetings/src/metra_meetings/documents.py:116
+#: plugins/meetings/src/metra_meetings/documents.py:135
+#: plugins/meetings/src/metra_meetings/documents.py:155
 #, python-brace-format
 msgid "Dear {first_name},"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/documents.py:89
+#: plugins/meetings/src/metra_meetings/documents.py:118
 #, python-format
 msgid "You are welcome to %(title)s (%(kind)s)."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/documents.py:91
-#, python-format
-msgid "Date: %(date)s"
-msgstr ""
-
-#: plugins/meetings/src/metra_meetings/documents.py:92
-#, python-format
-msgid "Time: %(time)s"
-msgstr ""
-
-#: plugins/meetings/src/metra_meetings/documents.py:93
-#, python-format
-msgid "Place: %(place)s"
-msgstr ""
-
-#: plugins/meetings/src/metra_meetings/documents.py:99
-msgid "Agenda:"
-msgstr ""
-
-#: plugins/meetings/src/metra_meetings/documents.py:101
-msgid "The agenda is attached as a PDF."
-msgstr ""
-
-#: plugins/meetings/src/metra_meetings/documents.py:101
+#: plugins/meetings/src/metra_meetings/documents.py:123
+#: plugins/meetings/src/metra_meetings/documents.py:142
+#: plugins/meetings/src/metra_meetings/documents.py:163
 msgid "Welcome!"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/documents.py:132
+#, python-format
+msgid "Reminder: %(title)s on %(date)s"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/documents.py:133
+#, python-format
+msgid "Reminder: %(title)s on %(date)s at %(time)s, %(place)s. Welcome!"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/documents.py:137
+#, python-format
+msgid "A reminder that %(title)s (%(kind)s) is coming up."
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/documents.py:152
+#, python-format
+msgid "Changed: %(title)s is now on %(date)s"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/documents.py:153
+#, python-format
+msgid "Changed: %(title)s is now on %(date)s at %(time)s, %(place)s. Welcome!"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/documents.py:157
+#, python-format
+msgid "The date, time or place of %(title)s (%(kind)s) has changed. It is now:"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/documents.py:161
+msgid "If the meeting is already in your calendar, the file updates it."
 msgstr ""
 
 #: plugins/meetings/src/metra_meetings/forms.py:26
@@ -197,291 +240,310 @@ msgstr ""
 msgid "They approve the minutes in Metra. Everyone ticked must approve."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/forms.py:64
+#: plugins/meetings/src/metra_meetings/forms.py:65
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/pdf/agenda.html:6
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/pdf/agenda.html:12
 msgid "Agenda"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/forms.py:66
+#: plugins/meetings/src/metra_meetings/forms.py:67
 msgid "The agenda template for this kind of meeting, if there is one"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/forms.py:67
+#: plugins/meetings/src/metra_meetings/forms.py:68
 msgid "An empty agenda"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/forms.py:72
+#: plugins/meetings/src/metra_meetings/forms.py:73
 msgid "You can change the items afterwards."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/forms.py:100
+#: plugins/meetings/src/metra_meetings/forms.py:101
 msgid "Another template is already used for this kind of meeting."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/forms.py:138
+#: plugins/meetings/src/metra_meetings/forms.py:139
 msgid "Person"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/forms.py:140
+#: plugins/meetings/src/metra_meetings/forms.py:141
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/attendance.html:22
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/pdf/minutes.html:26
 msgid "Unit"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/forms.py:143
+#: plugins/meetings/src/metra_meetings/forms.py:144
 msgid "Empty: the person's unit, if they have only one."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/forms.py:161
+#: plugins/meetings/src/metra_meetings/forms.py:162
 msgid ""
 "Empty: one vote for the first person present for a unit, none for the others."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/forms.py:163
+#: plugins/meetings/src/metra_meetings/forms.py:164
 msgid "Empty: one vote."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/forms.py:176
+#: plugins/meetings/src/metra_meetings/forms.py:177
 msgid "This person is already on the list."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/forms.py:187
+#: plugins/meetings/src/metra_meetings/forms.py:188
 msgid "Only units have votes at this meeting."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/forms.py:191
+#: plugins/meetings/src/metra_meetings/forms.py:192
 #, python-format
 msgid "%(name)s already carries the vote of %(unit)s."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/forms.py:196
+#: plugins/meetings/src/metra_meetings/forms.py:197
 msgid "A unit has one vote. Note the proxy for any votes beyond it."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:22
+#: plugins/meetings/src/metra_meetings/invitations.py:85
+#, python-format
+msgid "Everyone invited to %(title)s"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/models.py:28
 #: plugins/meetings/src/metra_meetings/views.py:35
 msgid "The minutes are approved and can no longer be changed."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:35
+#: plugins/meetings/src/metra_meetings/models.py:41
 msgid "Extraordinary meeting"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:39
+#: plugins/meetings/src/metra_meetings/models.py:45
 msgid "Being prepared"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:40
+#: plugins/meetings/src/metra_meetings/models.py:46
 msgid "Called"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:41
+#: plugins/meetings/src/metra_meetings/models.py:47
 msgid "Held"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:42
+#: plugins/meetings/src/metra_meetings/models.py:48
 msgid "Minutes approved"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:44
+#: plugins/meetings/src/metra_meetings/models.py:50
 msgid "kind"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:45
-#: plugins/meetings/src/metra_meetings/models.py:196
+#: plugins/meetings/src/metra_meetings/models.py:51
+#: plugins/meetings/src/metra_meetings/models.py:269
 msgid "title"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:46
+#: plugins/meetings/src/metra_meetings/models.py:52
 msgid "date and time"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:47
+#: plugins/meetings/src/metra_meetings/models.py:53
 msgid "place"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:49
+#: plugins/meetings/src/metra_meetings/models.py:55
 msgid "other information"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:51
+#: plugins/meetings/src/metra_meetings/models.py:57
 msgid ""
 "Shown in the notice and on the agenda, for example how to attend online."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:54
+#: plugins/meetings/src/metra_meetings/models.py:60
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/_minutes.html:8
 msgid "one vote per unit"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:57
+#: plugins/meetings/src/metra_meetings/models.py:63
 msgid ""
 "Each unit has one vote, carried by one of the people present for it. "
 "Otherwise everyone present has a vote."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:62
+#: plugins/meetings/src/metra_meetings/models.py:68
 msgid "show the approved minutes to members"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:64
+#: plugins/meetings/src/metra_meetings/models.py:70
 msgid "On the members' personal pages, once the minutes are approved."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:68
+#: plugins/meetings/src/metra_meetings/models.py:74
 msgid "chair"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:76
+#: plugins/meetings/src/metra_meetings/models.py:82
 msgid "secretary"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:84
+#: plugins/meetings/src/metra_meetings/models.py:90
 msgid "minute checkers"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:87
+#: plugins/meetings/src/metra_meetings/models.py:93
 msgid "They approve the minutes in Metra. Everyone listed must approve."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:90
-msgid "status"
-msgstr ""
-
-#: plugins/meetings/src/metra_meetings/models.py:92
-msgid "minutes approved"
-msgstr ""
-
-#: plugins/meetings/src/metra_meetings/models.py:95
-msgid "created by"
+#: plugins/meetings/src/metra_meetings/models.py:96
+msgid "reminder, days before"
 msgstr ""
 
 #: plugins/meetings/src/metra_meetings/models.py:101
-msgid "created"
-msgstr ""
-
-#: plugins/meetings/src/metra_meetings/models.py:105
-#: plugins/meetings/src/metra_meetings/models.py:191
-#: plugins/meetings/src/metra_meetings/models.py:229
-#: plugins/meetings/src/metra_meetings/models.py:291
-msgid "meeting"
+msgid ""
+"Everyone who got the invitation gets a reminder this many days before the "
+"meeting. Empty: no reminder."
 msgstr ""
 
 #: plugins/meetings/src/metra_meetings/models.py:106
+msgid "status"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/models.py:110
+msgid "reminder sent"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/models.py:115
+msgid "minutes approved"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/models.py:118
+msgid "created by"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/models.py:124
+msgid "created"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/models.py:128
+#: plugins/meetings/src/metra_meetings/models.py:264
+#: plugins/meetings/src/metra_meetings/models.py:302
+#: plugins/meetings/src/metra_meetings/models.py:364
+msgid "meeting"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/models.py:129
 msgid "meetings"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:166
+#: plugins/meetings/src/metra_meetings/models.py:239
 msgid "You cannot approve these minutes."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:194
+#: plugins/meetings/src/metra_meetings/models.py:267
 msgid "order"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:194
+#: plugins/meetings/src/metra_meetings/models.py:267
 msgid "Items are listed from the lowest number."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:198
+#: plugins/meetings/src/metra_meetings/models.py:271
 msgid "description"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:198
+#: plugins/meetings/src/metra_meetings/models.py:271
 msgid "Shown on the agenda sent with the notice."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:200
+#: plugins/meetings/src/metra_meetings/models.py:273
 msgid "What was discussed."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:201
+#: plugins/meetings/src/metra_meetings/models.py:274
 msgid "decision"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:205
+#: plugins/meetings/src/metra_meetings/models.py:278
 msgid "agenda item"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:206
-#: plugins/meetings/src/metra_meetings/models.py:334
+#: plugins/meetings/src/metra_meetings/models.py:279
+#: plugins/meetings/src/metra_meetings/models.py:407
 msgid "agenda items"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:233
+#: plugins/meetings/src/metra_meetings/models.py:306
 msgid "person"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:240
+#: plugins/meetings/src/metra_meetings/models.py:313
 msgid "unit"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:245
+#: plugins/meetings/src/metra_meetings/models.py:318
 msgid "The unit the person represents, if any."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:247
-#: plugins/meetings/src/metra_meetings/models.py:322
+#: plugins/meetings/src/metra_meetings/models.py:320
+#: plugins/meetings/src/metra_meetings/models.py:395
 msgid "name"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:248
+#: plugins/meetings/src/metra_meetings/models.py:321
 msgid "unit name"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:249
+#: plugins/meetings/src/metra_meetings/models.py:322
 msgid "votes"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:251
+#: plugins/meetings/src/metra_meetings/models.py:324
 msgid "proxy"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:254
+#: plugins/meetings/src/metra_meetings/models.py:327
 msgid "If the person attends for someone else, for whom and how it was shown."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:259
-#: plugins/meetings/src/metra_meetings/models.py:260
+#: plugins/meetings/src/metra_meetings/models.py:332
+#: plugins/meetings/src/metra_meetings/models.py:333
 msgid "attendance"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:295
+#: plugins/meetings/src/metra_meetings/models.py:368
 msgid "minute checker"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:299
+#: plugins/meetings/src/metra_meetings/models.py:372
 msgid "approved"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:303
+#: plugins/meetings/src/metra_meetings/models.py:376
 msgid "approval"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:304
+#: plugins/meetings/src/metra_meetings/models.py:377
 msgid "approvals"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:324
+#: plugins/meetings/src/metra_meetings/models.py:397
 msgid "for"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:329
+#: plugins/meetings/src/metra_meetings/models.py:402
 msgid ""
 "New meetings of this kind start with this agenda. Empty: chosen by hand for "
 "any kind of meeting."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:335
+#: plugins/meetings/src/metra_meetings/models.py:408
 msgid "One item per line, in order. Each line becomes a paragraph (§)."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:340
+#: plugins/meetings/src/metra_meetings/models.py:413
 msgid "agenda template"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/models.py:341
+#: plugins/meetings/src/metra_meetings/models.py:414
 msgid "agenda templates"
 msgstr ""
 
@@ -741,7 +803,11 @@ msgid "Write the minutes"
 msgstr ""
 
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:43
-msgid "Send the notice"
+msgid "Send more invitations"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:43
+msgid "Send invitations"
 msgstr ""
 
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:49
@@ -758,36 +824,117 @@ msgstr ""
 
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:58
 msgid ""
-"The notice opens as a new message with the agenda attached, so you can "
-"choose who gets it and check it before sending."
+"The invitation opens as a new message by email, with the agenda and a "
+"calendar file attached, so you can choose who gets it and check it before "
+"sending."
 msgstr ""
 
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:64
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:81
+msgid "Invitations and reminders"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:67
+msgid "The date, time or place changed after the invitations went out."
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:71
+#, python-format
+msgid "Send an updated invitation to %(count)s person"
+msgid_plural "Send an updated invitation to %(count)s people"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:77
+#, python-format
+msgid "%(count)s person is invited."
+msgid_plural "%(count)s people are invited."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:78
+#, python-format
+msgid "The reminder was sent on %(date)s."
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:79
+#, python-format
+msgid "A reminder goes out on %(date)s."
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:80
+msgid "No automatic reminder is set."
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:83
+msgid "Sent"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:83
+msgid "What"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:83
+msgid "Recipients"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:88
+msgid "Invitation"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:88
+msgid "Reminder"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:88
+msgid "Updated invitation"
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:98
+#, python-format
+msgid "Send a reminder to %(count)s person now"
+msgid_plural "Send a reminder to %(count)s people now"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:102
+msgid "No invitations have been sent yet."
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:103
+#, python-format
+msgid "Everyone invited gets a reminder %(days)s day before the meeting."
+msgid_plural ""
+"Everyone invited gets a reminder %(days)s days before the meeting."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:110
 msgid "Approval of the minutes"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:66
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:112
 #, python-format
 msgid "Approved on %(date)s. The minutes can no longer be changed."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:67
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:113
 msgid "Members can read them on their personal page."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:69
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:115
 msgid "No minute checkers are chosen. Edit the meeting to add them."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:71
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:117
 msgid "Waiting for:"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:78
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:124
 msgid "Agenda and minutes"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:80
+#: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:126
 msgid "Add an item"
 msgstr ""
 
@@ -924,7 +1071,7 @@ msgid "The minutes changed, so the checkers' approvals so far were removed."
 msgstr ""
 
 #: plugins/meetings/src/metra_meetings/views.py:55
-#: plugins/meetings/src/metra_meetings/views.py:353
+#: plugins/meetings/src/metra_meetings/views.py:371
 msgid "PDFs cannot be made on this server (WeasyPrint is missing)."
 msgstr ""
 
@@ -938,67 +1085,89 @@ msgstr ""
 msgid "The meeting was added. Now add the agenda."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/views.py:132
+#: plugins/meetings/src/metra_meetings/views.py:141
 msgid "The meeting was saved."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/views.py:143
+#: plugins/meetings/src/metra_meetings/views.py:146
+msgid ""
+"The invitations have already gone out. Send an updated invitation so that "
+"everyone knows about the change."
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/views.py:160
 msgid "The meeting was deleted."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/views.py:164
+#: plugins/meetings/src/metra_meetings/views.py:181
 #, python-format
 msgid "The meeting is now: %(status)s."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/views.py:183
+#: plugins/meetings/src/metra_meetings/views.py:200
 msgid "The item was added to the agenda."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/views.py:203
+#: plugins/meetings/src/metra_meetings/views.py:220
 msgid "The item was saved."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/views.py:219
+#: plugins/meetings/src/metra_meetings/views.py:236
 msgid "The item was removed from the agenda."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/views.py:234
+#: plugins/meetings/src/metra_meetings/views.py:251
 msgid "The minutes were saved."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/views.py:287
+#: plugins/meetings/src/metra_meetings/views.py:304
 #, python-format
 msgid "%(name)s was added as present."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/views.py:304
+#: plugins/meetings/src/metra_meetings/views.py:321
 msgid "The attendance was saved."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/views.py:322
+#: plugins/meetings/src/metra_meetings/views.py:339
 #, python-format
 msgid "%(name)s was removed from the list."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/views.py:370
+#: plugins/meetings/src/metra_meetings/views.py:379
 msgid ""
-"The notice is ready with the agenda attached. Choose who gets it, check and "
-"send. Then mark the meeting as called."
+"The invitation is ready with the agenda and a calendar file attached. Choose "
+"who gets it, check and send. The meeting is then marked as called."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/views.py:392
-msgid "The minutes are approved by every checker and can no longer be changed."
+#: plugins/meetings/src/metra_meetings/views.py:388
+msgid "No invitations have been sent for this meeting yet."
 msgstr ""
 
 #: plugins/meetings/src/metra_meetings/views.py:396
-msgid "Thank you. The minutes are approved when every checker has approved."
+msgid "Nobody who was invited can be reached any more."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/views.py:432
-msgid "The agenda template was saved."
+#: plugins/meetings/src/metra_meetings/views.py:413
+msgid "The reminder is being sent to everyone invited."
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/views.py:428
+msgid "The updated invitation is being sent to everyone invited."
 msgstr ""
 
 #: plugins/meetings/src/metra_meetings/views.py:447
+msgid "The minutes are approved by every checker and can no longer be changed."
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/views.py:451
+msgid "Thank you. The minutes are approved when every checker has approved."
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/views.py:487
+msgid "The agenda template was saved."
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/views.py:502
 msgid "The agenda template was deleted."
 msgstr ""

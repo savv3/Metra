@@ -12,6 +12,22 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+### Added
+
+- Meetings: **Send invitations** opens the invitation as an email with the
+  agenda PDF and a calendar file (.ics) attached, and sending it marks the
+  meeting as called. Everyone invited gets an automatic reminder a set
+  number of days before the meeting (**Reminder, days before**, 3 unless
+  changed), or one sent by hand. When the date, time or place changes after
+  the invitations, the meeting page offers an updated invitation whose
+  calendar file moves the meeting in people's calendars.
+- Plugin API: `api.send_message()` sends a message to (person, unit) pairs
+  in the background, `api.message_draft()` takes `channels` and `source`,
+  send-outs have a `source` a plugin finds them by (`api.MessageBatch`),
+  `api.events.message_sent` is sent when a message to many people starts
+  going out, and `api.plugin_enabled()` tells a periodic task whether its
+  plugin is on. Calendar files (.ics) can be attached to messages.
+
 ## [0.6.0] - 2026-11-20
 
 ### Added

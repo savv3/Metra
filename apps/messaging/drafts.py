@@ -19,11 +19,13 @@ SESSION_PREFIX = "messaging:draft:"
 KEPT_SECONDS = 6 * 60 * 60
 
 
-def create(request, subject, body, files=(), email_body=""):
+def create(request, subject, body, files=(), email_body="", channels="", source=""):
     """Store a draft for ``request.user`` and return the New message form's URL.
 
     ``files`` are (filename, bytes, mimetype); they become the user's unsent
-    attachments, ticked in the form. Raises ValidationError for a file type or
+    attachments, ticked in the form. ``channels`` (a MessageBatch.Channels
+    value) is chosen in the form to start with, and ``source`` is stored on
+    the send-out once it is sent. Raises ValidationError for a file type or
     size that could not be sent.
     """
     uploads = [ContentFile(content, name=name) for name, content, _mimetype in files]
@@ -36,6 +38,8 @@ def create(request, subject, body, files=(), email_body=""):
         "body": body,
         "email_body": email_body,
         "attachments": [a.pk for a in saved],
+        "channels": channels,
+        "source": source,
         "created": time.time(),
     }
     return f"{reverse('messaging:compose')}?{urlencode({'draft': draft_id})}"

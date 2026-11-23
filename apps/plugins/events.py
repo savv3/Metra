@@ -51,6 +51,10 @@ payment_recorded = Signal()
 # reminder: a payment reminder was made for an overdue invoice, with its fee
 # (which may be zero).
 reminder_sent = Signal()
+# batch: staff confirmed a message to many people (a MessageBatch), or a
+# plugin sent one with api.send_message; sending has started. A plugin
+# finds its own by ``batch.source``.
+message_sent = Signal()
 
 ALL = {
     "unit_saved": unit_saved,
@@ -59,6 +63,7 @@ ALL = {
     "invoice_issued": invoice_issued,
     "payment_recorded": payment_recorded,
     "reminder_sent": reminder_sent,
+    "message_sent": message_sent,
 }
 
 

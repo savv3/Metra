@@ -33,6 +33,7 @@ TYPES = {
     ".webp": "image/webp",
     ".txt": "text/plain",
     ".csv": "text/csv",
+    ".ics": "text/calendar",
     ".rtf": "application/rtf",
     ".doc": "application/msword",
     ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",

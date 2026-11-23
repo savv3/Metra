@@ -46,15 +46,36 @@ lagts till. Admin och styrelsen ändrar mallarna; de andra kan se dem.
 
 ## Kalla till mötet
 
-Klicka på **Skicka kallelsen**. Ett nytt meddelande öppnas med kallelsen
-skriven och föredragningslistan bifogad som pdf. Välj vem som får den (till
-exempel alla, eller bara varje enhets huvudkontakt), kontrollera texten och
-skicka som vilket meddelande som helst. Mottagare med e-post får
-föredragningslistan som bilaga; mottagare med sms får en länk. Klicka sedan
-på **Markera som kallat**.
+Klicka på **Skicka kallelser**. Ett nytt meddelande öppnas med kallelsen
+skriven, föredragningslistan bifogad som pdf och en kalenderfil bifogad, så
+att mottagarna kan lägga in mötet i sin kalender med ett klick. Det är
+inställt på att gå med e-post; välj vem som får det (till exempel alla, bara
+varje enhets huvudkontakt eller de som är taggade som styrelse), kontrollera
+texten och skicka som vilket meddelande som helst. Om du också väljer sms får
+mottagare med sms en länk till filerna. När kallelsen är skickad markeras
+mötet som kallat. Du kan skicka fler kallelser senare, till exempel till
+någon som blev bortglömd.
 
 För att skicka meddelanden till alla behövs rätten att skicka meddelanden,
 som bara administratörer har om de inte ger den till styrelsen.
+
+## Påminnelser
+
+**Påminnelse, dagar före** på mötet anger när alla som fått kallelsen får en
+påminnelse, med föredragningslistan och kalenderfilen igen. Den är 3 dagar om
+du inte ändrar den; lämna fältet tomt för ingen påminnelse. Påminnelsen går
+ut en gång, på morgonen den dagen, på samma sätt som kallelsen. Den hoppas
+över om själva kallelsen gick ut samma dag eller senare. Vill du påminna
+tidigare klickar du på **Skicka en påminnelse nu** under **Kallelser och
+påminnelser** på mötets sida.
+
+Om du ändrar datum, tid eller plats efter att kallelserna gått ut, erbjuder
+mötets sida **Skicka en uppdaterad kallelse**. Alla som är kallade får då de
+nya uppgifterna och en kalenderfil som flyttar mötet i deras kalender. Ett
+möte som flyttats får sin påminnelse på nytt före det nya datumet.
+
+Varje kallelse, påminnelse och uppdatering listas på mötets sida och under
+**Meddelanden**, med vem som fick den.
 
 ## Under mötet
 
