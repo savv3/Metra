@@ -12,6 +12,8 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-11-23
+
 ### Added
 
 - Meetings: **Send invitations** opens the invitation as an email with the
