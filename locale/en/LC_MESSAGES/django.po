@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-23 17:36+0000\n"
+"POT-Creation-Date: 2026-11-23 18:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -880,7 +880,7 @@ msgid "Staff login"
 msgstr ""
 
 #: apps/core/templates/core/settings.html:3
-#: apps/core/templates/core/settings.html:6 apps/core/templatetags/nav.py:108
+#: apps/core/templates/core/settings.html:6 apps/core/templatetags/nav.py:103
 #: apps/messaging/templates/messaging/email_settings.html:7
 #: apps/plugins/templates/plugins/plugin_list.html:7
 #: apps/register/templates/register/unit_type_choose.html:16
@@ -909,10 +909,6 @@ msgstr ""
 #: apps/messaging/templates/messaging/batch_list.html:6
 #: apps/messaging/templates/messaging/batch_list.html:17
 msgid "Send-outs"
-msgstr ""
-
-#: apps/core/templatetags/nav.py:103
-msgid "Manage add-ons"
 msgstr ""
 
 #: apps/help/apps.py:7 apps/help/templates/help/index.html:3
