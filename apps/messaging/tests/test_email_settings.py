@@ -215,3 +215,54 @@ def test_the_environment_can_choose_mailgun(settings, monkeypatch, db):
     assert (config.provider, config.choice) == ("mailgun", "mailgun")
     assert "provider" in config.locked
     assert provider_for(EMAIL).name == "mailgun"
+
+
+def test_the_from_address_can_have_a_name(admin, db):
+    admin.post(URL, {**SMTP, "from_email": "Kasvikens vatten, rf <styrelsen@example.fi>"})
+
+    provider_for(EMAIL).send("anna@example.com", "Hej", subject="Test")
+
+    assert EmailSettings.objects.get().from_email == '"Kasvikens vatten, rf" <styrelsen@example.fi>'
+    sent = mail.outbox[-1]
+    assert sent.message()["From"] == '"Kasvikens vatten, rf" <styrelsen@example.fi>'
+    assert "@example.fi>" in sent.extra_headers["Message-ID"]
+
+
+def test_a_from_address_it_cannot_read_says_what_it_takes(admin, db):
+    response = admin.post(URL, {**SMTP, "from_email": "Metra noreply@example.fi"})
+
+    assert "or a name and an address such as" in response.content.decode()
+    assert not EmailSettings.objects.exists()
+
+
+def test_only_the_chosen_way_of_sending_is_shown(admin, postbox, db):
+    smtp_part = '<fieldset data-email-for="smtp" hidden>'
+
+    nothing = admin.get(URL).content.decode()
+    admin.post(URL, {"provider": "test-postbox", "from_email": "vatten@example.fi"})
+    add_on = admin.get(URL).content.decode()
+    admin.post(URL, SMTP)
+    smtp = admin.get(URL).content.decode()
+
+    assert smtp_part in nothing
+    assert '<div data-email-unless="none" hidden>' in nothing
+    assert smtp_part in add_on
+    assert '<div class="notice" data-email-for="test-postbox">' in add_on
+    assert '<fieldset data-email-for="smtp">' in smtp
+    assert '<div class="notice" data-email-for="test-postbox" hidden>' in smtp
+
+
+def test_an_add_on_needs_no_smtp_fields(admin, postbox, db):
+    admin.post(URL, {"provider": "test-postbox", "from_email": "vatten@example.fi"})
+
+    saved = EmailSettings.objects.get()
+    assert (saved.provider, saved.port, saved.security) == ("test-postbox", 587, "tls")
+
+
+def test_no_test_email_goes_out_without_a_from_address(admin, settings, db):
+    settings.DEBUG = True  # sends to the server log, with no settings saved
+
+    response = admin.post(URL, {"action": "test", "to": "me@example.com"}, follow=True)
+
+    assert "Enter the from address under Settings &gt; Email first." in response.content.decode()
+    assert mail.outbox == []

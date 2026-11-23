@@ -14,6 +14,7 @@ links, invitations) through ``ConfiguredBackend``, Django's EMAIL_BACKEND.
 import logging
 import os
 from dataclasses import dataclass, field
+from email.utils import parseaddr
 
 from django.conf import settings
 from django.core.mail import get_connection
@@ -44,6 +45,8 @@ ENVIRONMENT = {
     "reply_to": "METRA_EMAIL_REPLY_TO",
 }
 SECURITY_ENVIRONMENT = ("METRA_EMAIL_USE_TLS", "METRA_EMAIL_USE_SSL")
+# The from address until one is set, which no mail server accepts.
+DEFAULT_FROM = "register@localhost"
 
 
 def _env(name):
@@ -60,7 +63,7 @@ class EmailConfig:
     user: str = ""
     password: str = ""
     security: str = "tls"
-    from_email: str = "register@localhost"
+    from_email: str = DEFAULT_FROM  # a bare address or "Name <address>"
     reply_to: str = ""
     choice: str = ""  # what the page shows as chosen: SMTP, CONSOLE, NONE or a provider
     locked: set = field(default_factory=set)  # fields set in the environment
@@ -68,7 +71,11 @@ class EmailConfig:
 
     @property
     def domain(self):
-        return self.from_email.rpartition("@")[2] or "localhost"
+        return parseaddr(self.from_email)[1].rpartition("@")[2] or "localhost"
+
+    @property
+    def from_is_set(self):
+        return bool(self.from_email) and self.from_email != DEFAULT_FROM
 
 
 def _security_from_env():

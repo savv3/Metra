@@ -163,13 +163,26 @@ def test_unit_types_and_fields_can_be_added(admin_client):
     assert CustomField.objects.count() == 2
 
 
-def test_test_messages(admin_client):
+def test_test_messages(admin_client, monkeypatch):
+    monkeypatch.setenv("METRA_EMAIL_FROM", "styrelsen@example.fi")
     admin_client.post(url("messaging"), {"channel": "email", "to": "me@example.com"})
     admin_client.post(url("messaging"), {"channel": "sms", "to": "0401234567"})
 
     assert mail.outbox[0].to == ["me@example.com"]
     assert providers.outbox[0]["to"] == "0401234567"
     assert "messaging" in SetupState.current().saved_steps
+
+
+def test_no_test_email_before_the_from_address_is_set(admin_client, monkeypatch):
+    monkeypatch.delenv("METRA_EMAIL_FROM", raising=False)
+
+    response = admin_client.post(
+        url("messaging"), {"channel": "email", "to": "me@example.com"}, follow=True
+    )
+
+    assert mail.outbox == []
+    assert "messaging" not in SetupState.current().saved_steps
+    assert response.status_code == 200
 
 
 def test_messaging_step_saves_the_email_settings(admin_client, settings):

@@ -1,5 +1,10 @@
+import re
+
 from django import forms
 from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
 
@@ -23,19 +28,91 @@ def provider_choices():
     return choices
 
 
+def add_on_providers():
+    """The email providers of add-ons that are on, for the panel each one
+    shows when chosen: where its own settings are and whether they are filled in."""
+    providers = []
+    for name in registry.names(EMAIL):
+        if name == DJANGO:
+            continue
+        provider = registry.get(EMAIL, name)
+        plugin = getattr(provider, "plugin", None)
+        providers.append(
+            {
+                "name": name,
+                "label": provider.label(),
+                "settings_url": reverse("plugins:settings", args=[plugin]) if plugin else "",
+                "configured": provider.is_configured(),
+            }
+        )
+    return providers
+
+
+# "address", "<address>" or "name <address>", on one line.
+ADDRESS = re.compile(r"^(?:(?P<name>[^<>\r\n]*?)\s*<)?(?P<address>[^<>\s]+)(?(name)>)\Z")
+# Characters that make a display name need quotes in an address (RFC 5322 specials).
+NEEDS_QUOTES = re.compile(r'[()<>\[\]:;@\\,."]')
+
+
+class AddressField(forms.CharField):
+    """An email address, bare (noreply@example.fi) or with the name people
+    see (Kasvikens vatten <noreply@example.fi>). Cleans to one of those two forms."""
+
+    default_error_messages = {
+        "invalid": gettext_lazy(
+            "Enter an address such as noreply@example.fi, or a name and an address "
+            "such as Kasvikens vatten <noreply@example.fi>."
+        ),
+    }
+
+    def __init__(self, **kwargs):
+        kwargs.setdefault("max_length", 254)
+        super().__init__(**kwargs)
+
+    def to_python(self, value):
+        value = super().to_python(value)
+        if not value:
+            return value
+        match = ADDRESS.match(value)
+        if not match:
+            raise ValidationError(self.error_messages["invalid"], code="invalid")
+        name, address = match["name"] or "", match["address"]
+        try:
+            validate_email(address)
+        except ValidationError:
+            raise ValidationError(self.error_messages["invalid"], code="invalid") from None
+        if len(name) > 1 and name[0] == name[-1] == '"':
+            name = name[1:-1].replace('\\"', '"').replace("\\\\", "\\")
+        name = " ".join(name.split())
+        if not name:
+            return address
+        if NEEDS_QUOTES.search(name):
+            name = '"{}"'.format(name.replace("\\", "\\\\").replace('"', '\\"'))
+        return f"{name} <{address}>"
+
+
 class EmailSettingsForm(forms.Form):
     """The email settings. A field set in the server environment is shown
     with its value, locked."""
 
-    provider = forms.ChoiceField(label=gettext_lazy("Send email through"))
+    provider = forms.ChoiceField(
+        label=gettext_lazy("Send email through"),
+        help_text=gettext_lazy(
+            "Sending services such as Mailgun are add-ons: turn one on under "
+            "Settings > Add-ons to choose it here."
+        ),
+    )
     host = forms.CharField(
         label=gettext_lazy("Mail server"),
         required=False,
         help_text=gettext_lazy("For example smtp.example.fi."),
     )
-    port = forms.IntegerField(label=gettext_lazy("Port"), min_value=1, max_value=65535)
+    # Not required in the form: they matter only for SMTP, see clean().
+    port = forms.IntegerField(
+        label=gettext_lazy("Port"), min_value=1, max_value=65535, required=False
+    )
     security = forms.ChoiceField(
-        label=gettext_lazy("Encryption"), choices=EmailSettings.Security.choices
+        label=gettext_lazy("Encryption"), choices=EmailSettings.Security.choices, required=False
     )
     user = forms.CharField(label=gettext_lazy("User name"), required=False)
     password = forms.CharField(
@@ -46,12 +123,15 @@ class EmailSettingsForm(forms.Form):
     clear_password = forms.BooleanField(
         label=gettext_lazy("Remove the saved password"), required=False
     )
-    from_email = forms.EmailField(
+    from_email = AddressField(
         label=gettext_lazy("From address"),
         required=False,
-        help_text=gettext_lazy("The address members see the email come from."),
+        help_text=gettext_lazy(
+            "What members see the email come from: an address such as noreply@example.fi, "
+            "or a name and an address such as Kasvikens vatten <noreply@example.fi>."
+        ),
     )
-    reply_to = forms.EmailField(
+    reply_to = AddressField(
         label=gettext_lazy("Reply-To address"),
         required=False,
         help_text=gettext_lazy("Where replies go, if not to the from address."),
@@ -71,7 +151,7 @@ class EmailSettingsForm(forms.Form):
             "port": config.port,
             "security": config.security,
             "user": config.user,
-            "from_email": config.from_email if config.from_email != "register@localhost" else "",
+            "from_email": config.from_email if config.from_is_set else "",
             "reply_to": config.reply_to,
         }
         if config.choice not in dict(self.fields["provider"].choices):
@@ -90,6 +170,14 @@ class EmailSettingsForm(forms.Form):
         for name in config.locked:
             if name in self.fields:
                 self._lock(name)
+        self.add_ons = add_on_providers()
+
+    @property
+    def chosen(self):
+        """The provider the page shows as chosen, so only its fields are shown."""
+        if self.is_bound and "provider" not in self.config.locked:
+            return self.data.get("provider") or self.config.choice
+        return self.config.choice
 
     def _lock(self, name):
         field = self.fields[name]
@@ -108,8 +196,15 @@ class EmailSettingsForm(forms.Form):
     def clean(self):
         cleaned = super().clean()
         provider = cleaned.get("provider") or self.config.choice
-        if provider == SMTP and not (cleaned.get("host") or self.config.host):
-            self.add_error("host", _("Enter the mail server to send through SMTP."))
+        if provider == SMTP:
+            if not (cleaned.get("host") or self.config.host):
+                self.add_error("host", _("Enter the mail server to send through SMTP."))
+            if not cleaned.get("security") and "security" not in self.config.locked:
+                self.add_error("security", _("Choose the encryption."))
+        if not cleaned.get("port"):
+            cleaned["port"] = self.config.port or 587
+        if not cleaned.get("security"):
+            cleaned["security"] = self.config.security
         if provider != NONE and not (
             cleaned.get("from_email") or "from_email" in self.config.locked
         ):

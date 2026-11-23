@@ -9,7 +9,8 @@ invoices.
 The menu is on the left, in sections: **Register**, **Finance**,
 **Communication**, and **Add-ons** for add-ons that do not belong in one of
 the others. Turned-on add-ons such as Bookkeeping and Meetings show in their
-section. **Settings** and **Help** are at the bottom. On a phone, open the
+section. Admins also find **Manage add-ons** under **Add-ons**, to turn add-ons
+on and off and open their settings. **Settings** and **Help** are at the bottom. On a phone, open the
 menu with the button at the top left.
 
 - **Units** and **People**: the register. With a single unit type, the menu uses that type's own name (for example **Cabins**).

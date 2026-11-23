@@ -97,10 +97,17 @@ def main_menu(context):
     for nav_item, url in navigation_items(user):
         section = nav_item.group if nav_item.group in items else "addons"
         items[section].append(_item(request, url, nav_item.label, nav_item.icon))
+    # The add-ons themselves (turn on and off, their settings) are always one click away.
+    add_ons = None
+    if user.has_perm("plugins.change_pluginstate"):
+        add_ons = _item(request, reverse("plugins:list"), _("Manage add-ons"), "box")
+        items["addons"].append(add_ons)
 
     settings_item = None
     if can_open(user):
         settings_item = _item(request, reverse("core:settings"), _("Settings"), "settings")
+        if add_ons and add_ons["current"]:
+            settings_item["current"] = False
     help_url, help_current = url_for_request(request)
     return {
         "sections": [(title, items[key]) for key, title in SECTIONS if items[key]],

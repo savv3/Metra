@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 20:57+0000\n"
+"POT-Creation-Date: 2026-11-23 17:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgid "role"
 msgstr "roll"
 
 #: apps/accounts/admin.py:28 apps/invoicing/models.py:143
-#: apps/messaging/models.py:337 apps/readings/models.py:24
+#: apps/messaging/models.py:341 apps/readings/models.py:24
 #: apps/register/models.py:57 apps/register/models.py:115
 #: apps/register/models.py:129 apps/register/models.py:333
 msgid "name"
@@ -168,7 +168,7 @@ msgid "Show codes"
 msgstr "Visa koder"
 
 #: apps/accounts/templates/accounts/profile.html:75
-#: apps/messaging/email_forms.py:42
+#: apps/messaging/email_forms.py:119
 msgid "Password"
 msgstr "Lösenord"
 
@@ -257,7 +257,7 @@ msgid "sent offsite"
 msgstr "skickad externt"
 
 #: apps/backups/models.py:40 apps/backups/models.py:68
-#: apps/messaging/models.py:176
+#: apps/messaging/models.py:180
 msgid "error"
 msgstr "fel"
 
@@ -629,7 +629,7 @@ msgstr ""
 msgid "General"
 msgstr "Allmänt"
 
-#: apps/core/middleware.py:55
+#: apps/core/middleware.py:59
 msgid "Accounts and passwords cannot be changed on the demo site."
 msgstr "Konton och lösenord kan inte ändras på demosidan."
 
@@ -644,7 +644,7 @@ msgid "Urgent"
 msgstr "Brådskande"
 
 #: apps/core/models.py:23 apps/messaging/models.py:90
-#: apps/messaging/models.py:170 apps/messaging/models.py:233
+#: apps/messaging/models.py:174 apps/messaging/models.py:237
 msgid "text"
 msgstr "text"
 
@@ -671,7 +671,7 @@ msgstr "skapad av"
 
 #: apps/core/models.py:37 apps/invoicing/models.py:319
 #: apps/invoicing/models.py:423 apps/invoicing/models.py:791
-#: apps/messaging/models.py:85 apps/messaging/models.py:177
+#: apps/messaging/models.py:85 apps/messaging/models.py:181
 #: apps/notifications/models.py:28 apps/readings/models.py:111
 #: apps/register/models.py:236 apps/selfservice/models.py:76
 msgid "created"
@@ -923,7 +923,7 @@ msgid "Staff login"
 msgstr "Inloggning för personal"
 
 #: apps/core/templates/core/settings.html:3
-#: apps/core/templates/core/settings.html:6 apps/core/templatetags/nav.py:103
+#: apps/core/templates/core/settings.html:6 apps/core/templatetags/nav.py:108
 #: apps/messaging/templates/messaging/email_settings.html:7
 #: apps/plugins/templates/plugins/plugin_list.html:7
 #: apps/register/templates/register/unit_type_choose.html:16
@@ -953,6 +953,10 @@ msgstr "Fakturor"
 #: apps/messaging/templates/messaging/batch_list.html:17
 msgid "Send-outs"
 msgstr "Utskick"
+
+#: apps/core/templatetags/nav.py:103
+msgid "Manage add-ons"
+msgstr "Hantera tillägg"
 
 #: apps/help/apps.py:7 apps/help/templates/help/index.html:3
 #: apps/help/templates/help/index.html:5 templates/_main_menu.html:13
@@ -1263,7 +1267,7 @@ msgid "Fixed fees only."
 msgstr "Endast fasta avgifter."
 
 #: apps/invoicing/models.py:202 apps/invoicing/models.py:377
-#: apps/invoicing/models.py:723 apps/messaging/models.py:161
+#: apps/invoicing/models.py:723 apps/messaging/models.py:165
 #: apps/readings/models.py:200 apps/register/models.py:348
 #: apps/register/models.py:371 apps/selfservice/models.py:58
 msgid "unit"
@@ -1419,7 +1423,7 @@ msgstr "Krediterad"
 
 #: apps/invoicing/models.py:361
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:6
-#: apps/invoicing/views.py:493 apps/messaging/models.py:222
+#: apps/invoicing/views.py:493 apps/messaging/models.py:226
 msgid "Invoice"
 msgstr "Faktura"
 
@@ -1429,11 +1433,11 @@ msgid "Credit note"
 msgstr "Kreditnota"
 
 #: apps/invoicing/models.py:366 apps/messaging/models.py:75
-#: apps/messaging/models.py:172 apps/register/models.py:335
+#: apps/messaging/models.py:176 apps/register/models.py:335
 msgid "status"
 msgstr "status"
 
-#: apps/invoicing/models.py:380 apps/messaging/models.py:168
+#: apps/invoicing/models.py:380 apps/messaging/models.py:172
 msgid "recipient"
 msgstr "mottagare"
 
@@ -1557,12 +1561,12 @@ msgid "Letter"
 msgstr "Brev"
 
 #: apps/invoicing/models.py:782 apps/invoicing/models.py:864
-#: apps/messaging/models.py:167 apps/messaging/models.py:227
+#: apps/messaging/models.py:171 apps/messaging/models.py:231
 msgid "channel"
 msgstr "kanal"
 
 #: apps/invoicing/models.py:785 apps/invoicing/models.py:867
-#: apps/messaging/models.py:183
+#: apps/messaging/models.py:187
 msgid "message"
 msgstr "meddelande"
 
@@ -1590,16 +1594,16 @@ msgstr "betalningsdag"
 msgid "reference given"
 msgstr "angiven referens"
 
-#: apps/invoicing/models.py:830 apps/messaging/models.py:283
+#: apps/invoicing/models.py:830 apps/messaging/models.py:287
 #: apps/readings/models.py:224
 msgid "note"
 msgstr "anteckning"
 
-#: apps/invoicing/models.py:833 apps/messaging/models.py:276
+#: apps/invoicing/models.py:833 apps/messaging/models.py:280
 msgid "recorded by"
 msgstr "registrerat av"
 
-#: apps/invoicing/models.py:839 apps/messaging/models.py:273
+#: apps/invoicing/models.py:839 apps/messaging/models.py:277
 msgid "recorded"
 msgstr "registrerat"
 
@@ -1623,7 +1627,7 @@ msgstr "ny förfallodag"
 msgid "sent by"
 msgstr "skickat av"
 
-#: apps/invoicing/models.py:881 apps/messaging/models.py:178
+#: apps/invoicing/models.py:881 apps/messaging/models.py:182
 msgid "sent"
 msgstr "skickat"
 
@@ -1955,7 +1959,7 @@ msgid "Record payment"
 msgstr "Registrera betalningen"
 
 #: apps/invoicing/templates/invoicing/invoice_detail.html:138
-#: apps/messaging/models.py:138
+#: apps/messaging/models.py:142
 msgid "Sent"
 msgstr "Skickat"
 
@@ -2338,8 +2342,8 @@ msgid "All issued invoices of this run have been sent."
 msgstr "Alla utfärdade fakturor i den här omgången har skickats."
 
 #: apps/invoicing/views.py:353 apps/invoicing/views.py:416
-#: apps/messaging/views.py:54 apps/messaging/views.py:156
-#: apps/messaging/views.py:238
+#: apps/messaging/views.py:55 apps/messaging/views.py:161
+#: apps/messaging/views.py:249
 msgid "Sending has started. This page shows how it goes."
 msgstr "Utskicket har startat. Den här sidan visar hur det går."
 
@@ -2376,26 +2380,26 @@ msgstr "Påminnelseavgift"
 msgid "Messaging"
 msgstr "Meddelanden"
 
-#: apps/messaging/attachments.py:70
+#: apps/messaging/attachments.py:71
 #, python-format
 msgid "%(name)s: this kind of file cannot be attached."
 msgstr "%(name)s: den här sortens fil kan inte bifogas."
 
-#: apps/messaging/attachments.py:74
+#: apps/messaging/attachments.py:75
 #, python-format
 msgid "%(name)s is larger than %(limit)s."
 msgstr "%(name)s är större än %(limit)s."
 
-#: apps/messaging/attachments.py:80
+#: apps/messaging/attachments.py:81
 #, python-format
 msgid "The files are %(size)s together; at most %(limit)s can be sent."
 msgstr "Filerna är %(size)s tillsammans; högst %(limit)s kan skickas."
 
-#: apps/messaging/attachments.py:136
+#: apps/messaging/attachments.py:137
 msgid "This email provider cannot send attachments."
 msgstr "Den här e-postleverantören kan inte skicka bilagor."
 
-#: apps/messaging/attachments.py:160
+#: apps/messaging/attachments.py:161
 msgid "Files:"
 msgstr "Filer:"
 
@@ -2438,84 +2442,110 @@ msgstr "Studsade."
 msgid "The recipient marked this email as spam."
 msgstr "Mottagaren markerade e-postmeddelandet som skräppost."
 
-#: apps/messaging/email_forms.py:17
+#: apps/messaging/email_forms.py:22
+#: apps/messaging/templates/messaging/_email_settings_fields.html:23
 #: apps/setup/templates/setup/messaging.html:23
 msgid "Not set up"
 msgstr "Inte inställt"
 
-#: apps/messaging/email_forms.py:17 apps/messaging/providers.py:25
+#: apps/messaging/email_forms.py:22 apps/messaging/providers.py:25
 msgid "SMTP (your own mail server or account)"
 msgstr "SMTP (egen e-postserver eller eget konto)"
 
-#: apps/messaging/email_forms.py:19
+#: apps/messaging/email_forms.py:24
 msgid "The server log (development)"
 msgstr "Serverloggen (utveckling)"
 
-#: apps/messaging/email_forms.py:30
+#: apps/messaging/email_forms.py:63
+msgid ""
+"Enter an address such as noreply@example.fi, or a name and an address such "
+"as Kasvikens vatten <noreply@example.fi>."
+msgstr ""
+"Ange en adress, till exempel noreply@example.fi, eller ett namn och en "
+"adress, till exempel Kasvikens vatten <noreply@example.fi>."
+
+#: apps/messaging/email_forms.py:99
 msgid "Send email through"
 msgstr "Skicka e-post via"
 
-#: apps/messaging/email_forms.py:32
+#: apps/messaging/email_forms.py:101
+msgid ""
+"Sending services such as Mailgun are add-ons: turn one on under Settings > "
+"Add-ons to choose it here."
+msgstr ""
+"Sändningstjänster, till exempel Mailgun, är tillägg. Slå på ett under "
+"Inställningar > Tillägg för att kunna välja det här."
+
+#: apps/messaging/email_forms.py:106
 msgid "Mail server"
 msgstr "E-postserver"
 
-#: apps/messaging/email_forms.py:34
+#: apps/messaging/email_forms.py:108
 msgid "For example smtp.example.fi."
 msgstr "Till exempel smtp.example.fi."
 
-#: apps/messaging/email_forms.py:36
+#: apps/messaging/email_forms.py:112
 msgid "Port"
 msgstr "Port"
 
-#: apps/messaging/email_forms.py:38
+#: apps/messaging/email_forms.py:115
 msgid "Encryption"
 msgstr "Kryptering"
 
-#: apps/messaging/email_forms.py:40
+#: apps/messaging/email_forms.py:117
 msgid "User name"
 msgstr "Användarnamn"
 
-#: apps/messaging/email_forms.py:47
+#: apps/messaging/email_forms.py:124
 msgid "Remove the saved password"
 msgstr "Ta bort det sparade lösenordet"
 
-#: apps/messaging/email_forms.py:50
+#: apps/messaging/email_forms.py:127
 msgid "From address"
 msgstr "Avsändaradress"
 
-#: apps/messaging/email_forms.py:52
-msgid "The address members see the email come from."
-msgstr "Adressen som medlemmarna ser att e-posten kommer från."
+#: apps/messaging/email_forms.py:130
+msgid ""
+"What members see the email come from: an address such as noreply@example.fi, "
+"or a name and an address such as Kasvikens vatten <noreply@example.fi>."
+msgstr ""
+"Det här är avsändaren som medlemmarna ser: en adress, till exempel "
+"noreply@example.fi, eller ett namn och en adress, till exempel Kasvikens "
+"vatten <noreply@example.fi>."
 
-#: apps/messaging/email_forms.py:55 apps/messaging/models.py:385
+#: apps/messaging/email_forms.py:135 apps/messaging/models.py:390
 msgid "Reply-To address"
 msgstr "Svarsadress"
 
-#: apps/messaging/email_forms.py:57 apps/messaging/models.py:387
+#: apps/messaging/email_forms.py:137 apps/messaging/models.py:393
 msgid "Where replies go, if not to the from address."
 msgstr "Dit svaren går, om inte till avsändaradressen."
 
-#: apps/messaging/email_forms.py:83
+#: apps/messaging/email_forms.py:163
 msgid ""
 "The saved password cannot be read with this server's key; enter it again."
 msgstr ""
 "Det sparade lösenordet kan inte läsas med serverns nyckel. Skriv in det igen."
 
-#: apps/messaging/email_forms.py:85
+#: apps/messaging/email_forms.py:165
 msgid "A password is saved. Leave this empty to keep it."
 msgstr "Ett lösenord är sparat. Lämna fältet tomt för att behålla det."
 
-#: apps/messaging/email_forms.py:103 apps/plugins/views.py:129
+#: apps/messaging/email_forms.py:191 apps/plugins/views.py:129
 #, python-format
 msgid ""
 "Set in the server environment (%(variable)s), so it cannot be changed here."
 msgstr "Anges i serverns miljö (%(variable)s) och kan därför inte ändras här."
 
-#: apps/messaging/email_forms.py:112
+#: apps/messaging/email_forms.py:201
 msgid "Enter the mail server to send through SMTP."
 msgstr "Ange e-postservern som SMTP ska skicka via."
 
-#: apps/messaging/email_forms.py:116
+#: apps/messaging/email_forms.py:203
+msgid "Choose the encryption."
+msgstr "Välj kryptering."
+
+#: apps/messaging/email_forms.py:211
 msgid "Enter the address email is sent from."
 msgstr "Ange adressen som e-posten skickas från."
 
@@ -2755,7 +2785,7 @@ msgstr "SMS"
 msgid "Self-service links"
 msgstr "Självbetjäningslänkar"
 
-#: apps/messaging/models.py:38 apps/messaging/models.py:221
+#: apps/messaging/models.py:38 apps/messaging/models.py:225
 msgid "Reminder"
 msgstr "Påminnelse"
 
@@ -2834,86 +2864,86 @@ msgstr "mottagare"
 msgid "file link expires"
 msgstr "fillänken går ut"
 
-#: apps/messaging/models.py:110 apps/messaging/models.py:145
-#: apps/messaging/models.py:330
+#: apps/messaging/models.py:114 apps/messaging/models.py:149
+#: apps/messaging/models.py:334
 msgid "send-out"
 msgstr "utskick"
 
-#: apps/messaging/models.py:111
+#: apps/messaging/models.py:115
 msgid "send-outs"
 msgstr "utskick"
 
-#: apps/messaging/models.py:113
+#: apps/messaging/models.py:117
 msgid "Can send messages and alerts to everyone"
 msgstr "Kan skicka meddelanden och varningar till alla"
 
-#: apps/messaging/models.py:114
+#: apps/messaging/models.py:118
 msgid "Can send newsletters"
 msgstr "Kan skicka nyhetsbrev"
 
-#: apps/messaging/models.py:115
+#: apps/messaging/models.py:119
 msgid "Can send a message to one unit"
 msgstr "Kan skicka ett meddelande till en enhet"
 
-#: apps/messaging/models.py:137
+#: apps/messaging/models.py:141
 msgid "Queued"
 msgstr "I kö"
 
-#: apps/messaging/models.py:139
+#: apps/messaging/models.py:143
 msgid "Delivered"
 msgstr "Levererat"
 
-#: apps/messaging/models.py:140
+#: apps/messaging/models.py:144
 msgid "Failed"
 msgstr "Misslyckades"
 
-#: apps/messaging/models.py:141
+#: apps/messaging/models.py:145
 msgid "To print"
 msgstr "Ska skrivas ut"
 
-#: apps/messaging/models.py:153 apps/messaging/models.py:269
+#: apps/messaging/models.py:157 apps/messaging/models.py:273
 #: apps/register/models.py:295 apps/register/models.py:374
 #: apps/selfservice/models.py:62
 msgid "person"
 msgstr "person"
 
-#: apps/messaging/models.py:169 apps/messaging/models.py:231
+#: apps/messaging/models.py:173 apps/messaging/models.py:235
 msgid "subject"
 msgstr "ämne"
 
-#: apps/messaging/models.py:174
+#: apps/messaging/models.py:178
 msgid "provider"
 msgstr "leverantör"
 
-#: apps/messaging/models.py:175
+#: apps/messaging/models.py:179
 msgid "provider's id"
 msgstr "leverantörens id"
 
-#: apps/messaging/models.py:179
+#: apps/messaging/models.py:183
 msgid "status changed"
 msgstr "status ändrad"
 
-#: apps/messaging/models.py:184
+#: apps/messaging/models.py:188
 msgid "messages"
 msgstr "meddelanden"
 
-#: apps/messaging/models.py:220
+#: apps/messaging/models.py:224
 msgid "Self-service link"
 msgstr "Självbetjäningslänk"
 
-#: apps/messaging/models.py:223
+#: apps/messaging/models.py:227
 msgid "Payment reminder"
 msgstr "Betalningspåminnelse"
 
-#: apps/messaging/models.py:225
+#: apps/messaging/models.py:229
 msgid "purpose"
 msgstr "syfte"
 
-#: apps/messaging/models.py:231
+#: apps/messaging/models.py:235
 msgid "Email only."
 msgstr "Endast e-post."
 
-#: apps/messaging/models.py:235
+#: apps/messaging/models.py:239
 #, python-brace-format
 msgid ""
 "Placeholders: {name}, {first_name}, {link}, {closes}, {period}, "
@@ -2926,134 +2956,134 @@ msgstr ""
 "{organisation_email}, {organisation_website} och {emergency_phone}. Håll sms "
 "korta: ungefär 160 tecken är ett meddelande."
 
-#: apps/messaging/models.py:244
+#: apps/messaging/models.py:248
 msgid "message template"
 msgstr "meddelandemall"
 
-#: apps/messaging/models.py:245
+#: apps/messaging/models.py:249
 msgid "message templates"
 msgstr "meddelandemallar"
 
-#: apps/messaging/models.py:264
+#: apps/messaging/models.py:268
 msgid "Self-service page"
 msgstr "Självbetjäningssidan"
 
-#: apps/messaging/models.py:265
+#: apps/messaging/models.py:269
 msgid "Entered by staff"
 msgstr "Inmatat av personal"
 
-#: apps/messaging/models.py:266
+#: apps/messaging/models.py:270
 msgid "Unsubscribe link"
 msgstr "Avregistreringslänk"
 
-#: apps/messaging/models.py:271
+#: apps/messaging/models.py:275
 msgid "wants the newsletter"
 msgstr "vill ha nyhetsbrevet"
 
-#: apps/messaging/models.py:272 apps/readings/models.py:204
+#: apps/messaging/models.py:276 apps/readings/models.py:204
 msgid "source"
 msgstr "källa"
 
-#: apps/messaging/models.py:283
+#: apps/messaging/models.py:287
 msgid "For example: signed form, 3 May."
 msgstr "Till exempel: underskriven blankett, 3 maj."
 
-#: apps/messaging/models.py:288
+#: apps/messaging/models.py:292
 msgid "newsletter consent"
 msgstr "samtycke till nyhetsbrev"
 
-#: apps/messaging/models.py:289
+#: apps/messaging/models.py:293
 msgid "newsletter consents"
 msgstr "samtycken till nyhetsbrev"
 
-#: apps/messaging/models.py:292
+#: apps/messaging/models.py:296
 #: apps/messaging/templates/messaging/_person_newsletter.html:24
 msgid "yes"
 msgstr "ja"
 
-#: apps/messaging/models.py:292
+#: apps/messaging/models.py:296
 #: apps/messaging/templates/messaging/_person_newsletter.html:24
 msgid "no"
 msgstr "nej"
 
-#: apps/messaging/models.py:336
+#: apps/messaging/models.py:340
 msgid "file"
 msgstr "fil"
 
-#: apps/messaging/models.py:338
+#: apps/messaging/models.py:342
 msgid "size"
 msgstr "storlek"
 
-#: apps/messaging/models.py:339 apps/register/models.py:331
+#: apps/messaging/models.py:343 apps/register/models.py:331
 msgid "type"
 msgstr "typ"
 
-#: apps/messaging/models.py:342
+#: apps/messaging/models.py:346
 msgid "uploaded by"
 msgstr "uppladdad av"
 
-#: apps/messaging/models.py:348
+#: apps/messaging/models.py:352
 msgid "uploaded"
 msgstr "uppladdad"
 
-#: apps/messaging/models.py:352
+#: apps/messaging/models.py:356
 msgid "attachment"
 msgstr "bilaga"
 
-#: apps/messaging/models.py:353
+#: apps/messaging/models.py:357
 msgid "attachments"
 msgstr "bilagor"
 
-#: apps/messaging/models.py:370
+#: apps/messaging/models.py:374
 msgid "STARTTLS (usually port 587)"
 msgstr "STARTTLS (vanligen port 587)"
 
-#: apps/messaging/models.py:371
+#: apps/messaging/models.py:375
 msgid "SSL/TLS (usually port 465)"
 msgstr "SSL/TLS (vanligen port 465)"
 
-#: apps/messaging/models.py:372
+#: apps/messaging/models.py:376
 msgid "None"
 msgstr "Ingen"
 
-#: apps/messaging/models.py:374
+#: apps/messaging/models.py:378
 msgid "send email through"
 msgstr "skicka e-post via"
 
-#: apps/messaging/models.py:375
+#: apps/messaging/models.py:379
 msgid "mail server"
 msgstr "e-postserver"
 
-#: apps/messaging/models.py:376
+#: apps/messaging/models.py:380
 msgid "port"
 msgstr "port"
 
-#: apps/messaging/models.py:377
+#: apps/messaging/models.py:381
 msgid "user name"
 msgstr "användarnamn"
 
-#: apps/messaging/models.py:379
+#: apps/messaging/models.py:383
 msgid "password"
 msgstr "lösenord"
 
-#: apps/messaging/models.py:381
+#: apps/messaging/models.py:385
 msgid "encryption"
 msgstr "kryptering"
 
-#: apps/messaging/models.py:383
+#: apps/messaging/models.py:388
 msgid "from address"
 msgstr "avsändaradress"
 
-#: apps/messaging/models.py:389 apps/plugins/models.py:13
+#: apps/messaging/models.py:395 apps/plugins/models.py:13
 #: apps/plugins/models.py:39
 msgid "changed"
 msgstr "ändrad"
 
-#: apps/messaging/models.py:392 apps/messaging/models.py:393
+#: apps/messaging/models.py:398 apps/messaging/models.py:399
 msgid "email settings"
 msgstr "e-postinställningar"
 
-#: apps/messaging/models.py:396
+#: apps/messaging/models.py:402
 #: apps/messaging/templates/messaging/email_settings.html:3
 #: apps/messaging/templates/messaging/email_settings.html:6
 msgid "Email settings"
@@ -3071,7 +3101,7 @@ msgstr "Avslutade prenumerationen innan det skickades."
 
 #: apps/messaging/newsletter.py:116
 #: apps/messaging/templates/messaging/_send_forms.html:8
-#: apps/messaging/views.py:352
+#: apps/messaging/views.py:363
 msgid "Email is not set up."
 msgstr "E-post är inte inställt."
 
@@ -3095,17 +3125,29 @@ msgstr "[personlig länk]"
 msgid "SMS recipients get a link to the files at the end of the SMS."
 msgstr "Den som får sms får en länk till filerna i slutet av meddelandet."
 
-#: apps/messaging/templates/messaging/_email_settings_fields.html:4
+#: apps/messaging/templates/messaging/_email_settings_fields.html:9
 msgid "SMTP"
 msgstr "SMTP"
 
-#: apps/messaging/templates/messaging/_email_settings_fields.html:5
+#: apps/messaging/templates/messaging/_email_settings_fields.html:10
+msgid "Your email provider or IT support can tell you these."
+msgstr "Din e-postleverantör eller IT-support kan berätta vad du ska ange."
+
+#: apps/messaging/templates/messaging/_email_settings_fields.html:21
+#: apps/setup/templates/setup/messaging.html:23
+msgid "Set up"
+msgstr "Inställt"
+
+#: apps/messaging/templates/messaging/_email_settings_fields.html:26
+#, python-format
 msgid ""
-"Only used when email goes through SMTP. Your email provider or IT support "
-"can tell you these."
+"The account details for %(label)s, such as its sending domain and API key, "
+"are set on its add-on page: <a href=\"%(url)s\">Settings &rsaquo; Add-ons "
+"&rsaquo; %(label)s</a>."
 msgstr ""
-"Används bara när e-posten skickas via SMTP. Din e-postleverantör eller IT-"
-"support kan berätta vad du ska ange."
+"Kontouppgifterna för %(label)s, till exempel avsändardomän och API-nyckel, "
+"anges på tilläggets sida: <a href=\"%(url)s\">Inställningar &rsaquo; Tillägg "
+"&rsaquo; %(label)s</a>."
 
 #: apps/messaging/templates/messaging/_person_newsletter.html:6
 msgid "Does not want the newsletter"
@@ -3401,13 +3443,13 @@ msgid "Send a test"
 msgstr "Skicka ett test"
 
 #: apps/messaging/templates/messaging/email_settings.html:23
-#: apps/plugins/templates/plugins/plugin_settings.html:47
+#: apps/plugins/templates/plugins/plugin_settings.html:51
 #: apps/setup/templates/setup/messaging.html:16
 msgid "Send a test email to"
 msgstr "Skicka ett testmejl till"
 
 #: apps/messaging/templates/messaging/email_settings.html:24
-#: apps/plugins/templates/plugins/plugin_settings.html:48
+#: apps/plugins/templates/plugins/plugin_settings.html:52
 #: apps/setup/templates/setup/messaging.html:17
 msgid "Send test email"
 msgstr "Skicka testmejl"
@@ -3519,54 +3561,67 @@ msgstr "Nyhetsbrevet skickas till %(name)s."
 msgid "Unsubscribe"
 msgstr "Avsluta prenumerationen"
 
-#: apps/messaging/views.py:132
+#: apps/messaging/views.py:135
 msgid "Nobody can be reached with these choices."
 msgstr "Ingen kan nås med de här valen."
 
-#: apps/messaging/views.py:209
+#: apps/messaging/views.py:220
 msgid "The notice is no longer shown."
 msgstr "Anslaget visas inte längre."
 
-#: apps/messaging/views.py:232
+#: apps/messaging/views.py:243
 msgid "Everyone who wants the newsletter"
 msgstr "Alla som vill ha nyhetsbrevet"
 
-#: apps/messaging/views.py:268
+#: apps/messaging/views.py:279
 msgid "Saved the newsletter choice."
 msgstr "Valet för nyhetsbrevet är sparat."
 
-#: apps/messaging/views.py:352
+#: apps/messaging/views.py:363
 msgid "This channel is not set up."
 msgstr "Den här kanalen är inte inställd."
 
-#: apps/messaging/views.py:356
+#: apps/messaging/views.py:367
 msgid "Enter an email address."
 msgstr "Ange en e-postadress."
 
-#: apps/messaging/views.py:356
+#: apps/messaging/views.py:367
 msgid "Enter a phone number."
 msgstr "Ange ett telefonnummer."
 
-#: apps/messaging/views.py:360
+#: apps/messaging/views.py:370
+msgid "Enter the from address under Settings > Email first."
+msgstr "Ange avsändaradressen under Inställningar > E-post först."
+
+#: apps/messaging/views.py:373
 msgid "This is a test message from Metra. If you got it, sending works."
 msgstr ""
 "Det här är ett testmeddelande från Metra. Om du fick det fungerar utskicket."
 
-#: apps/messaging/views.py:361
+#: apps/messaging/views.py:374
 msgid "Test message from Metra"
 msgstr "Testmeddelande från Metra"
 
-#: apps/messaging/views.py:364
+#: apps/messaging/views.py:377
 #, python-format
 msgid "The test failed: %(error)s"
 msgstr "Testet misslyckades: %(error)s"
 
-#: apps/messaging/views.py:366
+#: apps/messaging/views.py:379
 #, python-format
 msgid "Test sent to %(to)s."
 msgstr "Testet skickades till %(to)s."
 
-#: apps/messaging/views.py:384 apps/setup/views.py:185
+#: apps/messaging/views.py:391
+#, python-format
+msgid ""
+"%(label)s is chosen, but its account details are missing. Enter them under "
+"Settings > Add-ons > %(label)s."
+msgstr ""
+"%(label)s är valt, men kontouppgifterna saknas. Ange dem under Inställningar "
+"> Tillägg > %(label)s."
+
+#: apps/messaging/views.py:412 apps/setup/views.py:186
 msgid "Saved the email settings."
 msgstr "E-postinställningarna är sparade."
 
@@ -3893,18 +3948,29 @@ msgstr ""
 "Spara inställningarna först. Testet skickas via det här tillägget även om "
 "ett annat är valt för utskick."
 
-#: apps/plugins/templates/plugins/plugin_settings.html:44
+#: apps/plugins/templates/plugins/plugin_settings.html:41
+#, python-format
+msgid ""
+"Email is not sent through %(label)s yet. To use it for all email, choose it "
+"under <a href=\"%(email_settings)s\">Settings &rsaquo; Email</a>, where the "
+"from address is set too."
+msgstr ""
+"E-post skickas inte via %(label)s ännu. Vill du använda det för all e-post "
+"väljer du det under <a href=\"%(email_settings)s\">Inställningar &rsaquo; E-"
+"post</a>, där avsändaradressen också anges."
+
+#: apps/plugins/templates/plugins/plugin_settings.html:48
 #: apps/setup/templates/setup/messaging.html:29
 msgid "Send a test SMS to"
 msgstr "Skicka ett test-sms till"
 
-#: apps/plugins/templates/plugins/plugin_settings.html:45
+#: apps/plugins/templates/plugins/plugin_settings.html:49
 #: apps/setup/templates/setup/messaging.html:30
 msgid "Send test SMS"
 msgstr "Skicka test-sms"
 
-#: apps/plugins/templates/plugins/plugin_settings.html:52
-#: apps/plugins/views.py:234
+#: apps/plugins/templates/plugins/plugin_settings.html:56
+#: apps/plugins/views.py:242
 msgid "Turn the add-on on to send a test."
 msgstr "Slå på tillägget för att skicka ett test."
 
@@ -5221,7 +5287,7 @@ msgid "Print self-service letter"
 msgstr "Skriv ut brev med länk"
 
 #: apps/selfservice/templates/selfservice/base.html:9
-#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:270
+#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:271
 #: templates/base.html:7 templates/base.html:24
 msgid "Metra"
 msgstr "Metra"
@@ -5792,10 +5858,6 @@ msgid "Save email settings"
 msgstr "Spara e-postinställningar"
 
 #: apps/setup/templates/setup/messaging.html:23
-msgid "Set up"
-msgstr "Inställt"
-
-#: apps/setup/templates/setup/messaging.html:23
 #, python-format
 msgid "Sender %(sender)s"
 msgstr "Avsändare %(sender)s"
@@ -5899,7 +5961,7 @@ msgstr "Logotypen togs bort."
 msgid "Added %(name)s with its fields and a water meter."
 msgstr "La till %(name)s med fält och en vattenmätare."
 
-#: apps/setup/views.py:244
+#: apps/setup/views.py:245
 msgid ""
 "Email is not set up, so no invitation can be sent. Add the person under "
 "Settings."
@@ -5907,12 +5969,12 @@ msgstr ""
 "E-post är inte inställd, så ingen inbjudan kan skickas. Lägg till personen "
 "under Inställningar."
 
-#: apps/setup/views.py:275
+#: apps/setup/views.py:276
 #, python-format
 msgid "Your account for %(organisation)s"
 msgstr "Ditt konto för %(organisation)s"
 
-#: apps/setup/views.py:278
+#: apps/setup/views.py:279
 #, python-format
 msgid ""
 "Hello %(name)s,\n"
@@ -5935,17 +5997,17 @@ msgstr ""
 "\n"
 "Länken fungerar i några dagar."
 
-#: apps/setup/views.py:288
+#: apps/setup/views.py:289
 #, python-format
 msgid "The invitation could not be sent: %(error)s"
 msgstr "Inbjudan kunde inte skickas: %(error)s"
 
-#: apps/setup/views.py:290
+#: apps/setup/views.py:291
 #, python-format
 msgid "Invitation sent to %(email)s."
 msgstr "Inbjudan skickad till %(email)s."
 
-#: apps/setup/views.py:311
+#: apps/setup/views.py:312
 msgid "Setup is done. You can run it again from Settings."
 msgstr "Inställningen är klar. Du kan köra den igen från Inställningar."
 
@@ -6002,7 +6064,9 @@ msgstr "Stäng menyn"
 msgid ""
 "Try Metra: log in with the username <strong>%(username)s</strong> and the "
 "password <strong>%(password)s</strong>."
-msgstr "Prova Metra: logga in med användarnamnet <strong>%(username)s</strong> och lösenordet <strong>%(password)s</strong>."
+msgstr ""
+"Prova Metra: logga in med användarnamnet <strong>%(username)s</strong> och "
+"lösenordet <strong>%(password)s</strong>."
 
 #: templates/base.html:21
 msgid "Menu"
@@ -6029,7 +6093,9 @@ msgstr "Logga ut"
 msgid ""
 "This is a demo site with made-up data. Everything you change is reset every "
 "night at %(time)s. Do not enter real personal data."
-msgstr "Det här är en demosida med påhittade uppgifter. Allt du ändrar återställs varje natt kl. %(time)s. Skriv inte in riktiga personuppgifter."
+msgstr ""
+"Det här är en demosida med påhittade uppgifter. Allt du ändrar återställs "
+"varje natt kl. %(time)s. Skriv inte in riktiga personuppgifter."
 
 #: templates/base.html:72
 msgid ""
@@ -6046,6 +6112,9 @@ msgid ""
 msgstr ""
 "Skydda ditt konto med tvåfaktorsinloggning. Det tar en minut med en "
 "autentiseringsapp i telefonen."
+
+#~ msgid "The address members see the email come from."
+#~ msgstr "Adressen som medlemmarna ser att e-posten kommer från."
 
 #~ msgid "SMS settings are described in INSTALL.md, under Email and SMS."
 #~ msgstr "Sms-inställningar beskrivs i INSTALL.md, under Email and SMS."

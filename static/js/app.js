@@ -54,3 +54,19 @@ document.querySelectorAll("form").forEach((form) => {
   radios.forEach((radio) => radio.addEventListener("change", show));
   show();
 });
+
+// Email settings: show only the fields for the chosen way of sending.
+document.querySelectorAll("form").forEach((form) => {
+  const select = form.querySelector("select[name=provider]");
+  if (!select || !form.querySelector("[data-email-for], [data-email-unless]")) return;
+  const show = () => {
+    form.querySelectorAll("[data-email-for]").forEach((part) => {
+      part.hidden = !part.dataset.emailFor.split(" ").includes(select.value);
+    });
+    form.querySelectorAll("[data-email-unless]").forEach((part) => {
+      part.hidden = part.dataset.emailUnless.split(" ").includes(select.value);
+    });
+  };
+  select.addEventListener("change", show);
+  show();
+});

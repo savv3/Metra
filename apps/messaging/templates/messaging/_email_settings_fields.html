@@ -1,8 +1,13 @@
 {% load i18n %}
+{% comment %}
+  Only the parts for the chosen way of sending are shown: static/js/app.js
+  shows and hides them when the choice changes ([data-email-for] lists the
+  choices a part is for, [data-email-unless] the ones it is hidden for).
+{% endcomment %}
 {% include "register/_field.html" with field=form.provider %}
-<fieldset>
+<fieldset data-email-for="smtp"{% if form.chosen != "smtp" %} hidden{% endif %}>
   <legend>{% translate "SMTP" %}</legend>
-  <p class="help">{% translate "Only used when email goes through SMTP. Your email provider or IT support can tell you these." %}</p>
+  <p class="help">{% translate "Your email provider or IT support can tell you these." %}</p>
   {% include "register/_field.html" with field=form.host %}
   {% include "register/_field.html" with field=form.port %}
   {% include "register/_field.html" with field=form.security %}
@@ -10,5 +15,22 @@
   {% include "register/_field.html" with field=form.password %}
   {% if form.clear_password %}{% include "register/_field.html" with field=form.clear_password %}{% endif %}
 </fieldset>
-{% include "register/_field.html" with field=form.from_email %}
-{% include "register/_field.html" with field=form.reply_to %}
+{% for add_on in form.add_ons %}
+  <div class="notice" data-email-for="{{ add_on.name }}"{% if form.chosen != add_on.name %} hidden{% endif %}>
+    {% if add_on.configured %}
+      <span class="pill pill--ok">{% translate "Set up" %}</span>
+    {% else %}
+      <span class="pill pill--warn">{% translate "Not set up" %}</span>
+    {% endif %}
+    {% if add_on.settings_url %}
+      {% blocktranslate trimmed with label=add_on.label url=add_on.settings_url %}
+        The account details for {{ label }}, such as its sending domain and API key, are set on
+        its add-on page: <a href="{{ url }}">Settings &rsaquo; Add-ons &rsaquo; {{ label }}</a>.
+      {% endblocktranslate %}
+    {% endif %}
+  </div>
+{% endfor %}
+<div data-email-unless="none"{% if form.chosen == "none" %} hidden{% endif %}>
+  {% include "register/_field.html" with field=form.from_email %}
+  {% include "register/_field.html" with field=form.reply_to %}
+</div>

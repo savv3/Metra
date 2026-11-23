@@ -19,7 +19,7 @@ from django.views.decorators.http import require_POST
 from apps.invoicing.models import BillingSettings
 from apps.messaging.email_forms import EmailSettingsForm
 from apps.messaging.registry import EMAIL, SMS, ProviderError, provider_for
-from apps.messaging.views import send_test, send_test_email
+from apps.messaging.views import send_test, send_test_email, warn_if_add_on_not_set_up
 from apps.register.models import CustomField, Organisation, UnitType
 
 from . import examples
@@ -182,6 +182,7 @@ def messaging_step(request, name):
         if request.POST.get("action") == "save":
             if form.is_valid():
                 form.save()
+                warn_if_add_on_not_set_up(request)
                 return _saved(request, name, stay=True, message=_("Saved the email settings."))
         else:
             test = TestMessageForm(request.POST)
