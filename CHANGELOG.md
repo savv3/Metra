@@ -12,6 +12,13 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+## [0.7.1] - 2026-11-23
+
+### Removed
+
+- The **Manage add-ons** link in the menu from 0.7.0. Add-ons are under
+  **Settings > Add-ons**, as before.
+
 ## [0.7.0] - 2026-11-23
 
 ### Added
@@ -32,6 +39,8 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Changed
 
+- The menu always has **Manage add-ons** under **Add-ons** for admins, so
+  add-ons are one click away instead of under Settings.
 - **Settings > Email** shows only the fields for the chosen way of sending:
   the SMTP fields only for SMTP, and for an add-on such as Mailgun a link to
   the add-on's page where its sending domain and API key are entered, with
