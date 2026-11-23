@@ -98,6 +98,80 @@ def test_message_draft_refuses_files_that_cannot_be_attached(admin):
     assert not Attachment.objects.exists()
 
 
+def test_a_draft_chooses_channels_and_marks_the_send_out(
+    admin, unit, person, django_capture_on_commit_callbacks
+):
+    UnitContact.objects.create(unit=unit, person=person, role="owner")
+    url = draft_for(
+        admin,
+        admin.user,
+        subject="Kallelse",
+        body="Välkommen.",
+        email_body="Hej {first_name}.",
+        channels="email",
+        source="example:thing:1",
+    )
+    page = admin.get(url).content.decode()
+    assert re.search(r'name="channels" value="email"[^>]*checked', page)
+    sent = []
+
+    def record(sender, batch, **kwargs):
+        sent.append(batch)
+
+    api.events.message_sent.connect(record)
+    data = {
+        "scope": "everyone",
+        "contacts": "all",
+        "channels": "email",
+        "subject": "Kallelse",
+        "email_body": "Hej {first_name}.",
+        "step": "confirm",
+    }
+
+    try:
+        with django_capture_on_commit_callbacks(execute=True):
+            admin.post(url, data)
+    finally:
+        api.events.message_sent.disconnect(record)
+
+    batch = api.MessageBatch.objects.get()
+    assert batch.source == "example:thing:1"
+    assert sent == [batch]
+
+
+def test_send_message_sends_in_the_background(
+    unit, person, mailoutbox, django_capture_on_commit_callbacks
+):
+    person.email = "anna@example.com"
+    person.save()
+
+    with django_capture_on_commit_callbacks(execute=True):
+        batch = api.send_message(
+            [(person, unit)],
+            "Påminnelse",
+            "Hej {first_name}, välkommen.",
+            files=[("möte.ics", b"BEGIN:VCALENDAR", "text/calendar")],
+            source="example:thing:1",
+            audience="Alla inbjudna",
+        )
+
+    batch.refresh_from_db()
+    assert batch.source == "example:thing:1" and batch.status == batch.Status.DONE
+    assert batch.recipients == [[person.pk, unit.pk]]
+    [message] = mailoutbox
+    assert message.to == ["anna@example.com"] and message.subject == "Påminnelse"
+    assert message.body.startswith(f"Hej {person.first_name}, välkommen.")
+    assert message.attachments[0][0] == "möte.ics"
+
+
+def test_send_message_refuses_unknown_channels_and_files(person):
+    with pytest.raises(ValidationError):
+        api.send_message([(person, None)], "x", "x", channels="pigeon")
+    with pytest.raises(ValidationError):
+        api.send_message([(person, None)], "x", "x", files=[("run.exe", b"MZ", "")])
+    assert not api.MessageBatch.objects.exists()
+
+
 def test_an_unknown_draft_opens_an_empty_form(admin):
     response = admin.get(reverse("messaging:compose") + "?draft=nope")
 

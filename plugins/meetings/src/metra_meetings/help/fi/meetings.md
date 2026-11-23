@@ -49,15 +49,39 @@ niitä.
 
 ## Kutsu kokous koolle
 
-Napsauta **Lähetä kokouskutsu**. Uusi viesti avautuu valmiiksi kirjoitettuna,
-ja esityslista on liitteenä PDF-tiedostona. Valitse vastaanottajat (esimerkiksi
-kaikki tai vain jokaisen yksikön pääyhteyshenkilö), tarkista teksti ja lähetä
-kuten mikä tahansa viesti. Sähköpostin vastaanottajat saavat esityslistan
-liitteenä; tekstiviestin vastaanottajat saavat linkin. Napsauta sitten
-**Merkitse kutsutuksi**.
+Napsauta **Lähetä kokouskutsut**. Uusi viesti avautuu valmiiksi
+kirjoitettuna, ja esityslista on liitteenä PDF-tiedostona sekä
+kalenteritiedosto, jonka avulla jokainen voi lisätä kokouksen kalenteriinsa
+yhdellä napsautuksella. Viesti lähtee oletuksena sähköpostilla; valitse
+vastaanottajat (esimerkiksi kaikki, vain jokaisen yksikön pääyhteyshenkilö tai
+hallituksena merkityt henkilöt), tarkista teksti ja lähetä kuten mikä tahansa
+viesti. Jos valitset myös tekstiviestin, tekstiviestin vastaanottajat saavat
+linkin tiedostoihin. Kun kokouskutsu on lähetetty, kokous merkitään
+kutsutuksi. Voit lähettää lisää kokouskutsuja myöhemmin, esimerkiksi jollekulle,
+joka unohtui.
 
 Viestien lähettäminen kaikille vaatii viestien lähetysoikeuden, joka on vain
 ylläpitäjillä, elleivät he anna sitä hallitukselle.
+
+## Muistutukset
+
+Kokouksen kenttä **Muistutus, päivää ennen** kertoo, milloin kaikki
+kokouskutsun saaneet saavat muistutuksen, johon liitetään esityslista ja
+kalenteritiedosto uudelleen. Oletus on 3 päivää, ellet muuta sitä; jätä kenttä
+tyhjäksi, jos et halua muistutusta. Muistutus lähtee kerran, kyseisen päivän
+aamuna, samaa kanavaa pitkin kuin kokouskutsu. Se jätetään lähettämättä, jos
+kokouskutsu itse lähti kyseisenä päivänä tai sen jälkeen. Jos haluat muistuttaa
+ihmisiä aiemmin, napsauta kokouksen sivulla kohdassa **Kutsut ja
+muistutukset** painiketta **Lähetä muistutus nyt**.
+
+Jos muutat päivämäärää, aikaa tai paikkaa kokouskutsujen lähettämisen
+jälkeen, kokouksen sivulla on painike **Lähetä päivitetty kokouskutsu**.
+Kaikki kutsutut saavat silloin uudet tiedot ja kalenteritiedoston, joka siirtää
+kokouksen heidän kalenterissaan. Siirretystä kokouksesta lähetetään muistutus
+uudelleen ennen uutta päivämäärää.
+
+Jokainen kokouskutsu, muistutus ja päivitys näkyy kokouksen sivulla ja
+kohdassa **Viestit** sekä tieto siitä, ketkä sen saivat.
 
 ## Kokouksessa
 

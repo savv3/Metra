@@ -21,7 +21,11 @@ class MeetingsConfig(AppConfig):
     def ready(self):
         from apps.plugins import api
 
-        from . import member
+        from . import invitations, member
+
+        api.events.message_sent.connect(
+            invitations.mark_called, dispatch_uid="metra_meetings.mark_called"
+        )
 
         api.add_navigation(
             api.NavItem(

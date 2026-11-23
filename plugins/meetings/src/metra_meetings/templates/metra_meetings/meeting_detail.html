@@ -40,7 +40,7 @@
         {% if can_send_notice %}
           <form method="post" action="{% url 'metra_meetings:send_notice' meeting.pk %}" class="inline-form">
             {% csrf_token %}
-            <button type="submit" class="button">{% translate "Send the notice" %}</button>
+            <button type="submit" class="button">{% if send_outs %}{% translate "Send more invitations" %}{% else %}{% translate "Send invitations" %}{% endif %}</button>
           </form>
         {% endif %}
         <form method="post" action="{% url 'metra_meetings:meeting_status' meeting.pk %}" class="inline-form">
@@ -55,9 +55,55 @@
           {% endif %}
         </form>
       </div>
-      {% if can_send_notice %}<p class="help">{% translate "The notice opens as a new message with the agenda attached, so you can choose who gets it and check it before sending." %}</p>{% endif %}
+      {% if can_send_notice %}<p class="help">{% translate "The invitation opens as a new message by email, with the agenda and a calendar file attached, so you can choose who gets it and check it before sending." %}</p>{% endif %}
     {% endif %}
   </section>
+
+  {% if send_outs or meeting.status == "draft" or meeting.status == "called" %}
+    <section class="card" aria-labelledby="meeting-invitations">
+      <h2 id="meeting-invitations">{% translate "Invitations and reminders" %}</h2>
+      {% if needs_update %}
+        <div class="status-panel">
+          <p>{% translate "The date, time or place changed after the invitations went out." %}</p>
+          {% if can_send_notice and not meeting.is_approved %}
+            <form method="post" action="{% url 'metra_meetings:send_update' meeting.pk %}" class="inline-form">
+              {% csrf_token %}
+              <button type="submit" class="button button--primary">{% blocktranslate count count=invitee_count %}Send an updated invitation to {{ count }} person{% plural %}Send an updated invitation to {{ count }} people{% endblocktranslate %}</button>
+            </form>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if send_outs %}
+        <p>{% blocktranslate count count=invitee_count %}{{ count }} person is invited.{% plural %}{{ count }} people are invited.{% endblocktranslate %}
+        {% if meeting.reminded_at %}{% blocktranslate with date=meeting.reminded_at|date:"DATETIME_FORMAT" %}The reminder was sent on {{ date }}.{% endblocktranslate %}
+        {% elif is_future and reminder_date and meeting.status == "called" %}{% blocktranslate with date=reminder_date|date:"DATE_FORMAT" %}A reminder goes out on {{ date }}.{% endblocktranslate %}
+        {% elif not reminder_date %}{% translate "No automatic reminder is set." %}{% endif %}</p>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Invitations and reminders' %}">
+        <table>
+          <thead><tr><th scope="col">{% translate "Sent" %}</th><th scope="col">{% translate "What" %}</th><th scope="col">{% translate "Recipients" %}</th></tr></thead>
+          <tbody>
+            {% for batch in send_outs %}
+              <tr>
+                <td>{% if can_view_messages %}<a href="{{ batch.get_absolute_url }}">{{ batch.created_at|date:"SHORT_DATETIME_FORMAT" }}</a>{% else %}{{ batch.created_at|date:"SHORT_DATETIME_FORMAT" }}{% endif %}</td>
+                <td>{% if batch.source|slice:"-10:" == "invitation" %}{% translate "Invitation" %}{% elif batch.source|slice:"-8:" == "reminder" %}{% translate "Reminder" %}{% else %}{% translate "Updated invitation" %}{% endif %}</td>
+                <td>{{ batch.recipients|length }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>
+        {% if can_send_notice and is_future and not meeting.is_approved and invitee_count %}
+          <form method="post" action="{% url 'metra_meetings:send_reminder' meeting.pk %}" class="inline-form">
+            {% csrf_token %}
+            <button type="submit" class="button">{% blocktranslate count count=invitee_count %}Send a reminder to {{ count }} person now{% plural %}Send a reminder to {{ count }} people now{% endblocktranslate %}</button>
+          </form>
+        {% endif %}
+      {% else %}
+        <p>{% translate "No invitations have been sent yet." %}
+        {% if reminder_date %}{% blocktranslate count days=meeting.remind_days_before %}Everyone invited gets a reminder {{ days }} day before the meeting.{% plural %}Everyone invited gets a reminder {{ days }} days before the meeting.{% endblocktranslate %}{% endif %}</p>
+      {% endif %}
+    </section>
+  {% endif %}
 
   {% if meeting.status == "held" or meeting.is_approved %}
     <section class="card" aria-labelledby="meeting-approval">

@@ -6,6 +6,8 @@ it). Until then, any change to the minutes clears the approvals given so far,
 so checkers always approve what the minutes now say.
 """
 
+import datetime
+
 from auditlog.registry import auditlog
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -13,6 +15,10 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+
+INVITATION = "invitation"
+REMINDER = "reminder"
+UPDATE = "update"
 
 
 class MinutesLocked(ValidationError):
@@ -86,9 +92,26 @@ class Meeting(models.Model):
         related_name="meetings_to_check",
         help_text=_("They approve the minutes in Metra. Everyone listed must approve."),
     )
+    remind_days_before = models.PositiveSmallIntegerField(
+        _("reminder, days before"),
+        null=True,
+        blank=True,
+        default=3,
+        help_text=_(
+            "Everyone who got the invitation gets a reminder this many days before "
+            "the meeting. Empty: no reminder."
+        ),
+    )
     status = models.CharField(
         _("status"), max_length=10, choices=Status.choices, default=Status.DRAFT
     )
+    # When the reminder went out; cleared when the meeting moves, so the
+    # reminder goes again before the new date.
+    reminded_at = models.DateTimeField(_("reminder sent"), null=True, blank=True, editable=False)
+    # When the date, time or place last changed after invitations had gone
+    # out, and the calendar files' version (raised with each update sent).
+    details_changed_at = models.DateTimeField(null=True, blank=True, editable=False)
+    calendar_sequence = models.PositiveIntegerField(default=0, editable=False)
     approved_at = models.DateTimeField(_("minutes approved"), null=True, blank=True)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -136,6 +159,56 @@ class Meeting(models.Model):
         """Raise MinutesLocked when the minutes are approved."""
         if Meeting.objects.filter(pk=self.pk, status=self.Status.APPROVED).exists():
             raise MinutesLocked()
+
+    # Invitations and reminders: send-outs made with Metra's messaging, found
+    # by their source.
+
+    def source(self, kind):
+        return f"metra_meetings:meeting:{self.pk}:{kind}"
+
+    def send_outs(self):
+        """The invitations, reminders and updates sent, newest first."""
+        from apps.plugins import api
+
+        return api.MessageBatch.objects.filter(
+            source__startswith=f"metra_meetings:meeting:{self.pk}:"
+        ).order_by("-created_at", "-pk")
+
+    def invitations(self):
+        return self.send_outs().filter(source=self.source(INVITATION))
+
+    def invitees(self):
+        """(person, unit) for everyone who got an invitation, once each, in
+        the order they were invited. People erased or archived since are left out."""
+        from apps.plugins import api
+
+        pairs, seen = [], set()
+        for batch in self.invitations().order_by("created_at", "pk"):
+            for person_id, unit_id in batch.recipients:
+                if person_id not in seen:
+                    seen.add(person_id)
+                    pairs.append((person_id, unit_id))
+        people = api.Person.objects.filter(archived_at__isnull=True).in_bulk([p for p, _u in pairs])
+        units = api.Unit.objects.in_bulk([u for _p, u in pairs if u])
+        return [(people[p], units.get(u)) for p, u in pairs if p in people]
+
+    def reminder_date(self):
+        """The day the reminder goes out, or None without one."""
+        if self.remind_days_before is None:
+            return None
+        day = timezone.localtime(self.starts_at).date()
+        return day - datetime.timedelta(days=self.remind_days_before)
+
+    def needs_update(self):
+        """The date, time or place changed after the last invitation or update."""
+        if self.details_changed_at is None or self.starts_at <= timezone.now():
+            return False
+        last = (
+            self.send_outs()
+            .filter(source__in=[self.source(INVITATION), self.source(UPDATE)])
+            .first()
+        )
+        return last is not None and self.details_changed_at > last.created_at
 
     # Attendance and votes.
 

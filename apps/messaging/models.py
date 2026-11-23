@@ -104,6 +104,10 @@ class MessageBatch(models.Model):
     # like self-service links, so a copy of the database cannot open it.
     files_token_hash = models.CharField(max_length=64, blank=True, editable=False)
     files_expire_at = models.DateTimeField(_("file link expires"), null=True, blank=True)
+    # What the send-out belongs to, set by a plugin that prepared it (see
+    # apps.plugins.api.message_draft and send_message), for example
+    # "metra_meetings:meeting:5:invitation". Empty for Metra's own.
+    source = models.CharField(max_length=100, blank=True, db_index=True, editable=False)
 
     class Meta:
         ordering = ["-created_at", "-pk"]

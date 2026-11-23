@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
 from apps.core.models import Notice
+from apps.plugins import events
 from apps.readings.models import ReadingRound
 from apps.register.models import Unit
 
@@ -93,6 +94,8 @@ def compose(request):
     if draft := drafts.get(request, request.GET.get("draft")):
         # Prepared elsewhere, for example a plugin's meeting notice.
         initial |= {key: draft[key] for key in ("subject", "body", "email_body", "attachments")}
+        if draft.get("channels"):
+            initial["channels"] = draft["channels"]
     form = MessageForm(
         request.POST or None,
         request.FILES or None,
@@ -142,6 +145,7 @@ def _compose(request, form, unit=None):
                     audience=form.audience_label(),
                     recipients=[[p.pk, u.pk if u else None] for p, u in pairs],
                     created_by=request.user,
+                    source=_draft_source(request, unit),
                 )
                 form.attach(batch, files)
                 if data.get("notice"):
@@ -153,6 +157,7 @@ def _compose(request, form, unit=None):
                     )
                     batch.save(update_fields=["notice"])
                 send_batch_task(batch.pk)
+                events.send_on_commit(events.message_sent, MessageBatch, batch=batch)
                 messages.success(request, _("Sending has started. This page shows how it goes."))
                 return redirect(batch)
         if "edit" not in request.POST:
@@ -179,6 +184,12 @@ def _compose(request, form, unit=None):
                     scope, form.units()
                 )
     return render(request, "messaging/compose.html", context)
+
+
+def _draft_source(request, unit):
+    """The source of the draft the message was written from, if any."""
+    draft = None if unit else drafts.get(request, request.GET.get("draft"))
+    return (draft or {}).get("source", "")[:100]
 
 
 @login_required

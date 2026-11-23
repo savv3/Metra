@@ -1,4 +1,5 @@
-"""The agenda and minutes as PDFs, and the text of the notice of meeting."""
+"""The agenda and minutes as PDFs, and the texts of the notice of meeting
+(the invitation), the reminder and the update when the meeting moves."""
 
 from django.template.defaultfilters import date as date_filter
 from django.template.loader import render_to_string
@@ -64,17 +65,45 @@ def _when(meeting):
     return date_filter(local, "DATE_FORMAT"), date_filter(local, "TIME_FORMAT")
 
 
-def notice_texts(meeting):
-    """(subject, short text, email text) for the notice of meeting. The email
-    text greets each recipient with the {first_name} placeholder."""
+def _values(meeting):
     day, time = _when(meeting)
-    values = {
+    return {
         "kind": meeting.get_kind_display(),
         "title": meeting.title,
         "date": day,
         "time": time,
         "place": meeting.place or "–",
     }
+
+
+def _details(meeting, values):
+    lines = [
+        _("Date: %(date)s") % values,
+        _("Time: %(time)s") % values,
+        _("Place: %(place)s") % values,
+    ]
+    if meeting.notes:
+        lines += ["", meeting.notes]
+    items = meeting.items.all()
+    if items:
+        lines += ["", _("Agenda:")]
+        lines += [f"§ {number}. {item.title}" for number, item in enumerate(items, 1)]
+    return lines
+
+
+def _closing(attached_pdf=True):
+    lines = [""]
+    if attached_pdf:
+        lines.append(_("The agenda is attached as a PDF."))
+    lines.append(_("Open the attached calendar file to add the meeting to your calendar."))
+    return lines
+
+
+def notice_texts(meeting):
+    """(subject, short text, email text) for the notice of meeting, the
+    invitation. The email text greets each recipient with the {first_name}
+    placeholder."""
+    values = _values(meeting)
     subject = _("Notice: %(title)s on %(date)s") % values
     short = (
         _(
@@ -88,15 +117,50 @@ def notice_texts(meeting):
         "",
         _("You are welcome to %(title)s (%(kind)s).") % values,
         "",
-        _("Date: %(date)s") % values,
-        _("Time: %(time)s") % values,
-        _("Place: %(place)s") % values,
+        *_details(meeting, values),
+        *_closing(),
+        "",
+        _("Welcome!"),
+        "{organisation}",
     ]
-    if meeting.notes:
-        lines += ["", meeting.notes]
-    items = meeting.items.all()
-    if items:
-        lines += ["", _("Agenda:")]
-        lines += [f"§ {number}. {item.title}" for number, item in enumerate(items, 1)]
-    lines += ["", _("The agenda is attached as a PDF."), "", _("Welcome!"), "{organisation}"]
+    return subject, short, "\n".join(lines)
+
+
+def reminder_texts(meeting, attached_pdf=True):
+    """(subject, short text, email text) for the reminder before the meeting."""
+    values = _values(meeting)
+    subject = _("Reminder: %(title)s on %(date)s") % values
+    short = _("Reminder: %(title)s on %(date)s at %(time)s, %(place)s. Welcome!") % values
+    lines = [
+        _("Dear {first_name},"),
+        "",
+        _("A reminder that %(title)s (%(kind)s) is coming up.") % values,
+        "",
+        *_details(meeting, values),
+        *_closing(attached_pdf),
+        "",
+        _("Welcome!"),
+        "{organisation}",
+    ]
+    return subject, short, "\n".join(lines)
+
+
+def update_texts(meeting, attached_pdf=True):
+    """(subject, short text, email text) when the date, time or place changed
+    after the invitation."""
+    values = _values(meeting)
+    subject = _("Changed: %(title)s is now on %(date)s") % values
+    short = _("Changed: %(title)s is now on %(date)s at %(time)s, %(place)s. Welcome!") % values
+    lines = [
+        _("Dear {first_name},"),
+        "",
+        _("The date, time or place of %(title)s (%(kind)s) has changed. It is now:") % values,
+        "",
+        *_details(meeting, values),
+        *_closing(attached_pdf),
+        _("If the meeting is already in your calendar, the file updates it."),
+        "",
+        _("Welcome!"),
+        "{organisation}",
+    ]
     return subject, short, "\n".join(lines)

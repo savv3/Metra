@@ -19,7 +19,7 @@ The plugin is turned on by the person running the installation
 ## Prepare the meeting
 
 1. Under **Meetings**, click **New meeting**. Choose the kind, write a title,
-   the date, time and place, and anything else the notice should say. Under
+   the date, time and place, and anything else the invitation should say. Under
    **Agenda**, the meeting starts with the agenda template for its kind
    (see below), or another template, or an empty agenda.
 2. Tick **One vote per unit** if each unit (household or member) has one
@@ -46,14 +46,35 @@ look at them.
 
 ## Call the meeting
 
-Click **Send the notice**. A new message opens with the notice written and
-the agenda attached as a PDF. Choose who gets it (for example everyone, or
-only each unit's main contact), check the text and send as with any message.
-Email recipients get the agenda as an attachment; SMS recipients get a link.
-Then click **Mark as called**.
+Click **Send invitations**. A new message opens with the invitation written,
+the agenda attached as a PDF and a calendar file attached, so people can add
+the meeting to their calendar with one click. It is set to go by email;
+choose who gets it (for example everyone, only each unit's main contact, or
+the people tagged as the board), check the text and send as with any
+message. If you choose SMS as well, SMS recipients get a link to the files.
+Once the invitation is sent, the meeting is marked as called. You can send
+more invitations later, for example to someone who was missed.
 
 Sending messages to everyone needs the right to send messages, which only
 admins have unless they give it to the board.
+
+## Reminders
+
+**Reminder, days before** on the meeting says when everyone who got the
+invitation gets a reminder, with the agenda and the calendar file again. It
+is 3 days unless you change it; leave it empty for no reminder. The reminder
+goes out once, in the morning of that day, by the same channel as the
+invitation. It is skipped if the invitation itself went out on or after that
+day. To remind people sooner, click **Send a reminder now** under
+**Invitations and reminders** on the meeting's page.
+
+If you change the date, time or place after the invitations went out, the
+meeting's page offers **Send an updated invitation**. Everyone invited then
+gets the new details and a calendar file that moves the meeting in their
+calendar. A meeting that moved gets its reminder again before the new date.
+
+Each invitation, reminder and update is listed on the meeting's page and
+under **Messages**, with who got it.
 
 ## At the meeting
 

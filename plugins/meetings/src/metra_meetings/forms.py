@@ -45,6 +45,7 @@ class MeetingForm(forms.ModelForm):
             "starts_at",
             "place",
             "notes",
+            "remind_days_before",
             "votes_by_unit",
             "members_can_read",
             "chair",
