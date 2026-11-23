@@ -3,21 +3,28 @@
 ## Email settings
 
 An admin decides how email is sent under **Settings > Email**, which is also a
-step of the setup wizard. Choose **SMTP** to send through the association's own
-mail account: enter the **Mail server**, **Port**, **Encryption**, **User name**
-and **Password** your email provider gives you. An add-on can offer a sending
-service instead. Set the **From address** members see, and a **Reply-To
-address** if replies should go somewhere else. All email from Metra goes this
-way, including login codes and invitations. **Send test email** checks that it
-works. A saved password is never shown again: leave the field empty to keep it.
-A field that is greyed out is set on the server and cannot be changed in the
-app.
+step of the setup wizard. The page shows only the fields for the way you
+choose. Choose **SMTP** to send through the association's own mail account:
+enter the **Mail server**, **Port**, **Encryption**, **User name** and
+**Password** your email provider gives you. A sending service such as Mailgun
+is an add-on: turn it on under **Settings > Add-ons** and it can be chosen
+here, and the page links to the add-on's own page, where its account details
+are entered. Set the **From address** members see, either an address alone
+(`noreply@example.fi`) or a name and an address (`Kasvikens vatten
+<noreply@example.fi>`), and a **Reply-To address** if replies should go
+somewhere else. All email from Metra goes this way, including login codes and
+invitations. **Send test email** checks that it works; it needs the from
+address to be set. A saved password is never shown again: leave the field
+empty to keep it. A field that is greyed out is set on the server and cannot
+be changed in the app.
 
 ### Mailgun
 
 The **Mailgun** add-on sends email through Mailgun instead. Enter the
 **Sending domain**, **API key** and **Region** under **Settings > Add-ons >
-Mailgun**, then choose **Mailgun** under **Settings > Email**. With the
+Mailgun**, then choose **Mailgun** under **Settings > Email**. The add-on's
+page can send a test through Mailgun before it is chosen, using the from
+address set under **Settings > Email**. With the
 **Webhook signing key** filled in and the webhook added at Mailgun (see the
 installation guide), each message's status shows whether it was delivered.
 When an email bounces, the message is marked failed and the person's page

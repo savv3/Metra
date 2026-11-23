@@ -208,6 +208,7 @@ def plugin_settings(request, name):
                 {
                     "channel": provider_class.channel,
                     "to": request.user.email if provider_class.channel == EMAIL else "",
+                    "in_use": _in_use(provider_class),
                 }
                 for provider_class in providers.values()
             ],
@@ -220,6 +221,13 @@ def _providers(name):
     from apps.messaging.registry import registry
 
     return {provider_class.channel: provider_class for provider_class in registry.of_plugin(name)}
+
+
+def _in_use(provider_class):
+    """True when the installation sends this channel through the provider."""
+    from apps.messaging.registry import provider_for
+
+    return getattr(provider_for(provider_class.channel), "name", None) == provider_class.name
 
 
 def _send_test(request, name, providers):

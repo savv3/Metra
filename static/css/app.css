@@ -403,6 +403,7 @@ fieldset li label { font-weight: 400; display: flex; gap: 0.5rem; align-items: c
 .errorlist-box .errorlist { margin: 0; }
 .notice { background: var(--info-bg); padding: 0.75rem 1rem; border-radius: var(--radius-small); }
 .form--narrow { max-width: 24rem; }
+.form > .notice { margin: 0 0 1rem; }
 .form--inline { max-width: 32rem; }
 
 /* Filters */

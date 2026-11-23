@@ -9,6 +9,8 @@ fakturor.
 Menyn finns till vänster, uppdelad i avsnitt: **Register**, **Ekonomi**,
 **Kommunikation** och **Tillägg** för tillägg som inte hör till något av de
 andra. Påslagna tillägg som Bokföring och Möten syns under sitt avsnitt.
+Administratörer hittar också **Hantera tillägg** under **Tillägg**, för att
+slå på och av tillägg och öppna deras inställningar.
 **Inställningar** och **Hjälp** finns längst ner. På en telefon öppnar du
 menyn med knappen uppe till vänster.
 

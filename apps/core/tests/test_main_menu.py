@@ -102,3 +102,20 @@ def test_phones_get_a_button_that_opens_the_menu(board_client):
 
     assert 'class="menu-button" href="#main-menu"' in page
     assert 'id="main-menu"' in page
+
+
+def test_add_ons_are_always_in_the_menu_for_admins(role_client, make_user):
+    from django.test import Client
+
+    admin = role_client("Admin")
+    html = menu(admin)
+    addons = html.split("<h2>Add-ons</h2>", 1)[1].split("</ul>", 1)[0]
+    page = admin.get(reverse("plugins:list"), HTTP_ACCEPT_LANGUAGE="en").content.decode()
+    menu_part, end = page.split('class="side-nav__end"', 1)
+    reader = Client()
+    reader.force_login(make_user("reader", "Read-only"))
+
+    assert "Manage add-ons</a>" in addons
+    assert f'href="{reverse("plugins:list")}" aria-current="page"' in menu_part
+    assert 'aria-current="page"' not in end.split("</nav>", 1)[0]
+    assert reverse("plugins:list") not in menu(reader)

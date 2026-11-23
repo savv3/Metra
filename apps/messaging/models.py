@@ -384,9 +384,11 @@ class EmailSettings(models.Model):
     security = models.CharField(
         _("encryption"), max_length=4, choices=Security.choices, default=Security.STARTTLS
     )
-    from_email = models.EmailField(_("from address"), blank=True)
-    reply_to = models.EmailField(
+    # A bare address or "Name <address>"; checked by the form (email_forms.AddressField).
+    from_email = models.CharField(_("from address"), max_length=254, blank=True)
+    reply_to = models.CharField(
         _("Reply-To address"),
+        max_length=254,
         blank=True,
         help_text=_("Where replies go, if not to the from address."),
     )

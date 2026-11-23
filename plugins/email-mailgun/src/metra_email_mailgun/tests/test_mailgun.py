@@ -266,3 +266,51 @@ def test_without_a_signing_key_events_are_refused(client, mailgun, monkeypatch, 
     monkeypatch.delenv("METRA_MAILGUN_WEBHOOK_KEY")
 
     assert event(client, "delivered", "m1").status_code == 406
+
+
+def test_the_email_settings_page_says_where_mailguns_details_go(role_client, db):
+    client = role_client("Admin")
+    url = reverse("messaging:email_settings")
+
+    client.post(url, {"provider": "mailgun", "from_email": "Vatten <vatten@example.fi>"})
+    page = client.get(url).content.decode()
+
+    assert f'<a href="{SETTINGS}">Settings &rsaquo; Add-ons &rsaquo; Mailgun</a>' in page
+    assert "Not set up" in page
+
+
+def test_saving_mailgun_without_its_details_warns(role_client, db):
+    response = role_client("Admin").post(
+        reverse("messaging:email_settings"),
+        {"provider": "mailgun", "from_email": "vatten@example.fi"},
+        follow=True,
+    )
+
+    assert "Mailgun is chosen, but its account details are missing." in response.content.decode()
+
+
+def test_the_add_on_test_needs_a_from_address(role_client, mailgun, posted):
+    client = role_client("Admin")
+
+    page = client.get(SETTINGS).content.decode()
+    response = client.post(
+        SETTINGS, {"action": "test", "channel": "email", "to": "me@example.com"}, follow=True
+    )
+
+    assert "Email is not sent through Mailgun yet." in page
+    assert "Enter the from address under Settings &gt; Email first." in response.content.decode()
+    assert posted == []
+
+
+def test_mailgun_sends_with_the_name_in_the_from_address(role_client, mailgun, posted):
+    client = role_client("Admin")
+    client.post(
+        reverse("messaging:email_settings"),
+        {"provider": "mailgun", "from_email": "Metra <noreply@example.fi>"},
+    )
+
+    page = client.get(SETTINGS).content.decode()
+    Mailgun().send("anna@example.com", "Hej", subject="Test")
+
+    assert "Email is not sent through Mailgun yet." not in page
+    assert ("from", "Metra <noreply@example.fi>") in text_fields(posted[-1][2])

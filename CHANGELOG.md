@@ -28,6 +28,23 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   going out, and `api.plugin_enabled()` tells a periodic task whether its
   plugin is on. Calendar files (.ics) can be attached to messages.
 
+### Changed
+
+- The menu always has **Manage add-ons** under **Add-ons** for admins, so
+  add-ons are one click away instead of under Settings.
+- **Settings > Email** shows only the fields for the chosen way of sending:
+  the SMTP fields only for SMTP, and for an add-on such as Mailgun a link to
+  the add-on's page where its sending domain and API key are entered, with
+  whether they are filled in. Saving an add-on that lacks them warns.
+- The **From address** and **Reply-To address** take a name as well as an
+  address, such as `Kasvikens vatten <noreply@example.fi>`.
+
+### Fixed
+
+- A test email, from **Settings > Email** or an add-on's page, is no longer
+  sent before a from address is set (it went out as `register@localhost`).
+  An email add-on's page says when email is not sent through it yet.
+
 ## [0.6.0] - 2026-11-20
 
 ### Added

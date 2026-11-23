@@ -14,8 +14,8 @@ from apps.plugins import events
 from apps.readings.models import ReadingRound
 from apps.register.models import Unit
 
-from . import attachments, broadcast, drafts, newsletter
-from .email_forms import EmailSettingsForm
+from . import attachments, broadcast, drafts, email_config, newsletter
+from .email_forms import EmailSettingsForm, add_on_providers
 from .forms import ConsentForm, MessageForm, NewsletterForm
 from .models import Attachment, ConsentRecord, Message, MessageBatch, MessageTemplate
 from .registry import EMAIL, SMS, ProviderError, provider_for
@@ -366,6 +366,8 @@ def send_test(request, provider, channel, to):
             raise ProviderError(
                 _("Enter an email address.") if channel == EMAIL else _("Enter a phone number.")
             )
+        if channel == EMAIL and not email_config.current().from_is_set:
+            raise ProviderError(_("Enter the from address under Settings > Email first."))
         provider.send(
             to,
             _("This is a test message from Metra. If you got it, sending works."),
@@ -376,6 +378,21 @@ def send_test(request, provider, channel, to):
         return False
     messages.success(request, _("Test sent to %(to)s.") % {"to": to})
     return True
+
+
+def warn_if_add_on_not_set_up(request):
+    """After saving: say so when the chosen add-on still lacks its account details."""
+    choice = email_config.current().choice
+    for add_on in add_on_providers():
+        if add_on["name"] == choice and not add_on["configured"]:
+            messages.warning(
+                request,
+                _(
+                    "%(label)s is chosen, but its account details are missing. Enter them under "
+                    "Settings > Add-ons > %(label)s."
+                )
+                % {"label": add_on["label"]},
+            )
 
 
 def send_test_email(request, to):
@@ -393,6 +410,7 @@ def email_settings(request):
     if request.method == "POST" and form.is_valid():
         form.save()
         messages.success(request, _("Saved the email settings."))
+        warn_if_add_on_not_set_up(request)
         return redirect("messaging:email_settings")
     return render(
         request,

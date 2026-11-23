@@ -36,6 +36,10 @@
     <h2>{% translate "Send a test" %}</h2>
     {% if plugin.enabled %}
       <p class="help">{% translate "Save the settings first. The test goes through this add-on even if another one is chosen for sending." %}</p>
+      {% if test.channel == "email" and not test.in_use %}
+        {% url 'messaging:email_settings' as email_settings %}
+        <p class="notice">{% blocktranslate with label=plugin.label %}Email is not sent through {{ label }} yet. To use it for all email, choose it under <a href="{{ email_settings }}">Settings &rsaquo; Email</a>, where the from address is set too.{% endblocktranslate %}</p>
+      {% endif %}
       <form method="post" class="form form--inline">
         {% csrf_token %}
         <input type="hidden" name="action" value="test">

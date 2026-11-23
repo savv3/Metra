@@ -3,28 +3,35 @@
 ## E-postinställningar
 
 En administratör bestämmer hur e-post skickas under **Inställningar > E-post**,
-som också är ett steg i installationsguiden. Välj **SMTP** för att skicka via
-föreningens eget e-postkonto: ange **E-postserver**, **Port**, **Kryptering**,
-**Användarnamn** och **Lösenord** som din e-postleverantör ger dig. Ett tillägg
-kan i stället erbjuda en sändningstjänst. Ange **Avsändaradress** som
-medlemmarna ser, och en **Svarsadress** om svaren ska gå någon annanstans. All
-e-post från Metra skickas på det här sättet, också inloggningskoder och
-inbjudningar. **Skicka testmejl** kontrollerar att det fungerar. Ett sparat
-lösenord visas aldrig igen: lämna fältet tomt för att behålla det. Ett fält som
-är nedtonat är inställt på servern och kan inte ändras i appen.
+som också är ett steg i installationsguiden. Sidan visar bara de fält som hör
+till det sätt du väljer. Välj **SMTP** för att skicka via föreningens eget
+e-postkonto: ange **E-postserver**, **Port**, **Kryptering**,
+**Användarnamn** och **Lösenord** som din e-postleverantör ger dig. En
+sändningstjänst som Mailgun är ett tillägg: slå på det under **Inställningar >
+Tillägg** så kan det väljas här, och sidan länkar till tilläggets egen sida, där
+kontouppgifterna anges. Ange **Avsändaradress** som medlemmarna ser, antingen
+en adress ensam (`noreply@example.fi`) eller ett namn och en adress (`Kasvikens
+vatten <noreply@example.fi>`), och en **Svarsadress** om svaren ska gå någon
+annanstans. All e-post från Metra skickas på det här sättet, också
+inloggningskoder och inbjudningar. **Skicka testmejl** kontrollerar att det
+fungerar; avsändaradressen måste vara ifylld. Ett sparat lösenord visas aldrig
+igen: lämna fältet tomt för att behålla det. Ett fält som är nedtonat är inställt
+på servern och kan inte ändras i appen.
 
 ### Mailgun
 
 Tillägget **Mailgun** skickar i stället e-posten via Mailgun. Fyll i
 **Avsändardomän**, **API-nyckel** och **Region** under **Inställningar >
 Tillägg > Mailgun**, och välj sedan **Mailgun** under **Inställningar >
-E-post**. När **Signeringsnyckel för webhooks** är ifylld och webhooken är
-tillagd hos Mailgun (se installationsanvisningen) visar varje meddelandes
-status om det levererades. När ett e-postmeddelande studsar markeras
-meddelandet som misslyckat, och personens sida visar **Studsade** bredvid
-adressen, med Mailguns orsak. Kontrollera adressen med personen och rätta den;
-en ny adress tar bort markeringen. Ett meddelande som mottagaren markerat som
-skräppost noteras på meddelandet.
+E-post**. Tilläggets sida kan skicka ett testmeddelande via Mailgun innan det
+väljs, med avsändaradressen från **Inställningar > E-post**. När
+**Signeringsnyckel för webhooks** är ifylld och webhooken är tillagd hos Mailgun
+(se installationsanvisningen) visar varje meddelandes status om det levererades.
+När ett e-postmeddelande studsar markeras meddelandet som misslyckat, och
+personens sida visar **Studsade** bredvid adressen, med Mailguns orsak.
+Kontrollera adressen med personen och rätta den; en ny adress tar bort
+markeringen. Ett meddelande som mottagaren markerat som skräppost noteras på
+meddelandet.
 
 ## Att skriva till många hushåll
 

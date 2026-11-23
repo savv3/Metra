@@ -3,29 +3,36 @@
 ## Sähköpostiasetukset
 
 Ylläpitäjä päättää, miten sähköposti lähetetään, kohdassa **Asetukset >
-Sähköposti**, joka on myös yksi käyttöönoton vaiheista. Valitse **SMTP**, jos
-haluat lähettää yhdistyksen oman sähköpostitilin kautta: anna
-**Sähköpostipalvelin**, **Portti**, **Salaus**, **Käyttäjätunnus** ja
-**Salasana**, jotka saat sähköpostin tarjoajaltasi. Lisäosa voi tarjota
-sen sijaan lähetyspalvelun. Aseta **Lähettäjän osoite**, jonka jäsenet näkevät,
-ja **Vastausosoite**, jos vastausten pitää mennä muualle. Kaikki Metran
-sähköposti lähetetään näin, myös kirjautumiskoodit ja kutsut. **Lähetä
-testisähköposti** tarkistaa, että lähetys toimii. Tallennettua salasanaa ei
-näytetä enää koskaan: jätä kenttä tyhjäksi, jos haluat säilyttää sen. Harmaa
-kenttä on asetettu palvelimella, eikä sitä voi muuttaa sovelluksessa.
+Sähköposti**, joka on myös yksi käyttöönoton vaiheista. Sivulla näkyvät vain
+valitun tavan kentät. Valitse **SMTP**, jos haluat lähettää yhdistyksen oman
+sähköpostitilin kautta: anna **Sähköpostipalvelin**, **Portti**, **Salaus**,
+**Käyttäjätunnus** ja **Salasana**, jotka saat sähköpostin tarjoajaltasi.
+Lähetyspalvelu, kuten Mailgun, on lisäosa: ota se käyttöön kohdassa
+**Asetukset > Lisäosat**, niin se voi olla valittavissa täällä. Sivu linkittää
+lisäosan omalle sivulle, jossa tilitiedot annetaan. Aseta jäsenten näkemä
+**Lähettäjän osoite**, joko pelkkä osoite (`noreply@example.fi`) tai nimi ja
+osoite (`Kasvikens vatten <noreply@example.fi>`), ja **Vastausosoite**, jos
+vastausten pitää mennä muualle. Kaikki Metran sähköposti lähetetään näin, myös
+kirjautumiskoodit ja kutsut. **Lähetä testisähköposti** tarkistaa, että
+lähetys toimii; lähettäjän osoitteen pitää olla asetettu. Tallennettua
+salasanaa ei näytetä enää koskaan: jätä kenttä tyhjäksi, jos haluat säilyttää
+sen. Harmaa kenttä on asetettu palvelimella, eikä sitä voi muuttaa
+sovelluksessa.
 
 ### Mailgun
 
 **Mailgun**-lisäosa lähettää sähköpostin sen sijaan Mailgunin kautta. Anna
 **Lähetysverkkotunnus**, **API-avain** ja **Alue** kohdassa **Asetukset >
 Lisäosat > Mailgun** ja valitse sitten **Mailgun** kohdassa **Asetukset >
-Sähköposti**. Kun **Webhookien allekirjoitusavain** on annettu ja webhook on
-lisätty Mailgunissa (katso asennusohje), jokaisen viestin tila näyttää, onko
-se toimitettu. Kun sähköposti palautuu, viesti merkitään epäonnistuneeksi, ja
-henkilön sivulla näkyy osoitteen vieressä **Palautui** sekä Mailgunin
-ilmoittama syy. Tarkista osoite henkilöltä ja korjaa se; uusi osoite poistaa
-merkinnän. Jos vastaanottaja merkitsi viestin roskapostiksi, se näkyy
-viestissä.
+Sähköposti**. Lisäosan sivu voi lähettää testiviestin Mailgunin kautta jo ennen
+kuin se valitaan, ja se käyttää kohdassa **Asetukset > Sähköposti** asetettua
+lähettäjän osoitetta. Kun **Webhookien allekirjoitusavain** on annettu ja
+webhook on lisätty Mailgunissa (katso asennusohje), jokaisen viestin tila
+näyttää, onko se toimitettu. Kun sähköposti palautuu, viesti merkitään
+epäonnistuneeksi, ja henkilön sivulla näkyy osoitteen vieressä **Palautui**
+sekä Mailgunin ilmoittama syy. Tarkista osoite henkilöltä ja korjaa se; uusi
+osoite poistaa merkinnän. Jos vastaanottaja merkitsi viestin roskapostiksi, se
+näkyy viestissä.
 
 **Lähetykset > Uusi viesti** kirjoittaa yhden viestin kaikille, tunnisteella
 merkityille yksiköille tai henkilöille, tietyn tyyppisille yksiköille tai suodattamasi listan

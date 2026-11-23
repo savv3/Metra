@@ -8,7 +8,9 @@ kerää lukemat, lähettää viestejä ja uutiskirjeitä sekä tekee laskut.
 Valikko on vasemmalla, osioihin jaettuna: **Rekisteri**, **Talous**,
 **Viestintä** sekä **Lisäosat** niille lisäosille, jotka eivät kuulu muihin.
 Käyttöön otetut lisäosat, kuten Kirjanpito ja Kokoukset, näkyvät omassa
-osiossaan. **Asetukset** ja **Ohje** ovat alimpana. Puhelimessa valikko
+osiossaan. Ylläpitäjät löytävät **Lisäosat**-osiosta myös kohdan **Hallitse
+lisäosia**, josta lisäosat otetaan käyttöön tai poistetaan käytöstä ja niiden
+asetukset avataan. **Asetukset** ja **Ohje** ovat alimpana. Puhelimessa valikko
 avautuu vasemman yläkulman painikkeesta.
 
 - **Yksiköt** ja **Henkilöt**: rekisteri. Jos yksikkötyyppejä on vain yksi, valikko käyttää sen omaa nimeä (esimerkiksi **Mökit**).
