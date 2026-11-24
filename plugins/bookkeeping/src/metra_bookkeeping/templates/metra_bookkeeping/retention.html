@@ -41,7 +41,7 @@
               <td class="num">{{ row.invoices }}</td>
               <td>{{ row.year.vouchers_kept_until|date:"SHORT_DATE_FORMAT" }}</td>
               <td>{{ row.year.books_kept_until|date:"SHORT_DATE_FORMAT" }}</td>
-              <td>{% if row.state == "keep" %}{% translate "Keep everything" %}{% elif row.state == "vouchers_passed" %}{% translate "Vouchers and receipts may be removed; keep the books" %}{% else %}{% translate "May be removed" %}{% endif %}</td>
+              <td>{% if row.state == "keep" %}{% translate "Keep everything" %}{% elif row.state == "vouchers_passed" %}{% translate "Minimum passed for vouchers and receipts; keep the books" %}{% else %}{% translate "Minimum passed" %}{% endif %}</td>
             </tr>
           {% endfor %}
         </tbody>
@@ -52,7 +52,10 @@
   {% endif %}
   <h2>{% translate "Nothing is removed automatically" %}</h2>
   <p>{% blocktranslate trimmed %}
-    These are the shortest times the law allows, and Metra keeps everything after them as well.
+    These are the shortest times the Accounting Act allows, and Metra keeps everything after
+    them as well. Other rules can require keeping material longer: the terms of a grant, the
+    10-year VAT adjustment period of a property investment, or an open tax audit, appeal or
+    dispute. Check those before removing anything.
     Removing a year whose time has passed is not offered in Metra yet; when it is due, export
     the year first and decide with the board and the auditor.
   {% endblocktranslate %}</p>

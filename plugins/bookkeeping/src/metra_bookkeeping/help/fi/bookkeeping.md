@@ -155,10 +155,16 @@ vuotta sen kalenterivuoden lopusta, jona tilikausi päättyi. Laskutuksesta
 kirjatut laskut, hyvityslaskut ja suoritukset ovat tositteiden perusteena,
 ja ne säilytetään yhtä kauan. **Kuinka kauan kirjanpito säilytetään**,
 johon on linkki tilikausien luettelosta, näyttää kaikki tilikaudet yhdessä:
-tositteet, kuitit ja laskut, kaksi päivämäärää ja sen, voiko jotakin jo
-poistaa.
+tositteet, kuitit ja laskut, kaksi päivämäärää ja sen, onko lain
+vähimmäisaika jo kulunut.
 
-Nämä ovat lyhimmät lain sallimat ajat. Mitään ei poisteta automaattisesti,
+Nämä ovat lyhimmät kirjanpitolain sallimat ajat. Muut säännöt voivat
+vaatia aineiston säilyttämistä pidempään: avustuksen ehdot
+(vesihuoltoverkkojen avustukset edellyttävät usein vähintään 10 vuotta),
+kiinteistöinvestoinnin arvonlisäveron 10 vuoden tarkistuskausi tai
+keskeneräinen verotarkastus, muutoksenhaku tai riita. Sivu kertoo, milloin
+kirjanpitolain vähimmäisaika on kulunut, ei sitä, että aineiston saa
+poistaa. Mitään ei poisteta automaattisesti,
 eikä määräajan ylittäneen tilikauden poistamista vielä tarjota Metrassa:
 kun sen aika koittaa, vie tilikausi ensin ja päätä asiasta hallituksen ja
 tilintarkastajan kanssa. Kun kirjanpidossa on kirjattuja tositteita,

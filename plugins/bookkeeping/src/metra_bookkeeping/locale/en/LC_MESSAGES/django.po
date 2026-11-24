@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-24 18:58+0200\n"
+"POT-Creation-Date: 2026-11-24 19:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps.py:9 apps.py:31 apps.py:50 templates/metra_bookkeeping/_nav.html:2
+#: apps.py:9 apps.py:32 apps.py:51 templates/metra_bookkeeping/_nav.html:2
 #: templates/metra_bookkeeping/index.html:3
 #: templates/metra_bookkeeping/index.html:6
 msgid "Bookkeeping"
@@ -29,24 +29,24 @@ msgid ""
 "Double-entry books with vouchers, journal and ledger, under Finnish rules."
 msgstr ""
 
-#: apps.py:40 templates/metra_bookkeeping/_nav.html:14
+#: apps.py:41 templates/metra_bookkeeping/_nav.html:14
 #: templates/metra_bookkeeping/posting_settings.html:3
 #: templates/metra_bookkeeping/posting_settings.html:5
 msgid "Bookkeeping of invoices"
 msgstr ""
 
-#: apps.py:43
+#: apps.py:44
 msgid ""
 "The accounts and voucher series invoices and payments are booked to, and VAT."
 msgstr ""
 
-#: apps.py:70
+#: apps.py:71
 msgid ""
 "The books have posted vouchers, which must be kept readable for the legal "
 "period, so bookkeeping stays on."
 msgstr ""
 
-#: archive.py:118 archive.py:167
+#: archive.py:119 archive.py:168
 #: templates/metra_bookkeeping/_budget_table.html:6
 #: templates/metra_bookkeeping/_journal_table.html:7
 #: templates/metra_bookkeeping/_trial_balance_table.html:6
@@ -58,22 +58,22 @@ msgstr ""
 msgid "Account"
 msgstr ""
 
-#: archive.py:119 archive.py:168 views.py:1040 views.py:1068 views.py:1131
+#: archive.py:120 archive.py:169 views.py:1040 views.py:1068 views.py:1131
 #: views.py:1239
 msgid "Account name"
 msgstr ""
 
-#: archive.py:120 archive.py:161
+#: archive.py:121 archive.py:162
 #: templates/metra_bookkeeping/account_list.html:16
 #: templates/metra_bookkeeping/voucher_detail.html:41
 msgid "Kind"
 msgstr ""
 
-#: archive.py:121
+#: archive.py:122
 msgid "Opening balance"
 msgstr ""
 
-#: archive.py:122 archive.py:170
+#: archive.py:123 archive.py:171
 #: templates/metra_bookkeeping/_journal_table.html:8
 #: templates/metra_bookkeeping/_ledger_table.html:8
 #: templates/metra_bookkeeping/_trial_balance_table.html:7
@@ -84,7 +84,7 @@ msgstr ""
 msgid "Debit"
 msgstr ""
 
-#: archive.py:123 archive.py:171
+#: archive.py:124 archive.py:172
 #: templates/metra_bookkeeping/_journal_table.html:8
 #: templates/metra_bookkeeping/_ledger_table.html:8
 #: templates/metra_bookkeeping/_trial_balance_table.html:8
@@ -95,31 +95,31 @@ msgstr ""
 msgid "Credit"
 msgstr ""
 
-#: archive.py:124
+#: archive.py:125
 msgid "Closing balance"
 msgstr ""
 
-#: archive.py:148
+#: archive.py:149
 #, python-format
 msgid "%(source)s, invoice %(number)s"
 msgstr ""
 
-#: archive.py:157 models.py:417
+#: archive.py:158 models.py:417
 #: templates/metra_bookkeeping/_journal_table.html:6
 #: templates/metra_bookkeeping/_ledger_table.html:7 views.py:1040 views.py:1068
 msgid "Voucher"
 msgstr ""
 
-#: archive.py:158 templates/metra_bookkeeping/voucher_detail.html:43
+#: archive.py:159 templates/metra_bookkeeping/voucher_detail.html:43
 msgid "Series"
 msgstr ""
 
-#: archive.py:159 templates/metra_bookkeeping/_voucher_table.html:6
+#: archive.py:160 templates/metra_bookkeeping/_voucher_table.html:6
 #: templates/metra_bookkeeping/account_list.html:16
 msgid "Number"
 msgstr ""
 
-#: archive.py:160 templates/metra_bookkeeping/_journal_table.html:6
+#: archive.py:161 templates/metra_bookkeeping/_journal_table.html:6
 #: templates/metra_bookkeeping/_ledger_table.html:7
 #: templates/metra_bookkeeping/_voucher_table.html:7
 #: templates/metra_bookkeeping/voucher_detail.html:38 views.py:1040
@@ -127,7 +127,7 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: archive.py:162 templates/metra_bookkeeping/_journal_table.html:7
+#: archive.py:163 templates/metra_bookkeeping/_journal_table.html:7
 #: templates/metra_bookkeeping/_ledger_table.html:7
 #: templates/metra_bookkeeping/_voucher_table.html:8
 #: templates/metra_bookkeeping/voucher_detail.html:39
@@ -136,68 +136,68 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: archive.py:163 templates/metra_bookkeeping/voucher_detail.html:44
+#: archive.py:164 templates/metra_bookkeeping/voucher_detail.html:44
 msgid "Reverses"
 msgstr ""
 
-#: archive.py:164
+#: archive.py:165
 msgid "Corrects the year"
 msgstr ""
 
-#: archive.py:165
+#: archive.py:166
 msgid "From invoicing"
 msgstr ""
 
-#: archive.py:166
+#: archive.py:167
 msgid "Line"
 msgstr ""
 
-#: archive.py:169
+#: archive.py:170
 msgid "Line description"
 msgstr ""
 
-#: archive.py:172 forms.py:162 models.py:749
+#: archive.py:173 forms.py:162 models.py:749
 #: templates/metra_bookkeeping/_vat_table.html:39
 #: templates/metra_bookkeeping/voucher_detail.html:55
 #: templates/metra_bookkeeping/voucher_form.html:26 views.py:1296
 msgid "VAT"
 msgstr ""
 
-#: archive.py:173 models.py:752 models.py:1048
+#: archive.py:174 models.py:752 models.py:1048
 msgid "VAT rate (%)"
 msgstr ""
 
-#: archive.py:174 templates/metra_bookkeeping/retention.html:28
+#: archive.py:175 templates/metra_bookkeeping/retention.html:28
 #: templates/metra_bookkeeping/voucher_detail.html:75
 #: templates/metra_bookkeeping/year_export.html:18
 msgid "Receipts"
 msgstr ""
 
-#: archive.py:310
+#: archive.py:319
 #, python-format
 msgid ""
 "The books of %(organisation)s for the financial year %(year)s (%(start)s to "
 "%(end)s)."
 msgstr ""
 
-#: archive.py:312
+#: archive.py:321
 #, python-format
 msgid ""
 "Status of the year: %(status)s. Exported from Metra %(version)s on %(made)s."
 msgstr ""
 
-#: archive.py:316
+#: archive.py:325
 msgid ""
 "The year is still open, so these books are preliminary and may still change."
 msgstr ""
 
-#: archive.py:321
+#: archive.py:330
 msgid ""
 "accounts.csv: the chart of accounts with each account's opening balance, "
 "debits, credits and closing balance for the year."
 msgstr ""
 
-#: archive.py:325
+#: archive.py:334
 #, python-format
 msgid ""
 "vouchers.csv: every line of the %(vouchers)s posted vouchers in date order, "
@@ -205,24 +205,24 @@ msgid ""
 "amounts. Drafts are not part of the books and are left out."
 msgstr ""
 
-#: archive.py:330
+#: archive.py:339
 #, python-format
 msgid "receipts/: the %(receipts)s attached receipts, in a folder per voucher."
 msgstr ""
 
-#: archive.py:332
+#: archive.py:341
 msgid ""
 "books.se: the same year in SIE 4 for accounting software, encoded in PC8 "
 "(code page 437). Opening balances are #IB, the other vouchers #VER."
 msgstr ""
 
-#: archive.py:337
+#: archive.py:346
 msgid ""
 "The CSV files are UTF-8, separated by semicolons, with dates as YYYY-MM-DD "
 "and a comma for decimals. Balances are debits minus credits, in euros."
 msgstr ""
 
-#: archive.py:342
+#: archive.py:351
 #, python-format
 msgid ""
 "Keep the financial statements, journal, ledger, chart of accounts and list "
@@ -231,7 +231,7 @@ msgid ""
 "financial statements, journal and ledger."
 msgstr ""
 
-#: archive.py:373
+#: archive.py:382
 msgid "The file of this receipt was not found on the server."
 msgstr ""
 
@@ -2055,11 +2055,11 @@ msgid "Keep everything"
 msgstr ""
 
 #: templates/metra_bookkeeping/retention.html:44
-msgid "Vouchers and receipts may be removed; keep the books"
+msgid "Minimum passed for vouchers and receipts; keep the books"
 msgstr ""
 
 #: templates/metra_bookkeeping/retention.html:44
-msgid "May be removed"
+msgid "Minimum passed"
 msgstr ""
 
 #: templates/metra_bookkeeping/retention.html:53
@@ -2068,17 +2068,20 @@ msgstr ""
 
 #: templates/metra_bookkeeping/retention.html:54
 msgid ""
-"These are the shortest times the law allows, and Metra keeps everything "
-"after them as well. Removing a year whose time has passed is not offered in "
-"Metra yet; when it is due, export the year first and decide with the board "
-"and the auditor."
+"These are the shortest times the Accounting Act allows, and Metra keeps "
+"everything after them as well. Other rules can require keeping material "
+"longer: the terms of a grant, the 10-year VAT adjustment period of a "
+"property investment, or an open tax audit, appeal or dispute. Check those "
+"before removing anything. Removing a year whose time has passed is not "
+"offered in Metra yet; when it is due, export the year first and decide with "
+"the board and the auditor."
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:59
+#: templates/metra_bookkeeping/retention.html:62
 msgid "Personal data in the books"
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:60
+#: templates/metra_bookkeeping/retention.html:63
 msgid ""
 "Vouchers, receipts and the invoices they rest on can name members and "
 "suppliers. They are bookkeeping material that the law requires to be kept, "

@@ -212,6 +212,7 @@ def test_retention_page(db, treasurer, year_books):
     assert states == ["passed", "vouchers_passed", "keep"]
     assert page.context["rows"][-1]["receipts"] == 1
     assert b"Nothing is removed automatically" in page.content
+    assert b"Minimum passed" in page.content
 
 
 def test_retention_page_needs_the_permission(db, login):

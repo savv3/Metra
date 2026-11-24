@@ -49,7 +49,10 @@ following the Finnish Accounting Act (kirjanpitolaki):
 - a list of drafts past the legal booking time (four months after the end
   of their month), and a retention page with, for each year, the dates
   until which its books and vouchers must be kept (from the country
-  module; KPL 2:10 in Finland). Nothing is removed automatically.
+  module; KPL 2:10 in Finland). These are the Accounting Act's minimums:
+  grant terms, the VAT adjustment period of property investments or an
+  open tax audit or dispute can require longer. Nothing is removed
+  automatically.
 
 Official, but off until `METRA_PLUGINS=bookkeeping`. Admin and Treasurer
 keep the books; Board and Read-only (for example the auditor) read them.

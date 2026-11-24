@@ -155,9 +155,14 @@ det kalenderår då räkenskapsperioden slutade. De fakturor, kreditnotor och
 betalningar som bokförts från faktureringen är verifikatens underlag och
 sparas lika länge. **Hur länge bokföringen sparas**, som länkas från listan
 över räkenskapsperioder, visar alla perioder tillsammans: verifikat, kvitton
-och fakturor, de två datumen och om något redan får tas bort.
+och fakturor, de två datumen och om lagens minimitid har gått ut.
 
-Det här är de kortaste tider som lagen tillåter. Inget tas bort automatiskt,
+Det här är de kortaste tider som bokföringslagen tillåter. Andra regler kan
+kräva att material sparas längre: villkoren för ett bidrag (bidrag till
+vattenledningsnät kräver ofta 10 år eller mer), justeringsperioden på 10
+år för moms på en fastighetsinvestering, eller en pågående skatterevision,
+ett besvär eller en tvist. Sidan visar när bokföringslagens minimitid har
+gått ut, inte att materialet får tas bort. Inget tas bort automatiskt,
 och att ta bort en period vars tid har gått ut erbjuds ännu inte i Metra:
 när det är dags, exportera perioden först och besluta tillsammans med
 styrelsen och revisorn. När bokföringen har bokförda verifikat kan tillägget

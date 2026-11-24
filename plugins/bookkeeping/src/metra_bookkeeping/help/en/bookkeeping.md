@@ -149,11 +149,15 @@ end of the calendar year in which the financial year ended. The invoices,
 credit notes and payments booked from invoicing are the evidence of their
 vouchers and are kept as long. **How long the books are kept**, linked from
 the list of financial years, shows every year together: its vouchers,
-receipts and invoices, the two dates, and whether anything may be removed
-yet.
+receipts and invoices, the two dates, and whether the legal minimum
+has passed.
 
-These are the shortest times the law allows. Nothing is deleted
-automatically, and removing a year whose time has passed is not offered in
+These are the shortest times the Accounting Act allows. Other rules can
+require keeping material longer: the terms of a grant (grants for water
+networks often require 10 years or more), the 10-year VAT adjustment
+period of a property investment, or an open tax audit, appeal or dispute.
+The page says when the Accounting Act's minimum has passed, not that the
+material may be removed. Nothing is deleted automatically, and removing a year whose time has passed is not offered in
 Metra yet: when it is due, export the year first and decide with the board
 and the auditor. Once the books have posted vouchers, the add-on cannot be
 turned off, so that they stay readable.
