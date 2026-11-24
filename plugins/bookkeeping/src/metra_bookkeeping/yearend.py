@@ -17,7 +17,7 @@ Closing a year, once its books are complete:
 
 Year-end entries the treasurer reviews and posts before closing: the
 depreciation by the plans in the asset register (KPL 5:5) and the accrual
-of invoices issued after the year for supplies made in it.
+of invoiced income across the year end by supply days (KPL 2:3).
 """
 
 import datetime
@@ -28,7 +28,7 @@ from decimal import Decimal
 from django.conf import settings as django_settings
 from django.core.exceptions import ValidationError
 from django.db import transaction
-from django.db.models import Sum
+from django.db.models import Q, Sum
 from django.utils import formats, timezone, translation
 from django.utils.translation import gettext as _
 from django.utils.translation import ngettext
@@ -208,8 +208,16 @@ def warnings(year, today=None):
     booked = year.vouchers.filter(kind=Voucher.Kind.DEPRECIATION, status=Voucher.Status.POSTED)
     if planned and not booked.exists():
         found.append(_("The depreciation by plan is not booked."))
-    if accrual_candidates(year) and not year.vouchers.filter(kind=Voucher.Kind.ACCRUAL).exists():
-        found.append(_("Invoices issued after the year for supplies in it are not accrued."))
+    if difference := accrual_difference(year):
+        accrued, deferred = _accrual_accounts(year)
+        amount = sum((abs(v) for a, v in difference.items() if a not in (accrued, deferred)), ZERO)
+        found.append(
+            _(
+                "Invoiced income across the year end is not fully accrued or deferred "
+                "(income still to move: %(amount)s). Make the accrual voucher."
+            )
+            % {"amount": formats.number_format(amount, 2)}
+        )
     for row in bank_rows(year):
         if row.statement is None:
             found.append(
@@ -305,7 +313,7 @@ def close(year, user=None, retained_earnings=None, today=None):
             raise ValidationError(found)
         entries = opening_entries(year, retained_earnings)
         accruals = list(
-            _reversed(year.vouchers.filter(kind=Voucher.Kind.ACCRUAL, status=Voucher.Status.POSTED))
+            _reversed(year.vouchers.filter(kind__in=ACCRUAL_KINDS, status=Voucher.Status.POSTED))
         )
         ChartEntry.objects.bulk_create(
             [
@@ -426,56 +434,159 @@ def asset_accounts(year):
 
 # Accruals
 
+ACCRUAL_KINDS = (Voucher.Kind.ACCRUAL, Voucher.Kind.INCOME_ACCRUAL)
 
-def accrual_candidates(year):
-    """Issued invoices and credit notes dated after ``year`` for supplies
-    made in it: income of the year, invoiced in the next one."""
-    return list(
+
+@dataclass
+class AccrualRow:
+    """An invoice whose supply period crosses the year end from the books'
+    point of view: ``accrue`` when it is booked in a later year but (part of)
+    its supply is in this one; ``defer`` when it is booked in this year but
+    (part of) its supply is in the next. ``amounts`` is the net income of
+    that part per sales account, shared by supply days."""
+
+    invoice: object
+    kind: str
+    days: int
+    total_days: int
+    amounts: dict
+
+    @property
+    def total(self):
+        return sum(self.amounts.values(), ZERO)
+
+
+def _share(invoice, settings, fraction):
+    amounts = defaultdict(lambda: ZERO)
+    for line in invoice.lines.all():
+        account = settings.sales_account(line.fee_line_id, line.vat_rate)
+        amounts[account] += (line.net * fraction).quantize(Decimal("0.01"))
+    return {account: amount for account, amount in amounts.items() if amount}
+
+
+def accrual_rows(year):
+    """The invoices and credit notes whose income belongs partly or wholly to
+    another year than the one they are booked in (KPL 2:3), by supply days:
+    those issued after ``year`` for supplies in it, and those issued in it
+    for supplies after it. Empty while postings from invoicing are off."""
+    settings = PostingSettings.current()
+    if not settings.is_on:
+        return []
+    invoices = (
         api.Invoice.objects.issued()
-        .filter(issue_date__gt=year.end, supply_end__isnull=False, supply_end__lte=year.end)
+        .filter(supply_end__isnull=False, issue_date__gte=settings.start)
         .exclude(total=ZERO)
         .prefetch_related("lines")
         .order_by("issue_date", "number")
     )
+    after = invoices.filter(issue_date__gt=year.end).filter(
+        Q(supply_start__lte=year.end) | Q(supply_start__isnull=True, supply_end__lte=year.end)
+    )
+    within = invoices.filter(issue_date__range=(year.start, year.end), supply_end__gt=year.end)
+    rows = []
+    for kind, found in (("accrue", after), ("defer", within)):
+        for invoice in found:
+            start = invoice.supply_start or invoice.supply_end
+            end = invoice.supply_end
+            total_days = (end - start).days + 1
+            if kind == "accrue":
+                days = (min(end, year.end) - start).days + 1
+            else:
+                days = (end - max(start, year.end + datetime.timedelta(days=1))).days + 1
+            amounts = _share(invoice, settings, Decimal(days) / Decimal(total_days))
+            if amounts:
+                rows.append(AccrualRow(invoice, kind, days, total_days, amounts))
+    return rows
+
+
+def _accrual_accounts(year):
+    rules = _rules(year)
+    accrued = Account.objects.filter(number=rules.ACCRUED_INCOME).first()
+    deferred = Account.objects.filter(number=rules.DEFERRED_INCOME).first()
+    return accrued, deferred
+
+
+def accrual_expected(year, rows=None):
+    """{account: debit minus credit} the year's accruals of invoiced income
+    should add up to."""
+    rows = accrual_rows(year) if rows is None else rows
+    accrued, deferred = _accrual_accounts(year)
+    expected = defaultdict(lambda: ZERO)
+    for row in rows:
+        sign = 1 if row.kind == "accrue" else -1
+        for account, amount in row.amounts.items():
+            expected[account] -= sign * amount
+        expected[accrued if row.kind == "accrue" else deferred] += sign * row.total
+    return expected
+
+
+def accrual_booked(year):
+    """{account: debit minus credit} of the year's accrual vouchers of
+    invoiced income, drafts included, reversed ones left out."""
+    vouchers = _reversed(year.vouchers.filter(kind=Voucher.Kind.INCOME_ACCRUAL))
+    rows = (
+        VoucherLine.objects.filter(voucher__in=vouchers)
+        .values("account")
+        .annotate(debit=Sum("debit"), credit=Sum("credit"))
+    )
+    accounts = Account.objects.in_bulk([row["account"] for row in rows])
+    return {
+        accounts[row["account"]]: (row["debit"] or ZERO) - (row["credit"] or ZERO) for row in rows
+    }
+
+
+def accrual_difference(year, rows=None):
+    """{account: amount} still to book so the accruals match the invoices
+    as they are now (more may have been issued since the last voucher)."""
+    expected = accrual_expected(year, rows)
+    booked = accrual_booked(year)
+    accounts = set(expected) | set(booked)
+    difference = {a: expected.get(a, ZERO) - booked.get(a, ZERO) for a in accounts}
+    return {account: amount for account, amount in difference.items() if amount}
 
 
 def make_accruals(year, user=None):
-    """A draft accrual voucher dated the last day of the year: the net
-    income of the invoices from accrual_candidates() on their sales accounts,
-    against accrued income. Closing the year reverses it on the first day of
-    the next one, where the invoices themselves are booked. VAT is left out:
-    it is reported by its supply period from the invoices."""
+    """A draft voucher, dated the last day of the year, that brings the
+    accruals of invoiced income in line with accrual_rows(): income of the
+    year invoiced later is accrued (accrued income against sales), income
+    invoiced in the year for the next one is deferred (sales against
+    deferred income), each by supply days. A later call books only what
+    changed since. Closing the year reverses them on the first day of the
+    next one. VAT is left out: it is reported by its supply period from the
+    invoices. None when nothing is to book."""
     if problem := year.lock_problem(year.end):
         raise ValidationError(problem)
-    if year.vouchers.filter(kind=Voucher.Kind.ACCRUAL).exists():
-        raise ValidationError(_("The year already has an accrual voucher."))
-    invoices = accrual_candidates(year)
-    if not invoices:
+    rows = accrual_rows(year)
+    accrued, deferred = _accrual_accounts(year)
+    needed = {row.kind for row in rows}
+    rules = _rules(year)
+    for kind, account, number in (
+        ("accrue", accrued, rules.ACCRUED_INCOME),
+        ("defer", deferred, rules.DEFERRED_INCOME),
+    ):
+        if kind in needed and account is None:
+            raise ValidationError(
+                _("The chart of accounts has no account %(number)s for accruals.")
+                % {"number": number}
+            )
+    difference = accrual_difference(year, rows)
+    if not difference:
         return None
-    accrued = Account.objects.filter(number=_rules(year).ACCRUED_INCOME).first()
-    settings = PostingSettings.current()
-    if accrued is None or settings.sales is None:
-        raise ValidationError(
-            _("The accrued income account %(number)s or the sales account is missing.")
-            % {"number": _rules(year).ACCRUED_INCOME}
-        )
-    sales = defaultdict(lambda: ZERO)
-    numbers = []
-    for invoice in invoices:
-        numbers.append(invoice.number)
-        for line in invoice.lines.all():
-            sales[settings.sales_account(line.fee_line_id, line.vat_rate)] += line.net
-    total = sum(sales.values(), ZERO)
-    text = ", ".join(numbers)
-    entries = [(accrued, total, text)] + [(account, -net, text) for account, net in sales.items()]
+    text = ", ".join(dict.fromkeys(row.invoice.number for row in rows))
+    entries = [
+        (account, amount, text)
+        for account, amount in sorted(difference.items(), key=lambda item: item[0].number)
+    ]
     with transaction.atomic():
         return _voucher(
             year,
             year.end,
-            _in_books_language(_("Accrual: invoiced after %(year)s for supplies in it"), year=year),
-            [entry for entry in entries if entry[1]],
+            _in_books_language(
+                _("Accrual of invoiced income across the end of %(year)s"), year=year
+            ),
+            entries,
             user,
-            kind=Voucher.Kind.ACCRUAL,
+            kind=Voucher.Kind.INCOME_ACCRUAL,
         )
 
 

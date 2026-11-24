@@ -178,12 +178,17 @@ goes through the year-end:
 1. **Depreciation by plan**: **Make the depreciation voucher** makes a draft,
    dated the last day of the year, from the asset register. Check and post
    it.
-2. **Income invoiced after the year**: invoices issued after the year for
-   deliveries in it are offered as an accrual voucher, so their income
-   falls in the right year. Other accruals (costs billed later, income
-   received in advance) are vouchers of the kind **Accrual** dated the last
-   day of the year. Closing reverses every accrual on the first day of the
-   next year.
+2. **Invoiced income across the year end**: income is shared between the
+   years by supply days. Invoices issued after the year for supplies in it
+   are accrued (accrued income, 1760), and invoices issued in the year for
+   supplies after it are deferred (2960). **Make the accrual voucher** makes
+   a draft dated the last day of the year; if invoices are issued or
+   credited after that, the page and the closing warn, and the button makes
+   a voucher for the difference only. The share by days is a suggestion:
+   have an accountant confirm the method if the supplies are uneven. Other
+   accruals (costs billed later, income received in advance) are vouchers
+   of the kind **Accrual** dated the last day of the year. Closing reverses
+   every accrual on the first day of the next year.
 3. **Bank statements**: enter each bank account's balance on the year-end
    statement; the balance sheet specifications compare it with the books.
 4. **Notes and signatures**: the notes to the financial statements, with a

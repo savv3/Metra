@@ -353,16 +353,53 @@ def test_a_payment_dated_in_a_closed_year_is_booked_late(
     assert "bokförd i efterhand" in posting.voucher.description
 
 
+def _lines(voucher):
+    return {line.account.number: line.debit - line.credit for line in voucher.lines.all()}
+
+
 def test_invoices_issued_after_the_year_are_accrued(books, last_year, this_year, make_invoice):
     supplied = (last_year.end.replace(month=7, day=1), last_year.end)
     make_invoice([("Water", "2", "50", "0")], supplied=supplied)
     make_invoice([("Water", "1", "10", "0")])  # this year's
-    (invoice,) = yearend.accrual_candidates(last_year)
-    assert invoice.total == Decimal("100.00")
+    (row,) = yearend.accrual_rows(last_year)
+    assert row.kind == "accrue" and row.total == Decimal("100.00")
     voucher = yearend.make_accruals(last_year)
-    lines = {line.account.number: line.debit - line.credit for line in voucher.lines.all()}
-    assert lines == {"1760": Decimal("100.00"), "3000": Decimal("-100.00")}
-    assert voucher.kind == Voucher.Kind.ACCRUAL
+    assert _lines(voucher) == {"1760": Decimal("100.00"), "3000": Decimal("-100.00")}
+    assert voucher.kind == Voucher.Kind.INCOME_ACCRUAL
+    assert yearend.make_accruals(last_year) is None
+
+
+def test_a_supply_across_the_year_end_is_accrued_by_days(books, last_year, this_year, make_invoice):
+    # 31 days in the closed year, 31 in this one: half belongs to last year.
+    supplied = (last_year.end.replace(day=1), this_year.start.replace(day=31))
+    make_invoice([("Water", "1", "100", "0")], supplied=supplied)
+    (row,) = yearend.accrual_rows(last_year)
+    assert (row.days, row.total_days, row.total) == (31, 62, Decimal("50.00"))
+
+
+def test_income_invoiced_for_the_next_year_is_deferred(books, this_year, make_invoice):
+    # Issued this year for the last month of it and the first two of the next.
+    start = this_year.end.replace(day=1)
+    end = this_year.end.replace(year=this_year.end.year + 1, month=2, day=28)
+    make_invoice([("Water", "1", "90", "0")], supplied=(start, end))
+    (row,) = yearend.accrual_rows(this_year)
+    assert row.kind == "defer" and row.days == 59 and row.total_days == 90
+    voucher = yearend.make_accruals(this_year)
+    assert _lines(voucher) == {"3000": Decimal("59.00"), "2960": Decimal("-59.00")}
+
+
+def test_an_invoice_after_the_accrual_voucher_is_warned_about_and_topped_up(
+    books, last_year, this_year, make_invoice
+):
+    supplied = (last_year.end.replace(month=7, day=1), last_year.end)
+    make_invoice([("Water", "1", "100", "0")], supplied=supplied)
+    yearend.make_accruals(last_year).post()
+    assert not any("accrued or deferred" in w for w in yearend.warnings(last_year))
+    make_invoice([("Water", "1", "40", "0")], supplied=supplied)
+    (warning,) = [w for w in yearend.warnings(last_year) if "accrued or deferred" in w]
+    assert "40,00" in warning or "40.00" in warning
+    top_up = yearend.make_accruals(last_year)
+    assert _lines(top_up) == {"1760": Decimal("40.00"), "3000": Decimal("-40.00")}
 
 
 def test_receivables_by_invoice(books, this_year, make_invoice, pay):

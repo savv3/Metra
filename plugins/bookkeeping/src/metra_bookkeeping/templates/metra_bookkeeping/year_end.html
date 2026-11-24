@@ -33,18 +33,23 @@
         {% if perms.metra_bookkeeping.view_fixedasset %}<p class="help"><a href="{% url 'metra_bookkeeping:asset_list' %}">{% translate "Fixed assets" %}</a></p>{% endif %}
       </li>
       <li>
-        <h2>{% translate "Income invoiced after the year" %}</h2>
+        <h2>{% translate "Invoiced income across the year end" %}</h2>
         {% if accruals %}
-          <p>{% translate "These invoices were issued after the year for supplies made in it. Their income belongs to this year:" %}</p>
-          <ul>{% for invoice in accruals %}<li><a href="{{ invoice.get_absolute_url }}">{{ invoice }}</a>, {{ invoice.issue_date|date:"SHORT_DATE_FORMAT" }}, {{ invoice.total_net|money }}</li>{% endfor %}</ul>
-          {% if accrual_voucher %}
-            <p><a href="{{ accrual_voucher.get_absolute_url }}">{{ accrual_voucher }}</a> ({{ accrual_voucher.get_status_display|lower }})</p>
-          {% elif perms.metra_bookkeeping.add_voucher %}
+          <p>{% translate "These invoices are for supplies on both sides of the year end. Their income is shared by supply days: income for this year invoiced after it is accrued, and income for the next year invoiced in this one is deferred." %}</p>
+          <ul>{% for row in accruals %}<li><a href="{{ row.invoice.get_absolute_url }}">{{ row.invoice }}</a>, {{ row.invoice.issue_date|date:"SHORT_DATE_FORMAT" }}: {% if row.kind == "accrue" %}{% translate "accrued" %}{% else %}{% translate "deferred" %}{% endif %} {{ row.total|money }} ({% blocktranslate with days=row.days total=row.total_days %}{{ days }} of {{ total }} supply days{% endblocktranslate %})</li>{% endfor %}</ul>
+        {% else %}
+          <p>{% translate "No invoices are for supplies across the year end." %}</p>
+        {% endif %}
+        {% for voucher in accrual_vouchers %}
+          <p><a href="{{ voucher.get_absolute_url }}">{{ voucher }}</a> ({{ voucher.get_status_display|lower }})</p>
+        {% endfor %}
+        {% if accrual_difference %}
+          {% if accrual_vouchers %}<p><strong>{% translate "Invoices have changed since the accrual voucher was made." %}</strong></p>{% endif %}
+          {% if perms.metra_bookkeeping.add_voucher %}
             <form method="post" action="{% url 'metra_bookkeeping:year_accruals' year.pk %}">{% csrf_token %}<button type="submit" class="button">{% translate "Make the accrual voucher" %}</button></form>
           {% endif %}
-        {% else %}
-          <p>{% translate "No invoices issued after the year are for supplies in it." %}</p>
         {% endif %}
+        <p class="help">{% translate "The share by supply days is a suggestion; have an accountant confirm the method if the supplies are uneven." %}</p>
         <p class="help">{% translate "Other accruals (costs of the year billed later, income received in advance) are entered as vouchers of the kind Accrual, dated the last day of the year. Closing the year reverses every accrual on the first day of the next one." %}</p>
       </li>
       <li>

@@ -240,8 +240,9 @@ def year_end(request, pk):
             "warnings": yearend.warnings(year),
             "depreciation": yearend.depreciation_plan(year),
             "depreciation_voucher": year.vouchers.filter(kind=Voucher.Kind.DEPRECIATION).first(),
-            "accruals": yearend.accrual_candidates(year),
-            "accrual_voucher": year.vouchers.filter(kind=Voucher.Kind.ACCRUAL).first(),
+            "accruals": yearend.accrual_rows(year),
+            "accrual_vouchers": year.vouchers.filter(kind=Voucher.Kind.INCOME_ACCRUAL),
+            "accrual_difference": bool(yearend.accrual_difference(year)),
             "bank_rows": yearend.bank_rows(year),
             "opening": yearend.opening_entries(year, yearend.default_retained_earnings(year))
             if yearend.default_retained_earnings(year)
@@ -288,7 +289,7 @@ def year_accruals(request, pk):
         pk,
         yearend.make_accruals,
         _("The accrual voucher is ready as a draft. Check it and post it."),
-        _("No invoices to accrue."),
+        _("The accruals already match the invoices."),
     )
 
 
