@@ -164,10 +164,10 @@ flowchart TD
     p7[Phase 7: Restore, help and meetings<br/>restore from backups in the app, help pages,<br/>meeting protocols plugin, notifications]
     p8[Phase 8: Plugins and sending in the app<br/>plugin chooser, email and SMS settings,<br/>Mailgun plugin]
     p9[Phase 9: Bookkeeping plugin<br/>simple double-entry books for small associations]
-    p10[Phase 10: Sweden<br/>Bankgiro with OCR references, Swish, Swedish rules]
-    p11[Phase 11: Orchestrator<br/>separate tool: self-service sign-up, many installs]
-    p12[Phase 12: Support plugin<br/>time-limited, audited access to help with setup]
-    p1 --> p2 --> gate --> p3 --> p4 --> p5 --> p6 --> p7 --> p8 --> p9 --> p10 --> p11 --> p12
+    p11[Phase 11: Orchestrator<br/>separate tool metra-admin: many installs, deploy, upgrades, demos]
+    p12[Phase 12: Support plugin, postponed<br/>time-limited, audited access to help with setup]
+    p1 --> p2 --> gate --> p3 --> p4 --> p5 --> p6 --> p7 --> p8 --> p9 --> p11
+    p11 -.-> p12
 ```
 
 The API is built into every phase, since pages and API share models and
@@ -181,7 +181,9 @@ permissions; phase 6 opens it to outside systems.
 | 7 | Done: snapshots, restore in the app, help pages, meeting protocols plugin, notifications |
 | 8 | Done: plugin chooser and plugin settings, email settings in the app, the Mailgun add-on and 46elks settings in the app (releases 0.3.0 to 0.5.0). Since then also a left sidebar menu |
 | 9 | In progress: A (ledger), B (postings from Metra), C (financial statements, budget and VAT summary) and D (locking and year-end) done; E (exports and retention) not started. See the [phase 9 build plan](#phase-9-build-plan) |
-| 10 to 12 | Planned. Each phase gets a build plan with one row per pull request before work starts. The orchestrator (phase 11) has already been started in its own repository, `metra-admin` |
+| 10 | Parked: country rules for Sweden moved to [might-do-later.md](might-do-later.md#sweden) |
+| 11 | In use: the orchestrator is its own repository, `metra-admin` (Metra plus its `hosting` add-on), with its own roadmap. Version 0.2.5 runs on the server and manages the installs there, including the water association and the public demo. Its bookkeeping phase waits for phase 9 E |
+| 12 | Postponed, not a priority: to be planned later |
 
 Ideas taken off the plan for now are in [might-do-later.md](might-do-later.md).
 
@@ -192,12 +194,10 @@ next.
 
 - **Phase 9: Bookkeeping plugin.** See the
   [phase 9 build plan](#phase-9-build-plan).
-- **Phase 10: Sweden.** Country rules become a setting per organisation:
-  Swedish VAT and invoice details, Bankgiro and OCR references, Swish
-  payment requests and QR codes, and Swedish bookkeeping retention (7
-  years). This proves the country layer so further countries are mostly
-  configuration.
-- **Phase 11: Orchestrator.** A separate tool in its own repository that
+- **Phase 10: Sweden.** Parked; see
+  [might-do-later.md](might-do-later.md#sweden).
+- **Phase 11: Orchestrator.** In use; the plan and its status are in
+  `ROADMAP.md` in the `metra-admin` repository. A separate tool in its own repository that
   runs many Metra installations, so an organisation can sign up and get
   its own install without the maintainer's help, and so hosting can later
   be sold. Each customer keeps a separate install with its own data
@@ -207,7 +207,8 @@ next.
   status, and later plans and payment. Metra itself needs only small
   additions: a command that creates an organisation and its first admin
   (sent a one-time setup link), and a way to read version and health.
-- **Phase 12: Support plugin.** A plugin, the first in the plugins
+- **Phase 12: Support plugin.** Postponed; not a priority, and planned
+  again when it is needed. A plugin, the first in the plugins
   repository (see [Plugins](#plugins)), that lets
   the maintainer help an organisation set up its install. The
   organisation's admin grants support access from a page in the app, for
