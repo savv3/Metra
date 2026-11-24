@@ -249,3 +249,13 @@ def test_language_links_set_the_language(client, issued):
     assert response.status_code == 302
     assert response.url == url
     assert "Hello Anna" in page
+
+
+def test_saved_reading_is_shown_with_the_types_decimals(client, issued, unit, open_round):
+    _link, _token, url = issued
+    Reading.objects.create(round=open_round, unit=unit, value=D("17.000"))
+
+    page = client.get(url).content.decode()
+
+    assert 'value="17"' in page
+    assert "17,000" not in page
