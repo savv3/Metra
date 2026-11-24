@@ -136,7 +136,7 @@
       <h1>{{ texts.chart }}</h1>
       {% if chart_note %}<p class="note">{{ chart_note }}</p>{% endif %}
       <table>
-        <tbody>{% for entry, kind in chart %}<tr><td>{{ entry.number }}</td><td>{{ entry.name }}</td><td>{{ kind }}</td></tr>{% endfor %}</tbody>
+        <tbody>{% for entry, kind in chart %}<tr><td>{{ entry.number }}</td><td>{{ entry.display_name }}</td><td>{{ kind }}</td></tr>{% endfor %}</tbody>
       </table>
     </section>
 

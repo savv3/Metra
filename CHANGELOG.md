@@ -34,6 +34,10 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Fixed
 
+- Bookkeeping: account names from the chart template now show in the
+  display language (Swedish, English or Finnish), also in books already
+  started in another language. Names the treasurer has changed stay as
+  written.
 - The reading box on the member page and the staff reading form shows a saved
   reading with the reading type's decimals (17, not 17,000).
 
