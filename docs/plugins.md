@@ -167,7 +167,7 @@ default: they are installed in the Docker image, and
 | [metra-email-mailgun](../plugins/email-mailgun) | `mailgun` | Email through Mailgun, with delivery, bounce and spam reports. Bundled, on by default; sends once chosen under Settings > Email |
 | [metra-api](../plugins/api) | `api` | The REST API ([docs](api.md)). Off until `METRA_PLUGINS=api` |
 | [metra-webhooks](../plugins/webhooks) | `webhooks` | Signed webhooks to outside systems ([docs](webhooks.md)). Off until `METRA_PLUGINS=webhooks` |
-| [metra-bookkeeping](../plugins/bookkeeping) | `bookkeeping` | Double-entry books under Finnish rules: chart of accounts, numbered vouchers with receipts, reversing corrections, journal, ledger and trial balance, dated VAT, and vouchers made automatically from invoices, credit notes, payments and reminder fees. Off until `METRA_PLUGINS=bookkeeping` |
+| [metra-bookkeeping](../plugins/bookkeeping) | `bookkeeping` | Double-entry books under Finnish rules: chart of accounts, numbered vouchers with receipts, reversing corrections, journal, ledger and trial balance, dated VAT, vouchers made automatically from invoices, credit notes, payments and reminder fees, financial statements, year-end, and export of a year as CSV and SIE 4. Off until `METRA_PLUGINS=bookkeeping` |
 | [metra-meetings](../plugins/meetings) | `meetings` | Meetings: notice with the agenda, attendance and votes, minutes approved by the minute checkers and shown to members. Off until `METRA_PLUGINS=meetings` |
 
 So that each can later move to its own repository, a plugin in plugins/:

@@ -5,8 +5,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.db import transaction
-from django.db.models import Count, ProtectedError
-from django.http import FileResponse, Http404
+from django.db.models import Count, ProtectedError, Q
+from django.http import FileResponse, Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import formats, timezone
@@ -16,7 +16,18 @@ from django.views.decorators.http import require_POST
 
 from apps.plugins import api
 
-from . import countries, exports, package, postings, reports, statements, timing, vat, yearend
+from . import (
+    archive,
+    countries,
+    exports,
+    package,
+    postings,
+    reports,
+    statements,
+    timing,
+    vat,
+    yearend,
+)
 from .forms import (
     AccountForm,
     BalanceSheetForm,
@@ -373,6 +384,88 @@ def year_package(request, pk):
         request,
         "metra_bookkeeping/year_package.html",
         {"year": year, "form": form, "size": size, "pdf_url": _query(request, format="pdf")},
+    )
+
+
+# Exports and retention
+
+
+@login_required
+@permission_required(f"{P}.view_voucher", raise_exception=True)
+def year_export(request, pk):
+    """The year's books as files for an accountant or for keeping: a ZIP
+    with CSV, the receipts and SIE 4, or the SIE 4 file alone."""
+    year = get_object_or_404(FiscalYear, pk=pk)
+    kind = request.GET.get("format")
+    if kind == "zip":
+        archive.log_export(request, year, "zip")
+        response = FileResponse(
+            archive.year_zip(year),
+            as_attachment=True,
+            filename=archive.filename(year, "zip"),
+            content_type="application/zip",
+        )
+        response["Cache-Control"] = "private, no-store"
+        return response
+    if kind == "sie":
+        archive.log_export(request, year, "sie4")
+        response = HttpResponse(archive.sie4(year), content_type="text/plain; charset=cp437")
+        response["Content-Disposition"] = f'attachment; filename="{archive.filename(year, "se")}"'
+        response["Cache-Control"] = "private, no-store"
+        return response
+    counts = year.vouchers.filter(status=Voucher.Status.POSTED).aggregate(
+        vouchers=Count("pk", distinct=True), receipts=Count("receipts", distinct=True)
+    )
+    return render(
+        request,
+        "metra_bookkeeping/year_export.html",
+        {"year": year, "drafts": year.vouchers.filter(status=Voucher.Status.DRAFT).count()}
+        | counts,
+    )
+
+
+@login_required
+@permission_required(f"{P}.view_fiscalyear", raise_exception=True)
+def retention(request):
+    """How long each year's books and vouchers must be kept, and what could
+    be removed once that has passed. Nothing is removed automatically."""
+    today = timezone.localdate()
+    years = FiscalYear.objects.annotate(
+        voucher_count=Count("vouchers", filter=Q(vouchers__status=Voucher.Status.POSTED)),
+    ).order_by("start")
+    receipts = dict(
+        Receipt.objects.filter(voucher__status=Voucher.Status.POSTED)
+        .values("voucher__year")
+        .annotate(n=Count("pk"))
+        .values_list("voucher__year", "n")
+    )
+    invoiced = dict(
+        Posting.objects.filter(voucher__status=Voucher.Status.POSTED)
+        .values("voucher__year")
+        .annotate(n=Count("invoice", distinct=True))
+        .values_list("voucher__year", "n")
+    )
+    rows = []
+    for year in years:
+        if today <= year.vouchers_kept_until:
+            state = "keep"
+        elif today <= year.books_kept_until:
+            state = "vouchers_passed"
+        else:
+            state = "passed"
+        rows.append(
+            {
+                "year": year,
+                "receipts": receipts.get(year.pk, 0),
+                "invoices": invoiced.get(year.pk, 0),
+                "state": state,
+            }
+        )
+    rules = countries.get(FiscalYear.objects.values_list("country", flat=True).first())
+    return render(
+        request,
+        "metra_bookkeeping/retention.html",
+        {"rows": rows, "today": today, "retention": rules.RETENTION},
     )
 
 

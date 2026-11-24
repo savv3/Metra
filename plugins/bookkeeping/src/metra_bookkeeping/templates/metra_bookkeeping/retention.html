@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "How long the books are kept" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "How long the books are kept" %}</h1>
+  </div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  <p>{% if retention.vouchers_from_calendar_year %}{% blocktranslate trimmed with books=retention.books_years vouchers=retention.vouchers_years source=retention.source %}
+    The financial statements, balance sheet specifications, journal, ledger, chart of accounts
+    and list of books are kept {{ books }} years from the end of the financial year. Vouchers and
+    receipts, and the invoices, credit notes and payments booked from invoicing, are kept
+    {{ vouchers }} years from the end of the calendar year in which the financial year ended
+    ({{ source }}).
+  {% endblocktranslate %}{% else %}{% blocktranslate trimmed with books=retention.books_years vouchers=retention.vouchers_years source=retention.source %}
+    The financial statements, balance sheet specifications, journal, ledger, chart of accounts
+    and list of books are kept {{ books }} years from the end of the financial year. Vouchers and
+    receipts, and the invoices, credit notes and payments booked from invoicing, are kept
+    {{ vouchers }} years from the end of the financial year ({{ source }}).
+  {% endblocktranslate %}{% endif %}</p>
+  {% if rows %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Financial years' %}">
+      <table>
+        <thead><tr>
+          <th scope="col">{% translate "Financial year" %}</th>
+          <th scope="col">{% translate "Status" %}</th>
+          <th scope="col" class="num">{% translate "Vouchers" %}</th>
+          <th scope="col" class="num">{% translate "Receipts" %}</th>
+          <th scope="col" class="num">{% translate "Invoices" %}</th>
+          <th scope="col">{% translate "Vouchers kept until" %}</th>
+          <th scope="col">{% translate "Books kept until" %}</th>
+          <th scope="col">{% translate "Now" %}</th>
+        </tr></thead>
+        <tbody>
+          {% for row in rows %}
+            <tr>
+              <th scope="row"><a href="{{ row.year.get_absolute_url }}">{{ row.year }}</a></th>
+              <td>{{ row.year.get_status_display }}</td>
+              <td class="num">{{ row.year.voucher_count }}</td>
+              <td class="num">{{ row.receipts }}</td>
+              <td class="num">{{ row.invoices }}</td>
+              <td>{{ row.year.vouchers_kept_until|date:"SHORT_DATE_FORMAT" }}</td>
+              <td>{{ row.year.books_kept_until|date:"SHORT_DATE_FORMAT" }}</td>
+              <td>{% if row.state == "keep" %}{% translate "Keep everything" %}{% elif row.state == "vouchers_passed" %}{% translate "Minimum passed for vouchers and receipts; keep the books" %}{% else %}{% translate "Minimum passed" %}{% endif %}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "None." %}</p>
+  {% endif %}
+  <h2>{% translate "Nothing is removed automatically" %}</h2>
+  <p>{% blocktranslate trimmed %}
+    These are the shortest times the Accounting Act allows, and Metra keeps everything after
+    them as well. Other rules can require keeping material longer: the terms of a grant, the
+    10-year VAT adjustment period of a property investment, or an open tax audit, appeal or
+    dispute. Check those before removing anything.
+    Removing a year whose time has passed is not offered in Metra yet; when it is due, export
+    the year first and decide with the board and the auditor.
+  {% endblocktranslate %}</p>
+  <h2>{% translate "Personal data in the books" %}</h2>
+  <p>{% blocktranslate trimmed %}
+    Vouchers, receipts and the invoices they rest on can name members and suppliers. They are
+    bookkeeping material that the law requires to be kept, so they are kept for these periods
+    even when a person asks to have their data erased (GDPR article 17(3)(b)). Changing or
+    archiving a person or unit in the register does not change anything already booked: the
+    books keep the names and amounts as they were booked.
+  {% endblocktranslate %}</p>
+{% endblock %}

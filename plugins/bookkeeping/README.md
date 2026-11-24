@@ -42,23 +42,35 @@ following the Finnish Accounting Act (kirjanpitolaki):
 - the year-end package for the auditor as one PDF: statements, notes,
   signature page, balance sheet specifications, list of books and
   material, chart of accounts, journal and ledger;
+- export of a year for an accountant or for keeping outside Metra: a ZIP
+  with the chart of accounts and balances and every voucher line as CSV,
+  the receipts, and the year in SIE 4 (or the SIE 4 file alone), recorded
+  in the audit log;
 - a list of drafts past the legal booking time (four months after the end
-  of their month), and on each year the dates until which its books and
-  vouchers must be kept.
+  of their month), and a retention page with, for each year, the dates
+  until which its books and vouchers must be kept (from the country
+  module; KPL 2:10 in Finland). These are the Accounting Act's minimums:
+  grant terms, the VAT adjustment period of property investments or an
+  open tax audit or dispute can require longer. Nothing is removed
+  automatically.
 
 Official, but off until `METRA_PLUGINS=bookkeeping`. Admin and Treasurer
 keep the books; Board and Read-only (for example the auditor) read them.
 Once the books have posted vouchers, the add-on cannot be turned off under
 Settings > Add-ons, so that they stay readable for the legal period.
 Removing it from `METRA_PLUGINS` on the server is not stopped: keep the books
-another way first (reports, receipts and a backup). The tables stay in the database.
+another way first (export every year, keep the year-end packages and a
+backup). The tables stay in the database.
 
-What differs between countries is in `countries/` (Finland in `fi.py`).
-The plan for the rest (exports and retention) is the phase 9 build plan in
+What differs between countries is in `countries/` (Finland in `fi.py`),
+including the retention periods. The plan is the phase 9 build plan in
 [docs/architecture.md](../../docs/architecture.md#phase-9-build-plan).
 
-Personal data: voucher descriptions and receipts can name people. They are
-bookkeeping material, kept for the legal period and left out of erasure.
+Personal data: voucher descriptions and receipts can name people, and the
+invoices behind vouchers name their recipients. They are bookkeeping
+material, kept for the legal period and left out of erasure (GDPR art.
+17(3)(b)): the books hold copies of names as booked, so changing,
+archiving or anonymising a person in the register leaves them as they were.
 
 The rules here are from general knowledge of the law, not legal advice; an
 authorised accountant should check them before the first real year.

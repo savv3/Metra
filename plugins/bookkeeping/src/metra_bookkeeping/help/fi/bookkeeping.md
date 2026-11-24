@@ -151,11 +151,55 @@ määräajan.
 Tilikauden sivu näyttää, kuinka kauan sen aineisto on säilytettävä:
 tilinpäätös, päiväkirja, pääkirja, tilikartta ja luettelo kirjanpidoista ja
 aineistoista 10 vuotta tilikauden päättymisestä; tositteet ja kuitit 6
-vuotta sen kalenterivuoden lopusta, jona tilikausi päättyi. Mitään ei
-poisteta automaattisesti. Kun kirjanpidossa on kirjattuja tositteita,
+vuotta sen kalenterivuoden lopusta, jona tilikausi päättyi. Laskutuksesta
+kirjatut laskut, hyvityslaskut ja suoritukset ovat tositteiden perusteena,
+ja ne säilytetään yhtä kauan. **Kuinka kauan kirjanpito säilytetään**,
+johon on linkki tilikausien luettelosta, näyttää kaikki tilikaudet yhdessä:
+tositteet, kuitit ja laskut, kaksi päivämäärää ja sen, onko lain
+vähimmäisaika jo kulunut.
+
+Nämä ovat lyhimmät kirjanpitolain sallimat ajat. Muut säännöt voivat
+vaatia aineiston säilyttämistä pidempään: avustuksen ehdot
+(vesihuoltoverkkojen avustukset edellyttävät usein vähintään 10 vuotta),
+kiinteistöinvestoinnin arvonlisäveron 10 vuoden tarkistuskausi tai
+keskeneräinen verotarkastus, muutoksenhaku tai riita. Sivu kertoo, milloin
+kirjanpitolain vähimmäisaika on kulunut, ei sitä, että aineiston saa
+poistaa. Mitään ei poisteta automaattisesti,
+eikä määräajan ylittäneen tilikauden poistamista vielä tarjota Metrassa:
+kun sen aika koittaa, vie tilikausi ensin ja päätä asiasta hallituksen ja
+tilintarkastajan kanssa. Kun kirjanpidossa on kirjattuja tositteita,
 lisäosaa ei voi poistaa käytöstä, jotta ne pysyvät luettavina.
 
-Ylläpitäjän, joka poistaa lisäosan palvelimelta (`METRA_PLUGINS`-asetuksesta), on ensin säilytettävä kirjanpito lakisääteisen ajan muulla tavoin: tallenna raportit ja kuitit ja säilytä varmuuskopio. Tiedot jäävät tietokantaan, mutta niitä ei voi lukea Metrassa, kun lisäosa ei ole asennettuna.
+Tositteissa, kuiteissa ja laskuissa voi olla jäsenten ja toimittajien
+nimiä. Ne ovat kirjanpitoaineistoa, jonka säilyttämisestä laki velvoittaa,
+joten ne säilytetään näiden aikojen ajan, vaikka henkilö pyytäisi tietojensa
+poistamista (GDPR:n 17 artiklan 3 kohdan b alakohta). Henkilön tai yksikön
+muuttaminen tai arkistointi rekisterissä ei muuta mitään jo kirjattua:
+kirjanpito säilyttää nimet ja summat sellaisina kuin ne kirjattiin.
+
+Ylläpitäjän, joka poistaa lisäosan palvelimelta (`METRA_PLUGINS`-asetuksesta), on ensin säilytettävä kirjanpito lakisääteisen ajan muulla tavoin: vie jokainen tilikausi (katso alla), säilytä tilinpäätöspaketit ja säilytä varmuuskopio. Tiedot jäävät tietokantaan, mutta niitä ei voi lukea Metrassa, kun lisäosa ei ole asennettuna.
+
+## Kirjanpidon vienti
+
+**Vie kirjanpito** tilikauden sivulla antaa tilikauden tiedostoina
+kirjanpitäjälle, joka ottaa kirjanpidon haltuunsa omalla ohjelmallaan, tai
+kopion säilyttämiseksi Metran ulkopuolella:
+
+- **Lataa ZIP-tiedosto**: tilikartta, jossa kunkin tilin avaava saldo,
+  debet, kredit ja päättävä saldo (`accounts.csv`), kirjattujen tositteiden
+  kaikki rivit päiväjärjestyksessä (`vouchers.csv`), kuitit kansiossa
+  tositetta kohden, tilikausi SIE 4 -muodossa (`books.se`) sekä README, joka
+  kuvaa tiedostot.
+- **Lataa SIE 4**: pelkkä SIE 4 -tiedosto. SIE on pohjoismainen tekstimuoto
+  kirjanpidon siirtämiseen kirjanpito-ohjelmien välillä. Avaavat saldot ovat
+  sen avaavia saldoja ja muut kirjatut tositteet sen tositteita.
+
+CSV-tiedostot ovat UTF-8-muotoisia, erotettu puolipisteillä, päivämäärät
+muodossa YYYY-MM-DD ja desimaalierottimena pilkku. Luonnokset eivät kuulu
+kirjanpitoon, ja ne jätetään pois. Avoimen tilikauden vienti kertoo, että
+se on alustava. Kysy kirjanpitäjältä, mitä muotoa heidän ohjelmansa tuo;
+useimmat hyväksyvät SIE-tiedoston tai CSV-tiedoston. Jokainen vienti
+kirjataan muutoslokiin.
 
 ## Kuukausien lukitseminen
 
@@ -318,4 +362,5 @@ siltä varalta että kauden ilmoitus on jo annettu.
 ## Tulostus ja tiedostot
 
 Jokaisen raportin voi tulostaa, tallentaa **PDF**-tiedostona tai ladata
-**CSV**-tiedostona taulukkolaskentaa varten.
+**CSV**-tiedostona taulukkolaskentaa varten. Koko tilikausi viedään
+toiminnolla **Vie kirjanpito**.

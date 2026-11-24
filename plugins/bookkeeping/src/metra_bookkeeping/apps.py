@@ -12,7 +12,8 @@ class BookkeepingConfig(AppConfig):
 
     # Voucher descriptions and receipts can name people (a member paid, a
     # supplier's invoice). They are bookkeeping material, kept for the legal
-    # period and left out of erasure.
+    # period (KPL 2:10) and left out of erasure (GDPR art. 17(3)(b)): the
+    # books hold the names as booked, never a link to the person.
     personal_data = [
         "Vouchers: descriptions and attached receipts, which may name people",
     ]

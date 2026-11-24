@@ -98,6 +98,7 @@ file=metra-$version.tar.gz
 echo "Deploying $tag to $host:$dir ($platform)."
 run "$docker" build --platform "$platform" \
     --build-arg "METRA_PLUGIN_PACKAGES=${METRA_PLUGIN_PACKAGES:-}" \
+    --label "org.opencontainers.image.version=$version" \
     -t "$image" "$work"
 echo "+ $docker save $image | gzip >$work/$file"
 [ -n "$dry_run" ] || "$docker" save "$image" | gzip >"$work/$file"

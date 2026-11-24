@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-24 19:10+0200\n"
+"POT-Creation-Date: 2026-11-24 19:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/apps.py:9
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:31
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:50
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:32
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:51
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:2
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:6
@@ -33,21 +33,21 @@ msgstr ""
 "Kahdenkertainen kirjanpito tositteineen, päiväkirjoineen ja pääkirjoineen "
 "Suomen sääntöjen mukaan."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:40
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:41
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:14
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:5
 msgid "Bookkeeping of invoices"
 msgstr "Laskujen kirjanpito"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:43
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:44
 msgid ""
 "The accounts and voucher series invoices and payments are booked to, and "
 "VAT."
 msgstr ""
 "Tilit ja tositesarjat, joille laskut ja suoritukset kirjataan, sekä ALV."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:70
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:71
 msgid ""
 "The books have posted vouchers, which must be kept readable for the legal "
 "period, so bookkeeping stays on."
@@ -55,15 +55,256 @@ msgstr ""
 "Kirjanpidossa on kirjattuja tositteita, joiden on pysyttävä luettavina "
 "lakisääteinen aika, joten kirjanpitoa ei voi poistaa käytöstä."
 
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:119
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:168
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:20
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:54
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:24
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:92
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1041
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1069
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1132
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1240
+msgid "Account"
+msgstr "Tili"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:120
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:169
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1041
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1069
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1132
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1240
+msgid "Account name"
+msgstr "Tilin nimi"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:121
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:162
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:41
+msgid "Kind"
+msgstr "Laji"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:122
+msgid "Opening balance"
+msgstr "Avaava saldo"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:123
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:171
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:56
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:25
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:92
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1042
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1070
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1132
+msgid "Debit"
+msgstr "Debet"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:124
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:172
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:56
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:25
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:92
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1042
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1070
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1132
+msgid "Credit"
+msgstr "Kredit"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:125
+msgid "Closing balance"
+msgstr "Päättävä saldo"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:149
+#, python-format
+msgid "%(source)s, invoice %(number)s"
+msgstr "%(source)s, lasku %(number)s"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:158
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:422
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1041
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1069
+msgid "Voucher"
+msgstr "Tosite"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:159
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:43
+msgid "Series"
+msgstr "Sarja"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:160
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:16
+msgid "Number"
+msgstr "Numero"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:161
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:38
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1041
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1069
+msgid "Date"
+msgstr "Päivämäärä"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:163
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:39
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:54
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:24
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1041
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1069
+msgid "Description"
+msgstr "Kuvaus"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:164
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:44
+msgid "Reverses"
+msgstr "Oikaisee"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:165
+msgid "Corrects the year"
+msgstr "Oikaisee tilikauden"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:166
+msgid "From invoicing"
+msgstr "Laskutuksesta"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:167
+msgid "Line"
+msgstr "Rivi"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:170
+msgid "Line description"
+msgstr "Rivin kuvaus"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:173
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:166
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:756
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:39
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:55
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:26
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1297
+msgid "VAT"
+msgstr "ALV"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:174
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:759
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1055
+msgid "VAT rate (%)"
+msgstr "ALV-kanta (%)"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:175
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:28
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:75
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:18
+msgid "Receipts"
+msgstr "Kuitit"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:319
+#, python-format
+msgid ""
+"The books of %(organisation)s for the financial year %(year)s (%(start)s to "
+"%(end)s)."
+msgstr ""
+"%(organisation)s kirjanpito tilikaudelta %(year)s (%(start)s – %(end)s)."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:321
+#, python-format
+msgid ""
+"Status of the year: %(status)s. Exported from Metra %(version)s on %(made)s."
+msgstr "Tilikauden tila: %(status)s. Viety Metrasta %(version)s %(made)s."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:325
+msgid ""
+"The year is still open, so these books are preliminary and may still change."
+msgstr ""
+"Tilikausi on vielä avoinna, joten kirjanpito on alustava ja voi vielä "
+"muuttua."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:330
+msgid ""
+"accounts.csv: the chart of accounts with each account's opening balance, "
+"debits, credits and closing balance for the year."
+msgstr ""
+"accounts.csv: tilikartta, jossa kunkin tilin avaava saldo, debet- ja kredit-"
+"kirjaukset sekä päättävä saldo tilikaudelta."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:334
+#, python-format
+msgid ""
+"vouchers.csv: every line of the %(vouchers)s posted vouchers in date order, "
+"with the voucher's number, date and description, the account and the "
+"amounts. Drafts are not part of the books and are left out."
+msgstr ""
+"vouchers.csv: kaikki %(vouchers)s kirjatun tositteen rivit "
+"päiväjärjestyksessä, tositteen numero, päivämäärä ja kuvaus, tili ja summat."
+" Luonnokset eivät kuulu kirjanpitoon, ja ne jätetään pois."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:339
+#, python-format
+msgid ""
+"receipts/: the %(receipts)s attached receipts, in a folder per voucher."
+msgstr ""
+"receipts/: %(receipts)s liitettyä kuittia, kansiossa tositetta kohden."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:341
+msgid ""
+"books.se: the same year in SIE 4 for accounting software, encoded in PC8 "
+"(code page 437). Opening balances are #IB, the other vouchers #VER."
+msgstr ""
+"books.se: sama tilikausi SIE 4 -muodossa kirjanpito-ohjelmia varten, "
+"PC8-koodauksella (koodisivu 437). Avaavat saldot ovat #IB, muut tositteet "
+"#VER."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:346
+msgid ""
+"The CSV files are UTF-8, separated by semicolons, with dates as YYYY-MM-DD "
+"and a comma for decimals. Balances are debits minus credits, in euros."
+msgstr ""
+"CSV-tiedostot ovat UTF-8-muotoisia, erotettu puolipisteillä, päivämäärät "
+"muodossa YYYY-MM-DD ja desimaalierottimena pilkku. Saldot ovat debet miinus "
+"kredit, euroina."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:351
+#, python-format
+msgid ""
+"Keep the financial statements, journal, ledger, chart of accounts and list "
+"of books until at least %(books)s, and the vouchers and receipts until at "
+"least %(kept)s (KPL 2:10 §). The year-end package PDF in Metra holds the "
+"financial statements, journal and ledger."
+msgstr ""
+"Säilytä tilinpäätös, päiväkirja, pääkirja, tilikartta ja luettelo "
+"kirjanpidoista vähintään %(books)s asti sekä tositteet ja kuitit vähintään "
+"%(kept)s asti (KPL 2:10 §). Metran tilinpäätöspaketti PDF-tiedostona "
+"sisältää tilinpäätöksen, päiväkirjan ja pääkirjan."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:382
+msgid "The file of this receipt was not found on the server."
+msgstr "Tämän kuitin tiedostoa ei löytynyt palvelimelta."
+
 #: plugins/bookkeeping/src/metra_bookkeeping/countries/fi.py:19
 msgid "Finland"
 msgstr "Suomi"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/countries/fi.py:195
+#: plugins/bookkeeping/src/metra_bookkeeping/countries/fi.py:204
 msgid "Association"
 msgstr "Yhdistys"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/countries/fi.py:197
+#: plugins/bookkeeping/src/metra_bookkeeping/countries/fi.py:206
 msgid ""
 "For a registered association (yhdistys): activities, fundraising and "
 "membership fees, with a surplus or deficit."
@@ -71,11 +312,11 @@ msgstr ""
 "Rekisteröidylle yhdistykselle: toiminta, varainhankinta ja jäsenmaksut, "
 "tuloksena ylijäämä tai alijäämä."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/countries/fi.py:318
+#: plugins/bookkeeping/src/metra_bookkeeping/countries/fi.py:327
 msgid "Cooperative or company"
 msgstr "Osuuskunta tai yhtiö"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/countries/fi.py:320
+#: plugins/bookkeeping/src/metra_bookkeeping/countries/fi.py:329
 msgid ""
 "For a cooperative (osuuskunta), such as a water cooperative, or a company: "
 "net sales, with a profit or loss."
@@ -107,15 +348,6 @@ msgstr "Ei, tämän vuoden kirjaus"
 #: plugins/bookkeeping/src/metra_bookkeeping/forms.py:144
 msgid "No financial year covers this date."
 msgstr "Mikään tilikausi ei kata tätä päivää."
-
-#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:166
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:753
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:39
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:55
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:26
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1204
-msgid "VAT"
-msgstr "ALV"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/forms.py:168
 msgid "The VAT the line is for, when VAT registered."
@@ -160,7 +392,7 @@ msgid "Why the voucher is reversed, for example a wrong account."
 msgstr "Miksi tosite oikaistaan, esimerkiksi väärä tili."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/forms.py:272
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:704
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:707
 msgid "There is no open financial year for that date."
 msgstr "Tälle päivälle ei ole avointa tilikautta."
 
@@ -169,6 +401,7 @@ msgstr "Tälle päivälle ei ole avointa tilikautta."
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_report_head.html:2
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:35
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/pdf/report.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:25
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:22
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:6
@@ -179,14 +412,14 @@ msgstr "Tilikausi"
 #: plugins/bookkeeping/src/metra_bookkeeping/forms.py:284
 #: plugins/bookkeeping/src/metra_bookkeeping/forms.py:363
 #: plugins/bookkeeping/src/metra_bookkeeping/forms.py:388
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1204
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1297
 msgid "From"
 msgstr "Alkaen"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/forms.py:285
 #: plugins/bookkeeping/src/metra_bookkeeping/forms.py:364
 #: plugins/bookkeeping/src/metra_bookkeeping/forms.py:389
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1204
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1297
 msgid "To"
 msgstr "Asti"
 
@@ -277,7 +510,7 @@ msgid "Statement"
 msgstr "Tiliote"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/forms.py:669
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1380
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1383
 msgid "For example: statement 12/2026."
 msgstr "Esimerkiksi: tiliote 12/2026."
 
@@ -300,12 +533,12 @@ msgid "For filing, for example with the Trade Register."
 msgstr "Toimitettavaksi esimerkiksi kaupparekisteriin."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:44
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1209
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1302
 msgid "Sales"
 msgstr "Myynti"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:45
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1211
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1304
 msgid "Purchases"
 msgstr "Ostot"
 
@@ -332,7 +565,7 @@ msgid "last day"
 msgstr "viimeinen päivä"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:80
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:443
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:446
 msgid "status"
 msgstr "tila"
 
@@ -403,17 +636,17 @@ msgid "closed by"
 msgstr "sulkenut"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:138
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:473
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1117
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:476
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1120
 msgid "created"
 msgstr "luotu"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/models.py:142
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:431
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1175
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1206
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1371
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1400
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:434
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1178
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1209
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1374
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1403
 msgid "financial year"
 msgstr "tilikausi"
 
@@ -421,16 +654,16 @@ msgstr "tilikausi"
 msgid "financial years"
 msgstr "tilikaudet"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:238
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:241
 msgid "The year must end after it starts."
 msgstr "Tilikauden on päätyttävä sen alkamisen jälkeen."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:245
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:248
 #, python-format
 msgid "Say why the year is not %(usual)s months."
 msgstr "Kerro, miksi tilikausi ei ole %(usual)s kuukautta."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:254
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:257
 #, python-format
 msgid ""
 "A financial year is %(usual)s months; a first or changed one %(min)s to "
@@ -439,37 +672,37 @@ msgstr ""
 "Tilikausi on %(usual)s kuukautta; ensimmäinen tai muutettu tilikausi "
 "%(min)s–%(max)s kuukautta."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:261
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:264
 msgid "The year overlaps another financial year."
 msgstr "Tilikausi menee päällekkäin toisen tilikauden kanssa."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:266
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:269
 #, python-format
 msgid "The year must start the day after the previous one ends (%(day)s)."
 msgstr ""
 "Tilikauden on alettava edellisen päättymistä seuraavana päivänä (%(day)s)."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:273
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:276
 msgid "The year must end the day before the next one starts."
 msgstr "Tilikauden on päätyttävä päivää ennen seuraavan alkamista."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:276
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:279
 msgid "Some of the year's vouchers would fall outside it."
 msgstr "Osa tilikauden tositteista jäisi sen ulkopuolelle."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:281
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:287
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:304
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:322
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:434
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:707
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:284
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:290
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:315
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:333
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:527
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:800
 #: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:83
 #: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:155
 #, python-format
 msgid "The financial year %(year)s is closed."
 msgstr "Tilikausi %(year)s on suljettu."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:290
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:293
 #, python-format
 msgid ""
 "The books are locked up to %(day)s: nothing can be posted on or before it."
@@ -477,67 +710,67 @@ msgstr ""
 "Kirjanpito on lukittu päivään %(day)s asti: sille päivälle tai sitä "
 "aiemmille päiville ei voi kirjata mitään."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:307
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:310
 msgid "Asset"
 msgstr "Vastaavaa"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:308
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:311
 msgid "Liability"
 msgstr "Velka"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:309
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:312
 msgid "Equity"
 msgstr "Oma pääoma"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:310
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:313
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget_form.html:11
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1141
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1150
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1234
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1243
 msgid "Income"
 msgstr "Tuotto"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:311
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:314
 msgid "Expense"
 msgstr "Kulu"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:314
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:438
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1213
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:317
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:441
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1216
 msgid "number"
 msgstr "numero"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:317
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:320
 msgid "Use digits only."
 msgstr "Käytä vain numeroita."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:319
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:395
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:822
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1214
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1244
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:322
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:398
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:825
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1217
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1247
 msgid "name"
 msgstr "nimi"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:320
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:441
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1215
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:323
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:444
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1218
 msgid "kind"
 msgstr "laji"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:322
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1216
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:325
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1219
 msgid "in use"
 msgstr "käytössä"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:322
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:325
 msgid "Accounts not in use cannot get new entries."
 msgstr "Käyttämättömille tileille ei voi tehdä uusia kirjauksia."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:325
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:328
 msgid "long-term"
 msgstr "pitkäaikainen"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:328
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:331
 msgid ""
 "For receivables and liabilities due after more than a year. The balance "
 "sheet shows them separately; keep the part due within a year on an account "
@@ -546,20 +779,20 @@ msgstr ""
 "Saamisille ja veloille, jotka erääntyvät yli vuoden kuluttua. Tase näyttää "
 "ne erikseen; pidä vuoden sisällä erääntyvä osa omalla tilillään."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:335
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:744
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1055
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1180
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1211
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1376
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:338
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:747
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1058
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1183
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1214
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1379
 msgid "account"
 msgstr "tili"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:336
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:339
 msgid "accounts"
 msgstr "tilit"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:363
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:366
 msgid ""
 "The account has entries, so its number and kind stay as they are. Rename it,"
 " or stop using it and add a new one."
@@ -567,28 +800,29 @@ msgstr ""
 "Tilillä on kirjauksia, joten sen numero ja laji pysyvät ennallaan. Nimeä se "
 "uudelleen tai poista se käytöstä ja lisää uusi."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:370
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:373
 msgid "An account with entries cannot be deleted."
 msgstr "Tiliä, jolla on kirjauksia, ei voi poistaa."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:389
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:392
 msgid "code"
 msgstr "tunnus"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:393
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:396
 msgid ""
 "Shown before the number, for example M for M12. Can be empty for one series."
 msgstr ""
 "Näytetään ennen numeroa, esimerkiksi M tunnukselle M12. Voi olla tyhjä "
 "yhdelle sarjalle."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:399
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:400
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:402
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:403
 msgid "voucher series"
 msgstr "tositesarja"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:409
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:412
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:4
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:27
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_list.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_list.html:6
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_list.html:13
@@ -596,143 +830,135 @@ msgstr "tositesarja"
 msgid "Vouchers"
 msgstr "Tositteet"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:415
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:418
 msgid "Draft"
 msgstr "Luonnos"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:416
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:419
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:47
 msgid "Posted"
 msgstr "Kirjattu"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:419
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:6
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:7
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:948
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:976
-msgid "Voucher"
-msgstr "Tosite"
-
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:420
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:423
 msgid "Opening balances"
 msgstr "Avaavat saldot"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:421
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:424
 msgid "Reversal"
 msgstr "Vastakirjaus"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:424
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:427
 msgid "Accrual"
 msgstr "Jaksotus"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:426
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:429
 msgid "Accrual of invoiced income"
 msgstr "Laskutettujen tuottojen jaksotus"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:427
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:430
 msgid "Depreciation"
 msgstr "Poisto"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:436
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:439
 msgid "series"
 msgstr "sarja"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:439
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:442
 msgid "date"
 msgstr "päivämäärä"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:440
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:748
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:443
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:751
 msgid "description"
 msgstr "kuvaus"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:447
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:450
 msgid "reverses"
 msgstr "oikaisee"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:458
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:461
 msgid "corrects the year"
 msgstr "oikaisee tilikauden"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:463
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:466
 msgid "For an error found in a closed year, corrected in this one."
 msgstr ""
 "Suljetulla tilikaudella havaitulle virheelle, joka oikaistaan tällä "
 "tilikaudella."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:467
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:470
 msgid "created by"
 msgstr "luonut"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:476
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:479
 msgid "posted by"
 msgstr "kirjannut"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:482
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:485
 msgid "posted"
 msgstr "kirjattu"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:486
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:741
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:819
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1086
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:489
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:744
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:822
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1089
 msgid "voucher"
 msgstr "tosite"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:487
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:490
 msgid "vouchers"
 msgstr "tositteet"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:497
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:500
 msgid "Draft voucher"
 msgstr "Tositeluonnos"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:498
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:501
 #, python-format
 msgid "Voucher %(number)s"
 msgstr "Tosite %(number)s"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:504
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:507
 msgid "Vouchers are posted with post()."
 msgstr "Tositteet kirjataan post()-metodilla."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:533
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:598
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:536
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:691
 msgid "A posted voucher cannot change. Correct it with a reversing voucher."
 msgstr "Kirjattua tositetta ei voi muuttaa. Oikaise se vastakirjauksella."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:554
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:557
 #, python-format
 msgid "The date is outside the financial year %(year)s."
 msgstr "Päivämäärä on tilikauden %(year)s ulkopuolella."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:559
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:562
 msgid "Only a closed earlier year can be corrected."
 msgstr "Vain suljetun aiemman tilikauden voi oikaista."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:562
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:565
 msgid "A voucher needs at least two lines."
 msgstr "Tositteella on oltava vähintään kaksi riviä."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:566
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:569
 #, python-format
 msgid "Debits (%(debit)s) and credits (%(credit)s) differ."
 msgstr "Debet (%(debit)s) ja kredit (%(credit)s) eivät täsmää."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:573
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:576
 msgid "The amounts are zero."
 msgstr "Summat ovat nolla."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:577
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:580
 #, python-format
 msgid "Opening balances are dated the first day of the year (%(day)s)."
 msgstr "Avaavat saldot päivätään tilikauden ensimmäiselle päivälle (%(day)s)."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:586
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:589
 msgid "The year already has posted opening balances."
 msgstr "Tilikaudella on jo kirjatut avaavat saldot."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:592
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:595
 msgid ""
 "The opening balances are carried over when the previous year is closed; they"
 " are not entered by hand."
@@ -740,17 +966,17 @@ msgstr ""
 "Avaavat saldot siirretään, kun edellinen tilikausi suljetaan; niitä ei "
 "syötetä käsin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:600
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:603
 #, python-format
 msgid "The account %(account)s is not in use."
 msgstr "Tili %(account)s ei ole käytössä."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:620
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:623
 #, python-format
 msgid "The VAT rate %(rate)s is not in force on %(day)s."
 msgstr "ALV-kanta %(rate)s ei ole voimassa %(day)s."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:629
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:632
 #, python-format
 msgid ""
 "The organisation is not VAT registered on %(day)s, so the voucher can have "
@@ -759,7 +985,7 @@ msgstr ""
 "Organisaatio ei ole arvonlisäverovelvollinen %(day)s, joten tositteella ei "
 "voi olla ALV:a. Tarkista ALV-rekisteröinnin päivämäärät kirjausasetuksista."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:647
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:650
 msgid ""
 "No receipt is attached. Every entry needs evidence: attach the receipt, or "
 "explain in the description why there is none (a memo voucher)."
@@ -767,153 +993,148 @@ msgstr ""
 "Kuittia ei ole liitetty. Jokainen kirjaus tarvitsee tositteen: liitä kuitti "
 "tai kerro kuvauksessa, miksi sitä ei ole (muistiotosite)."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:660
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:663
 msgid "The voucher is already posted."
 msgstr "Tosite on jo kirjattu."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:700
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:674
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:703
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:767
 msgid "This voucher cannot be reversed."
 msgstr "Tätä tositetta ei voi oikaista."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:707
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:710
 #, python-format
 msgid "Reversal of voucher %(number)s"
 msgstr "Tositteen %(number)s vastakirjaus"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:746
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:749
 msgid "debit"
 msgstr "debet"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:747
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:750
 msgid "credit"
 msgstr "kredit"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:756
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1052
-msgid "VAT rate (%)"
-msgstr "ALV-kanta (%)"
-
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:758
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:761
 msgid "order"
 msgstr "järjestys"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:762
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:765
 msgid "voucher line"
 msgstr "tositerivi"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:763
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:766
 msgid "voucher lines"
 msgstr "tositerivit"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:802
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:805
 msgid "Amounts are positive; use the other column instead."
 msgstr "Summat ovat positiivisia; käytä sen sijaan toista saraketta."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:804
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:807
 msgid "A line is either a debit or a credit, not both."
 msgstr "Rivi on joko debet tai kredit, ei molempia."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:806
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:809
 msgid "Enter a debit or a credit."
 msgstr "Anna debet tai kredit."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:821
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:824
 msgid "file"
 msgstr "tiedosto"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:823
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:826
 msgid "size"
 msgstr "koko"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:824
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:827
 msgid "type"
 msgstr "tyyppi"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:827
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:830
 msgid "uploaded by"
 msgstr "lähettänyt"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:833
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:836
 msgid "uploaded"
 msgstr "lähetetty"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:837
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:840
 msgid "receipt"
 msgstr "kuitti"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:838
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:841
 msgid "receipts"
 msgstr "kuitit"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:845
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:848
 msgid "A receipt cannot be changed."
 msgstr "Kuittia ei voi muuttaa."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:858
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:861
 msgid "Month"
 msgstr "Kuukausi"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:859
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:862
 msgid "Quarter"
 msgstr "Neljännesvuosi"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:860
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:863
 msgid "Calendar year"
 msgstr "Kalenterivuosi"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:862
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:865
 msgid "registered from"
 msgstr "rekisteröity alkaen"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:864
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:867
 msgid "registered until"
 msgstr "rekisteröinti päättyi"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:864
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:867
 msgid "Empty while still registered."
 msgstr "Tyhjä, kun rekisteröinti on yhä voimassa."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:867
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:870
 msgid "VAT period"
 msgstr "Verokausi"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:871
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:874
 msgid ""
 "How often the VAT return is filed, as agreed with the Tax Administration."
 msgstr ""
 "Kuinka usein arvonlisäveroilmoitus annetaan, Verohallinnon kanssa sovitulla "
 "tavalla."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:876
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:879
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:61
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/vat_registration_form.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/vat_registration_form.html:5
 msgid "VAT registration"
 msgstr "ALV-rekisteröinti"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:877
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:880
 msgid "VAT registrations"
 msgstr "ALV-rekisteröinnit"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:882
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:885
 #, python-format
 msgid "from %(start)s"
 msgstr "alkaen %(start)s"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:888
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:891
 msgid "The registration must end after it starts."
 msgstr "Rekisteröinnin on päätyttävä sen alkamisen jälkeen."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:896
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:899
 msgid "The period overlaps another VAT registration."
 msgstr "Jakso menee päällekkäin toisen ALV-rekisteröinnin kanssa."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:930
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:933
 msgid "post automatically from"
 msgstr "kirjaa automaattisesti alkaen"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:934
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:937
 msgid ""
 "Invoices, credit notes, payments and reminders dated this day or later are "
 "booked automatically. Choose a day after anything already booked by hand, so"
@@ -923,136 +1144,136 @@ msgstr ""
 "ja muistutukset kirjataan automaattisesti. Valitse päivä käsin jo kirjatun "
 "jälkeen, jotta mitään ei kirjata kahdesti. Tyhjä: mitään ei kirjata."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:939
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:942
 msgid "receivables"
 msgstr "myyntisaamiset"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:939
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:942
 msgid "Debited for invoices, credited for payments."
 msgstr "Laskuissa debet, suorituksissa kredit."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:940
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:943
 msgid "bank account"
 msgstr "pankkitili"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:940
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:943
 msgid "Where payments arrive."
 msgstr "Minne suoritukset tulevat."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:942
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:945
 msgid "sales"
 msgstr "myynti"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:942
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:945
 msgid "Income for invoice lines without an account of their own below."
 msgstr "Tulo laskuriveille, joilla ei ole omaa tiliä alla."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:944
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:947
 msgid "reminder fees"
 msgstr "muistutusmaksut"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:945
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:948
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:45
 msgid "VAT on sales"
 msgstr "Myynnin ALV"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:946
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:949
 msgid "VAT on purchases"
 msgstr "Ostojen ALV"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:948
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:951
 msgid "VAT settlement"
 msgstr "ALV-tilitys"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:949
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:952
 msgid ""
 "The VAT to pay or to get back, from the sales and purchase VAT of each "
 "period."
 msgstr ""
 "Maksettava tai palautettava ALV, kunkin kauden myynnin ja ostojen ALV:sta."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:953
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:956
 msgid "series for invoices"
 msgstr "tositesarja laskuille"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:958
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:961
 msgid "Invoices, credit notes and reminder fees."
 msgstr "Laskut, hyvityslaskut ja muistutusmaksut."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:962
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:965
 msgid "series for payments"
 msgstr "tositesarja suorituksille"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:981
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:982
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:984
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:985
 msgid "posting settings"
 msgstr "kirjausasetukset"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:985
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:988
 msgid "Posting settings"
 msgstr "Kirjausasetukset"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1045
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1048
 msgid "fee line"
 msgstr "maksurivi"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1059
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1062
 msgid "sales account"
 msgstr "myyntitili"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1060
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1063
 msgid "sales accounts"
 msgstr "myyntitilit"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1080
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1083
 msgid "Invoice"
 msgstr "Lasku"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1081
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1084
 msgid "Credit note"
 msgstr "Hyvityslasku"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1082
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1085
 msgid "Payment"
 msgstr "Suoritus"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1083
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1086
 msgid "Reminder fee"
 msgstr "Muistutusmaksu"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1088
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1091
 msgid "from"
 msgstr "peräisin"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1091
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1094
 msgid "invoice"
 msgstr "lasku"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1097
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1100
 msgid "payment"
 msgstr "suoritus"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1105
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1108
 msgid "payment reminder"
 msgstr "maksumuistutus"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1115
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1118
 msgid "supplied from"
 msgstr "toimitettu alkaen"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1116
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1119
 msgid "supplied until"
 msgstr "toimitettu päättyen"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1121
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1124
 msgid "posting"
 msgstr "kirjaus"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1122
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1125
 msgid "postings"
 msgstr "kirjaukset"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1160
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1163
 #, python-format
 msgid ""
 "%(invoice)s was issued without VAT, although the organisation is VAT "
@@ -1063,155 +1284,155 @@ msgstr ""
 "arvonlisäverovelvollinen. Tarkista laskutusasetukset ja ALV-rekisteröinnin "
 "päivämäärät."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1182
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1185
 msgid "budget"
 msgstr "talousarvio"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1186
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1189
 msgid "budget line"
 msgstr "talousarviorivi"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1187
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1190
 msgid "budget lines"
 msgstr "talousarviorivit"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1220
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1223
 msgid "account of a closed year"
 msgstr "suljetun tilikauden tili"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1221
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1224
 msgid "chart of accounts of a closed year"
 msgstr "suljetun tilikauden tilikartta"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1240
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1243
 msgid "Straight line over a number of years"
 msgstr "Tasapoisto usean vuoden aikana"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1241
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1244
 msgid "Reducing balance, a percentage a year"
 msgstr "Menojäännöspoisto, prosentti vuodessa"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1242
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1245
 msgid "Not depreciated (land, for example)"
 msgstr "Ei poisteta (esimerkiksi maa-alue)"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1247
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1250
 msgid "asset account"
 msgstr "omaisuustili"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1254
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1257
 msgid "depreciation account"
 msgstr "poistotili"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1262
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1265
 msgid "acquired"
 msgstr "hankittu"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1262
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1265
 msgid "Depreciation starts from the month it is taken into use."
 msgstr "Poisto alkaa käyttöönottokuukaudesta."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1264
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1267
 msgid "acquisition cost"
 msgstr "hankintameno"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1266
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1269
 msgid "depreciation plan"
 msgstr "poistosuunnitelma"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1268
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1271
 msgid "years"
 msgstr "vuotta"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1270
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1273
 msgid "per cent a year"
 msgstr "prosenttia vuodessa"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1273
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1276
 msgid "sold or scrapped"
 msgstr "myyty tai romutettu"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1273
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1276
 msgid "Empty while still in use."
 msgstr "Tyhjä, kun käytössä."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1275
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1402
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1278
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1405
 msgid "note"
 msgstr "huomautus"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1279
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1282
 msgid "fixed asset"
 msgstr "käyttöomaisuushyödyke"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1280
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1283
 msgid "fixed assets"
 msgstr "käyttöomaisuus"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1287
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1290
 msgid "Say over how many years."
 msgstr "Ilmoita, kuinka monen vuoden aikana."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1289
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1292
 msgid "Give a percentage from 1 to 100."
 msgstr "Anna prosenttiluku väliltä 1–100."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1292
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1295
 msgid "Choose the account depreciation is booked to."
 msgstr "Valitse tili, jolle poisto kirjataan."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1295
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1298
 msgid "The cost is more than zero."
 msgstr "Hankintameno on suurempi kuin nolla."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1297
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1300
 msgid "It cannot go before it was acquired."
 msgstr "Se ei voi olla ennen hankintaa."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1302
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1305
 #, python-format
 msgid "%(years)s years, straight line"
 msgstr "%(years)s vuotta, tasapoisto"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1304
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1307
 #, python-format
 msgid "%(percent)s %% reducing balance"
 msgstr "%(percent)s %% menojäännöspoisto"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1307
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1310
 msgid "Not depreciated"
 msgstr "Ei poisteta"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1378
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1381
 msgid "balance on the statement"
 msgstr "saldo tiliotteella"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1380
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1383
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:58
 msgid "statement"
 msgstr "tiliote"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1385
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1388
 msgid "bank statement balance"
 msgstr "tiliotteen saldo"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1386
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1389
 msgid "bank statement balances"
 msgstr "tiliotteen saldot"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1403
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1406
 msgid "language"
 msgstr "kieli"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1404
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1407
 msgid "text"
 msgstr "teksti"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1408
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1411
 msgid "note to the financial statements"
 msgstr "tilinpäätöksen liitetieto"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1409
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1412
 msgid "notes to the financial statements"
 msgstr "tilinpäätöksen liitetiedot"
 
@@ -1244,39 +1465,25 @@ msgstr "%(description)s (päivätty %(day)s, kirjattu jälkikäteen)"
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget.html:6
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:42
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1172
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1265
 msgid "Budget follow-up"
 msgstr "Budjettiseuranta"
-
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:6
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:7
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:6
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:20
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:54
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:24
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:92
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:948
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:976
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1039
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1147
-msgid "Account"
-msgstr "Tili"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:6
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:10
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget_form.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget_form.html:5
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1147
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1240
 msgid "Budget"
 msgstr "Talousarvio"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:7
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1147
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1240
 msgid "Actual"
 msgstr "Toteuma"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:7
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1147
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1240
 msgid "Difference"
 msgstr "Ero"
 
@@ -1292,7 +1499,7 @@ msgid "Total"
 msgstr "Yhteensä"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:23
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1165
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1258
 msgid "Result"
 msgstr "Tulos"
 
@@ -1305,53 +1512,9 @@ msgstr "Ei talousarviota eikä kirjauksia tällä jaksolla."
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/journal.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/journal.html:6
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:37
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:969
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1062
 msgid "Journal"
 msgstr "Päiväkirja"
-
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:6
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:7
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:7
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:38
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:948
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:976
-msgid "Date"
-msgstr "Päivämäärä"
-
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:7
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:7
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:8
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:39
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:54
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:24
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:948
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:976
-msgid "Description"
-msgstr "Kuvaus"
-
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:8
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:8
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:7
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:56
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:25
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:92
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:949
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:977
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1039
-msgid "Debit"
-msgstr "Debet"
-
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:8
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:8
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:8
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:56
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:25
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:92
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:949
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:977
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1039
-msgid "Credit"
-msgstr "Kredit"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:30
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:27
@@ -1360,12 +1523,12 @@ msgid "No posted vouchers in this period."
 msgstr "Ei kirjattuja tositteita tällä jaksolla."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:8
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:977
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1070
 msgid "Balance"
 msgstr "Saldo"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:11
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:982
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1075
 msgid "Balance brought forward"
 msgstr "Alkusaldo"
 
@@ -1381,7 +1544,7 @@ msgstr "Yleiskatsaus"
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/ledger.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/ledger.html:6
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:38
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1008
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1101
 msgid "General ledger"
 msgstr "Pääkirja"
 
@@ -1390,7 +1553,7 @@ msgstr "Pääkirja"
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/trial_balance.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/trial_balance.html:6
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:39
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1058
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1151
 msgid "Trial balance"
 msgstr "Saldoluettelo"
 
@@ -1398,7 +1561,7 @@ msgstr "Saldoluettelo"
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/income_statement.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/income_statement.html:6
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:40
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1116
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1209
 msgid "Income statement"
 msgstr "Tuloslaskelma"
 
@@ -1406,14 +1569,14 @@ msgstr "Tuloslaskelma"
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/balance_sheet.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/balance_sheet.html:6
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:41
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1128
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1221
 msgid "Balance sheet"
 msgstr "Tase"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:11
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/vat_summary.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/vat_summary.html:6
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1220
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1313
 msgid "VAT summary"
 msgstr "ALV-yhteenveto"
 
@@ -1433,6 +1596,7 @@ msgid "Chart of accounts"
 msgstr "Tilikartta"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:15
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:22
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:6
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:11
@@ -1543,12 +1707,12 @@ msgstr ""
 "päätetyn tilikauden allekirjoitettu tilinpäätös on lopullinen."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:7
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1039
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1132
 msgid "At the start"
 msgstr "Alussa"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:8
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1040
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1133
 msgid "At the end"
 msgstr "Lopussa"
 
@@ -1651,12 +1815,12 @@ msgid "No VAT in this period."
 msgstr "Ei ALV:a tällä jaksolla."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:39
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1204
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1297
 msgid "Base"
 msgstr "Veroperuste"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:39
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1204
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1297
 msgid "Tax"
 msgstr "Vero"
 
@@ -1672,17 +1836,13 @@ msgstr "Palautettavaa"
 msgid "To pay"
 msgstr "Maksettavaa"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:6
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:16
-msgid "Number"
-msgstr "Numero"
-
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:9
 msgid "Amount"
 msgstr "Summa"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:10
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:26
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:13
 msgid "Status"
 msgstr "Tila"
@@ -1690,7 +1850,8 @@ msgstr "Tila"
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:26
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:43
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:38
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:26
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:51
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:27
 msgid "None."
 msgstr "Ei yhtään."
 
@@ -1736,11 +1897,6 @@ msgstr "Peruuta"
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:20
 msgid "Name"
 msgstr "Nimi"
-
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:16
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:41
-msgid "Kind"
-msgstr "Laji"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:16
 msgid "Actions"
@@ -1880,8 +2036,8 @@ msgstr ""
 "Jätä tili tyhjäksi, jos sillä ei ole talousarviota."
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget_form.html:13
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1142
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1150
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1235
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1243
 msgid "Expenses"
 msgstr "Kulut"
 
@@ -2124,6 +2280,118 @@ msgstr "Ei arvonlisäverovelvollinen."
 msgid "Add a VAT registration"
 msgstr "Lisää ALV-rekisteröinti"
 
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:27
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:25
+msgid "How long the books are kept"
+msgstr "Kuinka kauan kirjanpito säilytetään"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:9
+#, python-format
+msgid ""
+"The financial statements, balance sheet specifications, journal, ledger, "
+"chart of accounts and list of books are kept %(books)s years from the end of"
+" the financial year. Vouchers and receipts, and the invoices, credit notes "
+"and payments booked from invoicing, are kept %(vouchers)s years from the end"
+" of the calendar year in which the financial year ended (%(source)s)."
+msgstr ""
+"Tilinpäätös, tase-erittelyt, päiväkirja, pääkirja, tilikartta ja luettelo "
+"kirjanpidoista säilytetään %(books)s vuotta tilikauden päättymisestä. "
+"Tositteet ja kuitit sekä laskutuksesta kirjatut laskut, hyvityslaskut ja "
+"suoritukset säilytetään %(vouchers)s vuotta sen kalenterivuoden lopusta, "
+"jona tilikausi päättyi (%(source)s)."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:15
+#, python-format
+msgid ""
+"The financial statements, balance sheet specifications, journal, ledger, "
+"chart of accounts and list of books are kept %(books)s years from the end of"
+" the financial year. Vouchers and receipts, and the invoices, credit notes "
+"and payments booked from invoicing, are kept %(vouchers)s years from the end"
+" of the financial year (%(source)s)."
+msgstr ""
+"Tilinpäätös, tase-erittelyt, päiväkirja, pääkirja, tilikartta ja luettelo "
+"kirjanpidoista säilytetään %(books)s vuotta tilikauden päättymisestä. "
+"Tositteet ja kuitit sekä laskutuksesta kirjatut laskut, hyvityslaskut ja "
+"suoritukset säilytetään %(vouchers)s vuotta tilikauden päättymisestä "
+"(%(source)s)."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:29
+msgid "Invoices"
+msgstr "Laskut"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:30
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:25
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:13
+msgid "Vouchers kept until"
+msgstr "Tositteet säilytetään"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:31
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:24
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:13
+msgid "Books kept until"
+msgstr "Kirjanpito säilytetään"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:32
+msgid "Now"
+msgstr "Nyt"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:44
+msgid "Keep everything"
+msgstr "Säilytä kaikki"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:44
+msgid "Minimum passed for vouchers and receipts; keep the books"
+msgstr "Tositteiden ja kuittien vähimmäisaika on kulunut; säilytä kirjanpito"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:44
+msgid "Minimum passed"
+msgstr "Vähimmäisaika on kulunut"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:53
+msgid "Nothing is removed automatically"
+msgstr "Mitään ei poisteta automaattisesti"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:54
+msgid ""
+"These are the shortest times the Accounting Act allows, and Metra keeps "
+"everything after them as well. Other rules can require keeping material "
+"longer: the terms of a grant, the 10-year VAT adjustment period of a "
+"property investment, or an open tax audit, appeal or dispute. Check those "
+"before removing anything. Removing a year whose time has passed is not "
+"offered in Metra yet; when it is due, export the year first and decide with "
+"the board and the auditor."
+msgstr ""
+"Nämä ovat lyhimmät kirjanpitolain sallimat ajat, ja Metra säilyttää kaiken "
+"myös niiden jälkeen. Muut säännöt voivat vaatia aineiston säilyttämistä "
+"pidempään: avustuksen ehdot, kiinteistöinvestoinnin arvonlisäveron 10 vuoden"
+" tarkistuskausi tai keskeneräinen verotarkastus, muutoksenhaku tai riita. "
+"Tarkista ne ennen kuin poistat mitään. Määräajan ylittäneen tilikauden "
+"poistamista ei vielä tarjota Metrassa; kun sen aika koittaa, vie tilikausi "
+"ensin ja päätä asiasta hallituksen ja tilintarkastajan kanssa."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:62
+msgid "Personal data in the books"
+msgstr "Henkilötiedot kirjanpidossa"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:63
+msgid ""
+"Vouchers, receipts and the invoices they rest on can name members and "
+"suppliers. They are bookkeeping material that the law requires to be kept, "
+"so they are kept for these periods even when a person asks to have their "
+"data erased (GDPR article 17(3)(b)). Changing or archiving a person or unit "
+"in the register does not change anything already booked: the books keep the "
+"names and amounts as they were booked."
+msgstr ""
+"Tositteissa, kuiteissa ja niiden perusteena olevissa laskuissa voi olla "
+"jäsenten ja toimittajien nimiä. Ne ovat kirjanpitoaineistoa, jonka "
+"säilyttämisestä laki velvoittaa, joten ne säilytetään näiden aikojen ajan, "
+"vaikka henkilö pyytäisi tietojensa poistamista (GDPR:n 17 artiklan 3 kohdan "
+"b alakohta). Henkilön tai yksikön muuttaminen tai arkistointi rekisterissä "
+"ei muuta mitään jo kirjattua: kirjanpito säilyttää nimet ja summat "
+"sellaisina kuin ne kirjattiin."
+
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/series_form.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/series_form.html:5
 msgid "Edit voucher series"
@@ -2188,14 +2456,6 @@ msgstr "Metran tekemä laskun perusteella; lasku on tämän tositteen todiste."
 msgid "Corrects an error of"
 msgstr "Oikaisee virheen tilikaudelta"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:43
-msgid "Series"
-msgstr "Sarja"
-
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:44
-msgid "Reverses"
-msgstr "Oikaisee"
-
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:45
 msgid "Reversed by"
 msgstr "Oikaistu tositteella"
@@ -2212,10 +2472,6 @@ msgstr "Kirjaukset"
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:68
 msgid "No lines yet."
 msgstr "Ei vielä rivejä."
-
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:75
-msgid "Receipts"
-msgstr "Kuitit"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:90
 msgid "No receipt attached."
@@ -2331,10 +2587,12 @@ msgid "Average staff"
 msgstr "Henkilöstön keskimääräinen lukumäärä"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:17
 msgid "Posted vouchers"
 msgstr "Kirjatut tositteet"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:17
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:19
 msgid "Drafts"
 msgstr "Luonnokset"
 
@@ -2367,22 +2625,12 @@ msgid "Result carried to"
 msgstr "Tulos siirretään tilille"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:24
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:13
-msgid "Books kept until"
-msgstr "Kirjanpito säilytetään"
-
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:24
 msgid ""
 "Financial statements, journal, ledger, chart of accounts and list of books: "
 "10 years from the end of the financial year."
 msgstr ""
 "Tilinpäätös, päiväkirja, pääkirja, tilikartta ja luettelo kirjanpidoista ja "
 "aineistoista: 10 vuotta tilikauden päättymisestä."
-
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:25
-#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:13
-msgid "Vouchers kept until"
-msgstr "Tositteet säilytetään"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:25
 msgid ""
@@ -2421,12 +2669,19 @@ msgstr "Tilinpäätös"
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:47
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:7
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:70
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:40
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_package.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_package.html:6
 msgid "Year-end package"
 msgstr "Tilinpäätöspaketti"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:48
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:6
+msgid "Export the books"
+msgstr "Vie kirjanpito"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:49
 msgid "Next year"
 msgstr "Seuraava tilikausi"
 
@@ -2462,7 +2717,7 @@ msgid "Make the depreciation voucher"
 msgstr "Tee poistotosite"
 
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:31
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:279
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:290
 msgid "The asset register has no depreciation for the year."
 msgstr "Käyttöomaisuusrekisterissä ei ole tilikauden poistoja."
 
@@ -2587,6 +2842,74 @@ msgstr ""
 msgid "Opening balances of the next year"
 msgstr "Seuraavan tilikauden avaavat saldot"
 
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:9
+msgid ""
+"The year as files, for an accountant who takes over the books in their own "
+"software, or to keep a copy outside Metra."
+msgstr ""
+"Tilikausi tiedostoina kirjanpitäjälle, joka ottaa kirjanpidon haltuunsa "
+"omalla ohjelmallaan, tai kopion säilyttämiseksi Metran ulkopuolella."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:14
+msgid ""
+"The year is still open, so the export is preliminary and the books may still"
+" change."
+msgstr ""
+"Tilikausi on vielä avoinna, joten vienti on alustava ja kirjanpito voi vielä"
+" muuttua."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:19
+msgid "Drafts are not part of the books and are left out."
+msgstr "Luonnokset eivät kuulu kirjanpitoon, ja ne jätetään pois."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:21
+msgid "Everything as a ZIP"
+msgstr "Kaikki ZIP-pakettina"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:22
+msgid ""
+"The chart of accounts with the year's balances and every posted voucher line"
+" as CSV files, the attached receipts in a folder per voucher, the year in "
+"SIE 4, and a README that describes the files."
+msgstr ""
+"Tilikartta tilikauden saldoineen ja kaikki kirjatut tositerivit CSV-"
+"tiedostoina, liitetyt kuitit kansiossa tositetta kohden, tilikausi SIE 4 "
+"-muodossa sekä README, joka kuvaa tiedostot."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:27
+msgid "Download the ZIP"
+msgstr "Lataa ZIP-tiedosto"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:28
+msgid "SIE 4"
+msgstr "SIE 4"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:29
+msgid ""
+"SIE 4 is the Nordic text format for moving books between accounting "
+"programs: the chart of accounts, the opening and closing balances and every "
+"voucher. Many Swedish programs and some Finnish ones import it. Ask the "
+"accountant which format their software takes; the CSV files in the ZIP suit "
+"the others."
+msgstr ""
+"SIE 4 on pohjoismainen tekstimuoto kirjanpidon siirtämiseen kirjanpito-"
+"ohjelmien välillä: tilikartta, avaavat ja päättävät saldot sekä kaikki "
+"tositteet. Monet ruotsalaiset ja jotkin suomalaiset ohjelmat tuovat sen. "
+"Kysy kirjanpitäjältä, mitä muotoa heidän ohjelmansa käyttää; ZIP-paketin "
+"CSV-tiedostot sopivat muihin."
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:35
+msgid "Download SIE 4"
+msgstr "Lataa SIE 4"
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:36
+msgid ""
+"For the auditor, the year-end package holds the financial statements, "
+"journal and ledger as one PDF. Each export is recorded in the audit log."
+msgstr ""
+"Tilintarkastajalle tilinpäätöspaketti sisältää tilinpäätöksen, päiväkirjan "
+"ja pääkirjan yhtenä PDF-tiedostona. Jokainen vienti kirjataan muutoslokiin."
+
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_form.html:3
 #: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_form.html:5
 msgid "Edit financial year"
@@ -2687,26 +3010,26 @@ msgstr ""
 "Paketti on suomeksi tai ruotsiksi sen mukaan, millä kielellä tilinpäätös "
 "laaditaan. Englanninkielinen merkitään käännökseksi."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:120
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:131
 msgid ""
 "The books are started. Enter the opening balances as the first voucher."
 msgstr "Kirjanpito on aloitettu. Anna avaavat saldot ensimmäisenä tositteena."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:155
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:166
 #, python-format
 msgid "The financial year %(year)s was added."
 msgstr "Tilikausi %(year)s lisättiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:201
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:212
 #, python-format
 msgid "The books are locked up to %(day)s."
 msgstr "Kirjanpito on lukittu päivään %(day)s asti."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:205
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:216
 msgid "Choose the last day to lock."
 msgstr "Valitse viimeinen lukittava päivä."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:230
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:241
 #, python-format
 msgid ""
 "The financial year %(year)s is closed, and %(next)s has its opening "
@@ -2714,130 +3037,130 @@ msgid ""
 msgstr ""
 "Tilikausi %(year)s on suljettu, ja tilikaudella %(next)s on avaavat saldot."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:278
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:289
 msgid "The depreciation voucher is ready as a draft. Check it and post it."
 msgstr "Poistotosite on valmis luonnoksena. Tarkista se ja kirjaa se."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:291
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:302
 msgid "The accrual voucher is ready as a draft. Check it and post it."
 msgstr "Jaksotustosite on valmis luonnoksena. Tarkista se ja kirjaa se."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:292
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:303
 msgid "The accruals already match the invoices."
 msgstr "Jaksotukset vastaavat jo laskuja."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:310
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:321
 msgid "The bank statement balances were saved."
 msgstr "Tiliotteiden saldot tallennettiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:338
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:349
 msgid "The notes were saved."
 msgstr "Liitetiedot tallennettiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:371
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:917
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:382
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1010
 msgid "PDFs cannot be made on this server."
 msgstr "PDF-tiedostoja ei voi luoda tällä palvelimella."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:403
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:496
 msgid "The fixed asset was saved."
 msgstr "Käyttöomaisuushyödyke tallennettiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:425
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:518
 msgid "The fixed asset was removed from the register."
 msgstr "Käyttöomaisuushyödyke poistettiin rekisteristä."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:441
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:534
 msgid "The financial year was saved."
 msgstr "Tilikausi tallennettiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:466
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:559
 #, python-format
 msgid "The account %(account)s was added."
 msgstr "Tili %(account)s lisättiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:478
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:571
 msgid "The account was saved."
 msgstr "Tili tallennettiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:494
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:587
 msgid "An account with entries cannot be deleted. Stop using it instead."
 msgstr ""
 "Tiliä, jolla on kirjauksia, ei voi poistaa. Poista se sen sijaan käytöstä."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:497
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:590
 msgid "The account was deleted."
 msgstr "Tili poistettiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:507
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:600
 msgid "The voucher series was added."
 msgstr "Tositesarja lisättiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:519
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:612
 msgid "The series has posted vouchers, so its code stays."
 msgstr "Sarjalla on kirjattuja tositteita, joten sen tunnus pysyy ennallaan."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:522
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:615
 msgid "The voucher series was saved."
 msgstr "Tositesarja tallennettiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:567
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:660
 msgid "The draft voucher was saved."
 msgstr "Tositeluonnos tallennettiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:580
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:673
 msgid "Add a financial year first."
 msgstr "Lisää ensin tilikausi."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:646
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:739
 #, python-format
 msgid "Voucher %(number)s was posted."
 msgstr "Tosite %(number)s kirjattiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:664
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:757
 msgid "The draft voucher was deleted."
 msgstr "Tositeluonnos poistettiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:688
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:781
 #, python-format
 msgid ""
 "Voucher %(number)s reverses it. Enter the right entry as a new voucher."
 msgstr "Tosite %(number)s oikaisee sen. Anna oikea kirjaus uutena tositteena."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:721
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:814
 msgid "The receipt was added."
 msgstr "Kuitti lisättiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:756
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:849
 msgid "The receipt was removed."
 msgstr "Kuitti poistettiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:773
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:866
 msgid "The posting settings were saved."
 msgstr "Kirjausasetukset tallennettiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:803
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:896
 #, python-format
 msgid "Added the accounts %(accounts)s."
 msgstr "Lisättiin tilit %(accounts)s."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:816
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:831
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:909
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:924
 msgid "The VAT registration was saved."
 msgstr "ALV-rekisteröinti tallennettiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:845
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:938
 msgid "The VAT registration was removed."
 msgstr "ALV-rekisteröinti poistettiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:859
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:952
 #, python-format
 msgid "%(count)s voucher was made from invoicing."
 msgid_plural "%(count)s vouchers were made from invoicing."
 msgstr[0] "%(count)s tosite tehtiin laskutuksesta."
 msgstr[1] "%(count)s tositetta tehtiin laskutuksesta."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:869
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:962
 #, python-format
 msgid "%(count)s of them could not be posted; it is among the drafts."
 msgid_plural ""
@@ -2845,7 +3168,7 @@ msgid_plural ""
 msgstr[0] "%(count)s niistä ei voitu kirjata; se on luonnoksissa."
 msgstr[1] "%(count)s niistä ei voitu kirjata; ne ovat luonnoksissa."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:879
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:972
 #, python-format
 msgid ""
 "%(count)s record is still waiting: no open financial year covers its date."
@@ -2858,26 +3181,19 @@ msgstr[1] ""
 "%(count)s tietuetta odottaa yhä: mikään avoin tilikausi ei kata niiden "
 "päiviä."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:948
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:976
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1039
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1147
-msgid "Account name"
-msgstr "Tilin nimi"
-
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1148
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1241
 msgid "Of the budget (%)"
 msgstr "Talousarviosta (%)"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1188
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1281
 msgid "The budget was saved."
 msgstr "Talousarvio tallennettiin."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1204
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1297
 msgid "Rate (%)"
 msgstr "Kanta (%)"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1212
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1305
 msgid "To pay (to get back if negative)"
 msgstr "Maksettavaa (palautettavaa, jos negatiivinen)"
 
@@ -2951,7 +3267,7 @@ msgstr ""
 msgid "The depreciation by plan is not booked."
 msgstr "Suunnitelman mukaisia poistoja ei ole kirjattu."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:218
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:216
 #, python-format
 msgid ""
 "Invoiced income across the year end is not fully accrued or deferred (income"
@@ -2960,64 +3276,64 @@ msgstr ""
 "Tilikauden vaihteen yli laskutettuja tuottoja ei ole jaksotettu kokonaan "
 "(siirtämättä: %(amount)s). Tee jaksotustosite."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:226
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:224
 #, python-format
 msgid "The bank statement balance of %(account)s is not given."
 msgstr "Tilin %(account)s tiliotteen saldoa ei ole annettu."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:231
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:229
 #, python-format
 msgid "%(account)s differs from the bank statement by %(amount)s."
 msgstr "%(account)s poikkeaa tiliotteesta %(amount)s."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:237
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:235
 #, python-format
 msgid "The receivables account differs from the open invoices by %(amount)s."
 msgstr "Myyntisaamisten tili poikkeaa avoimista laskuista %(amount)s."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:243
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:241
 #, python-format
 msgid "%(account)s differs from the asset register by %(amount)s."
 msgstr "%(account)s poikkeaa käyttöomaisuusrekisteristä %(amount)s."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:247
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:245
 msgid "The notes to the financial statements are not written yet."
 msgstr "Tilinpäätöksen liitetietoja ei ole vielä kirjoitettu."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:250
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:248
 #, python-format
 msgid "The financial statements were due on %(day)s."
 msgstr "Tilinpäätös olisi pitänyt tehdä viimeistään %(day)s."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:311
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:309
 msgid "Choose the equity account the result is carried to."
 msgstr "Valitse oman pääoman tili, jolle tulos siirretään."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:345
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:343
 #, python-format
 msgid "Opening balances from the financial year %(year)s"
 msgstr "Avaavat saldot tilikaudelta %(year)s"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:356
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:354
 #, python-format
 msgid "accrual of %(year)s"
 msgstr "tilikauden %(year)s jaksotus"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:381
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:379
 msgid "The year already has a depreciation voucher."
 msgstr "Tilikaudella on jo poistotosite."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:393
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:391
 #, python-format
 msgid "Depreciation by plan %(year)s"
 msgstr "Suunnitelman mukaiset poistot %(year)s"
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:571
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:569
 #, python-format
 msgid "The chart of accounts has no account %(number)s for accruals."
 msgstr "Tilikartassa ei ole jaksotuksille tiliä %(number)s."
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:587
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:585
 #, python-format
 msgid "Accrual of invoiced income across the end of %(year)s"
 msgstr "Laskutettujen tuottojen jaksotus tilikauden %(year)s vaihteessa"
@@ -3047,6 +3363,9 @@ msgstr "Laskutettujen tuottojen jaksotus tilikauden %(year)s vaihteessa"
 #, python-format
 #~ msgid "Accrual: invoiced after %(year)s for supplies in it"
 #~ msgstr "Jaksotus: laskutettu tilikauden %(year)s jälkeen sen toimituksista"
+
+#~ msgid "May be removed"
+#~ msgstr "Voidaan poistaa"
 
 #~ msgid "A year with posted vouchers keeps its dates."
 #~ msgstr "Tilikausi, jolla on kirjattuja tositteita, säilyttää päivämääränsä."
