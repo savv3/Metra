@@ -1,8 +1,6 @@
 """The setup wizard: one page per step, each saved on its own or skipped.
 Nothing changes until a step's form is saved."""
 
-from allauth.account.forms import default_token_generator
-from allauth.account.utils import user_pk_to_url_str
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -16,6 +14,7 @@ from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
 from django.views.decorators.http import require_POST
 
+from apps.accounts import invites
 from apps.invoicing.models import BillingSettings
 from apps.messaging.email_forms import EmailSettingsForm
 from apps.messaging.registry import EMAIL, SMS, ProviderError, provider_for
@@ -238,8 +237,7 @@ def board_step(request, name):
 def _invite(request, data):
     """Make the account and email a link to choose a password. Nothing is
     made if the email cannot be sent."""
-    provider = provider_for(EMAIL)
-    if provider is None:
+    if not invites.email_set_up():
         messages.error(
             request,
             _("Email is not set up, so no invitation can be sent. Add the person under Settings."),
@@ -256,34 +254,9 @@ def _invite(request, data):
     user.set_unusable_password()
     user.save()
     user.groups.add(group)
-    link = request.build_absolute_uri(
-        reverse(
-            "account_reset_password_from_key",
-            kwargs={
-                "uidb36": user_pk_to_url_str(user),
-                "key": default_token_generator.make_token(user),
-            },
-        )
-    )
-    organisation = Organisation.current()
-    values = {
-        "name": user.first_name,
-        "organisation": organisation.public_name if organisation else _("Metra"),
-        "username": user.username,
-        "link": link,
-        "inviter": request.user.get_full_name() or request.user.get_username(),
-    }
-    subject = _("Your account for %(organisation)s") % values
-    body = (
-        _(
-            "Hello %(name)s,\n\n%(inviter)s has made you an account for %(organisation)s "
-            "in Metra. Your username is %(username)s.\n\nChoose your password here:\n%(link)s\n\n"
-            "The link works for a few days."
-        )
-        % values
-    )
+    inviter = request.user.get_full_name() or request.user.get_username()
     try:
-        provider.send(user.email, body, subject=subject)
+        invites.send(user, invites.make_link(user, request), inviter=inviter)
     except ProviderError as error:
         user.delete()
         messages.error(request, _("The invitation could not be sent: %(error)s") % {"error": error})
