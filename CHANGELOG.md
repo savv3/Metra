@@ -85,6 +85,13 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   its pages and settings and a note when it is in use or not set up yet.
   Turning one off first says what changes. The official add-ons'
   descriptions are translated.
+- A closed reading round no longer offers to send links, and its rows show
+  each value with **Correct** instead of an input and a Save button per row.
+  **Export as CSV** moved to the top of the round page, and the SMS service
+  is named in words instead of by its code name.
+- **Send-outs**: **New message** is the main button, and **Urgent alert** is
+  no longer red (red is kept for deleting and restoring). Dates in tables no
+  longer break over two lines, and the two-factor banner is smaller.
 - On a reading round's page, the units table and its filters have their own
   **Readings** heading, so they no longer run into the **Send links** buttons.
 

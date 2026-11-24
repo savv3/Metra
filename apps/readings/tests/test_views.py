@@ -215,3 +215,29 @@ def test_entry_form_shows_saved_value_with_the_types_decimals(board_client, roun
     page = board_client.get(entry_url(round_, unit), HTTP_ACCEPT_LANGUAGE="sv").content.decode()
 
     assert 'value="17,0"' in page
+
+
+def test_closed_round_has_no_send_buttons_or_inline_entry(board_client, make_round, unit):
+    closed = make_round(2020)
+    Reading.objects.create(round=closed, unit=unit, value=D("100"))
+
+    page = board_client.get(closed.get_absolute_url(), HTTP_ACCEPT_LANGUAGE="en").content
+    page = page.decode()
+
+    assert "The round is closed" in page
+    assert "Send links to all units" not in page
+    assert 'name="value"' not in page
+    assert f'href="{entry_url(closed, unit)}">Correct' in page
+    assert (
+        reverse("readings:round_export", args=[closed.pk])
+        in page.split("</h1>")[1].split("</div>")[0]
+    )
+
+
+def test_open_round_names_the_sms_service_in_words(board_client, round_, unit):
+    page = board_client.get(round_.get_absolute_url(), HTTP_ACCEPT_LANGUAGE="en").content
+    page = page.decode()
+
+    assert "Send links to all units" in page
+    assert "Way of sending SMS:" in page
+    assert "through console" not in page

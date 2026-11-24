@@ -26,7 +26,9 @@ saknas. Skriv in värden rad för rad, eller använd **Mata in** eller
 **Korrigera** på en enhets sida. För en mätare är förbrukningen värdet minus
 föregående avläsning. Ett värde som är lägre än förra gången, eller långt
 över enhetens vanliga förbrukning, sparas men markeras **Kontrollera**.
-**Exportera som CSV** laddar ner omgången.
+När en omgång är stängd visar raderna värdena med **Korrigera** i stället
+för inmatningsfält, och knapparna för att skicka länkar försvinner.
+**Exportera som CSV**, uppe på omgångens sida, laddar ner omgången.
 
 ## Medlemmarna rapporterar själva
 

@@ -328,6 +328,7 @@ td a:hover, th a:hover { text-decoration: underline; }
 
 /* Messages */
 .messages { list-style: none; margin: 0 0 1rem; padding: 0; }
+.message.two-factor-off, .message.two-factor-nudge { padding: 0.5rem 0.9rem; font-size: 0.9rem; }
 .message {
   padding: 0.75rem 1rem;
   margin-bottom: 0.75rem;
@@ -409,6 +410,7 @@ td a:hover, th a:hover { text-decoration: underline; }
 .add-panel > summary::-webkit-details-marker { display: none; }
 .add-panel[open] > summary { display: none; }
 .add-panel__body { margin-top: 0.5rem; padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.nowrap { white-space: nowrap; }
 .history-panel { margin-top: 1.75rem; }
 .history-panel > summary { cursor: pointer; }
 .history-panel > summary h2 { display: inline; margin: 0; }

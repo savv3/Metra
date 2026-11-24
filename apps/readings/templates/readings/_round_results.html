@@ -16,9 +16,6 @@
       </tbody>
     </table>
   </div>
-  {% if perms.readings.view_reading and perms.register.view_unit %}
-    <p class="export-link"><a href="{% url 'readings:round_export' round.pk %}{% if query %}?{{ query }}{% endif %}" download>{% translate "Export as CSV" %}</a></p>
-  {% endif %}
 {% else %}
   <p class="empty">{% translate "No units found." %}</p>
 {% endif %}

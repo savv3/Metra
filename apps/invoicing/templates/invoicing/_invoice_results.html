@@ -19,8 +19,8 @@
             <th scope="row"><a href="{{ invoice.get_absolute_url }}">{% if invoice.number %}{{ invoice.number }}{% else %}{% translate "Draft" %}{% endif %}</a>{% if invoice.kind == "credit_note" %} <span class="badge">{% translate "Credit note" %}</span>{% endif %}</th>
             <td>{{ invoice.unit.name }}</td>
             <td>{{ invoice.person.full_name }}</td>
-            <td>{{ invoice.issue_date|date:"SHORT_DATE_FORMAT"|default:"–" }}</td>
-            <td>{{ invoice.due_date|date:"SHORT_DATE_FORMAT"|default:"–" }}</td>
+            <td class="nowrap">{{ invoice.issue_date|date:"SHORT_DATE_FORMAT"|default:"–" }}</td>
+            <td class="nowrap">{{ invoice.due_date|date:"SHORT_DATE_FORMAT"|default:"–" }}</td>
             <td class="num">{{ invoice.total|floatformat:2 }} €</td>
             <td>{% if invoice.is_overdue %}<span class="status-error">{% translate "Overdue" %}</span>{% else %}{{ invoice.get_status_display }}{% endif %}{% if invoice.problems %} <span class="badge">{% translate "Check" %}</span>{% endif %}</td>
           </tr>

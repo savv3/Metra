@@ -22,10 +22,9 @@
       </form>
       {% if row.errors %}<ul class="errorlist" id="value-{{ unit.pk }}-errors">{% for error in row.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
       {% if row.saved %}<p class="status-ok" role="status">{% translate "Saved" %}</p>{% endif %}
-    {% elif reading %}
-      {{ reading.value|reading_value:reading_type }}
     {% else %}
-      <span class="status-skip">{% translate "Missing" %}</span>
+      {% if reading %}{{ reading.value|reading_value:reading_type }}{% else %}<span class="status-skip">{% translate "Missing" %}</span>{% endif %}
+      {% if can_correct %}<a class="button button--small" href="{% url 'readings:reading_entry' round.pk unit.pk %}">{% if reading %}{% translate "Correct" %}{% else %}{% translate "Enter" %}{% endif %}<span class="visually-hidden"> {{ unit.name }}</span></a>{% endif %}
     {% endif %}
   </td>
   <td>
@@ -34,7 +33,7 @@
   </td>
   <td>
     {% if reading %}
-      {{ reading.submitted_at|date:"SHORT_DATE_FORMAT" }}
+      <span class="nowrap">{{ reading.submitted_at|date:"SHORT_DATE_FORMAT" }}</span>
       <span class="help">{{ reading.get_source_display }}{% if reading.submitted_by %}, {{ reading.submitted_by }}{% elif reading.submitted_by_person %}, {{ reading.submitted_by_person }}{% endif %}</span>
     {% else %}–{% endif %}
   </td>
