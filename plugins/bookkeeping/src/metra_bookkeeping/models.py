@@ -425,6 +425,8 @@ class Voucher(models.Model):
         # Year-end entries. An accrual is reversed on the first day of the
         # next year when the year is closed.
         ACCRUAL = "accrual", _("Accrual")
+        # Invoiced income moved across the year end by supply days.
+        INCOME_ACCRUAL = "income_accrual", _("Accrual of invoiced income")
         DEPRECIATION = "depreciation", _("Depreciation")
 
     year = models.ForeignKey(

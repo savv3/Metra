@@ -44,6 +44,12 @@ and date. **Upgrade notes** says what an admin must do when upgrading
   listed in its notes. The **Year-end package** is one PDF for the auditor:
   the statements, notes, signature page, balance sheet specifications, list
   of books and material, chart of accounts, journal and ledger.
+- Bookkeeping: invoiced income across the year end is shared by supply
+  days. Supplies that straddle the year end are accrued in part, and
+  invoices issued in the year for supplies after it are deferred. If
+  invoices change after the accrual voucher was made, the year-end page and
+  the closing warn, and **Make the accrual voucher** books only the
+  difference.
 
 ### Changed
 

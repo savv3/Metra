@@ -228,13 +228,22 @@ läpi tilinpäätöksen vaiheet:
 1. **Suunnitelman mukaiset poistot**: **Tee poistotosite** tekee
    käyttöomaisuusrekisteristä luonnoksen, joka on päivätty tilikauden
    viimeiselle päivälle. Tarkista ja kirjaa se.
-2. **Tilikauden jälkeen laskutetut tuotot**: tilikauden jälkeen lähetetyt
-   laskut sen aikana tehdyistä toimituksista tarjotaan jaksotustositteeksi,
-   jotta tuotto kohdistuu oikealle vuodelle. Muut jaksotukset (myöhemmin
-   laskutetut kulut, etukäteen saadut tuotot) ovat lajia **Jaksotus**
-   olevia tositteita, jotka päivätään tilikauden viimeiselle päivälle.
-   Sulkeminen peruu kaikki jaksotukset seuraavan tilikauden ensimmäisenä
-   päivänä.
+2. **Tilikauden vaihteen yli laskutetut tuotot**: tuotto jaetaan
+   tilikausien kesken toimituspäivien mukaan. Tilikauden jälkeen lähetetyt
+   laskut sen aikana tehdyistä toimituksista jaksotetaan siirtosaamisiksi
+   (1760), ja tilikauden aikana lähetetyt laskut sen jälkeisistä
+   toimituksista siirtoveloiksi (2960). **Tee jaksotustosite** tekee
+   luonnoksen, joka on päivätty tilikauden viimeiselle päivälle; jos
+   laskuja lähetetään tai hyvitetään sen jälkeen, sivu ja sulkeminen
+   varoittavat, ja painike tekee tositteen vain erotuksesta. Jako päivien
+   mukaan on ehdotus: pyydä kirjanpitäjää vahvistamaan menetelmä, jos
+   toimitukset ovat epätasaisia. Tilikautta edeltäviä toimituspäiviä ei
+   lasketa mukaan; jos ne osuvat suljetulle tilikaudelle, sulkeminen
+   varoittaa, ja tuotto kirjataan sen tilikauden korjauksena, jos se on
+   olennainen. Muut jaksotukset (myöhemmin laskutetut
+   kulut, etukäteen saadut tuotot) ovat lajia **Jaksotus** olevia
+   tositteita, jotka päivätään tilikauden viimeiselle päivälle. Sulkeminen
+   peruu kaikki jaksotukset seuraavan tilikauden ensimmäisenä päivänä.
 3. **Tiliotteet**: anna jokaisen pankkitilin saldo tilikauden lopun
    tiliotteelta; tase-erittelyt vertaavat sitä kirjanpitoon.
 4. **Liitetiedot ja allekirjoitukset**: tilinpäätöksen liitetiedot, kuhunkin

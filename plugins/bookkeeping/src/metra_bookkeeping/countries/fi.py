@@ -1396,6 +1396,8 @@ TEXTS = {
 RETAINED_EARNINGS = "2250"
 # Invoices issued after the year for supplies made in it are accrued here.
 ACCRUED_INCOME = "1760"
+# Invoiced in the year for supplies in the next one: deferred here.
+DEFERRED_INCOME = "2960"
 # The balance sheet lines whose accounts are bank and cash (their balances
 # are checked against the bank statements) and fixed assets (against the
 # asset register).

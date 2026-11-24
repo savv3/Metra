@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-24 19:06+0200\n"
+"POT-Creation-Date: 2026-11-24 19:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,186 +18,222 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps.py:9 apps.py:32 apps.py:51 templates/metra_bookkeeping/_nav.html:2
-#: templates/metra_bookkeeping/index.html:3
-#: templates/metra_bookkeeping/index.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:9
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:32
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:51
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:2
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:6
 msgid "Bookkeeping"
 msgstr ""
 
-#: apps.py:10
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:10
 msgid ""
 "Double-entry books with vouchers, journal and ledger, under Finnish rules."
 msgstr ""
 
-#: apps.py:41 templates/metra_bookkeeping/_nav.html:14
-#: templates/metra_bookkeeping/posting_settings.html:3
-#: templates/metra_bookkeeping/posting_settings.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:41
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:14
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:5
 msgid "Bookkeeping of invoices"
 msgstr ""
 
-#: apps.py:44
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:44
 msgid ""
 "The accounts and voucher series invoices and payments are booked to, and VAT."
 msgstr ""
 
-#: apps.py:71
+#: plugins/bookkeeping/src/metra_bookkeeping/apps.py:71
 msgid ""
 "The books have posted vouchers, which must be kept readable for the legal "
 "period, so bookkeeping stays on."
 msgstr ""
 
-#: archive.py:119 archive.py:168
-#: templates/metra_bookkeeping/_budget_table.html:6
-#: templates/metra_bookkeeping/_journal_table.html:7
-#: templates/metra_bookkeeping/_trial_balance_table.html:6
-#: templates/metra_bookkeeping/asset_list.html:20
-#: templates/metra_bookkeeping/voucher_detail.html:54
-#: templates/metra_bookkeeping/voucher_form.html:24
-#: templates/metra_bookkeeping/year_end.html:87 views.py:1040 views.py:1068
-#: views.py:1131 views.py:1239
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:119
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:168
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:20
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:54
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:24
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:92
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1041
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1069
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1132
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1240
 msgid "Account"
 msgstr ""
 
-#: archive.py:120 archive.py:169 views.py:1040 views.py:1068 views.py:1131
-#: views.py:1239
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:120
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:169
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1041
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1069
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1132
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1240
 msgid "Account name"
 msgstr ""
 
-#: archive.py:121 archive.py:162
-#: templates/metra_bookkeeping/account_list.html:16
-#: templates/metra_bookkeeping/voucher_detail.html:41
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:121
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:162
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:41
 msgid "Kind"
 msgstr ""
 
-#: archive.py:122
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:122
 msgid "Opening balance"
 msgstr ""
 
-#: archive.py:123 archive.py:171
-#: templates/metra_bookkeeping/_journal_table.html:8
-#: templates/metra_bookkeeping/_ledger_table.html:8
-#: templates/metra_bookkeeping/_trial_balance_table.html:7
-#: templates/metra_bookkeeping/voucher_detail.html:56
-#: templates/metra_bookkeeping/voucher_form.html:25
-#: templates/metra_bookkeeping/year_end.html:87 views.py:1041 views.py:1069
-#: views.py:1131
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:123
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:171
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:56
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:25
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:92
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1042
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1070
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1132
 msgid "Debit"
 msgstr ""
 
-#: archive.py:124 archive.py:172
-#: templates/metra_bookkeeping/_journal_table.html:8
-#: templates/metra_bookkeeping/_ledger_table.html:8
-#: templates/metra_bookkeeping/_trial_balance_table.html:8
-#: templates/metra_bookkeeping/voucher_detail.html:56
-#: templates/metra_bookkeeping/voucher_form.html:25
-#: templates/metra_bookkeeping/year_end.html:87 views.py:1041 views.py:1069
-#: views.py:1131
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:124
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:172
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:56
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:25
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:92
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1042
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1070
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1132
 msgid "Credit"
 msgstr ""
 
-#: archive.py:125
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:125
 msgid "Closing balance"
 msgstr ""
 
-#: archive.py:149
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:149
 #, python-format
 msgid "%(source)s, invoice %(number)s"
 msgstr ""
 
-#: archive.py:158 models.py:417
-#: templates/metra_bookkeeping/_journal_table.html:6
-#: templates/metra_bookkeeping/_ledger_table.html:7 views.py:1040 views.py:1068
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:158
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:422
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1041
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1069
 msgid "Voucher"
 msgstr ""
 
-#: archive.py:159 templates/metra_bookkeeping/voucher_detail.html:43
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:159
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:43
 msgid "Series"
 msgstr ""
 
-#: archive.py:160 templates/metra_bookkeeping/_voucher_table.html:6
-#: templates/metra_bookkeeping/account_list.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:160
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:16
 msgid "Number"
 msgstr ""
 
-#: archive.py:161 templates/metra_bookkeeping/_journal_table.html:6
-#: templates/metra_bookkeeping/_ledger_table.html:7
-#: templates/metra_bookkeeping/_voucher_table.html:7
-#: templates/metra_bookkeeping/voucher_detail.html:38 views.py:1040
-#: views.py:1068
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:161
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:38
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1041
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1069
 msgid "Date"
 msgstr ""
 
-#: archive.py:163 templates/metra_bookkeeping/_journal_table.html:7
-#: templates/metra_bookkeeping/_ledger_table.html:7
-#: templates/metra_bookkeeping/_voucher_table.html:8
-#: templates/metra_bookkeeping/voucher_detail.html:39
-#: templates/metra_bookkeeping/voucher_detail.html:54
-#: templates/metra_bookkeeping/voucher_form.html:24 views.py:1040 views.py:1068
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:163
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:39
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:54
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:24
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1041
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1069
 msgid "Description"
 msgstr ""
 
-#: archive.py:164 templates/metra_bookkeeping/voucher_detail.html:44
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:164
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:44
 msgid "Reverses"
 msgstr ""
 
-#: archive.py:165
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:165
 msgid "Corrects the year"
 msgstr ""
 
-#: archive.py:166
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:166
 msgid "From invoicing"
 msgstr ""
 
-#: archive.py:167
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:167
 msgid "Line"
 msgstr ""
 
-#: archive.py:170
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:170
 msgid "Line description"
 msgstr ""
 
-#: archive.py:173 forms.py:162 models.py:749
-#: templates/metra_bookkeeping/_vat_table.html:39
-#: templates/metra_bookkeeping/voucher_detail.html:55
-#: templates/metra_bookkeeping/voucher_form.html:26 views.py:1296
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:173
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:166
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:756
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:39
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:55
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:26
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1297
 msgid "VAT"
 msgstr ""
 
-#: archive.py:174 models.py:752 models.py:1048
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:174
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:759
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1055
 msgid "VAT rate (%)"
 msgstr ""
 
-#: archive.py:175 templates/metra_bookkeeping/retention.html:28
-#: templates/metra_bookkeeping/voucher_detail.html:75
-#: templates/metra_bookkeeping/year_export.html:18
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:175
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:28
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:75
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:18
 msgid "Receipts"
 msgstr ""
 
-#: archive.py:319
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:319
 #, python-format
 msgid ""
 "The books of %(organisation)s for the financial year %(year)s (%(start)s to "
 "%(end)s)."
 msgstr ""
 
-#: archive.py:321
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:321
 #, python-format
 msgid ""
 "Status of the year: %(status)s. Exported from Metra %(version)s on %(made)s."
 msgstr ""
 
-#: archive.py:325
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:325
 msgid ""
 "The year is still open, so these books are preliminary and may still change."
 msgstr ""
 
-#: archive.py:330
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:330
 msgid ""
 "accounts.csv: the chart of accounts with each account's opening balance, "
 "debits, credits and closing balance for the year."
 msgstr ""
 
-#: archive.py:334
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:334
 #, python-format
 msgid ""
 "vouchers.csv: every line of the %(vouchers)s posted vouchers in date order, "
@@ -205,24 +241,24 @@ msgid ""
 "amounts. Drafts are not part of the books and are left out."
 msgstr ""
 
-#: archive.py:339
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:339
 #, python-format
 msgid "receipts/: the %(receipts)s attached receipts, in a folder per voucher."
 msgstr ""
 
-#: archive.py:341
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:341
 msgid ""
 "books.se: the same year in SIE 4 for accounting software, encoded in PC8 "
 "(code page 437). Opening balances are #IB, the other vouchers #VER."
 msgstr ""
 
-#: archive.py:346
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:346
 msgid ""
 "The CSV files are UTF-8, separated by semicolons, with dates as YYYY-MM-DD "
 "and a comma for decimals. Balances are debits minus credits, in euros."
 msgstr ""
 
-#: archive.py:351
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:351
 #, python-format
 msgid ""
 "Keep the financial statements, journal, ledger, chart of accounts and list "
@@ -231,890 +267,950 @@ msgid ""
 "financial statements, journal and ledger."
 msgstr ""
 
-#: archive.py:382
+#: plugins/bookkeeping/src/metra_bookkeeping/archive.py:382
 msgid "The file of this receipt was not found on the server."
 msgstr ""
 
-#: countries/fi.py:19
+#: plugins/bookkeeping/src/metra_bookkeeping/countries/fi.py:19
 msgid "Finland"
 msgstr ""
 
-#: countries/fi.py:204
+#: plugins/bookkeeping/src/metra_bookkeeping/countries/fi.py:204
 msgid "Association"
 msgstr ""
 
-#: countries/fi.py:206
+#: plugins/bookkeeping/src/metra_bookkeeping/countries/fi.py:206
 msgid ""
 "For a registered association (yhdistys): activities, fundraising and "
 "membership fees, with a surplus or deficit."
 msgstr ""
 
-#: countries/fi.py:327
+#: plugins/bookkeeping/src/metra_bookkeeping/countries/fi.py:327
 msgid "Cooperative or company"
 msgstr ""
 
-#: countries/fi.py:329
+#: plugins/bookkeeping/src/metra_bookkeeping/countries/fi.py:329
 msgid ""
 "For a cooperative (osuuskunta), such as a water cooperative, or a company: "
 "net sales, with a profit or loss."
 msgstr ""
 
-#: forms.py:78 templates/metra_bookkeeping/year_detail.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:78
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:13
 msgid "Kind of organisation"
 msgstr ""
 
-#: forms.py:85
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:85
 msgid ""
 "Decides the form of the income statement and the chart of accounts the books "
 "start with. Accounts can then be added, renamed and retired."
 msgstr ""
 
-#: forms.py:104
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:108
 msgid "The account has entries, so this stays."
 msgstr ""
 
-#: forms.py:129
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:133
 msgid "No, an entry of this year"
 msgstr ""
 
-#: forms.py:140
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:144
 msgid "No financial year covers this date."
 msgstr ""
 
-#: forms.py:164
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:168
 msgid "The VAT the line is for, when VAT registered."
 msgstr ""
 
-#: forms.py:201
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:205
 msgid "Choose a VAT rate from the list."
 msgstr ""
 
-#: forms.py:215
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:219
 msgid "Add the voucher's lines."
 msgstr ""
 
-#: forms.py:230
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:234
 msgid "Receipt"
 msgstr ""
 
-#: forms.py:231
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:235
 #, python-format
 msgid "A PDF or a photo of the receipt or bill, up to %(mb)s MB."
 msgstr ""
 
-#: forms.py:239
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:243
 msgid "This kind of file cannot be a receipt."
 msgstr ""
 
-#: forms.py:242
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:246
 #, python-format
 msgid "The file is larger than %(limit)s."
 msgstr ""
 
-#: forms.py:253
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:257
 msgid "Date of the reversal"
 msgstr ""
 
-#: forms.py:255
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:259
 msgid "Reason"
 msgstr ""
 
-#: forms.py:257
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:261
 msgid "Why the voucher is reversed, for example a wrong account."
 msgstr ""
 
-#: forms.py:268 models.py:700
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:272
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:707
 msgid "There is no open financial year for that date."
 msgstr ""
 
-#: forms.py:278 forms.py:349 templates/metra_bookkeeping/_report_head.html:2
-#: templates/metra_bookkeeping/index.html:35
-#: templates/metra_bookkeeping/pdf/report.html:13
-#: templates/metra_bookkeeping/retention.html:25
-#: templates/metra_bookkeeping/voucher_detail.html:22
-#: templates/metra_bookkeeping/year_detail.html:3
-#: templates/metra_bookkeeping/year_detail.html:6
-#: templates/metra_bookkeeping/year_list.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:282
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:353
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_report_head.html:2
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:35
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/pdf/report.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:25
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:22
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:13
 msgid "Financial year"
 msgstr ""
 
-#: forms.py:280 forms.py:359 forms.py:384 views.py:1296
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:284
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:363
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:388
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1297
 msgid "From"
 msgstr ""
 
-#: forms.py:281 forms.py:360 forms.py:385 views.py:1296
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:285
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:364
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:389
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1297
 msgid "To"
 msgstr ""
 
-#: forms.py:307
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:311
 msgid "English (a translation, not for filing)"
 msgstr ""
 
-#: forms.py:323 templates/metra_bookkeeping/year_notes.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:327
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_notes.html:16
 msgid "Language"
 msgstr ""
 
-#: forms.py:325
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:329
 msgid "Without the previous year"
 msgstr ""
 
-#: forms.py:327
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:331
 msgid "The previous financial year is shown beside it when it exists."
 msgstr ""
 
-#: forms.py:330
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:334
 msgid "Micro-entity format"
 msgstr ""
 
-#: forms.py:332
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:336
 msgid "Leaves out the breakdowns a micro entity need not show."
 msgstr ""
 
-#: forms.py:367
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:371
 msgid "At"
 msgstr ""
 
-#: forms.py:469
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:473
 msgid "Sales invoices"
 msgstr ""
 
-#: forms.py:470
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:474
 msgid "Payments"
 msgstr ""
 
-#: forms.py:480
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:484
 #, python-format
 msgid "New series: %(code)s %(name)s"
 msgstr ""
 
-#: forms.py:493
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:497
 msgid "Choose a day in an open financial year."
 msgstr ""
 
-#: forms.py:506
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:510
 #, python-format
 msgid "Choose these accounts before posting starts: %(names)s."
 msgstr ""
 
-#: forms.py:513
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:517
 msgid ""
 "Sales VAT, purchase VAT and the VAT settlement need accounts of their own."
 msgstr ""
 
-#: forms.py:516
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:520
 msgid "Receivables and the bank need accounts of their own."
 msgstr ""
 
-#: forms.py:568
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:572
 msgid "Default sales account"
 msgstr ""
 
-#: forms.py:610
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:614
 msgid "Lock the books up to"
 msgstr ""
 
-#: forms.py:626
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:630
 msgid "Carry the result to"
 msgstr ""
 
-#: forms.py:628
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:632
 msgid "The result of earlier years, in the next year's opening balances."
 msgstr ""
 
-#: forms.py:631
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:635
 msgid "I understand that a closed year can never be changed or opened again."
 msgstr ""
 
-#: forms.py:661
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:665
 msgid "Statement"
 msgstr ""
 
-#: forms.py:665 models.py:1372
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:669
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1383
 msgid "For example: statement 12/2026."
 msgstr ""
 
-#: forms.py:696
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:700
 msgid "Who signs the financial statements"
 msgstr ""
 
-#: forms.py:700 models.py:118
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:704
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:118
 msgid "The board members, one per line. Printed under the signature lines."
 msgstr ""
 
-#: forms.py:775
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:779
 msgid "Only the financial statements and notes"
 msgstr ""
 
-#: forms.py:777
+#: plugins/bookkeeping/src/metra_bookkeeping/forms.py:781
 msgid "For filing, for example with the Trade Register."
 msgstr ""
 
-#: models.py:44 views.py:1301
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:44
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1302
 msgid "Sales"
 msgstr ""
 
-#: models.py:45 views.py:1303
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:45
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1304
 msgid "Purchases"
 msgstr ""
 
-#: models.py:54
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:54
 #, python-format
 msgid "%(kind)s %(rate)s %%"
 msgstr ""
 
-#: models.py:74
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:74
 msgid "Open"
 msgstr ""
 
-#: models.py:75 templates/metra_bookkeeping/year_detail.html:21
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:75
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:21
 msgid "Closed"
 msgstr ""
 
-#: models.py:77
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:77
 msgid "first day"
 msgstr ""
 
-#: models.py:78
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:78
 msgid "last day"
 msgstr ""
 
-#: models.py:80 models.py:439
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:80
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:446
 msgid "status"
 msgstr ""
 
-#: models.py:84
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:84
 msgid "The first financial year"
 msgstr ""
 
-#: models.py:85
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:85
 msgid "The last financial year"
 msgstr ""
 
-#: models.py:86
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:86
 msgid "The closing date changes"
 msgstr ""
 
-#: models.py:88
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:88
 msgid "country"
 msgstr ""
 
-#: models.py:90
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:90
 msgid "kind of organisation"
 msgstr ""
 
-#: models.py:93
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:93
 msgid "Decides the form of the income statement."
 msgstr ""
 
-#: models.py:96
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:96
 msgid "why the year is not 12 months"
 msgstr ""
 
-#: models.py:100
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:100
 msgid "A year is 12 months, except when the books start, end or change dates."
 msgstr ""
 
-#: models.py:103
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:103
 msgid "average staff"
 msgstr ""
 
-#: models.py:108
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:108
 msgid ""
 "The average number of employees during the year. With the balance sheet "
 "total and turnover, it decides the size class of the financial statements."
 msgstr ""
 
-#: models.py:114
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:114
 msgid "locked until"
 msgstr ""
 
-#: models.py:116
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:116
 msgid "who signs the financial statements"
 msgstr ""
 
-#: models.py:123
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:123
 msgid "result carried to"
 msgstr ""
 
-#: models.py:129
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:129
 msgid "closed"
 msgstr ""
 
-#: models.py:132
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:132
 msgid "closed by"
 msgstr ""
 
-#: models.py:138 models.py:469 models.py:1113
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:138
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:476
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1120
 msgid "created"
 msgstr ""
 
-#: models.py:142 models.py:427 models.py:1171 models.py:1202 models.py:1363
-#: models.py:1392
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:142
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:434
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1178
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1209
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1374
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1403
 msgid "financial year"
 msgstr ""
 
-#: models.py:143
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:143
 msgid "financial years"
 msgstr ""
 
-#: models.py:241
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:241
 msgid "The year must end after it starts."
 msgstr ""
 
-#: models.py:248
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:248
 #, python-format
 msgid "Say why the year is not %(usual)s months."
 msgstr ""
 
-#: models.py:257
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:257
 #, python-format
 msgid ""
 "A financial year is %(usual)s months; a first or changed one %(min)s to "
 "%(max)s."
 msgstr ""
 
-#: models.py:264
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:264
 msgid "The year overlaps another financial year."
 msgstr ""
 
-#: models.py:269
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:269
 #, python-format
 msgid "The year must start the day after the previous one ends (%(day)s)."
 msgstr ""
 
-#: models.py:276
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:276
 msgid "The year must end the day before the next one starts."
 msgstr ""
 
-#: models.py:279
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:279
 msgid "Some of the year's vouchers would fall outside it."
 msgstr ""
 
-#: models.py:284 models.py:290 views.py:314 views.py:332 views.py:526
-#: views.py:799 yearend.py:83 yearend.py:155
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:284
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:290
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:315
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:333
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:527
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:800
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:83
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:155
 #, python-format
 msgid "The financial year %(year)s is closed."
 msgstr ""
 
-#: models.py:293
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:293
 #, python-format
 msgid ""
 "The books are locked up to %(day)s: nothing can be posted on or before it."
 msgstr ""
 
-#: models.py:310
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:310
 msgid "Asset"
 msgstr ""
 
-#: models.py:311
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:311
 msgid "Liability"
 msgstr ""
 
-#: models.py:312
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:312
 msgid "Equity"
 msgstr ""
 
-#: models.py:313 templates/metra_bookkeeping/budget_form.html:11 views.py:1233
-#: views.py:1242
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:313
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget_form.html:11
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1234
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1243
 msgid "Income"
 msgstr ""
 
-#: models.py:314
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:314
 msgid "Expense"
 msgstr ""
 
-#: models.py:317 models.py:434 models.py:1209
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:317
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:441
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1216
 msgid "number"
 msgstr ""
 
-#: models.py:320
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:320
 msgid "Use digits only."
 msgstr ""
 
-#: models.py:322 models.py:393 models.py:818 models.py:1210 models.py:1236
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:322
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:398
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:825
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1217
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1247
 msgid "name"
 msgstr ""
 
-#: models.py:323 models.py:437 models.py:1211
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:323
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:444
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1218
 msgid "kind"
 msgstr ""
 
-#: models.py:325 models.py:1212
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:325
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1219
 msgid "in use"
 msgstr ""
 
-#: models.py:325
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:325
 msgid "Accounts not in use cannot get new entries."
 msgstr ""
 
-#: models.py:328
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:328
 msgid "long-term"
 msgstr ""
 
-#: models.py:331
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:331
 msgid ""
 "For receivables and liabilities due after more than a year. The balance "
 "sheet shows them separately; keep the part due within a year on an account "
 "of its own."
 msgstr ""
 
-#: models.py:338 models.py:740 models.py:1051 models.py:1176 models.py:1207
-#: models.py:1368
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:338
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:747
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1058
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1183
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1214
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1379
 msgid "account"
 msgstr ""
 
-#: models.py:339
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:339
 msgid "accounts"
 msgstr ""
 
-#: models.py:361
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:366
 msgid ""
 "The account has entries, so its number and kind stay as they are. Rename it, "
 "or stop using it and add a new one."
 msgstr ""
 
-#: models.py:368
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:373
 msgid "An account with entries cannot be deleted."
 msgstr ""
 
-#: models.py:387
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:392
 msgid "code"
 msgstr ""
 
-#: models.py:391
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:396
 msgid ""
 "Shown before the number, for example M for M12. Can be empty for one series."
 msgstr ""
 
-#: models.py:397 models.py:398
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:402
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:403
 msgid "voucher series"
 msgstr ""
 
-#: models.py:407 templates/metra_bookkeeping/_nav.html:4
-#: templates/metra_bookkeeping/retention.html:27
-#: templates/metra_bookkeeping/voucher_list.html:3
-#: templates/metra_bookkeeping/voucher_list.html:6
-#: templates/metra_bookkeeping/voucher_list.html:13
-#: templates/metra_bookkeeping/year_list.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:412
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:4
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:27
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_list.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_list.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_list.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:13
 msgid "Vouchers"
 msgstr ""
 
-#: models.py:413
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:418
 msgid "Draft"
 msgstr ""
 
-#: models.py:414 templates/metra_bookkeeping/voucher_detail.html:47
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:419
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:47
 msgid "Posted"
 msgstr ""
 
-#: models.py:418
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:423
 msgid "Opening balances"
 msgstr ""
 
-#: models.py:419
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:424
 msgid "Reversal"
 msgstr ""
 
-#: models.py:422
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:427
 msgid "Accrual"
 msgstr ""
 
-#: models.py:423
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:429
+msgid "Accrual of invoiced income"
+msgstr ""
+
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:430
 msgid "Depreciation"
 msgstr ""
 
-#: models.py:432
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:439
 msgid "series"
 msgstr ""
 
-#: models.py:435
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:442
 msgid "date"
 msgstr ""
 
-#: models.py:436 models.py:744
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:443
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:751
 msgid "description"
 msgstr ""
 
-#: models.py:443
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:450
 msgid "reverses"
 msgstr ""
 
-#: models.py:454
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:461
 msgid "corrects the year"
 msgstr ""
 
-#: models.py:459
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:466
 msgid "For an error found in a closed year, corrected in this one."
 msgstr ""
 
-#: models.py:463
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:470
 msgid "created by"
 msgstr ""
 
-#: models.py:472
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:479
 msgid "posted by"
 msgstr ""
 
-#: models.py:478
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:485
 msgid "posted"
 msgstr ""
 
-#: models.py:482 models.py:737 models.py:815 models.py:1082
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:489
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:744
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:822
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1089
 msgid "voucher"
 msgstr ""
 
-#: models.py:483
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:490
 msgid "vouchers"
 msgstr ""
 
-#: models.py:493
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:500
 msgid "Draft voucher"
 msgstr ""
 
-#: models.py:494
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:501
 #, python-format
 msgid "Voucher %(number)s"
 msgstr ""
 
-#: models.py:500
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:507
 msgid "Vouchers are posted with post()."
 msgstr ""
 
-#: models.py:529 views.py:690
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:536
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:691
 msgid "A posted voucher cannot change. Correct it with a reversing voucher."
 msgstr ""
 
-#: models.py:550
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:557
 #, python-format
 msgid "The date is outside the financial year %(year)s."
 msgstr ""
 
-#: models.py:555
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:562
 msgid "Only a closed earlier year can be corrected."
 msgstr ""
 
-#: models.py:558
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:565
 msgid "A voucher needs at least two lines."
 msgstr ""
 
-#: models.py:562
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:569
 #, python-format
 msgid "Debits (%(debit)s) and credits (%(credit)s) differ."
 msgstr ""
 
-#: models.py:569
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:576
 msgid "The amounts are zero."
 msgstr ""
 
-#: models.py:573
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:580
 #, python-format
 msgid "Opening balances are dated the first day of the year (%(day)s)."
 msgstr ""
 
-#: models.py:582
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:589
 msgid "The year already has posted opening balances."
 msgstr ""
 
-#: models.py:588
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:595
 msgid ""
 "The opening balances are carried over when the previous year is closed; they "
 "are not entered by hand."
 msgstr ""
 
-#: models.py:596
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:603
 #, python-format
 msgid "The account %(account)s is not in use."
 msgstr ""
 
-#: models.py:616
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:623
 #, python-format
 msgid "The VAT rate %(rate)s is not in force on %(day)s."
 msgstr ""
 
-#: models.py:625
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:632
 #, python-format
 msgid ""
 "The organisation is not VAT registered on %(day)s, so the voucher can have "
 "no VAT. Check the VAT registration dates in the posting settings."
 msgstr ""
 
-#: models.py:643
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:650
 msgid ""
 "No receipt is attached. Every entry needs evidence: attach the receipt, or "
 "explain in the description why there is none (a memo voucher)."
 msgstr ""
 
-#: models.py:656
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:663
 msgid "The voucher is already posted."
 msgstr ""
 
-#: models.py:696 views.py:766
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:703
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:767
 msgid "This voucher cannot be reversed."
 msgstr ""
 
-#: models.py:703
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:710
 #, python-format
 msgid "Reversal of voucher %(number)s"
 msgstr ""
 
-#: models.py:742
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:749
 msgid "debit"
 msgstr ""
 
-#: models.py:743
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:750
 msgid "credit"
 msgstr ""
 
-#: models.py:754
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:761
 msgid "order"
 msgstr ""
 
-#: models.py:758
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:765
 msgid "voucher line"
 msgstr ""
 
-#: models.py:759
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:766
 msgid "voucher lines"
 msgstr ""
 
-#: models.py:798
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:805
 msgid "Amounts are positive; use the other column instead."
 msgstr ""
 
-#: models.py:800
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:807
 msgid "A line is either a debit or a credit, not both."
 msgstr ""
 
-#: models.py:802
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:809
 msgid "Enter a debit or a credit."
 msgstr ""
 
-#: models.py:817
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:824
 msgid "file"
 msgstr ""
 
-#: models.py:819
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:826
 msgid "size"
 msgstr ""
 
-#: models.py:820
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:827
 msgid "type"
 msgstr ""
 
-#: models.py:823
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:830
 msgid "uploaded by"
 msgstr ""
 
-#: models.py:829
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:836
 msgid "uploaded"
 msgstr ""
 
-#: models.py:833
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:840
 msgid "receipt"
 msgstr ""
 
-#: models.py:834
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:841
 msgid "receipts"
 msgstr ""
 
-#: models.py:841
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:848
 msgid "A receipt cannot be changed."
 msgstr ""
 
-#: models.py:854
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:861
 msgid "Month"
 msgstr ""
 
-#: models.py:855
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:862
 msgid "Quarter"
 msgstr ""
 
-#: models.py:856
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:863
 msgid "Calendar year"
 msgstr ""
 
-#: models.py:858
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:865
 msgid "registered from"
 msgstr ""
 
-#: models.py:860
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:867
 msgid "registered until"
 msgstr ""
 
-#: models.py:860
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:867
 msgid "Empty while still registered."
 msgstr ""
 
-#: models.py:863
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:870
 msgid "VAT period"
 msgstr ""
 
-#: models.py:867
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:874
 msgid ""
 "How often the VAT return is filed, as agreed with the Tax Administration."
 msgstr ""
 
-#: models.py:872 templates/metra_bookkeeping/posting_settings.html:61
-#: templates/metra_bookkeeping/vat_registration_form.html:3
-#: templates/metra_bookkeeping/vat_registration_form.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:879
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:61
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/vat_registration_form.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/vat_registration_form.html:5
 msgid "VAT registration"
 msgstr ""
 
-#: models.py:873
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:880
 msgid "VAT registrations"
 msgstr ""
 
-#: models.py:878
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:885
 #, python-format
 msgid "from %(start)s"
 msgstr ""
 
-#: models.py:884
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:891
 msgid "The registration must end after it starts."
 msgstr ""
 
-#: models.py:892
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:899
 msgid "The period overlaps another VAT registration."
 msgstr ""
 
-#: models.py:926
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:933
 msgid "post automatically from"
 msgstr ""
 
-#: models.py:930
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:937
 msgid ""
 "Invoices, credit notes, payments and reminders dated this day or later are "
 "booked automatically. Choose a day after anything already booked by hand, so "
 "nothing is booked twice. Empty: nothing is posted."
 msgstr ""
 
-#: models.py:935
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:942
 msgid "receivables"
 msgstr ""
 
-#: models.py:935
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:942
 msgid "Debited for invoices, credited for payments."
 msgstr ""
 
-#: models.py:936
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:943
 msgid "bank account"
 msgstr ""
 
-#: models.py:936
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:943
 msgid "Where payments arrive."
 msgstr ""
 
-#: models.py:938
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:945
 msgid "sales"
 msgstr ""
 
-#: models.py:938
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:945
 msgid "Income for invoice lines without an account of their own below."
 msgstr ""
 
-#: models.py:940
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:947
 msgid "reminder fees"
 msgstr ""
 
-#: models.py:941 templates/metra_bookkeeping/_vat_table.html:45
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:948
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:45
 msgid "VAT on sales"
 msgstr ""
 
-#: models.py:942
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:949
 msgid "VAT on purchases"
 msgstr ""
 
-#: models.py:944
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:951
 msgid "VAT settlement"
 msgstr ""
 
-#: models.py:945
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:952
 msgid ""
 "The VAT to pay or to get back, from the sales and purchase VAT of each "
 "period."
 msgstr ""
 
-#: models.py:949
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:956
 msgid "series for invoices"
 msgstr ""
 
-#: models.py:954
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:961
 msgid "Invoices, credit notes and reminder fees."
 msgstr ""
 
-#: models.py:958
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:965
 msgid "series for payments"
 msgstr ""
 
-#: models.py:977 models.py:978
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:984
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:985
 msgid "posting settings"
 msgstr ""
 
-#: models.py:981
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:988
 msgid "Posting settings"
 msgstr ""
 
-#: models.py:1041
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1048
 msgid "fee line"
 msgstr ""
 
-#: models.py:1055
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1062
 msgid "sales account"
 msgstr ""
 
-#: models.py:1056
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1063
 msgid "sales accounts"
 msgstr ""
 
-#: models.py:1076
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1083
 msgid "Invoice"
 msgstr ""
 
-#: models.py:1077
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1084
 msgid "Credit note"
 msgstr ""
 
-#: models.py:1078
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1085
 msgid "Payment"
 msgstr ""
 
-#: models.py:1079
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1086
 msgid "Reminder fee"
 msgstr ""
 
-#: models.py:1084
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1091
 msgid "from"
 msgstr ""
 
-#: models.py:1087
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1094
 msgid "invoice"
 msgstr ""
 
-#: models.py:1093
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1100
 msgid "payment"
 msgstr ""
 
-#: models.py:1101
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1108
 msgid "payment reminder"
 msgstr ""
 
-#: models.py:1111
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1118
 msgid "supplied from"
 msgstr ""
 
-#: models.py:1112
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1119
 msgid "supplied until"
 msgstr ""
 
-#: models.py:1117
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1124
 msgid "posting"
 msgstr ""
 
-#: models.py:1118
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1125
 msgid "postings"
 msgstr ""
 
-#: models.py:1156
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1163
 #, python-format
 msgid ""
 "%(invoice)s was issued without VAT, although the organisation is VAT "
@@ -1122,434 +1218,451 @@ msgid ""
 "dates."
 msgstr ""
 
-#: models.py:1178
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1185
 msgid "budget"
 msgstr ""
 
-#: models.py:1182
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1189
 msgid "budget line"
 msgstr ""
 
-#: models.py:1183
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1190
 msgid "budget lines"
 msgstr ""
 
-#: models.py:1216
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1223
 msgid "account of a closed year"
 msgstr ""
 
-#: models.py:1217
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1224
 msgid "chart of accounts of a closed year"
 msgstr ""
 
-#: models.py:1232
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1243
 msgid "Straight line over a number of years"
 msgstr ""
 
-#: models.py:1233
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1244
 msgid "Reducing balance, a percentage a year"
 msgstr ""
 
-#: models.py:1234
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1245
 msgid "Not depreciated (land, for example)"
 msgstr ""
 
-#: models.py:1239
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1250
 msgid "asset account"
 msgstr ""
 
-#: models.py:1246
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1257
 msgid "depreciation account"
 msgstr ""
 
-#: models.py:1254
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1265
 msgid "acquired"
 msgstr ""
 
-#: models.py:1254
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1265
 msgid "Depreciation starts from the month it is taken into use."
 msgstr ""
 
-#: models.py:1256
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1267
 msgid "acquisition cost"
 msgstr ""
 
-#: models.py:1258
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1269
 msgid "depreciation plan"
 msgstr ""
 
-#: models.py:1260
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1271
 msgid "years"
 msgstr ""
 
-#: models.py:1262
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1273
 msgid "per cent a year"
 msgstr ""
 
-#: models.py:1265
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1276
 msgid "sold or scrapped"
 msgstr ""
 
-#: models.py:1265
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1276
 msgid "Empty while still in use."
 msgstr ""
 
-#: models.py:1267 models.py:1394
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1278
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1405
 msgid "note"
 msgstr ""
 
-#: models.py:1271
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1282
 msgid "fixed asset"
 msgstr ""
 
-#: models.py:1272
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1283
 msgid "fixed assets"
 msgstr ""
 
-#: models.py:1279
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1290
 msgid "Say over how many years."
 msgstr ""
 
-#: models.py:1281
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1292
 msgid "Give a percentage from 1 to 100."
 msgstr ""
 
-#: models.py:1284
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1295
 msgid "Choose the account depreciation is booked to."
 msgstr ""
 
-#: models.py:1287
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1298
 msgid "The cost is more than zero."
 msgstr ""
 
-#: models.py:1289
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1300
 msgid "It cannot go before it was acquired."
 msgstr ""
 
-#: models.py:1294
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1305
 #, python-format
 msgid "%(years)s years, straight line"
 msgstr ""
 
-#: models.py:1296
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1307
 #, python-format
 msgid "%(percent)s %% reducing balance"
 msgstr ""
 
-#: models.py:1299
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1310
 msgid "Not depreciated"
 msgstr ""
 
-#: models.py:1370
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1381
 msgid "balance on the statement"
 msgstr ""
 
-#: models.py:1372 templates/metra_bookkeeping/year_end.html:53
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1383
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:58
 msgid "statement"
 msgstr ""
 
-#: models.py:1377
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1388
 msgid "bank statement balance"
 msgstr ""
 
-#: models.py:1378
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1389
 msgid "bank statement balances"
 msgstr ""
 
-#: models.py:1395
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1406
 msgid "language"
 msgstr ""
 
-#: models.py:1396
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1407
 msgid "text"
 msgstr ""
 
-#: models.py:1400
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1411
 msgid "note to the financial statements"
 msgstr ""
 
-#: models.py:1401
+#: plugins/bookkeeping/src/metra_bookkeeping/models.py:1412
 msgid "notes to the financial statements"
 msgstr ""
 
-#: postings.py:160
+#: plugins/bookkeeping/src/metra_bookkeeping/postings.py:160
 #, python-format
 msgid "Credit note %(number)s for invoice %(credited)s, %(unit)s"
 msgstr ""
 
-#: postings.py:162
+#: plugins/bookkeeping/src/metra_bookkeeping/postings.py:162
 #, python-format
 msgid "Payment of invoice %(number)s, %(unit)s"
 msgstr ""
 
-#: postings.py:164
+#: plugins/bookkeeping/src/metra_bookkeeping/postings.py:164
 #, python-format
 msgid "Reminder fee for invoice %(number)s, %(unit)s"
 msgstr ""
 
-#: postings.py:166
+#: plugins/bookkeeping/src/metra_bookkeeping/postings.py:166
 #, python-format
 msgid "Invoice %(number)s, %(unit)s"
 msgstr ""
 
-#: postings.py:203
+#: plugins/bookkeeping/src/metra_bookkeeping/postings.py:203
 #, python-format
 msgid "%(description)s (dated %(day)s, booked late)"
 msgstr ""
 
-#: templates/metra_bookkeeping/_budget_table.html:3
-#: templates/metra_bookkeeping/budget.html:3
-#: templates/metra_bookkeeping/budget.html:6
-#: templates/metra_bookkeeping/year_detail.html:42 views.py:1264
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:42
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1265
 msgid "Budget follow-up"
 msgstr ""
 
-#: templates/metra_bookkeeping/_budget_table.html:6
-#: templates/metra_bookkeeping/_nav.html:10
-#: templates/metra_bookkeeping/budget_form.html:3
-#: templates/metra_bookkeeping/budget_form.html:5 views.py:1239
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:10
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget_form.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget_form.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1240
 msgid "Budget"
 msgstr ""
 
-#: templates/metra_bookkeeping/_budget_table.html:7 views.py:1239
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1240
 msgid "Actual"
 msgstr ""
 
-#: templates/metra_bookkeeping/_budget_table.html:7 views.py:1239
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1240
 msgid "Difference"
 msgstr ""
 
-#: templates/metra_bookkeeping/_budget_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:8
 msgid "Of the budget"
 msgstr ""
 
-#: templates/metra_bookkeeping/_budget_table.html:20
-#: templates/metra_bookkeeping/_journal_table.html:26
-#: templates/metra_bookkeeping/_trial_balance_table.html:19
-#: templates/metra_bookkeeping/voucher_detail.html:71
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:20
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:26
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:19
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:71
 msgid "Total"
 msgstr ""
 
-#: templates/metra_bookkeeping/_budget_table.html:23 views.py:1257
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:23
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1258
 msgid "Result"
 msgstr ""
 
-#: templates/metra_bookkeeping/_budget_table.html:27
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_budget_table.html:27
 msgid "No budget and no entries in this period."
 msgstr ""
 
-#: templates/metra_bookkeeping/_journal_table.html:3
-#: templates/metra_bookkeeping/_nav.html:5
-#: templates/metra_bookkeeping/journal.html:3
-#: templates/metra_bookkeeping/journal.html:6
-#: templates/metra_bookkeeping/year_detail.html:37 views.py:1061
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/journal.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/journal.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:37
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1062
 msgid "Journal"
 msgstr ""
 
-#: templates/metra_bookkeeping/_journal_table.html:30
-#: templates/metra_bookkeeping/_ledger_table.html:27
-#: templates/metra_bookkeeping/_trial_balance_table.html:23
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_journal_table.html:30
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:27
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:23
 msgid "No posted vouchers in this period."
 msgstr ""
 
-#: templates/metra_bookkeeping/_ledger_table.html:8 views.py:1069
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1070
 msgid "Balance"
 msgstr ""
 
-#: templates/metra_bookkeeping/_ledger_table.html:11 views.py:1074
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:11
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1075
 msgid "Balance brought forward"
 msgstr ""
 
-#: templates/metra_bookkeeping/_ledger_table.html:23
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_ledger_table.html:23
 msgid "Total and balance"
 msgstr ""
 
-#: templates/metra_bookkeeping/_nav.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:3
 msgid "Overview"
 msgstr ""
 
-#: templates/metra_bookkeeping/_nav.html:6
-#: templates/metra_bookkeeping/ledger.html:3
-#: templates/metra_bookkeeping/ledger.html:6
-#: templates/metra_bookkeeping/year_detail.html:38 views.py:1100
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/ledger.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/ledger.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:38
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1101
 msgid "General ledger"
 msgstr ""
 
-#: templates/metra_bookkeeping/_nav.html:7
-#: templates/metra_bookkeeping/_trial_balance_table.html:3
-#: templates/metra_bookkeeping/trial_balance.html:3
-#: templates/metra_bookkeeping/trial_balance.html:6
-#: templates/metra_bookkeeping/year_detail.html:39 views.py:1150
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/trial_balance.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/trial_balance.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:39
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1151
 msgid "Trial balance"
 msgstr ""
 
-#: templates/metra_bookkeeping/_nav.html:8
-#: templates/metra_bookkeeping/income_statement.html:3
-#: templates/metra_bookkeeping/income_statement.html:6
-#: templates/metra_bookkeeping/year_detail.html:40 views.py:1208
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/income_statement.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/income_statement.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:40
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1209
 msgid "Income statement"
 msgstr ""
 
-#: templates/metra_bookkeeping/_nav.html:9
-#: templates/metra_bookkeeping/balance_sheet.html:3
-#: templates/metra_bookkeeping/balance_sheet.html:6
-#: templates/metra_bookkeeping/year_detail.html:41 views.py:1220
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:9
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/balance_sheet.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/balance_sheet.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:41
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1221
 msgid "Balance sheet"
 msgstr ""
 
-#: templates/metra_bookkeeping/_nav.html:11
-#: templates/metra_bookkeeping/vat_summary.html:3
-#: templates/metra_bookkeeping/vat_summary.html:6 views.py:1312
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:11
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/vat_summary.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/vat_summary.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1313
 msgid "VAT summary"
 msgstr ""
 
-#: templates/metra_bookkeeping/_nav.html:12
-#: templates/metra_bookkeeping/asset_list.html:3
-#: templates/metra_bookkeeping/asset_list.html:6
-#: templates/metra_bookkeeping/asset_list.html:17
-#: templates/metra_bookkeeping/year_end.html:33
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:12
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:17
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:33
 msgid "Fixed assets"
 msgstr ""
 
-#: templates/metra_bookkeeping/_nav.html:13
-#: templates/metra_bookkeeping/account_list.html:3
-#: templates/metra_bookkeeping/account_list.html:6
-#: templates/metra_bookkeeping/account_list.html:14
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:14
 msgid "Chart of accounts"
 msgstr ""
 
-#: templates/metra_bookkeeping/_nav.html:15
-#: templates/metra_bookkeeping/retention.html:22
-#: templates/metra_bookkeeping/year_list.html:3
-#: templates/metra_bookkeeping/year_list.html:6
-#: templates/metra_bookkeeping/year_list.html:11
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_nav.html:15
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:22
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:11
 msgid "Financial years"
 msgstr ""
 
-#: templates/metra_bookkeeping/_report_actions.html:3
-#: templates/metra_bookkeeping/account_list.html:9
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_report_actions.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:9
 msgid "Print"
 msgstr ""
 
-#: templates/metra_bookkeeping/_report_actions.html:4
-#: templates/metra_bookkeeping/year_package.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_report_actions.html:4
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_package.html:7
 msgid "PDF"
 msgstr ""
 
-#: templates/metra_bookkeeping/_report_actions.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_report_actions.html:5
 msgid "CSV"
 msgstr ""
 
-#: templates/metra_bookkeeping/_report_filter.html:4
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_report_filter.html:4
 msgid "Show"
 msgstr ""
 
-#: templates/metra_bookkeeping/_report_head.html:2
-#: templates/metra_bookkeeping/pdf/report.html:13
-#: templates/metra_bookkeeping/pdf/report.html:15
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_report_head.html:2
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/pdf/report.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/pdf/report.html:15
 #, python-format
 msgid "Made %(when)s"
 msgstr ""
 
-#: templates/metra_bookkeeping/_statement_notes.html:4
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_statement_notes.html:4
 msgid "Accounts outside the format"
 msgstr ""
 
-#: templates/metra_bookkeeping/_statement_notes.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_statement_notes.html:5
 msgid ""
 "These accounts have entries but their numbers fall on no line of the "
 "statement, so the statement leaves them out. Give them numbers in the right "
 "range (see the help), or move the entries."
 msgstr ""
 
-#: templates/metra_bookkeeping/_statement_notes.html:11
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_statement_notes.html:11
 #, python-format
 msgid ""
 "Assets and equity and liabilities differ by %(difference)s. Check the "
 "accounts outside the format, and that the opening balances balance."
 msgstr ""
 
-#: templates/metra_bookkeeping/_statement_notes.html:17
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_statement_notes.html:17
 msgid ""
 "Size class: micro entity. The micro-entity format may be used, which leaves "
 "out the breakdowns; the full format is always allowed."
 msgstr ""
 
-#: templates/metra_bookkeeping/_statement_notes.html:18
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_statement_notes.html:18
 msgid ""
 "Size class: small entity. The full format of the decree on small and micro "
 "entities applies."
 msgstr ""
 
-#: templates/metra_bookkeeping/_statement_notes.html:19
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_statement_notes.html:19
 msgid ""
 "The limits of a small entity are exceeded: the decree on small and micro "
 "entities no longer applies. Ask an accountant which formats to use."
 msgstr ""
 
-#: templates/metra_bookkeeping/_statement_notes.html:20
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_statement_notes.html:20
 #, python-format
 msgid ""
 "%(year)s: balance sheet total %(total)s, turnover %(turnover)s, staff "
 "%(staff)s."
 msgstr ""
 
-#: templates/metra_bookkeeping/_statement_notes.html:21
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_statement_notes.html:21
 msgid "The figures of an open year are those booked so far."
 msgstr ""
 
-#: templates/metra_bookkeeping/_statement_notes.html:24
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_statement_notes.html:24
 #, python-format
 msgid ""
 "Format: %(source)s. The Finnish line names are the decree's own; the Swedish "
 "ones are yet to be checked against the decree's Swedish text."
 msgstr ""
 
-#: templates/metra_bookkeeping/_statement_notes.html:25
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_statement_notes.html:25
 msgid ""
 "The PDF and CSV say the statement is preliminary, and why: only a closed "
 "year's signed financial statements are final."
 msgstr ""
 
-#: templates/metra_bookkeeping/_trial_balance_table.html:7 views.py:1131
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1132
 msgid "At the start"
 msgstr ""
 
-#: templates/metra_bookkeeping/_trial_balance_table.html:8 views.py:1132
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_trial_balance_table.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1133
 msgid "At the end"
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:3
 msgid ""
 "The organisation is not VAT registered on these dates. Add the VAT "
 "registration in the bookkeeping of invoices."
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:7
 msgid "Nothing known is missing: the entries with a VAT code are all posted."
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:11
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:11
 msgid "Not ready for the VAT return"
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:13
 msgid ""
 "Choose the VAT accounts in the bookkeeping of invoices, so VAT can be told "
 "from the base."
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:14
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:14
 msgid ""
 "These vouchers have entries on the VAT accounts without a VAT code, so they "
 "are not in the summary:"
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:16
 msgid "Draft vouchers with VAT are not posted yet:"
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:18
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:18
 #, python-format
 msgid ""
 "%(count)s invoice, payment or reminder fee from invoicing has no voucher yet."
@@ -1559,14 +1672,14 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/metra_bookkeeping/_vat_table.html:22
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:22
 msgid ""
 "Only entries with a VAT code are included. Reverse charge, imports (also "
 "goods across the Åland tax border) and anything booked without a VAT code "
 "are not: add those to the return yourself."
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:23
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:23
 msgid ""
 "VAT follows the supply: invoices count at the end of their supply period, "
 "and the part paid before it as an advance payment in the month it was paid. "
@@ -1574,170 +1687,172 @@ msgid ""
 "the voucher it reverses counted."
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:25
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:25
 #, python-format
 msgid ""
 "Voucher %(voucher)s: an advance payment received on %(day)s, when the VAT "
 "rate %(rate)s %% was not in force. Check the rate with an accountant."
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:29
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:29
 #, python-format
 msgid "The return and the tax are due %(due)s."
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:31
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:31
 msgid "Posted after the period ended, so not in a return filed before then:"
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:35
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:35
 msgid "No VAT in this period."
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:39 views.py:1296
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:39
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1297
 msgid "Base"
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:39 views.py:1296
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:39
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1297
 msgid "Tax"
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:46
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:46
 msgid "Deductible VAT on purchases"
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:47
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:47
 msgid "To get back"
 msgstr ""
 
-#: templates/metra_bookkeeping/_vat_table.html:47
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_vat_table.html:47
 msgid "To pay"
 msgstr ""
 
-#: templates/metra_bookkeeping/_voucher_table.html:9
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:9
 msgid "Amount"
 msgstr ""
 
-#: templates/metra_bookkeeping/_voucher_table.html:10
-#: templates/metra_bookkeeping/account_list.html:16
-#: templates/metra_bookkeeping/retention.html:26
-#: templates/metra_bookkeeping/year_list.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:10
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:26
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:13
 msgid "Status"
 msgstr ""
 
-#: templates/metra_bookkeeping/_voucher_table.html:26
-#: templates/metra_bookkeeping/account_list.html:43
-#: templates/metra_bookkeeping/asset_list.html:38
-#: templates/metra_bookkeeping/retention.html:51
-#: templates/metra_bookkeeping/year_list.html:27
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/_voucher_table.html:26
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:43
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:38
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:51
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:27
 msgid "None."
 msgstr ""
 
-#: templates/metra_bookkeeping/account_form.html:3
-#: templates/metra_bookkeeping/account_form.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_form.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_form.html:5
 msgid "Edit account"
 msgstr ""
 
-#: templates/metra_bookkeeping/account_form.html:3
-#: templates/metra_bookkeeping/account_form.html:5
-#: templates/metra_bookkeeping/account_list.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_form.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_form.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:8
 msgid "New account"
 msgstr ""
 
-#: templates/metra_bookkeeping/account_form.html:11
-#: templates/metra_bookkeeping/asset_form.html:15
-#: templates/metra_bookkeeping/budget_form.html:16
-#: templates/metra_bookkeeping/posting_settings.html:53
-#: templates/metra_bookkeeping/series_form.html:11
-#: templates/metra_bookkeeping/vat_registration_form.html:11
-#: templates/metra_bookkeeping/year_bank.html:20
-#: templates/metra_bookkeeping/year_form.html:12
-#: templates/metra_bookkeeping/year_notes.html:26
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_form.html:11
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_form.html:15
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget_form.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:53
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/series_form.html:11
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/vat_registration_form.html:11
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_bank.html:20
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_form.html:12
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_notes.html:26
 msgid "Save"
 msgstr ""
 
-#: templates/metra_bookkeeping/account_form.html:12
-#: templates/metra_bookkeeping/asset_form.html:16
-#: templates/metra_bookkeeping/budget_form.html:17
-#: templates/metra_bookkeeping/posting_settings.html:54
-#: templates/metra_bookkeeping/series_form.html:12
-#: templates/metra_bookkeeping/vat_registration_form.html:12
-#: templates/metra_bookkeeping/voucher_confirm_delete.html:10
-#: templates/metra_bookkeeping/voucher_form.html:48
-#: templates/metra_bookkeeping/voucher_reverse.html:16
-#: templates/metra_bookkeeping/year_bank.html:21
-#: templates/metra_bookkeeping/year_form.html:13
-#: templates/metra_bookkeeping/year_notes.html:27
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_form.html:12
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_form.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget_form.html:17
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:54
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/series_form.html:12
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/vat_registration_form.html:12
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_confirm_delete.html:10
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:48
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_reverse.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_bank.html:21
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_form.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_notes.html:27
 msgid "Cancel"
 msgstr ""
 
-#: templates/metra_bookkeeping/account_list.html:16
-#: templates/metra_bookkeeping/asset_list.html:20
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:20
 msgid "Name"
 msgstr ""
 
-#: templates/metra_bookkeeping/account_list.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:16
 msgid "Actions"
 msgstr ""
 
-#: templates/metra_bookkeeping/account_list.html:22
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:22
 msgid "In use"
 msgstr ""
 
-#: templates/metra_bookkeeping/account_list.html:22
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:22
 msgid "Not in use"
 msgstr ""
 
-#: templates/metra_bookkeeping/account_list.html:24
-#: templates/metra_bookkeeping/posting_settings.html:71
-#: templates/metra_bookkeeping/voucher_detail.html:9
-#: templates/metra_bookkeeping/year_detail.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:24
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:71
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:9
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:7
 msgid "Edit"
 msgstr ""
 
-#: templates/metra_bookkeeping/account_list.html:26
-#: templates/metra_bookkeeping/voucher_confirm_delete.html:9
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:26
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_confirm_delete.html:9
 msgid "Delete"
 msgstr ""
 
-#: templates/metra_bookkeeping/account_list.html:35
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:35
 msgid "No accounts yet. They are added when the books are started."
 msgstr ""
 
-#: templates/metra_bookkeeping/account_list.html:38
-#: templates/metra_bookkeeping/posting_settings.html:39
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:38
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:39
 msgid "Voucher series"
 msgstr ""
 
-#: templates/metra_bookkeeping/account_list.html:39
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:39
 msgid ""
 "Vouchers are numbered without gaps within each series and financial year."
 msgstr ""
 
-#: templates/metra_bookkeeping/account_list.html:45
-#: templates/metra_bookkeeping/series_form.html:3
-#: templates/metra_bookkeeping/series_form.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/account_list.html:45
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/series_form.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/series_form.html:5
 msgid "New voucher series"
 msgstr ""
 
-#: templates/metra_bookkeeping/asset_form.html:3
-#: templates/metra_bookkeeping/asset_form.html:5
-#: templates/metra_bookkeeping/asset_list.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_form.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_form.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:7
 msgid "New fixed asset"
 msgstr ""
 
-#: templates/metra_bookkeeping/asset_form.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_form.html:6
 msgid ""
 "The plan applies from the month the asset is acquired, also for years before "
 "the books were kept in Metra. Book the purchase itself as a voucher on the "
 "asset account."
 msgstr ""
 
-#: templates/metra_bookkeeping/asset_form.html:20
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_form.html:20
 msgid "Remove from the register"
 msgstr ""
 
-#: templates/metra_bookkeeping/asset_list.html:10
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:10
 msgid ""
 "Machinery, buildings, a pipe network and other things used for more than a "
 "year are booked on an asset account at their cost and depreciated by a plan. "
@@ -1745,129 +1860,131 @@ msgid ""
 "sheet specifications compare the register with the books."
 msgstr ""
 
-#: templates/metra_bookkeeping/asset_list.html:20
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:20
 msgid "Acquired"
 msgstr ""
 
-#: templates/metra_bookkeeping/asset_list.html:21
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:21
 msgid "Cost"
 msgstr ""
 
-#: templates/metra_bookkeeping/asset_list.html:21
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:21
 msgid "Depreciation plan"
 msgstr ""
 
-#: templates/metra_bookkeeping/asset_list.html:22
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:22
 #, python-format
 msgid "Depreciation %(year)s"
 msgstr ""
 
-#: templates/metra_bookkeeping/asset_list.html:23
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:23
 #, python-format
 msgid "Book value %(day)s"
 msgstr ""
 
-#: templates/metra_bookkeeping/asset_list.html:28
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/asset_list.html:28
 msgid "Sold or scrapped"
 msgstr ""
 
-#: templates/metra_bookkeeping/balance_sheet.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/balance_sheet.html:13
 msgid ""
 "The balances at the day chosen, from the posted vouchers. The profit or "
 "surplus for the year is worked out from the income and expense accounts."
 msgstr ""
 
-#: templates/metra_bookkeeping/balance_sheet.html:17
-#: templates/metra_bookkeeping/income_statement.html:17
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/balance_sheet.html:17
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/income_statement.html:17
 msgid "The books have not been started yet."
 msgstr ""
 
-#: templates/metra_bookkeeping/budget.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget.html:8
 msgid "Edit the budget"
 msgstr ""
 
-#: templates/metra_bookkeeping/budget.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget.html:13
 msgid ""
 "The year's budget against what is booked in the period. Income and costs are "
 "both positive; for a part of the year, compare with the share of the year "
 "that has passed."
 msgstr ""
 
-#: templates/metra_bookkeeping/budget_form.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget_form.html:7
 msgid ""
 "The income and costs expected for the whole year, per account, as positive "
 "amounts. Leave an account empty for no budget."
 msgstr ""
 
-#: templates/metra_bookkeeping/budget_form.html:13 views.py:1234 views.py:1242
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/budget_form.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1235
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1243
 msgid "Expenses"
 msgstr ""
 
-#: templates/metra_bookkeeping/income_statement.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/income_statement.html:13
 msgid ""
 "Income positive, expenses negative, from the posted vouchers. The previous "
 "financial year is beside it for the same period."
 msgstr ""
 
-#: templates/metra_bookkeeping/index.html:9
-#: templates/metra_bookkeeping/voucher_form.html:3
-#: templates/metra_bookkeeping/voucher_form.html:6
-#: templates/metra_bookkeeping/voucher_list.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:9
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_list.html:8
 msgid "New voucher"
 msgstr ""
 
-#: templates/metra_bookkeeping/index.html:17
-#: templates/metra_bookkeeping/index.html:27
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:17
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:27
 msgid "Start the books"
 msgstr ""
 
-#: templates/metra_bookkeeping/index.html:18
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:18
 msgid ""
 "Choose the first financial year and a chart of accounts. Then enter the "
 "balances the year starts with (from last year's balance sheet) as the first "
 "voucher, of the kind \"Opening balances\"."
 msgstr ""
 
-#: templates/metra_bookkeeping/index.html:31
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:31
 msgid "The books have not been started yet, or no financial year is open."
 msgstr ""
 
-#: templates/metra_bookkeeping/index.html:35
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:35
 #, python-format
 msgid "%(count)s posted voucher"
 msgid_plural "%(count)s posted vouchers"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/metra_bookkeeping/index.html:39
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:39
 #, python-format
 msgid ""
 "The financial year %(year)s has ended. Make the year-end entries and close "
 "it; the financial statements are due by %(due)s."
 msgstr ""
 
-#: templates/metra_bookkeeping/index.html:40
-#: templates/metra_bookkeeping/year_detail.html:46
-#: templates/metra_bookkeeping/year_end.html:68
-#: templates/metra_bookkeeping/year_end.html:98
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:40
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:46
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:73
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:103
 msgid "Close the year"
 msgstr ""
 
-#: templates/metra_bookkeeping/index.html:46
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:46
 msgid "Late entries"
 msgstr ""
 
-#: templates/metra_bookkeeping/index.html:47
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:47
 msgid ""
 "Entries are to be booked at the latest four months after the end of their "
 "month, and cash payments day by day. These drafts are past that:"
 msgstr ""
 
-#: templates/metra_bookkeeping/index.html:57
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:57
 msgid "Waiting from invoicing"
 msgstr ""
 
-#: templates/metra_bookkeeping/index.html:58
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:58
 #, python-format
 msgid "%(count)s invoice, payment or reminder fee has no voucher yet:"
 msgid_plural ""
@@ -1875,66 +1992,66 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/metra_bookkeeping/index.html:61
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:61
 msgid "Post them now"
 msgstr ""
 
-#: templates/metra_bookkeeping/index.html:65
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:65
 msgid "Set up the bookkeeping of invoices"
 msgstr ""
 
-#: templates/metra_bookkeeping/index.html:65
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:65
 msgid "to book invoices, payments and reminder fees without typing."
 msgstr ""
 
-#: templates/metra_bookkeeping/index.html:68
-#: templates/metra_bookkeeping/index.html:69
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:68
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:69
 msgid "Drafts to post"
 msgstr ""
 
-#: templates/metra_bookkeeping/index.html:70
-#: templates/metra_bookkeeping/index.html:71
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:70
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/index.html:71
 msgid "Recently posted"
 msgstr ""
 
-#: templates/metra_bookkeeping/invoice_panel.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/invoice_panel.html:8
 msgid "Draft, not posted yet"
 msgstr ""
 
-#: templates/metra_bookkeeping/invoice_panel.html:11
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/invoice_panel.html:11
 msgid "Waiting to be posted"
 msgstr ""
 
-#: templates/metra_bookkeeping/invoice_panel.html:15
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/invoice_panel.html:15
 msgid ""
 "Not in the books: it is dated before automatic posting started, or posting "
 "is off."
 msgstr ""
 
-#: templates/metra_bookkeeping/journal.html:12
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/journal.html:12
 msgid "The posted entries in date order."
 msgstr ""
 
-#: templates/metra_bookkeeping/ledger.html:12
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/ledger.html:12
 msgid "The posted entries account by account. Balances are debit minus credit."
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:7
 msgid ""
 "Issued invoices and credit notes (on their invoice date), payments (on the "
 "day paid) and reminder fees become vouchers of their own, posted at once. "
 "Each voucher points to the invoice it comes from, which is its evidence."
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:15
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:15
 msgid "The chart of accounts lacks accounts that postings use:"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:17
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:17
 msgid "Add them"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:23
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:23
 #, python-format
 msgid ""
 "The receivables account is %(booked)s € when automatic posting starts, but "
@@ -1943,29 +2060,29 @@ msgid ""
 "opening balances."
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:36
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:36
 msgid "Accounts"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:43
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:43
 msgid "Sales accounts"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:44
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:44
 msgid ""
 "Invoice lines are booked to the account of their fee line, else to the "
 "account of their VAT rate, else to the default sales account."
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:46
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:46
 msgid "Per fee line"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:49
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:49
 msgid "Per VAT rate"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:58
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:58
 #, python-format
 msgid ""
 "%(count)s record from invoicing is waiting to be posted; post it from the "
@@ -1976,7 +2093,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/metra_bookkeeping/posting_settings.html:62
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:62
 msgid ""
 "VAT is booked only on days the organisation is VAT registered, at the rate "
 "in force on the day. Reverse charge (services from other EU countries, "
@@ -1984,33 +2101,33 @@ msgid ""
 "not supported yet: book them by hand, and check them with an accountant."
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:70
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:70
 msgid "VAT registered"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:72
-#: templates/metra_bookkeeping/voucher_detail.html:83
-#: templates/metra_bookkeeping/voucher_form.html:26
-#: templates/metra_bookkeeping/voucher_form.html:32
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:72
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:83
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:26
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:32
 msgid "Remove"
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:74
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:74
 msgid "Not VAT registered."
 msgstr ""
 
-#: templates/metra_bookkeeping/posting_settings.html:80
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/posting_settings.html:80
 msgid "Add a VAT registration"
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:3
-#: templates/metra_bookkeeping/retention.html:6
-#: templates/metra_bookkeeping/year_detail.html:27
-#: templates/metra_bookkeeping/year_list.html:25
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:27
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:25
 msgid "How long the books are kept"
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:9
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:9
 #, python-format
 msgid ""
 "The financial statements, balance sheet specifications, journal, ledger, "
@@ -2020,7 +2137,7 @@ msgid ""
 "of the calendar year in which the financial year ended (%(source)s)."
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:15
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:15
 #, python-format
 msgid ""
 "The financial statements, balance sheet specifications, journal, ledger, "
@@ -2030,43 +2147,43 @@ msgid ""
 "of the financial year (%(source)s)."
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:29
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:29
 msgid "Invoices"
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:30
-#: templates/metra_bookkeeping/year_detail.html:25
-#: templates/metra_bookkeeping/year_list.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:30
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:25
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:13
 msgid "Vouchers kept until"
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:31
-#: templates/metra_bookkeeping/year_detail.html:24
-#: templates/metra_bookkeeping/year_list.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:31
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:24
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:13
 msgid "Books kept until"
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:32
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:32
 msgid "Now"
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:44
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:44
 msgid "Keep everything"
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:44
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:44
 msgid "Minimum passed for vouchers and receipts; keep the books"
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:44
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:44
 msgid "Minimum passed"
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:53
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:53
 msgid "Nothing is removed automatically"
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:54
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:54
 msgid ""
 "These are the shortest times the Accounting Act allows, and Metra keeps "
 "everything after them as well. Other rules can require keeping material "
@@ -2077,11 +2194,11 @@ msgid ""
 "the board and the auditor."
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:62
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:62
 msgid "Personal data in the books"
 msgstr ""
 
-#: templates/metra_bookkeeping/retention.html:63
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/retention.html:63
 msgid ""
 "Vouchers, receipts and the invoices they rest on can name members and "
 "suppliers. They are bookkeeping material that the law requires to be kept, "
@@ -2091,157 +2208,157 @@ msgid ""
 "names and amounts as they were booked."
 msgstr ""
 
-#: templates/metra_bookkeeping/series_form.html:3
-#: templates/metra_bookkeeping/series_form.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/series_form.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/series_form.html:5
 msgid "Edit voucher series"
 msgstr ""
 
-#: templates/metra_bookkeeping/trial_balance.html:12
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/trial_balance.html:12
 msgid ""
 "Every account's balance at the start and end of the period, and the period's "
 "debits and credits. Balances are debit minus credit; they add up to zero."
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_confirm_delete.html:3
-#: templates/metra_bookkeeping/voucher_confirm_delete.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_confirm_delete.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_confirm_delete.html:5
 msgid "Delete draft voucher"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_confirm_delete.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_confirm_delete.html:6
 #, python-format
 msgid ""
 "Delete the draft \"%(description)s\" and its receipts? Drafts have no "
 "number, so this leaves no gap."
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:13
 msgid "Post"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:16
 msgid "Delete draft"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:18
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:18
 msgid "Reverse"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:26
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:26
 msgid "Before posting"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:40
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:40
 msgid "Booked from"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:40
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:40
 msgid "Supplied"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:40
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:40
 msgid "VAT is due for the month the supply ends in."
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:40
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:40
 msgid "Made by Metra from the invoice, which is the evidence for this voucher."
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:42
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:42
 msgid "Corrects an error of"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:45
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:45
 msgid "Reversed by"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:46
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:46
 msgid "Created"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:50
-#: templates/metra_bookkeeping/voucher_detail.html:51
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:50
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:51
 msgid "Entries"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:68
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:68
 msgid "No lines yet."
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:90
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:90
 msgid "No receipt attached."
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:96
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:96
 msgid "The voucher is posted: a receipt added now cannot be removed."
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_detail.html:97
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_detail.html:97
 msgid "Attach"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_form.html:3
-#: templates/metra_bookkeeping/voucher_form.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:6
 msgid "Edit draft voucher"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_form.html:8
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:8
 msgid ""
 "Each line goes to one account, as a debit or a credit. Debits and credits "
 "must add up to the same amount before the voucher can be posted. A receipt "
 "can be attached once the draft is saved."
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_form.html:18
-#: templates/metra_bookkeeping/voucher_form.html:21
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:18
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:21
 msgid "Lines"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_form.html:41
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:41
 msgid "Save to get more empty lines."
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_form.html:41
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:41
 msgid ""
 "VAT: mark the line with the price without VAT (for example the expense) and "
 "the VAT line with the same VAT code, at the rate in force on the voucher's "
 "date."
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_form.html:46
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:46
 msgid "Save draft"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_form.html:47
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_form.html:47
 msgid "Save and post"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_reverse.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_reverse.html:3
 msgid "Reverse voucher"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_reverse.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_reverse.html:5
 #, python-format
 msgid "Reverse %(voucher)s"
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_reverse.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_reverse.html:6
 msgid ""
 "A posted voucher never changes. To correct it, a new voucher with the same "
 "lines on the opposite side cancels it, and both stay in the books. Then "
 "enter the right entry as a new voucher."
 msgstr ""
 
-#: templates/metra_bookkeeping/voucher_reverse.html:15
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/voucher_reverse.html:15
 msgid "Post the reversal"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_bank.html:3
-#: templates/metra_bookkeeping/year_bank.html:5
-#: templates/metra_bookkeeping/year_end.html:51
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_bank.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_bank.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:56
 msgid "Bank statements"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_bank.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_bank.html:7
 #, python-format
 msgid ""
 "The balance of each account on the bank statement on %(day)s, and which "
@@ -2249,124 +2366,124 @@ msgid ""
 "books; keep the statements themselves with the bookkeeping material."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_bank.html:25
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_bank.html:25
 msgid "The chart of accounts has no bank or cash accounts."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:11
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:11
 msgid "First day"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:12
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:12
 msgid "Last day"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:14
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:14
 msgid "Not 12 months because"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:15
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:15
 msgid "Average staff"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:16
-#: templates/metra_bookkeeping/year_export.html:17
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:17
 msgid "Posted vouchers"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:17
-#: templates/metra_bookkeeping/year_export.html:19
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:17
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:19
 msgid "Drafts"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:18
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:18
 msgid "Locked until"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:18
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:18
 msgid "Nothing is locked yet."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:18
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:18
 msgid ""
 "Nothing can be posted on or before this day. Lock each month once it is "
 "reported, for example in the VAT return."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:19
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:19
 msgid "Financial statements due"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:19
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:19
 msgid "Within four months of the end of the year."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:22
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:22
 msgid "Result carried to"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:24
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:24
 msgid ""
 "Financial statements, journal, ledger, chart of accounts and list of books: "
 "10 years from the end of the financial year."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:25
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:25
 msgid ""
 "Vouchers and receipts: 6 years from the end of the calendar year in which "
 "the financial year ended."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:27
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:27
 msgid ""
 "These are the shortest times the law allows. Nothing is deleted "
 "automatically."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:32
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:32
 msgid "Lock"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:33
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:33
 msgid ""
 "A lock cannot be undone. Records from invoicing dated in a locked period are "
 "booked on the first open day, with a note."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:44
-#: templates/metra_bookkeeping/year_detail.html:46
-#: templates/metra_bookkeeping/year_end.html:3
-#: templates/metra_bookkeeping/year_end.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:44
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:46
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:6
 msgid "Year-end"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:47
-#: templates/metra_bookkeeping/year_end.html:7
-#: templates/metra_bookkeeping/year_end.html:65
-#: templates/metra_bookkeeping/year_export.html:40
-#: templates/metra_bookkeeping/year_package.html:3
-#: templates/metra_bookkeeping/year_package.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:47
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:70
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:40
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_package.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_package.html:6
 msgid "Year-end package"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:48
-#: templates/metra_bookkeeping/year_export.html:3
-#: templates/metra_bookkeeping/year_export.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:48
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:6
 msgid "Export the books"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_detail.html:49
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_detail.html:49
 msgid "Next year"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:11
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:11
 #, python-format
 msgid ""
 "The year was closed on %(day)s. Its books can no longer change; errors found "
 "now are corrected in the open year."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:13
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:13
 #, python-format
 msgid ""
 "Go through the steps below, then close the year. Closing locks the year for "
@@ -2375,134 +2492,159 @@ msgid ""
 "are due by %(due)s, four months after the end of the year."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:22
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:22
 msgid "Depreciation by plan"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:28
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:28
 msgid "Make the depreciation voucher"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:31 views.py:289
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:31
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:290
 msgid "The asset register has no depreciation for the year."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:36
-msgid "Income invoiced after the year"
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:36
+msgid "Invoiced income across the year end"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:38
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:38
 msgid ""
-"These invoices were issued after the year for supplies made in it. Their "
-"income belongs to this year:"
+"These invoices are for supplies on both sides of the year end. Their income "
+"is shared by supply days: income for this year invoiced after it is accrued, "
+"and income for the next year invoiced in this one is deferred."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:43
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:39
+msgid "accrued"
+msgstr ""
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:39
+msgid "deferred"
+msgstr ""
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:39
+#, python-format
+msgid "%(days)s of %(total)s supply days"
+msgstr ""
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:41
+msgid "No invoices are for supplies across the year end."
+msgstr ""
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:47
+msgid "Invoices have changed since the accrual voucher was made."
+msgstr ""
+
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:49
 msgid "Make the accrual voucher"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:46
-msgid "No invoices issued after the year are for supplies in it."
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:52
+msgid ""
+"The share by supply days is a suggestion; have an accountant confirm the "
+"method if the supplies are uneven."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:48
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:53
 msgid ""
 "Other accruals (costs of the year billed later, income received in advance) "
 "are entered as vouchers of the kind Accrual, dated the last day of the year. "
 "Closing the year reverses every accrual on the first day of the next one."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:53
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:58
 msgid "books"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:53
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:58
 msgid "difference"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:55
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:60
 msgid "Enter the bank statement balances"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:58
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:63
 msgid "Notes and signatures"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:59
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:64
 msgid ""
 "The notes to the financial statements, and the board members who sign them."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:60
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:65
 msgid "Write the notes"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:63
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:68
 msgid "Check the package"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:64
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:69
 msgid ""
 "The year-end package has everything for the auditor in one PDF. Before the "
 "year is closed it says it is preliminary."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:71
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:76
 msgid "The year cannot be closed yet:"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:77
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:82
 msgid "Check these first:"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:81
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:86
 #, python-format
 msgid ""
 "The result for the year is %(amount)s. It is carried to the equity account "
 "chosen below in the next year's opening balances."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_end.html:84
-#: templates/metra_bookkeeping/year_end.html:85
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:89
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_end.html:90
 msgid "Opening balances of the next year"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_export.html:9
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:9
 msgid ""
 "The year as files, for an accountant who takes over the books in their own "
 "software, or to keep a copy outside Metra."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_export.html:14
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:14
 msgid ""
 "The year is still open, so the export is preliminary and the books may still "
 "change."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_export.html:19
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:19
 msgid "Drafts are not part of the books and are left out."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_export.html:21
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:21
 msgid "Everything as a ZIP"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_export.html:22
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:22
 msgid ""
 "The chart of accounts with the year's balances and every posted voucher line "
 "as CSV files, the attached receipts in a folder per voucher, the year in SIE "
 "4, and a README that describes the files."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_export.html:27
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:27
 msgid "Download the ZIP"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_export.html:28
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:28
 msgid "SIE 4"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_export.html:29
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:29
 msgid ""
 "SIE 4 is the Nordic text format for moving books between accounting "
 "programs: the chart of accounts, the opening and closing balances and every "
@@ -2511,39 +2653,39 @@ msgid ""
 "the others."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_export.html:35
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:35
 msgid "Download SIE 4"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_export.html:36
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_export.html:36
 msgid ""
 "For the auditor, the year-end package holds the financial statements, "
 "journal and ledger as one PDF. Each export is recorded in the audit log."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_form.html:3
-#: templates/metra_bookkeeping/year_form.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_form.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_form.html:5
 msgid "Edit financial year"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_form.html:3
-#: templates/metra_bookkeeping/year_form.html:5
-#: templates/metra_bookkeeping/year_list.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_form.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_form.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_list.html:7
 msgid "New financial year"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_form.html:6
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_form.html:6
 msgid ""
 "A financial year is 12 months and starts the day after the previous one "
 "ends. The first year, or one whose dates change, can be 1 to 18 months."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_notes.html:3
-#: templates/metra_bookkeeping/year_notes.html:5
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_notes.html:3
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_notes.html:5
 msgid "Notes to the financial statements"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_notes.html:7
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_notes.html:7
 msgid ""
 "The notes a small or micro entity gives, each with a suggested text. Edit "
 "them to fit the organisation; an empty note is left out. The depreciation "
@@ -2551,25 +2693,25 @@ msgid ""
 "on their own. Ask an accountant which notes the organisation needs."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_notes.html:14
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_notes.html:14
 msgid "Size class: micro entity."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_notes.html:14
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_notes.html:14
 msgid "Size class: small entity."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_notes.html:14
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_notes.html:14
 msgid ""
 "The limits of a small entity are exceeded: ask an accountant which notes to "
 "give."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_notes.html:23
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_notes.html:23
 msgid "Signatures"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_package.html:10
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_package.html:10
 msgid ""
 "Everything the auditor needs in one PDF: the income statement and balance "
 "sheet with the previous year beside them, the notes, the signature page, the "
@@ -2577,173 +2719,175 @@ msgid ""
 "accounts, the journal and the general ledger."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_package.html:16
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_package.html:16
 msgid ""
 "The year is still open, so the package says on its first page that it is "
 "preliminary and not the financial statements to sign."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_package.html:21
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_package.html:21
 msgid "Make the PDF"
 msgstr ""
 
-#: templates/metra_bookkeeping/year_package.html:23
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_package.html:23
 msgid ""
 "A cooperative files its financial statements with the Trade Register once "
 "its general meeting has adopted them. Use the PDF with only the statements "
 "and notes."
 msgstr ""
 
-#: templates/metra_bookkeeping/year_package.html:24
+#: plugins/bookkeeping/src/metra_bookkeeping/templates/metra_bookkeeping/year_package.html:24
 msgid ""
 "The package is in Finnish or Swedish, as the financial statements are kept. "
 "An English one is marked as a translation."
 msgstr ""
 
-#: views.py:131
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:131
 msgid "The books are started. Enter the opening balances as the first voucher."
 msgstr ""
 
-#: views.py:166
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:166
 #, python-format
 msgid "The financial year %(year)s was added."
 msgstr ""
 
-#: views.py:212
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:212
 #, python-format
 msgid "The books are locked up to %(day)s."
 msgstr ""
 
-#: views.py:216
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:216
 msgid "Choose the last day to lock."
 msgstr ""
 
-#: views.py:241
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:241
 #, python-format
 msgid ""
 "The financial year %(year)s is closed, and %(next)s has its opening balances."
 msgstr ""
 
-#: views.py:288
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:289
 msgid "The depreciation voucher is ready as a draft. Check it and post it."
 msgstr ""
 
-#: views.py:301
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:302
 msgid "The accrual voucher is ready as a draft. Check it and post it."
 msgstr ""
 
-#: views.py:302
-msgid "No invoices to accrue."
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:303
+msgid "The accruals already match the invoices."
 msgstr ""
 
-#: views.py:320
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:321
 msgid "The bank statement balances were saved."
 msgstr ""
 
-#: views.py:348
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:349
 msgid "The notes were saved."
 msgstr ""
 
-#: views.py:381 views.py:1009
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:382
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1010
 msgid "PDFs cannot be made on this server."
 msgstr ""
 
-#: views.py:495
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:496
 msgid "The fixed asset was saved."
 msgstr ""
 
-#: views.py:517
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:518
 msgid "The fixed asset was removed from the register."
 msgstr ""
 
-#: views.py:533
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:534
 msgid "The financial year was saved."
 msgstr ""
 
-#: views.py:558
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:559
 #, python-format
 msgid "The account %(account)s was added."
 msgstr ""
 
-#: views.py:570
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:571
 msgid "The account was saved."
 msgstr ""
 
-#: views.py:586
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:587
 msgid "An account with entries cannot be deleted. Stop using it instead."
 msgstr ""
 
-#: views.py:589
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:590
 msgid "The account was deleted."
 msgstr ""
 
-#: views.py:599
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:600
 msgid "The voucher series was added."
 msgstr ""
 
-#: views.py:611
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:612
 msgid "The series has posted vouchers, so its code stays."
 msgstr ""
 
-#: views.py:614
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:615
 msgid "The voucher series was saved."
 msgstr ""
 
-#: views.py:659
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:660
 msgid "The draft voucher was saved."
 msgstr ""
 
-#: views.py:672
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:673
 msgid "Add a financial year first."
 msgstr ""
 
-#: views.py:738
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:739
 #, python-format
 msgid "Voucher %(number)s was posted."
 msgstr ""
 
-#: views.py:756
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:757
 msgid "The draft voucher was deleted."
 msgstr ""
 
-#: views.py:780
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:781
 #, python-format
 msgid "Voucher %(number)s reverses it. Enter the right entry as a new voucher."
 msgstr ""
 
-#: views.py:813
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:814
 msgid "The receipt was added."
 msgstr ""
 
-#: views.py:848
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:849
 msgid "The receipt was removed."
 msgstr ""
 
-#: views.py:865
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:866
 msgid "The posting settings were saved."
 msgstr ""
 
-#: views.py:895
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:896
 #, python-format
 msgid "Added the accounts %(accounts)s."
 msgstr ""
 
-#: views.py:908 views.py:923
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:909
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:924
 msgid "The VAT registration was saved."
 msgstr ""
 
-#: views.py:937
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:938
 msgid "The VAT registration was removed."
 msgstr ""
 
-#: views.py:951
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:952
 #, python-format
 msgid "%(count)s voucher was made from invoicing."
 msgid_plural "%(count)s vouchers were made from invoicing."
 msgstr[0] ""
 msgstr[1] ""
 
-#: views.py:961
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:962
 #, python-format
 msgid "%(count)s of them could not be posted; it is among the drafts."
 msgid_plural ""
@@ -2751,7 +2895,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: views.py:971
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:972
 #, python-format
 msgid ""
 "%(count)s record is still waiting: no open financial year covers its date."
@@ -2761,31 +2905,31 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: views.py:1240
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1241
 msgid "Of the budget (%)"
 msgstr ""
 
-#: views.py:1280
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1281
 msgid "The budget was saved."
 msgstr ""
 
-#: views.py:1296
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1297
 msgid "Rate (%)"
 msgstr ""
 
-#: views.py:1304
+#: plugins/bookkeeping/src/metra_bookkeeping/views.py:1305
 msgid "To pay (to get back if negative)"
 msgstr ""
 
-#: yearend.py:85
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:85
 msgid "Choose a day in the financial year."
 msgstr ""
 
-#: yearend.py:87
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:87
 msgid "The books are already locked up to that day."
 msgstr ""
 
-#: yearend.py:92
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:92
 #, python-format
 msgid ""
 "%(count)s draft voucher is dated in the period. Post or delete it first."
@@ -2794,23 +2938,23 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: yearend.py:158
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:158
 #, python-format
 msgid "Close the financial year %(year)s first."
 msgstr ""
 
-#: yearend.py:160
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:160
 msgid "The year has not ended yet."
 msgstr ""
 
-#: yearend.py:165
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:165
 #, python-format
 msgid "%(count)s draft voucher is waiting. Post or delete it."
 msgid_plural "%(count)s draft vouchers are waiting. Post or delete them."
 msgstr[0] ""
 msgstr[1] ""
 
-#: yearend.py:174
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:174
 #, python-format
 msgid ""
 "%(count)s record from invoicing dated in the year is waiting to be booked."
@@ -2819,92 +2963,99 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: yearend.py:187
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:187
 #, python-format
 msgid "These accounts fall on no line of the statements: %(accounts)s."
 msgstr ""
 
-#: yearend.py:191
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:191
 msgid "The balance sheet does not balance."
 msgstr ""
 
-#: yearend.py:195
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:195
 #, python-format
 msgid ""
 "The next year already has opening balances (voucher %(number)s). Reverse "
 "them, so the closing can carry the balances over."
 msgstr ""
 
-#: yearend.py:210
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:210
 msgid "The depreciation by plan is not booked."
 msgstr ""
 
-#: yearend.py:212
-msgid "Invoices issued after the year for supplies in it are not accrued."
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:216
+#, python-format
+msgid ""
+"Invoiced income across the year end is not fully accrued or deferred (income "
+"still to move: %(amount)s). Make the accrual voucher."
 msgstr ""
 
-#: yearend.py:216
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:227
+#, python-format
+msgid ""
+"%(invoice)s is partly for supplies before the year (%(days)s of %(total)s "
+"supply days). That income belongs to a closed year: if it is material, book "
+"it as a correction of that year."
+msgstr ""
+
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:236
 #, python-format
 msgid "The bank statement balance of %(account)s is not given."
 msgstr ""
 
-#: yearend.py:221
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:241
 #, python-format
 msgid "%(account)s differs from the bank statement by %(amount)s."
 msgstr ""
 
-#: yearend.py:227
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:247
 #, python-format
 msgid "The receivables account differs from the open invoices by %(amount)s."
 msgstr ""
 
-#: yearend.py:233
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:253
 #, python-format
 msgid "%(account)s differs from the asset register by %(amount)s."
 msgstr ""
 
-#: yearend.py:237
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:257
 msgid "The notes to the financial statements are not written yet."
 msgstr ""
 
-#: yearend.py:240
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:260
 #, python-format
 msgid "The financial statements were due on %(day)s."
 msgstr ""
 
-#: yearend.py:301
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:321
 msgid "Choose the equity account the result is carried to."
 msgstr ""
 
-#: yearend.py:335
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:355
 #, python-format
 msgid "Opening balances from the financial year %(year)s"
 msgstr ""
 
-#: yearend.py:346
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:366
 #, python-format
 msgid "accrual of %(year)s"
 msgstr ""
 
-#: yearend.py:371
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:391
 msgid "The year already has a depreciation voucher."
 msgstr ""
 
-#: yearend.py:383
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:403
 #, python-format
 msgid "Depreciation by plan %(year)s"
 msgstr ""
 
-#: yearend.py:451
-msgid "The year already has an accrual voucher."
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:584
+#, python-format
+msgid "The chart of accounts has no account %(number)s for accruals."
 msgstr ""
 
-#: yearend.py:459
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:600
 #, python-format
-msgid "The accrued income account %(number)s or the sales account is missing."
-msgstr ""
-
-#: yearend.py:475
-#, python-format
-msgid "Accrual: invoiced after %(year)s for supplies in it"
+msgid "Accrual of invoiced income across the end of %(year)s"
 msgstr ""

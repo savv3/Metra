@@ -227,13 +227,22 @@ igenom bokslutet:
 1. **Avskrivning enligt plan**: **Skapa avskrivningsverifikatet** gör ett
    utkast, daterat periodens sista dag, utifrån anläggningsregistret.
    Kontrollera och bokför det.
-2. **Intäkter fakturerade efter året**: fakturor som skickats efter
-   perioden för leveranser under den erbjuds som ett
-   periodiseringsverifikat, så att intäkten hamnar på rätt år. Andra
-   periodiseringar (kostnader som faktureras senare, intäkter som fåtts i
-   förskott) är verifikat av slaget **Periodisering** daterade periodens
-   sista dag. Avslutningen återför alla periodiseringar nästa periods
-   första dag.
+2. **Fakturerade intäkter över årsskiftet**: intäkten delas mellan åren
+   enligt leveransdagar. Fakturor som skickats efter perioden för
+   leveranser under den periodiseras som upplupna intäkter (1760), och
+   fakturor som skickats under perioden för leveranser efter den som
+   förutbetalda intäkter (2960). **Skapa periodiseringsverifikatet** gör ett
+   utkast daterat periodens sista dag; om fakturor skickas eller krediteras
+   efter det varnar sidan och avslutningen, och knappen gör ett verifikat
+   för bara skillnaden. Fördelningen per dag är ett förslag: låt en
+   revisor eller bokförare bekräfta metoden om leveranserna är ojämna.
+   Leveransdagar före perioden räknas inte med; faller de i en avslutad
+   period varnar avslutningen, och den intäkten bokförs som en rättelse av
+   den perioden om den är väsentlig.
+   Andra periodiseringar (kostnader som faktureras senare, intäkter som
+   fåtts i förskott) är verifikat av slaget **Periodisering** daterade
+   periodens sista dag. Avslutningen återför alla periodiseringar nästa
+   periods första dag.
 3. **Kontoutdrag**: ange varje bankkontos saldo enligt kontoutdraget vid
    periodens slut; balansspecifikationerna jämför det med bokföringen.
 4. **Noter och underskrifter**: noterna till bokslutet, med ett förslag till
