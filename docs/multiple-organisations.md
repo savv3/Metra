@@ -38,7 +38,9 @@ public host name and a free port. The script creates `~/metra/vatten/` with:
 - `.env`, from `.env.example`, with `COMPOSE_PROJECT_NAME`, the host name,
   `METRA_ALLOWED_HOSTS`, `METRA_CSRF_TRUSTED_ORIGINS` and a new random
   `METRA_SECRET_KEY` filled in (readable only by you);
-- `compose.override.yaml`, which publishes the app on `127.0.0.1:8001`.
+- `compose.override.yaml`, which publishes the app on `127.0.0.1:8001` and
+  keeps the install's own `caddy` service from starting (it is in the
+  `caddy` profile, which nothing turns on).
 
 It refuses a name whose folder already exists and a port another install in
 the same parent folder already uses. Then:
@@ -76,7 +78,8 @@ each organisation; installs cannot share one host name under different paths.
 after a reboot; nothing per install is needed.
 
 Without a tunnel, run one reverse proxy on the host for all installs instead
-of each install's `caddy` service (they would all want ports 80 and 443).
+of each install's `caddy` service (they would all want ports 80 and 443;
+that is why `compose.override.yaml` turns it off).
 For example a host Caddyfile:
 
 ```

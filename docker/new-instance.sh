@@ -96,10 +96,14 @@ chmod 600 "$dir/.env"
 
 cat >"$dir/compose.override.yaml" <<EOF
 # Written by new-instance.sh: the app on localhost only, for the tunnel.
+# The tunnel (or a proxy on the host) does TLS, so this install's own caddy
+# is never started; it would want ports 80 and 443 like every other install.
 services:
   web:
     ports:
       - "127.0.0.1:$port:8000"
+  caddy:
+    profiles: ["caddy"]
 EOF
 
 cat <<EOF
