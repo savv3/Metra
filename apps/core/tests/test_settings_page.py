@@ -236,3 +236,40 @@ def test_advanced_is_only_for_admins_and_superusers(client, make_user):
 
     assert "advanced" not in groups(board)
     assert f'href="{reverse("admin:index")}"' not in board
+
+
+def test_links_show_what_still_needs_doing(client, make_user):
+    from apps.invoicing.models import BillingSettings
+
+    admin = make_user("admin", "Admin", is_staff=True)
+    page = get(client, admin).content.decode()
+    assert "Bank account missing" in page
+    assert "No backup yet" in page
+
+    billing = BillingSettings.current()
+    billing.iban = "FI21 1234 5600 0007 85"
+    billing.save()
+    page = get(client, admin).content.decode()
+    assert "Bank account missing" not in page
+
+
+def test_saving_a_one_row_setting_returns_to_the_settings_page(client, make_user):
+    from apps.invoicing.models import BillingSettings
+
+    client.force_login(make_user("admin", "Admin", is_staff=True))
+    billing = BillingSettings.current()
+    url = reverse("admin:invoicing_billingsettings_change", args=[billing.pk])
+    form = client.get(url).context["adminform"].form
+    data = {
+        name: value
+        for name, value in form.initial.items()
+        if value is not None and not isinstance(value, (list, dict))
+    }
+    data["iban"] = "FI21 1234 5600 0007 85"
+    response = client.post(url, data)
+
+    assert response.status_code == 302, response.context["adminform"].form.errors
+    assert response.url == URL
+    page = client.get(url).content.decode()
+    assert "Back to Metra settings" in page or "Tillbaka till Metras inställningar" in page
+    assert 'id="nav-sidebar"' not in page

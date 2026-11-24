@@ -60,6 +60,12 @@ ordnat efter uppgift:
 Var och en ser bara det som den egna rollen får ändra, och menyn visar
 Inställningar bara för dem som kan ändra något där.
 
+En kort notis bredvid vissa länkar säger vad som återstår, till exempel att
+bankkonto eller avsändaradress saknas, och när den senaste säkerhetskopian
+togs. Vissa inställningar öppnas på en sida med blå rubrikrad och ett äldre
+utseende; **Tillbaka till Metras inställningar** uppe till höger, eller att
+spara, tar dig tillbaka.
+
 ## Medlemmar
 
 Medlemmar loggar aldrig in. De får en personlig länk med sms, e-post eller

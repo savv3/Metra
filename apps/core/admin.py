@@ -1,5 +1,7 @@
 from auditlog.mixins import AuditlogHistoryAdminMixin
 from django.contrib import admin
+from django.shortcuts import redirect
+from django.utils.translation import gettext_lazy as _
 
 from .models import Notice
 
@@ -35,6 +37,31 @@ def get_app_list(request, app_label=None):
 
 
 admin.site.get_app_list = get_app_list
+admin.site.site_header = "Metra"
+admin.site.site_title = "Metra"
+admin.site.index_title = _("All data tables")
+# Settings open admin pages one at a time from Metra's Settings page; the
+# admin's own list of every table would lead people away from it.
+admin.site.enable_nav_sidebar = False
+
+
+class BackToSettingsMixin:
+    """For settings kept in one row (organisation, invoice settings): after
+    saving, go back to Metra's Settings page instead of the admin's list."""
+
+    def _back(self, request, obj):
+        # The admin has already said what was saved.
+        if "_continue" in request.POST or "_addanother" in request.POST:
+            return None
+        return redirect("core:settings")
+
+    def response_change(self, request, obj):
+        response = super().response_change(request, obj)
+        return self._back(request, obj) or response
+
+    def response_add(self, request, obj, post_url_continue=None):
+        response = super().response_add(request, obj, post_url_continue)
+        return self._back(request, obj) or response
 
 
 @admin.register(Notice)

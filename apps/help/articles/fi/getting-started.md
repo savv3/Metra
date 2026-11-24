@@ -59,6 +59,12 @@ mukaan ryhmiteltynä:
 Kukin näkee vain sen, mitä oma rooli saa muuttaa, ja valikko näyttää
 Asetukset vain niille, jotka voivat muuttaa siellä jotakin.
 
+Joidenkin linkkien vieressä oleva lyhyt merkintä kertoo, mitä on vielä
+tehtävä, esimerkiksi että tilinumero tai lähettäjän osoite puuttuu, ja milloin
+viimeisin varmuuskopio otettiin. Osa asetuksista avautuu vanhemman näköiselle
+sivulle, jossa on sininen otsikkopalkki; **Takaisin Metran asetuksiin**
+oikeassa yläkulmassa tai tallentaminen vie takaisin.
+
 ## Jäsenet
 
 Jäsenet eivät koskaan kirjaudu sisään. He saavat henkilökohtaisen linkin
