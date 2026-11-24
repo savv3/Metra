@@ -218,6 +218,18 @@ def warnings(year, today=None):
             )
             % {"amount": formats.number_format(amount, 2)}
         )
+    previous = FiscalYear.objects.filter(end__lt=year.start).order_by("-end").first()
+    if previous is not None and not previous.is_open:
+        for row in accrual_rows(year):
+            if row.earlier_days:
+                found.append(
+                    _(
+                        "%(invoice)s is partly for supplies before the year (%(days)s of "
+                        "%(total)s supply days). That income belongs to a closed year: if it "
+                        "is material, book it as a correction of that year."
+                    )
+                    % {"invoice": row.invoice, "days": row.earlier_days, "total": row.total_days}
+                )
     for row in bank_rows(year):
         if row.statement is None:
             found.append(
@@ -443,13 +455,15 @@ class AccrualRow:
     point of view: ``accrue`` when it is booked in a later year but (part of)
     its supply is in this one; ``defer`` when it is booked in this year but
     (part of) its supply is in the next. ``amounts`` is the net income of
-    that part per sales account, shared by supply days."""
+    that part per sales account, shared by supply days. ``earlier_days``
+    are the supply days before the year, which belong to an earlier one."""
 
     invoice: object
     kind: str
     days: int
     total_days: int
     amounts: dict
+    earlier_days: int = 0
 
     @property
     def total(self):
@@ -479,7 +493,7 @@ def accrual_rows(year):
         .prefetch_related("lines")
         .order_by("issue_date", "number")
     )
-    after = invoices.filter(issue_date__gt=year.end).filter(
+    after = invoices.filter(issue_date__gt=year.end, supply_end__gte=year.start).filter(
         Q(supply_start__lte=year.end) | Q(supply_start__isnull=True, supply_end__lte=year.end)
     )
     within = invoices.filter(issue_date__range=(year.start, year.end), supply_end__gt=year.end)
@@ -490,12 +504,13 @@ def accrual_rows(year):
             end = invoice.supply_end
             total_days = (end - start).days + 1
             if kind == "accrue":
-                days = (min(end, year.end) - start).days + 1
+                days = (min(end, year.end) - max(start, year.start)).days + 1
             else:
                 days = (end - max(start, year.end + datetime.timedelta(days=1))).days + 1
+            earlier = max((min(end, year.start - datetime.timedelta(days=1)) - start).days + 1, 0)
             amounts = _share(invoice, settings, Decimal(days) / Decimal(total_days))
             if amounts:
-                rows.append(AccrualRow(invoice, kind, days, total_days, amounts))
+                rows.append(AccrualRow(invoice, kind, days, total_days, amounts, earlier))
     return rows
 
 

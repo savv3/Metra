@@ -237,7 +237,10 @@ läpi tilinpäätöksen vaiheet:
    laskuja lähetetään tai hyvitetään sen jälkeen, sivu ja sulkeminen
    varoittavat, ja painike tekee tositteen vain erotuksesta. Jako päivien
    mukaan on ehdotus: pyydä kirjanpitäjää vahvistamaan menetelmä, jos
-   toimitukset ovat epätasaisia. Muut jaksotukset (myöhemmin laskutetut
+   toimitukset ovat epätasaisia. Tilikautta edeltäviä toimituspäiviä ei
+   lasketa mukaan; jos ne osuvat suljetulle tilikaudelle, sulkeminen
+   varoittaa, ja tuotto kirjataan sen tilikauden korjauksena, jos se on
+   olennainen. Muut jaksotukset (myöhemmin laskutetut
    kulut, etukäteen saadut tuotot) ovat lajia **Jaksotus** olevia
    tositteita, jotka päivätään tilikauden viimeiselle päivälle. Sulkeminen
    peruu kaikki jaksotukset seuraavan tilikauden ensimmäisenä päivänä.

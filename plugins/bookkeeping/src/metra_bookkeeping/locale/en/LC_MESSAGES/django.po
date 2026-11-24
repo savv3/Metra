@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-24 19:25+0200\n"
+"POT-Creation-Date: 2026-11-24 19:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2990,64 +2990,72 @@ msgid ""
 "still to move: %(amount)s). Make the accrual voucher."
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:224
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:227
+#, python-format
+msgid ""
+"%(invoice)s is partly for supplies before the year (%(days)s of %(total)s "
+"supply days). That income belongs to a closed year: if it is material, book "
+"it as a correction of that year."
+msgstr ""
+
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:236
 #, python-format
 msgid "The bank statement balance of %(account)s is not given."
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:229
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:241
 #, python-format
 msgid "%(account)s differs from the bank statement by %(amount)s."
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:235
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:247
 #, python-format
 msgid "The receivables account differs from the open invoices by %(amount)s."
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:241
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:253
 #, python-format
 msgid "%(account)s differs from the asset register by %(amount)s."
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:245
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:257
 msgid "The notes to the financial statements are not written yet."
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:248
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:260
 #, python-format
 msgid "The financial statements were due on %(day)s."
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:309
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:321
 msgid "Choose the equity account the result is carried to."
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:343
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:355
 #, python-format
 msgid "Opening balances from the financial year %(year)s"
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:354
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:366
 #, python-format
 msgid "accrual of %(year)s"
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:379
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:391
 msgid "The year already has a depreciation voucher."
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:391
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:403
 #, python-format
 msgid "Depreciation by plan %(year)s"
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:569
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:584
 #, python-format
 msgid "The chart of accounts has no account %(number)s for accruals."
 msgstr ""
 
-#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:585
+#: plugins/bookkeeping/src/metra_bookkeeping/yearend.py:600
 #, python-format
 msgid "Accrual of invoiced income across the end of %(year)s"
 msgstr ""

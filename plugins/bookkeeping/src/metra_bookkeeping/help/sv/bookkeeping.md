@@ -236,6 +236,9 @@ igenom bokslutet:
    efter det varnar sidan och avslutningen, och knappen gör ett verifikat
    för bara skillnaden. Fördelningen per dag är ett förslag: låt en
    revisor eller bokförare bekräfta metoden om leveranserna är ojämna.
+   Leveransdagar före perioden räknas inte med; faller de i en avslutad
+   period varnar avslutningen, och den intäkten bokförs som en rättelse av
+   den perioden om den är väsentlig.
    Andra periodiseringar (kostnader som faktureras senare, intäkter som
    fåtts i förskott) är verifikat av slaget **Periodisering** daterade
    periodens sista dag. Avslutningen återför alla periodiseringar nästa

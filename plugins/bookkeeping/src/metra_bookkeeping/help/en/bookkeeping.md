@@ -226,7 +226,10 @@ goes through the year-end:
    a draft dated the last day of the year; if invoices are issued or
    credited after that, the page and the closing warn, and the button makes
    a voucher for the difference only. The share by days is a suggestion:
-   have an accountant confirm the method if the supplies are uneven. Other
+   have an accountant confirm the method if the supplies are uneven. A
+   supply's days before the year are left out; if they fall in a closed
+   year, the closing warns, and that income is booked as a correction of
+   that year if it is material. Other
    accruals (costs billed later, income received in advance) are vouchers
    of the kind **Accrual** dated the last day of the year. Closing reverses
    every accrual on the first day of the next year.

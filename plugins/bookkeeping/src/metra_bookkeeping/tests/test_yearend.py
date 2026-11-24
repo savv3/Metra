@@ -377,6 +377,38 @@ def test_a_supply_across_the_year_end_is_accrued_by_days(books, last_year, this_
     assert (row.days, row.total_days, row.total) == (31, 62, Decimal("50.00"))
 
 
+@pytest.fixture
+def closed_before(last_year):
+    start = last_year.start.replace(year=last_year.start.year - 1)
+    return FiscalYear.objects.create(
+        start=start,
+        end=last_year.start - datetime.timedelta(1),
+        status=FiscalYear.Status.CLOSED,
+        locked_until=last_year.start - datetime.timedelta(1),
+    )
+
+
+def test_a_supply_wholly_before_the_year_is_not_accrued_into_it(
+    books, closed_before, last_year, this_year, make_invoice
+):
+    make_invoice([("Water", "1", "100", "0")], supplied=(closed_before.start, closed_before.end))
+    assert yearend.accrual_rows(last_year) == []
+
+
+def test_only_the_years_share_of_a_longer_supply_is_accrued(
+    books, closed_before, last_year, this_year, make_invoice
+):
+    start, end = closed_before.end.replace(month=7, day=1), last_year.end.replace(month=6, day=30)
+    make_invoice([("Water", "1", "365", "0")], supplied=(start, end))
+    (row,) = yearend.accrual_rows(last_year)
+    days = (end - last_year.start).days + 1
+    assert row.total_days == (end - start).days + 1
+    assert (row.days, row.earlier_days) == (days, row.total_days - days)
+    expected = (Decimal("365") * days / row.total_days).quantize(Decimal("0.01"))
+    assert row.total == expected
+    assert any("belongs to a closed year" in w for w in yearend.warnings(last_year))
+
+
 def test_income_invoiced_for_the_next_year_is_deferred(books, this_year, make_invoice):
     # Issued this year for the last month of it and the first two of the next.
     start = this_year.end.replace(day=1)
