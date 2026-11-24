@@ -336,10 +336,15 @@ class Account(models.Model):
         verbose_name_plural = _("accounts")
 
     def __str__(self):
-        return f"{self.number} {self.name}"
+        return f"{self.number} {self.display_name}"
 
     def get_absolute_url(self):
         return reverse("metra_bookkeeping:account_ledger", args=[self.pk])
+
+    @property
+    def display_name(self):
+        """The name in the current language while it is a chart template's."""
+        return countries.account_name(self.number, self.name)
 
     @property
     def debit_normal(self):
@@ -1217,7 +1222,11 @@ class ChartEntry(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.number} {self.name}"
+        return f"{self.number} {self.display_name}"
+
+    @property
+    def display_name(self):
+        return countries.account_name(self.number, self.name)
 
 
 class FixedAsset(models.Model):

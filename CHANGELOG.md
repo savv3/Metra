@@ -32,6 +32,13 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 - On a reading round's page, the units table and its filters have their own
   **Readings** heading, so they no longer run into the **Send links** buttons.
 
+### Fixed
+
+- Bookkeeping: account names from the chart template now show in the
+  display language (Swedish, English or Finnish), also in books already
+  started in another language. Names the treasurer has changed stay as
+  written.
+
 ## [0.7.1] - 2026-11-23
 
 ### Removed
