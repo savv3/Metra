@@ -74,6 +74,12 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 - A unit's page: **Archive** is under **More**, the add-contact form opens
   from **Add contact**, empty fields are left out, and the history is folded
   away.
+- **Settings** is a two-column grid, and some links say what still needs
+  doing: a missing bank account or from address, no backup yet, or when the
+  last backup was taken.
+- Settings that open in the Django admin now have Metra's colours, no side
+  list of every table, and **Back to Metra settings** at the top; saving the
+  organisation or invoice settings returns to the Settings page.
 - On a reading round's page, the units table and its filters have their own
   **Readings** heading, so they no longer run into the **Send links** buttons.
 

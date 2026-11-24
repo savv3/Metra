@@ -3,11 +3,13 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
+from apps.core.admin import BackToSettingsMixin
+
 from .models import BillingSettings, FeeLine, FeePlan, FeeTier, Invoice
 
 
 @admin.register(BillingSettings)
-class BillingSettingsAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
+class BillingSettingsAdmin(BackToSettingsMixin, AuditlogHistoryAdminMixin, admin.ModelAdmin):
     show_auditlog_history_link = True
     fieldsets = [
         (_("VAT"), {"fields": ["vat_registered", "default_vat_rate", "vat_exemption_text"]}),

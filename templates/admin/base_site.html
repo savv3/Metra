@@ -1,0 +1,39 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+{# The admin in Metra's colours, with the way back to Metra's Settings page. #}
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | Metra{% endblock %}
+{% block extrastyle %}{{ block.super }}
+<style>
+  :root, html[data-theme="light"], html[data-theme="dark"] {
+    --primary: #1a5fb4;
+    --secondary: #154c91;
+    --header-bg: #1a5fb4;
+    --header-color: #fff;
+    --header-branding-color: #fff;
+    --header-link-color: #fff;
+    --breadcrumbs-bg: #154c91;
+    --breadcrumbs-fg: #e8f0fb;
+    --breadcrumbs-link-fg: #fff;
+    --default-button-bg: #1a5fb4;
+    --default-button-hover-bg: #154c91;
+    --button-bg: #1a5fb4;
+    --button-hover-bg: #154c91;
+    --link-selected-fg: #1a5fb4;
+    --accent: #fff;
+  }
+  #branding h1 a { display: inline-flex; gap: 0.5rem; align-items: center; font-weight: 700; }
+  #user-tools .metra-back { font-weight: 700; }
+</style>
+{% endblock %}
+{% block branding %}
+  <div id="site-name"><a href="{% url 'core:home' %}">Metra</a></div>
+{% endblock %}
+{% block usertools %}
+  {% if has_permission %}
+    <div id="user-tools">
+      <a class="metra-back" href="{% url 'core:settings' %}">← {% translate "Back to Metra settings" %}</a>
+      / <a href="{% url 'core:home' %}">{% translate "Back to Metra" %}</a>
+    </div>
+  {% endif %}
+{% endblock %}
+{% block nav-global %}{% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-24 20:35+0200\n"
+"POT-Creation-Date: 2026-11-24 20:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgid "Access"
 msgstr ""
 
 #: apps/accounts/forms.py:30 apps/accounts/templates/accounts/profile.html:16
-#: apps/core/settings_page.py:147 apps/core/templates/core/_contact.html:14
+#: apps/core/settings_page.py:231 apps/core/templates/core/_contact.html:14
 #: apps/invoicing/models.py:776 apps/messaging/models.py:29
 #: apps/messaging/templates/messaging/compose.html:21
 #: apps/register/csv_io.py:521 apps/register/models.py:274
@@ -192,7 +192,7 @@ msgid "Name"
 msgstr ""
 
 #: apps/accounts/templates/accounts/profile.html:18
-#: apps/core/settings_page.py:187
+#: apps/core/settings_page.py:273
 msgid "Roles"
 msgstr ""
 
@@ -283,8 +283,8 @@ msgstr ""
 
 #: apps/backups/apps.py:7 apps/backups/templates/backups/backup_list.html:3
 #: apps/backups/templates/backups/backup_list.html:7
-#: apps/backups/templates/backups/restore.html:5 apps/core/settings_page.py:210
-#: apps/core/settings_page.py:213
+#: apps/backups/templates/backups/restore.html:5 apps/core/settings_page.py:297
+#: apps/core/settings_page.py:300
 msgid "Backups"
 msgstr ""
 
@@ -428,7 +428,7 @@ msgstr ""
 #: apps/backups/templates/backups/backup_list.html:5
 #: apps/backups/templates/backups/restore.html:5
 #: apps/core/templates/core/settings.html:3
-#: apps/core/templates/core/settings.html:6 apps/core/templatetags/nav.py:103
+#: apps/core/templates/core/settings.html:6 apps/core/templatetags/nav.py:104
 #: apps/messaging/templates/messaging/email_settings.html:5
 #: apps/plugins/templates/plugins/plugin_list.html:5
 #: apps/plugins/templates/plugins/plugin_settings.html:5
@@ -609,7 +609,7 @@ msgid "People"
 msgstr ""
 
 #: apps/backups/templates/backups/restore.html:33
-#: apps/core/settings_page.py:111 apps/core/templatetags/nav.py:22
+#: apps/core/settings_page.py:194 apps/core/templatetags/nav.py:22
 #: apps/readings/apps.py:7
 #: apps/readings/templates/readings/_round_results.html:3
 #: apps/readings/templates/readings/_unit_readings.html:3
@@ -620,7 +620,7 @@ msgid "Readings"
 msgstr ""
 
 #: apps/backups/templates/backups/restore.html:33
-#: apps/core/settings_page.py:144
+#: apps/core/settings_page.py:228
 #: apps/messaging/templates/messaging/_unit_messages.html:4
 #: apps/messaging/templates/messaging/batch_detail.html:62
 #: apps/messaging/templates/messaging/batch_list.html:24
@@ -718,6 +718,10 @@ msgid ""
 "You may need to log in again when it is done."
 msgstr ""
 
+#: apps/core/admin.py:42 apps/core/settings_page.py:328
+msgid "All data tables"
+msgstr ""
+
 #: apps/core/apps.py:7
 msgid "General"
 msgstr ""
@@ -778,40 +782,70 @@ msgstr ""
 msgid "notices"
 msgstr ""
 
-#: apps/core/settings_page.py:71 apps/setup/views.py:40
+#: apps/core/settings_page.py:81
+msgid "Not filled in"
+msgstr ""
+
+#: apps/core/settings_page.py:90
+msgid "Bank account missing"
+msgstr ""
+
+#: apps/core/settings_page.py:98
+msgid "From address missing"
+msgstr ""
+
+#: apps/core/settings_page.py:106
+#, python-format
+msgid "%(count)s user"
+msgid_plural "%(count)s users"
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/core/settings_page.py:115
+#, python-format
+msgid "%(count)s on"
+msgid_plural "%(count)s on"
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/core/settings_page.py:125
+msgid "No backup yet"
+msgstr ""
+
+#: apps/core/settings_page.py:153 apps/setup/views.py:40
 msgid "Organisation"
 msgstr ""
 
-#: apps/core/settings_page.py:74
+#: apps/core/settings_page.py:156
 msgid "Organisation details"
 msgstr ""
 
-#: apps/core/settings_page.py:75
+#: apps/core/settings_page.py:157
 msgid "Name, business ID, contact details, logo and the public page."
 msgstr ""
 
-#: apps/core/settings_page.py:84 apps/core/templatetags/nav.py:11
+#: apps/core/settings_page.py:167 apps/core/templatetags/nav.py:11
 #: apps/register/apps.py:7
 msgid "Register"
 msgstr ""
 
-#: apps/core/settings_page.py:87
+#: apps/core/settings_page.py:170
 msgid "Unit types and their fields"
 msgstr ""
 
-#: apps/core/settings_page.py:88
+#: apps/core/settings_page.py:171
 msgid "The kinds of units in the register and the fields each one has."
 msgstr ""
 
-#: apps/core/settings_page.py:94
+#: apps/core/settings_page.py:177
 msgid "Person fields"
 msgstr ""
 
-#: apps/core/settings_page.py:95
+#: apps/core/settings_page.py:178
 msgid "Extra fields on every person, besides name and contact details."
 msgstr ""
 
-#: apps/core/settings_page.py:101 apps/register/csv_io.py:475
+#: apps/core/settings_page.py:184 apps/register/csv_io.py:475
 #: apps/register/csv_io.py:528
 #: apps/register/templates/register/_person_results.html:11
 #: apps/register/templates/register/_unit_results.html:11
@@ -820,88 +854,88 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
-#: apps/core/settings_page.py:102
+#: apps/core/settings_page.py:185
 msgid "Labels for grouping units and people, for example for send-outs."
 msgstr ""
 
-#: apps/core/settings_page.py:114
+#: apps/core/settings_page.py:197
 msgid "Reading types"
 msgstr ""
 
-#: apps/core/settings_page.py:115
+#: apps/core/settings_page.py:198
 msgid "What is read, for which unit type, and in which unit."
 msgstr ""
 
-#: apps/core/settings_page.py:124 apps/invoicing/apps.py:7
+#: apps/core/settings_page.py:207 apps/invoicing/apps.py:7
 msgid "Invoicing"
 msgstr ""
 
-#: apps/core/settings_page.py:127 apps/invoicing/models.py:118
+#: apps/core/settings_page.py:210 apps/invoicing/models.py:118
 msgid "Invoice settings"
 msgstr ""
 
-#: apps/core/settings_page.py:128
+#: apps/core/settings_page.py:211
 msgid "Bank account, payment terms, VAT, numbering and reminders."
 msgstr ""
 
-#: apps/core/settings_page.py:134
+#: apps/core/settings_page.py:218
 #: apps/invoicing/templates/invoicing/run_list.html:8
 msgid "Fee plans"
 msgstr ""
 
-#: apps/core/settings_page.py:135
+#: apps/core/settings_page.py:219
 msgid "What units pay: fixed fees and usage fees, with their fee lines."
 msgstr ""
 
-#: apps/core/settings_page.py:148
+#: apps/core/settings_page.py:232
 msgid "How email is sent: the mail server or service, and the from address."
 msgstr ""
 
-#: apps/core/settings_page.py:153
+#: apps/core/settings_page.py:238
 msgid "Message templates"
 msgstr ""
 
-#: apps/core/settings_page.py:154
+#: apps/core/settings_page.py:239
 msgid "The texts of invoices, reminders, reading requests and other messages."
 msgstr ""
 
-#: apps/core/settings_page.py:160
+#: apps/core/settings_page.py:245
 msgid "Notices"
 msgstr ""
 
-#: apps/core/settings_page.py:161
+#: apps/core/settings_page.py:246
 msgid "Short notices on the public page and members' pages."
 msgstr ""
 
-#: apps/core/settings_page.py:167
+#: apps/core/settings_page.py:252
 msgid "Newsletter consents"
 msgstr ""
 
-#: apps/core/settings_page.py:168
+#: apps/core/settings_page.py:253
 msgid "The record of who subscribed to or unsubscribed from the newsletter."
 msgstr ""
 
-#: apps/core/settings_page.py:177
+#: apps/core/settings_page.py:262
 msgid "Users and roles"
 msgstr ""
 
-#: apps/core/settings_page.py:180
+#: apps/core/settings_page.py:265
 msgid "Users"
 msgstr ""
 
-#: apps/core/settings_page.py:181
+#: apps/core/settings_page.py:266
 msgid "Who can log in, and the role each one has."
 msgstr ""
 
-#: apps/core/settings_page.py:188
+#: apps/core/settings_page.py:274
 msgid "What each role may see and do."
 msgstr ""
 
-#: apps/core/settings_page.py:197
+#: apps/core/settings_page.py:283
 msgid "Integrations"
 msgstr ""
 
-#: apps/core/settings_page.py:200 apps/core/templatetags/nav.py:14
+#: apps/core/settings_page.py:286 apps/core/templatetags/nav.py:14
 #: apps/plugins/apps.py:7 apps/plugins/templates/plugins/plugin_list.html:3
 #: apps/plugins/templates/plugins/plugin_list.html:7
 #: apps/plugins/templates/plugins/plugin_list.html:18
@@ -909,37 +943,33 @@ msgstr ""
 msgid "Add-ons"
 msgstr ""
 
-#: apps/core/settings_page.py:201
+#: apps/core/settings_page.py:287
 msgid "Turn add-ons on or off, and their settings."
 msgstr ""
 
-#: apps/core/settings_page.py:214
+#: apps/core/settings_page.py:301
 msgid "Snapshots of the register, here and offsite, and restoring one."
 msgstr ""
 
-#: apps/core/settings_page.py:222
+#: apps/core/settings_page.py:310
 msgid "Setup wizard"
 msgstr ""
 
-#: apps/core/settings_page.py:225
+#: apps/core/settings_page.py:313
 msgid "Run the setup wizard"
 msgstr ""
 
-#: apps/core/settings_page.py:227
+#: apps/core/settings_page.py:315
 msgid ""
 "Organisation, language, logo, units and fields, email and SMS, invoices and "
 "the board, step by step."
 msgstr ""
 
-#: apps/core/settings_page.py:237
+#: apps/core/settings_page.py:325
 msgid "Advanced"
 msgstr ""
 
-#: apps/core/settings_page.py:240
-msgid "All data tables"
-msgstr ""
-
-#: apps/core/settings_page.py:241
+#: apps/core/settings_page.py:329
 msgid "The full Django admin, with every table. For technical changes."
 msgstr ""
 
@@ -1078,7 +1108,7 @@ msgstr ""
 msgid "Pick a guide from the list, or search for a word."
 msgstr ""
 
-#: apps/invoicing/admin.py:13 apps/invoicing/models.py:409
+#: apps/invoicing/admin.py:15 apps/invoicing/models.py:409
 #: apps/invoicing/templates/invoicing/invoice_detail.html:111
 #: apps/invoicing/templates/invoicing/invoice_detail.html:113
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:113
@@ -1086,29 +1116,29 @@ msgstr ""
 msgid "VAT"
 msgstr ""
 
-#: apps/invoicing/admin.py:15
+#: apps/invoicing/admin.py:17
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:135
 #: apps/invoicing/views.py:516
 msgid "Payment"
 msgstr ""
 
-#: apps/invoicing/admin.py:26 apps/messaging/models.py:44
+#: apps/invoicing/admin.py:28 apps/messaging/models.py:44
 msgid "Payment reminders"
 msgstr ""
 
-#: apps/invoicing/admin.py:27
+#: apps/invoicing/admin.py:29
 msgid "Numbering"
 msgstr ""
 
-#: apps/invoicing/admin.py:28
+#: apps/invoicing/admin.py:30
 msgid "Invoice text"
 msgstr ""
 
-#: apps/invoicing/admin.py:51 apps/invoicing/models.py:276
+#: apps/invoicing/admin.py:53 apps/invoicing/models.py:276
 msgid "price tiers"
 msgstr ""
 
-#: apps/invoicing/admin.py:58
+#: apps/invoicing/admin.py:60
 #, python-format
 msgid "Edit tiers (%(count)s)"
 msgstr ""
@@ -4294,17 +4324,17 @@ msgstr ""
 msgid "Saved the reading for %(name)s."
 msgstr ""
 
-#: apps/register/admin.py:44
+#: apps/register/admin.py:46
 msgid "Public page and contact details"
 msgstr ""
 
-#: apps/register/admin.py:47
+#: apps/register/admin.py:49
 msgid ""
 "Shown to anyone on the public page, on members' pages and in letters, "
 "together with the email, phone and address above."
 msgstr ""
 
-#: apps/register/admin.py:81
+#: apps/register/admin.py:83
 #, python-format
 msgid "Nothing was deleted: a snapshot could not be taken first (%(error)s)."
 msgstr ""
@@ -5923,6 +5953,14 @@ msgstr ""
 msgid ""
 "Try Metra: log in with the username <strong>%(username)s</strong> and the "
 "password <strong>%(password)s</strong>."
+msgstr ""
+
+#: templates/admin/base_site.html:34
+msgid "Back to Metra settings"
+msgstr ""
+
+#: templates/admin/base_site.html:35
+msgid "Back to Metra"
 msgstr ""
 
 #: templates/base.html:21

@@ -59,6 +59,11 @@ task:
 Everyone sees only what their role may change, and the menu shows Settings
 only to those who can change something there.
 
+A short note beside some links says what still needs doing, such as a
+missing bank account or from address, and when the last backup was taken.
+Some settings open in an older-looking page with a blue header; **Back to
+Metra settings** at its top right, or saving, brings you back.
+
 ## Members
 
 Members never log in. They get a personal link by SMS, email or letter, where

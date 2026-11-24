@@ -11,6 +11,7 @@ from dataclasses import dataclass, field
 
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ngettext
 
 from apps.plugins.templatetags.plugins import settings_links
 
@@ -24,6 +25,10 @@ class Entry:
     admin: bool = False  # opens the admin, which needs staff status
     # Only superusers and users with the Admin role, such as the full admin.
     admins_only: bool = False
+    # A short state shown beside the link, such as "Bank account missing":
+    # a function returning (text, "ok" | "warn"), or None when there is
+    # nothing to say.
+    status: object = None
 
     def allowed(self, user):
         if self.admins_only and not (
@@ -43,6 +48,83 @@ class Group:
     key: str
     title: str
     entries: list = field(default_factory=list)
+
+
+# Each group's icon on the Settings page, a name from the main menu's icons.
+ICONS = {
+    "organisation": "building",
+    "register": "home",
+    "readings": "gauge",
+    "invoicing": "invoice",
+    "messages": "mail",
+    "users": "people",
+    "integrations": "box",
+    "backups": "server",
+    "setup": "list",
+    "advanced": "settings",
+}
+
+
+@dataclass
+class Link:
+    url: str
+    label: str
+    description: str = ""
+    status: tuple | None = None  # (text, "ok" | "warn")
+
+
+def _organisation_status():
+    from apps.register.models import Organisation
+
+    organisation = Organisation.current()
+    if organisation is None or not organisation.name:
+        return (_("Not filled in"), "warn")
+    return None
+
+
+def _billing_status():
+    from apps.invoicing.models import BillingSettings
+
+    billing = BillingSettings.objects.order_by("pk").first()
+    if billing is None or not billing.iban:
+        return (_("Bank account missing"), "warn")
+    return None
+
+
+def _email_status():
+    from apps.messaging import email_config
+
+    if not email_config.current().from_is_set:
+        return (_("From address missing"), "warn")
+    return None
+
+
+def _users_status():
+    from django.contrib.auth import get_user_model
+
+    count = get_user_model().objects.filter(is_active=True).count()
+    return (ngettext("%(count)s user", "%(count)s users", count) % {"count": count}, "")
+
+
+def _plugins_status():
+    from django.conf import settings
+
+    from apps.plugins import state
+
+    count = sum(1 for name in settings.PLUGIN_APPS if state.is_enabled(name))
+    return (ngettext("%(count)s on", "%(count)s on", count) % {"count": count}, "")
+
+
+def _backups_status():
+    from django.utils import formats, timezone
+
+    from apps.backups.models import BackupRun
+
+    last = BackupRun.objects.filter(success=True).order_by("-started_at").first()
+    if last is None:
+        return (_("No backup yet"), "warn")
+    when = timezone.localtime(last.finished_at or last.started_at)
+    return (formats.date_format(when, "SHORT_DATETIME_FORMAT"), "ok")
 
 
 def _single(model, admin_name):
@@ -76,6 +158,7 @@ def _groups():
                     _single(Organisation, "register_organisation"),
                     "register.change_organisation",
                     admin=True,
+                    status=_organisation_status,
                 ),
             ],
         ),
@@ -129,6 +212,7 @@ def _groups():
                     _single(BillingSettings, "invoicing_billingsettings"),
                     "invoicing.change_billingsettings",
                     admin=True,
+                    status=_billing_status,
                 ),
                 Entry(
                     _("Fee plans"),
@@ -148,6 +232,7 @@ def _groups():
                     _("How email is sent: the mail server or service, and the from address."),
                     "messaging:email_settings",
                     "messaging.change_emailsettings",
+                    status=_email_status,
                 ),
                 Entry(
                     _("Message templates"),
@@ -182,6 +267,7 @@ def _groups():
                     "admin:auth_user_changelist",
                     "auth.change_user",
                     admin=True,
+                    status=_users_status,
                 ),
                 Entry(
                     _("Roles"),
@@ -202,6 +288,7 @@ def _groups():
                     "plugins:list",
                     "plugins.change_pluginstate",
                     admins_only=True,
+                    status=_plugins_status,
                 ),
             ],
         ),
@@ -214,6 +301,7 @@ def _groups():
                     _("Snapshots of the register, here and offsite, and restoring one."),
                     "backups:list",
                     "backups.view_backuprun",
+                    status=_backups_status,
                 ),
             ],
         ),
@@ -249,14 +337,19 @@ def _groups():
 
 
 def visible_groups(user):
-    """[(group, [(url, label, description), ...])] the user may use; empty groups left out."""
+    """[(group, [Link, ...])] the user may use; empty groups left out."""
     if not user.is_authenticated:
         return []
     result = []
     for group in _groups():
-        links = [(e.href(), e.label, e.description) for e in group.entries if e.allowed(user)]
-        links += settings_links(user, group=group.key)
+        links = [
+            Link(e.href(), e.label, e.description, e.status() if e.status else None)
+            for e in group.entries
+            if e.allowed(user)
+        ]
+        links += [Link(*link) for link in settings_links(user, group=group.key)]
         if links:
+            group.icon = ICONS.get(group.key, "settings")
             result.append((group, links))
     return result
 

@@ -5,6 +5,8 @@ from django.shortcuts import redirect
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
+from apps.core.admin import BackToSettingsMixin
+
 from .models import CustomField, Organisation, Person, Tag, Unit, UnitContact, UnitType
 
 
@@ -18,7 +20,7 @@ class UnitCustomFieldInline(admin.TabularInline):
 
 
 @admin.register(Organisation)
-class OrganisationAdmin(AuditlogHistoryAdminMixin, admin.ModelAdmin):
+class OrganisationAdmin(BackToSettingsMixin, AuditlogHistoryAdminMixin, admin.ModelAdmin):
     show_auditlog_history_link = True
     list_display = ["name", "business_id", "country"]
     # A website typed as example.org becomes https://example.org.

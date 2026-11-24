@@ -1,22 +1,27 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n nav %}
 {% block title %}{% translate "Settings" %}{% endblock %}
 {% block content %}
   <div class="page-head">
     <h1>{% translate "Settings" %}</h1>
   </div>
 
-  {% for group, links in groups %}
-    <section class="card settings-group" id="settings-{{ group.key }}" aria-labelledby="settings-{{ group.key }}-title">
-      <h2 id="settings-{{ group.key }}-title">{{ group.title }}</h2>
-      {% for url, label, description in links %}
-        <div class="setting-row">
-          <div>
-            <h3><a href="{{ url }}">{{ label }}</a></h3>
-            {% if description %}<p class="help">{{ description }}</p>{% endif %}
-          </div>
-        </div>
-      {% endfor %}
-    </section>
-  {% endfor %}
+  <div class="settings-grid">
+    {% for group, links in groups %}
+      <section class="card settings-group" id="settings-{{ group.key }}" aria-labelledby="settings-{{ group.key }}-title">
+        <h2 id="settings-{{ group.key }}-title">{% menu_icon group.icon %}{{ group.title }}</h2>
+        <ul class="settings-links">
+          {% for link in links %}
+            <li>
+              <div>
+                <a href="{{ link.url }}">{{ link.label }}</a>
+                {% if link.description %}<p class="help">{{ link.description }}</p>{% endif %}
+              </div>
+              {% if link.status %}<span class="pill{% if link.status.1 == 'warn' %} pill--warn{% elif link.status.1 == 'ok' %} pill--ok{% endif %}">{{ link.status.0 }}</span>{% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endfor %}
+  </div>
 {% endblock %}
