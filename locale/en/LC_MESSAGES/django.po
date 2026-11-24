@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-24 20:41+0200\n"
+"POT-Creation-Date: 2026-11-24 21:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -205,12 +205,13 @@ msgid "Two-factor login"
 msgstr ""
 
 #: apps/accounts/templates/accounts/profile.html:28
-#: apps/plugins/templates/plugins/plugin_list.html:29
+#: apps/plugins/templates/plugins/plugin_list.html:21
+#: apps/plugins/templates/plugins/plugin_list.html:27
 msgid "On"
 msgstr ""
 
 #: apps/accounts/templates/accounts/profile.html:28
-#: apps/plugins/templates/plugins/plugin_list.html:29
+#: apps/plugins/templates/plugins/plugin_list.html:27
 msgid "Off"
 msgstr ""
 
@@ -431,7 +432,9 @@ msgstr ""
 #: apps/core/templates/core/settings.html:6 apps/core/templatetags/nav.py:104
 #: apps/messaging/templates/messaging/email_settings.html:5
 #: apps/plugins/templates/plugins/plugin_list.html:5
+#: apps/plugins/templates/plugins/plugin_list.html:40
 #: apps/plugins/templates/plugins/plugin_settings.html:5
+#: apps/plugins/templates/plugins/plugin_turn_off.html:5
 #: apps/register/templates/register/unit_type_choose.html:16
 msgid "Settings"
 msgstr ""
@@ -491,7 +494,6 @@ msgstr ""
 
 #: apps/backups/templates/backups/backup_list.html:48
 #: apps/backups/templates/backups/restore.html:10
-#: apps/plugins/templates/plugins/plugin_list.html:21
 msgid "Version"
 msgstr ""
 
@@ -504,7 +506,6 @@ msgid "Where"
 msgstr ""
 
 #: apps/backups/templates/backups/backup_list.html:51
-#: apps/plugins/templates/plugins/plugin_list.html:22
 #: apps/readings/templates/readings/_unit_readings.html:12
 #: apps/register/templates/register/unit_detail.html:68
 #: apps/selfservice/templates/selfservice/round_links.html:44
@@ -679,6 +680,7 @@ msgstr ""
 #: apps/messaging/templates/messaging/compose.html:127
 #: apps/messaging/templates/messaging/newsletter_compose.html:37
 #: apps/plugins/templates/plugins/plugin_settings.html:31
+#: apps/plugins/templates/plugins/plugin_turn_off.html:20
 #: apps/readings/templates/readings/reading_form.html:31
 #: apps/readings/templates/readings/round_form.html:21
 #: apps/register/templates/register/import_upload.html:21
@@ -938,8 +940,8 @@ msgstr ""
 #: apps/core/settings_page.py:286 apps/core/templatetags/nav.py:14
 #: apps/plugins/apps.py:7 apps/plugins/templates/plugins/plugin_list.html:3
 #: apps/plugins/templates/plugins/plugin_list.html:7
-#: apps/plugins/templates/plugins/plugin_list.html:18
 #: apps/plugins/templates/plugins/plugin_settings.html:5
+#: apps/plugins/templates/plugins/plugin_turn_off.html:5
 msgid "Add-ons"
 msgstr ""
 
@@ -1810,7 +1812,6 @@ msgstr ""
 #: apps/messaging/templates/messaging/_unit_messages.html:16
 #: apps/messaging/templates/messaging/batch_detail.html:69
 #: apps/messaging/templates/messaging/batch_list.html:25
-#: apps/plugins/templates/plugins/plugin_list.html:22
 #: apps/readings/templates/readings/round_list.html:22
 #: apps/register/csv_io.py:468
 #: apps/register/templates/register/_unit_results.html:10
@@ -2605,7 +2606,7 @@ msgstr ""
 msgid "A password is saved. Leave this empty to keep it."
 msgstr ""
 
-#: apps/messaging/email_forms.py:191 apps/plugins/views.py:129
+#: apps/messaging/email_forms.py:191 apps/plugins/views.py:203
 #, python-format
 msgid ""
 "Set in the server environment (%(variable)s), so it cannot be changed here."
@@ -3917,33 +3918,29 @@ msgid ""
 "and sections at once, and its data is kept for when it is turned on again."
 msgstr ""
 
-#: apps/plugins/templates/plugins/plugin_list.html:13
-msgid ""
-"This list shows the add-ons installed on this server. Installing another one "
-"is done on the server, with METRA_PLUGINS."
-msgstr ""
-
-#: apps/plugins/templates/plugins/plugin_list.html:21
-msgid "Add-on"
-msgstr ""
-
-#: apps/plugins/templates/plugins/plugin_list.html:37
+#: apps/plugins/templates/plugins/plugin_list.html:35
 #, python-format
-msgid "Turn off<span class=\"visually-hidden\"> %(plugin)s</span>"
+msgid "In the menu under %(section)s."
 msgstr ""
 
-#: apps/plugins/templates/plugins/plugin_list.html:40
+#: apps/plugins/templates/plugins/plugin_list.html:39
 #, python-format
-msgid "Turn on<span class=\"visually-hidden\"> %(plugin)s</span>"
+msgid "Open %(page)s"
 msgstr ""
 
 #: apps/plugins/templates/plugins/plugin_list.html:43
 #, python-format
-msgid "Settings<span class=\"visually-hidden\"> for %(plugin)s</span>"
+msgid "version %(version)s"
+msgstr ""
+
+#: apps/plugins/templates/plugins/plugin_list.html:49
+msgid "No add-ons are installed."
 msgstr ""
 
 #: apps/plugins/templates/plugins/plugin_list.html:51
-msgid "No add-ons are installed."
+msgid ""
+"This list shows the add-ons installed on this server. Installing another one "
+"is done on the server, with METRA_PLUGINS."
 msgstr ""
 
 #: apps/plugins/templates/plugins/plugin_settings.html:3
@@ -3990,34 +3987,90 @@ msgid "Send test SMS"
 msgstr ""
 
 #: apps/plugins/templates/plugins/plugin_settings.html:56
-#: apps/plugins/views.py:242
+#: apps/plugins/views.py:316
 msgid "Turn the add-on on to send a test."
 msgstr ""
 
-#: apps/plugins/views.py:103
+#: apps/plugins/templates/plugins/plugin_turn_off.html:3
+#: apps/plugins/templates/plugins/plugin_turn_off.html:6
+#, python-format
+msgid "Turn off %(plugin)s?"
+msgstr ""
+
+#: apps/plugins/templates/plugins/plugin_turn_off.html:8
+msgid "Its pages leave the menu:"
+msgstr ""
+
+#: apps/plugins/templates/plugins/plugin_turn_off.html:10
+msgid ""
+"Metra sends its email through this add-on now. Choose another way of sending "
+"under Settings > Email, or email stops."
+msgstr ""
+
+#: apps/plugins/templates/plugins/plugin_turn_off.html:11
+msgid ""
+"Metra sends its SMS through this add-on now. Without another SMS service, "
+"SMS stops."
+msgstr ""
+
+#: apps/plugins/templates/plugins/plugin_turn_off.html:13
+msgid ""
+"Its data and settings are kept, and come back when it is turned on again."
+msgstr ""
+
+#: apps/plugins/templates/plugins/plugin_turn_off.html:19
+#, python-format
+msgid "Turn off %(plugin)s"
+msgstr ""
+
+#: apps/plugins/views.py:88
+msgid "Features"
+msgstr ""
+
+#: apps/plugins/views.py:89
+msgid "Sending services"
+msgstr ""
+
+#: apps/plugins/views.py:90
+msgid "Integrations and other add-ons"
+msgstr ""
+
+#: apps/plugins/views.py:92
+msgid "Used for email"
+msgstr ""
+
+#: apps/plugins/views.py:92
+msgid "Used for SMS"
+msgstr ""
+
+#: apps/plugins/views.py:133
+msgid "Not set up yet"
+msgstr ""
+
+#: apps/plugins/views.py:177
 #, python-format
 msgid "%(plugin)s is on."
 msgstr ""
 
-#: apps/plugins/views.py:105
+#: apps/plugins/views.py:179
 #, python-format
 msgid "%(plugin)s is off. Its data is kept."
 msgstr ""
 
-#: apps/plugins/views.py:118
+#: apps/plugins/views.py:192
 #, python-format
 msgid "Remove the saved %(setting)s"
 msgstr ""
 
-#: apps/plugins/views.py:152
+#: apps/plugins/views.py:226
 msgid "The saved value cannot be read with this server's key; enter it again."
 msgstr ""
 
-#: apps/plugins/views.py:154
+#: apps/plugins/views.py:228
 msgid "A value is saved. Leave this empty to keep it."
 msgstr ""
 
-#: apps/plugins/views.py:198
+#: apps/plugins/views.py:272
 msgid "Saved the settings."
 msgstr ""
 

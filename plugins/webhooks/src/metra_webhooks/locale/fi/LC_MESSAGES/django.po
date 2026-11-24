@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 20:57+0000\n"
+"POT-Creation-Date: 2026-11-24 21:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,21 +19,28 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: plugins/webhooks/src/metra_webhooks/apps.py:8
-#: plugins/webhooks/src/metra_webhooks/apps.py:26
+#: plugins/webhooks/src/metra_webhooks/apps.py:27
 #: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:3
 #: plugins/webhooks/src/metra_webhooks/templates/metra_webhooks/endpoint_list.html:6
 msgid "Webhooks"
 msgstr "Webhookit"
 
-#: plugins/webhooks/src/metra_webhooks/apps.py:29
+#: plugins/webhooks/src/metra_webhooks/apps.py:9
+msgid ""
+"Tell other systems when something changes in Metra, with signed messages."
+msgstr ""
+"Ilmoittaa muille järjestelmille, kun Metrassa muuttuu jotain, "
+"allekirjoitetuilla viesteillä."
+
+#: plugins/webhooks/src/metra_webhooks/apps.py:30
 msgid "Tell outside systems when something changes in Metra."
 msgstr "Kerro ulkoisille järjestelmille, kun jokin muuttuu Metrassa."
 
-#: plugins/webhooks/src/metra_webhooks/apps.py:35
+#: plugins/webhooks/src/metra_webhooks/apps.py:36
 msgid "A webhook could not be delivered"
 msgstr "Webhookia ei voitu toimittaa"
 
-#: plugins/webhooks/src/metra_webhooks/apps.py:37
+#: plugins/webhooks/src/metra_webhooks/apps.py:38
 #, python-format
 msgid "A webhook to %(endpoint)s could not be delivered and was given up."
 msgid_plural ""

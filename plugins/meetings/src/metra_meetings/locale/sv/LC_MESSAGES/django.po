@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-23 18:40+0200\n"
+"POT-Creation-Date: 2026-11-24 21:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,14 +18,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: plugins/meetings/src/metra_meetings/apps.py:9
-#: plugins/meetings/src/metra_meetings/apps.py:32
+#: plugins/meetings/src/metra_meetings/apps.py:35
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_list.html:3
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_list.html:6
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/template_list.html:9
 msgid "Meetings"
 msgstr "Möten"
 
-#: plugins/meetings/src/metra_meetings/apps.py:41
+#: plugins/meetings/src/metra_meetings/apps.py:11
+msgid ""
+"Call meetings, take and approve the minutes, and publish approved minutes to "
+"members."
+msgstr ""
+"Kalla till möten, för och justera protokoll och publicera justerade protokoll"
+" för medlemmarna."
+
+#: plugins/meetings/src/metra_meetings/apps.py:44
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_list.html:12
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/template_list.html:3
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/template_list.html:6
@@ -33,14 +41,14 @@ msgstr "Möten"
 msgid "Agenda templates"
 msgstr "Mallar för föredragningslistor"
 
-#: plugins/meetings/src/metra_meetings/apps.py:44
+#: plugins/meetings/src/metra_meetings/apps.py:47
 msgid ""
 "The usual agenda of each kind of meeting, which new meetings start from."
 msgstr ""
 "Den vanliga föredragningslistan för varje slags möte, som nya möten utgår "
 "från."
 
-#: plugins/meetings/src/metra_meetings/apps.py:50
+#: plugins/meetings/src/metra_meetings/apps.py:53
 msgid "Meeting minutes"
 msgstr "Mötesprotokoll"
 
@@ -160,8 +168,8 @@ msgstr "Kallelse: %(title)s den %(date)s"
 #: plugins/meetings/src/metra_meetings/documents.py:110
 #, python-format
 msgid ""
-"Welcome to %(title)s on %(date)s at %(time)s, %(place)s. The agenda is in "
-"the attached file."
+"Welcome to %(title)s on %(date)s at %(time)s, %(place)s. The agenda is in the"
+" attached file."
 msgstr ""
 "Välkommen till %(title)s den %(date)s kl. %(time)s, %(place)s. "
 "Föredragningslistan finns i den bifogade filen."
@@ -192,8 +200,7 @@ msgstr "Påminnelse: %(title)s den %(date)s"
 #: plugins/meetings/src/metra_meetings/documents.py:133
 #, python-format
 msgid "Reminder: %(title)s on %(date)s at %(time)s, %(place)s. Welcome!"
-msgstr ""
-"Påminnelse: %(title)s den %(date)s kl. %(time)s, %(place)s. Välkommen!"
+msgstr "Påminnelse: %(title)s den %(date)s kl. %(time)s, %(place)s. Välkommen!"
 
 #: plugins/meetings/src/metra_meetings/documents.py:137
 #, python-format
@@ -213,8 +220,7 @@ msgstr ""
 
 #: plugins/meetings/src/metra_meetings/documents.py:157
 #, python-format
-msgid ""
-"The date, time or place of %(title)s (%(kind)s) has changed. It is now:"
+msgid "The date, time or place of %(title)s (%(kind)s) has changed. It is now:"
 msgstr ""
 "Datum, tid eller plats för %(title)s (%(kind)s) har ändrats. Nu gäller:"
 
@@ -290,8 +296,7 @@ msgstr "Tomt: personens enhet, om hen bara har en."
 
 #: plugins/meetings/src/metra_meetings/forms.py:162
 msgid ""
-"Empty: one vote for the first person present for a unit, none for the "
-"others."
+"Empty: one vote for the first person present for a unit, none for the others."
 msgstr ""
 "Tomt: en röst för den första närvarande för en enhet, ingen för de andra."
 
@@ -371,8 +376,8 @@ msgstr "övrig information"
 msgid ""
 "Shown in the notice and on the agenda, for example how to attend online."
 msgstr ""
-"Visas i kallelsen och på föredragningslistan, till exempel hur man deltar på"
-" distans."
+"Visas i kallelsen och på föredragningslistan, till exempel hur man deltar på "
+"distans."
 
 #: plugins/meetings/src/metra_meetings/models.py:60
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/_minutes.html:8
@@ -384,8 +389,8 @@ msgid ""
 "Each unit has one vote, carried by one of the people present for it. "
 "Otherwise everyone present has a vote."
 msgstr ""
-"Varje enhet har en röst, som en av de närvarande för enheten för. Annars har"
-" alla närvarande en röst."
+"Varje enhet har en röst, som en av de närvarande för enheten för. Annars har "
+"alla närvarande en röst."
 
 #: plugins/meetings/src/metra_meetings/models.py:68
 msgid "show the approved minutes to members"
@@ -649,8 +654,8 @@ msgid ""
 "Read the minutes below or as a PDF. When every minute checker has approved "
 "them, they can no longer be changed."
 msgstr ""
-"Läs protokollet nedan eller som pdf. När alla protokolljusterare har "
-"justerat det kan det inte längre ändras."
+"Läs protokollet nedan eller som pdf. När alla protokolljusterare har justerat"
+" det kan det inte längre ändras."
 
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/approve.html:8
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:30
@@ -666,8 +671,7 @@ msgid ""
 "If something is wrong, do not approve: tell the secretary, who corrects the "
 "minutes."
 msgstr ""
-"Om något är fel, justera inte: säg till sekreteraren, som rättar "
-"protokollet."
+"Om något är fel, justera inte: säg till sekreteraren, som rättar protokollet."
 
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/attendance.html:3
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/attendance.html:6
@@ -855,8 +859,8 @@ msgid ""
 "calendar file attached, so you can choose who gets it and check it before "
 "sending."
 msgstr ""
-"Kallelsen öppnas som ett nytt meddelande med e-post, med föredragningslistan"
-" och en kalenderfil bifogade, så att du kan välja vem som får den och "
+"Kallelsen öppnas som ett nytt meddelande med e-post, med föredragningslistan "
+"och en kalenderfil bifogade, så att du kan välja vem som får den och "
 "kontrollera den innan den skickas."
 
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_detail.html:64
@@ -1046,11 +1050,11 @@ msgstr "Ta bort mall för föredragningslista"
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/template_confirm_delete.html:6
 #, python-format
 msgid ""
-"Delete the agenda template %(name)s? Meetings that started from it keep "
-"their agenda."
+"Delete the agenda template %(name)s? Meetings that started from it keep their"
+" agenda."
 msgstr ""
-"Ta bort mallen för föredragningslista %(name)s? Möten som har utgått från "
-"den behåller sin föredragningslista."
+"Ta bort mallen för föredragningslista %(name)s? Möten som har utgått från den"
+" behåller sin föredragningslista."
 
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/template_form.html:3
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/template_form.html:6
@@ -1068,15 +1072,14 @@ msgstr "Ny mall"
 
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/template_list.html:12
 msgid ""
-"The usual agenda of each kind of meeting. A new meeting starts with the "
-"items of the template for its kind, or of the one chosen, and you change "
-"them there as needed. Changing a template does not change meetings already "
-"added."
+"The usual agenda of each kind of meeting. A new meeting starts with the items"
+" of the template for its kind, or of the one chosen, and you change them "
+"there as needed. Changing a template does not change meetings already added."
 msgstr ""
 "Den vanliga föredragningslistan för varje slags möte. Ett nytt möte börjar "
 "med ärendena i mallen för dess typ, eller i den mall som du väljer, och där "
-"ändrar du dem vid behov. Om du ändrar en mall ändras inte möten som redan är"
-" tillagda."
+"ändrar du dem vid behov. Om du ändrar en mall ändras inte möten som redan är "
+"tillagda."
 
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/template_list.html:21
 msgid "Template"
@@ -1133,8 +1136,8 @@ msgid ""
 "The invitations have already gone out. Send an updated invitation so that "
 "everyone knows about the change."
 msgstr ""
-"Kallelserna har redan gått ut. Skicka en uppdaterad kallelse så att alla får"
-" veta om ändringen."
+"Kallelserna har redan gått ut. Skicka en uppdaterad kallelse så att alla får "
+"veta om ändringen."
 
 #: plugins/meetings/src/metra_meetings/views.py:160
 msgid "The meeting was deleted."
@@ -1177,8 +1180,8 @@ msgstr "%(name)s togs bort från listan."
 
 #: plugins/meetings/src/metra_meetings/views.py:379
 msgid ""
-"The invitation is ready with the agenda and a calendar file attached. Choose"
-" who gets it, check and send. The meeting is then marked as called."
+"The invitation is ready with the agenda and a calendar file attached. Choose "
+"who gets it, check and send. The meeting is then marked as called."
 msgstr ""
 "Kallelsen är klar med föredragningslistan och en kalenderfil bifogade. Välj "
 "vem som får den, kontrollera och skicka. Mötet markeras då som kallat."
@@ -1200,8 +1203,7 @@ msgid "The updated invitation is being sent to everyone invited."
 msgstr "Den uppdaterade kallelsen skickas till alla kallade."
 
 #: plugins/meetings/src/metra_meetings/views.py:447
-msgid ""
-"The minutes are approved by every checker and can no longer be changed."
+msgid "The minutes are approved by every checker and can no longer be changed."
 msgstr "Protokollet är justerat av alla justerare och kan inte längre ändras."
 
 #: plugins/meetings/src/metra_meetings/views.py:451

@@ -74,11 +74,13 @@ they report their reading and correct their contact details. See
 
 Add-ons add features, such as SMS through 46elks or meeting minutes. An admin
 sees the add-ons installed on the server under **Settings > Add-ons** and
-turns each one on or off with **Turn on** and **Turn off**. An add-on that is
-off disappears from the menu and pages at once, and its data is kept for when
+turns each one on or off with its switch. Before turning one off, Metra says
+what will change, for example that email is sent through it now. An add-on
+that is off disappears from the menu and pages at once, and its data is kept for when
 it is turned on again. Add-ons with settings, such as an API key, or with
 setting pages of their own, such as the meetings add-on's agenda templates,
-have a **Settings** button there. Pages of their own are also listed on the
+have a **Settings** link there, and add-ons with pages of their own an
+**Open** link. Pages of their own are also listed on the
 Settings page, in the section they belong to. A saved password or key is never shown again: leave
 the field empty to keep it, or enter a new one. A setting that is greyed out is
 set on the server and cannot be changed in the app. Installing a new add-on is

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 17:13+0000\n"
+"POT-Creation-Date: 2026-11-24 21:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,33 +18,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:22
-msgid "API username"
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:11
+msgid "Send Metra's SMS through 46elks, with delivery reports."
 msgstr ""
 
 #: plugins/sms-46elks/src/metra_sms_46elks/apps.py:23
-#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:30
+msgid "API username"
+msgstr ""
+
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:24
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:31
 msgid "At 46elks, under Account."
 msgstr ""
 
-#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:28
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:29
 msgid "API password"
 msgstr ""
 
-#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:35
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:36
 msgid "Sender"
 msgstr ""
 
-#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:37
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:38
 msgid ""
 "The name shown on the phone, up to 11 letters and digits (for example "
 "Vatten), or a number you have at 46elks."
 msgstr ""
 
-#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:44
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:45
 msgid "Test mode"
 msgstr ""
 
-#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:46
+#: plugins/sms-46elks/src/metra_sms_46elks/apps.py:47
 msgid "46elks checks messages without sending them or charging."
 msgstr ""

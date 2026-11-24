@@ -80,6 +80,11 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 - Settings that open in the Django admin now have Metra's colours, no side
   list of every table, and **Back to Metra settings** at the top; saving the
   organisation or invoice settings returns to the Settings page.
+- **Settings > Add-ons** shows each add-on as a card with an on/off switch,
+  grouped into features, sending services and integrations, with links to
+  its pages and settings and a note when it is in use or not set up yet.
+  Turning one off first says what changes. The official add-ons'
+  descriptions are translated.
 - On a reading round's page, the units table and its filters have their own
   **Readings** heading, so they no longer run into the **Send links** buttons.
 

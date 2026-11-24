@@ -10,6 +10,7 @@ class MailgunConfig(AppConfig):
     name = "metra_email_mailgun"
     label = "metra_email_mailgun"
     verbose_name = "Mailgun"
+    description = _("Send Metra's email through Mailgun, with delivery and bounce reports.")
     default_auto_field = "django.db.models.BigAutoField"
 
     # Messages, their status and bounced addresses are stored by Metra, not here.

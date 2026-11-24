@@ -8,6 +8,7 @@ class FortySixElksConfig(AppConfig):
     name = "metra_sms_46elks"
     label = "metra_sms_46elks"
     verbose_name = "46elks SMS"
+    description = _("Send Metra's SMS through 46elks, with delivery reports.")
     default_auto_field = "django.db.models.BigAutoField"
 
     # Messages and their delivery status are stored by Metra, not here.

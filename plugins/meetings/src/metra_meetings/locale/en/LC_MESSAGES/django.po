@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-23 18:40+0200\n"
+"POT-Creation-Date: 2026-11-24 21:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,14 +18,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: plugins/meetings/src/metra_meetings/apps.py:9
-#: plugins/meetings/src/metra_meetings/apps.py:32
+#: plugins/meetings/src/metra_meetings/apps.py:35
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_list.html:3
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_list.html:6
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/template_list.html:9
 msgid "Meetings"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/apps.py:41
+#: plugins/meetings/src/metra_meetings/apps.py:11
+msgid ""
+"Call meetings, take and approve the minutes, and publish approved minutes to "
+"members."
+msgstr ""
+
+#: plugins/meetings/src/metra_meetings/apps.py:44
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/meeting_list.html:12
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/template_list.html:3
 #: plugins/meetings/src/metra_meetings/templates/metra_meetings/template_list.html:6
@@ -33,12 +39,12 @@ msgstr ""
 msgid "Agenda templates"
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/apps.py:44
+#: plugins/meetings/src/metra_meetings/apps.py:47
 msgid ""
 "The usual agenda of each kind of meeting, which new meetings start from."
 msgstr ""
 
-#: plugins/meetings/src/metra_meetings/apps.py:50
+#: plugins/meetings/src/metra_meetings/apps.py:53
 msgid "Meeting minutes"
 msgstr ""
 

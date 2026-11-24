@@ -6,6 +6,7 @@ from django.utils.translation import ngettext_lazy
 class WebhooksConfig(AppConfig):
     name = "metra_webhooks"
     verbose_name = _("Webhooks")
+    description = _("Tell other systems when something changes in Metra, with signed messages.")
     default_auto_field = "django.db.models.BigAutoField"
 
     # Payloads carry ids and non-personal facts only, and endpoints are

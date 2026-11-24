@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from django import forms
 from django.conf import settings
@@ -6,15 +6,17 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import Http404
 from django.shortcuts import redirect, render
+from django.urls import NoReverseMatch, reverse
 from django.utils import timezone
 from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy
 from django.views.decorators.http import require_POST
 
 from apps.messaging.registry import EMAIL
 from config.plugins import BUNDLED, available
 
 from . import state
-from .hooks import SETTINGS_LINKS, hooks
+from .hooks import NAVIGATION, SETTINGS_LINKS, hooks
 from .models import PluginState
 from .plugin_settings import PluginSettings, Setting, definitions
 
@@ -30,6 +32,12 @@ class Installed:
     has_settings: bool
     # Why the plugin cannot be turned off now, if it says so.
     keep_on: str = ""
+    # For the Add-ons page: which group it is listed in, its menu links as
+    # (label, url, menu section), where its settings are, and short notes.
+    category: str = "integrations"
+    menu: list = field(default_factory=list)
+    settings_url: str = ""
+    notes: list = field(default_factory=list)  # [(text, "ok" | "warn")]
 
 
 def has_pages(name):
@@ -75,10 +83,67 @@ def installed():
     return result
 
 
+# The groups of the Add-ons page, in order.
+CATEGORIES = (
+    ("features", gettext_lazy("Features")),
+    ("sending", gettext_lazy("Sending services")),
+    ("integrations", gettext_lazy("Integrations and other add-ons")),
+)
+CHANNEL_NOTES = {"email": gettext_lazy("Used for email"), "sms": gettext_lazy("Used for SMS")}
+
+
+def _menu(name):
+    """The plugin's main menu links: (label, url, the menu section's title)."""
+    from apps.core.templatetags.nav import SECTIONS
+
+    titles = dict(SECTIONS)
+    links = []
+    for item in hooks.get(NAVIGATION, everything=True):
+        if hooks.owner(item) != name:
+            continue
+        try:
+            url = reverse(item.url_name)
+        except NoReverseMatch:
+            continue
+        links.append((item.label, url, titles.get(item.group, titles["addons"])))
+    return links
+
+
+def describe(plugin, user):
+    """Fill in what the Add-ons page shows about an installed plugin."""
+    from .templatetags.plugins import settings_links
+
+    providers = _providers(plugin.name)
+    plugin.menu = _menu(plugin.name)
+    if providers:
+        plugin.category = "sending"
+    elif plugin.menu:
+        plugin.category = "features"
+    if plugin.has_settings and user.has_perm("plugins.change_pluginsetting"):
+        pages = settings_links(user, plugin=plugin.name)
+        if plugin.enabled and len(pages) == 1 and not definitions(plugin.name):
+            plugin.settings_url = pages[0][0]  # straight to its only page
+        else:
+            plugin.settings_url = reverse("plugins:settings", args=[plugin.name])
+    if plugin.enabled:
+        for provider_class in providers.values():
+            if _in_use(provider_class):
+                plugin.notes.append((CHANNEL_NOTES[provider_class.channel], "ok"))
+            elif not provider_class.is_configured():
+                plugin.notes.append((_("Not set up yet"), "warn"))
+    return plugin
+
+
 @login_required
 @permission_required("plugins.change_pluginstate", raise_exception=True)
 def plugin_list(request):
-    return render(request, "plugins/plugin_list.html", {"plugins": installed()})
+    plugins = [describe(p, request.user) for p in installed()]
+    groups = [
+        (title, [p for p in plugins if p.category == key])
+        for key, title in CATEGORIES
+        if any(p.category == key for p in plugins)
+    ]
+    return render(request, "plugins/plugin_list.html", {"plugins": plugins, "groups": groups})
 
 
 @login_required
@@ -91,6 +156,15 @@ def plugin_toggle(request, name):
     if not enabled and (reason := turn_off_refused(name)):
         messages.error(request, reason)
         return redirect("plugins:list")
+    if not enabled and request.POST.get("confirmed") != "1":
+        # Say what turning it off changes before doing it.
+        plugin = describe(next(p for p in installed() if p.name == name), request.user)
+        in_use = [
+            provider_class.channel
+            for provider_class in _providers(name).values()
+            if _in_use(provider_class)
+        ]
+        return render(request, "plugins/plugin_turn_off.html", {"plugin": plugin, "in_use": in_use})
     plugin, created = PluginState.objects.get_or_create(name=name)
     if plugin.enabled != enabled or created:
         plugin.enabled = enabled

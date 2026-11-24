@@ -75,12 +75,13 @@ lukemansa ja korjaavat yhteystietonsa. Katso [Lukemat](/help/readings/).
 
 Lisäosat tuovat uusia toimintoja, kuten tekstiviestit 46elksin kautta tai
 kokouspöytäkirjat. Ylläpitäjä näkee palvelimelle asennetut lisäosat kohdassa
-**Asetukset > Lisäosat** ja ottaa kunkin käyttöön tai pois käytöstä
-painikkeilla **Ota käyttöön** ja **Poista käytöstä**. Pois käytöstä oleva
+**Asetukset > Lisäosat** ja ottaa kunkin käyttöön tai pois käytöstä sen
+kytkimellä. Ennen kuin lisäosa poistetaan käytöstä, Metra kertoo, mitä
+muuttuu, esimerkiksi että sähköposti lähetetään nyt sen kautta. Pois käytöstä oleva
 lisäosa katoaa valikosta ja sivuilta heti, ja sen tiedot säilyvät, kunnes se
 otetaan taas käyttöön. Lisäosilla, joilla on asetuksia, kuten API-avain, tai
 omia asetussivuja, kuten kokouslisäosan esityslistapohjat, on siellä
-**Asetukset**-painike. Omat asetussivut näkyvät myös Asetukset-sivulla siinä
+**Asetukset**-linkki, ja lisäosilla, joilla on omia sivuja, **Avaa**-linkki. Omat asetussivut näkyvät myös Asetukset-sivulla siinä
 osiossa, johon ne kuuluvat. Tallennettua salasanaa tai avainta ei näytetä
 enää koskaan: jätä kenttä tyhjäksi, jos haluat säilyttää sen, tai anna uusi.
 Harmaana oleva asetus on asetettu palvelimella, eikä sitä voi muuttaa

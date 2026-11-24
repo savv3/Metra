@@ -10,44 +10,46 @@
     Add-ons add features to Metra. Turning one off hides its pages, menu items and
     sections at once, and its data is kept for when it is turned on again.
   {% endblocktranslate %}</p>
-  <p class="help">{% blocktranslate trimmed %}
+  {% for title, members in groups %}
+    <h2 class="addon-group">{{ title }}</h2>
+    <div class="addon-grid">
+      {% for plugin in members %}
+        <section class="card addon" aria-labelledby="addon-{{ plugin.name }}">
+          <div class="addon__head">
+            <h3 id="addon-{{ plugin.name }}">{{ plugin.label }}</h3>
+            {% if plugin.enabled and plugin.keep_on %}
+              <span class="switch switch--on switch--locked"><span class="switch__track" aria-hidden="true"></span>{% translate "On" %}</span>
+            {% else %}
+              <form method="post" action="{% url 'plugins:toggle' plugin.name %}">
+                {% csrf_token %}
+                <input type="hidden" name="enabled" value="{% if plugin.enabled %}0{% else %}1{% endif %}">
+                <button type="submit" class="switch{% if plugin.enabled %} switch--on{% endif %}" role="switch" aria-checked="{% if plugin.enabled %}true{% else %}false{% endif %}">
+                  <span class="switch__track" aria-hidden="true"></span>{% if plugin.enabled %}{% translate "On" %}{% else %}{% translate "Off" %}{% endif %}<span class="visually-hidden">: {{ plugin.label }}</span>
+                </button>
+              </form>
+            {% endif %}
+          </div>
+          {% if plugin.description %}<p class="addon__text">{{ plugin.description }}</p>{% endif %}
+          {% if plugin.keep_on %}<p class="help">{{ plugin.keep_on }}</p>{% endif %}
+          {% if plugin.enabled and plugin.menu %}
+            <p class="help">{% for label, url, section in plugin.menu %}{% blocktranslate with section=section %}In the menu under {{ section }}.{% endblocktranslate %}{% if not forloop.last %} {% endif %}{% endfor %}</p>
+          {% endif %}
+          <div class="addon__foot">
+            <span class="addon__links">
+              {% if plugin.enabled %}{% for label, url, section in plugin.menu %}<a href="{{ url }}">{% blocktranslate with page=label %}Open {{ page }}{% endblocktranslate %}</a>{% endfor %}{% endif %}
+              {% if plugin.settings_url %}<a href="{{ plugin.settings_url }}">{% translate "Settings" %}<span class="visually-hidden"> {{ plugin.label }}</span></a>{% endif %}
+              {% for text, kind in plugin.notes %}<span class="pill pill--{{ kind }}">{{ text }}</span>{% endfor %}
+            </span>
+            {% if plugin.version %}<span class="help">{% blocktranslate with version=plugin.version %}version {{ version }}{% endblocktranslate %}</span>{% endif %}
+          </div>
+        </section>
+      {% endfor %}
+    </div>
+  {% empty %}
+    <p class="empty">{% translate "No add-ons are installed." %}</p>
+  {% endfor %}
+  <p class="help addon-install">{% blocktranslate trimmed %}
     This list shows the add-ons installed on this server. Installing another one is done
     on the server, with METRA_PLUGINS.
   {% endblocktranslate %}</p>
-  {% if plugins %}
-    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Add-ons' %}">
-      <table>
-        <thead><tr>
-          <th scope="col">{% translate "Add-on" %}</th><th scope="col">{% translate "Version" %}</th>
-          <th scope="col">{% translate "Status" %}</th><th scope="col"><span class="visually-hidden">{% translate "Actions" %}</span></th>
-        </tr></thead>
-        <tbody>
-          {% for plugin in plugins %}
-            <tr>
-              <th scope="row">{{ plugin.label }}{% if plugin.description %}<span class="help">{{ plugin.description }}</span>{% endif %}</th>
-              <td>{{ plugin.version|default:"–" }}</td>
-              <td>{% if plugin.enabled %}<span class="status-ok">{% translate "On" %}</span>{% else %}{% translate "Off" %}{% endif %}</td>
-              <td>
-                <form method="post" action="{% url 'plugins:toggle' plugin.name %}" class="inline-form">
-                  {% csrf_token %}
-                  {% if plugin.enabled and plugin.keep_on %}
-                    <span class="help">{{ plugin.keep_on }}</span>
-                  {% elif plugin.enabled %}
-                    <input type="hidden" name="enabled" value="0">
-                    <button type="submit" class="button">{% blocktranslate with plugin=plugin.label %}Turn off<span class="visually-hidden"> {{ plugin }}</span>{% endblocktranslate %}</button>
-                  {% else %}
-                    <input type="hidden" name="enabled" value="1">
-                    <button type="submit" class="button button--primary">{% blocktranslate with plugin=plugin.label %}Turn on<span class="visually-hidden"> {{ plugin }}</span>{% endblocktranslate %}</button>
-                  {% endif %}
-                </form>
-                {% if plugin.has_settings and perms.plugins.change_pluginsetting %}<a class="button" href="{% url 'plugins:settings' plugin.name %}">{% blocktranslate with plugin=plugin.label %}Settings<span class="visually-hidden"> for {{ plugin }}</span>{% endblocktranslate %}</a>{% endif %}
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  {% else %}
-    <p class="empty">{% translate "No add-ons are installed." %}</p>
-  {% endif %}
 {% endblock %}

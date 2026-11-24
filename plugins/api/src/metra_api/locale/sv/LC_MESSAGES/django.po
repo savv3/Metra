@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 20:57+0000\n"
+"POT-Creation-Date: 2026-11-24 21:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,15 @@ msgstr ""
 msgid "API"
 msgstr "API"
 
-#: plugins/api/src/metra_api/apps.py:21 plugins/api/src/metra_api/models.py:78
+#: plugins/api/src/metra_api/apps.py:9
+msgid ""
+"A REST API for other systems: units, people, readings and invoices, with a "
+"token per client."
+msgstr ""
+"Ett REST-API för andra system: enheter, personer, avläsningar och fakturor, "
+"med en nyckel per klient."
+
+#: plugins/api/src/metra_api/apps.py:25 plugins/api/src/metra_api/models.py:78
 #: plugins/api/src/metra_api/templates/metra_api/client_list.html:3
 #: plugins/api/src/metra_api/templates/metra_api/client_list.html:6
 #: plugins/api/src/metra_api/templates/metra_api/client_list.html:14
@@ -29,7 +37,7 @@ msgstr "API"
 msgid "API clients"
 msgstr "API-klienter"
 
-#: plugins/api/src/metra_api/apps.py:24
+#: plugins/api/src/metra_api/apps.py:28
 msgid "Tokens for other systems that read or change the register."
 msgstr "Tokens för andra system som läser eller ändrar registret."
 
@@ -276,9 +284,8 @@ msgid ""
 "it. If it is lost, make a new one."
 msgstr ""
 "Tokenen visas bara den här gången. Metra sparar endast ett fingeravtryck av "
-"den. Om den kommer bort, skapa en ny.Tokenen visas bara den här gången. "
-"Metra sparar endast ett fingeravtryck av den. Om den kommer bort, skapa en "
-"ny."
+"den. Om den kommer bort, skapa en ny.Tokenen visas bara den här gången. Metra"
+" sparar endast ett fingeravtryck av den. Om den kommer bort, skapa en ny."
 
 #: plugins/api/src/metra_api/templates/metra_api/client_token.html:14
 msgid "Header"
@@ -286,8 +293,8 @@ msgstr "Rubrik"
 
 #: plugins/api/src/metra_api/templates/metra_api/client_token.html:19
 msgid ""
-"Store it in the other system's settings or a password manager, never in "
-"email or chat."
+"Store it in the other system's settings or a password manager, never in email"
+" or chat."
 msgstr ""
 "Spara den i det andra systemets inställningar eller i en lösenordshanterare, "
 "aldrig i e-post eller chatt.Spara den i det andra systemets inställningar "
@@ -313,15 +320,15 @@ msgstr "Så anropar du API:et"
 
 #: plugins/api/src/metra_api/templates/metra_api/docs.html:14
 msgid ""
-"Send the client's token in every request as <code>Authorization: Bearer &lt;"
-"token&gt;</code>. Requests and answers are JSON. Lists come in pages: <code>?"
-"page=2&amp;page_size=100</code> (at most 200)."
+"Send the client's token in every request as <code>Authorization: Bearer "
+"&lt;token&gt;</code>. Requests and answers are JSON. Lists come in pages: "
+"<code>?page=2&amp;page_size=100</code> (at most 200)."
 msgstr ""
-"Skicka klientens token i varje anrop som <code>Authorization: Bearer &lt;"
-"token&gt;</code>. Anrop och svar är JSON. Listor kommer i sidor: <code>?"
-"page=2&amp;page_size=100</code> (högst 200).Skicka klientens token i varje "
-"anrop som <code>Authorization: Bearer &lt;token&gt;</code>. Anrop och svar "
-"är JSON. Listor kommer i sidor: <code>?page=2&amp;page_size=100</code> "
+"Skicka klientens token i varje anrop som <code>Authorization: Bearer "
+"&lt;token&gt;</code>. Anrop och svar är JSON. Listor kommer i sidor: "
+"<code>?page=2&amp;page_size=100</code> (högst 200).Skicka klientens token i "
+"varje anrop som <code>Authorization: Bearer &lt;token&gt;</code>. Anrop och "
+"svar är JSON. Listor kommer i sidor: <code>?page=2&amp;page_size=100</code> "
 "(högst 200)."
 
 #: plugins/api/src/metra_api/templates/metra_api/docs.html:18
