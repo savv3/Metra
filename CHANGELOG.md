@@ -12,6 +12,13 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+### Changed
+
+- Installs made with `docker/new-instance.sh` never start their own
+  `caddy` service, which only got in the way next to a tunnel or a proxy on
+  the host. `scripts/deploy.sh` labels the image it builds with its version,
+  as the published images are, so metra-admin accepts it as a release.
+
 ### Added
 
 - Bookkeeping: locking and year-end. Months are locked once reported, and
