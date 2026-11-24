@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n nav %}
 {% block title %}{% if unit %}{% blocktranslate with name=unit.name %}Message to {{ name }}{% endblocktranslate %}{% elif form.urgent.value %}{% translate "Urgent alert" %}{% else %}{% translate "New message" %}{% endif %}{% endblock %}
 {% block content %}
+  {% url 'messaging:batch_list' as c1 %}{% crumbs c1 _('Send-outs') %}
   <div class="{% if form.urgent.value %}alert-compose{% endif %}">
   <h1>{% if form.urgent.value %}<span class="alert-badge">{% translate "Urgent" %}</span> {% translate "Urgent alert" %}{% elif unit %}{% blocktranslate with name=unit.name %}Message to {{ name }}{% endblocktranslate %}{% else %}{% translate "New message" %}{% endif %}</h1>
   {% if not channels_set_up.sms or not channels_set_up.email %}
@@ -123,7 +124,7 @@
       {% endif %}
       <div class="actions">
         <button type="submit" class="button button--primary">{% translate "Check recipients" %}</button>
-        <a class="button" href="{{ cancel_url }}">{% translate "Cancel" %}</a>
+        <a class="button button--link" href="{{ cancel_url }}">{% translate "Cancel" %}</a>
       </div>
       <p class="help">{% translate "Nothing is sent until you have checked the recipients and confirmed." %}</p>
     </form>

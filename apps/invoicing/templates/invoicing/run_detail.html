@@ -1,33 +1,56 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n nav %}
 {% block title %}{{ run }}{% endblock %}
 {% block content %}
+  {% url 'invoicing:invoice_list' as c1 %}{% url 'invoicing:run_list' as c2 %}{% crumbs c1 _('Invoices') c2 _('Invoice runs') %}
   <div class="page-head">
     <h1>{{ run }}</h1>
     <div class="actions">
-      {% if drafts and perms.invoicing.change_invoice %}
-        <form method="post" action="{% url 'invoicing:run_rebuild' run.pk %}" class="inline-form">{% csrf_token %}<button type="submit" class="button">{% translate "Rebuild drafts" %}</button></form>
-      {% endif %}
-      {% if unsent and perms.invoicing.issue_invoice %}
-        <form method="post" action="{% url 'invoicing:run_send' run.pk %}" class="inline-form">{% csrf_token %}<button type="submit" class="button button--primary">{% blocktranslate count count=unsent %}Send {{ count }} invoice{% plural %}Send {{ count }} invoices{% endblocktranslate %}</button></form>
-      {% endif %}
       <a class="button" href="{% url 'invoicing:run_print' run.pk %}">{% translate "PDF of invoices for post" %}</a>
-      {% if drafts and perms.invoicing.issue_invoice %}
-        <form method="post" action="{% url 'invoicing:run_issue' run.pk %}" class="inline-form">{% csrf_token %}<button type="submit" class="button button--primary">{% translate "Issue all checked drafts" %}</button></form>
-      {% endif %}
     </div>
   </div>
-  <p class="help">{% translate "Issued invoices go by email with the PDF attached. Recipients without email, or who prefer post, are listed for printing." %}</p>
-  <p class="subtitle">{% for plan in run.plans.all %}{{ plan }}{% if not forloop.last %}, {% endif %}{% endfor %}{% for round in run.rounds.all %} &middot; {{ round }}{% endfor %}</p>
-  <p>{% blocktranslate count count=invoices|length with total=totals.total|default:0|floatformat:2 %}{{ count }} invoice, {{ total }} € in total.{% plural %}{{ count }} invoices, {{ total }} € in total.{% endblocktranslate %}
-     {% blocktranslate count count=drafts %}{{ count }} is still a draft.{% plural %}{{ count }} are still drafts.{% endblocktranslate %}</p>
-  {% if with_problems %}
-    <div class="status-panel status-panel--warning">
-      <h2>{% blocktranslate count count=with_problems|length %}{{ count }} draft to check{% plural %}{{ count }} drafts to check{% endblocktranslate %}</h2>
-      <p>{% translate "These are not issued with the others. Enter the missing reading or fix the lines, then rebuild or save the draft." %}</p>
-      <ul>{% for invoice in with_problems %}<li><a href="{{ invoice.get_absolute_url }}">{{ invoice.unit.name }}</a>: {{ invoice.problems|join:" " }}</li>{% endfor %}</ul>
-    </div>
-  {% endif %}
+  <p class="subtitle">{% for plan in run.plans.all %}{{ plan }}{% if not forloop.last %}, {% endif %}{% endfor %}{% for round in run.rounds.all %} &middot; {{ round }}{% endfor %}
+    &middot; {% blocktranslate count count=invoices|length with total=totals.total|default:0|floatformat:2 %}{{ count }} invoice, {{ total }} € in total{% plural %}{{ count }} invoices, {{ total }} € in total{% endblocktranslate %}</p>
+
+  <ol class="steps">
+    <li class="step{% if step == 1 %} step--current{% elif step > 1 %} step--done{% endif %}">
+      <h2>{% translate "1 · Check" %}</h2>
+      {% if with_problems %}
+        <p>{% blocktranslate count count=with_problems|length %}{{ count }} draft to check. Enter the missing reading or fix the lines, then rebuild:{% plural %}{{ count }} drafts to check. Enter the missing reading or fix the lines, then rebuild:{% endblocktranslate %}</p>
+        <ul>{% for invoice in with_problems %}<li><a href="{{ invoice.get_absolute_url }}">{{ invoice.unit.name }}</a>: {{ invoice.problems|join:" " }}</li>{% endfor %}</ul>
+      {% elif drafts %}
+        <p>{% translate "Every draft is ready to issue." %}</p>
+      {% else %}
+        <p>{% translate "No drafts left." %}</p>
+      {% endif %}
+      {% if drafts and perms.invoicing.change_invoice %}
+        <form method="post" action="{% url 'invoicing:run_rebuild' run.pk %}">{% csrf_token %}<button type="submit" class="button">{% translate "Rebuild drafts" %}</button></form>
+      {% endif %}
+    </li>
+    <li class="step{% if step == 2 %} step--current{% elif step > 2 %} step--done{% endif %}">
+      <h2>{% translate "2 · Issue" %}</h2>
+      {% if ready %}
+        <p>{% blocktranslate count count=ready %}{{ count }} draft is ready. Issuing gives it a number, and it can then only be corrected with a credit note.{% plural %}{{ count }} drafts are ready. Issuing gives them numbers, and they can then only be corrected with credit notes.{% endblocktranslate %}</p>
+        {% if perms.invoicing.issue_invoice %}
+          <form method="post" action="{% url 'invoicing:run_issue' run.pk %}">{% csrf_token %}<button type="submit" class="button button--primary">{% blocktranslate count count=ready %}Issue {{ count }} invoice{% plural %}Issue {{ count }} invoices{% endblocktranslate %}</button></form>
+        {% endif %}
+      {% else %}
+        <p>{% translate "Nothing to issue." %}</p>
+      {% endif %}
+    </li>
+    <li class="step{% if step == 3 %} step--current{% endif %}">
+      <h2>{% translate "3 · Send" %}</h2>
+      {% if unsent %}
+        <p>{% translate "Issued invoices go by email with the PDF attached. Recipients without email, or who prefer post, are listed for printing." %}</p>
+        {% if perms.invoicing.issue_invoice %}
+          <form method="post" action="{% url 'invoicing:run_send' run.pk %}">{% csrf_token %}<button type="submit" class="button{% if not ready %} button--primary{% endif %}">{% blocktranslate count count=unsent %}Send {{ count }} invoice{% plural %}Send {{ count }} invoices{% endblocktranslate %}</button></form>
+        {% endif %}
+      {% else %}
+        <p>{% translate "Every issued invoice has been sent." %}</p>
+      {% endif %}
+    </li>
+  </ol>
+
   <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Invoices' %}">
     <table>
       <thead><tr><th scope="col">{% translate "Unit" %}</th><th scope="col">{% translate "Recipient" %}</th><th scope="col">{% translate "Number" %}</th><th scope="col" class="num">{% translate "Total" %}</th><th scope="col">{% translate "Status" %}</th><th scope="col">PDF</th></tr></thead>

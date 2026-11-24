@@ -1,6 +1,6 @@
 {% load i18n %}
 {% if show %}
-  <div class="page-head">
+  <div class="section-head">
     <h2 id="messages">{% translate "Messages" %}</h2>
     {% if can_send %}<div class="actions"><a class="button" href="{% url 'messaging:unit_compose' unit.pk %}">{% translate "Send message" %}</a></div>{% endif %}
   </div>

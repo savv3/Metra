@@ -8,7 +8,7 @@
     {% csrf_token %}
     <div class="actions">
       <button type="submit" class="button button--danger">{% translate "Delete" %}</button>
-      <a class="button" href="{{ endpoint.get_absolute_url }}">{% translate "Cancel" %}</a>
+      <a class="button button--link" href="{{ endpoint.get_absolute_url }}">{% translate "Cancel" %}</a>
     </div>
   </form>
 {% endblock %}

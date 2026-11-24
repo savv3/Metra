@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n nav %}
 {% block title %}{% blocktranslate with plugin=plugin.label %}Settings: {{ plugin }}{% endblocktranslate %}{% endblock %}
 {% block content %}
+  {% url 'core:settings' as c1 %}{% url 'plugins:list' as c2 %}{% crumbs c1 _('Settings') c2 _('Add-ons') %}
   <div class="page-head">
     <h1>{% blocktranslate with plugin=plugin.label %}Settings: {{ plugin }}{% endblocktranslate %}</h1>
-    <div class="actions"><a class="button" href="{% url 'plugins:list' %}">{% translate "Add-ons" %}</a></div>
   </div>
   {% if not plugin.enabled %}<p class="notice">{% translate "This add-on is off. Its settings are kept and apply when it is turned on." %}</p>{% endif %}
   {% if pages %}
@@ -28,7 +28,7 @@
       {% for field in form %}{% include "register/_field.html" %}{% endfor %}
       <div class="actions">
         <button type="submit" class="button button--primary">{% translate "Save" %}</button>
-        <a class="button" href="{% url 'plugins:list' %}">{% translate "Cancel" %}</a>
+        <a class="button button--link" href="{% url 'plugins:list' %}">{% translate "Cancel" %}</a>
       </div>
     </form>
   {% endif %}

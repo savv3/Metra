@@ -26,7 +26,7 @@
     {% endfor %}
     <div class="actions">
       <button type="submit" class="button button--primary">{% translate "Create client" %}</button>
-      <a class="button" href="{% url 'metra_api:client_list' %}">{% translate "Cancel" %}</a>
+      <a class="button button--link" href="{% url 'metra_api:client_list' %}">{% translate "Cancel" %}</a>
     </div>
   </form>
 {% endblock %}

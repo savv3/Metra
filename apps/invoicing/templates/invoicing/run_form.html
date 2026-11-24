@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n nav %}
 {% block title %}{% translate "New invoice run" %}{% endblock %}
 {% block content %}
+  {% url 'invoicing:invoice_list' as c1 %}{% url 'invoicing:run_list' as c2 %}{% crumbs c1 _('Invoices') c2 _('Invoice runs') %}
   <h1>{% translate "New invoice run" %}</h1>
   <p>{% translate "Makes a draft invoice for every active unit the chosen fee plans apply to. Nothing is sent or numbered until you issue the drafts." %}
     {% if user.is_staff and perms.invoicing.view_feeplan %}<a href="{% url 'admin:invoicing_feeplan_changelist' %}">{% translate "Open the fee plans" %}</a>{% endif %}</p>
@@ -11,7 +12,7 @@
     {% for field in form %}{% include "register/_field.html" %}{% endfor %}
     <div class="actions">
       <button type="submit" class="button button--primary">{% translate "Make draft invoices" %}</button>
-      <a class="button" href="{% url 'invoicing:run_list' %}">{% translate "Cancel" %}</a>
+      <a class="button button--link" href="{% url 'invoicing:run_list' %}">{% translate "Cancel" %}</a>
     </div>
   </form>
 {% endblock %}

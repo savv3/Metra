@@ -14,7 +14,7 @@
     {% include "register/_field.html" with field=form.active %}
     <div class="actions">
       <button type="submit" class="button button--primary">{% translate "Save" %}</button>
-      <a class="button" href="{% url 'metra_webhooks:endpoint_list' %}">{% translate "Cancel" %}</a>
+      <a class="button button--link" href="{% url 'metra_webhooks:endpoint_list' %}">{% translate "Cancel" %}</a>
     </div>
   </form>
 

@@ -23,11 +23,11 @@ leveranser ska momsen redovisas för den månad då perioden slutar, med den
 momssats som gäller då. En enskild faktura kan ha ett eget leveransdatum
 eller en egen period; utan det gäller fakturadatumet.
 
-**Utfärda alla kontrollerade utkast** på omgångens sida, eller **Utfärda
-fakturan** på ett enskilt utkast, ger varje faktura dess nummer och datum och
-låser den. En utfärdad faktura ändras aldrig: ett fel rättas med en
-kreditnota (**Gör en kreditnota** på fakturan), som kan kreditera hela eller
-en del av fakturan.
+Omgångens sida visar tre steg: **Kontrollera**, **Utfärda** och **Skicka**.
+**Utfärda** där, eller **Utfärda fakturan** på ett enskilt utkast, ger varje
+faktura dess nummer och datum och låser den. En utfärdad faktura ändras
+aldrig: ett fel rättas med en kreditnota (**Gör en kreditnota** på
+fakturan), som kan kreditera hela eller en del av fakturan.
 
 ## Utskick
 
@@ -44,11 +44,11 @@ helt eller i delar. En faktura är **Betald** när inget återstår. Betalningar
 ändras eller tas aldrig bort; för att ångra en registrerar du samma belopp
 som en negativ betalning.
 
-**Fakturor > Förfallen** visar obetalda fakturor efter förfallodagen.
-**Skicka påminnelser till de valda** skickar en betalningspåminnelse via
-var och ens önskade kanal (e-post eller sms, eller den andra om de saknar
-adress för den), eller som brev till dem som vill ha post eller saknar båda,
-med påminnelseavgiften om en sådan är inställd och
+**Fakturor > Förfallna fakturor** visar obetalda fakturor efter
+förfallodagen. **Skicka påminnelser till de valda** skickar en
+betalningspåminnelse via var och ens önskade kanal (e-post eller sms, eller
+den andra om de saknar adress för den), eller som brev till dem som vill ha
+post eller saknar båda, med påminnelseavgiften om en sådan är inställd och
 minst 14 dagar att betala.
 
 ## Till bokföraren

@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-{% load i18n invoicing plugins %}
+{% load i18n invoicing plugins nav %}
 {% block title %}{{ invoice }}{% endblock %}
 {% block content %}
+  {% url 'invoicing:invoice_list' as c1 %}{% if invoice.run %}{% crumbs c1 _('Invoices') invoice.run.get_absolute_url invoice.run %}{% else %}{% crumbs c1 _('Invoices') %}{% endif %}
   <div class="page-head">
     <h1>{{ invoice }}{% if invoice.is_overdue %} <span class="badge">{% translate "Overdue" %}</span>{% endif %}</h1>
     <div class="actions">
