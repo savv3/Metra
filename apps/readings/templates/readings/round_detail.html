@@ -18,6 +18,7 @@
 
   {% round_send_forms round %}
 
+  <h2>{% translate "Readings" %}</h2>
   <form class="filters" method="get" action="{{ round.get_absolute_url }}" role="search"
         hx-get="{{ round.get_absolute_url }}" hx-target="#results" hx-push-url="true"
         hx-trigger="input delay:300ms from:#f-q, change, submit">
