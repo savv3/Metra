@@ -14,6 +14,17 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Added
 
+- Bookkeeping: exports and retention. **Export the books** on a year's page
+  downloads the year as a ZIP for an accountant or for keeping outside
+  Metra: the chart of accounts with balances and every posted voucher line
+  as CSV, the receipts, a README, and the year in SIE 4, which is also
+  offered on its own. Exports are recorded in the audit log. A new page,
+  **How long the books are kept**, shows for every year how long its books
+  (10 years) and vouchers and receipts (6 years from the end of the calendar
+  year) must be kept, and whether anything may be removed yet; nothing is
+  removed automatically. The books, receipts and invoices are kept for
+  these periods even when a person is erased.
+
 - Bookkeeping: locking and year-end. Months are locked once reported, and
   nothing can be posted into a locked period (records from invoicing dated
   there are booked on the first open day, with a note). **Close the year**

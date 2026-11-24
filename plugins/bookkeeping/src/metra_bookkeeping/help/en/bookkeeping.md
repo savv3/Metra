@@ -145,11 +145,48 @@ Bookkeeping page lists drafts that are past that.
 The year's page shows how long its material must be kept: the financial
 statements, journal, ledger, chart of accounts and list of books 10 years
 from the end of the financial year; vouchers and receipts 6 years from the
-end of the calendar year in which the financial year ended. Nothing is
-deleted automatically. Once the books have posted vouchers, the add-on
-cannot be turned off, so that they stay readable.
+end of the calendar year in which the financial year ended. The invoices,
+credit notes and payments booked from invoicing are the evidence of their
+vouchers and are kept as long. **How long the books are kept**, linked from
+the list of financial years, shows every year together: its vouchers,
+receipts and invoices, the two dates, and whether anything may be removed
+yet.
 
-An administrator who removes the add-on from the server (from `METRA_PLUGINS`) must first keep the books for the legal period another way: save the reports and receipts, and keep a backup. The data stays in the database, but cannot be read in Metra while the add-on is not installed.
+These are the shortest times the law allows. Nothing is deleted
+automatically, and removing a year whose time has passed is not offered in
+Metra yet: when it is due, export the year first and decide with the board
+and the auditor. Once the books have posted vouchers, the add-on cannot be
+turned off, so that they stay readable.
+
+Vouchers, receipts and invoices can name members and suppliers. They are
+bookkeeping material that the law requires to be kept, so they are kept
+for these periods even when a person asks to be erased (GDPR article
+17(3)(b)). Changing or archiving a person or a unit in the register
+changes nothing already booked: the books keep the names and amounts as
+they were booked.
+
+An administrator who removes the add-on from the server (from `METRA_PLUGINS`) must first keep the books for the legal period another way: export every year (see below), keep the year-end packages, and keep a backup. The data stays in the database, but cannot be read in Metra while the add-on is not installed.
+
+## Exporting the books
+
+**Export the books** on a year's page gives the year as files, for an
+accountant who takes over the books in their own software or to keep a copy
+outside Metra:
+
+- **Download the ZIP**: the chart of accounts with each account's opening
+  balance, debits, credits and closing balance (`accounts.csv`), every line
+  of the posted vouchers in date order (`vouchers.csv`), the receipts in a
+  folder per voucher, the year in SIE 4 (`books.se`), and a README that
+  describes the files.
+- **Download SIE 4**: the SIE 4 file alone. SIE is the Nordic text format
+  for moving books between accounting programs. The opening balances are
+  its opening balances, and the other posted vouchers its vouchers.
+
+The CSV files are UTF-8, separated by semicolons, with dates as
+YYYY-MM-DD and a comma for decimals. Drafts are not part of the books and
+are left out. An open year's export says that it is preliminary. Ask the
+accountant which format their software imports; most take SIE or a CSV
+file. Each export is recorded in the audit log.
 
 ## Locking months
 
@@ -303,4 +340,5 @@ case that period's return was already filed.
 ## Printing and files
 
 Every report can be printed, saved as a **PDF** or downloaded as a **CSV**
-file for a spreadsheet.
+file for a spreadsheet. A whole year is exported under **Export the
+books**.

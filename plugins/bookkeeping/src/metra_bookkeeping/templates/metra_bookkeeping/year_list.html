@@ -22,6 +22,7 @@
         </tbody>
       </table>
     </div>
+    <p class="help"><a href="{% url 'metra_bookkeeping:retention' %}">{% translate "How long the books are kept" %}</a></p>
   {% else %}
     <p class="empty">{% translate "None." %}</p>
   {% endif %}

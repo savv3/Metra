@@ -13,7 +13,7 @@ from decimal import Decimal
 
 from django.utils.translation import gettext_lazy as _
 
-from . import Account, Chart, Format, Line, SizeLimits, VatRate
+from . import Account, Chart, Format, Line, Retention, SizeLimits, VatRate
 
 CODE = "fi"
 NAME = _("Finland")
@@ -21,6 +21,15 @@ NAME = _("Finland")
 # A financial year is 12 months; the first one, or one whose dates change,
 # may be shorter or longer, up to 18 months (KPL 1:4).
 YEAR_MONTHS = 12
+
+# KPL 2:10 §: the financial statements, balance sheet specifications,
+# journal, ledger, chart of accounts and list of books at least 10 years
+# from the end of the financial year; vouchers, correspondence and other
+# material at least 6 years from the end of the calendar year in which the
+# financial year ended.
+RETENTION = Retention(
+    books_years=10, vouchers_years=6, vouchers_from_calendar_year=True, source="KPL 2:10 §"
+)
 FIRST_YEAR_MONTHS = (1, 18)
 
 ASSET, LIABILITY, EQUITY, INCOME, EXPENSE = "asset", "liability", "equity", "income", "expense"

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Export the books" %} {{ year }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Export the books" %} {{ year }}</h1>
+  </div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  <p>{% blocktranslate trimmed %}
+    The year as files, for an accountant who takes over the books in their own software, or to
+    keep a copy outside Metra.
+  {% endblocktranslate %}</p>
+  {% if year.is_open %}
+    <div class="status-panel status-panel--warning"><p>{% translate "The year is still open, so the export is preliminary and the books may still change." %}</p></div>
+  {% endif %}
+  <dl class="details-list">
+    <dt>{% translate "Posted vouchers" %}</dt><dd>{{ vouchers }}</dd>
+    <dt>{% translate "Receipts" %}</dt><dd>{{ receipts }}</dd>
+    {% if drafts %}<dt>{% translate "Drafts" %}</dt><dd>{{ drafts }}<span class="help">{% translate "Drafts are not part of the books and are left out." %}</span></dd>{% endif %}
+  </dl>
+  <h2>{% translate "Everything as a ZIP" %}</h2>
+  <p>{% blocktranslate trimmed %}
+    The chart of accounts with the year's balances and every posted voucher line as CSV
+    files, the attached receipts in a folder per voucher, the year in SIE 4, and a README that
+    describes the files.
+  {% endblocktranslate %}</p>
+  <div class="actions"><a class="button button--primary" href="?format=zip" download>{% translate "Download the ZIP" %}</a></div>
+  <h2>{% translate "SIE 4" %}</h2>
+  <p>{% blocktranslate trimmed %}
+    SIE 4 is the Nordic text format for moving books between accounting programs: the chart of
+    accounts, the opening and closing balances and every voucher. Many Swedish programs and some
+    Finnish ones import it. Ask the accountant which format their software takes; the CSV files
+    in the ZIP suit the others.
+  {% endblocktranslate %}</p>
+  <div class="actions"><a class="button" href="?format=sie" download>{% translate "Download SIE 4" %}</a></div>
+  <p class="help">{% blocktranslate trimmed %}
+    For the auditor, the year-end package holds the financial statements, journal and ledger as
+    one PDF. Each export is recorded in the audit log.
+  {% endblocktranslate %}</p>
+  <div class="actions"><a class="button" href="{% url 'metra_bookkeeping:year_package' year.pk %}">{% translate "Year-end package" %}</a></div>
+{% endblock %}
