@@ -1,6 +1,14 @@
 {% load i18n %}
 {% if show %}
-  <h2 id="self-service">{% translate "Self-service" %}</h2>
+  <div class="section-head">
+    <h2 id="self-service">{% translate "Self-service" %}</h2>
+    {% if perms.selfservice.add_selfservicelink %}
+      <form method="post" action="{% url 'selfservice:unit_print' unit.pk %}" target="_blank" class="actions">
+        {% csrf_token %}
+        <button type="submit" class="button">{% translate "Print self-service letter" %}</button>
+      </form>
+    {% endif %}
+  </div>
   {% if links %}
     <ul class="plain-list">
       {% for link in links %}
@@ -18,11 +26,5 @@
     </ul>
   {% else %}
     <p class="empty">{% translate "No working self-service link." %}</p>
-  {% endif %}
-  {% if perms.selfservice.add_selfservicelink %}
-    <form method="post" action="{% url 'selfservice:unit_print' unit.pk %}" target="_blank">
-      {% csrf_token %}
-      <button type="submit" class="button">{% translate "Print self-service letter" %}</button>
-    </form>
   {% endif %}
 {% endif %}

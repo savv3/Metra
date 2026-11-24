@@ -24,11 +24,11 @@ jatkuvien toimitusten vero kohdistuu kuukaudelle, jolloin jakso päättyy,
 silloin voimassa olevalla verokannalla. Yksittäisellä laskulla voi olla oma
 toimituspäivä tai -jakso; ilman sitä käytetään laskun päivämäärää.
 
-**Laadi kaikki tarkistetut luonnokset** ajon sivulla tai **Laadi lasku**
-yksittäisellä luonnoksella antaa jokaiselle laskulle numeron ja päivämäärät
-ja lukitsee sen. Laadittua laskua ei koskaan muuteta: virhe korjataan
-hyvityslaskulla (**Tee hyvityslasku** laskulla), joka voi hyvittää laskun
-kokonaan tai osittain.
+Ajon sivulla on kolme vaihetta: **Tarkista**, **Laadi** ja **Lähetä**.
+**Laadi** siellä tai **Laadi lasku** yksittäisellä luonnoksella antaa
+jokaiselle laskulle numeron ja päivämäärät ja lukitsee sen. Laadittua laskua
+ei koskaan muuteta: virhe korjataan hyvityslaskulla (**Tee hyvityslasku**
+laskulla), joka voi hyvittää laskun kokonaan tai osittain.
 
 ## Lähettäminen
 
@@ -46,12 +46,12 @@ osissa. Lasku on **Maksettu**, kun mitään ei ole maksamatta. Maksuja ei
 koskaan muuteta tai poisteta; voit kumota maksun kirjaamalla saman summan
 negatiivisena maksuna.
 
-**Laskut > Erääntynyt** listaa maksamattomat laskut, joiden eräpäivä on
-ohi. **Lähetä muistutukset valituille** lähettää maksumuistutuksen
-kunkin ensisijaisella kanavalla (sähköposti tai tekstiviesti, tai toinen, jos
-siihen ei ole osoitetta) tai kirjeenä niille, jotka toivovat postia tai joilla
-ei ole kumpaakaan; mukana on muistutusmaksu, jos
-sellainen on määritetty, ja maksuaikaa on vähintään 14 päivää.
+**Laskut > Erääntyneet laskut** listaa maksamattomat laskut, joiden eräpäivä
+on ohi. **Lähetä muistutukset valituille** lähettää maksumuistutuksen kunkin
+ensisijaisella kanavalla (sähköposti tai tekstiviesti, tai toinen, jos
+siihen ei ole osoitetta) tai kirjeenä niille, jotka toivovat postia tai
+joilla ei ole kumpaakaan; mukana on muistutusmaksu, jos sellainen on
+määritetty, ja maksuaikaa on vähintään 14 päivää.
 
 ## Kirjanpitäjälle
 

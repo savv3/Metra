@@ -11,7 +11,7 @@
     {% for field in form %}{% include "register/_field.html" %}{% endfor %}
     <div class="actions">
       <button type="submit" class="button button--primary">{% translate "Save" %}</button>
-      <a class="button" href="{% url 'metra_meetings:template_list' %}">{% translate "Cancel" %}</a>
+      <a class="button button--link" href="{% url 'metra_meetings:template_list' %}">{% translate "Cancel" %}</a>
     </div>
   </form>
 {% endblock %}

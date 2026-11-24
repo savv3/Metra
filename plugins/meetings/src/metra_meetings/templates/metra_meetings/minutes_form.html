@@ -22,7 +22,7 @@
       <div class="actions">
         <button type="submit" class="button button--primary">{% translate "Save" %}</button>
         <button type="submit" name="stay" value="1" class="button">{% translate "Save and keep writing" %}</button>
-        <a class="button" href="{{ meeting.get_absolute_url }}">{% translate "Cancel" %}</a>
+        <a class="button button--link" href="{{ meeting.get_absolute_url }}">{% translate "Cancel" %}</a>
       </div>
     </form>
   {% else %}

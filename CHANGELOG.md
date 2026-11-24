@@ -62,6 +62,18 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Changed
 
+- Buttons sit in the same places on every page: one blue button for the
+  main action, page actions at the top right, section actions next to the
+  section heading, and **Cancel** as a link. Pages below the first level show
+  the way back above the heading (for example **Fakturor › Faktureringsomgångar**)
+  instead of a back button.
+- An invoice run's page shows three steps, **Check**, **Issue** and **Send**,
+  each with its own button, in the order they are done.
+- **Invoices**, **Overdue invoices** and **Invoice runs** are tabs, and
+  **New invoice run** is on the Invoices page.
+- A unit's page: **Archive** is under **More**, the add-contact form opens
+  from **Add contact**, empty fields are left out, and the history is folded
+  away.
 - On a reading round's page, the units table and its filters have their own
   **Readings** heading, so they no longer run into the **Send links** buttons.
 

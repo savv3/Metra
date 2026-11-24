@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-{% load i18n static %}
+{% load i18n static nav %}
 {% block title %}{% if single_unit_type %}{% blocktranslate with word=unit_word_plural %}Import CSV: {{ word }}{% endblocktranslate %}{% else %}{% translate "Import units from CSV" %}{% endif %}{% endblock %}
 {% block content %}
+  {% url 'register:unit_list' as c1 %}{% crumbs c1 unit_word_plural %}
   <h1>{% if single_unit_type %}{% blocktranslate with word=unit_word_plural %}Import CSV: {{ word }}{% endblocktranslate %}{% else %}{% translate "Import units from CSV" %}{% endif %}</h1>
   <p>{% blocktranslate trimmed %}
     Each row becomes one unit, optionally with one contact person. You choose which
@@ -17,7 +18,7 @@
       {% endfor %}
       <div class="actions">
         <button type="submit" class="button button--primary">{% translate "Next" %}</button>
-        <a class="button" href="{% url 'register:unit_list' %}">{% translate "Cancel" %}</a>
+        <a class="button button--link" href="{% url 'register:unit_list' %}">{% translate "Cancel" %}</a>
       </div>
     </form>
   {% else %}

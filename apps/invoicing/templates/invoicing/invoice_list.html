@@ -5,11 +5,11 @@
   <div class="page-head">
     <h1>{% translate "Invoices" %}</h1>
     <div class="actions">
-      <a class="button" href="{% url 'invoicing:overdue_list' %}">{% translate "Overdue" %}</a>
-      <a class="button" href="{% url 'invoicing:run_list' %}">{% translate "Invoice runs" %}</a>
       {% if perms.invoicing.view_payment %}<a class="button" href="{% url 'invoicing:export_payments' %}">{% translate "Export payments" %}</a>{% endif %}
+      {% if perms.invoicing.add_invoicerun %}<a class="button button--primary" href="{% url 'invoicing:run_create' %}">{% translate "New invoice run" %}</a>{% endif %}
     </div>
   </div>
+  {% include "invoicing/_tabs.html" with current="all" %}
   <form class="filters" method="get" role="search" hx-get="{% url 'invoicing:invoice_list' %}" hx-target="#results" hx-push-url="true" hx-trigger="input delay:300ms from:#f-q, change, submit">
     <div class="field">
       <label for="f-q">{% translate "Search" %}</label>
