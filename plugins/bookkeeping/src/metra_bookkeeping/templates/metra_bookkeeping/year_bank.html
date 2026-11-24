@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Bank statements" %} {{ year }}{% endblock %}
+{% block content %}
+  <div class="page-head"><h1>{% translate "Bank statements" %} {{ year }}</h1></div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  <p class="help">{% blocktranslate with day=year.end|date:"DATE_FORMAT" trimmed %}The balance of each account on the bank statement on {{ day }}, and which statement it is. The balance sheet specifications compare them with the books; keep the statements themselves with the bookkeeping material.{% endblocktranslate %}</p>
+  {% if form.rows %}
+    <form method="post" class="form" novalidate>
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      {% for account, balance, reference in form.pairs %}
+        <fieldset>
+          <legend>{{ account }}</legend>
+          {% include "register/_field.html" with field=balance %}
+          {% include "register/_field.html" with field=reference %}
+        </fieldset>
+      {% endfor %}
+      <div class="actions">
+        <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+        <a class="button" href="{% url 'metra_bookkeeping:year_end' year.pk %}">{% translate "Cancel" %}</a>
+      </div>
+    </form>
+  {% else %}
+    <p class="empty">{% translate "The chart of accounts has no bank or cash accounts." %}</p>
+  {% endif %}
+{% endblock %}

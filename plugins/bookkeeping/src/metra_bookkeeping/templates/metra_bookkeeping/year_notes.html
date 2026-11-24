@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Notes to the financial statements" %} {{ year }}{% endblock %}
+{% block content %}
+  <div class="page-head"><h1>{% translate "Notes to the financial statements" %} {{ year }}</h1></div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  <p class="help">{% blocktranslate trimmed %}
+    The notes a small or micro entity gives, each with a suggested text. Edit them to fit the
+    organisation; an empty note is left out. The depreciation plans of the asset register and the
+    corrections of earlier years are added on their own. Ask an accountant which notes the
+    organisation needs.
+  {% endblocktranslate %}</p>
+  <p class="help">
+    {% if size.key == "micro" %}{% translate "Size class: micro entity." %}{% elif size.key == "small" %}{% translate "Size class: small entity." %}{% else %}{% translate "The limits of a small entity are exceeded: ask an accountant which notes to give." %}{% endif %}
+  </p>
+  <nav class="actions" aria-label="{% translate 'Language' %}">
+    {% for code, name in languages %}<a class="button{% if code == language %} button--primary{% endif %}" href="?language={{ code }}"{% if code == language %} aria-current="page"{% endif %}>{{ name }}</a>{% endfor %}
+  </nav>
+  <form method="post" class="form form--wide" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form.note_fields %}{% include "register/_field.html" %}{% endfor %}
+    <h2>{% translate "Signatures" %}</h2>
+    {% include "register/_field.html" with field=form.signers %}
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+      <a class="button" href="{% url 'metra_bookkeeping:year_end' year.pk %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+{% endblock %}

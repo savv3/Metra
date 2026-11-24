@@ -1,28 +1,35 @@
 import datetime
 
+from django.conf import settings as django_settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
-from django.core.exceptions import ValidationError
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.db import transaction
 from django.db.models import Count, ProtectedError
 from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.utils import timezone
+from django.utils import formats, timezone
 from django.utils.translation import get_language, ngettext
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
 from apps.plugins import api
 
-from . import countries, exports, postings, reports, statements, timing, vat
+from . import countries, exports, package, postings, reports, statements, timing, vat, yearend
 from .forms import (
     AccountForm,
     BalanceSheetForm,
+    BankBalanceForm,
     BudgetForm,
+    CloseForm,
     FiscalYearForm,
+    FixedAssetForm,
     IncomeStatementForm,
     LineFormSet,
+    LockForm,
+    NotesForm,
+    PackageForm,
     PostingSettingsForm,
     ReceiptForm,
     ReportForm,
@@ -34,10 +41,12 @@ from .forms import (
     VoucherForm,
     VoucherSeriesForm,
     YearStaffForm,
+    default_statement_language,
 )
 from .models import (
     Account,
     FiscalYear,
+    FixedAsset,
     Posting,
     PostingSettings,
     Receipt,
@@ -85,6 +94,9 @@ def index(request):
                 :10
             ],
             "late": timing.late_drafts(),
+            "to_close": FiscalYear.objects.filter(
+                status=FiscalYear.Status.OPEN, end__lt=timezone.localdate()
+            ).order_by("start"),
             "posted_count": vouchers.filter(status=Voucher.Status.POSTED).count(),
         },
     )
@@ -162,8 +174,255 @@ def year_detail(request, pk):
             "drafts": counts.get(Voucher.Status.DRAFT, 0),
             "can_edit": year.is_open,
             "dates_fixed": bool(counts.get(Voucher.Status.POSTED)),
+            "lock_form": LockForm(year=year) if year.is_open else None,
+            "following": year.following(),
         },
     )
+
+
+# Locking and year-end
+
+
+@login_required
+@permission_required(f"{P}.close_fiscalyear", raise_exception=True)
+@require_POST
+def year_lock(request, pk):
+    year = get_object_or_404(FiscalYear, pk=pk)
+    form = LockForm(request.POST, year=year)
+    if form.is_valid():
+        try:
+            yearend.lock(year, form.cleaned_data["until"], request.user)
+        except ValidationError as error:
+            for message in _errors(error):
+                messages.error(request, message)
+        else:
+            messages.success(
+                request,
+                _("The books are locked up to %(day)s.")
+                % {"day": formats.date_format(year.locked_until, "DATE_FORMAT")},
+            )
+    else:
+        messages.error(request, _("Choose the last day to lock."))
+    return redirect(year)
+
+
+@login_required
+@permission_required(f"{P}.view_fiscalyear", raise_exception=True)
+def year_end(request, pk):
+    year = get_object_or_404(FiscalYear, pk=pk)
+    can_close = request.user.has_perm(f"{P}.close_fiscalyear")
+    form = CloseForm(request.POST or None, year=year)
+    if request.method == "POST":
+        if not can_close:
+            raise PermissionDenied
+        if form.is_valid():
+            try:
+                following = yearend.close(
+                    year, request.user, form.cleaned_data["retained_earnings"]
+                )
+            except ValidationError as error:
+                for message in _errors(error):
+                    messages.error(request, message)
+            else:
+                messages.success(
+                    request,
+                    _(
+                        "The financial year %(year)s is closed, and %(next)s has its opening "
+                        "balances."
+                    )
+                    % {"year": year, "next": following},
+                )
+                return redirect(year)
+    context = {"year": year, "form": form if can_close and year.is_open else None}
+    if year.is_open:
+        context |= {
+            "problems": yearend.problems(year),
+            "warnings": yearend.warnings(year),
+            "depreciation": yearend.depreciation_plan(year),
+            "depreciation_voucher": year.vouchers.filter(kind=Voucher.Kind.DEPRECIATION).first(),
+            "accruals": yearend.accrual_candidates(year),
+            "accrual_voucher": year.vouchers.filter(kind=Voucher.Kind.ACCRUAL).first(),
+            "bank_rows": yearend.bank_rows(year),
+            "opening": yearend.opening_entries(year, yearend.default_retained_earnings(year))
+            if yearend.default_retained_earnings(year)
+            else [],
+            "result": statements.result(year, year.start, year.end),
+        }
+    return render(request, "metra_bookkeeping/year_end.html", context)
+
+
+def _year_end_entry(request, pk, make, made, none):
+    year = get_object_or_404(FiscalYear, pk=pk)
+    try:
+        voucher = make(year, request.user)
+    except ValidationError as error:
+        for message in _errors(error):
+            messages.error(request, message)
+        return redirect(f"{P}:year_end", year.pk)
+    if voucher is None:
+        messages.info(request, none)
+        return redirect(f"{P}:year_end", year.pk)
+    messages.success(request, made)
+    return redirect(voucher)
+
+
+@login_required
+@permission_required(f"{P}.add_voucher", raise_exception=True)
+@require_POST
+def year_depreciation(request, pk):
+    return _year_end_entry(
+        request,
+        pk,
+        yearend.make_depreciation,
+        _("The depreciation voucher is ready as a draft. Check it and post it."),
+        _("The asset register has no depreciation for the year."),
+    )
+
+
+@login_required
+@permission_required(f"{P}.add_voucher", raise_exception=True)
+@require_POST
+def year_accruals(request, pk):
+    return _year_end_entry(
+        request,
+        pk,
+        yearend.make_accruals,
+        _("The accrual voucher is ready as a draft. Check it and post it."),
+        _("No invoices to accrue."),
+    )
+
+
+@login_required
+@permission_required(
+    [f"{P}.add_bankbalance", f"{P}.change_bankbalance", f"{P}.delete_bankbalance"],
+    raise_exception=True,
+)
+def year_bank(request, pk):
+    year = get_object_or_404(FiscalYear, pk=pk)
+    if not year.is_open:
+        messages.error(request, _("The financial year %(year)s is closed.") % {"year": year})
+        return redirect(f"{P}:year_end", year.pk)
+    form = BankBalanceForm(request.POST or None, year=year, accounts=yearend.bank_accounts(year))
+    if request.method == "POST" and form.is_valid():
+        with transaction.atomic():
+            form.save()
+        messages.success(request, _("The bank statement balances were saved."))
+        return redirect(f"{P}:year_end", year.pk)
+    return render(request, "metra_bookkeeping/year_bank.html", {"year": year, "form": form})
+
+
+@login_required
+@permission_required(
+    [f"{P}.add_yearnote", f"{P}.change_yearnote", f"{P}.change_fiscalyear"], raise_exception=True
+)
+def year_notes(request, pk):
+    year = get_object_or_404(FiscalYear, pk=pk)
+    if not year.is_open:
+        messages.error(request, _("The financial year %(year)s is closed.") % {"year": year})
+        return redirect(f"{P}:year_end", year.pk)
+    languages = countries.get(year.country).STATEMENT_LANGUAGES
+    language = request.GET.get("language")
+    if language not in languages:
+        language = default_statement_language()
+    size = statements.size_class(year)
+    form = NotesForm(
+        request.POST or None,
+        year=year,
+        language=language,
+        notes=package.notes(year, language, size.key),
+    )
+    if request.method == "POST" and form.is_valid():
+        with transaction.atomic():
+            form.save()
+        messages.success(request, _("The notes were saved."))
+        return redirect(f"{P}:year_end", year.pk)
+    names = dict(django_settings.LANGUAGES)
+    return render(
+        request,
+        "metra_bookkeeping/year_notes.html",
+        {
+            "year": year,
+            "form": form,
+            "language": language,
+            "languages": [(code, names.get(code, code)) for code in languages],
+            "size": size,
+        },
+    )
+
+
+@login_required
+@permission_required(f"{P}.view_voucher", raise_exception=True)
+def year_package(request, pk):
+    year = get_object_or_404(FiscalYear, pk=pk)
+    form = PackageForm(request.GET or None)
+    size = statements.size_class(year)
+    language, compare, micro = form.options(size.is_micro)
+    only = bool(form.is_bound and form.is_valid() and form.cleaned_data.get("statements_only"))
+    if request.GET.get("format") == "pdf":
+        context = package.build(year, language, compare, micro, only)
+        texts = context["texts"]
+        name = f"{texts['statements_part'] if only else texts['title']} {year}"
+        try:
+            return exports.pdf_response(
+                request, "metra_bookkeeping/pdf/package.html", context, name, language
+            )
+        except api.PDFUnavailable:
+            messages.error(request, _("PDFs cannot be made on this server."))
+    return render(
+        request,
+        "metra_bookkeeping/year_package.html",
+        {"year": year, "form": form, "size": size, "pdf_url": _query(request, format="pdf")},
+    )
+
+
+# Fixed assets
+
+
+@login_required
+@permission_required(f"{P}.view_fixedasset", raise_exception=True)
+def asset_list(request):
+    year = FiscalYear.current() or FiscalYear.objects.first()
+    assets = FixedAsset.objects.select_related("account", "depreciation_account")
+    rows = []
+    for asset in assets:
+        rows.append(
+            (
+                asset,
+                asset.depreciation(year) if year else None,
+                asset.book_value(year.end) if year else None,
+            )
+        )
+    return render(request, "metra_bookkeeping/asset_list.html", {"rows": rows, "year": year})
+
+
+def _asset_form(request, asset):
+    form = FixedAssetForm(request.POST or None, instance=asset)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, _("The fixed asset was saved."))
+        return redirect(f"{P}:asset_list")
+    return render(request, "metra_bookkeeping/asset_form.html", {"form": form, "asset": asset})
+
+
+@login_required
+@permission_required(f"{P}.add_fixedasset", raise_exception=True)
+def asset_create(request):
+    return _asset_form(request, None)
+
+
+@login_required
+@permission_required(f"{P}.change_fixedasset", raise_exception=True)
+def asset_edit(request, pk):
+    return _asset_form(request, get_object_or_404(FixedAsset, pk=pk))
+
+
+@login_required
+@permission_required(f"{P}.delete_fixedasset", raise_exception=True)
+@require_POST
+def asset_delete(request, pk):
+    get_object_or_404(FixedAsset, pk=pk).delete()
+    messages.success(request, _("The fixed asset was removed from the register."))
+    return redirect(f"{P}:asset_list")
 
 
 @login_required

@@ -21,7 +21,8 @@ nimetä niitä uudelleen ja poistaa käytöstä tarpeettomat. Kun tilillä on
 kirjauksia, sen numero ja laji pysyvät ennallaan.
 
 Anna sitten tilikauden alkusaldot edellisen vuoden taseesta ensimmäisenä
-tositteena, lajiltaan **Avaavat saldot**.
+tositteena, lajiltaan **Avaavat saldot**. Myöhemmät tilikaudet saavat
+avaavat saldonsa, kun edellinen tilikausi suljetaan.
 
 Tilikausi on 12 kuukautta ja alkaa edellisen päättymistä seuraavana
 päivänä. Ensimmäinen tilikausi tai tilikausi, jonka päivämäärät muuttuvat,
@@ -156,7 +157,80 @@ lisäosaa ei voi poistaa käytöstä, jotta ne pysyvät luettavina.
 
 Ylläpitäjän, joka poistaa lisäosan palvelimelta (`METRA_PLUGINS`-asetuksesta), on ensin säilytettävä kirjanpito lakisääteisen ajan muulla tavoin: tallenna raportit ja kuitit ja säilytä varmuuskopio. Tiedot jäävät tietokantaan, mutta niitä ei voi lukea Metrassa, kun lisäosa ei ole asennettuna.
 
-Tilikauden päättäminen tulee lisäosan myöhemmässä versiossa.
+## Kuukausien lukitseminen
+
+Kun kuukausi on ilmoitettu, esimerkiksi arvonlisäveroilmoituksessa, lukitse
+se tilikauden sivulla: valitse viimeinen lukittava päivä ja paina
+**Lukitse**. Sinä päivänä tai aiemmin ei voi kirjata mitään, eikä lukitusta
+voi purkaa. Jakson päivätyt luonnokset on ensin kirjattava tai poistettava.
+Lukitulle jaksolle päivätty lasku, suoritus tai muistutusmaksu kirjataan
+sen sijaan ensimmäiselle avoimelle päivälle, ja kuvaukseen tulee
+"kirjattu jälkikäteen" ja sen oma päivämäärä.
+
+## Käyttöomaisuus
+
+Kirjaa kohtaan **Käyttöomaisuus** jokainen kone, rakennus, vesijohtoverkosto
+tai muu yli vuoden käytössä oleva hyödyke: sen tasetili, hankintapäivä,
+hankintameno ja poistosuunnitelma (tasapoisto vuosien määrälle tai
+menojäännöspoisto prosentteina; maa-alueesta ei tehdä poistoja).
+Suunnitelma lasketaan hankintakuukaudesta alkaen, myös vuosille ennen kuin
+kirjanpitoa pidettiin Metrassa. Kirjaa itse hankinta tositteena tasetilille.
+
+## Tilikauden päättäminen
+
+Kun tilikausi on päättynyt, avaa se ja paina **Sulje tilikausi**. Sivu käy
+läpi tilinpäätöksen vaiheet:
+
+1. **Suunnitelman mukaiset poistot**: **Tee poistotosite** tekee
+   käyttöomaisuusrekisteristä luonnoksen, joka on päivätty tilikauden
+   viimeiselle päivälle. Tarkista ja kirjaa se.
+2. **Tilikauden jälkeen laskutetut tuotot**: tilikauden jälkeen lähetetyt
+   laskut sen aikana tehdyistä toimituksista tarjotaan jaksotustositteeksi,
+   jotta tuotto kohdistuu oikealle vuodelle. Muut jaksotukset (myöhemmin
+   laskutetut kulut, etukäteen saadut tuotot) ovat lajia **Jaksotus**
+   olevia tositteita, jotka päivätään tilikauden viimeiselle päivälle.
+   Sulkeminen peruu kaikki jaksotukset seuraavan tilikauden ensimmäisenä
+   päivänä.
+3. **Tiliotteet**: anna jokaisen pankkitilin saldo tilikauden lopun
+   tiliotteelta; tase-erittelyt vertaavat sitä kirjanpitoon.
+4. **Liitetiedot ja allekirjoitukset**: tilinpäätöksen liitetiedot, kuhunkin
+   ehdotettu teksti, ja allekirjoittavat hallituksen jäsenet. Kysy
+   kirjanpitäjältä, mitä liitetietoja yhteisö tarvitsee.
+5. **Sulje tilikausi**: sivu näyttää, mikä vielä estää sulkemisen
+   (luonnokset, laskutuksesta odottavat kirjaukset, laskelmien ulkopuoliset
+   tilit, avoin aiempi tilikausi) ja mitä kannattaa ensin tarkistaa.
+
+Sulkeminen lukitsee tilikauden pysyvästi, tallentaa sen tilikartan
+sellaisena kuin se on sinä päivänä (myöhempi nimenmuutos ei muuta suljetun
+tilikauden raportteja) ja avaa seuraavan tilikauden, tarvittaessa lisäten
+sen, niin että päättävät saldot ovat sen avaavat saldot. Tilikauden tulos
+siirretään valitsemallesi oman pääoman tilille, oletuksena edellisten
+tilikausien tulokseen. Avaavat saldot kirjoitetaan käsin vain ensimmäiselle
+Metrassa pidetylle tilikaudelle.
+
+Tilinpäätös on laadittava neljän kuukauden kuluessa tilikauden
+päättymisestä.
+
+## Tilinpäätöspaketti
+
+**Tilinpäätöspaketti** tekee tilintarkastajalle yhden PDF-tiedoston:
+tuloslaskelma ja tase edellisen vuoden luvuin, liitetiedot,
+allekirjoitussivu tilinpäätösmerkintöineen, tase-erittelyt (saldot,
+tiliotteet, käyttöomaisuus ja avoimet laskut), luettelo kirjanpidoista ja
+aineistoista, tilikartta, päiväkirja ja pääkirja. Ennen tilikauden
+sulkemista sen ensimmäisellä sivulla lukee, että se on keskeneräinen. Se on
+suomeksi tai ruotsiksi; englanninkielinen on merkitty käännökseksi. Valitse
+**Vain tilinpäätös ja liitetiedot** rekisteröintiä varten: osuuskunta
+ilmoittaa tilinpäätöksensä kaupparekisteriin, kun osuuskunnan kokous on
+vahvistanut sen.
+
+## Aiemman tilikauden oikaiseminen
+
+Suljettua tilikautta ei voi koskaan avata uudelleen. Myöhemmin löytynyt
+virhe oikaistaan avoimella tilikaudella: valitse tositteella suljettu
+tilikausi kohtaan **Oikaisee tilikauden**, ja kirjaa olennainen virhe
+edellisten tilikausien tulosta vastaan. Tilikauden liitetiedoissa luetellaan
+tällaiset oikaisut.
 
 ## Tilinpäätös
 

@@ -1,6 +1,7 @@
 """The books as the Accounting Act asks for them: entries in date order
 (the journal, päiväkirja) and in account order (the general ledger,
-pääkirja), plus a trial balance. Only posted vouchers count."""
+pääkirja), plus a trial balance. Only posted vouchers count, and a closed
+year's accounts have the names they had when it was closed."""
 
 from dataclasses import dataclass, field
 from decimal import Decimal
@@ -30,6 +31,8 @@ def journal(year, start, end):
         .filter(voucher__date__range=(start, end))
         .aggregate(debit=Sum("debit"), credit=Sum("credit"))
     )
+    vouchers = list(vouchers)
+    year.apply_chart(line.account for voucher in vouchers for line in voucher.lines.all())
     return vouchers, totals["debit"] or ZERO, totals["credit"] or ZERO
 
 
@@ -75,6 +78,8 @@ def ledger(year, start, end, account=None):
     result = {a.pk: LedgerAccount(a, opening=before.get(a.pk, ZERO)) for a in accounts}
     if account is not None and account.pk not in result:
         result[account.pk] = LedgerAccount(account)
+    # A closed year reads as its chart did when it was closed.
+    year.apply_chart(item.account for item in result.values())
     for line in lines:
         item = result[line.account_id]
         item.debit += line.debit

@@ -33,6 +33,15 @@ following the Finnish Accounting Act (kirjanpitolaki):
 - a VAT summary per VAT period by rate, dated by the supply and by advance
   payments, that says when it is not ready for the return;
 - every report as a PDF and a CSV file;
+- locking months once reported, and closing a year: its chart of accounts
+  is kept as it was, it is locked for good, and the next year opens with
+  the closing balances and the result carried to equity, enforced by
+  database triggers like posted vouchers;
+- a fixed asset register with depreciation plans, and year-end entries
+  proposed from it and from invoices issued after the year;
+- the year-end package for the auditor as one PDF: statements, notes,
+  signature page, balance sheet specifications, list of books and
+  material, chart of accounts, journal and ledger;
 - a list of drafts past the legal booking time (four months after the end
   of their month), and on each year the dates until which its books and
   vouchers must be kept.
@@ -45,7 +54,7 @@ Removing it from `METRA_PLUGINS` on the server is not stopped: keep the books
 another way first (reports, receipts and a backup). The tables stay in the database.
 
 What differs between countries is in `countries/` (Finland in `fi.py`).
-The plan for the rest (year-end and exports) is the phase 9 build plan in
+The plan for the rest (exports and retention) is the phase 9 build plan in
 [docs/architecture.md](../../docs/architecture.md#phase-9-build-plan).
 
 Personal data: voucher descriptions and receipts can name people. They are

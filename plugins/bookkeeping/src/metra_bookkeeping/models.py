@@ -109,12 +109,39 @@ class FiscalYear(models.Model):
             "and turnover, it decides the size class of the financial statements."
         ),
     )
+    # Entries dated up to and including this day can no longer be posted
+    # (the months are reported, for VAT say). It only moves forward.
+    locked_until = models.DateField(_("locked until"), null=True, blank=True)
+    signers = models.TextField(
+        _("who signs the financial statements"),
+        blank=True,
+        help_text=_("The board members, one per line. Printed under the signature lines."),
+    )
+    # Closing: where the result went, and when. A closed year never changes.
+    retained_earnings = models.ForeignKey(
+        "Account",
+        verbose_name=_("result carried to"),
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="+",
+    )
+    closed_at = models.DateTimeField(_("closed"), null=True, blank=True)
+    closed_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_("closed by"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="+",
+    )
     created_at = models.DateTimeField(_("created"), auto_now_add=True)
 
     class Meta:
         ordering = ["-start"]
         verbose_name = _("financial year")
         verbose_name_plural = _("financial years")
+        permissions = [("close_fiscalyear", "Can lock periods and close financial years")]
 
     def __str__(self):
         if (self.start.month, self.start.day, self.end.month, self.end.day) == (1, 1, 12, 31) and (
@@ -160,6 +187,49 @@ class FiscalYear(models.Model):
 
     def previous(self):
         return FiscalYear.objects.filter(end__lt=self.start).order_by("-end").first()
+
+    def following(self):
+        return FiscalYear.objects.filter(start__gt=self.end).order_by("start").first()
+
+    def is_locked(self, date):
+        """Whether entries dated ``date`` can no longer be posted in this year."""
+        return not self.is_open or (self.locked_until is not None and date <= self.locked_until)
+
+    @property
+    def first_open_day(self):
+        """The first day entries can still be posted on, or None."""
+        if not self.is_open:
+            return None
+        if self.locked_until is None:
+            return self.start
+        day = self.locked_until + datetime.timedelta(days=1)
+        return day if day <= self.end else None
+
+    @property
+    def statements_due(self):
+        """The financial statements are made within four months of the end
+        of the year (KPL 3:7)."""
+        month = self.end.month + 4
+        year = self.end.year + (month - 1) // 12
+        month = (month - 1) % 12 + 1
+        following = datetime.date(year + month // 12, month % 12 + 1, 1)
+        return following - datetime.timedelta(days=1)
+
+    def chart_names(self):
+        """{account id: name} as the chart read when the year was closed;
+        empty for an open year, whose reports use the names of today."""
+        if self.is_open:
+            return {}
+        return dict(self.chart_entries.values_list("account_id", "name"))
+
+    def apply_chart(self, accounts):
+        """Give ``accounts`` (in memory) the names they had when the year was
+        closed, so a later rename never rewrites a closed year's books."""
+        names = self.chart_names()
+        if names:
+            for account in accounts:
+                account.name = names.get(account.pk, account.name)
+        return accounts
 
     def clean(self):
         if not (self.start and self.end):
@@ -210,6 +280,26 @@ class FiscalYear(models.Model):
             raise LockedError(
                 _("The financial year %(year)s is closed.") % {"year": self}, code="closed"
             )
+
+    def lock_problem(self, date):
+        """Why entries dated ``date`` cannot be posted in this year, or ""."""
+        if not self.is_open:
+            return gettext("The financial year %(year)s is closed.") % {"year": self}
+        if self.is_locked(date):
+            return gettext(
+                "The books are locked up to %(day)s: nothing can be posted on or before it."
+            ) % {"day": formats.date_format(self.locked_until, "SHORT_DATE_FORMAT")}
+        return ""
+
+    @classmethod
+    def first_open_day_from(cls, date):
+        """The first day on or after ``date`` that entries can be posted on,
+        in an open year, or None."""
+        for year in cls.objects.filter(end__gte=date, status=cls.Status.OPEN).order_by("start"):
+            day = year.first_open_day
+            if day is not None:
+                return max(day, date)
+        return None
 
 
 class Account(models.Model):
@@ -324,6 +414,10 @@ class Voucher(models.Model):
         NORMAL = "normal", _("Voucher")
         OPENING = "opening", _("Opening balances")
         REVERSAL = "reversal", _("Reversal")
+        # Year-end entries. An accrual is reversed on the first day of the
+        # next year when the year is closed.
+        ACCRUAL = "accrual", _("Accrual")
+        DEPRECIATION = "depreciation", _("Depreciation")
 
     year = models.ForeignKey(
         FiscalYear,
@@ -337,7 +431,7 @@ class Voucher(models.Model):
     number = models.PositiveIntegerField(_("number"), null=True, blank=True)
     date = models.DateField(_("date"))
     description = models.CharField(_("description"), max_length=200)
-    kind = models.CharField(_("kind"), max_length=10, choices=Kind.choices, default=Kind.NORMAL)
+    kind = models.CharField(_("kind"), max_length=15, choices=Kind.choices, default=Kind.NORMAL)
     status = models.CharField(
         _("status"), max_length=10, choices=Status.choices, default=Status.DRAFT
     )
@@ -348,6 +442,18 @@ class Voucher(models.Model):
         null=True,
         blank=True,
         related_name="reversals",
+    )
+    # A correction of an error found in a closed year: booked in the open
+    # year, material ones against the result of earlier years (KILA
+    # 1976/2017), and listed in the notes of the year it is booked in.
+    corrects = models.ForeignKey(
+        FiscalYear,
+        verbose_name=_("corrects the year"),
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="corrections",
+        help_text=_("For an error found in a closed year, corrected in this one."),
     )
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -429,16 +535,21 @@ class Voucher(models.Model):
     def total(self):
         return self.totals()[0]
 
-    def problems(self):
-        """What stops this draft from being posted, as sentences."""
+    def problems(self, carried=False):
+        """What stops this draft from being posted, as sentences. ``carried``
+        is for the opening balances the closing of the previous year makes."""
         problems = []
         year = self.year
-        if not year.is_open:
-            problems.append(gettext("The financial year %(year)s is closed.") % {"year": year})
+        if problem := year.lock_problem(self.date):
+            problems.append(problem)
         if not year.contains(self.date):
             problems.append(
                 gettext("The date is outside the financial year %(year)s.") % {"year": year}
             )
+        if self.corrects_id is not None and (
+            self.corrects.is_open or self.corrects.start >= year.start
+        ):
+            problems.append(gettext("Only a closed earlier year can be corrected."))
         lines = list(self.lines.select_related("account"))
         if len(lines) < 2:
             problems.append(gettext("A voucher needs at least two lines."))
@@ -459,12 +570,24 @@ class Voucher(models.Model):
                     gettext("Opening balances are dated the first day of the year (%(day)s).")
                     % {"day": formats.date_format(year.start, "SHORT_DATE_FORMAT")}
                 )
-            others = Voucher.objects.filter(
-                year=year, kind=self.Kind.OPENING, status=self.Status.POSTED
-            ).exclude(pk=self.pk)
+            others = (
+                Voucher.objects.filter(year=year, kind=self.Kind.OPENING, status=self.Status.POSTED)
+                .exclude(pk=self.pk)
+                .exclude(reversals__status=self.Status.POSTED)
+            )
             if others.exists():
                 problems.append(gettext("The year already has posted opening balances."))
-        for line in lines:
+            if not carried and year.previous() is not None:
+                # Continuity (KPL 3:3): the opening balances are the previous
+                # year's closing balance sheet, carried when it is closed.
+                problems.append(
+                    gettext(
+                        "The opening balances are carried over when the previous year is "
+                        "closed; they are not entered by hand."
+                    )
+                )
+        for line in lines if not carried else []:
+            # Balances carried over stay on their accounts, in use or not.
             if not line.account.active:
                 problems.append(
                     gettext("The account %(account)s is not in use.") % {"account": line.account}
@@ -520,7 +643,7 @@ class Voucher(models.Model):
             ]
         return []
 
-    def post(self, user=None):
+    def post(self, user=None, carried=False):
         """Number and lock the voucher. Raises ValidationError when it cannot be posted."""
         with transaction.atomic():
             # SQLite transactions here take the write lock up front
@@ -528,7 +651,7 @@ class Voucher(models.Model):
             voucher = Voucher.objects.select_related("year", "series").get(pk=self.pk)
             if not voucher.is_draft:
                 raise LockedError(_("The voucher is already posted."))
-            if problems := voucher.problems():
+            if problems := voucher.problems(carried):
                 raise ValidationError(problems)
             last = Voucher.objects.filter(year=voucher.year, series=voucher.series).aggregate(
                 last=models.Max("number")
@@ -572,6 +695,8 @@ class Voucher(models.Model):
         year = FiscalYear.for_date(date)
         if year is None or not year.is_open:
             raise ValidationError(_("There is no open financial year for that date."))
+        if problem := year.lock_problem(date):
+            raise ValidationError(problem)
         description = gettext("Reversal of voucher %(number)s") % {"number": self.display_number}
         if note:
             description = f"{description}: {note}"
@@ -1061,6 +1186,224 @@ class Budget(models.Model):
         return f"{self.year} {self.account}: {self.amount}"
 
 
+# Year-end
+
+
+class ChartEntry(models.Model):
+    """An account as the chart of accounts read when a year was closed. The
+    chart is part of the books kept 10 years (KPL 2:10), so a closed year's
+    reports and package use these, whatever the account is called later."""
+
+    year = models.ForeignKey(
+        FiscalYear,
+        verbose_name=_("financial year"),
+        on_delete=models.PROTECT,
+        related_name="chart_entries",
+    )
+    account = models.ForeignKey(
+        Account, verbose_name=_("account"), on_delete=models.PROTECT, related_name="+"
+    )
+    number = models.CharField(_("number"), max_length=8)
+    name = models.CharField(_("name"), max_length=100)
+    kind = models.CharField(_("kind"), max_length=10, choices=Account.Kind.choices)
+    active = models.BooleanField(_("in use"), default=True)
+
+    class Meta:
+        ordering = ["number"]
+        verbose_name = _("account of a closed year")
+        verbose_name_plural = _("chart of accounts of a closed year")
+        constraints = [
+            models.UniqueConstraint(fields=["year", "account"], name="chartentry_one_per_year")
+        ]
+
+    def __str__(self):
+        return f"{self.number} {self.name}"
+
+
+class FixedAsset(models.Model):
+    """A fixed asset with its depreciation plan (poistosuunnitelma, KPL 5:5):
+    the acquisition cost is booked on an asset account and depreciated over
+    the years it is used. Land, for one, is not depreciated."""
+
+    class Method(models.TextChoices):
+        STRAIGHT = "straight", _("Straight line over a number of years")
+        REDUCING = "reducing", _("Reducing balance, a percentage a year")
+        NONE = "none", _("Not depreciated (land, for example)")
+
+    name = models.CharField(_("name"), max_length=150)
+    account = models.ForeignKey(
+        Account,
+        verbose_name=_("asset account"),
+        on_delete=models.PROTECT,
+        related_name="fixed_assets",
+        limit_choices_to={"kind": "asset"},
+    )
+    depreciation_account = models.ForeignKey(
+        Account,
+        verbose_name=_("depreciation account"),
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="+",
+        limit_choices_to={"kind": "expense"},
+    )
+    acquired = models.DateField(
+        _("acquired"), help_text=_("Depreciation starts from the month it is taken into use.")
+    )
+    cost = models.DecimalField(_("acquisition cost"), max_digits=12, decimal_places=2)
+    method = models.CharField(
+        _("depreciation plan"), max_length=10, choices=Method.choices, default=Method.STRAIGHT
+    )
+    years = models.PositiveSmallIntegerField(_("years"), null=True, blank=True)
+    percent = models.DecimalField(
+        _("per cent a year"), max_digits=5, decimal_places=2, null=True, blank=True
+    )
+    disposed = models.DateField(
+        _("sold or scrapped"), null=True, blank=True, help_text=_("Empty while still in use.")
+    )
+    note = models.CharField(_("note"), max_length=200, blank=True)
+
+    class Meta:
+        ordering = ["account__number", "acquired", "pk"]
+        verbose_name = _("fixed asset")
+        verbose_name_plural = _("fixed assets")
+
+    def __str__(self):
+        return self.name
+
+    def clean(self):
+        if self.method == self.Method.STRAIGHT and not self.years:
+            raise ValidationError({"years": _("Say over how many years.")})
+        if self.method == self.Method.REDUCING and not (self.percent and 0 < self.percent <= 100):
+            raise ValidationError({"percent": _("Give a percentage from 1 to 100.")})
+        if self.method != self.Method.NONE and self.depreciation_account_id is None:
+            raise ValidationError(
+                {"depreciation_account": _("Choose the account depreciation is booked to.")}
+            )
+        if self.cost is not None and self.cost <= 0:
+            raise ValidationError({"cost": _("The cost is more than zero.")})
+        if self.disposed and self.acquired and self.disposed < self.acquired:
+            raise ValidationError({"disposed": _("It cannot go before it was acquired.")})
+
+    @property
+    def plan_display(self):
+        if self.method == self.Method.STRAIGHT:
+            return gettext("%(years)s years, straight line") % {"years": self.years}
+        if self.method == self.Method.REDUCING:
+            return gettext("%(percent)s %% reducing balance") % {
+                "percent": formats.number_format(self.percent.normalize())
+            }
+        return gettext("Not depreciated")
+
+    def _months(self, start, end):
+        """Months of use from ``start`` to ``end``, counting the month it was
+        acquired as a whole one, up to the month it was disposed of."""
+        first = max(start, self.acquired.replace(day=1))
+        last = min(end, self.disposed) if self.disposed else end
+        if last < first:
+            return 0
+        return (last.year - first.year) * 12 + last.month - first.month + 1
+
+    def _periods(self, until):
+        """(start, end) of each period up to ``until``: calendar years
+        before the books start, then the financial years."""
+        years = list(FiscalYear.objects.filter(start__lte=until).order_by("start"))
+        first = years[0].start if years else until + datetime.timedelta(days=1)
+        periods = []
+        start = self.acquired.replace(day=1)
+        while start < first:
+            end = min(datetime.date(start.year, 12, 31), first - datetime.timedelta(days=1))
+            periods.append((start, end))
+            start = end + datetime.timedelta(days=1)
+        periods += [(year.start, min(year.end, until)) for year in years]
+        return periods
+
+    def schedule(self, until):
+        """[(start, end, depreciation)] by the plan, up to ``until``."""
+        value = self.cost
+        rows = []
+        for start, end in self._periods(until):
+            months = self._months(start, end)
+            amount = ZERO
+            if months and value > 0:
+                if self.method == self.Method.STRAIGHT:
+                    amount = self.cost * months / (self.years * 12)
+                elif self.method == self.Method.REDUCING:
+                    amount = value * self.percent / 100 * months / 12
+                amount = min(Decimal(amount).quantize(Decimal("0.01")), value)
+            value -= amount
+            rows.append((start, end, amount))
+        return rows
+
+    def depreciation(self, year):
+        """The plan's depreciation for ``year``."""
+        rows = self.schedule(year.end)
+        return rows[-1][2] if rows and rows[-1][0] == year.start else ZERO
+
+    def book_value(self, date):
+        """The cost less the plan's depreciation up to ``date``; zero once
+        disposed of."""
+        if self.acquired > date:
+            return ZERO
+        if self.disposed and self.disposed <= date:
+            return ZERO
+        return self.cost - sum((amount for *_dates, amount in self.schedule(date)), ZERO)
+
+
+class BankBalance(models.Model):
+    """The balance of a bank account on the bank statement at the end of a
+    year, and which statement it is. The external evidence for the cash
+    entries; the balance sheet specifications compare it with the books."""
+
+    year = models.ForeignKey(
+        FiscalYear,
+        verbose_name=_("financial year"),
+        on_delete=models.PROTECT,
+        related_name="bank_balances",
+    )
+    account = models.ForeignKey(
+        Account, verbose_name=_("account"), on_delete=models.PROTECT, related_name="+"
+    )
+    balance = models.DecimalField(_("balance on the statement"), max_digits=12, decimal_places=2)
+    reference = models.CharField(
+        _("statement"), max_length=100, blank=True, help_text=_("For example: statement 12/2026.")
+    )
+
+    class Meta:
+        ordering = ["account__number"]
+        verbose_name = _("bank statement balance")
+        verbose_name_plural = _("bank statement balances")
+        constraints = [
+            models.UniqueConstraint(fields=["year", "account"], name="bankbalance_one_per_account")
+        ]
+
+    def __str__(self):
+        return f"{self.year} {self.account}: {self.balance}"
+
+
+class YearNote(models.Model):
+    """A note to the financial statements (liitetieto) of a year, written by
+    the treasurer from the headings of the country's rules."""
+
+    year = models.ForeignKey(
+        FiscalYear, verbose_name=_("financial year"), on_delete=models.PROTECT, related_name="notes"
+    )
+    key = models.CharField(_("note"), max_length=40)
+    language = models.CharField(_("language"), max_length=5)
+    text = models.TextField(_("text"), blank=True)
+
+    class Meta:
+        ordering = ["pk"]
+        verbose_name = _("note to the financial statements")
+        verbose_name_plural = _("notes to the financial statements")
+        constraints = [
+            models.UniqueConstraint(fields=["year", "key", "language"], name="yearnote_one_per_key")
+        ]
+
+    def __str__(self):
+        return f"{self.year} {self.key}"
+
+
 @receiver(post_delete, sender=Receipt)
 def _delete_receipt_file(sender, instance, **kwargs):
     instance.file.delete(save=False)
@@ -1077,3 +1420,7 @@ auditlog.register(PostingSettings)
 auditlog.register(SalesAccount)
 auditlog.register(Posting, exclude_fields=["created_at"])
 auditlog.register(Budget)
+auditlog.register(ChartEntry)
+auditlog.register(FixedAsset)
+auditlog.register(BankBalance)
+auditlog.register(YearNote)

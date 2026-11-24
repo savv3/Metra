@@ -1,6 +1,7 @@
 """Vouchers from invoicing: issued invoices and credit notes (on the accrual
 basis, dated the invoice date), payments (dated the day paid) and reminder
-fees (dated the day the reminder was made).
+fees (dated the day the reminder was made). A record dated in a locked
+period or a closed year is booked on the first day still open, with a note.
 
 Each record is booked once, in a voucher of its own that points to it (see
 Posting); the record is the voucher's evidence. The voucher is posted at
@@ -32,7 +33,7 @@ from django.conf import settings as django_settings
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError, transaction
 from django.db.models import Sum
-from django.utils import timezone, translation
+from django.utils import formats, timezone, translation
 from django.utils.translation import gettext as _
 
 from apps.plugins import api
@@ -178,8 +179,17 @@ def book(record, settings=None, user=None):
     if not settings.applies(date):
         return None
     year = FiscalYear.for_date(date)
-    if year is None or not year.is_open or record.booked():
+    if year is None or record.booked():
         return None
+    late = year.is_locked(date)
+    if late:
+        # Its period is locked or its year closed: book it on the first day
+        # still open, saying so (an error of a closed year is corrected in
+        # the open one).
+        date = FiscalYear.first_open_day_from(date)
+        if date is None:
+            return None
+        year = FiscalYear.for_date(date)
     entries = [entry for entry in ENTRIES[record.source](record, settings) if entry.amount]
     if not entries:
         return None
@@ -189,6 +199,12 @@ def book(record, settings=None, user=None):
     # made the record.
     with translation.override(django_settings.LANGUAGE_CODE):
         description = _description(record)
+        if late:
+            description = _("%(description)s (dated %(day)s, booked late)") % {
+                "description": description,
+                "day": formats.date_format(record.date, "SHORT_DATE_FORMAT"),
+            }
+        description = description[:200]
     try:
         with transaction.atomic():
             voucher = Voucher.objects.create(

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load i18n bookkeeping %}
+{% block title %}{% translate "Year-end" %} {{ year }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Year-end" %} {{ year }} <span class="badge">{{ year.get_status_display }}</span></h1>
+    <div class="actions"><a class="button" href="{% url 'metra_bookkeeping:year_package' year.pk %}">{% translate "Year-end package" %}</a></div>
+  </div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  {% if not year.is_open %}
+    <p>{% blocktranslate with day=year.closed_at|date:"DATE_FORMAT" trimmed %}The year was closed on {{ day }}. Its books can no longer change; errors found now are corrected in the open year.{% endblocktranslate %}</p>
+  {% else %}
+    <p class="help">{% blocktranslate with due=year.statements_due|date:"DATE_FORMAT" trimmed %}
+      Go through the steps below, then close the year. Closing locks the year for good, keeps its
+      chart of accounts as it reads today, and opens the next year with the closing balances as
+      its opening balances. The financial statements are due by {{ due }}, four months after the
+      end of the year.
+    {% endblocktranslate %}</p>
+
+    <ol class="steps">
+      <li>
+        <h2>{% translate "Depreciation by plan" %}</h2>
+        {% if depreciation %}
+          <ul>{% for asset, amount in depreciation %}<li>{{ asset.name }} ({{ asset.plan_display }}): {{ amount|money }}</li>{% endfor %}</ul>
+          {% if depreciation_voucher %}
+            <p><a href="{{ depreciation_voucher.get_absolute_url }}">{{ depreciation_voucher }}</a> ({{ depreciation_voucher.get_status_display|lower }})</p>
+          {% elif perms.metra_bookkeeping.add_voucher %}
+            <form method="post" action="{% url 'metra_bookkeeping:year_depreciation' year.pk %}">{% csrf_token %}<button type="submit" class="button">{% translate "Make the depreciation voucher" %}</button></form>
+          {% endif %}
+        {% else %}
+          <p>{% translate "The asset register has no depreciation for the year." %}</p>
+        {% endif %}
+        {% if perms.metra_bookkeeping.view_fixedasset %}<p class="help"><a href="{% url 'metra_bookkeeping:asset_list' %}">{% translate "Fixed assets" %}</a></p>{% endif %}
+      </li>
+      <li>
+        <h2>{% translate "Income invoiced after the year" %}</h2>
+        {% if accruals %}
+          <p>{% translate "These invoices were issued after the year for supplies made in it. Their income belongs to this year:" %}</p>
+          <ul>{% for invoice in accruals %}<li><a href="{{ invoice.get_absolute_url }}">{{ invoice }}</a>, {{ invoice.issue_date|date:"SHORT_DATE_FORMAT" }}, {{ invoice.total_net|money }}</li>{% endfor %}</ul>
+          {% if accrual_voucher %}
+            <p><a href="{{ accrual_voucher.get_absolute_url }}">{{ accrual_voucher }}</a> ({{ accrual_voucher.get_status_display|lower }})</p>
+          {% elif perms.metra_bookkeeping.add_voucher %}
+            <form method="post" action="{% url 'metra_bookkeeping:year_accruals' year.pk %}">{% csrf_token %}<button type="submit" class="button">{% translate "Make the accrual voucher" %}</button></form>
+          {% endif %}
+        {% else %}
+          <p>{% translate "No invoices issued after the year are for supplies in it." %}</p>
+        {% endif %}
+        <p class="help">{% translate "Other accruals (costs of the year billed later, income received in advance) are entered as vouchers of the kind Accrual, dated the last day of the year. Closing the year reverses every accrual on the first day of the next one." %}</p>
+      </li>
+      <li>
+        <h2>{% translate "Bank statements" %}</h2>
+        {% if bank_rows %}
+          <ul>{% for row in bank_rows %}<li>{{ row.account }}: {% translate "books" %} {{ row.books|money }}, {% translate "statement" %} {% if row.statement is None %}–{% else %}{{ row.statement|money }}{% if row.difference %} <strong>({% translate "difference" %} {{ row.difference|money }})</strong>{% endif %}{% endif %}</li>{% endfor %}</ul>
+        {% endif %}
+        {% if perms.metra_bookkeeping.change_bankbalance %}<p><a class="button" href="{% url 'metra_bookkeeping:year_bank' year.pk %}">{% translate "Enter the bank statement balances" %}</a></p>{% endif %}
+      </li>
+      <li>
+        <h2>{% translate "Notes and signatures" %}</h2>
+        <p>{% translate "The notes to the financial statements, and the board members who sign them." %}</p>
+        {% if perms.metra_bookkeeping.change_yearnote %}<p><a class="button" href="{% url 'metra_bookkeeping:year_notes' year.pk %}">{% translate "Write the notes" %}</a></p>{% endif %}
+      </li>
+      <li>
+        <h2>{% translate "Check the package" %}</h2>
+        <p>{% translate "The year-end package has everything for the auditor in one PDF. Before the year is closed it says it is preliminary." %}</p>
+        <p><a class="button" href="{% url 'metra_bookkeeping:year_package' year.pk %}">{% translate "Year-end package" %}</a></p>
+      </li>
+      <li>
+        <h2>{% translate "Close the year" %}</h2>
+        {% if problems %}
+          <div class="status-panel status-panel--warning" role="alert">
+            <p>{% translate "The year cannot be closed yet:" %}</p>
+            <ul>{% for problem in problems %}<li>{{ problem }}</li>{% endfor %}</ul>
+          </div>
+        {% endif %}
+        {% if warnings %}
+          <div class="status-panel">
+            <p>{% translate "Check these first:" %}</p>
+            <ul>{% for warning in warnings %}<li>{{ warning }}</li>{% endfor %}</ul>
+          </div>
+        {% endif %}
+        <p>{% blocktranslate with amount=result|money trimmed %}The result for the year is {{ amount }}. It is carried to the equity account chosen below in the next year's opening balances.{% endblocktranslate %}</p>
+        {% if opening %}
+          <details>
+            <summary>{% translate "Opening balances of the next year" %}</summary>
+            <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Opening balances of the next year' %}">
+              <table>
+                <thead><tr><th scope="col">{% translate "Account" %}</th><th scope="col" class="num">{% translate "Debit" %}</th><th scope="col" class="num">{% translate "Credit" %}</th></tr></thead>
+                <tbody>{% for account, amount in opening %}<tr><th scope="row">{{ account }}</th><td class="num">{% if amount > 0 %}{{ amount|money }}{% endif %}</td><td class="num">{% if amount < 0 %}{{ amount|negate|money }}{% endif %}</td></tr>{% endfor %}</tbody>
+              </table>
+            </div>
+          </details>
+        {% endif %}
+        {% if form and not problems %}
+          <form method="post" class="form" novalidate>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+            <div class="actions"><button type="submit" class="button button--primary">{% translate "Close the year" %}</button></div>
+          </form>
+        {% endif %}
+      </li>
+    </ol>
+  {% endif %}
+{% endblock %}

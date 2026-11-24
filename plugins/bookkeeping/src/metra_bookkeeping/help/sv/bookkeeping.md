@@ -20,7 +20,8 @@ konton, byta namn på dem och ta ur bruk de som du inte behöver. När ett
 konto har bokföringsposter ändras inte dess nummer och slag.
 
 Ange sedan de balanser som året börjar med, från fjolårets balansräkning,
-som det första verifikatet, av slaget **Ingående balans**.
+som det första verifikatet, av slaget **Ingående balans**. Senare år får sin
+ingående balans när året före stängs.
 
 En räkenskapsperiod är 12 månader och börjar dagen efter att den föregående
 slutar. Den första perioden, eller en period vars datum ändras, kan vara 1
@@ -156,7 +157,77 @@ de förblir läsbara.
 
 En administratör som tar bort tillägget från servern (ur `METRA_PLUGINS`) måste först spara bokföringen under den lagstadgade tiden på annat sätt: spara rapporterna och kvittona, och behåll en säkerhetskopia. Uppgifterna finns kvar i databasen, men kan inte läsas i Metra medan tillägget inte är installerat.
 
-Avslutning av året kommer i en senare version av tillägget.
+## Låsa månader
+
+När en månad är redovisad, till exempel i momsdeklarationen, lås den på
+periodens sida: välj den sista dagen som ska låsas och tryck **Lås**.
+Ingenting kan bokföras den dagen eller tidigare, och ett lås kan inte
+hävas. Utkast daterade under perioden måste först bokföras eller tas bort.
+En faktura, betalning eller påminnelseavgift daterad i en låst period
+bokförs i stället den första öppna dagen, med "bokförd i efterhand" och
+sitt eget datum i beskrivningen.
+
+## Anläggningstillgångar
+
+Under **Anläggningstillgångar** anger du varje maskin, byggnad,
+ledningsnät eller annan tillgång som används i mer än ett år: dess
+tillgångskonto, när den anskaffades, anskaffningsutgiften och
+avskrivningsplanen (linjär över ett antal år, eller en procent av det
+återstående värdet varje år; mark avskrivs inte). Planen gäller från den
+månad tillgången anskaffades, också för år innan bokföringen fördes i
+Metra. Bokför själva köpet som ett verifikat på tillgångskontot.
+
+## Avsluta räkenskapsperioden
+
+När perioden har slutat öppnar du den och trycker **Stäng året**. Sidan går
+igenom bokslutet:
+
+1. **Avskrivning enligt plan**: **Skapa avskrivningsverifikatet** gör ett
+   utkast, daterat periodens sista dag, utifrån anläggningsregistret.
+   Kontrollera och bokför det.
+2. **Intäkter fakturerade efter året**: fakturor som skickats efter
+   perioden för leveranser under den erbjuds som ett
+   periodiseringsverifikat, så att intäkten hamnar på rätt år. Andra
+   periodiseringar (kostnader som faktureras senare, intäkter som fåtts i
+   förskott) är verifikat av slaget **Periodisering** daterade periodens
+   sista dag. Avslutningen återför alla periodiseringar nästa periods
+   första dag.
+3. **Kontoutdrag**: ange varje bankkontos saldo enligt kontoutdraget vid
+   periodens slut; balansspecifikationerna jämför det med bokföringen.
+4. **Noter och underskrifter**: noterna till bokslutet, med ett förslag till
+   text för varje, och de styrelsemedlemmar som undertecknar. Fråga en
+   revisor eller bokförare vilka noter organisationen behöver.
+5. **Stäng året**: sidan visar vad som ännu hindrar avslutningen (utkast,
+   poster som väntar från faktureringen, konton utanför bokslutet, en
+   tidigare period som är öppen) och vad som bör kontrolleras först.
+
+Avslutningen låser perioden för gott, sparar kontoplanen som den ser ut den
+dagen (ett senare namnbyte ändrar inte den stängda periodens rapporter) och
+öppnar nästa period, som läggs till vid behov, med de utgående saldona som
+ingående balans. Periodens resultat förs till det konto för eget kapital
+som du väljer, som standard resultatet från tidigare perioder. Ingående
+balans skrivs in för hand bara för det första året i Metra.
+
+Bokslutet ska vara upprättat fyra månader efter periodens slut.
+
+## Bokslutspaket
+
+**Bokslutspaket** gör en PDF för revisorn: resultaträkningen och
+balansräkningen med föregående år, noterna, en sida för underskrifter med
+bokslutsanteckningen, balansspecifikationerna (varje saldo, kontoutdragen,
+anläggningstillgångarna och de öppna fakturorna), förteckningen över
+bokföringar och material, kontoplanen, dagboken och huvudboken. Innan
+perioden är stängd står det på första sidan att paketet är preliminärt.
+Det är på finska eller svenska; ett engelskt är märkt som en översättning.
+Välj **Endast bokslutet och noterna** för registrering: ett andelslag anmäler
+sitt bokslut till handelsregistret när andelsstämman har fastställt det.
+
+## Rätta ett tidigare år
+
+En stängd period kan aldrig öppnas igen. Ett fel som upptäcks senare rättas
+i den öppna perioden: välj den stängda perioden under **Rättar året** på
+verifikatet, och bokför ett väsentligt fel mot resultatet från tidigare
+perioder. Periodens noter räknar upp sådana rättelser.
 
 ## Bokslut
 

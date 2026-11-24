@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Year-end package" %} {{ year }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Year-end package" %} {{ year }}</h1>
+    <div class="actions"><a class="button button--primary" href="{{ pdf_url }}">{% translate "PDF" %}</a></div>
+  </div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  <p>{% blocktranslate trimmed %}
+    Everything the auditor needs in one PDF: the income statement and balance sheet with the
+    previous year beside them, the notes, the signature page, the balance sheet specifications,
+    the list of books and material, the chart of accounts, the journal and the general ledger.
+  {% endblocktranslate %}</p>
+  {% if year.is_open %}
+    <div class="status-panel status-panel--warning"><p>{% translate "The year is still open, so the package says on its first page that it is preliminary and not the financial statements to sign." %}</p></div>
+  {% endif %}
+  <form method="get" class="form" novalidate>
+    {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+    <input type="hidden" name="format" value="pdf">
+    <div class="actions"><button type="submit" class="button button--primary">{% translate "Make the PDF" %}</button></div>
+  </form>
+  {% if year.chart == "cooperative" %}<p class="help">{% translate "A cooperative files its financial statements with the Trade Register once its general meeting has adopted them. Use the PDF with only the statements and notes." %}</p>{% endif %}
+  <p class="help">{% translate "The package is in Finnish or Swedish, as the financial statements are kept. An English one is marked as a translation." %}</p>
+{% endblock %}

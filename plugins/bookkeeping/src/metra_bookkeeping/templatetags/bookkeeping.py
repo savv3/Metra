@@ -28,3 +28,8 @@ def vat_label(rate, code):
     from ..models import vat_label as label
 
     return label(code, Decimal(rate))
+
+
+@register.filter
+def negate(value):
+    return -Decimal(value)
