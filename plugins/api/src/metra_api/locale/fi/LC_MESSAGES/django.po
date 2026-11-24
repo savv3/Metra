@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 20:57+0000\n"
+"POT-Creation-Date: 2026-11-24 21:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,15 @@ msgstr ""
 msgid "API"
 msgstr "API"
 
-#: plugins/api/src/metra_api/apps.py:21 plugins/api/src/metra_api/models.py:78
+#: plugins/api/src/metra_api/apps.py:9
+msgid ""
+"A REST API for other systems: units, people, readings and invoices, with a "
+"token per client."
+msgstr ""
+"REST-rajapinta muille järjestelmille: yksiköt, henkilöt, lukemat ja laskut, "
+"oma tunniste jokaiselle asiakkaalle."
+
+#: plugins/api/src/metra_api/apps.py:25 plugins/api/src/metra_api/models.py:78
 #: plugins/api/src/metra_api/templates/metra_api/client_list.html:3
 #: plugins/api/src/metra_api/templates/metra_api/client_list.html:6
 #: plugins/api/src/metra_api/templates/metra_api/client_list.html:14
@@ -29,11 +37,12 @@ msgstr "API"
 msgid "API clients"
 msgstr "API-asiakkaat"
 
-#: plugins/api/src/metra_api/apps.py:24
+#: plugins/api/src/metra_api/apps.py:28
 msgid "Tokens for other systems that read or change the register."
 msgstr ""
-"Tunnisteet muille järjestelmille, jotka lukevat tai muuttavat rekisteriä."
-"Tunnisteet muille järjestelmille, jotka lukevat tai muuttavat rekisteriä."
+"Tunnisteet muille järjestelmille, jotka lukevat tai muuttavat "
+"rekisteriä.Tunnisteet muille järjestelmille, jotka lukevat tai muuttavat "
+"rekisteriä."
 
 #: plugins/api/src/metra_api/auth.py:28
 msgid "Give the token after Bearer, without spaces."
@@ -60,8 +69,8 @@ msgid ""
 "The client may do what a user with this role may. Choose the narrowest role "
 "that does the job."
 msgstr ""
-"Asiakas saa tehdä sen, mitä tämän roolin käyttäjä saa. Valitse suppein "
-"rooli, joka riittää."
+"Asiakas saa tehdä sen, mitä tämän roolin käyttäjä saa. Valitse suppein rooli,"
+" joka riittää."
 
 #: plugins/api/src/metra_api/forms.py:57
 msgid "Choose today or a later day."
@@ -198,9 +207,9 @@ msgid ""
 msgstr ""
 "Jokainen asiakas on toinen järjestelmä, jolla on oma tunniste. Se saa tehdä "
 "sen, mitä sen rooli sallii, ja jokainen sen tekemä muutos kirjataan sen "
-"nimellä.Jokainen asiakas on toinen järjestelmä, jolla on oma tunniste. Se "
-"saa tehdä sen, mitä sen rooli sallii, ja jokainen sen tekemä muutos "
-"kirjataan sen nimellä."
+"nimellä.Jokainen asiakas on toinen järjestelmä, jolla on oma tunniste. Se saa"
+" tehdä sen, mitä sen rooli sallii, ja jokainen sen tekemä muutos kirjataan "
+"sen nimellä."
 
 #: plugins/api/src/metra_api/templates/metra_api/client_list.html:18
 msgid "Client"
@@ -290,8 +299,8 @@ msgstr "Otsake"
 
 #: plugins/api/src/metra_api/templates/metra_api/client_token.html:19
 msgid ""
-"Store it in the other system's settings or a password manager, never in "
-"email or chat."
+"Store it in the other system's settings or a password manager, never in email"
+" or chat."
 msgstr ""
 "Tallenna se toisen järjestelmän asetuksiin tai salasanojen hallintaan, ei "
 "koskaan sähköpostiin tai chattiin.Tallenna se toisen järjestelmän asetuksiin "
@@ -317,16 +326,16 @@ msgstr "Näin kutsut rajapintaa"
 
 #: plugins/api/src/metra_api/templates/metra_api/docs.html:14
 msgid ""
-"Send the client's token in every request as <code>Authorization: Bearer &lt;"
-"token&gt;</code>. Requests and answers are JSON. Lists come in pages: <code>?"
-"page=2&amp;page_size=100</code> (at most 200)."
+"Send the client's token in every request as <code>Authorization: Bearer "
+"&lt;token&gt;</code>. Requests and answers are JSON. Lists come in pages: "
+"<code>?page=2&amp;page_size=100</code> (at most 200)."
 msgstr ""
 "Lähetä asiakkaan tunniste jokaisessa pyynnössä muodossa <code>Authorization: "
 "Bearer &lt;token&gt;</code>. Pyynnöt ja vastaukset ovat JSONia. Luettelot "
-"tulevat sivuina: <code>?page=2&amp;page_size=100</code> (enintään 200)."
-"Lähetä asiakkaan tunniste jokaisessa pyynnössä muodossa <code>Authorization: "
-"Bearer &lt;token&gt;</code>. Pyynnöt ja vastaukset ovat JSONia. Luettelot "
-"tulevat sivuina: <code>?page=2&amp;page_size=100</code> (enintään 200)."
+"tulevat sivuina: <code>?page=2&amp;page_size=100</code> (enintään 200).Lähetä"
+" asiakkaan tunniste jokaisessa pyynnössä muodossa <code>Authorization: Bearer"
+" &lt;token&gt;</code>. Pyynnöt ja vastaukset ovat JSONia. Luettelot tulevat "
+"sivuina: <code>?page=2&amp;page_size=100</code> (enintään 200)."
 
 #: plugins/api/src/metra_api/templates/metra_api/docs.html:18
 msgid ""
@@ -335,10 +344,10 @@ msgid ""
 "on the web pages."
 msgstr ""
 "Yksiköitä ja henkilöitä ei koskaan poisteta: DELETE arkistoi ne. Omat kentät "
-"ovat kohdassa <code>custom_fields</code> kentän avaimella, ja ne "
-"tarkistetaan kuten verkkosivuilla.Yksiköitä ja henkilöitä ei koskaan "
-"poisteta: DELETE arkistoi ne. Omat kentät ovat kohdassa <code>custom_fields</"
-"code> kentän avaimella, ja ne tarkistetaan kuten verkkosivuilla."
+"ovat kohdassa <code>custom_fields</code> kentän avaimella, ja ne tarkistetaan"
+" kuten verkkosivuilla.Yksiköitä ja henkilöitä ei koskaan poisteta: DELETE "
+"arkistoi ne. Omat kentät ovat kohdassa <code>custom_fields</code> kentän "
+"avaimella, ja ne tarkistetaan kuten verkkosivuilla."
 
 #: plugins/api/src/metra_api/templates/metra_api/docs.html:27
 msgid "Path"

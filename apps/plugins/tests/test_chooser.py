@@ -19,7 +19,9 @@ def english(settings):
 
 def turn(client, name, on):
     return client.post(
-        reverse("plugins:toggle", args=[name]), {"enabled": "1" if on else "0"}, follow=True
+        reverse("plugins:toggle", args=[name]),
+        {"enabled": "1" if on else "0", "confirmed": "1"},
+        follow=True,
     )
 
 
@@ -212,3 +214,23 @@ def test_settings_links_go_in_the_section_they_name(role_client, settings):
 
     integrations = page.split('id="settings-integrations"')[1].split("</section>")[0]
     assert ">Odd</a>" in integrations
+
+
+def test_turning_off_asks_first_and_says_what_changes(role_client, unit):
+    client = role_client("Admin")
+    url = reverse("plugins:toggle", args=["example"])
+
+    page = client.post(url, {"enabled": "0"}).content.decode()
+
+    assert "Turn off Example plugin?" in page
+    assert "Its pages leave the menu: Example." in page
+    assert state.is_enabled("example")
+
+
+def test_add_ons_page_groups_and_links_the_add_ons(role_client):
+    page = role_client("Admin").get(reverse("plugins:list")).content.decode()
+
+    assert '<h2 class="addon-group">Sending services</h2>' in page
+    assert 'role="switch" aria-checked="true"' in page
+    assert "In the menu under Add-ons." in page
+    assert ">Open Example</a>" in page

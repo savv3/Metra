@@ -25,9 +25,13 @@ from .tasks import send_batch_task
 
 def channel_status():
     """Which channels this installation can send on, for the send buttons."""
+    sms, email = provider_for(SMS), provider_for(EMAIL)
     return {
-        "sms": getattr(provider_for(SMS), "name", ""),
-        "email": getattr(provider_for(EMAIL), "name", ""),
+        "sms": getattr(sms, "name", ""),
+        "email": getattr(email, "name", ""),
+        # What people read: the provider's description, not its code name.
+        "sms_label": sms.label() if sms else "",
+        "email_label": email.label() if email else "",
     }
 
 

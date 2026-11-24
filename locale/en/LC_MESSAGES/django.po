@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-24 20:41+0200\n"
+"POT-Creation-Date: 2026-11-24 21:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -205,12 +205,13 @@ msgid "Two-factor login"
 msgstr ""
 
 #: apps/accounts/templates/accounts/profile.html:28
-#: apps/plugins/templates/plugins/plugin_list.html:29
+#: apps/plugins/templates/plugins/plugin_list.html:21
+#: apps/plugins/templates/plugins/plugin_list.html:27
 msgid "On"
 msgstr ""
 
 #: apps/accounts/templates/accounts/profile.html:28
-#: apps/plugins/templates/plugins/plugin_list.html:29
+#: apps/plugins/templates/plugins/plugin_list.html:27
 msgid "Off"
 msgstr ""
 
@@ -431,7 +432,9 @@ msgstr ""
 #: apps/core/templates/core/settings.html:6 apps/core/templatetags/nav.py:104
 #: apps/messaging/templates/messaging/email_settings.html:5
 #: apps/plugins/templates/plugins/plugin_list.html:5
+#: apps/plugins/templates/plugins/plugin_list.html:40
 #: apps/plugins/templates/plugins/plugin_settings.html:5
+#: apps/plugins/templates/plugins/plugin_turn_off.html:5
 #: apps/register/templates/register/unit_type_choose.html:16
 msgid "Settings"
 msgstr ""
@@ -491,7 +494,6 @@ msgstr ""
 
 #: apps/backups/templates/backups/backup_list.html:48
 #: apps/backups/templates/backups/restore.html:10
-#: apps/plugins/templates/plugins/plugin_list.html:21
 msgid "Version"
 msgstr ""
 
@@ -504,7 +506,6 @@ msgid "Where"
 msgstr ""
 
 #: apps/backups/templates/backups/backup_list.html:51
-#: apps/plugins/templates/plugins/plugin_list.html:22
 #: apps/readings/templates/readings/_unit_readings.html:12
 #: apps/register/templates/register/unit_detail.html:68
 #: apps/selfservice/templates/selfservice/round_links.html:44
@@ -614,7 +615,7 @@ msgstr ""
 #: apps/readings/templates/readings/_round_results.html:3
 #: apps/readings/templates/readings/_unit_readings.html:3
 #: apps/readings/templates/readings/round_detail.html:5
-#: apps/readings/templates/readings/round_detail.html:22
+#: apps/readings/templates/readings/round_detail.html:23
 #: apps/readings/templates/readings/round_form.html:5
 msgid "Readings"
 msgstr ""
@@ -679,6 +680,7 @@ msgstr ""
 #: apps/messaging/templates/messaging/compose.html:127
 #: apps/messaging/templates/messaging/newsletter_compose.html:37
 #: apps/plugins/templates/plugins/plugin_settings.html:31
+#: apps/plugins/templates/plugins/plugin_turn_off.html:20
 #: apps/readings/templates/readings/reading_form.html:31
 #: apps/readings/templates/readings/round_form.html:21
 #: apps/register/templates/register/import_upload.html:21
@@ -938,8 +940,8 @@ msgstr ""
 #: apps/core/settings_page.py:286 apps/core/templatetags/nav.py:14
 #: apps/plugins/apps.py:7 apps/plugins/templates/plugins/plugin_list.html:3
 #: apps/plugins/templates/plugins/plugin_list.html:7
-#: apps/plugins/templates/plugins/plugin_list.html:18
 #: apps/plugins/templates/plugins/plugin_settings.html:5
+#: apps/plugins/templates/plugins/plugin_turn_off.html:5
 msgid "Add-ons"
 msgstr ""
 
@@ -984,7 +986,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: apps/core/templates/core/_contact.html:16 apps/readings/views.py:146
+#: apps/core/templates/core/_contact.html:16 apps/readings/views.py:149
 #: apps/register/templates/register/_person_results.html:10
 #: apps/register/templates/register/_unit_results.html:9
 #: apps/register/templates/register/person_detail.html:24
@@ -1077,7 +1079,7 @@ msgstr ""
 
 #: apps/help/templates/help/_nav.html:6
 #: apps/invoicing/templates/invoicing/invoice_list.html:15
-#: apps/readings/templates/readings/round_detail.html:27
+#: apps/readings/templates/readings/round_detail.html:28
 #: apps/register/templates/register/person_list.html:13
 #: apps/register/templates/register/unit_list.html:16
 msgid "Search"
@@ -1178,7 +1180,7 @@ msgid "Reference given"
 msgstr ""
 
 #: apps/invoicing/forms.py:97 apps/invoicing/views.py:510
-#: apps/readings/views.py:155
+#: apps/readings/views.py:158
 msgid "Note"
 msgstr ""
 
@@ -1323,7 +1325,7 @@ msgstr ""
 #: apps/readings/templates/readings/_round_results.html:10
 #: apps/readings/templates/readings/_unit_readings.html:10
 #: apps/readings/templates/readings/reading_form.html:11
-#: apps/readings/views.py:150
+#: apps/readings/views.py:153
 msgid "Usage"
 msgstr ""
 
@@ -1770,7 +1772,7 @@ msgstr ""
 #: apps/invoicing/views.py:450
 #: apps/messaging/templates/messaging/batch_detail.html:66
 #: apps/readings/templates/readings/_round_results.html:7
-#: apps/readings/views.py:145 apps/register/models.py:155
+#: apps/readings/views.py:148 apps/register/models.py:155
 #: apps/register/unitwords.py:22
 #: apps/selfservice/templates/selfservice/print.html:26
 #: apps/selfservice/templates/selfservice/round_links.html:39
@@ -1810,7 +1812,6 @@ msgstr ""
 #: apps/messaging/templates/messaging/_unit_messages.html:16
 #: apps/messaging/templates/messaging/batch_detail.html:69
 #: apps/messaging/templates/messaging/batch_list.html:25
-#: apps/plugins/templates/plugins/plugin_list.html:22
 #: apps/readings/templates/readings/round_list.html:22
 #: apps/register/csv_io.py:468
 #: apps/register/templates/register/_unit_results.html:10
@@ -1827,13 +1828,13 @@ msgstr ""
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:25
 #: apps/invoicing/templates/invoicing/run_detail.html:59
-#: apps/readings/templates/readings/_round_row.html:33
+#: apps/readings/templates/readings/_round_row.html:32
 #: apps/readings/templates/readings/_unit_readings.html:23
 msgid "Check"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:31
-#: apps/readings/templates/readings/_round_results.html:20
+#: apps/readings/templates/readings/round_detail.html:10
 msgid "Export as CSV"
 msgstr ""
 
@@ -2079,7 +2080,7 @@ msgstr ""
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:19
 #: apps/notifications/templates/notifications/list.html:19
-#: apps/readings/templates/readings/round_detail.html:31
+#: apps/readings/templates/readings/round_detail.html:32
 #: apps/register/templates/register/_show_select.html:3
 msgid "Show"
 msgstr ""
@@ -2108,7 +2109,7 @@ msgid "All runs"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:37
-#: apps/readings/templates/readings/round_detail.html:39
+#: apps/readings/templates/readings/round_detail.html:40
 #: apps/register/templates/register/person_list.html:25
 #: apps/register/templates/register/unit_list.html:42
 msgid "Filter"
@@ -2202,7 +2203,7 @@ msgid "Customer"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:79
-#: apps/readings/views.py:147
+#: apps/readings/views.py:150
 msgid "Period"
 msgstr ""
 
@@ -2429,8 +2430,8 @@ msgid "All issued invoices of this run have been sent."
 msgstr ""
 
 #: apps/invoicing/views.py:367 apps/invoicing/views.py:430
-#: apps/messaging/views.py:55 apps/messaging/views.py:161
-#: apps/messaging/views.py:249
+#: apps/messaging/views.py:59 apps/messaging/views.py:165
+#: apps/messaging/views.py:253
 msgid "Sending has started. This page shows how it goes."
 msgstr ""
 
@@ -2605,7 +2606,7 @@ msgstr ""
 msgid "A password is saved. Leave this empty to keep it."
 msgstr ""
 
-#: apps/messaging/email_forms.py:191 apps/plugins/views.py:129
+#: apps/messaging/email_forms.py:191 apps/plugins/views.py:203
 #, python-format
 msgid ""
 "Set in the server environment (%(variable)s), so it cannot be changed here."
@@ -2677,7 +2678,7 @@ msgid ""
 msgstr ""
 
 #: apps/messaging/forms.py:103 apps/messaging/models.py:41
-#: apps/messaging/templates/messaging/batch_list.html:12
+#: apps/messaging/templates/messaging/batch_list.html:11
 #: apps/messaging/templates/messaging/compose.html:3
 #: apps/messaging/templates/messaging/compose.html:7
 msgid "Urgent alert"
@@ -2852,7 +2853,7 @@ msgid "Automatic reminder"
 msgstr ""
 
 #: apps/messaging/models.py:47
-#: apps/readings/templates/readings/round_detail.html:33
+#: apps/readings/templates/readings/round_detail.html:34
 #: apps/selfservice/views.py:23
 msgid "All units"
 msgstr ""
@@ -3153,8 +3154,8 @@ msgid "Unsubscribed before it was sent."
 msgstr ""
 
 #: apps/messaging/newsletter.py:116
-#: apps/messaging/templates/messaging/_send_forms.html:8
-#: apps/messaging/views.py:363
+#: apps/messaging/templates/messaging/_send_forms.html:11
+#: apps/messaging/views.py:367
 msgid "Email is not set up."
 msgstr ""
 
@@ -3224,23 +3225,33 @@ msgid "Send links"
 msgstr ""
 
 #: apps/messaging/templates/messaging/_send_forms.html:7
-#, python-format
-msgid "SMS goes through %(provider)s."
+msgid ""
+"The round is closed, so members cannot report through their links. Change "
+"its dates to open it again."
 msgstr ""
 
 #: apps/messaging/templates/messaging/_send_forms.html:7
+msgid "The round is a draft. Take it out of draft to send links."
+msgstr ""
+
+#: apps/messaging/templates/messaging/_send_forms.html:10
+#, python-format
+msgid "Way of sending SMS: %(provider)s."
+msgstr ""
+
+#: apps/messaging/templates/messaging/_send_forms.html:10
 msgid "SMS is not set up, so links go by email."
 msgstr ""
 
-#: apps/messaging/templates/messaging/_send_forms.html:9
+#: apps/messaging/templates/messaging/_send_forms.html:12
 msgid "Households without a working phone or email are listed for printing."
 msgstr ""
 
-#: apps/messaging/templates/messaging/_send_forms.html:16
+#: apps/messaging/templates/messaging/_send_forms.html:19
 msgid "Send links to all units"
 msgstr ""
 
-#: apps/messaging/templates/messaging/_send_forms.html:21
+#: apps/messaging/templates/messaging/_send_forms.html:24
 msgid "Send reminder to units missing a reading"
 msgstr ""
 
@@ -3345,7 +3356,7 @@ msgstr ""
 msgid "New newsletter"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_list.html:11
+#: apps/messaging/templates/messaging/batch_list.html:12
 #: apps/messaging/templates/messaging/compose.html:3
 #: apps/messaging/templates/messaging/compose.html:7
 msgid "New message"
@@ -3600,64 +3611,64 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr ""
 
-#: apps/messaging/views.py:135
+#: apps/messaging/views.py:139
 msgid "Nobody can be reached with these choices."
 msgstr ""
 
-#: apps/messaging/views.py:220
+#: apps/messaging/views.py:224
 msgid "The notice is no longer shown."
 msgstr ""
 
-#: apps/messaging/views.py:243
+#: apps/messaging/views.py:247
 msgid "Everyone who wants the newsletter"
 msgstr ""
 
-#: apps/messaging/views.py:279
+#: apps/messaging/views.py:283
 msgid "Saved the newsletter choice."
 msgstr ""
 
-#: apps/messaging/views.py:363
+#: apps/messaging/views.py:367
 msgid "This channel is not set up."
 msgstr ""
 
-#: apps/messaging/views.py:367
+#: apps/messaging/views.py:371
 msgid "Enter an email address."
 msgstr ""
 
-#: apps/messaging/views.py:367
+#: apps/messaging/views.py:371
 msgid "Enter a phone number."
 msgstr ""
 
-#: apps/messaging/views.py:370
+#: apps/messaging/views.py:374
 msgid "Enter the from address under Settings > Email first."
 msgstr ""
 
-#: apps/messaging/views.py:373
+#: apps/messaging/views.py:377
 msgid "This is a test message from Metra. If you got it, sending works."
 msgstr ""
 
-#: apps/messaging/views.py:374
+#: apps/messaging/views.py:378
 msgid "Test message from Metra"
 msgstr ""
 
-#: apps/messaging/views.py:377
+#: apps/messaging/views.py:381
 #, python-format
 msgid "The test failed: %(error)s"
 msgstr ""
 
-#: apps/messaging/views.py:379
+#: apps/messaging/views.py:383
 #, python-format
 msgid "Test sent to %(to)s."
 msgstr ""
 
-#: apps/messaging/views.py:391
+#: apps/messaging/views.py:395
 #, python-format
 msgid ""
 "%(label)s is chosen, but its account details are missing. Enter them under "
 "Settings > Add-ons > %(label)s."
 msgstr ""
 
-#: apps/messaging/views.py:412 apps/setup/views.py:185
+#: apps/messaging/views.py:416 apps/setup/views.py:185
 msgid "Saved the email settings."
 msgstr ""
 
@@ -3917,33 +3928,29 @@ msgid ""
 "and sections at once, and its data is kept for when it is turned on again."
 msgstr ""
 
-#: apps/plugins/templates/plugins/plugin_list.html:13
-msgid ""
-"This list shows the add-ons installed on this server. Installing another one "
-"is done on the server, with METRA_PLUGINS."
-msgstr ""
-
-#: apps/plugins/templates/plugins/plugin_list.html:21
-msgid "Add-on"
-msgstr ""
-
-#: apps/plugins/templates/plugins/plugin_list.html:37
+#: apps/plugins/templates/plugins/plugin_list.html:35
 #, python-format
-msgid "Turn off<span class=\"visually-hidden\"> %(plugin)s</span>"
+msgid "In the menu under %(section)s."
 msgstr ""
 
-#: apps/plugins/templates/plugins/plugin_list.html:40
+#: apps/plugins/templates/plugins/plugin_list.html:39
 #, python-format
-msgid "Turn on<span class=\"visually-hidden\"> %(plugin)s</span>"
+msgid "Open %(page)s"
 msgstr ""
 
 #: apps/plugins/templates/plugins/plugin_list.html:43
 #, python-format
-msgid "Settings<span class=\"visually-hidden\"> for %(plugin)s</span>"
+msgid "version %(version)s"
+msgstr ""
+
+#: apps/plugins/templates/plugins/plugin_list.html:49
+msgid "No add-ons are installed."
 msgstr ""
 
 #: apps/plugins/templates/plugins/plugin_list.html:51
-msgid "No add-ons are installed."
+msgid ""
+"This list shows the add-ons installed on this server. Installing another one "
+"is done on the server, with METRA_PLUGINS."
 msgstr ""
 
 #: apps/plugins/templates/plugins/plugin_settings.html:3
@@ -3990,34 +3997,90 @@ msgid "Send test SMS"
 msgstr ""
 
 #: apps/plugins/templates/plugins/plugin_settings.html:56
-#: apps/plugins/views.py:242
+#: apps/plugins/views.py:316
 msgid "Turn the add-on on to send a test."
 msgstr ""
 
-#: apps/plugins/views.py:103
+#: apps/plugins/templates/plugins/plugin_turn_off.html:3
+#: apps/plugins/templates/plugins/plugin_turn_off.html:6
+#, python-format
+msgid "Turn off %(plugin)s?"
+msgstr ""
+
+#: apps/plugins/templates/plugins/plugin_turn_off.html:8
+msgid "Its pages leave the menu:"
+msgstr ""
+
+#: apps/plugins/templates/plugins/plugin_turn_off.html:10
+msgid ""
+"Metra sends its email through this add-on now. Choose another way of sending "
+"under Settings > Email, or email stops."
+msgstr ""
+
+#: apps/plugins/templates/plugins/plugin_turn_off.html:11
+msgid ""
+"Metra sends its SMS through this add-on now. Without another SMS service, "
+"SMS stops."
+msgstr ""
+
+#: apps/plugins/templates/plugins/plugin_turn_off.html:13
+msgid ""
+"Its data and settings are kept, and come back when it is turned on again."
+msgstr ""
+
+#: apps/plugins/templates/plugins/plugin_turn_off.html:19
+#, python-format
+msgid "Turn off %(plugin)s"
+msgstr ""
+
+#: apps/plugins/views.py:88
+msgid "Features"
+msgstr ""
+
+#: apps/plugins/views.py:89
+msgid "Sending services"
+msgstr ""
+
+#: apps/plugins/views.py:90
+msgid "Integrations and other add-ons"
+msgstr ""
+
+#: apps/plugins/views.py:92
+msgid "Used for email"
+msgstr ""
+
+#: apps/plugins/views.py:92
+msgid "Used for SMS"
+msgstr ""
+
+#: apps/plugins/views.py:133
+msgid "Not set up yet"
+msgstr ""
+
+#: apps/plugins/views.py:177
 #, python-format
 msgid "%(plugin)s is on."
 msgstr ""
 
-#: apps/plugins/views.py:105
+#: apps/plugins/views.py:179
 #, python-format
 msgid "%(plugin)s is off. Its data is kept."
 msgstr ""
 
-#: apps/plugins/views.py:118
+#: apps/plugins/views.py:192
 #, python-format
 msgid "Remove the saved %(setting)s"
 msgstr ""
 
-#: apps/plugins/views.py:152
+#: apps/plugins/views.py:226
 msgid "The saved value cannot be read with this server's key; enter it again."
 msgstr ""
 
-#: apps/plugins/views.py:154
+#: apps/plugins/views.py:228
 msgid "A value is saved. Leave this empty to keep it."
 msgstr ""
 
-#: apps/plugins/views.py:198
+#: apps/plugins/views.py:272
 msgid "Saved the settings."
 msgstr ""
 
@@ -4040,7 +4103,7 @@ msgstr ""
 #: apps/readings/forms.py:40
 #: apps/readings/templates/readings/_round_results.html:9
 #: apps/readings/templates/readings/_unit_readings.html:9
-#: apps/readings/views.py:149
+#: apps/readings/views.py:152
 msgid "Reading"
 msgstr ""
 
@@ -4160,7 +4223,7 @@ msgstr ""
 
 #: apps/readings/templates/readings/_round_results.html:8
 #: apps/readings/templates/readings/reading_form.html:9
-#: apps/readings/views.py:148
+#: apps/readings/views.py:151
 msgid "Previous reading"
 msgstr ""
 
@@ -4168,11 +4231,11 @@ msgstr ""
 #: apps/readings/templates/readings/_unit_readings.html:11
 #: apps/readings/templates/readings/reading_form.html:12
 #: apps/readings/templates/readings/round_list.html:23
-#: apps/readings/views.py:154
+#: apps/readings/views.py:157
 msgid "Submitted"
 msgstr ""
 
-#: apps/readings/templates/readings/_round_results.html:23
+#: apps/readings/templates/readings/_round_results.html:20
 #: apps/register/templates/register/_unit_results.html:36
 msgid "No units found."
 msgstr ""
@@ -4189,9 +4252,19 @@ msgstr ""
 msgid "Saved"
 msgstr ""
 
-#: apps/readings/templates/readings/_round_row.html:28
+#: apps/readings/templates/readings/_round_row.html:26
 #: apps/readings/templates/readings/_unit_readings.html:20
 msgid "Missing"
+msgstr ""
+
+#: apps/readings/templates/readings/_round_row.html:27
+#: apps/readings/templates/readings/_unit_readings.html:27
+msgid "Correct"
+msgstr ""
+
+#: apps/readings/templates/readings/_round_row.html:27
+#: apps/readings/templates/readings/_unit_readings.html:27
+msgid "Enter"
 msgstr ""
 
 #: apps/readings/templates/readings/_unit_readings.html:8
@@ -4199,21 +4272,13 @@ msgstr ""
 msgid "Round"
 msgstr ""
 
-#: apps/readings/templates/readings/_unit_readings.html:27
-msgid "Correct"
-msgstr ""
-
-#: apps/readings/templates/readings/_unit_readings.html:27
-msgid "Enter"
-msgstr ""
-
-#: apps/readings/templates/readings/round_detail.html:10
+#: apps/readings/templates/readings/round_detail.html:11
 #: apps/register/templates/register/person_detail.html:10
 #: apps/register/templates/register/unit_detail.html:10
 msgid "Edit"
 msgstr ""
 
-#: apps/readings/templates/readings/round_detail.html:16
+#: apps/readings/templates/readings/round_detail.html:17
 #, python-format
 msgid "%(submitted)s of %(count)s unit has reported. %(missing)s missing."
 msgid_plural ""
@@ -4221,11 +4286,11 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/readings/templates/readings/round_detail.html:34
+#: apps/readings/templates/readings/round_detail.html:35
 msgid "Missing a reading"
 msgstr ""
 
-#: apps/readings/templates/readings/round_detail.html:35
+#: apps/readings/templates/readings/round_detail.html:36
 msgid "Reported"
 msgstr ""
 
@@ -4303,23 +4368,23 @@ msgstr ""
 msgid "Saved %(name)s."
 msgstr ""
 
-#: apps/readings/views.py:151
+#: apps/readings/views.py:154
 msgid "Unit of measure"
 msgstr ""
 
-#: apps/readings/views.py:152
+#: apps/readings/views.py:155
 msgid "Source"
 msgstr ""
 
-#: apps/readings/views.py:153
+#: apps/readings/views.py:156
 msgid "Entered by"
 msgstr ""
 
-#: apps/readings/views.py:156
+#: apps/readings/views.py:159
 msgid "Warnings"
 msgstr ""
 
-#: apps/readings/views.py:224
+#: apps/readings/views.py:227
 #, python-format
 msgid "Saved the reading for %(name)s."
 msgstr ""

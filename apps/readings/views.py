@@ -127,7 +127,10 @@ def round_detail(request, pk):
         "expected": expected,
         "submitted": submitted,
         "missing": max(expected - submitted, 0),
-        "can_enter": request.user.has_perms(["readings.add_reading", "readings.change_reading"]),
+        # A closed round is corrected one reading at a time, from its own page.
+        "can_enter": round_.state != ReadingRound.State.CLOSED
+        and request.user.has_perms(["readings.add_reading", "readings.change_reading"]),
+        "can_correct": request.user.has_perms(["readings.add_reading", "readings.change_reading"]),
     }
     if _is_htmx(request, "results"):
         return render(request, "readings/_round_results.html", context)

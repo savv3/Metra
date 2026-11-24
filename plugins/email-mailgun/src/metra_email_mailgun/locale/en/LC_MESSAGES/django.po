@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 20:57+0000\n"
+"POT-Creation-Date: 2026-11-24 21:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,45 +17,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:24
-msgid "Sending domain"
+#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:13
+msgid "Send Metra's email through Mailgun, with delivery and bounce reports."
 msgstr ""
 
 #: plugins/email-mailgun/src/metra_email_mailgun/apps.py:25
+msgid "Sending domain"
+msgstr ""
+
+#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:26
 msgid "The domain you added at Mailgun, for example mg.example.fi."
 msgstr ""
 
-#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:30
+#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:31
 msgid "API key"
 msgstr ""
 
-#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:32
+#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:33
 msgid "A sending API key for the domain, from Mailgun."
 msgstr ""
 
-#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:37
+#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:38
 msgid "Region"
 msgstr ""
 
-#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:39
+#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:40
 msgid "EU (api.eu.mailgun.net)"
 msgstr ""
 
-#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:39
+#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:40
 msgid "US (api.mailgun.net)"
 msgstr ""
 
-#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:42
+#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:43
 msgid ""
 "Where your Mailgun account keeps its data. Choose EU unless it was made in "
 "the US."
 msgstr ""
 
-#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:48
+#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:49
 msgid "Webhook signing key"
 msgstr ""
 
-#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:52
+#: plugins/email-mailgun/src/metra_email_mailgun/apps.py:53
 #, python-brace-format
 msgid ""
 "From Mailgun's Webhooks page. There, add {url} for delivered messages, "

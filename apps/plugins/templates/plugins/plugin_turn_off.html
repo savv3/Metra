@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n nav %}
+{% block title %}{% blocktranslate with plugin=plugin.label %}Turn off {{ plugin }}?{% endblocktranslate %}{% endblock %}
+{% block content %}
+  {% url 'core:settings' as c1 %}{% url 'plugins:list' as c2 %}{% crumbs c1 _('Settings') c2 _('Add-ons') %}
+  <h1>{% blocktranslate with plugin=plugin.label %}Turn off {{ plugin }}?{% endblocktranslate %}</h1>
+  <ul>
+    {% if plugin.menu %}<li>{% translate "Its pages leave the menu:" %} {% for label, url, section in plugin.menu %}{{ label }}{% if not forloop.last %}, {% endif %}{% endfor %}.</li>{% endif %}
+    {% for channel in in_use %}
+      {% if channel == "email" %}<li><strong>{% translate "Metra sends its email through this add-on now. Choose another way of sending under Settings > Email, or email stops." %}</strong></li>{% endif %}
+      {% if channel == "sms" %}<li><strong>{% translate "Metra sends its SMS through this add-on now. Without another SMS service, SMS stops." %}</strong></li>{% endif %}
+    {% endfor %}
+    <li>{% translate "Its data and settings are kept, and come back when it is turned on again." %}</li>
+  </ul>
+  <form method="post" action="{% url 'plugins:toggle' plugin.name %}" class="actions">
+    {% csrf_token %}
+    <input type="hidden" name="enabled" value="0">
+    <input type="hidden" name="confirmed" value="1">
+    <button type="submit" class="button button--danger">{% blocktranslate with plugin=plugin.label %}Turn off {{ plugin }}{% endblocktranslate %}</button>
+    <a class="button button--link" href="{% url 'plugins:list' %}">{% translate "Cancel" %}</a>
+  </form>
+{% endblock %}

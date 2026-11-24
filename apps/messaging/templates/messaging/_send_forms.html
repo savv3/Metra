@@ -2,8 +2,11 @@
 {% comment %}Send buttons for a round; needs round, channels and perms.{% endcomment %}
 {% if perms.messaging.add_messagebatch and perms.selfservice.add_selfservicelink %}
   <h2>{% translate "Send links" %}</h2>
+  {% if round.state == "closed" or round.state == "draft" %}
+  <p class="help">{% if round.state == "closed" %}{% translate "The round is closed, so members cannot report through their links. Change its dates to open it again." %}{% else %}{% translate "The round is a draft. Take it out of draft to send links." %}{% endif %}</p>
+  {% else %}
   <p>
-    {% if channels.sms %}{% blocktranslate with provider=channels.sms %}SMS goes through {{ provider }}.{% endblocktranslate %}{% else %}{% translate "SMS is not set up, so links go by email." %}{% endif %}
+    {% if channels.sms %}{% blocktranslate with provider=channels.sms_label %}Way of sending SMS: {{ provider }}.{% endblocktranslate %}{% else %}{% translate "SMS is not set up, so links go by email." %}{% endif %}
     {% if not channels.email %}{% translate "Email is not set up." %}{% endif %}
     {% translate "Households without a working phone or email are listed for printing." %}
   </p>
@@ -20,4 +23,5 @@
       <button type="submit" class="button">{% translate "Send reminder to units missing a reading" %}</button>
     </form>
   </div>
+  {% endif %}
 {% endif %}

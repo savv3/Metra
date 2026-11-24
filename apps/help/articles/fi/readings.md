@@ -26,7 +26,9 @@ keneltä se puuttuu. Kirjoita arvot rivi riviltä tai käytä yksikön sivun
 toimintoa **Syötä** tai **Korjaa**. Mittarin kulutus on arvo miinus edellinen
 lukema. Arvo, joka on pienempi kuin viime kerralla tai paljon yksikön
 tavallista kulutusta suurempi, tallennetaan mutta merkitään **Tarkista**.
-**Vie CSV-tiedostona** lataa kierroksen tiedot.
+Kun kierros on suljettu, rivit näyttävät arvot ja **Korjaa**-painikkeen
+syöttökenttien sijaan, eikä linkkien lähetyspainikkeita enää näytetä.
+**Vie CSV-tiedostona** kierroksen sivun yläosassa lataa kierroksen tiedot.
 
 ## Jäsenet ilmoittavat lukemansa itse
 

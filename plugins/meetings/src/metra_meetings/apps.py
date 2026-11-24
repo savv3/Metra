@@ -7,6 +7,9 @@ from django.utils.translation import gettext_lazy as _
 class MeetingsConfig(AppConfig):
     name = "metra_meetings"
     verbose_name = _("Meetings")
+    description = _(
+        "Call meetings, take and approve the minutes, and publish approved minutes to members."
+    )
     default_auto_field = "django.db.models.BigAutoField"
 
     # Attendance links a person (and the unit they represent) to a meeting,

@@ -15,7 +15,7 @@
       <tbody>
         {% for change in history.changes %}
           <tr>
-            <td>{{ change.entry.timestamp|date:"SHORT_DATETIME_FORMAT" }}</td>
+            <td class="nowrap">{{ change.entry.timestamp|date:"SHORT_DATETIME_FORMAT" }}</td>
             <td>{{ change.entry.actor|default:_("System") }}</td>
             <td>{{ change.action }}</td>
             <td>

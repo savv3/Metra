@@ -8,8 +8,8 @@
       <div class="actions">
         {% if perms.messaging.send_newsletter %}<a class="button" href="{% url 'messaging:newsletter_compose' %}">{% translate "New newsletter" %}</a>{% endif %}
         {% if perms.messaging.send_broadcast %}
-        <a class="button" href="{% url 'messaging:compose' %}">{% translate "New message" %}</a>
-        <a class="button button--danger" href="{% url 'messaging:compose' %}?urgent=1">{% translate "Urgent alert" %}</a>{% endif %}
+        <a class="button" href="{% url 'messaging:compose' %}?urgent=1"><span aria-hidden="true">⚠ </span>{% translate "Urgent alert" %}</a>
+        <a class="button button--primary" href="{% url 'messaging:compose' %}">{% translate "New message" %}</a>{% endif %}
       </div>
     {% endif %}
   </div>

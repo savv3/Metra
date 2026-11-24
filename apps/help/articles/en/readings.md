@@ -23,7 +23,9 @@ The round page shows how many units have reported and which are missing. Type
 values in row by row, or use **Enter** or **Correct** on a unit's page. For a
 meter, the usage is the value minus the previous reading. A value lower than
 last time, or far above the unit's usual usage, is saved but marked
-**Check**. **Export as CSV** downloads the round.
+**Check**. Once a round is closed, its rows show the values with
+**Correct** instead of input fields, and the send buttons are gone.
+**Export as CSV**, at the top of the round page, downloads the round.
 
 ## Members report their own readings
 

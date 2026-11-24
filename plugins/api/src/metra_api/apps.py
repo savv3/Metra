@@ -5,6 +5,10 @@ from django.utils.translation import gettext_lazy as _
 class ApiConfig(AppConfig):
     name = "metra_api"
     verbose_name = _("API")
+    description = _(
+        "A REST API for other systems: units, people, readings and invoices, "
+        "with a token per client."
+    )
     default_auto_field = "django.db.models.BigAutoField"
 
     # Clients are systems, not people: the plugin stores their name and who
