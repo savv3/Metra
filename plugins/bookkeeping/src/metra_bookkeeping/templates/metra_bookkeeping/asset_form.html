@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if asset %}{{ asset.name }}{% else %}{% translate "New fixed asset" %}{% endif %}{% endblock %}
+{% block content %}
+  <div class="page-head"><h1>{% if asset %}{{ asset.name }}{% else %}{% translate "New fixed asset" %}{% endif %}</h1></div>
+  <p class="help">{% blocktranslate trimmed %}
+    The plan applies from the month the asset is acquired, also for years before the books were
+    kept in Metra. Book the purchase itself as a voucher on the asset account.
+  {% endblocktranslate %}</p>
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}{% include "register/_field.html" %}{% endfor %}
+    <div class="actions">
+      <button type="submit" class="button button--primary">{% translate "Save" %}</button>
+      <a class="button" href="{% url 'metra_bookkeeping:asset_list' %}">{% translate "Cancel" %}</a>
+    </div>
+  </form>
+  {% if asset and perms.metra_bookkeeping.delete_fixedasset %}
+    <form method="post" action="{% url 'metra_bookkeeping:asset_delete' asset.pk %}">{% csrf_token %}<button type="submit" class="button button--danger">{% translate "Remove from the register" %}</button></form>
+  {% endif %}
+{% endblock %}

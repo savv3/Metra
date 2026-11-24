@@ -15,10 +15,24 @@
     <dt>{% translate "Average staff" %}</dt><dd>{{ year.staff }}</dd>
     <dt>{% translate "Posted vouchers" %}</dt><dd>{{ posted }}</dd>
     <dt>{% translate "Drafts" %}</dt><dd>{{ drafts }}</dd>
+    <dt>{% translate "Locked until" %}</dt><dd>{% if year.locked_until %}{{ year.locked_until|date:"DATE_FORMAT" }}{% else %}{% translate "Nothing is locked yet." %}{% endif %}<span class="help">{% translate "Nothing can be posted on or before this day. Lock each month once it is reported, for example in the VAT return." %}</span></dd>
+    {% if year.is_open %}<dt>{% translate "Financial statements due" %}</dt><dd>{{ year.statements_due|date:"DATE_FORMAT" }}<span class="help">{% translate "Within four months of the end of the year." %}</span></dd>{% endif %}
+    {% if not year.is_open %}
+      <dt>{% translate "Closed" %}</dt><dd>{{ year.closed_at|date:"DATETIME_FORMAT" }}{% if year.closed_by %}, {{ year.closed_by.get_full_name|default:year.closed_by.get_username }}{% endif %}</dd>
+      {% if year.retained_earnings %}<dt>{% translate "Result carried to" %}</dt><dd>{{ year.retained_earnings }}</dd>{% endif %}
+    {% endif %}
     <dt>{% translate "Books kept until" %}</dt><dd>{{ year.books_kept_until|date:"DATE_FORMAT" }}<span class="help">{% translate "Financial statements, journal, ledger, chart of accounts and list of books: 10 years from the end of the financial year." %}</span></dd>
     <dt>{% translate "Vouchers kept until" %}</dt><dd>{{ year.vouchers_kept_until|date:"DATE_FORMAT" }}<span class="help">{% translate "Vouchers and receipts: 6 years from the end of the calendar year in which the financial year ended." %}</span></dd>
   </dl>
   <p class="help">{% translate "These are the shortest times the law allows. Nothing is deleted automatically." %}</p>
+  {% if lock_form and lock_form.fields.until.choices and perms.metra_bookkeeping.close_fiscalyear %}
+    <form method="post" action="{% url 'metra_bookkeeping:year_lock' year.pk %}" class="form form--inline" novalidate>
+      {% csrf_token %}
+      {% include "register/_field.html" with field=lock_form.until %}
+      <div class="actions"><button type="submit" class="button">{% translate "Lock" %}</button></div>
+      <p class="help">{% translate "A lock cannot be undone. Records from invoicing dated in a locked period are booked on the first open day, with a note." %}</p>
+    </form>
+  {% endif %}
   <div class="actions">
     <a class="button" href="{% url 'metra_bookkeeping:journal' %}?year={{ year.pk }}">{% translate "Journal" %}</a>
     <a class="button" href="{% url 'metra_bookkeeping:ledger' %}?year={{ year.pk }}">{% translate "General ledger" %}</a>
@@ -26,5 +40,11 @@
     <a class="button" href="{% url 'metra_bookkeeping:income_statement' %}?year={{ year.pk }}">{% translate "Income statement" %}</a>
     <a class="button" href="{% url 'metra_bookkeeping:balance_sheet' %}?year={{ year.pk }}">{% translate "Balance sheet" %}</a>
     {% if perms.metra_bookkeeping.view_budget %}<a class="button" href="{% url 'metra_bookkeeping:budget' %}?year={{ year.pk }}">{% translate "Budget follow-up" %}</a>{% endif %}
+  </div>
+  <h2>{% translate "Year-end" %}</h2>
+  <div class="actions">
+    <a class="button{% if year.is_open %} button--primary{% endif %}" href="{% url 'metra_bookkeeping:year_end' year.pk %}">{% if year.is_open %}{% translate "Close the year" %}{% else %}{% translate "Year-end" %}{% endif %}</a>
+    <a class="button" href="{% url 'metra_bookkeeping:year_package' year.pk %}">{% translate "Year-end package" %}</a>
+    {% if following %}<a class="button" href="{{ following.get_absolute_url }}">{% translate "Next year" %}: {{ following }}</a>{% endif %}
   </div>
 {% endblock %}

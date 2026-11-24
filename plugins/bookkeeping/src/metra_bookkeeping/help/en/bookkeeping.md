@@ -21,7 +21,8 @@ accounts, rename them and stop using the ones you do not need. Once an
 account has entries, its number and kind stay as they are.
 
 Then enter the balances the year starts with, from last year's balance
-sheet, as the first voucher, of the kind **Opening balances**.
+sheet, as the first voucher, of the kind **Opening balances**. Later years
+get their opening balances when the year before is closed.
 
 A financial year is 12 months and starts the day after the previous one
 ends. The first year, or a year whose dates change, can be 1 to 18 months.
@@ -150,7 +151,76 @@ cannot be turned off, so that they stay readable.
 
 An administrator who removes the add-on from the server (from `METRA_PLUGINS`) must first keep the books for the legal period another way: save the reports and receipts, and keep a backup. The data stays in the database, but cannot be read in Metra while the add-on is not installed.
 
-Closing the year comes in a later version of the add-on.
+## Locking months
+
+Once a month is reported, for example in the VAT return, lock it on the
+year's page: choose the last day to lock and press **Lock**. Nothing can be
+posted on or before that day, and a lock cannot be undone. Drafts dated in
+the period must be posted or deleted first. An invoice, payment or reminder
+fee dated in a locked period is booked on the first open day instead, with
+"booked late" and its own date in the description.
+
+## Fixed assets
+
+Under **Fixed assets**, enter each machine, building, pipe network or other
+asset used for more than a year: its asset account, when it was acquired,
+its cost and its depreciation plan (straight line over a number of years,
+or a percentage of the remaining value each year; land is not
+depreciated). The plan runs from the month the asset was acquired, also for
+years before the books were kept in Metra. Book the purchase itself as a
+voucher on the asset account.
+
+## Closing the year
+
+When the year has ended, open it and press **Close the year**. The page
+goes through the year-end:
+
+1. **Depreciation by plan**: **Make the depreciation voucher** makes a draft,
+   dated the last day of the year, from the asset register. Check and post
+   it.
+2. **Income invoiced after the year**: invoices issued after the year for
+   deliveries in it are offered as an accrual voucher, so their income
+   falls in the right year. Other accruals (costs billed later, income
+   received in advance) are vouchers of the kind **Accrual** dated the last
+   day of the year. Closing reverses every accrual on the first day of the
+   next year.
+3. **Bank statements**: enter each bank account's balance on the year-end
+   statement; the balance sheet specifications compare it with the books.
+4. **Notes and signatures**: the notes to the financial statements, with a
+   suggested text for each, and the board members who sign. Ask an
+   accountant which notes the organisation needs.
+5. **Close the year**: the page lists what still stops the closing (drafts,
+   records waiting from invoicing, accounts outside the statements, an
+   earlier year still open) and what to check first.
+
+Closing locks the year for good, keeps its chart of accounts as it reads
+that day (a later rename does not change the closed year's reports), and
+opens the next year, adding it if needed, with the closing balances as its
+opening balances. The result for the year is carried to the equity account
+you choose, by default the result of earlier years. Opening balances are
+typed by hand only in the first year kept in Metra.
+
+The financial statements are due four months after the end of the year.
+
+## Year-end package
+
+**Year-end package** makes one PDF for the auditor: the income statement
+and balance sheet with the previous year, the notes, a signature page with
+the auditor's note, the balance sheet specifications (each balance, the
+bank statements, the fixed assets and the open invoices), the list of books
+and material, the chart of accounts, the journal and the general ledger.
+Before the year is closed, it says on its first page that it is
+preliminary. It is in Finnish or Swedish; an English one is marked as a
+translation. Choose **Only the financial statements and notes** for
+filing: a cooperative files its statements with the Trade Register once
+its general meeting has adopted them.
+
+## Correcting an earlier year
+
+A closed year can never be opened again. An error found later is corrected
+in the open year: on the voucher, choose the closed year under **Corrects
+the year**, and book a material error against the result of earlier years.
+The notes of the year list such corrections.
 
 ## Financial statements
 

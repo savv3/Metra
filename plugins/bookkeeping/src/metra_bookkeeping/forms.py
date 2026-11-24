@@ -6,7 +6,7 @@ from django import forms
 from django.conf import settings
 from django.db import models
 from django.template.defaultfilters import filesizeformat
-from django.utils import timezone, translation
+from django.utils import formats, timezone, translation
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
 
@@ -15,8 +15,10 @@ from apps.plugins import api
 from . import countries
 from .models import (
     Account,
+    BankBalance,
     Budget,
     FiscalYear,
+    FixedAsset,
     PostingSettings,
     SalesAccount,
     VatCode,
@@ -24,6 +26,7 @@ from .models import (
     Voucher,
     VoucherLine,
     VoucherSeries,
+    YearNote,
     vat_label,
 )
 
@@ -110,7 +113,7 @@ class VoucherSeriesForm(forms.ModelForm):
 class VoucherForm(forms.ModelForm):
     class Meta:
         model = Voucher
-        fields = ["date", "description", "series", "kind"]
+        fields = ["date", "description", "series", "kind", "corrects"]
         widgets = {"date": DATE}
 
     def __init__(self, *args, **kwargs):
@@ -120,6 +123,12 @@ class VoucherForm(forms.ModelForm):
             for value, label in Voucher.Kind.choices
             if value != Voucher.Kind.REVERSAL
         ]
+        closed = FiscalYear.objects.filter(status=FiscalYear.Status.CLOSED)
+        if closed.exists() or self.instance.corrects_id:
+            self.fields["corrects"].queryset = closed
+            self.fields["corrects"].empty_label = _("No, an entry of this year")
+        else:
+            del self.fields["corrects"]
         if VoucherSeries.objects.count() < 2:
             self.fields["series"].widget = forms.HiddenInput()
         self.fields["series"].initial = VoucherSeries.default().pk
@@ -129,10 +138,8 @@ class VoucherForm(forms.ModelForm):
         year = FiscalYear.for_date(date)
         if year is None:
             raise forms.ValidationError(_("No financial year covers this date."))
-        if not year.is_open:
-            raise forms.ValidationError(
-                _("The financial year %(year)s is closed.") % {"year": year}
-            )
+        if problem := year.lock_problem(date):
+            raise forms.ValidationError(problem)
         self.year = year
         return date
 
@@ -259,6 +266,8 @@ class ReverseForm(forms.Form):
         year = FiscalYear.for_date(date)
         if year is None or not year.is_open:
             raise forms.ValidationError(_("There is no open financial year for that date."))
+        if problem := year.lock_problem(date):
+            raise forms.ValidationError(problem)
         return date
 
 
@@ -592,3 +601,178 @@ class VatRegistrationForm(forms.ModelForm):
 
     def clean_period(self):
         return self.cleaned_data["period"] or VatRegistration.Period.MONTH
+
+
+# Year-end
+
+
+class LockForm(forms.Form):
+    until = forms.TypedChoiceField(label=gettext_lazy("Lock the books up to"), coerce=str)
+
+    def __init__(self, *args, year, **kwargs):
+        from .yearend import month_ends
+
+        super().__init__(*args, **kwargs)
+        self.fields["until"].choices = [
+            (day.isoformat(), formats.date_format(day, "DATE_FORMAT")) for day in month_ends(year)
+        ]
+
+    def clean_until(self):
+        return datetime.date.fromisoformat(self.cleaned_data["until"])
+
+
+class CloseForm(forms.Form):
+    retained_earnings = forms.ModelChoiceField(
+        label=gettext_lazy("Carry the result to"),
+        queryset=Account.objects.filter(kind=Account.Kind.EQUITY),
+        help_text=gettext_lazy("The result of earlier years, in the next year's opening balances."),
+    )
+    confirm = forms.BooleanField(
+        label=gettext_lazy("I understand that a closed year can never be changed or opened again."),
+    )
+
+    def __init__(self, *args, year, **kwargs):
+        from .yearend import default_retained_earnings
+
+        super().__init__(*args, **kwargs)
+        account = default_retained_earnings(year)
+        self.fields["retained_earnings"].initial = account.pk if account else None
+
+
+class BankBalanceForm(forms.Form):
+    """The bank statement balance at the end of the year, per bank account."""
+
+    def __init__(self, *args, year, accounts, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.year = year
+        given = {row.account_id: row for row in BankBalance.objects.filter(year=year)}
+        self.rows = []
+        for account in accounts:
+            row = given.get(account.pk)
+            self.fields[f"balance_{account.pk}"] = forms.DecimalField(
+                label=str(account),
+                required=False,
+                max_digits=12,
+                decimal_places=2,
+                initial=row.balance if row else None,
+                widget=forms.NumberInput(attrs={"inputmode": "decimal", "step": "0.01"}),
+            )
+            self.fields[f"reference_{account.pk}"] = forms.CharField(
+                label=gettext_lazy("Statement"),
+                required=False,
+                max_length=100,
+                initial=row.reference if row else "",
+                help_text=gettext_lazy("For example: statement 12/2026."),
+            )
+            self.rows.append((account, row))
+
+    def pairs(self):
+        return [
+            (account, self[f"balance_{account.pk}"], self[f"reference_{account.pk}"])
+            for account, _row in self.rows
+        ]
+
+    def save(self):
+        for account, row in self.rows:
+            balance = self.cleaned_data.get(f"balance_{account.pk}")
+            reference = self.cleaned_data.get(f"reference_{account.pk}", "")
+            if balance is None:
+                if row is not None:
+                    row.delete()
+            elif row is None:
+                BankBalance.objects.create(
+                    year=self.year, account=account, balance=balance, reference=reference
+                )
+            elif (row.balance, row.reference) != (balance, reference):
+                row.balance, row.reference = balance, reference
+                row.save()
+
+
+class NotesForm(forms.Form):
+    """The notes to a year's financial statements in one language, and who
+    signs them."""
+
+    signers = forms.CharField(
+        label=gettext_lazy("Who signs the financial statements"),
+        required=False,
+        widget=forms.Textarea(attrs={"rows": 4}),
+        help_text=gettext_lazy(
+            "The board members, one per line. Printed under the signature lines."
+        ),
+    )
+
+    def __init__(self, *args, year, language, notes, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.year = year
+        self.language = language
+        self.notes = notes
+        self.fields["signers"].initial = year.signers
+        saved = {note.key: note for note in year.notes.filter(language=language)}
+        self.saved = saved
+        for note in notes:
+            self.fields[f"note_{note.key}"] = forms.CharField(
+                label=note.name,
+                required=False,
+                widget=forms.Textarea(attrs={"rows": 3}),
+                initial=saved[note.key].text if note.key in saved else note.default,
+            )
+
+    def note_fields(self):
+        return [self[f"note_{note.key}"] for note in self.notes]
+
+    def save(self):
+        for note in self.notes:
+            text = self.cleaned_data.get(f"note_{note.key}", "").strip()
+            row = self.saved.get(note.key)
+            if row is None:
+                YearNote.objects.create(
+                    year=self.year, key=note.key, language=self.language, text=text
+                )
+            elif row.text != text:
+                row.text = text
+                row.save()
+        signers = self.cleaned_data.get("signers", "").strip()
+        if signers != self.year.signers:
+            self.year.signers = signers
+            self.year.save(update_fields=["signers"])
+
+
+class FixedAssetForm(forms.ModelForm):
+    class Meta:
+        model = FixedAsset
+        fields = [
+            "name",
+            "account",
+            "acquired",
+            "cost",
+            "method",
+            "years",
+            "percent",
+            "depreciation_account",
+            "disposed",
+            "note",
+        ]
+        widgets = {"acquired": DATE, "disposed": DATE}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name, kind in (
+            ("account", Account.Kind.ASSET),
+            ("depreciation_account", Account.Kind.EXPENSE),
+        ):
+            current = getattr(self.instance, f"{name}_id", None)
+            self.fields[name].queryset = Account.objects.filter(kind=kind).filter(
+                models.Q(active=True) | models.Q(pk=current)
+            )
+
+
+class PackageForm(StatementOptions):
+    """The year-end package: its language, the micro-entity format, and
+    whether it is only the statements (for filing) or everything the
+    auditor needs."""
+
+    statements_only = forms.BooleanField(
+        label=gettext_lazy("Only the financial statements and notes"),
+        required=False,
+        help_text=gettext_lazy("For filing, for example with the Trade Register."),
+    )

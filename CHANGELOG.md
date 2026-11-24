@@ -12,6 +12,21 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+### Added
+
+- Bookkeeping: locking and year-end. Months are locked once reported, and
+  nothing can be posted into a locked period (records from invoicing dated
+  there are booked on the first open day, with a note). **Close the year**
+  goes through the year-end: depreciation by plan from a new **Fixed
+  assets** register, accrual of income invoiced after the year, the bank
+  statement balances, and the notes and signers. Closing locks the year for
+  good, keeps its chart of accounts as it was, and opens the next year with
+  the closing balances, the result carried to equity; accruals are reversed
+  on its first day. Errors found later are corrected in the open year and
+  listed in its notes. The **Year-end package** is one PDF for the auditor:
+  the statements, notes, signature page, balance sheet specifications, list
+  of books and material, chart of accounts, journal and ledger.
+
 ### Changed
 
 - On a reading round's page, the units table and its filters have their own

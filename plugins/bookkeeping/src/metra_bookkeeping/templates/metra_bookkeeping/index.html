@@ -34,6 +34,13 @@
     {% include "metra_bookkeeping/_nav.html" %}
     <p class="subtitle">{% translate "Financial year" %} <a href="{{ year.get_absolute_url }}">{{ year }}</a> &middot; {% blocktranslate count count=posted_count trimmed %}{{ count }} posted voucher{% plural %}{{ count }} posted vouchers{% endblocktranslate %}</p>
 
+    {% for ended in to_close %}
+      <div class="status-panel status-panel--warning">
+        <p>{% blocktranslate with year=ended due=ended.statements_due|date:"DATE_FORMAT" trimmed %}The financial year {{ year }} has ended. Make the year-end entries and close it; the financial statements are due by {{ due }}.{% endblocktranslate %}
+        <a href="{% url 'metra_bookkeeping:year_end' ended.pk %}">{% translate "Close the year" %}</a></p>
+      </div>
+    {% endfor %}
+
     {% if late %}
       <div class="status-panel status-panel--warning">
         <h2>{% translate "Late entries" %}</h2>

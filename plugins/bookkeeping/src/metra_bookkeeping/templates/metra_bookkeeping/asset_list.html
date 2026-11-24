@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load i18n bookkeeping %}
+{% block title %}{% translate "Fixed assets" %}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>{% translate "Fixed assets" %}</h1>
+    <div class="actions">{% if perms.metra_bookkeeping.add_fixedasset %}<a class="button button--primary" href="{% url 'metra_bookkeeping:asset_create' %}">{% translate "New fixed asset" %}</a>{% endif %}</div>
+  </div>
+  {% include "metra_bookkeeping/_nav.html" %}
+  <p class="help">{% blocktranslate trimmed %}
+    Machinery, buildings, a pipe network and other things used for more than a year are booked
+    on an asset account at their cost and depreciated by a plan. At year-end the plan's
+    depreciation is offered as a voucher, and the balance sheet specifications compare the
+    register with the books.
+  {% endblocktranslate %}</p>
+  {% if rows %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="{% translate 'Fixed assets' %}">
+      <table>
+        <thead><tr>
+          <th scope="col">{% translate "Name" %}</th><th scope="col">{% translate "Account" %}</th><th scope="col">{% translate "Acquired" %}</th>
+          <th scope="col" class="num">{% translate "Cost" %}</th><th scope="col">{% translate "Depreciation plan" %}</th>
+          <th scope="col" class="num">{% if year %}{% blocktranslate %}Depreciation {{ year }}{% endblocktranslate %}{% endif %}</th>
+          <th scope="col" class="num">{% if year %}{% blocktranslate with day=year.end|date:"SHORT_DATE_FORMAT" %}Book value {{ day }}{% endblocktranslate %}{% endif %}</th>
+        </tr></thead>
+        <tbody>
+          {% for asset, depreciation, value in rows %}
+            <tr>
+              <th scope="row">{% if perms.metra_bookkeeping.change_fixedasset %}<a href="{% url 'metra_bookkeeping:asset_edit' asset.pk %}">{{ asset.name }}</a>{% else %}{{ asset.name }}{% endif %}{% if asset.disposed %} <span class="badge">{% translate "Sold or scrapped" %} {{ asset.disposed|date:"SHORT_DATE_FORMAT" }}</span>{% endif %}</th>
+              <td>{{ asset.account }}</td><td>{{ asset.acquired|date:"SHORT_DATE_FORMAT" }}</td>
+              <td class="num">{{ asset.cost|money }}</td><td>{{ asset.plan_display }}</td>
+              <td class="num">{{ depreciation|money }}</td><td class="num">{{ value|money }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% translate "None." %}</p>
+  {% endif %}
+{% endblock %}

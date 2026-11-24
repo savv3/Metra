@@ -1378,3 +1378,332 @@ TEXTS = {
         "version is not for filing.",
     },
 }
+
+# Year-end.
+#
+# The result of a closed year is carried to the result of earlier years
+# (edellisten tilikausien voitto/tappio, yli-/alijäämä) in the next year's
+# opening balances; the treasurer can choose another equity account.
+RETAINED_EARNINGS = "2250"
+# Invoices issued after the year for supplies made in it are accrued here.
+ACCRUED_INCOME = "1760"
+# The balance sheet lines whose accounts are bank and cash (their balances
+# are checked against the bank statements) and fixed assets (against the
+# asset register).
+CASH_LINE = "cash"
+FIXED_ASSET_LINE = "non_current"
+
+
+def _t(fi, sv, en):
+    return {"fi": fi, "sv": sv, "en": en}
+
+
+# The notes to the financial statements (liitetiedot) of a small or micro
+# entity (PMA 1753/2015, ch. 3), as headings with a suggested text the
+# treasurer edits. ``sizes`` are the size classes a note is for. Which notes
+# an organisation needs is for its accountant to confirm.
+NOTES = [
+    {
+        "key": "principles",
+        "name": _t(
+            "Tilinpäätöksen laatimisperiaatteet",
+            "Principer för upprättande av bokslutet",
+            "Accounting principles",
+        ),
+        "sizes": ("micro", "small", "larger"),
+        "default": {
+            "micro": _t(
+                "Tilinpäätös on laadittu noudattaen pien- ja mikroyrityksen tilinpäätöksessä "
+                "esitettävistä tiedoista annetun valtioneuvoston asetuksen (1753/2015) "
+                "mikroyritystä koskevia säännöksiä.",
+                "Bokslutet har upprättats enligt bestämmelserna om mikroföretag i statsrådets "
+                "förordning om uppgifter som ska tas upp i små- och mikroföretags bokslut "
+                "(1753/2015).",
+                "The financial statements follow the rules for micro entities of the "
+                "Government decree on the financial statements of small and micro entities "
+                "(1753/2015).",
+            ),
+            "small": _t(
+                "Tilinpäätös on laadittu noudattaen pien- ja mikroyrityksen tilinpäätöksessä "
+                "esitettävistä tiedoista annetun valtioneuvoston asetuksen (1753/2015) "
+                "pienyritystä koskevia säännöksiä.",
+                "Bokslutet har upprättats enligt bestämmelserna om småföretag i statsrådets "
+                "förordning om uppgifter som ska tas upp i små- och mikroföretags bokslut "
+                "(1753/2015).",
+                "The financial statements follow the rules for small entities of the "
+                "Government decree on the financial statements of small and micro entities "
+                "(1753/2015).",
+            ),
+        },
+    },
+    {
+        "key": "valuation",
+        "name": _t(
+            "Pysyvien vastaavien arvostus ja poistot",
+            "Värdering av bestående aktiva och avskrivningar",
+            "Valuation of non-current assets and depreciation",
+        ),
+        "sizes": ("micro", "small", "larger"),
+        "default": _t(
+            "Pysyvät vastaavat on merkitty taseeseen välittömään hankintamenoon vähennettynä "
+            "suunnitelman mukaisilla poistoilla.",
+            "Bestående aktiva har tagits upp i balansräkningen till direkta "
+            "anskaffningsutgifter minskade med avskrivningar enligt plan.",
+            "Non-current assets are shown at their acquisition cost less depreciation by plan.",
+        ),
+        "plans": True,
+    },
+    {
+        "key": "guarantees",
+        "name": _t(
+            "Vakuudet ja vastuusitoumukset",
+            "Säkerheter och ansvarsförbindelser",
+            "Guarantees and contingent liabilities",
+        ),
+        "sizes": ("micro", "small", "larger"),
+        "default": _t(
+            "Ei annettuja vakuuksia eikä vastuusitoumuksia.",
+            "Inga givna säkerheter eller ansvarsförbindelser.",
+            "No guarantees or contingent liabilities given.",
+        ),
+    },
+    {
+        "key": "management_loans",
+        "name": _t(
+            "Johdolle annetut rahalainat",
+            "Penninglån till ledningen",
+            "Loans to management",
+        ),
+        "sizes": ("micro", "small", "larger"),
+        "default": _t(
+            "Ei rahalainoja hallituksen jäsenille.",
+            "Inga penninglån till styrelsens medlemmar.",
+            "No loans to members of the board.",
+        ),
+    },
+    {
+        "key": "staff",
+        "name": _t("Henkilöstö", "Personal", "Staff"),
+        "sizes": ("small", "larger"),
+        "default": _t(
+            "Henkilöstön keskimääräinen lukumäärä tilikauden aikana: {staff}.",
+            "Medelantalet anställda under räkenskapsperioden: {staff}.",
+            "Average number of staff during the financial year: {staff}.",
+        ),
+    },
+    {
+        "key": "events_after",
+        "name": _t(
+            "Tilikauden päättymisen jälkeiset olennaiset tapahtumat",
+            "Väsentliga händelser efter räkenskapsperiodens utgång",
+            "Material events after the end of the year",
+        ),
+        "sizes": ("small", "larger"),
+        "default": _t("Ei olennaisia tapahtumia.", "Inga väsentliga händelser.", "None."),
+    },
+]
+
+# The words of the year-end package, in the statements' languages.
+PACKAGE_TEXTS = {
+    "title": _t("Tilinpäätös", "Bokslut", "Financial statements"),
+    "statements_part": _t(
+        "Tilinpäätös ja liitetiedot",
+        "Bokslut och noter",
+        "Financial statements and notes",
+    ),
+    "financial_year": _t("Tilikausi", "Räkenskapsperiod", "Financial year"),
+    "contents": _t("Sisällys", "Innehåll", "Contents"),
+    "made": _t("Laadittu", "Upprättad", "Made"),
+    "software": _t(
+        "Kirjanpito-ohjelmisto: Metra {version}",
+        "Bokföringsprogram: Metra {version}",
+        "Bookkeeping software: Metra {version}",
+    ),
+    "notes": _t("Liitetiedot", "Noter", "Notes"),
+    "plan_straight": _t(
+        "tasapoisto {years} vuotta", "linjär avskrivning {years} år", "straight line, {years} years"
+    ),
+    "plan_reducing": _t(
+        "menojäännöspoisto {percent} %",
+        "degressiv avskrivning {percent} %",
+        "reducing balance, {percent} %",
+    ),
+    "plan_none": _t("ei poisteta", "avskrivs inte", "not depreciated"),
+    "corrections": _t(
+        "Edellisten tilikausien virheiden korjaukset",
+        "Rättelser av fel från tidigare räkenskapsperioder",
+        "Corrections of errors of earlier years",
+    ),
+    "corrects": _t("korjaa tilikautta", "rättar räkenskapsperioden", "corrects the year"),
+    "signatures": _t(
+        "Tilinpäätöksen allekirjoitus",
+        "Bokslutets undertecknande",
+        "Signing of the financial statements",
+    ),
+    "place_date": _t("Paikka ja aika", "Ort och datum", "Place and date"),
+    "board": _t("Hallitus", "Styrelsen", "The board"),
+    "audit_note_title": _t("Tilinpäätösmerkintä", "Bokslutsanteckning", "Auditor's note"),
+    "audit_note": _t(
+        "Suoritetusta tarkastuksesta on tänään annettu kertomus.",
+        "Över den utförda granskningen har i dag lämnats en berättelse.",
+        "A report on the audit has been given today.",
+    ),
+    "auditor": _t(
+        "Tilintarkastaja tai toiminnantarkastaja",
+        "Revisor eller verksamhetsgranskare",
+        "Auditor or operations reviewer",
+    ),
+    "due": _t(
+        "Tilinpäätös on laadittava neljän kuukauden kuluessa tilikauden päättymisestä "
+        "(KPL 3:7), tälle tilikaudelle viimeistään {day}.",
+        "Bokslutet ska upprättas inom fyra månader från räkenskapsperiodens utgång "
+        "(BokfL 3:7), för denna räkenskapsperiod senast {day}.",
+        "The financial statements are made within four months of the end of the year "
+        "(KPL 3:7), for this year by {day}.",
+    ),
+    "specifications": _t("Tase-erittelyt", "Balansspecifikationer", "Balance sheet specifications"),
+    "specifications_note": _t(
+        "Tase-erittelyt eivät ole osa julkistettavaa tilinpäätöstä; ne kuuluvat "
+        "kirjanpitoaineistoon ja säilytetään 10 vuotta.",
+        "Balansspecifikationerna hör inte till det bokslut som offentliggörs; de är en del "
+        "av bokföringsmaterialet och sparas i 10 år.",
+        "The balance sheet specifications are not part of the published statements; they "
+        "belong to the books and are kept 10 years.",
+    ),
+    "account": _t("Tili", "Konto", "Account"),
+    "balance": _t("Saldo", "Saldo", "Balance"),
+    "sign_note": _t(
+        "Saldot: debet positiivinen, kredit negatiivinen.",
+        "Saldon: debet positivt, kredit negativt.",
+        "Balances: debit positive, credit negative.",
+    ),
+    "total": _t("Yhteensä", "Sammanlagt", "Total"),
+    "difference": _t("Erotus", "Differens", "Difference"),
+    "bank_statement": _t("Tiliotteen saldo", "Saldo enligt kontoutdrag", "Bank statement balance"),
+    "statement_ref": _t("Tiliote", "Kontoutdrag", "Statement"),
+    "not_given": _t("ei merkitty", "inte angivet", "not given"),
+    "assets": _t("Käyttöomaisuus", "Anläggningstillgångar", "Fixed assets"),
+    "acquired": _t("Hankittu", "Anskaffad", "Acquired"),
+    "cost": _t("Hankintameno", "Anskaffningsutgift", "Cost"),
+    "earlier_depreciation": _t("Aiemmat poistot", "Tidigare avskrivningar", "Earlier depreciation"),
+    "depreciation": _t("Tilikauden poisto", "Periodens avskrivning", "Depreciation for the year"),
+    "book_value": _t("Kirjanpitoarvo", "Bokföringsvärde", "Book value"),
+    "plan": _t("Poistosuunnitelma", "Avskrivningsplan", "Depreciation plan"),
+    "register_vs_books": _t(
+        "Käyttöomaisuusrekisterin ja kirjanpidon ero",
+        "Differens mellan anläggningsregistret och bokföringen",
+        "Difference between the asset register and the books",
+    ),
+    "receivables": _t(
+        "Myyntisaamiset laskuittain", "Kundfordringar per faktura", "Receivables by invoice"
+    ),
+    "invoice": _t("Lasku", "Faktura", "Invoice"),
+    "date": _t("Päivämäärä", "Datum", "Date"),
+    "list_of_books": _t(
+        "Luettelo kirjanpidoista ja aineistoista",
+        "Förteckning över bokföringar och material",
+        "List of books and material",
+    ),
+    "book": _t("Kirjanpito tai aineisto", "Bokföring eller material", "Book or material"),
+    "form": _t("Säilytystapa", "Förvaringssätt", "Kept as"),
+    "kept_until": _t("Säilytetään vähintään", "Sparas minst till", "Kept at least until"),
+    "electronic": _t("sähköisesti Metrassa", "elektroniskt i Metra", "electronically in Metra"),
+    "signed_paper": _t(
+        "allekirjoitettuna paperilla tai sähköisesti",
+        "undertecknat på papper eller elektroniskt",
+        "signed, on paper or electronically",
+    ),
+    "bank_kept": _t(
+        "pankin palvelussa tai arkistoituna",
+        "i bankens tjänst eller arkiverat",
+        "at the bank or filed",
+    ),
+    "book_journal": _t("Päiväkirja", "Dagbok", "Journal"),
+    "book_ledger": _t("Pääkirja", "Huvudbok", "General ledger"),
+    "book_statements": _t(
+        "Tilinpäätös (tuloslaskelma, tase ja liitetiedot)",
+        "Bokslut (resultaträkning, balansräkning och noter)",
+        "Financial statements (income statement, balance sheet and notes)",
+    ),
+    "book_specifications": _t(
+        "Tase-erittelyt", "Balansspecifikationer", "Balance sheet specifications"
+    ),
+    "book_chart": _t(
+        "Tililuettelo ja tämä luettelo",
+        "Kontoplan och denna förteckning",
+        "Chart of accounts and this list",
+    ),
+    "book_series": _t(
+        "Tositelaji {series}: tositteet {first}–{last} liitteineen",
+        "Verifikationsserie {series}: verifikationer {first}–{last} med bilagor",
+        "Voucher series {series}: vouchers {first}–{last} with their attachments",
+    ),
+    "book_invoicing": _t(
+        "Metran laskutus: lähetetyt laskut, hyvityslaskut, maksut ja maksumuistutukset "
+        "(laskutustositteiden perusteet)",
+        "Metras fakturering: skickade fakturor, kreditnotor, betalningar och "
+        "betalningspåminnelser (underlag för faktureringsverifikationerna)",
+        "Metra's invoicing: issued invoices, credit notes, payments and reminders (the "
+        "evidence of the invoicing vouchers)",
+    ),
+    "book_bank": _t("Pankin tiliotteet", "Kontoutdrag från banken", "Bank statements"),
+    "books_text": _t(
+        "Kirjanpito on tehty kahdenkertaisena Metra-ohjelmistolla (versio {version}). Kirjaukset "
+        "ovat aikajärjestyksessä päiväkirjassa ja tileittäin pääkirjassa, ja jokainen kirjaus "
+        "perustuu numeroituun tositteeseen. Kirjausketju kulkee tilinpäätöksestä pääkirjan ja "
+        "päiväkirjan kautta tositteeseen ja sen liitteeseen tai laskuun. Aineisto säilytetään "
+        "sähköisesti Metran palvelimella ja sen varmuuskopioissa, ja se on tarkastettavissa "
+        "Suomesta käsin.",
+        "Bokföringen är dubbel och förd med programmet Metra (version {version}). "
+        "Bokföringsposterna finns i tidsordning i dagboken och kontovis i huvudboken, och "
+        "varje post grundar sig på en numrerad verifikation. Verifikationskedjan går från "
+        "bokslutet via huvudboken och dagboken till verifikationen och dess bilaga eller "
+        "faktura. Materialet sparas elektroniskt på Metras server och i dess "
+        "säkerhetskopior och kan granskas från Finland.",
+        "The books are kept in double entry with Metra (version {version}). Entries are in "
+        "date order in the journal and by account in the general ledger, and every entry "
+        "rests on a numbered voucher. The audit trail runs from the statements through the "
+        "ledger and journal to the voucher and its attachment or invoice. The material is "
+        "kept electronically on Metra's server and its backups, and can be inspected from "
+        "Finland.",
+    ),
+    "length": _t(
+        "Tilikauden pituus poikkeaa 12 kuukaudesta, koska: {reason}.",
+        "Räkenskapsperiodens längd avviker från 12 månader, eftersom: {reason}.",
+        "The year is not 12 months because: {reason}.",
+    ),
+    "length_first": _t(
+        "kyseessä on ensimmäinen tilikausi",
+        "det är den första räkenskapsperioden",
+        "it is the first financial year",
+    ),
+    "length_last": _t(
+        "kyseessä on viimeinen tilikausi",
+        "det är den sista räkenskapsperioden",
+        "it is the last financial year",
+    ),
+    "length_change": _t(
+        "tilinpäätöspäivä muuttuu", "bokslutsdagen ändras", "the closing date changes"
+    ),
+    "chart": _t("Tililuettelo", "Kontoplan", "Chart of accounts"),
+    "chart_note": _t(
+        "Tilit sellaisina kuin ne olivat tilikauden päättyessä.",
+        "Kontona som de var när räkenskapsperioden avslutades.",
+        "The accounts as they were when the year was closed.",
+    ),
+    "kind_asset": _t("Vastaavaa", "Aktiva", "Asset"),
+    "kind_liability": _t("Vieras pääoma", "Främmande kapital", "Liability"),
+    "kind_equity": _t("Oma pääoma", "Eget kapital", "Equity"),
+    "kind_income": _t("Tuotot", "Intäkter", "Income"),
+    "kind_expense": _t("Kulut", "Kostnader", "Expense"),
+    "journal": _t("Päiväkirja", "Dagbok", "Journal"),
+    "ledger": _t("Pääkirja", "Huvudbok", "General ledger"),
+    "trade_register": _t(
+        "Osuuskunta ilmoittaa tilinpäätöksensä kaupparekisteriin (Patentti- ja "
+        "rekisterihallitus) sen jälkeen, kun osuuskunnan kokous on vahvistanut sen.",
+        "Ett andelslag anmäler sitt bokslut till handelsregistret (Patent- och "
+        "registerstyrelsen) efter att andelsstämman har fastställt det.",
+        "A cooperative files its financial statements with the Trade Register (Finnish "
+        "Patent and Registration Office) once its general meeting has adopted them.",
+    ),
+}

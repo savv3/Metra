@@ -1,0 +1,156 @@
+{% load bookkeeping %}<!doctype html>
+<html lang="{{ language }}">
+<head>
+<meta charset="utf-8">
+<title>{{ texts.title }} {{ year }}</title>
+{% include "metra_bookkeeping/pdf/_style.html" %}
+<style>
+  .part { page-break-before: always; }
+  .cover h1 { font-size: 22pt; margin-top: 40mm; }
+  .cover .organisation { font-size: 13pt; }
+  .signature { margin-top: 14mm; width: 75mm; border-top: 0.6px solid #000; padding-top: 1mm; display: inline-block; margin-right: 8mm; }
+  .contents li { margin: 1mm 0; }
+  .difference { font-weight: bold; }
+</style>
+</head>
+<body>
+  {# The package's words come from the country module (Finnish or Swedish), not the interface's translations. #}
+  <section class="cover">
+    {% if organisation %}<div class="organisation"><strong>{{ organisation.name }}</strong>{% if organisation.business_id %}<br>{{ statement_texts.business_id }} {{ organisation.business_id }}{% endif %}</div>{% endif %}
+    <h1>{% if statements_only %}{{ texts.statements_part }}{% else %}{{ texts.title }}{% endif %}</h1>
+    <p class="subtitle">{{ texts.financial_year }} {{ period }}</p>
+    {% if problems %}
+      <div class="preliminary"><strong>{{ statement_texts.preliminary }}</strong>
+        {% for reason in problems %}<br>{{ reason }}{% endfor %}
+        <br>{{ statement_texts.not_statements }}</div>
+    {% endif %}
+    {% if translation %}<p class="note">{{ translation }}</p>{% endif %}
+    <h2>{{ texts.contents }}</h2>
+    <ol class="contents">
+      <li>{{ income.title }}</li>
+      <li>{{ balance.title }}</li>
+      <li>{{ texts.notes }}</li>
+      <li>{{ texts.signatures }}</li>
+      {% if not statements_only %}
+        <li>{{ texts.specifications }}</li>
+        <li>{{ texts.list_of_books }}</li>
+        <li>{{ texts.chart }}</li>
+        <li>{{ texts.journal }}</li>
+        <li>{{ texts.ledger }}</li>
+      {% endif %}
+    </ol>
+    <p class="note">{{ texts.made }} {{ printed_at|date:"SHORT_DATETIME_FORMAT" }}{% if software %} &middot; {{ software }}{% endif %}</p>
+  </section>
+
+  <section class="part">
+    <h1>{{ income.title }}</h1>
+    <p class="subtitle">{{ income.columns.0.label }}</p>
+    {% include "metra_bookkeeping/_statement_table.html" with statement=income %}
+  </section>
+
+  <section class="part">
+    <h1>{{ balance.title }}</h1>
+    <p class="subtitle">{{ balance.columns.0.label }}</p>
+    {% include "metra_bookkeeping/_statement_table.html" with statement=balance %}
+  </section>
+
+  <section class="part">
+    <h1>{{ texts.notes }}</h1>
+    {% for heading, paragraphs in notes %}
+      <h2>{{ heading }}</h2>
+      {% for paragraph in paragraphs %}<p>{{ paragraph|linebreaksbr }}</p>{% endfor %}
+    {% endfor %}
+  </section>
+
+  <section class="part">
+    <h1>{{ texts.signatures }}</h1>
+    <p>{{ texts.place_date }}: ________________________________</p>
+    <h2>{{ texts.board }}</h2>
+    {% for name in signers %}<div class="signature">{{ name }}</div>{% empty %}{% for i in "1234" %}<div class="signature">&nbsp;</div>{% endfor %}{% endfor %}
+    <h2>{{ texts.audit_note_title }}</h2>
+    <p>{{ texts.audit_note }}</p>
+    <p>{{ texts.place_date }}: ________________________________</p>
+    <div class="signature">{{ texts.auditor }}</div>
+    <p class="note">{{ due }}</p>
+    {% if cooperative %}<p class="note">{{ texts.trade_register }}</p>{% endif %}
+  </section>
+
+  {% if not statements_only %}
+    <section class="part">
+      <h1>{{ texts.specifications }}</h1>
+      <p class="subtitle">{{ year.end|date:"j.n.Y" }}</p>
+      <p class="note">{{ texts.specifications_note }}</p>
+      <table>
+        <thead><tr><th scope="col">{{ texts.account }}</th><th scope="col" class="num">{{ texts.balance }}</th></tr></thead>
+        <tbody>{% for account, amount in balances %}<tr><td>{{ account }}</td><td class="num">{{ amount|money }}</td></tr>{% endfor %}</tbody>
+      </table>
+      <p class="note">{{ texts.sign_note }}</p>
+
+      {% if bank_rows %}
+        <h2>{{ texts.bank_statement }}</h2>
+        <table>
+          <thead><tr><th scope="col">{{ texts.account }}</th><th scope="col" class="num">{{ texts.balance }}</th><th scope="col" class="num">{{ texts.bank_statement }}</th><th scope="col" class="num">{{ texts.difference }}</th><th scope="col">{{ texts.statement_ref }}</th></tr></thead>
+          <tbody>{% for row in bank_rows %}<tr><td>{{ row.account }}</td><td class="num">{{ row.books|money }}</td><td class="num">{% if row.statement is None %}{{ texts.not_given }}{% else %}{{ row.statement|money }}{% endif %}</td><td class="num{% if row.difference %} difference{% endif %}">{{ row.difference|money }}</td><td>{{ row.reference }}</td></tr>{% endfor %}</tbody>
+        </table>
+      {% endif %}
+
+      {% if asset_accounts %}
+        <h2>{{ texts.assets }}</h2>
+        {% for item in asset_accounts %}
+          <h3>{{ item.account }}</h3>
+          <table>
+            <thead><tr><th scope="col"></th><th scope="col">{{ texts.acquired }}</th><th scope="col" class="num">{{ texts.cost }}</th><th scope="col" class="num">{{ texts.earlier_depreciation }}</th><th scope="col" class="num">{{ texts.depreciation }}</th><th scope="col" class="num">{{ texts.book_value }}</th></tr></thead>
+            <tbody>{% for asset, earlier, this_year, value in item.rows %}<tr><td>{{ asset.name }}</td><td>{{ asset.acquired|date:"j.n.Y" }}</td><td class="num">{{ asset.cost|money }}</td><td class="num">{{ earlier|money }}</td><td class="num">{{ this_year|money }}</td><td class="num">{{ value|money }}</td></tr>{% endfor %}</tbody>
+            <tfoot>
+              <tr><th scope="row" colspan="5">{{ texts.total }}</th><td class="num">{{ item.register|money }}</td></tr>
+              {% if item.difference %}<tr><th scope="row" colspan="5">{{ texts.register_vs_books }}</th><td class="num difference">{{ item.difference|money }}</td></tr>{% endif %}
+            </tfoot>
+          </table>
+        {% endfor %}
+      {% endif %}
+
+      {% if receivables and receivables.rows %}
+        <h2>{{ texts.receivables }}: {{ receivables.account }}</h2>
+        <table>
+          <thead><tr><th scope="col">{{ texts.invoice }}</th><th scope="col">{{ texts.date }}</th><th scope="col" class="num">{{ texts.balance }}</th></tr></thead>
+          <tbody>{% for invoice, amount in receivables.rows %}<tr><td>{{ invoice.number }}</td><td>{{ invoice.issue_date|date:"j.n.Y" }}</td><td class="num">{{ amount|money }}</td></tr>{% endfor %}</tbody>
+          <tfoot>
+            <tr><th scope="row" colspan="2">{{ texts.total }}</th><td class="num">{{ receivables.total|money }}</td></tr>
+            {% if receivables.difference %}<tr><th scope="row" colspan="2">{{ texts.difference }}</th><td class="num difference">{{ receivables.difference|money }}</td></tr>{% endif %}
+          </tfoot>
+        </table>
+      {% endif %}
+    </section>
+
+    <section class="part">
+      <h1>{{ texts.list_of_books }}</h1>
+      <p>{{ books_text }}</p>
+      {% if length %}<p>{{ length }}</p>{% endif %}
+      <table>
+        <thead><tr><th scope="col">{{ texts.book }}</th><th scope="col">{{ texts.form }}</th><th scope="col">{{ texts.kept_until }}</th></tr></thead>
+        <tbody>{% for name, form, until in books %}<tr><td>{{ name }}</td><td>{{ form }}</td><td>{{ until }}</td></tr>{% endfor %}</tbody>
+      </table>
+    </section>
+
+    <section class="part">
+      <h1>{{ texts.chart }}</h1>
+      {% if chart_note %}<p class="note">{{ chart_note }}</p>{% endif %}
+      <table>
+        <tbody>{% for entry, kind in chart %}<tr><td>{{ entry.number }}</td><td>{{ entry.name }}</td><td>{{ kind }}</td></tr>{% endfor %}</tbody>
+      </table>
+    </section>
+
+    <section class="part">
+      <h1>{{ texts.journal }}</h1>
+      <p class="subtitle">{{ period }}</p>
+      {% include "metra_bookkeeping/_journal_table.html" %}
+    </section>
+
+    <section class="part">
+      <h1>{{ texts.ledger }}</h1>
+      <p class="subtitle">{{ period }}</p>
+      {% include "metra_bookkeeping/_ledger_table.html" %}
+    </section>
+  {% endif %}
+</body>
+</html>
