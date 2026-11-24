@@ -162,14 +162,17 @@ class FiscalYear(models.Model):
     @property
     def books_kept_until(self):
         """The financial statements, journal, ledger, chart of accounts and list
-        of books are kept at least 10 years from the end of the year (KPL 2:10)."""
-        return _years_after(self.end, 10)
+        of books are kept at least 10 years from the end of the year in
+        Finland (KPL 2:10)."""
+        return countries.get(self.country).RETENTION.books_until(self.end)
 
     @property
     def vouchers_kept_until(self):
         """Vouchers and receipts are kept at least 6 years from the end of the
-        calendar year in which the financial year ended (KPL 2:10)."""
-        return datetime.date(self.end.year + 6, 12, 31)
+        calendar year in which the financial year ended in Finland (KPL 2:10).
+        The invoices, credit notes and payments the add-on booked are their
+        vouchers' evidence and are kept as long."""
+        return countries.get(self.country).RETENTION.vouchers_until(self.end)
 
     def contains(self, date):
         return self.start <= date <= self.end

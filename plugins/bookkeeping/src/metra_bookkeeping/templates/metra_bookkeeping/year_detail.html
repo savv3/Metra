@@ -24,7 +24,7 @@
     <dt>{% translate "Books kept until" %}</dt><dd>{{ year.books_kept_until|date:"DATE_FORMAT" }}<span class="help">{% translate "Financial statements, journal, ledger, chart of accounts and list of books: 10 years from the end of the financial year." %}</span></dd>
     <dt>{% translate "Vouchers kept until" %}</dt><dd>{{ year.vouchers_kept_until|date:"DATE_FORMAT" }}<span class="help">{% translate "Vouchers and receipts: 6 years from the end of the calendar year in which the financial year ended." %}</span></dd>
   </dl>
-  <p class="help">{% translate "These are the shortest times the law allows. Nothing is deleted automatically." %}</p>
+  <p class="help">{% translate "These are the shortest times the law allows. Nothing is deleted automatically." %} <a href="{% url 'metra_bookkeeping:retention' %}">{% translate "How long the books are kept" %}</a></p>
   {% if lock_form and lock_form.fields.until.choices and perms.metra_bookkeeping.close_fiscalyear %}
     <form method="post" action="{% url 'metra_bookkeeping:year_lock' year.pk %}" class="form form--inline" novalidate>
       {% csrf_token %}
@@ -45,6 +45,7 @@
   <div class="actions">
     <a class="button{% if year.is_open %} button--primary{% endif %}" href="{% url 'metra_bookkeeping:year_end' year.pk %}">{% if year.is_open %}{% translate "Close the year" %}{% else %}{% translate "Year-end" %}{% endif %}</a>
     <a class="button" href="{% url 'metra_bookkeeping:year_package' year.pk %}">{% translate "Year-end package" %}</a>
+    {% if perms.metra_bookkeeping.view_voucher %}<a class="button" href="{% url 'metra_bookkeeping:year_export' year.pk %}">{% translate "Export the books" %}</a>{% endif %}
     {% if following %}<a class="button" href="{{ following.get_absolute_url }}">{% translate "Next year" %}: {{ following }}</a>{% endif %}
   </div>
 {% endblock %}

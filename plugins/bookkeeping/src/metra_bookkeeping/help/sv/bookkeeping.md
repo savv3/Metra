@@ -151,11 +151,53 @@ Bokföring visar de utkast som har passerat den tiden.
 Periodens sida visar hur länge dess material ska sparas: bokslut, dagbok,
 huvudbok, kontoplan och förteckning över bokföringar och material 10 år från
 utgången av räkenskapsperioden; verifikat och kvitton 6 år från utgången av
-det kalenderår då räkenskapsperioden slutade. Inget tas bort automatiskt.
-När bokföringen har bokförda verifikat kan tillägget inte slås av, så att
-de förblir läsbara.
+det kalenderår då räkenskapsperioden slutade. De fakturor, kreditnotor och
+betalningar som bokförts från faktureringen är verifikatens underlag och
+sparas lika länge. **Hur länge bokföringen sparas**, som länkas från listan
+över räkenskapsperioder, visar alla perioder tillsammans: verifikat, kvitton
+och fakturor, de två datumen och om lagens minimitid har gått ut.
 
-En administratör som tar bort tillägget från servern (ur `METRA_PLUGINS`) måste först spara bokföringen under den lagstadgade tiden på annat sätt: spara rapporterna och kvittona, och behåll en säkerhetskopia. Uppgifterna finns kvar i databasen, men kan inte läsas i Metra medan tillägget inte är installerat.
+Det här är de kortaste tider som bokföringslagen tillåter. Andra regler kan
+kräva att material sparas längre: villkoren för ett bidrag (bidrag till
+vattenledningsnät kräver ofta 10 år eller mer), justeringsperioden på 10
+år för moms på en fastighetsinvestering, eller en pågående skatterevision,
+ett besvär eller en tvist. Sidan visar när bokföringslagens minimitid har
+gått ut, inte att materialet får tas bort. Inget tas bort automatiskt,
+och att ta bort en period vars tid har gått ut erbjuds ännu inte i Metra:
+när det är dags, exportera perioden först och besluta tillsammans med
+styrelsen och revisorn. När bokföringen har bokförda verifikat kan tillägget
+inte slås av, så att de förblir läsbara.
+
+Verifikat, kvitton och fakturor kan nämna medlemmar och leverantörer. De är
+bokföringsmaterial som lagen kräver att man sparar, så de sparas under dessa
+tider även när en person begär att bli raderad (GDPR artikel 17.3 b). Att
+ändra eller arkivera en person eller en enhet i registret ändrar ingenting
+som redan har bokförts: bokföringen behåller namnen och beloppen så som de
+bokfördes.
+
+En administratör som tar bort tillägget från servern (ur `METRA_PLUGINS`) måste först spara bokföringen under den lagstadgade tiden på annat sätt: exportera varje period (se nedan), spara bokslutspaketen och behåll en säkerhetskopia. Uppgifterna finns kvar i databasen, men kan inte läsas i Metra medan tillägget inte är installerat.
+
+## Exportera bokföringen
+
+**Exportera bokföringen** på en periods sida ger perioden som filer, för en
+bokförare som tar över bokföringen i sitt eget program eller för att spara
+en kopia utanför Metra:
+
+- **Ladda ner ZIP-filen**: kontoplanen med varje kontos ingående balans,
+  debet, kredit och utgående balans (`accounts.csv`), varje rad i de
+  bokförda verifikaten i datumordning (`vouchers.csv`), kvittona i en mapp
+  per verifikat, perioden i SIE 4 (`books.se`) och en README som beskriver
+  filerna.
+- **Ladda ner SIE 4**: bara SIE 4-filen. SIE är det nordiska textformatet
+  för att flytta bokföring mellan bokföringsprogram. De ingående balanserna
+  är dess ingående balanser och de övriga bokförda verifikaten dess
+  verifikat.
+
+CSV-filerna är i UTF-8, avgränsade med semikolon, med datum som
+YYYY-MM-DD och komma som decimaltecken. Utkast ingår inte i bokföringen och
+lämnas bort. En öppen periods export anger att den är preliminär. Fråga
+bokföraren vilket format deras program tar emot; de flesta klarar SIE eller
+en CSV-fil. Varje export antecknas i granskningsloggen.
 
 ## Låsa månader
 
@@ -308,4 +350,5 @@ period slutat, ifall den periodens deklaration redan lämnats.
 ## Utskrift och filer
 
 Varje rapport kan skrivas ut, sparas som **PDF** eller laddas ner som en
-**CSV**-fil för ett kalkylprogram.
+**CSV**-fil för ett kalkylprogram. Ett helt år exporteras under
+**Exportera bokföringen**.

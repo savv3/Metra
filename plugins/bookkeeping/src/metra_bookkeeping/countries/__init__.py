@@ -1,7 +1,7 @@
 """What differs between countries: chart of accounts templates, the length a
-financial year may have, statement formats and size classes, and (in later
-versions) retention periods and export formats. The ledger itself is the
-same everywhere; a new country is a new module here.
+financial year may have, statement formats and size classes, and how long
+the books are kept. The ledger itself is the same everywhere; a new country
+is a new module here.
 
 A country module has:
 
@@ -16,6 +16,7 @@ A country module has:
     SIZE_LIMITS = [SizeLimits(...), ...]  # micro and small, with their dates
     STATEMENT_LANGUAGES = ("fi", "sv")  # the languages statements are kept in
     TEXTS = {"income_statement": {"fi": ..., "sv": ..., "en": ...}, ...}
+    RETENTION = Retention(...)  # how long the books and vouchers are kept
 """
 
 import datetime
@@ -151,6 +152,36 @@ class SizeLimits:
     first: datetime.date
     micro: tuple
     small: tuple
+
+
+@dataclass(frozen=True)
+class Retention:
+    """How long the books are kept at least: the financial statements,
+    journal, ledger, chart of accounts and list of books ``books_years``
+    from the end of the financial year, and vouchers and receipts
+    ``vouchers_years`` from the end of the financial year or, with
+    ``vouchers_from_calendar_year``, from the end of the calendar year in
+    which it ended. These are minimums: nothing is removed automatically."""
+
+    books_years: int
+    vouchers_years: int
+    vouchers_from_calendar_year: bool = False
+    source: str = ""
+
+    def books_until(self, end):
+        return years_after(end, self.books_years)
+
+    def vouchers_until(self, end):
+        if self.vouchers_from_calendar_year:
+            return datetime.date(end.year + self.vouchers_years, 12, 31)
+        return years_after(end, self.vouchers_years)
+
+
+def years_after(date, years):
+    try:
+        return date.replace(year=date.year + years)
+    except ValueError:  # 29 February
+        return date.replace(year=date.year + years, day=28)
 
 
 def get(code=None):
