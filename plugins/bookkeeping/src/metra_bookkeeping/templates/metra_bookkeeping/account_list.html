@@ -18,7 +18,7 @@
           {% for account in accounts %}
             <tr>
               <th scope="row"><a href="{{ account.get_absolute_url }}">{{ account.number }}</a></th>
-              <td>{{ account.name }}</td><td>{{ account.get_kind_display }}</td>
+              <td>{{ account.display_name }}</td><td>{{ account.get_kind_display }}</td>
               <td>{% if account.active %}{% translate "In use" %}{% else %}{% translate "Not in use" %}{% endif %}</td>
               <td class="no-print">
                 {% if perms.metra_bookkeeping.change_account %}<a class="button" href="{% url 'metra_bookkeeping:account_edit' account.pk %}">{% translate "Edit" %}</a>{% endif %}
