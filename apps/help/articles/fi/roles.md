@@ -11,9 +11,16 @@ Jokaisella Metrassa työskentelevällä on tili ja yksi rooli:
 | Rahastonhoitaja | Nähdä rekisterin sekä ajaa laskutusta ja maksuja |
 | Vain luku | Nähdä rekisterin |
 
-Ylläpitäjä lisää käyttäjät kohdassa **Asetukset > Käyttäjät ja roolit > Käyttäjät** tai kutsuu heidät
-käyttöönoton ohjatun toiminnon **Kutsu hallitus** -vaiheessa, joka lähettää
-sähköpostilla linkin salasanan valitsemiseen.
+Ylläpitäjä kutsuu käyttäjät kohdassa **Asetukset > Käyttäjät ja roolit >
+Käyttäjät > Lisää käyttäjä** tai käyttöönoton ohjatun toiminnon **Kutsu
+hallitus** -vaiheessa. Annat nimen, sähköpostin ja roolin, et salasanaa: uusi
+käyttäjä saa sähköpostin, jossa on linkki oman salasanan valitsemiseen, ja
+ylläpitäjä ottaa sen jälkeen käyttöön kaksivaiheisen tunnistautumisen. Linkki
+toimii muutaman päivän ja vain kerran.
+
+Jos linkki on lakannut toimimasta, valitse käyttäjä luettelosta, valitse
+toiminto **Lähetä uusi kutsulinkki** ja paina **Suorita**. Jos sähköpostia ei
+ole määritetty, linkki näytetään sivulla kerran, jotta voit lähettää sen itse.
 
 ## Kaksivaiheinen tunnistautuminen
 

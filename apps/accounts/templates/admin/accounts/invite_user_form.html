@@ -1,0 +1,8 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block form_top %}
+  {% if not is_popup %}
+    <p>{% translate "The new user gets an email with a link where they choose their own password. Admins then set up two-factor login. The link works for a few days and only once; you can send a new one from the list of users." %}</p>
+  {% endif %}
+{% endblock %}

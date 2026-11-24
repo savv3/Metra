@@ -14,6 +14,15 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ### Changed
 
+- Adding a user under Settings > Users invites them by email instead of
+  asking for a password: the new user chooses their own password from a
+  one-time link (and admins then set up two-factor login). When email is not
+  set up, the link is shown once to send by hand. **Send a new invitation
+  link** in the list of users sends a fresh one to someone who has not chosen
+  a password yet. For hosting tools, `create_organisation --send` emails the
+  first admin's link from the install, and the new `invite_user` command makes
+  a new link (`--send` to email it).
+
 - Installs made with `docker/new-instance.sh` never start their own
   `caddy` service, which only got in the way next to a tunnel or a proxy on
   the host. `scripts/deploy.sh` labels the image it builds with its version,
