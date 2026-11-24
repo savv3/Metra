@@ -1,21 +1,22 @@
 """Set up a new install from the command line: the organisation's name and
 its first admin, who gets a one-time link to choose a password. Used by
-hosting tools (such as metra-admin) right after the first migrate."""
+hosting tools (such as metra-admin) right after the first migrate. With
+--send the install also emails the link to the admin when its email is set
+up."""
 
 import json
 
-from allauth.account.forms import default_token_generator
-from allauth.account.utils import user_pk_to_url_str
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand, CommandError
 from django.core.validators import validate_email
 from django.db import transaction
-from django.urls import reverse
 
+from apps.accounts import invites
 from apps.register.models import Organisation
+
+from ._invite import report, send
 
 
 class Command(BaseCommand):
@@ -30,11 +31,28 @@ class Command(BaseCommand):
         parser.add_argument("--admin-first-name", default="")
         parser.add_argument("--admin-last-name", default="")
         parser.add_argument(
+            "--send",
+            action="store_true",
+            help="Also email the link to the admin, when this install's email is set up.",
+        )
+        parser.add_argument(
             "--json", action="store_true", help="Print the result as JSON for scripts."
         )
 
+    def handle(self, *args, **options):
+        user, name = self.create(**options)
+        link = invites.make_link(user)
+        result = {"organisation": name, "username": user.username, "link": link}
+        if options["send"]:
+            result.update(send(user, link))
+        if options["json"]:
+            self.stdout.write(json.dumps(result))
+        else:
+            self.stdout.write(f"Created {name} with the admin {user.username}.")
+            report(self.stdout, result)
+
     @transaction.atomic
-    def handle(self, *args, name, admin_email, admin_first_name, admin_last_name, **options):
+    def create(self, *, name, admin_email, admin_first_name, admin_last_name, **options):
         name = name.strip()
         email = admin_email.strip().lower()
         if not name:
@@ -64,16 +82,4 @@ class Command(BaseCommand):
         user.save()
         user.groups.add(Group.objects.get(name="Admin"))
 
-        path = reverse(
-            "account_reset_password_from_key",
-            kwargs={
-                "uidb36": user_pk_to_url_str(user),
-                "key": default_token_generator.make_token(user),
-            },
-        )
-        link = settings.BASE_URL.rstrip("/") + path
-        if options["json"]:
-            self.stdout.write(json.dumps({"organisation": name, "username": email, "link": link}))
-        else:
-            self.stdout.write(f"Created {name} with the admin {email}.")
-            self.stdout.write(f"Choose a password here: {link}")
+        return user, name

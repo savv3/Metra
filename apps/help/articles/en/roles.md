@@ -11,9 +11,15 @@ Everyone who works in Metra has an account with one role:
 | Treasurer | See the register, and run invoicing and payments |
 | Read-only | See the register |
 
-An admin adds users under **Settings > Users and roles > Users**, or invites them with the
-setup wizard's **Invite the board** step, which emails a link to choose a
-password.
+An admin invites users under **Settings > Users and roles > Users > Add
+user**, or with the setup wizard's **Invite the board** step. You enter a name,
+email and role, no password: the new user gets an email with a link where they
+choose their own password, and an admin then sets up two-factor login. The
+link works for a few days and only once.
+
+If the link has stopped working, tick the user in the list, choose the action
+**Send a new invitation link** and press **Go**. When email is not set up, the
+link is shown once on the page so you can send it yourself.
 
 ## Two-factor login
 

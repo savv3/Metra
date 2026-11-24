@@ -11,9 +11,16 @@ Alla som arbetar i Metra har ett konto med en roll:
 | Kassör | Se registret och sköta fakturering och betalningar |
 | Läsbehörighet | Se registret |
 
-En administratör lägger till användare under **Inställningar >
-Användare och roller > Användare**, eller bjuder in dem med installationsguidens steg **Bjud in
-styrelsen**, som skickar en länk för att välja lösenord.
+En administratör bjuder in användare under **Inställningar > Användare och
+roller > Användare > Lägg till användare**, eller med installationsguidens steg
+**Bjud in styrelsen**. Du anger namn, e-post och roll, inget lösenord: den nya
+användaren får ett e-postmeddelande med en länk där hen väljer sitt eget
+lösenord, och en administratör slår sedan på tvåfaktorsinloggning. Länken
+fungerar i några dagar och bara en gång.
+
+Om länken har slutat fungera markerar du användaren i listan, väljer åtgärden
+**Skicka en ny inbjudningslänk** och trycker **Kör**. Är e-posten inte
+inställd visas länken en gång på sidan, så att du kan skicka den själv.
 
 ## Tvåfaktorsinloggning
 

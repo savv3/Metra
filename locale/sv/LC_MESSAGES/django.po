@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-24 20:28+0200\n"
+"POT-Creation-Date: 2026-11-24 20:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,20 +17,140 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/accounts/admin.py:13 apps/register/models.py:376
+#: apps/accounts/admin.py:17 apps/register/models.py:376
 msgid "role"
 msgstr "roll"
 
-#: apps/accounts/admin.py:28 apps/invoicing/models.py:143
+#: apps/accounts/admin.py:32 apps/invoicing/models.py:143
 #: apps/messaging/models.py:341 apps/readings/models.py:24
 #: apps/register/models.py:57 apps/register/models.py:115
 #: apps/register/models.py:129 apps/register/models.py:333
 msgid "name"
 msgstr "namn"
 
+#: apps/accounts/admin.py:47
+msgid "waiting for invitation"
+msgstr "väntar på inbjudan"
+
+#: apps/accounts/admin.py:56
+msgid "Send a new invitation link to the selected users"
+msgstr "Skicka en ny inbjudningslänk till de valda användarna"
+
+#: apps/accounts/admin.py:66
+#, python-format
+msgid "%(user)s has already chosen a password, so no invitation was sent."
+msgstr "%(user)s har redan valt ett lösenord, så ingen inbjudan skickades."
+
+#: apps/accounts/admin.py:82
+#, python-format
+msgid ""
+"The invitation to %(email)s could not be sent (%(error)s). Send them this "
+"link yourself; it works for a few days and only once: %(link)s"
+msgstr ""
+"Inbjudan till %(email)s kunde inte skickas (%(error)s). Skicka den här länken"
+" själv; den fungerar i några dagar och bara en gång: %(link)s"
+
+#: apps/accounts/admin.py:89 apps/setup/views.py:264
+#, python-format
+msgid "Invitation sent to %(email)s."
+msgstr "Inbjudan skickad till %(email)s."
+
+#: apps/accounts/admin.py:94
+#, python-format
+msgid ""
+"Email is not set up, so no invitation was sent. Send %(email)s this link "
+"yourself; it works for a few days and only once: %(link)s"
+msgstr ""
+"E-post är inte inställd, så ingen inbjudan skickades. Skicka den här länken "
+"själv till %(email)s; den fungerar i några dagar och bara en gång: %(link)s"
+
 #: apps/accounts/apps.py:7
 msgid "Access"
 msgstr "Åtkomst"
+
+#: apps/accounts/forms.py:30 apps/accounts/templates/accounts/profile.html:16
+#: apps/core/settings_page.py:231 apps/core/templates/core/_contact.html:14
+#: apps/invoicing/models.py:776 apps/messaging/models.py:29
+#: apps/messaging/templates/messaging/compose.html:21
+#: apps/register/csv_io.py:521 apps/register/models.py:274
+#: apps/register/templates/register/_person_results.html:8
+#: apps/register/templates/register/person_detail.html:20
+#: apps/register/templates/register/unit_detail.html:66 apps/setup/forms.py:142
+#: apps/setup/templates/setup/messaging.html:4
+msgid "Email"
+msgstr "E-post"
+
+#: apps/accounts/forms.py:30
+msgid "Also their username."
+msgstr "Blir också användarnamnet."
+
+#: apps/accounts/forms.py:31
+#: apps/register/templates/register/person_form.html:13
+#: apps/register/templates/register/unit_detail.html:65 apps/setup/forms.py:143
+msgid "Role"
+msgstr "Roll"
+
+#: apps/accounts/forms.py:45 apps/setup/forms.py:152
+msgid "Someone already has this email as their username."
+msgstr "Någon har redan den här e-postadressen som användarnamn."
+
+#: apps/accounts/invites.py:50
+#: apps/selfservice/templates/selfservice/base.html:9
+#: apps/selfservice/templates/selfservice/base.html:18 templates/base.html:7
+#: templates/base.html:24
+msgid "Metra"
+msgstr "Metra"
+
+#: apps/accounts/invites.py:55
+#, python-format
+msgid "Your account for %(organisation)s"
+msgstr "Ditt konto för %(organisation)s"
+
+#: apps/accounts/invites.py:57
+#, python-format
+msgid "%(inviter)s has made you an account for %(organisation)s in Metra."
+msgstr "%(inviter)s har gjort ett konto åt dig för %(organisation)s i Metra."
+
+#: apps/accounts/invites.py:59
+#, python-format
+msgid "You have an account for %(organisation)s in Metra."
+msgstr "Du har ett konto för %(organisation)s i Metra."
+
+#: apps/accounts/invites.py:61
+#: apps/selfservice/templates/selfservice/print.html:59
+#, python-format
+msgid "Hello %(name)s,"
+msgstr "Hej %(name)s,"
+
+#: apps/accounts/invites.py:65
+#, python-format
+msgid "Your username is %(username)s."
+msgstr "Ditt användarnamn är %(username)s."
+
+#: apps/accounts/invites.py:67
+#, python-format
+msgid ""
+"Choose your password here:\n"
+"%(link)s"
+msgstr ""
+"Välj ditt lösenord här:\n"
+"%(link)s"
+
+#: apps/accounts/invites.py:70
+msgid ""
+"The link works for a few days and only once. If it has stopped working, ask "
+"for a new one."
+msgstr ""
+"Länken fungerar i några dagar och bara en gång. Om den har slutat fungera, be"
+" om en ny."
+
+#: apps/accounts/invites.py:76
+msgid ""
+"After choosing your password you set up two-factor login with an "
+"authenticator app on your phone."
+msgstr ""
+"När du har valt lösenord slår du på tvåfaktorsinloggning med en "
+"autentiseringsapp i telefonen."
 
 #: apps/accounts/middleware.py:28
 msgid "Set up two-factor login with an authenticator app before you continue."
@@ -81,18 +201,6 @@ msgstr "Användarnamn"
 #: apps/register/templates/register/import_preview.html:36
 msgid "Name"
 msgstr "Namn"
-
-#: apps/accounts/templates/accounts/profile.html:16
-#: apps/core/settings_page.py:231 apps/core/templates/core/_contact.html:14
-#: apps/invoicing/models.py:776 apps/messaging/models.py:29
-#: apps/messaging/templates/messaging/compose.html:21
-#: apps/register/csv_io.py:521 apps/register/models.py:274
-#: apps/register/templates/register/_person_results.html:8
-#: apps/register/templates/register/person_detail.html:20
-#: apps/register/templates/register/unit_detail.html:66 apps/setup/forms.py:142
-#: apps/setup/templates/setup/messaging.html:4
-msgid "Email"
-msgstr "E-post"
 
 #: apps/accounts/templates/accounts/profile.html:18
 #: apps/core/settings_page.py:273
@@ -179,6 +287,17 @@ msgstr "Använd ett långt lösenord som du inte använder någon annanstans."
 #: apps/accounts/templates/accounts/profile.html:79
 msgid "Change password"
 msgstr "Byt lösenord"
+
+#: apps/accounts/templates/admin/accounts/invite_user_form.html:6
+msgid ""
+"The new user gets an email with a link where they choose their own password. "
+"Admins then set up two-factor login. The link works for a few days and only "
+"once; you can send a new one from the list of users."
+msgstr ""
+"Den nya användaren får ett e-postmeddelande med en länk där hen väljer sitt "
+"eget lösenord. Administratörer slår sedan på tvåfaktorsinloggning. Länken "
+"fungerar i några dagar och bara en gång; du kan skicka en ny från listan över"
+" användare."
 
 #: apps/backups/apps.py:7 apps/backups/templates/backups/backup_list.html:3
 #: apps/backups/templates/backups/backup_list.html:7
@@ -736,7 +855,7 @@ msgstr[1] "%(count)s på"
 msgid "No backup yet"
 msgstr "Ingen säkerhetskopia än"
 
-#: apps/core/settings_page.py:153 apps/setup/views.py:41
+#: apps/core/settings_page.py:153 apps/setup/views.py:40
 msgid "Organisation"
 msgstr "Organisation"
 
@@ -986,7 +1105,7 @@ msgstr "Kommunikation"
 #: apps/invoicing/templates/invoicing/run_detail.html:5
 #: apps/invoicing/templates/invoicing/run_detail.html:54
 #: apps/invoicing/templates/invoicing/run_form.html:5
-#: apps/messaging/models.py:43 apps/setup/views.py:46
+#: apps/messaging/models.py:43 apps/setup/views.py:45
 msgid "Invoices"
 msgstr "Fakturor"
 
@@ -3698,7 +3817,7 @@ msgstr ""
 "%(label)s är valt, men kontouppgifterna saknas. Ange dem under Inställningar "
 "> Tillägg > %(label)s."
 
-#: apps/messaging/views.py:412 apps/setup/views.py:186
+#: apps/messaging/views.py:412 apps/setup/views.py:185
 msgid "Saved the email settings."
 msgstr "E-postinställningarna är sparade."
 
@@ -4095,7 +4214,7 @@ msgstr "Återställ valda avläsningstyper"
 msgid "Restored."
 msgstr "Återställd."
 
-#: apps/readings/forms.py:29
+#: apps/readings/forms.py:40
 #: apps/readings/templates/readings/_round_results.html:9
 #: apps/readings/templates/readings/_unit_readings.html:9
 #: apps/readings/views.py:149
@@ -5188,11 +5307,6 @@ msgstr "Ny person"
 msgid "This person will be added to %(for_unit)s"
 msgstr "Personen läggs till i %(for_unit)s"
 
-#: apps/register/templates/register/person_form.html:13
-#: apps/register/templates/register/unit_detail.html:65 apps/setup/forms.py:143
-msgid "Role"
-msgstr "Roll"
-
 #: apps/register/templates/register/person_list.html:7
 msgid "Add person"
 msgstr "Lägg till person"
@@ -5375,17 +5489,11 @@ msgstr "Stoppa länken"
 msgid "No working self-service link."
 msgstr "Ingen personlig länk gäller just nu."
 
-#: apps/selfservice/templates/selfservice/base.html:9
-#: apps/selfservice/templates/selfservice/base.html:18 apps/setup/views.py:271
-#: templates/base.html:7 templates/base.html:24
-msgid "Metra"
-msgstr "Metra"
-
 #: apps/selfservice/templates/selfservice/base.html:15 templates/base.html:15
 msgid "Skip to content"
 msgstr "Hoppa till innehållet"
 
-#: apps/selfservice/templates/selfservice/base.html:19 apps/setup/views.py:42
+#: apps/selfservice/templates/selfservice/base.html:19 apps/setup/views.py:41
 #: templates/_language_form.html:5
 msgid "Language"
 msgstr "Språk"
@@ -5540,11 +5648,6 @@ msgstr "%(what)s %(period)s: rapportera din avläsning"
 #: apps/selfservice/templates/selfservice/print.html:58
 msgid "Please check your contact details"
 msgstr "Kontrollera dina kontaktuppgifter"
-
-#: apps/selfservice/templates/selfservice/print.html:59
-#, python-format
-msgid "Hello %(name)s,"
-msgstr "Hej %(name)s,"
 
 #: apps/selfservice/templates/selfservice/print.html:61
 #, python-format
@@ -5785,10 +5888,6 @@ msgstr "Alla personer"
 msgid "There is already a field with this name."
 msgstr "Det finns redan ett fält med det här namnet."
 
-#: apps/setup/forms.py:152
-msgid "Someone already has this email as their username."
-msgstr "Någon har redan den här e-postadressen som användarnamn."
-
 #: apps/setup/forms.py:158
 msgid "Send a test to"
 msgstr "Skicka ett test till"
@@ -5927,7 +6026,7 @@ msgstr "Nuvarande logotyp"
 msgid "Remove the logo"
 msgstr "Ta bort logotypen"
 
-#: apps/setup/templates/setup/logo.html:15 apps/setup/views.py:134
+#: apps/setup/templates/setup/logo.html:15 apps/setup/views.py:133
 msgid "Fill in the organisation first; the logo belongs to it."
 msgstr "Fyll först i organisationen, logotypen hör till den."
 
@@ -6020,36 +6119,36 @@ msgstr "Lägg till ett fält"
 msgid "Add field"
 msgstr "Lägg till fält"
 
-#: apps/setup/views.py:43
+#: apps/setup/views.py:42
 msgid "Logo"
 msgstr "Logotyp"
 
-#: apps/setup/views.py:44
+#: apps/setup/views.py:43
 msgid "Units and fields"
 msgstr "Enheter och fält"
 
-#: apps/setup/views.py:45
+#: apps/setup/views.py:44
 msgid "Email and SMS"
 msgstr "E-post och sms"
 
-#: apps/setup/views.py:47
+#: apps/setup/views.py:46
 msgid "Invite the board"
 msgstr "Bjud in styrelsen"
 
-#: apps/setup/views.py:77
+#: apps/setup/views.py:76
 msgid "Saved."
 msgstr "Sparat."
 
-#: apps/setup/views.py:138
+#: apps/setup/views.py:137
 msgid "The logo was removed."
 msgstr "Logotypen togs bort."
 
-#: apps/setup/views.py:155
+#: apps/setup/views.py:154
 #, python-format
 msgid "Added %(name)s with its fields and a water meter."
 msgstr "La till %(name)s med fält och en vattenmätare."
 
-#: apps/setup/views.py:245
+#: apps/setup/views.py:243
 msgid ""
 "Email is not set up, so no invitation can be sent. Add the person under "
 "Settings."
@@ -6057,43 +6156,12 @@ msgstr ""
 "E-post är inte inställd, så ingen inbjudan kan skickas. Lägg till personen "
 "under Inställningar."
 
-#: apps/setup/views.py:276
-#, python-format
-msgid "Your account for %(organisation)s"
-msgstr "Ditt konto för %(organisation)s"
-
-#: apps/setup/views.py:279
-#, python-format
-msgid ""
-"Hello %(name)s,\n"
-"\n"
-"%(inviter)s has made you an account for %(organisation)s in Metra. Your username is %(username)s.\n"
-"\n"
-"Choose your password here:\n"
-"%(link)s\n"
-"\n"
-"The link works for a few days."
-msgstr ""
-"Hej %(name)s,\n"
-"\n"
-"%(inviter)s har skapat ett konto åt dig för %(organisation)s i Metra. Ditt användarnamn är %(username)s.\n"
-"\n"
-"Välj ditt lösenord här:\n"
-"%(link)s\n"
-"\n"
-"Länken fungerar i några dagar."
-
-#: apps/setup/views.py:289
+#: apps/setup/views.py:262
 #, python-format
 msgid "The invitation could not be sent: %(error)s"
 msgstr "Inbjudan kunde inte skickas: %(error)s"
 
-#: apps/setup/views.py:291
-#, python-format
-msgid "Invitation sent to %(email)s."
-msgstr "Inbjudan skickad till %(email)s."
-
-#: apps/setup/views.py:312
+#: apps/setup/views.py:285
 msgid "Setup is done. You can run it again from Settings."
 msgstr "Inställningen är klar. Du kan köra den igen från Inställningar."
 
@@ -6210,6 +6278,26 @@ msgid ""
 msgstr ""
 "Skydda ditt konto med tvåfaktorsinloggning. Det tar en minut med en "
 "autentiseringsapp i telefonen."
+
+#, python-format
+#~ msgid ""
+#~ "Hello %(name)s,\n"
+#~ "\n"
+#~ "%(inviter)s has made you an account for %(organisation)s in Metra. Your username is %(username)s.\n"
+#~ "\n"
+#~ "Choose your password here:\n"
+#~ "%(link)s\n"
+#~ "\n"
+#~ "The link works for a few days."
+#~ msgstr ""
+#~ "Hej %(name)s,\n"
+#~ "\n"
+#~ "%(inviter)s har skapat ett konto åt dig för %(organisation)s i Metra. Ditt användarnamn är %(username)s.\n"
+#~ "\n"
+#~ "Välj ditt lösenord här:\n"
+#~ "%(link)s\n"
+#~ "\n"
+#~ "Länken fungerar i några dagar."
 
 #~ msgid "Issue all checked drafts"
 #~ msgstr "Utfärda alla kontrollerade utkast"
