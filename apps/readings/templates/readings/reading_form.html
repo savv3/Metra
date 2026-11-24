@@ -28,7 +28,7 @@
     {% endfor %}
     <div class="actions">
       <button type="submit" class="button button--primary">{% translate "Save" %}</button>
-      <a class="button" href="{% if next == 'unit' %}{{ unit.get_absolute_url }}{% else %}{{ round.get_absolute_url }}{% endif %}">{% translate "Cancel" %}</a>
+      <a class="button button--link" href="{% if next == 'unit' %}{{ unit.get_absolute_url }}{% else %}{{ round.get_absolute_url }}{% endif %}">{% translate "Cancel" %}</a>
     </div>
   </form>
 

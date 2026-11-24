@@ -4,8 +4,8 @@
 {% block content %}
   <div class="page-head">
     <h1>{% translate "Overdue invoices" %}</h1>
-    <div class="actions"><a class="button" href="{% url 'invoicing:invoice_list' %}">{% translate "All invoices" %}</a></div>
   </div>
+  {% include "invoicing/_tabs.html" with current="overdue" %}
   {% if invoices %}
     <form method="post" action="{% url 'invoicing:send_reminders' %}">
       {% csrf_token %}

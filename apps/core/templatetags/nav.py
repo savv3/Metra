@@ -107,3 +107,11 @@ def main_menu(context):
         "settings_item": settings_item,
         "help": {"url": help_url, "current": help_current},
     }
+
+
+@register.inclusion_tag("_crumbs.html")
+def crumbs(*pairs):
+    """The trail of parent pages above a page's heading: url, label, url, label...
+
+    The page itself is not repeated; its heading follows the trail."""
+    return {"links": list(zip(pairs[0::2], pairs[1::2], strict=True))}

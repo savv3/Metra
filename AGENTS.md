@@ -109,6 +109,24 @@ docker compose up --build                       # full stack, needs a .env (see 
   party except through a configured, documented provider.
 - **Bookkeeping data:** sent invoices and payments are immutable; correct
   them with credit notes, not edits.
+- **Buttons and actions:** every page follows the same layout, so people
+  find actions in the same place:
+  - One primary (blue) button per page or step: what most people came to do.
+  - Page actions sit in the heading row (`.page-head .actions`), primary
+    last. More than three: rarely used ones go in a "More" menu
+    (`<details class="more-menu">`), and so do destructive ones such as
+    Archive.
+  - A section's actions sit at the right of its heading (`.section-head`).
+    Forms for adding things open from a button (`<details class="add-panel">`)
+    instead of always showing.
+  - Form actions go at the bottom: the primary first, then Cancel as a link
+    (`button button--link`).
+  - Pages below the first level show the way back above the heading with
+    `{% crumbs url label ... %}` (from `nav`), never a "back" button named
+    after the parent page.
+  - Sibling pages of one section are tabs (`.filter-tabs`), not buttons.
+  - Filter bars update as you type (HTMX); their Filter button only shows
+    without JavaScript. Keep filters and action buttons in separate rows.
 - **Access:** every view checks a model permission (`permission_required`
   with `raise_exception=True`, so refusals are a 403 page) and templates hide
   buttons with `perms`. Roles are the groups created in

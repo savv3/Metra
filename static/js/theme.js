@@ -1,5 +1,6 @@
 // Apply the light or dark theme picked in the account menu before the page
 // draws, so it does not flash. Without a choice the device setting decides.
+document.documentElement.classList.add("js");
 (function () {
   try {
     var theme = localStorage.getItem("theme");

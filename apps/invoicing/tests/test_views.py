@@ -179,3 +179,41 @@ def test_fee_plan_links_are_hidden_without_permission(role_client, make_user, cl
         page = client.get(reverse("invoicing:run_list"), HTTP_ACCEPT_LANGUAGE="en").content.decode()
         assert plans not in page and billing not in page
         assert "under Settings > Invoice settings" in page
+
+
+def _primary_buttons(page):
+    return page.count("button--primary")
+
+
+def test_run_page_shows_the_steps_with_one_primary_button(treasurer_client, run):
+    page = treasurer_client.get(run.get_absolute_url(), HTTP_ACCEPT_LANGUAGE="en").content.decode()
+
+    # One draft has a problem, one is ready: checking is the current step and
+    # issuing the ready one is the only primary action.
+    assert page.index("1 · Check") < page.index("2 · Issue") < page.index("3 · Send")
+    assert 'class="step step--current"' in page.split("2 · Issue")[0]
+    assert "Issue 1 invoice</button>" in page
+    assert _primary_buttons(page.split('<ol class="steps">')[1].split("</ol>")[0]) == 1
+    assert 'class="crumbs"' in page and reverse("invoicing:run_list") in page
+
+
+def test_run_page_offers_sending_once_everything_is_issued(treasurer_client, run):
+    run.invoices.filter(unit__name="Bystigen 6").delete()
+    treasurer_client.post(reverse("invoicing:run_issue", args=[run.pk]))
+
+    page = treasurer_client.get(run.get_absolute_url(), HTTP_ACCEPT_LANGUAGE="en").content.decode()
+
+    assert "Nothing to issue." in page
+    assert 'class="button button--primary">Send 1 invoice</button>' in page
+
+
+def test_invoice_pages_share_tabs(treasurer_client, run):
+    for name, current in (
+        ("invoicing:invoice_list", "All invoices"),
+        ("invoicing:overdue_list", "Overdue invoices"),
+        ("invoicing:run_list", "Invoice runs"),
+    ):
+        page = treasurer_client.get(reverse(name), HTTP_ACCEPT_LANGUAGE="en").content.decode()
+        tabs = page.split('class="filter-tabs"')[1].split("</nav>")[0]
+        assert f'aria-current="page">{current}</a>' in tabs
+        assert tabs.count('aria-current="page"') == 1

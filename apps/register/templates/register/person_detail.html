@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-{% load i18n messaging plugins %}
+{% load i18n messaging plugins nav %}
 {% block title %}{{ person.full_name }}{% endblock %}
 {% block content %}
+  {% url 'register:person_list' as c1 %}{% crumbs c1 _('People') %}
   <div class="page-head">
     <h1>{{ person.full_name }}{% if person.is_archived %} <span class="badge">{% translate "Archived" %}</span>{% endif %}</h1>
     {% if perms.register.change_person %}

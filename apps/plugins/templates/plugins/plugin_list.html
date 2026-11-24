@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n nav %}
 {% block title %}{% translate "Add-ons" %}{% endblock %}
 {% block content %}
+  {% url 'core:settings' as c1 %}{% crumbs c1 _('Settings') %}
   <div class="page-head">
     <h1>{% translate "Add-ons" %}</h1>
-    <div class="actions"><a class="button" href="{% url 'core:settings' %}">{% translate "Settings" %}</a></div>
   </div>
   <p>{% blocktranslate trimmed %}
     Add-ons add features to Metra. Turning one off hides its pages, menu items and

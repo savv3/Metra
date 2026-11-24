@@ -206,12 +206,26 @@ def run_detail(request, pk):
     run = get_object_or_404(InvoiceRun, pk=pk)
     invoices = run.invoices.select_related("unit", "person").order_by("unit__name")
     drafts = [i for i in invoices if i.is_draft]
+    with_problems = [i for i in drafts if i.problems]
+    ready = len(drafts) - len(with_problems)
+    unsent_count = unsent(run.invoices.all()).count()
+    # The step to do next: 1 check drafts, 2 issue them, 3 send, 4 nothing left.
+    if with_problems:
+        step = 1
+    elif ready:
+        step = 2
+    elif unsent_count:
+        step = 3
+    else:
+        step = 4
     context = {
         "run": run,
         "invoices": invoices,
-        "unsent": unsent(run.invoices.all()).count(),
+        "unsent": unsent_count,
         "drafts": len(drafts),
-        "with_problems": [i for i in drafts if i.problems],
+        "ready": ready,
+        "with_problems": with_problems,
+        "step": step,
         "totals": invoices.aggregate(total=Sum("total"), vat=Sum("total_vat")),
     }
     return render(request, "invoicing/run_detail.html", context)

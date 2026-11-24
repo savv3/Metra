@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-23 18:01+0000\n"
+"POT-Creation-Date: 2026-11-24 20:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,8 +65,8 @@ msgstr ""
 
 #: apps/accounts/templates/accounts/profile.html:11
 #: apps/readings/templates/readings/_round_row.html:21
-#: apps/register/templates/register/person_form.html:28
-#: apps/register/templates/register/unit_form.html:19
+#: apps/register/templates/register/person_form.html:29
+#: apps/register/templates/register/unit_form.html:20
 msgid "Details"
 msgstr ""
 
@@ -84,11 +84,11 @@ msgstr ""
 #: apps/accounts/templates/accounts/profile.html:16
 #: apps/core/settings_page.py:147 apps/core/templates/core/_contact.html:14
 #: apps/invoicing/models.py:776 apps/messaging/models.py:29
-#: apps/messaging/templates/messaging/compose.html:20
+#: apps/messaging/templates/messaging/compose.html:21
 #: apps/register/csv_io.py:521 apps/register/models.py:274
 #: apps/register/templates/register/_person_results.html:8
-#: apps/register/templates/register/person_detail.html:19
-#: apps/register/templates/register/unit_detail.html:39 apps/setup/forms.py:142
+#: apps/register/templates/register/person_detail.html:20
+#: apps/register/templates/register/unit_detail.html:46 apps/setup/forms.py:142
 #: apps/setup/templates/setup/messaging.html:4
 msgid "Email"
 msgstr ""
@@ -177,8 +177,9 @@ msgid "Change password"
 msgstr ""
 
 #: apps/backups/apps.py:7 apps/backups/templates/backups/backup_list.html:3
-#: apps/backups/templates/backups/backup_list.html:6
-#: apps/core/settings_page.py:210 apps/core/settings_page.py:213
+#: apps/backups/templates/backups/backup_list.html:7
+#: apps/backups/templates/backups/restore.html:5 apps/core/settings_page.py:210
+#: apps/core/settings_page.py:213
 msgid "Backups"
 msgstr ""
 
@@ -319,11 +320,22 @@ msgstr ""
 msgid "Only snapshots taken by hand can be deleted."
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:10
+#: apps/backups/templates/backups/backup_list.html:5
+#: apps/backups/templates/backups/restore.html:5
+#: apps/core/templates/core/settings.html:3
+#: apps/core/templates/core/settings.html:6 apps/core/templatetags/nav.py:103
+#: apps/messaging/templates/messaging/email_settings.html:5
+#: apps/plugins/templates/plugins/plugin_list.html:5
+#: apps/plugins/templates/plugins/plugin_settings.html:5
+#: apps/register/templates/register/unit_type_choose.html:16
+msgid "Settings"
+msgstr ""
+
+#: apps/backups/templates/backups/backup_list.html:11
 msgid "Take a snapshot now"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:14
+#: apps/backups/templates/backups/backup_list.html:15
 #, python-format
 msgid ""
 "A snapshot is a copy of the whole register and all uploaded files. One is "
@@ -331,7 +343,7 @@ msgid ""
 "before deleting a unit type or field, and whenever you take one here."
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:18
+#: apps/backups/templates/backups/backup_list.html:19
 #, python-format
 msgid ""
 "Every snapshot is kept for %(days)s days, then the newest of each week for "
@@ -339,94 +351,94 @@ msgid ""
 "Snapshots taken by hand stay until you delete them."
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:23
+#: apps/backups/templates/backups/backup_list.html:24
 #, python-format
 msgid "Each snapshot is also sent offsite to %(remote)s."
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:25
+#: apps/backups/templates/backups/backup_list.html:26
 msgid ""
 "Snapshots are only kept on this server. Set up an offsite copy "
 "(METRA_BACKUP_REMOTE_TYPE) so they survive if the server is lost."
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:28
+#: apps/backups/templates/backups/backup_list.html:29
 #, python-format
 msgid "The offsite copies could not be listed: %(error)s"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:32
+#: apps/backups/templates/backups/backup_list.html:33
 msgid "Recent problems"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:39
+#: apps/backups/templates/backups/backup_list.html:40
 msgid "Snapshots"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:45
-#: apps/backups/templates/backups/restore.html:8
+#: apps/backups/templates/backups/backup_list.html:46
+#: apps/backups/templates/backups/restore.html:9
 msgid "Taken"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:46
+#: apps/backups/templates/backups/backup_list.html:47
 msgid "Why"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:47
-#: apps/backups/templates/backups/restore.html:9
+#: apps/backups/templates/backups/backup_list.html:48
+#: apps/backups/templates/backups/restore.html:10
 #: apps/plugins/templates/plugins/plugin_list.html:21
 msgid "Version"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:48
+#: apps/backups/templates/backups/backup_list.html:49
 msgid "Size"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:49
+#: apps/backups/templates/backups/backup_list.html:50
 msgid "Where"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:50
+#: apps/backups/templates/backups/backup_list.html:51
 #: apps/plugins/templates/plugins/plugin_list.html:22
 #: apps/readings/templates/readings/_unit_readings.html:12
-#: apps/register/templates/register/unit_detail.html:41
+#: apps/register/templates/register/unit_detail.html:48
 #: apps/selfservice/templates/selfservice/round_links.html:44
 msgid "Actions"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:60
+#: apps/backups/templates/backups/backup_list.html:61
 msgid "This server"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:60
+#: apps/backups/templates/backups/backup_list.html:61
 msgid "Offsite"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:63
+#: apps/backups/templates/backups/backup_list.html:64
 msgid "Restore…"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:68
+#: apps/backups/templates/backups/backup_list.html:69
 msgid "Delete"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:78
+#: apps/backups/templates/backups/backup_list.html:79
 msgid "No snapshot has been taken yet."
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:81
+#: apps/backups/templates/backups/backup_list.html:82
 msgid "Restores"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:85
+#: apps/backups/templates/backups/backup_list.html:86
 msgid "Restored"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:85
+#: apps/backups/templates/backups/backup_list.html:86
 msgid "Failed, the data was put back"
 msgstr ""
 
-#: apps/backups/templates/backups/backup_list.html:89
+#: apps/backups/templates/backups/backup_list.html:90
 msgid ""
 "If the app does not start at all, a snapshot can also be restored from the "
 "command line: see INSTALL.md, Backup and restore."
@@ -444,124 +456,129 @@ msgid ""
 msgstr ""
 
 #: apps/backups/templates/backups/restore.html:3
-#: apps/backups/templates/backups/restore.html:5
+#: apps/backups/templates/backups/restore.html:6
 msgid "Restore a snapshot"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:7
+#: apps/backups/templates/backups/restore.html:8
 msgid "Snapshot"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:13
+#: apps/backups/templates/backups/restore.html:14
 #, python-format
 msgid ""
 "Restoring replaces the whole register and all uploaded files with the "
 "snapshot's. Everything added or changed since %(taken)s is removed."
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:16
+#: apps/backups/templates/backups/restore.html:17
 msgid ""
 "A snapshot of the data as it is now is taken first, so this can be undone by "
 "restoring that one."
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:19
+#: apps/backups/templates/backups/restore.html:20
 msgid "What changes"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:25
+#: apps/backups/templates/backups/restore.html:26
 msgid "Now"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:26
+#: apps/backups/templates/backups/restore.html:27
 msgid "In the snapshot"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:32 apps/register/unitwords.py:23
+#: apps/backups/templates/backups/restore.html:33 apps/register/unitwords.py:23
 msgid "Units"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:32
+#: apps/backups/templates/backups/restore.html:33
 #: apps/core/templatetags/nav.py:21
 #: apps/register/templates/register/_person_results.html:3
+#: apps/register/templates/register/person_detail.html:5
+#: apps/register/templates/register/person_form.html:5
 #: apps/register/templates/register/person_list.html:3
 #: apps/register/templates/register/person_list.html:6
 msgid "People"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:32
+#: apps/backups/templates/backups/restore.html:33
 #: apps/core/settings_page.py:111 apps/core/templatetags/nav.py:22
 #: apps/readings/apps.py:7
 #: apps/readings/templates/readings/_round_results.html:3
 #: apps/readings/templates/readings/_unit_readings.html:3
+#: apps/readings/templates/readings/round_detail.html:5
+#: apps/readings/templates/readings/round_detail.html:22
+#: apps/readings/templates/readings/round_form.html:5
 msgid "Readings"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:32
+#: apps/backups/templates/backups/restore.html:33
 #: apps/core/settings_page.py:144
 #: apps/messaging/templates/messaging/_unit_messages.html:4
-#: apps/messaging/templates/messaging/batch_detail.html:61
+#: apps/messaging/templates/messaging/batch_detail.html:62
 #: apps/messaging/templates/messaging/batch_list.html:24
 msgid "Messages"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:32
+#: apps/backups/templates/backups/restore.html:33
 msgid "Issued invoices"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:32
-#: apps/invoicing/templates/invoicing/invoice_detail.html:118
+#: apps/backups/templates/backups/restore.html:33
+#: apps/invoicing/templates/invoicing/invoice_detail.html:119
 msgid "Payments"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:45
+#: apps/backups/templates/backups/restore.html:46
 msgid "Bookkeeping recorded since the snapshot"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:46
+#: apps/backups/templates/backups/restore.html:47
 msgid "Issued invoices that would be removed:"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:48
+#: apps/backups/templates/backups/restore.html:49
 msgid "Payments that would be removed:"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:49 apps/invoicing/delivery.py:59
+#: apps/backups/templates/backups/restore.html:50 apps/invoicing/delivery.py:59
 #: apps/invoicing/models.py:429 apps/invoicing/models.py:719
 #: apps/invoicing/models.py:780 apps/invoicing/models.py:820
 #: apps/invoicing/models.py:860
 msgid "invoice"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:51
+#: apps/backups/templates/backups/restore.html:52
 msgid ""
 "Sent invoices and recorded payments may already be in your bookkeeping. If "
 "you restore, record them again afterwards or correct them with credit notes."
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:52
+#: apps/backups/templates/backups/restore.html:53
 msgid "I understand that these invoices and payments will be removed."
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:55
+#: apps/backups/templates/backups/restore.html:56
 #, python-format
 msgid "Replace all data with the snapshot from %(taken)s."
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:57
+#: apps/backups/templates/backups/restore.html:58
 msgid "Restore this snapshot"
 msgstr ""
 
-#: apps/backups/templates/backups/restore.html:58
-#: apps/invoicing/templates/invoicing/run_form.html:14
-#: apps/messaging/templates/messaging/compose.html:126
-#: apps/messaging/templates/messaging/newsletter_compose.html:36
+#: apps/backups/templates/backups/restore.html:59
+#: apps/invoicing/templates/invoicing/run_form.html:15
+#: apps/messaging/templates/messaging/compose.html:127
+#: apps/messaging/templates/messaging/newsletter_compose.html:37
 #: apps/plugins/templates/plugins/plugin_settings.html:31
 #: apps/readings/templates/readings/reading_form.html:31
-#: apps/readings/templates/readings/round_form.html:20
-#: apps/register/templates/register/import_upload.html:20
-#: apps/register/templates/register/person_form.html:38
-#: apps/register/templates/register/unit_form.html:29
+#: apps/readings/templates/readings/round_form.html:21
+#: apps/register/templates/register/import_upload.html:21
+#: apps/register/templates/register/person_form.html:39
+#: apps/register/templates/register/unit_form.html:30
 msgid "Cancel"
 msgstr ""
 
@@ -609,8 +626,8 @@ msgid "Information"
 msgstr ""
 
 #: apps/core/models.py:21 apps/core/templates/core/_notices.html:4
-#: apps/messaging/templates/messaging/batch_detail.html:5
-#: apps/messaging/templates/messaging/compose.html:6
+#: apps/messaging/templates/messaging/batch_detail.html:6
+#: apps/messaging/templates/messaging/compose.html:7
 msgid "Urgent"
 msgstr ""
 
@@ -693,8 +710,8 @@ msgstr ""
 #: apps/register/csv_io.py:528
 #: apps/register/templates/register/_person_results.html:11
 #: apps/register/templates/register/_unit_results.html:11
-#: apps/register/templates/register/person_detail.html:24
-#: apps/register/templates/register/unit_detail.html:23
+#: apps/register/templates/register/person_detail.html:25
+#: apps/register/templates/register/unit_detail.html:29
 msgid "Tags"
 msgstr ""
 
@@ -723,7 +740,7 @@ msgid "Bank account, payment terms, VAT, numbering and reminders."
 msgstr ""
 
 #: apps/core/settings_page.py:134
-#: apps/invoicing/templates/invoicing/run_list.html:9
+#: apps/invoicing/templates/invoicing/run_list.html:8
 msgid "Fee plans"
 msgstr ""
 
@@ -781,9 +798,9 @@ msgstr ""
 
 #: apps/core/settings_page.py:200 apps/core/templatetags/nav.py:14
 #: apps/plugins/apps.py:7 apps/plugins/templates/plugins/plugin_list.html:3
-#: apps/plugins/templates/plugins/plugin_list.html:6
+#: apps/plugins/templates/plugins/plugin_list.html:7
 #: apps/plugins/templates/plugins/plugin_list.html:18
-#: apps/plugins/templates/plugins/plugin_settings.html:7
+#: apps/plugins/templates/plugins/plugin_settings.html:5
 msgid "Add-ons"
 msgstr ""
 
@@ -827,16 +844,16 @@ msgstr ""
 
 #: apps/core/templates/core/_contact.html:13 apps/register/csv_io.py:522
 #: apps/register/templates/register/_person_results.html:9
-#: apps/register/templates/register/person_detail.html:21
-#: apps/register/templates/register/unit_detail.html:40
+#: apps/register/templates/register/person_detail.html:22
+#: apps/register/templates/register/unit_detail.html:47
 msgid "Phone"
 msgstr ""
 
 #: apps/core/templates/core/_contact.html:16 apps/readings/views.py:146
 #: apps/register/templates/register/_person_results.html:10
 #: apps/register/templates/register/_unit_results.html:9
-#: apps/register/templates/register/person_detail.html:23
-#: apps/register/templates/register/unit_detail.html:20
+#: apps/register/templates/register/person_detail.html:24
+#: apps/register/templates/register/unit_detail.html:26
 msgid "Address"
 msgstr ""
 
@@ -879,14 +896,6 @@ msgstr ""
 msgid "Staff login"
 msgstr ""
 
-#: apps/core/templates/core/settings.html:3
-#: apps/core/templates/core/settings.html:6 apps/core/templatetags/nav.py:103
-#: apps/messaging/templates/messaging/email_settings.html:7
-#: apps/plugins/templates/plugins/plugin_list.html:7
-#: apps/register/templates/register/unit_type_choose.html:16
-msgid "Settings"
-msgstr ""
-
 #: apps/core/templatetags/nav.py:12
 msgid "Finance"
 msgstr ""
@@ -897,17 +906,24 @@ msgstr ""
 
 #: apps/core/templatetags/nav.py:23
 #: apps/invoicing/templates/invoicing/_invoice_results.html:3
+#: apps/invoicing/templates/invoicing/_tabs.html:1
+#: apps/invoicing/templates/invoicing/invoice_detail.html:5
 #: apps/invoicing/templates/invoicing/invoice_list.html:3
 #: apps/invoicing/templates/invoicing/invoice_list.html:6
-#: apps/invoicing/templates/invoicing/run_detail.html:31
+#: apps/invoicing/templates/invoicing/run_detail.html:5
+#: apps/invoicing/templates/invoicing/run_detail.html:54
+#: apps/invoicing/templates/invoicing/run_form.html:5
 #: apps/messaging/models.py:43 apps/setup/views.py:46
 msgid "Invoices"
 msgstr ""
 
 #: apps/core/templatetags/nav.py:27
+#: apps/messaging/templates/messaging/batch_detail.html:5
 #: apps/messaging/templates/messaging/batch_list.html:3
 #: apps/messaging/templates/messaging/batch_list.html:6
 #: apps/messaging/templates/messaging/batch_list.html:17
+#: apps/messaging/templates/messaging/compose.html:5
+#: apps/messaging/templates/messaging/newsletter_compose.html:5
 msgid "Send-outs"
 msgstr ""
 
@@ -926,7 +942,7 @@ msgstr ""
 
 #: apps/help/templates/help/_nav.html:6
 #: apps/invoicing/templates/invoicing/invoice_list.html:15
-#: apps/readings/templates/readings/round_detail.html:25
+#: apps/readings/templates/readings/round_detail.html:27
 #: apps/register/templates/register/person_list.html:13
 #: apps/register/templates/register/unit_list.html:16
 msgid "Search"
@@ -958,16 +974,16 @@ msgid "Pick a guide from the list, or search for a word."
 msgstr ""
 
 #: apps/invoicing/admin.py:13 apps/invoicing/models.py:409
-#: apps/invoicing/templates/invoicing/invoice_detail.html:110
-#: apps/invoicing/templates/invoicing/invoice_detail.html:112
+#: apps/invoicing/templates/invoicing/invoice_detail.html:111
+#: apps/invoicing/templates/invoicing/invoice_detail.html:113
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:113
-#: apps/invoicing/views.py:439
+#: apps/invoicing/views.py:453
 msgid "VAT"
 msgstr ""
 
 #: apps/invoicing/admin.py:15
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:135
-#: apps/invoicing/views.py:502
+#: apps/invoicing/views.py:516
 msgid "Payment"
 msgstr ""
 
@@ -1026,7 +1042,7 @@ msgstr ""
 msgid "Reference given"
 msgstr ""
 
-#: apps/invoicing/forms.py:97 apps/invoicing/views.py:496
+#: apps/invoicing/forms.py:97 apps/invoicing/views.py:510
 #: apps/readings/views.py:155
 msgid "Note"
 msgstr ""
@@ -1040,8 +1056,8 @@ msgid "From"
 msgstr ""
 
 #: apps/invoicing/forms.py:111
-#: apps/messaging/templates/messaging/batch_detail.html:8
-#: apps/messaging/templates/messaging/compose.html:17
+#: apps/messaging/templates/messaging/batch_detail.html:9
+#: apps/messaging/templates/messaging/compose.html:18
 msgid "To"
 msgstr ""
 
@@ -1347,20 +1363,20 @@ msgstr ""
 
 #: apps/invoicing/models.py:357
 #: apps/invoicing/templates/invoicing/invoice_list.html:24
-#: apps/invoicing/views.py:442
+#: apps/invoicing/views.py:456
 msgid "Paid"
 msgstr ""
 
 #: apps/invoicing/models.py:358
 #: apps/invoicing/templates/invoicing/invoice_list.html:26
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:122
-#: apps/invoicing/views.py:441
+#: apps/invoicing/views.py:455
 msgid "Credited"
 msgstr ""
 
 #: apps/invoicing/models.py:361
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:6
-#: apps/invoicing/views.py:493 apps/messaging/models.py:226
+#: apps/invoicing/views.py:507 apps/messaging/models.py:226
 msgid "Invoice"
 msgstr ""
 
@@ -1606,18 +1622,18 @@ msgstr ""
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:7
 #: apps/invoicing/templates/invoicing/overdue_list.html:16
-#: apps/invoicing/templates/invoicing/run_detail.html:33
-#: apps/invoicing/views.py:431 apps/register/models.py:160
+#: apps/invoicing/templates/invoicing/run_detail.html:56
+#: apps/invoicing/views.py:445 apps/register/models.py:160
 msgid "Number"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:8
-#: apps/invoicing/templates/invoicing/invoice_detail.html:49
-#: apps/invoicing/templates/invoicing/invoice_detail.html:66
+#: apps/invoicing/templates/invoicing/invoice_detail.html:50
+#: apps/invoicing/templates/invoicing/invoice_detail.html:67
 #: apps/invoicing/templates/invoicing/overdue_list.html:16
-#: apps/invoicing/templates/invoicing/run_detail.html:33
-#: apps/invoicing/views.py:436
-#: apps/messaging/templates/messaging/batch_detail.html:65
+#: apps/invoicing/templates/invoicing/run_detail.html:56
+#: apps/invoicing/views.py:450
+#: apps/messaging/templates/messaging/batch_detail.html:66
 #: apps/readings/templates/readings/_round_results.html:7
 #: apps/readings/views.py:145 apps/register/models.py:155
 #: apps/register/unitwords.py:22
@@ -1627,16 +1643,16 @@ msgid "Unit"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:9
-#: apps/invoicing/templates/invoicing/invoice_detail.html:46
+#: apps/invoicing/templates/invoicing/invoice_detail.html:47
 #: apps/invoicing/templates/invoicing/overdue_list.html:16
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:138
-#: apps/invoicing/templates/invoicing/run_detail.html:33
-#: apps/invoicing/views.py:435
+#: apps/invoicing/templates/invoicing/run_detail.html:56
+#: apps/invoicing/views.py:449
 msgid "Recipient"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:10
-#: apps/invoicing/views.py:491 apps/register/models.py:161
+#: apps/invoicing/views.py:505 apps/register/models.py:161
 msgid "Date"
 msgstr ""
 
@@ -1646,18 +1662,18 @@ msgid "Due"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:12
-#: apps/invoicing/templates/invoicing/invoice_detail.html:103
-#: apps/invoicing/templates/invoicing/run_detail.html:33
+#: apps/invoicing/templates/invoicing/invoice_detail.html:104
+#: apps/invoicing/templates/invoicing/run_detail.html:56
 #: apps/invoicing/templates/invoicing/run_list.html:17
-#: apps/invoicing/views.py:440
+#: apps/invoicing/views.py:454
 msgid "Total"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:13
-#: apps/invoicing/templates/invoicing/run_detail.html:33
-#: apps/invoicing/views.py:445
+#: apps/invoicing/templates/invoicing/run_detail.html:56
+#: apps/invoicing/views.py:459
 #: apps/messaging/templates/messaging/_unit_messages.html:16
-#: apps/messaging/templates/messaging/batch_detail.html:68
+#: apps/messaging/templates/messaging/batch_detail.html:69
 #: apps/messaging/templates/messaging/batch_list.html:25
 #: apps/plugins/templates/plugins/plugin_list.html:22
 #: apps/readings/templates/readings/round_list.html:22
@@ -1669,14 +1685,14 @@ msgid "Status"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:25
-#: apps/invoicing/templates/invoicing/invoice_detail.html:6
-#: apps/invoicing/templates/invoicing/invoice_list.html:8
+#: apps/invoicing/templates/invoicing/_tabs.html:3
+#: apps/invoicing/templates/invoicing/invoice_detail.html:7
 #: apps/invoicing/templates/invoicing/invoice_list.html:25
 msgid "Overdue"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:25
-#: apps/invoicing/templates/invoicing/run_detail.html:36
+#: apps/invoicing/templates/invoicing/run_detail.html:59
 #: apps/readings/templates/readings/_round_row.html:33
 #: apps/readings/templates/readings/_unit_readings.html:23
 msgid "Check"
@@ -1688,6 +1704,7 @@ msgid "Export as CSV"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/_invoice_results.html:32
+#: apps/invoicing/templates/invoicing/run_detail.html:13
 #, python-format
 msgid "%(count)s invoice, %(total)s € in total"
 msgid_plural "%(count)s invoices, %(total)s € in total"
@@ -1698,9 +1715,22 @@ msgstr[1] ""
 msgid "No invoices found."
 msgstr ""
 
+#: apps/invoicing/templates/invoicing/_tabs.html:2
+msgid "All invoices"
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/_tabs.html:4
+#: apps/invoicing/templates/invoicing/run_detail.html:5
+#: apps/invoicing/templates/invoicing/run_form.html:5
+#: apps/invoicing/templates/invoicing/run_list.html:3
+#: apps/invoicing/templates/invoicing/run_list.html:6
+#: apps/invoicing/templates/invoicing/run_list.html:15
+msgid "Invoice runs"
+msgstr ""
+
 #: apps/invoicing/templates/invoicing/export_payments.html:3
 #: apps/invoicing/templates/invoicing/export_payments.html:5
-#: apps/invoicing/templates/invoicing/invoice_list.html:10
+#: apps/invoicing/templates/invoicing/invoice_list.html:8
 msgid "Export payments"
 msgstr ""
 
@@ -1714,201 +1744,201 @@ msgstr ""
 msgid "Download CSV"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:8
+#: apps/invoicing/templates/invoicing/invoice_detail.html:9
 msgid "Preview PDF"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:13
+#: apps/invoicing/templates/invoicing/invoice_detail.html:14
 msgid "Issue credit note"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:13
+#: apps/invoicing/templates/invoicing/invoice_detail.html:14
 msgid "Issue invoice"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:19
+#: apps/invoicing/templates/invoicing/invoice_detail.html:20
 msgid "Rebuild from fee plans"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:25
+#: apps/invoicing/templates/invoicing/invoice_detail.html:26
 msgid "Delete draft"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:31
+#: apps/invoicing/templates/invoicing/invoice_detail.html:32
 msgid "Make a credit note"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:36
+#: apps/invoicing/templates/invoicing/invoice_detail.html:37
 msgid "Credits"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:40
+#: apps/invoicing/templates/invoicing/invoice_detail.html:41
 msgid "Check before issuing"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:50
+#: apps/invoicing/templates/invoicing/invoice_detail.html:51
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:74
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:141
-#: apps/invoicing/views.py:437 apps/invoicing/views.py:494
+#: apps/invoicing/views.py:451 apps/invoicing/views.py:508
 #: apps/selfservice/templates/selfservice/member.html:54
 msgid "Reference"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:51
+#: apps/invoicing/templates/invoicing/invoice_detail.html:52
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:71
-#: apps/invoicing/views.py:433
+#: apps/invoicing/views.py:447
 msgid "Invoice date"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:52
+#: apps/invoicing/templates/invoicing/invoice_detail.html:53
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:80
 msgid "Delivery date or period"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:53
+#: apps/invoicing/templates/invoicing/invoice_detail.html:54
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:73
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:142
-#: apps/invoicing/views.py:434
+#: apps/invoicing/views.py:448
 msgid "Due date"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:54
+#: apps/invoicing/templates/invoicing/invoice_detail.html:55
 msgid "Issued by"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:57
-#: apps/invoicing/templates/invoicing/invoice_detail.html:63
-#: apps/invoicing/templates/invoicing/invoice_detail.html:87
+#: apps/invoicing/templates/invoicing/invoice_detail.html:58
+#: apps/invoicing/templates/invoicing/invoice_detail.html:64
+#: apps/invoicing/templates/invoicing/invoice_detail.html:88
 msgid "Lines"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:66
-#: apps/invoicing/templates/invoicing/invoice_detail.html:90
+#: apps/invoicing/templates/invoicing/invoice_detail.html:67
+#: apps/invoicing/templates/invoicing/invoice_detail.html:91
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:87
 msgid "Description"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:66
-#: apps/invoicing/templates/invoicing/invoice_detail.html:90
+#: apps/invoicing/templates/invoicing/invoice_detail.html:67
+#: apps/invoicing/templates/invoicing/invoice_detail.html:91
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:88
 msgid "Quantity"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:67
-#: apps/invoicing/templates/invoicing/invoice_detail.html:91
+#: apps/invoicing/templates/invoicing/invoice_detail.html:68
+#: apps/invoicing/templates/invoicing/invoice_detail.html:92
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:89
 msgid "Unit price"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:67
-#: apps/invoicing/templates/invoicing/invoice_detail.html:91
+#: apps/invoicing/templates/invoicing/invoice_detail.html:68
+#: apps/invoicing/templates/invoicing/invoice_detail.html:92
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:90
 #, python-format
 msgid "VAT %%"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:67
-#: apps/invoicing/templates/invoicing/invoice_detail.html:73
-#: apps/register/templates/register/unit_detail.html:55
+#: apps/invoicing/templates/invoicing/invoice_detail.html:68
+#: apps/invoicing/templates/invoicing/invoice_detail.html:74
+#: apps/register/templates/register/unit_detail.html:62
 msgid "Remove"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:84
+#: apps/invoicing/templates/invoicing/invoice_detail.html:85
 msgid "Save the draft"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:91
+#: apps/invoicing/templates/invoicing/invoice_detail.html:92
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:91
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:143
-#: apps/invoicing/views.py:495
+#: apps/invoicing/views.py:509
 msgid "Amount"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:107
+#: apps/invoicing/templates/invoicing/invoice_detail.html:108
 #, python-format
 msgid "VAT %(rate)s %%"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:107
+#: apps/invoicing/templates/invoicing/invoice_detail.html:108
 #, python-format
 msgid "%(vat)s € on %(base)s €"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:109
-#: apps/invoicing/views.py:438
+#: apps/invoicing/templates/invoicing/invoice_detail.html:110
+#: apps/invoicing/views.py:452
 msgid "Without VAT"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:112
+#: apps/invoicing/templates/invoicing/invoice_detail.html:113
 msgid "Not VAT registered"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:114
+#: apps/invoicing/templates/invoicing/invoice_detail.html:115
 #: apps/invoicing/templates/invoicing/overdue_list.html:17
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:120
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:122
 msgid "To pay"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:120
+#: apps/invoicing/templates/invoicing/invoice_detail.html:121
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:116
 msgid "Invoice total"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:122
+#: apps/invoicing/templates/invoicing/invoice_detail.html:123
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:117
 #, python-format
 msgid "Paid %(date)s"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:123
+#: apps/invoicing/templates/invoicing/invoice_detail.html:124
 #, python-format
 msgid "Reminder %(date)s"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:123
+#: apps/invoicing/templates/invoicing/invoice_detail.html:124
 #, python-format
 msgid "new due date %(date)s"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:124
-#: apps/invoicing/views.py:444
+#: apps/invoicing/templates/invoicing/invoice_detail.html:125
+#: apps/invoicing/views.py:458
 msgid "Outstanding"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:127
+#: apps/invoicing/templates/invoicing/invoice_detail.html:128
 msgid "Record a payment"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:131
+#: apps/invoicing/templates/invoicing/invoice_detail.html:132
 msgid ""
 "Payments cannot be changed. To undo one, record the same amount as negative."
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:132
+#: apps/invoicing/templates/invoicing/invoice_detail.html:133
 msgid "Record payment"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:138
+#: apps/invoicing/templates/invoicing/invoice_detail.html:139
 #: apps/messaging/models.py:142
 msgid "Sent"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/invoice_detail.html:143
+#: apps/invoicing/templates/invoicing/invoice_detail.html:144
 #: apps/invoicing/templates/invoicing/invoice_list.html:27
 msgid "Credit notes"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:9
-#: apps/invoicing/templates/invoicing/run_list.html:3
-#: apps/invoicing/templates/invoicing/run_list.html:6
-#: apps/invoicing/templates/invoicing/run_list.html:15
-msgid "Invoice runs"
+#: apps/invoicing/templates/invoicing/run_form.html:3
+#: apps/invoicing/templates/invoicing/run_form.html:6
+#: apps/invoicing/templates/invoicing/run_list.html:9
+msgid "New invoice run"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:19
 #: apps/notifications/templates/notifications/list.html:19
-#: apps/readings/templates/readings/round_detail.html:29
+#: apps/readings/templates/readings/round_detail.html:31
 #: apps/register/templates/register/_show_select.html:3
 msgid "Show"
 msgstr ""
@@ -1937,7 +1967,7 @@ msgid "All runs"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/invoice_list.html:37
-#: apps/readings/templates/readings/round_detail.html:37
+#: apps/readings/templates/readings/round_detail.html:39
 #: apps/register/templates/register/person_list.html:25
 #: apps/register/templates/register/unit_list.html:42
 msgid "Filter"
@@ -1947,11 +1977,6 @@ msgstr ""
 #: apps/invoicing/templates/invoicing/overdue_list.html:6
 #: apps/invoicing/templates/invoicing/overdue_list.html:12
 msgid "Overdue invoices"
-msgstr ""
-
-#: apps/invoicing/templates/invoicing/overdue_list.html:7
-#: apps/invoicing/templates/invoicing/run_list.html:8
-msgid "All invoices"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/overdue_list.html:15
@@ -2033,7 +2058,7 @@ msgid "Invoice number"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/pdf/invoices.html:76
-#: apps/invoicing/views.py:446
+#: apps/invoicing/views.py:460
 msgid "Credits invoice"
 msgstr ""
 
@@ -2090,75 +2115,95 @@ msgid "Virtual barcode"
 msgstr ""
 
 #: apps/invoicing/templates/invoicing/run_detail.html:9
+msgid "PDF of invoices for post"
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/run_detail.html:17
+msgid "1 · Check"
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/run_detail.html:19
+#, python-format
+msgid ""
+"%(count)s draft to check. Enter the missing reading or fix the lines, then "
+"rebuild:"
+msgid_plural ""
+"%(count)s drafts to check. Enter the missing reading or fix the lines, then "
+"rebuild:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/invoicing/templates/invoicing/run_detail.html:22
+msgid "Every draft is ready to issue."
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/run_detail.html:24
+msgid "No drafts left."
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/run_detail.html:27
 msgid "Rebuild drafts"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/run_detail.html:12
+#: apps/invoicing/templates/invoicing/run_detail.html:31
+msgid "2 · Issue"
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/run_detail.html:33
+#, python-format
+msgid ""
+"%(count)s draft is ready. Issuing gives it a number, and it can then only be "
+"corrected with a credit note."
+msgid_plural ""
+"%(count)s drafts are ready. Issuing gives them numbers, and they can then "
+"only be corrected with credit notes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/invoicing/templates/invoicing/run_detail.html:35
+#, python-format
+msgid "Issue %(count)s invoice"
+msgid_plural "Issue %(count)s invoices"
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/invoicing/templates/invoicing/run_detail.html:38
+msgid "Nothing to issue."
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/run_detail.html:42
+msgid "3 · Send"
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/run_detail.html:44
+msgid ""
+"Issued invoices go by email with the PDF attached. Recipients without email, "
+"or who prefer post, are listed for printing."
+msgstr ""
+
+#: apps/invoicing/templates/invoicing/run_detail.html:46
 #, python-format
 msgid "Send %(count)s invoice"
 msgid_plural "Send %(count)s invoices"
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/invoicing/templates/invoicing/run_detail.html:14
-msgid "PDF of invoices for post"
+#: apps/invoicing/templates/invoicing/run_detail.html:49
+msgid "Every issued invoice has been sent."
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/run_detail.html:16
-msgid "Issue all checked drafts"
-msgstr ""
-
-#: apps/invoicing/templates/invoicing/run_detail.html:20
-msgid ""
-"Issued invoices go by email with the PDF attached. Recipients without email, "
-"or who prefer post, are listed for printing."
-msgstr ""
-
-#: apps/invoicing/templates/invoicing/run_detail.html:22
-#, python-format
-msgid "%(count)s invoice, %(total)s € in total."
-msgid_plural "%(count)s invoices, %(total)s € in total."
-msgstr[0] ""
-msgstr[1] ""
-
-#: apps/invoicing/templates/invoicing/run_detail.html:23
-#, python-format
-msgid "%(count)s is still a draft."
-msgid_plural "%(count)s are still drafts."
-msgstr[0] ""
-msgstr[1] ""
-
-#: apps/invoicing/templates/invoicing/run_detail.html:26
-#, python-format
-msgid "%(count)s draft to check"
-msgid_plural "%(count)s drafts to check"
-msgstr[0] ""
-msgstr[1] ""
-
-#: apps/invoicing/templates/invoicing/run_detail.html:27
-msgid ""
-"These are not issued with the others. Enter the missing reading or fix the "
-"lines, then rebuild or save the draft."
-msgstr ""
-
-#: apps/invoicing/templates/invoicing/run_form.html:3
-#: apps/invoicing/templates/invoicing/run_form.html:5
-#: apps/invoicing/templates/invoicing/run_list.html:10
-msgid "New invoice run"
-msgstr ""
-
-#: apps/invoicing/templates/invoicing/run_form.html:6
+#: apps/invoicing/templates/invoicing/run_form.html:7
 msgid ""
 "Makes a draft invoice for every active unit the chosen fee plans apply to. "
 "Nothing is sent or numbered until you issue the drafts."
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/run_form.html:7
+#: apps/invoicing/templates/invoicing/run_form.html:8
 #: apps/setup/templates/setup/invoicing.html:5
 msgid "Open the fee plans"
 msgstr ""
 
-#: apps/invoicing/templates/invoicing/run_form.html:13
+#: apps/invoicing/templates/invoicing/run_form.html:14
 msgid "Make draft invoices"
 msgstr ""
 
@@ -2221,65 +2266,65 @@ msgstr ""
 msgid "%(unit)s has no contact person, so no invoice."
 msgstr ""
 
-#: apps/invoicing/views.py:228
+#: apps/invoicing/views.py:242
 #, python-format
 msgid "Rebuilt %(rebuilt)s drafts and made %(created)s new ones."
 msgstr ""
 
-#: apps/invoicing/views.py:247
+#: apps/invoicing/views.py:261
 #, python-format
 msgid "Issued %(count)s invoices."
 msgstr ""
 
-#: apps/invoicing/views.py:251
+#: apps/invoicing/views.py:265
 #, python-format
 msgid "%(count)s drafts were not issued: check them first."
 msgstr ""
 
-#: apps/invoicing/views.py:296
+#: apps/invoicing/views.py:310
 msgid "No invoices in this run go by post."
 msgstr ""
 
-#: apps/invoicing/views.py:325
+#: apps/invoicing/views.py:339
 msgid "There is nothing to print in this send-out."
 msgstr ""
 
-#: apps/invoicing/views.py:344
+#: apps/invoicing/views.py:358
 msgid "All issued invoices of this run have been sent."
 msgstr ""
 
-#: apps/invoicing/views.py:353 apps/invoicing/views.py:416
+#: apps/invoicing/views.py:367 apps/invoicing/views.py:430
 #: apps/messaging/views.py:55 apps/messaging/views.py:161
 #: apps/messaging/views.py:249
 msgid "Sending has started. This page shows how it goes."
 msgstr ""
 
-#: apps/invoicing/views.py:372
+#: apps/invoicing/views.py:386
 msgid "Recorded the payment."
 msgstr ""
 
-#: apps/invoicing/views.py:407
+#: apps/invoicing/views.py:421
 msgid "Choose at least one overdue invoice."
 msgstr ""
 
-#: apps/invoicing/views.py:412
+#: apps/invoicing/views.py:426
 #, python-format
 msgid "%(count)s overdue invoices"
 msgstr ""
 
-#: apps/invoicing/views.py:432 apps/invoicing/views.py:492
+#: apps/invoicing/views.py:446 apps/invoicing/views.py:506
 msgid "Kind"
 msgstr ""
 
-#: apps/invoicing/views.py:443
+#: apps/invoicing/views.py:457
 msgid "Reminder fees"
 msgstr ""
 
-#: apps/invoicing/views.py:497
+#: apps/invoicing/views.py:511
 msgid "Recorded by"
 msgstr ""
 
-#: apps/invoicing/views.py:513
+#: apps/invoicing/views.py:527
 msgid "Reminder fee"
 msgstr ""
 
@@ -2477,7 +2522,7 @@ msgstr ""
 
 #: apps/messaging/forms.py:65
 #: apps/messaging/templates/messaging/_attachments.html:4
-#: apps/messaging/templates/messaging/batch_detail.html:13
+#: apps/messaging/templates/messaging/batch_detail.html:14
 msgid "Attached files"
 msgstr ""
 
@@ -2499,7 +2544,7 @@ msgstr ""
 #: apps/messaging/forms.py:103 apps/messaging/models.py:41
 #: apps/messaging/templates/messaging/batch_list.html:12
 #: apps/messaging/templates/messaging/compose.html:3
-#: apps/messaging/templates/messaging/compose.html:6
+#: apps/messaging/templates/messaging/compose.html:7
 msgid "Urgent alert"
 msgstr ""
 
@@ -2526,8 +2571,8 @@ msgid "Who in each unit"
 msgstr ""
 
 #: apps/messaging/forms.py:120
-#: apps/messaging/templates/messaging/batch_detail.html:9
-#: apps/messaging/templates/messaging/compose.html:18
+#: apps/messaging/templates/messaging/batch_detail.html:10
+#: apps/messaging/templates/messaging/compose.html:19
 msgid "Send by"
 msgstr ""
 
@@ -2540,13 +2585,13 @@ msgstr ""
 
 #: apps/messaging/forms.py:133 apps/messaging/models.py:40
 #: apps/messaging/templates/messaging/_unit_messages.html:13
-#: apps/messaging/templates/messaging/batch_detail.html:10
-#: apps/messaging/templates/messaging/compose.html:26
+#: apps/messaging/templates/messaging/batch_detail.html:11
+#: apps/messaging/templates/messaging/compose.html:27
 msgid "Message"
 msgstr ""
 
 #: apps/messaging/forms.py:140
-#: apps/messaging/templates/messaging/batch_detail.html:11
+#: apps/messaging/templates/messaging/batch_detail.html:12
 msgid "Email subject"
 msgstr ""
 
@@ -2652,14 +2697,14 @@ msgid "For example: signed form at the annual meeting."
 msgstr ""
 
 #: apps/messaging/models.py:28
-#: apps/messaging/templates/messaging/compose.html:19
+#: apps/messaging/templates/messaging/compose.html:20
 #: apps/register/models.py:275 apps/setup/templates/setup/messaging.html:20
 #: apps/setup/templates/setup/messaging.html:22
 msgid "SMS"
 msgstr ""
 
 #: apps/messaging/models.py:37
-#: apps/readings/templates/readings/round_detail.html:8
+#: apps/readings/templates/readings/round_detail.html:9
 msgid "Self-service links"
 msgstr ""
 
@@ -2672,7 +2717,7 @@ msgid "Automatic reminder"
 msgstr ""
 
 #: apps/messaging/models.py:47
-#: apps/readings/templates/readings/round_detail.html:31
+#: apps/readings/templates/readings/round_detail.html:33
 #: apps/selfservice/views.py:23
 msgid "All units"
 msgstr ""
@@ -2959,7 +3004,7 @@ msgstr ""
 
 #: apps/messaging/models.py:402
 #: apps/messaging/templates/messaging/email_settings.html:3
-#: apps/messaging/templates/messaging/email_settings.html:6
+#: apps/messaging/templates/messaging/email_settings.html:7
 msgid "Email settings"
 msgstr ""
 
@@ -3076,22 +3121,22 @@ msgid "Send message"
 msgstr ""
 
 #: apps/messaging/templates/messaging/_unit_messages.html:12
-#: apps/register/templates/register/_history.html:8
+#: apps/register/templates/register/_history.html:9
 #: apps/selfservice/templates/selfservice/recent_changes.html:12
 msgid "When"
 msgstr ""
 
 #: apps/messaging/templates/messaging/_unit_messages.html:14
-#: apps/messaging/templates/messaging/batch_detail.html:66
+#: apps/messaging/templates/messaging/batch_detail.html:67
 #: apps/register/models.py:156
-#: apps/register/templates/register/unit_detail.html:37
+#: apps/register/templates/register/unit_detail.html:44
 #: apps/selfservice/templates/selfservice/print.html:27
 #: apps/selfservice/templates/selfservice/round_links.html:40
 msgid "Person"
 msgstr ""
 
 #: apps/messaging/templates/messaging/_unit_messages.html:15
-#: apps/messaging/templates/messaging/batch_detail.html:67
+#: apps/messaging/templates/messaging/batch_detail.html:68
 msgid "Channel"
 msgstr ""
 
@@ -3099,75 +3144,75 @@ msgstr ""
 msgid "No messages yet."
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_detail.html:17
-#: apps/messaging/templates/messaging/compose.html:118
+#: apps/messaging/templates/messaging/batch_detail.html:18
+#: apps/messaging/templates/messaging/compose.html:119
 msgid "Public notice"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_detail.html:21
-#: apps/messaging/templates/messaging/compose.html:24
+#: apps/messaging/templates/messaging/batch_detail.html:22
+#: apps/messaging/templates/messaging/compose.html:25
 #, python-format
 msgid "Shown until %(until)s"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_detail.html:21
+#: apps/messaging/templates/messaging/batch_detail.html:22
 msgid "Shown until you remove it"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_detail.html:25
+#: apps/messaging/templates/messaging/batch_detail.html:26
 msgid "Remove the notice"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_detail.html:29
+#: apps/messaging/templates/messaging/batch_detail.html:30
 msgid "No longer shown"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_detail.html:43
+#: apps/messaging/templates/messaging/batch_detail.html:44
 #, python-format
 msgid "%(count)s invoice goes by post"
 msgid_plural "%(count)s invoices go by post"
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/messaging/templates/messaging/batch_detail.html:43
+#: apps/messaging/templates/messaging/batch_detail.html:44
 #, python-format
 msgid "%(count)s reminder goes by post"
 msgid_plural "%(count)s reminders go by post"
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/messaging/templates/messaging/batch_detail.html:44
+#: apps/messaging/templates/messaging/batch_detail.html:45
 msgid "PDF to print"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_detail.html:49
+#: apps/messaging/templates/messaging/batch_detail.html:50
 #, python-format
 msgid "%(count)s household needs a letter"
 msgid_plural "%(count)s households need a letter"
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/messaging/templates/messaging/batch_detail.html:50
+#: apps/messaging/templates/messaging/batch_detail.html:51
 msgid "They have no phone number or email address that works, or prefer post."
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_detail.html:55
+#: apps/messaging/templates/messaging/batch_detail.html:56
 msgid "Print their letters"
 msgstr ""
 
-#: apps/messaging/templates/messaging/batch_detail.html:87
+#: apps/messaging/templates/messaging/batch_detail.html:88
 msgid "Sending…"
 msgstr ""
 
 #: apps/messaging/templates/messaging/batch_list.html:9
 #: apps/messaging/templates/messaging/newsletter_compose.html:3
-#: apps/messaging/templates/messaging/newsletter_compose.html:5
+#: apps/messaging/templates/messaging/newsletter_compose.html:6
 msgid "New newsletter"
 msgstr ""
 
 #: apps/messaging/templates/messaging/batch_list.html:11
 #: apps/messaging/templates/messaging/compose.html:3
-#: apps/messaging/templates/messaging/compose.html:6
+#: apps/messaging/templates/messaging/compose.html:7
 msgid "New message"
 msgstr ""
 
@@ -3192,97 +3237,97 @@ msgid "Nothing has been sent yet."
 msgstr ""
 
 #: apps/messaging/templates/messaging/compose.html:3
-#: apps/messaging/templates/messaging/compose.html:6
+#: apps/messaging/templates/messaging/compose.html:7
 #, python-format
 msgid "Message to %(name)s"
 msgstr ""
 
-#: apps/messaging/templates/messaging/compose.html:9
+#: apps/messaging/templates/messaging/compose.html:10
 msgid "SMS is not set up, so nobody gets an SMS."
 msgstr ""
 
-#: apps/messaging/templates/messaging/compose.html:10
+#: apps/messaging/templates/messaging/compose.html:11
 msgid "Email is not set up, so nobody gets an email."
 msgstr ""
 
-#: apps/messaging/templates/messaging/compose.html:15
-#: apps/messaging/templates/messaging/newsletter_compose.html:11
+#: apps/messaging/templates/messaging/compose.html:16
+#: apps/messaging/templates/messaging/newsletter_compose.html:12
 msgid "Check before sending"
 msgstr ""
 
-#: apps/messaging/templates/messaging/compose.html:19
 #: apps/messaging/templates/messaging/compose.html:20
+#: apps/messaging/templates/messaging/compose.html:21
 #, python-format
 msgid "%(count)s person"
 msgid_plural "%(count)s people"
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/messaging/templates/messaging/compose.html:19
+#: apps/messaging/templates/messaging/compose.html:20
 #, python-format
 msgid "%(count)s SMS in total"
 msgid_plural "%(count)s SMS in total"
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/messaging/templates/messaging/compose.html:19
+#: apps/messaging/templates/messaging/compose.html:20
 #, python-format
 msgid "up to %(sms_per_person)s per person"
 msgstr ""
 
-#: apps/messaging/templates/messaging/compose.html:23
+#: apps/messaging/templates/messaging/compose.html:24
 msgid "Notice on the public page"
 msgstr ""
 
-#: apps/messaging/templates/messaging/compose.html:26
+#: apps/messaging/templates/messaging/compose.html:27
 #, python-format
 msgid "The message, as %(name)s gets it"
 msgstr ""
 
-#: apps/messaging/templates/messaging/compose.html:32
+#: apps/messaging/templates/messaging/compose.html:33
 msgid "Nobody matches these choices"
 msgstr ""
 
-#: apps/messaging/templates/messaging/compose.html:44
+#: apps/messaging/templates/messaging/compose.html:45
 #, python-format
 msgid "%(count)s person cannot be reached this way"
 msgid_plural "%(count)s people cannot be reached this way"
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/messaging/templates/messaging/compose.html:45
+#: apps/messaging/templates/messaging/compose.html:46
 msgid "Call or visit them:"
 msgstr ""
 
-#: apps/messaging/templates/messaging/compose.html:60
+#: apps/messaging/templates/messaging/compose.html:61
 #, python-format
 msgid "Send now to %(count)s person"
 msgid_plural "Send now to %(count)s people"
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/messaging/templates/messaging/compose.html:61
+#: apps/messaging/templates/messaging/compose.html:62
 msgid "Change the message"
 msgstr ""
 
-#: apps/messaging/templates/messaging/compose.html:70
+#: apps/messaging/templates/messaging/compose.html:71
 #, python-format
 msgid "To the contacts of %(name)s."
 msgstr ""
 
-#: apps/messaging/templates/messaging/compose.html:70
+#: apps/messaging/templates/messaging/compose.html:71
 msgid "Back to the unit"
 msgstr ""
 
-#: apps/messaging/templates/messaging/compose.html:93
+#: apps/messaging/templates/messaging/compose.html:94
 msgid "Other options"
 msgstr ""
 
-#: apps/messaging/templates/messaging/compose.html:125
+#: apps/messaging/templates/messaging/compose.html:126
 msgid "Check recipients"
 msgstr ""
 
-#: apps/messaging/templates/messaging/compose.html:128
+#: apps/messaging/templates/messaging/compose.html:129
 msgid "Nothing is sent until you have checked the recipients and confirmed."
 msgstr ""
 
@@ -3297,9 +3342,9 @@ msgstr ""
 #: apps/plugins/templates/plugins/plugin_settings.html:30
 #: apps/readings/templates/readings/_round_row.html:20
 #: apps/readings/templates/readings/reading_form.html:30
-#: apps/readings/templates/readings/round_form.html:19
-#: apps/register/templates/register/person_form.html:37
-#: apps/register/templates/register/unit_form.html:28
+#: apps/readings/templates/readings/round_form.html:20
+#: apps/register/templates/register/person_form.html:38
+#: apps/register/templates/register/unit_form.html:29
 msgid "Save"
 msgstr ""
 
@@ -3354,40 +3399,40 @@ msgid ""
 "sent it if you still need the files."
 msgstr ""
 
-#: apps/messaging/templates/messaging/newsletter_compose.html:6
+#: apps/messaging/templates/messaging/newsletter_compose.html:7
 #, python-format
 msgid "%(count)s person wants the newsletter and has an email address."
 msgid_plural "%(count)s people want the newsletter and have an email address."
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/messaging/templates/messaging/newsletter_compose.html:7
+#: apps/messaging/templates/messaging/newsletter_compose.html:8
 msgid ""
 "Only they get it: a newsletter needs each person's consent, given on their "
 "self-service page or recorded by staff."
 msgstr ""
 
-#: apps/messaging/templates/messaging/newsletter_compose.html:8
+#: apps/messaging/templates/messaging/newsletter_compose.html:9
 msgid "Email is not set up, so a newsletter cannot be sent."
 msgstr ""
 
-#: apps/messaging/templates/messaging/newsletter_compose.html:12
+#: apps/messaging/templates/messaging/newsletter_compose.html:13
 #, python-format
 msgid "The newsletter, as %(name)s gets it"
 msgstr ""
 
-#: apps/messaging/templates/messaging/newsletter_compose.html:22
+#: apps/messaging/templates/messaging/newsletter_compose.html:23
 #, python-format
 msgid "Send to %(count)s person"
 msgid_plural "Send to %(count)s people"
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/messaging/templates/messaging/newsletter_compose.html:23
+#: apps/messaging/templates/messaging/newsletter_compose.html:24
 msgid "Change the newsletter"
 msgstr ""
 
-#: apps/messaging/templates/messaging/newsletter_compose.html:35
+#: apps/messaging/templates/messaging/newsletter_compose.html:36
 msgid "Preview"
 msgstr ""
 
@@ -3767,7 +3812,7 @@ msgid "No add-ons are installed."
 msgstr ""
 
 #: apps/plugins/templates/plugins/plugin_settings.html:3
-#: apps/plugins/templates/plugins/plugin_settings.html:6
+#: apps/plugins/templates/plugins/plugin_settings.html:7
 #, python-format
 msgid "Settings: %(plugin)s"
 msgstr ""
@@ -4027,13 +4072,13 @@ msgstr ""
 msgid "Enter"
 msgstr ""
 
-#: apps/readings/templates/readings/round_detail.html:9
-#: apps/register/templates/register/person_detail.html:9
-#: apps/register/templates/register/unit_detail.html:9
+#: apps/readings/templates/readings/round_detail.html:10
+#: apps/register/templates/register/person_detail.html:10
+#: apps/register/templates/register/unit_detail.html:10
 msgid "Edit"
 msgstr ""
 
-#: apps/readings/templates/readings/round_detail.html:15
+#: apps/readings/templates/readings/round_detail.html:16
 #, python-format
 msgid "%(submitted)s of %(count)s unit has reported. %(missing)s missing."
 msgid_plural ""
@@ -4041,32 +4086,32 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/readings/templates/readings/round_detail.html:32
+#: apps/readings/templates/readings/round_detail.html:34
 msgid "Missing a reading"
 msgstr ""
 
-#: apps/readings/templates/readings/round_detail.html:33
+#: apps/readings/templates/readings/round_detail.html:35
 msgid "Reported"
 msgstr ""
 
 #: apps/readings/templates/readings/round_form.html:3
-#: apps/readings/templates/readings/round_form.html:5
+#: apps/readings/templates/readings/round_form.html:6
 #, python-format
 msgid "Edit %(round)s"
 msgstr ""
 
 #: apps/readings/templates/readings/round_form.html:3
-#: apps/readings/templates/readings/round_form.html:5
+#: apps/readings/templates/readings/round_form.html:6
 msgid "New reading round"
 msgstr ""
 
-#: apps/readings/templates/readings/round_form.html:7
+#: apps/readings/templates/readings/round_form.html:8
 msgid ""
 "There are no reading types yet. An admin adds them under Settings > Reading "
 "types."
 msgstr ""
 
-#: apps/readings/templates/readings/round_form.html:17
+#: apps/readings/templates/readings/round_form.html:18
 msgid ""
 "Members can submit readings while the round is open, from the day it opens "
 "until the day it closes."
@@ -4247,18 +4292,18 @@ msgid "Country"
 msgstr ""
 
 #: apps/register/csv_io.py:473
-#: apps/register/templates/register/unit_detail.html:21
+#: apps/register/templates/register/unit_detail.html:27
 msgid "Start date"
 msgstr ""
 
 #: apps/register/csv_io.py:474
-#: apps/register/templates/register/unit_detail.html:22
+#: apps/register/templates/register/unit_detail.html:28
 msgid "End date"
 msgstr ""
 
 #: apps/register/csv_io.py:476 apps/register/csv_io.py:529
-#: apps/register/templates/register/person_detail.html:26
-#: apps/register/templates/register/unit_detail.html:25
+#: apps/register/templates/register/person_detail.html:27
+#: apps/register/templates/register/unit_detail.html:30
 msgid "Notes"
 msgstr ""
 
@@ -4266,14 +4311,14 @@ msgstr ""
 #: apps/register/templates/register/_person_results.html:18
 #: apps/register/templates/register/_show_select.html:6
 #: apps/register/templates/register/_unit_results.html:18
-#: apps/register/templates/register/person_detail.html:6
-#: apps/register/templates/register/unit_detail.html:6
+#: apps/register/templates/register/person_detail.html:7
+#: apps/register/templates/register/unit_detail.html:7
 msgid "Archived"
 msgstr ""
 
 #: apps/register/csv_io.py:479
-#: apps/register/templates/register/unit_detail.html:31
-#: apps/register/templates/register/unit_detail.html:33
+#: apps/register/templates/register/unit_detail.html:37
+#: apps/register/templates/register/unit_detail.html:40
 msgid "Contacts"
 msgstr ""
 
@@ -4286,7 +4331,7 @@ msgid "Last name"
 msgstr ""
 
 #: apps/register/csv_io.py:523
-#: apps/register/templates/register/person_detail.html:22
+#: apps/register/templates/register/person_detail.html:23
 msgid "Preferred channel"
 msgstr ""
 
@@ -4663,39 +4708,39 @@ msgstr ""
 msgid "contact"
 msgstr ""
 
-#: apps/register/templates/register/_history.html:2
+#: apps/register/templates/register/_history.html:3
 msgid "History"
 msgstr ""
 
-#: apps/register/templates/register/_history.html:9
+#: apps/register/templates/register/_history.html:10
 #: apps/selfservice/templates/selfservice/recent_changes.html:13
 msgid "Who"
 msgstr ""
 
-#: apps/register/templates/register/_history.html:10
+#: apps/register/templates/register/_history.html:11
 #: apps/selfservice/templates/selfservice/recent_changes.html:14
 msgid "What"
 msgstr ""
 
-#: apps/register/templates/register/_history.html:11
+#: apps/register/templates/register/_history.html:12
 #: apps/selfservice/templates/selfservice/recent_changes.html:15
 msgid "Changes"
 msgstr ""
 
-#: apps/register/templates/register/_history.html:18
-#: apps/register/templates/register/_history.html:44
+#: apps/register/templates/register/_history.html:19
+#: apps/register/templates/register/_history.html:45
 msgid "System"
 msgstr ""
 
-#: apps/register/templates/register/_history.html:37
+#: apps/register/templates/register/_history.html:38
 msgid "No changes recorded yet."
 msgstr ""
 
-#: apps/register/templates/register/_history.html:40
+#: apps/register/templates/register/_history.html:41
 msgid "Recently viewed by"
 msgstr ""
 
-#: apps/register/templates/register/_history.html:48
+#: apps/register/templates/register/_history.html:49
 msgid "No views recorded yet."
 msgstr ""
 
@@ -4713,7 +4758,7 @@ msgid "Page %(number)s of %(total)s"
 msgstr ""
 
 #: apps/register/templates/register/_pagination.html:9
-#: apps/register/templates/register/import_upload.html:19
+#: apps/register/templates/register/import_upload.html:20
 msgid "Next"
 msgstr ""
 
@@ -4849,76 +4894,76 @@ msgid "Errors"
 msgstr ""
 
 #: apps/register/templates/register/import_upload.html:3
-#: apps/register/templates/register/import_upload.html:5
+#: apps/register/templates/register/import_upload.html:6
 #, python-format
 msgid "Import CSV: %(word)s"
 msgstr ""
 
 #: apps/register/templates/register/import_upload.html:3
-#: apps/register/templates/register/import_upload.html:5
+#: apps/register/templates/register/import_upload.html:6
 msgid "Import units from CSV"
 msgstr ""
 
-#: apps/register/templates/register/import_upload.html:6
+#: apps/register/templates/register/import_upload.html:7
 msgid ""
 "Each row becomes one unit, optionally with one contact person. You choose "
 "which column goes where in the next step, and see every row checked before "
 "anything is saved."
 msgstr ""
 
-#: apps/register/templates/register/import_upload.html:10
+#: apps/register/templates/register/import_upload.html:11
 msgid "Example for the water association setup:"
 msgstr ""
 
-#: apps/register/templates/register/import_upload.html:24
+#: apps/register/templates/register/import_upload.html:25
 msgid ""
 "There are no unit types yet. An administrator must create one under Settings "
 "first."
 msgstr ""
 
-#: apps/register/templates/register/person_detail.html:12
-#: apps/register/templates/register/unit_detail.html:12
+#: apps/register/templates/register/person_detail.html:13
+#: apps/register/templates/register/unit_detail.html:16
 msgid "Restore"
 msgstr ""
 
-#: apps/register/templates/register/person_detail.html:12
-#: apps/register/templates/register/unit_detail.html:12
+#: apps/register/templates/register/person_detail.html:13
+#: apps/register/templates/register/unit_detail.html:16
 msgid "Archive"
 msgstr ""
 
-#: apps/register/templates/register/person_detail.html:20
+#: apps/register/templates/register/person_detail.html:21
 #, python-format
 msgid "Bounced %(date)s"
 msgstr ""
 
-#: apps/register/templates/register/person_detail.html:20
+#: apps/register/templates/register/person_detail.html:21
 msgid ""
 "Email to this address could not be delivered. Check the address with the "
 "person and correct it."
 msgstr ""
 
-#: apps/register/templates/register/person_detail.html:40
+#: apps/register/templates/register/person_detail.html:41
 msgid "Not linked to any unit."
 msgstr ""
 
 #: apps/register/templates/register/person_form.html:3
-#: apps/register/templates/register/person_form.html:5
+#: apps/register/templates/register/person_form.html:6
 #, python-format
 msgid "Edit %(name)s"
 msgstr ""
 
 #: apps/register/templates/register/person_form.html:3
-#: apps/register/templates/register/person_form.html:5
+#: apps/register/templates/register/person_form.html:6
 msgid "New person"
 msgstr ""
 
-#: apps/register/templates/register/person_form.html:9
+#: apps/register/templates/register/person_form.html:10
 #, python-format
 msgid "This person will be added to %(for_unit)s"
 msgstr ""
 
-#: apps/register/templates/register/person_form.html:12
-#: apps/register/templates/register/unit_detail.html:38 apps/setup/forms.py:143
+#: apps/register/templates/register/person_form.html:13
+#: apps/register/templates/register/unit_detail.html:45 apps/setup/forms.py:143
 msgid "Role"
 msgstr ""
 
@@ -4931,30 +4976,42 @@ msgstr ""
 msgid "All tags"
 msgstr ""
 
-#: apps/register/templates/register/unit_detail.html:65
+#: apps/register/templates/register/unit_detail.html:12
+msgid "More"
+msgstr ""
+
+#: apps/register/templates/register/unit_detail.html:72
 msgid "No contacts yet."
 msgstr ""
 
-#: apps/register/templates/register/unit_detail.html:69
+#: apps/register/templates/register/unit_detail.html:77
+msgid "Add contact"
+msgstr ""
+
+#: apps/register/templates/register/unit_detail.html:79
 msgid "Add existing person"
 msgstr ""
 
-#: apps/register/templates/register/unit_detail.html:76
+#: apps/register/templates/register/unit_detail.html:86
 msgid "Add"
 msgstr ""
 
-#: apps/register/templates/register/unit_detail.html:80
+#: apps/register/templates/register/unit_detail.html:90
+msgid "Not in the register yet?"
+msgstr ""
+
+#: apps/register/templates/register/unit_detail.html:90
 msgid "Add new person"
 msgstr ""
 
 #: apps/register/templates/register/unit_form.html:3
-#: apps/register/templates/register/unit_form.html:5
+#: apps/register/templates/register/unit_form.html:6
 #, python-format
 msgid "Edit %(unit)s"
 msgstr ""
 
 #: apps/register/templates/register/unit_form.html:3
-#: apps/register/templates/register/unit_form.html:5
+#: apps/register/templates/register/unit_form.html:6
 #: apps/register/templates/register/unit_list.html:9
 #, python-format
 msgid "Add: %(unit_type)s"
@@ -5776,6 +5833,10 @@ msgstr ""
 
 #: templates/403.html:7
 msgid "Go to the start page"
+msgstr ""
+
+#: templates/_crumbs.html:1
+msgid "You are here"
 msgstr ""
 
 #: templates/_language_form.html:12

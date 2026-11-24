@@ -21,10 +21,11 @@ continuous supplies, VAT is due for the month the period ends in, at the
 rate in force then. A single invoice can have its own delivery date or
 period; without one, the invoice date counts.
 
-**Issue all checked drafts** on the run page, or **Issue invoice** on a single
-draft, gives each invoice its number and dates and locks it. An issued
-invoice is never changed: a mistake is corrected with a credit note (**Make a
-credit note** on the invoice), which can credit all or part of it.
+The run page shows three steps: **Check**, **Issue** and **Send**. **Issue**
+there, or **Issue invoice** on a single draft, gives each invoice its number
+and dates and locks it. An issued invoice is never changed: a mistake is
+corrected with a credit note (**Make a credit note** on the invoice), which
+can credit all or part of it.
 
 ## Sending
 
@@ -41,10 +42,11 @@ parts. An invoice is **Paid** when nothing is outstanding. Payments are never
 changed or deleted; to undo one, record the same amount as a negative
 payment.
 
-**Invoices > Overdue** lists unpaid invoices past their due date. **Send
-reminders to the chosen** sends a payment reminder on each person's preferred
-channel (email or SMS, or the other one if they have no address for it), or
-by letter to those who prefer post or have neither, with the reminder fee if one is set and at least 14 days to pay.
+**Invoices > Overdue invoices** lists unpaid invoices past their due date.
+**Send reminders to the chosen** sends a payment reminder on each person's
+preferred channel (email or SMS, or the other one if they have no address
+for it), or by letter to those who prefer post or have neither, with the
+reminder fee if one is set and at least 14 days to pay.
 
 ## For the accountant
 

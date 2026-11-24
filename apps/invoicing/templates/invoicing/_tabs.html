@@ -1,0 +1,5 @@
+{% load i18n %}<nav class="filter-tabs" aria-label="{% translate 'Invoices' %}">
+  <a href="{% url 'invoicing:invoice_list' %}"{% if current == "all" %} aria-current="page"{% endif %}>{% translate "All invoices" %}</a>
+  <a href="{% url 'invoicing:overdue_list' %}"{% if current == "overdue" %} aria-current="page"{% endif %}>{% translate "Overdue invoices" %}</a>
+  <a href="{% url 'invoicing:run_list' %}"{% if current == "runs" %} aria-current="page"{% endif %}>{% translate "Invoice runs" %}</a>
+</nav>

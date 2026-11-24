@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n nav %}
 {% block title %}{% translate "New newsletter" %}{% endblock %}
 {% block content %}
+  {% url 'messaging:batch_list' as c1 %}{% crumbs c1 _('Send-outs') %}
   <h1>{% translate "New newsletter" %}</h1>
   <p>{% blocktranslate count count=count %}{{ count }} person wants the newsletter and has an email address.{% plural %}{{ count }} people want the newsletter and have an email address.{% endblocktranslate %}
     {% translate "Only they get it: a newsletter needs each person's consent, given on their self-service page or recorded by staff." %}</p>
@@ -33,7 +34,7 @@
       {% include "register/_field.html" with field=form.files %}
       <div class="actions">
         <button type="submit" class="button button--primary">{% translate "Preview" %}</button>
-        <a class="button" href="{% url 'messaging:batch_list' %}">{% translate "Cancel" %}</a>
+        <a class="button button--link" href="{% url 'messaging:batch_list' %}">{% translate "Cancel" %}</a>
       </div>
     </form>
   {% endif %}
