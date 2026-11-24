@@ -12,6 +12,13 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+## [0.8.1] - 2026-11-24
+
+### Fixed
+
+- The cards on the Settings page have even padding again; the text no
+  longer sits against the card's edge.
+
 ## [0.8.0] - 2026-11-24
 
 ### Added
