@@ -18,6 +18,15 @@ A first part, parsing camt.053 and camt.054 files and matching by
 reference number, with tests, is kept on the branch
 `claude/project-thread-ky14sp`.
 
+## Sweden
+
+Phase 10 on the roadmap, parked in November 2026. Country rules become a
+setting per organisation: Swedish VAT and invoice details, Bankgiro and OCR
+references, Swish payment requests and QR codes, and Swedish bookkeeping
+retention (7 years). This would prove the country layer, so further
+countries are mostly configuration. The bookkeeping add-on already keeps its
+country rules in `countries/fi.py` so a `countries/se.py` can follow.
+
 ## E-invoicing
 
 Send invoices as Finvoice to business clients and members who ask for it,
