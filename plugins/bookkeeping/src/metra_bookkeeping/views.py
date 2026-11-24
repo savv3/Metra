@@ -1044,7 +1044,7 @@ def journal(request):
                 _day(voucher.date),
                 voucher.display_number,
                 line.account.number,
-                line.account.name,
+                line.account.display_name,
                 ": ".join(text for text in (voucher.description, line.description) if text),
                 A(line.debit or ""),
                 A(line.credit or ""),
@@ -1070,7 +1070,7 @@ def _ledger_rows(context):
     rows = []
     for item in context["accounts"]:
         account = item.account
-        start = [account.number, account.name, _day(context["start"]), ""]
+        start = [account.number, account.display_name, _day(context["start"]), ""]
         rows.append([*start, _("Balance brought forward"), "", "", A(item.opening)])
         for line, balance in item.entries:
             voucher = line.voucher
@@ -1078,7 +1078,7 @@ def _ledger_rows(context):
             rows.append(
                 [
                     account.number,
-                    account.name,
+                    account.display_name,
                     _day(voucher.date),
                     voucher.display_number,
                     text,
@@ -1133,7 +1133,7 @@ def trial_balance(request):
         lines = [
             [
                 row.account.number,
-                row.account.name,
+                row.account.display_name,
                 A(row.opening),
                 A(row.debit),
                 A(row.credit),
@@ -1244,7 +1244,7 @@ def budget(request):
                 lines.append(
                     [
                         row.account.number,
-                        row.account.name,
+                        row.account.display_name,
                         A(row.budget),
                         A(row.actual),
                         A(row.difference),

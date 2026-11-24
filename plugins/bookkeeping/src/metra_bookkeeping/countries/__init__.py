@@ -22,6 +22,7 @@ A country module has:
 import datetime
 from dataclasses import dataclass, field
 from decimal import Decimal
+from functools import cache
 from importlib import import_module
 
 from django.conf import settings
@@ -188,6 +189,26 @@ def get(code=None):
     if code not in COUNTRIES:
         raise LookupError(f"No bookkeeping rules for country {code!r}.")
     return import_module(f"{__name__}.{code}")
+
+
+@cache
+def _template_accounts():
+    """{(number, name in any language): template account} over every chart."""
+    found = {}
+    for code in COUNTRIES:
+        for chart in get(code).CHARTS.values():
+            for account in chart.accounts:
+                for name in account.names.values():
+                    found.setdefault((account.number, name), account)
+    return found
+
+
+def account_name(number, name, language=None):
+    """``name`` in ``language`` (the current one by default) while it is still
+    a chart template's name for account ``number``, in whichever language the
+    books were started in; a name the treasurer has changed stays as it is."""
+    template = _template_accounts().get((number, name))
+    return template.name(language) if template else name
 
 
 def chart_choices(code=None):

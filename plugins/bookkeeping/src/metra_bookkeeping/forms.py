@@ -98,6 +98,10 @@ class AccountForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        if self.instance.pk and not self.is_bound:
+            # A template name shows in the current language; saving it
+            # unchanged keeps it following the language.
+            self.initial["name"] = self.instance.display_name
         if self.instance.has_entries():
             for name in ("number", "kind"):
                 self.fields[name].disabled = True

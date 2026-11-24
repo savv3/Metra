@@ -105,6 +105,35 @@ def test_chart_in_language(db):
     assert Account.objects.get(number="2000").name == "Andelskapital"
 
 
+def test_template_names_follow_language(db):
+    from django.utils import translation
+
+    from metra_bookkeeping import countries
+
+    Account.create_chart(countries.get("fi").CHARTS["association"], "en")
+    bank = Account.objects.get(number="1910")
+    renamed = Account.objects.get(number="1700")
+    renamed.name = "Members' unpaid fees"
+    renamed.save()
+    with translation.override("sv"):
+        assert str(bank) == "1910 Bankkonto"
+        assert renamed.display_name == "Members' unpaid fees"
+    with translation.override("fi"):
+        assert bank.display_name == "Pankkitili"
+    with translation.override("en"):
+        assert bank.display_name == "Bank account"
+
+
+def test_account_list_and_form_in_language(treasurer, chart):
+    from django.urls import reverse
+
+    treasurer.post(reverse("set_language"), {"language": "sv", "next": "/"})
+    page = treasurer.get(reverse("metra_bookkeeping:account_list"))
+    assert "Bankkonto" in page.content.decode()
+    form = treasurer.get(reverse("metra_bookkeeping:account_edit", args=[chart["1910"].pk]))
+    assert 'value="Bankkonto"' in form.content.decode()
+
+
 def test_posting_numbers_without_gaps(make_voucher, year, chart):
     first = make_voucher([("4610", "100.00", "0"), ("1910", "0", "100.00")])
     dropped = make_voucher([("4610", "5.00", "0"), ("1910", "0", "5.00")])

@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
@@ -24,12 +26,21 @@ class RoundForm(forms.ModelForm):
             self.fields["reading_type"].initial = types.first()
 
 
+class ReadingValueField(forms.DecimalField):
+    """Shows a saved value with the field's decimals: 17 rather than 17,000."""
+
+    def prepare_value(self, value):
+        if isinstance(value, Decimal) and value.is_finite() and self.decimal_places is not None:
+            value = value.quantize(Decimal(1).scaleb(-self.decimal_places))
+        return super().prepare_value(value)
+
+
 def value_field(reading_type, **kwargs):
     """A number field with the reading type's decimals; accepts 12,5 as well as 12.5."""
     label = _("Reading")
     if reading_type.unit_label:
         label = f"{label} ({reading_type.unit_label})"
-    return forms.DecimalField(
+    return ReadingValueField(
         label=label,
         min_value=0,
         max_digits=15,

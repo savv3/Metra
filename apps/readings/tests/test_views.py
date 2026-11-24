@@ -205,3 +205,13 @@ def test_water_sample_adds_a_meter_reading_type(db):
     meter = ReadingType.objects.get()
     assert (meter.name, meter.unit_label, meter.cumulative) == ("Vattenmätare", "m³", True)
     assert meter.unit_type.name == "Hushåll"
+
+
+def test_entry_form_shows_saved_value_with_the_types_decimals(board_client, round_, unit, meter):
+    Reading.objects.create(round=round_, unit=unit, value=D("17.000"))
+    meter.decimals = 1
+    meter.save()
+
+    page = board_client.get(entry_url(round_, unit), HTTP_ACCEPT_LANGUAGE="sv").content.decode()
+
+    assert 'value="17,0"' in page
