@@ -5,20 +5,16 @@ Guidance for AI coding agents (and humans) working in this repository.
 
 ## What this is
 
-Metra is an open source (MIT), self-hostable web app for small
-companies and associations to manage members and clients: a register of
-households or other units and their contacts, annual readings (for example
-water usage), SMS and email messaging, newsletters, invoicing, an API, and
-offsite backups.
+Metra is an open source (MIT), self-hostable web app for small companies and
+associations: a register of units and their contacts, annual readings, SMS
+and email, invoicing, bookkeeping, an API and offsite backups. The first user
+is a water association with about 50 households, but the product stays
+**configurable**: record types and fields are set up by an admin, never
+hard-coded for water. Something only one kind of organisation needs becomes
+a setting or a configurable type.
 
-The first user is a water association serving about 50 households, but the
-product must stay **configurable**: record types and fields are set up by an
-admin, never hard-coded for water. If a feature only makes sense for one
-kind of organisation, make it a setting or a configurable type.
-
-The full plan, data model and roadmap are in
-[docs/architecture.md](docs/architecture.md). Read it before starting a new
-module.
+The plan, data model and roadmap are in
+[docs/architecture.md](docs/architecture.md).
 
 ## Decisions already made
 
@@ -38,22 +34,22 @@ Do not revisit these without the maintainer asking.
 
 ## How to work here
 
-- **Plan first.** For anything bigger than a small fix, write a short plan
-  and get the maintainer's approval before writing code.
-- **Small pull requests.** Follow the phase plan in `docs/architecture.md`;
-  one PR per row of the phase table. Each PR keeps CI green.
-- **Use subagents and match the model to the task.** When your tool can
-  start subagents, split independent work and run it in parallel. Send
-  simpler tasks to cheaper, faster models and keep the strongest model for
-  hard judgement:
-  - Cheapest model (for example Haiku): mechanical edits, renames,
-    translation entries, boilerplate, formatting, simple searches.
-  - Mid-tier model (for example Sonnet): well-specified features, tests,
-    Docker and CI changes, documentation.
-  - Strongest model (for example Opus): architecture and data model
-    decisions, security and privacy work, tricky bugs, reviewing other
-    agents' output before it is committed.
-  The agent that starts subagents stays responsible for checking their work.
+- **One PR per feature** (one row of the phase plan in `docs/architecture.md`),
+  with CI green. Review fixes go on the same branch before merging, not in a
+  new PR; small unrelated fixes wait and go together in one PR.
+- **Build straight away.** Plan and wait for approval only for data model,
+  security, privacy and bookkeeping-law changes.
+- **Short-lived branches** from the latest `main`; bring in `main` once,
+  just before merging, only if there are conflicts.
+- **Release in batches,** when there is something to deploy or the
+  maintainer asks, never after every PR ([docs/releasing.md](docs/releasing.md)).
+- **Subagents only for big independent pieces** (for example all
+  translations of a large PR); small edits are cheaper done yourself. Cheap
+  models for mechanical work, the strongest for design, security,
+  bookkeeping and reviews. Whoever starts a subagent checks its work.
+- **Read only what the task needs:** `docs/architecture.md` for a new
+  module, `docs/ui-conventions.md` for templates, `docs/plugins.md` for
+  plugins. Finished build plans are in `docs/history/`.
 
 ## Commands
 
@@ -70,85 +66,55 @@ uv run python manage.py makemessages -l sv -l en --ignore=.venv
 docker compose up --build                       # full stack, needs a .env (see .env.example)
 ```
 
-`compilemessages` and `makemessages` need GNU gettext installed. Always pass
-`--ignore=.venv` so they skip installed packages.
+The gettext commands need GNU gettext and always `--ignore=.venv`.
 
 ## Conventions
 
-- **Layout:** project settings in `config/`, Django apps in `apps/<name>/`,
-  shared templates in `templates/`, translations in `locale/`. Integrations
-  and providers for outside services (SMS gateways, the REST API, webhooks)
-  are plugins in `plugins/<name>/` that use only `apps.plugins.api`, so they
-  can move to their own repository later; see `docs/plugins.md`.
-- **Configuration:** every per-installation value is an environment variable
-  prefixed `METRA_` and documented in `.env.example`. No secrets in the repo.
-  Settings an admin changes in the app (plugins' settings, `api.Setting`)
-  keep an environment variable that wins when set, and secrets saved in the
-  database are encrypted with `apps.plugins.secrets`, never shown again and
-  kept out of the audit log.
-- **Plugins on and off:** admins turn installed plugins on and off in the
-  app (`apps.plugins.state`). Anything a plugin adds through
-  `apps.plugins.api` is left out while it is off, so new extension points go
-  through `hooks.register`/`hooks.get` (or check `state.is_enabled`). In the
-  interface plugins are called add-ons (Tillägg, Lisäosat), never plugins.
-- **Data:** everything persistent lives under `METRA_DATA_DIR` (databases,
-  uploads), so one directory is all a backup needs.
+- **Layout:** settings in `config/`, Django apps in `apps/<name>/`, shared
+  templates in `templates/`, translations in `locale/`. Integrations with
+  outside services (SMS, REST API, webhooks) are plugins in `plugins/<name>/`
+  that use only `apps.plugins.api`; see `docs/plugins.md`.
+- **Configuration:** every per-install value is a `METRA_` environment
+  variable documented in `.env.example`; no secrets in the repo. Settings
+  changed in the app (plugin settings, `api.Setting`) keep an environment
+  variable that wins when set. Secrets saved in the database are encrypted
+  with `apps.plugins.secrets`, never shown again and kept out of the audit log.
+- **Plugins on and off** (`apps.plugins.state`): anything a plugin adds is
+  left out while it is off, so new extension points go through
+  `hooks.register`/`hooks.get` or check `state.is_enabled`. The interface
+  calls them add-ons (Tillägg, Lisäosat), never plugins.
+- **Data:** everything persistent lives under `METRA_DATA_DIR`.
 - **Translations:** every user-facing string goes through `gettext` /
-  `{% translate %}`. Add the Swedish translation in
-  `locale/sv/LC_MESSAGES/django.po` and the Finnish one in
-  `locale/fi/LC_MESSAGES/django.po` in the same PR. The maintainer proofreads
-  Swedish and English but not Finnish, which is machine translated: keep it
-  in `MACHINE_TRANSLATED_LANGUAGES` so pages show a notice saying so. Compiled `.mo` files are
-  not committed.
-- **Help:** the in-app help articles are Markdown in
-  `apps/help/articles/<language>/`, in Swedish, English and Finnish. A change
-  users notice updates the article that describes it, in all three languages.
+  `{% translate %}`, with Swedish and Finnish entries in
+  `locale/{sv,fi}/LC_MESSAGES/django.po` in the same PR. Finnish is machine
+  translated and stays in `MACHINE_TRANSLATED_LANGUAGES`. `.mo` files are not
+  committed.
+- **Interface and help:** follow [docs/ui-conventions.md](docs/ui-conventions.md).
+  A change users notice updates its help article in `apps/help/articles/`
+  in all three languages.
 - **Privacy (GDPR):** store only fields with a clear purpose, log changes to
-  personal data, and make sure new personal data is covered by the
-  per-person export and erasure tools. Never send personal data to a third
-  party except through a configured, documented provider.
+  personal data, and cover new personal data in the per-person export and
+  erasure tools. Personal data goes to third parties only through a
+  configured, documented provider.
 - **Bookkeeping data:** sent invoices and payments are immutable; correct
-  them with credit notes, not edits.
-- **Buttons and actions:** every page follows the same layout, so people
-  find actions in the same place:
-  - One primary (blue) button per page or step: what most people came to do.
-  - Page actions sit in the heading row (`.page-head .actions`), primary
-    last. More than three: rarely used ones go in a "More" menu
-    (`<details class="more-menu">`), and so do destructive ones such as
-    Archive.
-  - A section's actions sit at the right of its heading (`.section-head`).
-    Forms for adding things open from a button (`<details class="add-panel">`)
-    instead of always showing.
-  - Form actions go at the bottom: the primary first, then Cancel as a link
-    (`button button--link`).
-  - Pages below the first level show the way back above the heading with
-    `{% crumbs url label ... %}` (from `nav`), never a "back" button named
-    after the parent page.
-  - Sibling pages of one section are tabs (`.filter-tabs`), not buttons.
-  - Filter bars update as you type (HTMX); their Filter button only shows
-    without JavaScript. Keep filters and action buttons in separate rows.
-- **Access:** every view checks a model permission (`permission_required`
-  with `raise_exception=True`, so refusals are a 403 page) and templates hide
-  buttons with `perms`. Roles are the groups created in
-  `apps/accounts/migrations/0001_roles.py`; a new model or permission needs a
-  migration that adds it to the right roles. Staff must use two-factor login
-  (`apps/accounts/middleware.py`) unless `METRA_REQUIRE_MFA` is off, which is
-  the default only when `METRA_DEBUG=true` (staff then see a warning banner);
-  tests run with it on. Keep every login path going through django-allauth,
-  and keep requests that are not pages (icons, robots.txt) out of the
+  them with credit notes.
+- **Access:** every view uses `permission_required(..., raise_exception=True)`
+  and templates hide buttons with `perms`. Roles are the groups from
+  `apps/accounts/migrations/0001_roles.py`; a new permission needs a
+  migration adding it to the right roles. Staff need two-factor login
+  (`apps/accounts/middleware.py`) unless `METRA_REQUIRE_MFA` is off (default
+  only with `METRA_DEBUG=true`); tests run with it on. All logins go through
+  django-allauth; non-page requests (icons, robots.txt) stay out of the
   middleware's redirect.
-- **Audit log:** register models are registered with django-auditlog in
-  `apps/register/models.py`; register new models holding personal or
-  business data the same way, and log views of detail pages with
-  `history.log_view`.
-- **Tests:** pytest with pytest-django. Shared fixtures (`make_user`,
-  `role_client`, `board_client`, `unit`, `person`) are in `conftest.py`.
-  New behaviour comes with tests; CI runs ruff, the migration check and
-  pytest.
-- **Versions and changelog:** the app version lives only in
-  `pyproject.toml`; see [docs/releasing.md](docs/releasing.md). Add a line
-  under **Unreleased** in `CHANGELOG.md` in every PR that changes something
-  users, admins or plugin authors notice. A breaking change to
-  `apps/plugins/api.py` bumps `API_VERSION`; additions do not.
-- **Dependencies:** prefer Django's built-ins and well-maintained, free
-  packages. Add new runtime dependencies only when they save real work.
+- **Audit log:** register models holding personal or business data with
+  django-auditlog (as in `apps/register/models.py`) and log detail-page views
+  with `history.log_view`.
+- **Tests:** pytest-django; shared fixtures (`make_user`, `role_client`,
+  `board_client`, `unit`, `person`) in `conftest.py`. New behaviour comes
+  with tests. CI runs ruff, the migration check and pytest.
+- **Versions and changelog:** the version lives only in `pyproject.toml`
+  ([docs/releasing.md](docs/releasing.md)). Every PR users, admins or plugin
+  authors notice adds a line under **Unreleased** in `CHANGELOG.md`. A
+  breaking change to `apps/plugins/api.py` bumps `API_VERSION`.
+- **Dependencies:** prefer Django built-ins; add runtime dependencies only
+  when they save real work.
