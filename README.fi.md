@@ -48,7 +48,7 @@ tavoittaa kaikki nopeasti. Se tehtiin ensin vesiosuuskunnalle, jossa on noin
 
 - Muokattava rekisteri yksiköistä, henkilöistä ja yhteystiedoista sekä
   CSV-tuonti ja -vienti
-- Roolit, henkilökunnan kaksivaiheinen tunnistautuminen ja loki kaikista
+- Roolit, kaikkien käyttäjien kaksivaiheinen tunnistautuminen ja loki kaikista
   muutoksista
 - Vuosittaiset lukemat, jotka hallitus tai jäsenet itse syöttävät
 - Jäsenten itsepalvelu henkilökohtaisten linkkien kautta, ilman salasanoja

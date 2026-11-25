@@ -26,8 +26,9 @@ ole määritetty, linkki näytetään sivulla kerran, jotta voit lähettää sen
 
 Kaksivaiheinen tunnistautuminen suojaa rekisteriä puhelimesi
 todennussovelluksen, kuten Aegisin, Google Authenticatorin tai
-1Passwordin, antamalla koodilla. Ylläpitäjien on käytettävä sitä; muille se
-on erittäin suositeltavaa.
+1Passwordin, antamalla koodilla. Jokaisen käyttäjän on otettava se käyttöön
+ennen kuin hän voi käyttää Metraa, koska kaikki roolit näkevät jäsenten
+henkilötiedot. (Asennuksen voi asettaa vaatimaan sitä vain ylläpitäjiltä.)
 
 Ota se käyttöön avaamalla **Oma tili** nimesi alla olevasta valikosta ja
 valitsemalla **Ota kaksivaiheinen tunnistautuminen käyttöön**. Skannaa

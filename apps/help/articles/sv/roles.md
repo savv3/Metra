@@ -26,8 +26,9 @@ inställd visas länken en gång på sidan, så att du kan skicka den själv.
 
 Tvåfaktorsinloggning skyddar registret med en kod från en
 autentiseringsapp i mobilen, som Aegis, Google Authenticator eller
-1Password. Administratörer måste använda den; för alla andra rekommenderas
-den starkt.
+1Password. Alla användare måste slå på den innan de kan använda Metra,
+eftersom alla roller ser medlemmarnas personuppgifter. (En installation kan
+ställas in så att bara administratörer måste använda den.)
 
 Slå på den under **Mitt konto** i menyn under ditt namn och välj **Slå på
 tvåfaktorsinloggning**. Skanna QR-koden med appen, skriv in den sexsiffriga

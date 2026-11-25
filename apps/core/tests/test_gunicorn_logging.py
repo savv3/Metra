@@ -46,3 +46,16 @@ def test_delivery_report_secret_stays_out_of_the_access_log():
 
 def test_other_addresses_are_logged_as_they_are():
     assert _atoms("/units/12/", "-")["U"] == "/units/12/"
+
+
+def test_invitation_and_password_links_stay_out_of_the_access_log():
+    atoms = _atoms("/accounts/password/reset/key/2s-abc123-secretkey/", "-")
+
+    assert "secretkey" not in atoms["r"]
+    assert atoms["U"] == "/accounts/password/reset/key/[redacted]/"
+
+
+def test_unsubscribe_tokens_stay_out_of_the_access_log():
+    atoms = _atoms("/unsubscribe/signed-token/", "https://example.com/unsubscribe/signed-token/")
+
+    assert "signed-token" not in atoms["r"] + atoms["{referer}i"]

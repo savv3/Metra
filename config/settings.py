@@ -148,10 +148,15 @@ ACCOUNT_SIGNUP_FIELDS = ["username*", "password1*", "password2*"]
 ACCOUNT_EMAIL_VERIFICATION = "none"
 MFA_ADAPTER = "apps.accounts.adapter.MFAAdapter"
 MFA_FORMS = {"activate_totp": "apps.accounts.forms.ActivateTOTPForm"}
-# Staff (who can open Settings) must use two-factor login. On by default in
-# production and off in development (METRA_DEBUG=true); an explicit value wins.
-# A demo site never requires it: everyone shares the demo account.
+# Users must use two-factor login. On by default in production and off in
+# development (METRA_DEBUG=true); an explicit value wins. A demo site never
+# requires it: everyone shares the demo account.
 REQUIRE_MFA = env_bool("METRA_REQUIRE_MFA", not DEBUG) and not DEMO
+# Who must: "all" (every user; the default, since every role sees members'
+# details) or "staff" (only staff and superusers, who can open Settings).
+REQUIRE_MFA_FOR = (os.environ.get("METRA_REQUIRE_MFA_FOR") or "all").strip().lower()
+if REQUIRE_MFA_FOR not in {"all", "staff"}:
+    raise ImproperlyConfigured("METRA_REQUIRE_MFA_FOR must be all or staff.")
 MFA_SUPPORTED_TYPES = ["totp", "recovery_codes"]
 MFA_TOTP_ISSUER = "Metra"
 
@@ -342,3 +347,12 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+# Browsers keep to https for this site once they have seen it, so a first
+# visit on a hostile network cannot be downgraded to http. In seconds; 0 turns
+# it off (for example while trying a new domain).
+SECURE_HSTS_SECONDS = 0 if DEBUG else int(os.environ.get("METRA_HSTS_SECONDS") or 31536000)
+# Plain http is sent on to https. The health check and the status page stay
+# reachable over http, because the containers' and hosts' own checks call
+# them on 127.0.0.1 without a proxy in front.
+SECURE_SSL_REDIRECT = env_bool("METRA_SSL_REDIRECT", not DEBUG)
+SECURE_REDIRECT_EXEMPT = [r"^healthz$", r"^status$"]

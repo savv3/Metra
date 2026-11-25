@@ -39,7 +39,7 @@ först för ett vattenandelslag med ungefär 50 hushåll. Andra som passar bra:
 
 - Ett register över enheter, personer och kontakter som går att anpassa, med
   import och export av CSV
-- Roller, tvåstegsinloggning för personalen och en logg över alla ändringar
+- Roller, tvåstegsinloggning för alla användare och en logg över alla ändringar
 - Årliga avläsningar, som styrelsen eller medlemmarna själva matar in
 - Självbetjäning för medlemmar via personliga länkar, utan lösenord
 - Sms (46elks) och e-post, akuta meddelanden och en offentlig sida med

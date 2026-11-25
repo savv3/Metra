@@ -135,10 +135,8 @@ def test_other_roles_do_not_see_history(role_client, unit, role):
 
 
 def test_settings_shows_a_records_audit_history(client, make_user, unit):
-    from allauth.mfa.totp.internal.auth import TOTP, generate_totp_secret
 
     admin = make_user("admin", "Admin", is_staff=True)
-    TOTP.activate(admin, generate_totp_secret())
     client.force_login(admin)
 
     response = client.get(reverse("admin:register_unit_auditlog", args=[unit.pk]))

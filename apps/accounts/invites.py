@@ -14,6 +14,8 @@ from django.utils.translation import gettext as _
 from apps.messaging.registry import EMAIL, provider_for
 from apps.register.models import Organisation
 
+from .twofactor import requires_two_factor
+
 
 def is_pending(user):
     """True while the user has not chosen a password yet."""
@@ -71,7 +73,7 @@ def send(user, link, inviter=""):
             "ask for a new one."
         )
     )
-    if user.is_staff and settings.REQUIRE_MFA:
+    if requires_two_factor(user):
         body += "\n\n" + _(
             "After choosing your password you set up two-factor login with an "
             "authenticator app on your phone."

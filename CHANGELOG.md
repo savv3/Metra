@@ -12,6 +12,26 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+### Changed
+
+- Every user must now use two-factor login, not only staff: board,
+  treasurer and read-only users see members' personal details too.
+  `METRA_REQUIRE_MFA_FOR=staff` keeps the old behaviour.
+- Plain http is redirected to https and pages send an HSTS header in
+  production (`METRA_SSL_REDIRECT`, `METRA_HSTS_SECONDS`).
+
+### Security
+
+- Invitation and password links and newsletter unsubscribe links are no
+  longer written in full to the access log.
+
+### Upgrade notes
+
+- Users without two-factor login are asked to set it up at their next login,
+  before they can use the app. Tell them before upgrading, or set
+  `METRA_REQUIRE_MFA_FOR=staff` until they are ready.
+- If nothing in front of Metra serves https, set `METRA_SSL_REDIRECT=false`.
+
 ## [0.8.1] - 2026-11-24
 
 ### Fixed
