@@ -64,7 +64,7 @@ backup). The tables stay in the database.
 
 What differs between countries is in `countries/` (Finland in `fi.py`),
 including the retention periods. The plan is the phase 9 build plan in
-[docs/architecture.md](../../docs/architecture.md#phase-9-build-plan).
+[docs/history/build-plans.md](../../docs/history/build-plans.md#phase-9-build-plan).
 
 Personal data: voucher descriptions and receipts can name people, and the
 invoices behind vouchers name their recipients. They are bookkeeping

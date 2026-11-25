@@ -78,7 +78,12 @@ developer.
    **Unreleased** section.
 2. Set the same version in `pyproject.toml` and run `uv lock`.
 3. Merge that as a pull request, then tag the merge commit and push the tag:
-   `git tag vX.Y.Z && git push origin vX.Y.Z`.
+   `git tag vX.Y.Z && git push origin vX.Y.Z`. Steps 1 and 2 can go in the
+   last feature PR of a batch instead of a PR of their own.
+
+Release in batches: when there is something worth deploying or the
+maintainer asks, not after every merged PR. A fix that only polishes
+something can wait for the next release.
 
 The release workflow checks that the tag matches `pyproject.toml`, publishes
 the images and creates the GitHub release from that changelog section.
