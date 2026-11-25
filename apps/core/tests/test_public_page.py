@@ -136,10 +136,8 @@ def test_letters_show_the_contact_block(board_client, organisation, unit, person
 
 
 def test_organisation_settings_have_the_public_fields(client, make_user, organisation):
-    from allauth.mfa.totp.internal.auth import TOTP, generate_totp_secret
 
     admin = make_user("admin", "Admin", is_staff=True)
-    TOTP.activate(admin, generate_totp_secret())
     client.force_login(admin)
 
     page = client.get(reverse("admin:register_organisation_change", args=[organisation.pk]))

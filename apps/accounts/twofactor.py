@@ -8,9 +8,13 @@ def is_staff(user):
 
 
 def requires_two_factor(user):
-    """Staff and superusers can open Settings, so they must use two-factor login,
-    unless METRA_REQUIRE_MFA turns that off (the default in development)."""
-    return settings.REQUIRE_MFA and is_staff(user)
+    """Every user sees members' personal details, so all must use two-factor
+    login. METRA_REQUIRE_MFA_FOR=staff limits it to staff and superusers, who
+    can open Settings; METRA_REQUIRE_MFA=false turns it off (the default in
+    development)."""
+    if not settings.REQUIRE_MFA or not user.is_authenticated:
+        return False
+    return settings.REQUIRE_MFA_FOR == "all" or is_staff(user)
 
 
 def has_two_factor(user):

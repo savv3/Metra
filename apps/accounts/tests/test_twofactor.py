@@ -16,7 +16,7 @@ def current_code():
 
 @pytest.fixture
 def admin_user(make_user):
-    return make_user("admin", "Admin", is_staff=True)
+    return make_user("admin", "Admin", is_staff=True, two_factor=False)
 
 
 def test_staff_without_two_factor_are_sent_to_set_it_up(client, admin_user):
@@ -29,7 +29,7 @@ def test_staff_without_two_factor_are_sent_to_set_it_up(client, admin_user):
 
 
 def test_superusers_without_two_factor_are_sent_to_set_it_up(client, make_user):
-    client.force_login(make_user("root", is_superuser=True))
+    client.force_login(make_user("root", is_superuser=True, two_factor=False))
 
     response = client.get(reverse("register:unit_list"))
 
@@ -60,8 +60,26 @@ def test_staff_with_two_factor_can_use_the_app(client, admin_user):
     assert client.get(reverse("admin:index")).status_code == 200
 
 
-def test_two_factor_is_optional_for_other_users(board_client):
-    assert board_client.get(reverse("register:unit_list")).status_code == 200
+@pytest.fixture
+def board_user(make_user):
+    return make_user("board", "Board", two_factor=False)
+
+
+def test_other_users_without_two_factor_are_sent_to_set_it_up(client, board_user):
+    """Every role sees members' personal details, so every user needs it."""
+    client.force_login(board_user)
+
+    response = client.get(reverse("register:unit_list"))
+
+    assert response.status_code == 302
+    assert response.url == reverse("mfa_activate_totp")
+
+
+def test_two_factor_can_be_required_of_staff_only(client, board_user, settings):
+    settings.REQUIRE_MFA_FOR = "staff"
+    client.force_login(board_user)
+
+    assert client.get(reverse("register:unit_list")).status_code == 200
 
 
 def test_login_asks_for_the_authenticator_code(client, admin_user):
@@ -95,9 +113,16 @@ def test_admin_login_goes_through_the_app_login(client):
 
 def test_staff_cannot_remove_their_authenticator(admin_user, make_user):
     staff_totp = TOTP.activate(admin_user, SECRET).instance
-    board_totp = TOTP.activate(make_user("board", "Board"), SECRET).instance
+    board_totp = TOTP.activate(make_user("board", "Board", two_factor=False), SECRET).instance
 
     assert not get_adapter().can_delete_authenticator(staff_totp)
+    assert not get_adapter().can_delete_authenticator(board_totp)
+
+
+def test_others_can_remove_it_when_only_staff_need_it(make_user, settings):
+    settings.REQUIRE_MFA_FOR = "staff"
+    board_totp = TOTP.activate(make_user("board", "Board", two_factor=False), SECRET).instance
+
     assert get_adapter().can_delete_authenticator(board_totp)
 
 
@@ -123,18 +148,22 @@ def test_nobody_can_sign_up(client, django_user_model):
     assert not django_user_model.objects.filter(username="visitor").exists()
 
 
-def test_other_users_are_reminded_to_turn_on_two_factor(board_client):
-    response = board_client.get(reverse("register:unit_list"))
+def test_other_users_are_reminded_to_turn_on_two_factor(client, board_user, settings):
+    settings.REQUIRE_MFA_FOR = "staff"
+    client.force_login(board_user)
+
+    response = client.get(reverse("register:unit_list"))
 
     assert response.status_code == 200
     assert reverse("mfa_activate_totp") in response.content.decode()
 
 
-def test_reminder_goes_once_two_factor_is_on(board_client):
-    user = board_client.get(reverse("register:unit_list")).wsgi_request.user
-    TOTP.activate(user, SECRET)
+def test_reminder_goes_once_two_factor_is_on(client, board_user, settings):
+    settings.REQUIRE_MFA_FOR = "staff"
+    client.force_login(board_user)
+    TOTP.activate(board_user, SECRET)
 
-    response = board_client.get(reverse("register:unit_list"))
+    response = client.get(reverse("register:unit_list"))
 
     assert reverse("mfa_activate_totp") not in response.content.decode()
 
@@ -238,7 +267,10 @@ def test_no_two_factor_banner_when_required_and_set_up(client, admin_user):
     assert not off and not nudge
 
 
-def test_other_users_without_two_factor_get_the_personal_nudge_only(role_client):
-    off, nudge, _page = banners(role_client("Board"))
+def test_other_users_without_two_factor_get_the_personal_nudge_only(client, board_user, settings):
+    settings.REQUIRE_MFA_FOR = "staff"
+    client.force_login(board_user)
+
+    off, nudge, _page = banners(client)
 
     assert nudge and not off

@@ -308,8 +308,9 @@ The first account comes from `createsuperuser` (in Docker:
 logs in, the app asks for the password once more and then for an
 authenticator app (for example Aegis, Google Authenticator or 1Password):
 scan the QR code, enter the six-digit code, and save the recovery codes it
-shows. Staff and superusers cannot use the app until this is done, and from
-then on every login asks for a code.
+shows. Nobody can use the app until this is done, and from then on every
+login asks for a code. `METRA_REQUIRE_MFA_FOR=staff` limits this to staff
+and superusers; other users are then reminded on every page instead.
 
 In development (`METRA_DEBUG=true`) two-factor is not required, so you can
 log in with just a password; staff see a warning banner saying so.
@@ -326,8 +327,8 @@ adding them to one group:
 | Read-only (Läsbehörighet) | View the register |
 
 The roles are shown in the user's language; groups you create yourself keep
-the name you give them. Two-factor login is optional for users without staff status; until they turn it
-on under **Two-factor login**, every page reminds them to. Every change to the register, every role
+the name you give them. Every user sets up two-factor login on their first
+login, as above (unless `METRA_REQUIRE_MFA_FOR=staff`). Every change to the register, every role
 change and every opened unit or person page is recorded in the audit log,
 shown on the unit and person pages for Admin and Board and under
 **Settings > Advanced** (superusers).

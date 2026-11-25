@@ -1,6 +1,7 @@
 import sqlite3
 
 import pytest
+from allauth.mfa.totp.internal.auth import TOTP, generate_totp_secret
 from django.contrib.auth.models import Group
 
 from apps.register.models import CustomField, Person, Unit, UnitType
@@ -8,12 +9,17 @@ from apps.register.models import CustomField, Person, Unit, UnitType
 
 @pytest.fixture
 def make_user(db, django_user_model):
-    """Create a user with one of the roles (Admin, Board, Treasurer, Read-only)."""
+    """Create a user with one of the roles (Admin, Board, Treasurer, Read-only).
 
-    def make(username, role=None, **extra):
+    Users have two-factor login set up, as every user must
+    (apps.accounts.twofactor); pass two_factor=False for one who has not."""
+
+    def make(username, role=None, two_factor=True, **extra):
         user = django_user_model.objects.create_user(username, password="pw", **extra)
         if role:
             user.groups.add(Group.objects.get(name=role))
+        if two_factor:
+            TOTP.activate(user, generate_totp_secret())
         return user
 
     return make

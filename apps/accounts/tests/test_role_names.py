@@ -1,5 +1,4 @@
 import pytest
-from allauth.mfa.totp.internal.auth import TOTP, generate_totp_secret
 from django.contrib.auth.models import Group
 from django.urls import reverse
 from django.utils import translation
@@ -17,7 +16,6 @@ SWEDISH = {
 @pytest.fixture
 def admin_client(client, make_user):
     admin = make_user("admin", "Admin", is_staff=True)
-    TOTP.activate(admin, generate_totp_secret())
     client.force_login(admin)
     return client
 

@@ -5,8 +5,10 @@ from django.urls import reverse
 
 
 @pytest.fixture
-def board_user(make_user):
-    return make_user("board", "Board")
+def board_user(make_user, settings):
+    """A user who may choose two-factor login and has not turned it on yet."""
+    settings.REQUIRE_MFA_FOR = "staff"
+    return make_user("board", "Board", two_factor=False)
 
 
 def test_account_page_needs_login(client):

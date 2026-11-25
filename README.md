@@ -38,7 +38,7 @@ first for a water association with about 50 households. Other good fits:
 
 - A configurable register of units, people and contacts, with CSV import and
   export
-- Roles, two-factor login for staff and an audit log of every change
+- Roles, two-factor login for every user and an audit log of every change
 - Annual readings, entered by the board or by members themselves
 - Member self-service through personal links, with no passwords
 - SMS (46elks) and email messages, urgent alerts and a public page with

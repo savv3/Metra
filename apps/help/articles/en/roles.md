@@ -24,8 +24,10 @@ link is shown once on the page so you can send it yourself.
 ## Two-factor login
 
 Two-factor login protects the register with a code from an authenticator
-app on your phone, such as Aegis, Google Authenticator or 1Password. Admins
-must use it; for everyone else it is strongly recommended.
+app on your phone, such as Aegis, Google Authenticator or 1Password. Every
+user must turn it on before they can use Metra, because every role can see
+members' personal details. (An installation can be set to require it of
+admins only.)
 
 To turn it on, open **My account** in the menu under your name and choose
 **Turn on two-factor login**. Scan the QR code with the app, enter the

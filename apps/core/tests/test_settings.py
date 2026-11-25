@@ -43,19 +43,23 @@ def test_login_rate_limits_trust_the_proxy_only_when_told(tmp_path):
     assert direct.stdout.strip() == "0"
 
 
-def _require_mfa(tmp_path, **env):
+def _setting(tmp_path, name, **env):
     import os
     import subprocess
     import sys
 
     clean = {k: v for k, v in os.environ.items() if not k.startswith("METRA_")}
     result = subprocess.run(
-        [sys.executable, "-c", "import config.settings as s; print(s.REQUIRE_MFA)"],
+        [sys.executable, "-c", f"import config.settings as s; print(s.{name})"],
         env={**clean, "METRA_DATA_DIR": str(tmp_path), **env},
         capture_output=True,
         text=True,
     )
-    return result.stdout.strip()
+    return result.stdout.strip() or result.stderr.strip().splitlines()[-1]
+
+
+def _require_mfa(tmp_path, **env):
+    return _setting(tmp_path, "REQUIRE_MFA", **env)
 
 
 def test_two_factor_is_required_in_production_and_optional_in_development(tmp_path):
@@ -65,3 +69,41 @@ def test_two_factor_is_required_in_production_and_optional_in_development(tmp_pa
     assert _require_mfa(tmp_path, METRA_DEBUG="true") == "False"
     assert _require_mfa(tmp_path, METRA_DEBUG="true", METRA_REQUIRE_MFA="true") == "True"
     assert _require_mfa(tmp_path, METRA_SECRET_KEY=key, METRA_REQUIRE_MFA="false") == "False"
+
+
+def test_two_factor_is_required_of_everyone_unless_limited_to_staff(tmp_path):
+    key = "a-real-secret-key-for-this-test-only"
+
+    assert _setting(tmp_path, "REQUIRE_MFA_FOR", METRA_SECRET_KEY=key) == "all"
+    assert (
+        _setting(tmp_path, "REQUIRE_MFA_FOR", METRA_SECRET_KEY=key, METRA_REQUIRE_MFA_FOR="Staff")
+        == "staff"
+    )
+    refused = _setting(
+        tmp_path, "REQUIRE_MFA_FOR", METRA_SECRET_KEY=key, METRA_REQUIRE_MFA_FOR="board"
+    )
+    assert "METRA_REQUIRE_MFA_FOR must be all or staff" in refused
+
+
+def test_hsts_is_on_in_production_only(tmp_path):
+    key = "a-real-secret-key-for-this-test-only"
+
+    assert _setting(tmp_path, "SECURE_HSTS_SECONDS", METRA_SECRET_KEY=key) == "31536000"
+    assert _setting(tmp_path, "SECURE_HSTS_SECONDS", METRA_DEBUG="true") == "0"
+    assert (
+        _setting(tmp_path, "SECURE_HSTS_SECONDS", METRA_SECRET_KEY=key, METRA_HSTS_SECONDS="0")
+        == "0"
+    )
+
+
+@pytest.mark.django_db
+def test_http_is_sent_to_https_in_production_except_the_health_checks(client, settings):
+    settings.SECURE_SSL_REDIRECT = True
+
+    page = client.get("/")
+    health = client.get("/healthz")
+
+    assert page.status_code == 301
+    assert page.url.startswith("https://")
+    assert health.status_code == 200
+    assert client.get("/", headers={"X-Forwarded-Proto": "https"}).status_code != 301

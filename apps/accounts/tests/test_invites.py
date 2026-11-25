@@ -74,11 +74,19 @@ def test_adding_a_user_emails_an_invitation(admin_client, client):
     assert b"password1" in page.content
 
 
-def test_a_board_member_is_not_staff_and_not_told_about_two_factor(admin_client):
+def test_a_board_member_is_not_staff_but_told_about_two_factor(admin_client):
     add_user(admin_client, role="Board")
 
     user = User.objects.get(username="bo@example.org")
     assert not user.is_staff
+    assert "two-factor" in mail.outbox[0].body
+
+
+def test_a_board_member_is_not_told_when_only_staff_need_two_factor(admin_client, settings):
+    settings.REQUIRE_MFA_FOR = "staff"
+
+    add_user(admin_client, role="Board")
+
     assert "two-factor" not in mail.outbox[0].body
 
 
