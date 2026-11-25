@@ -272,4 +272,5 @@ def test_saving_a_one_row_setting_returns_to_the_settings_page(client, make_user
     assert response.url == URL
     page = client.get(url).content.decode()
     assert "Back to Metra settings" in page or "Tillbaka till Metras inställningar" in page
-    assert 'id="nav-sidebar"' not in page
+    # Admins use the side list of every table to move between them.
+    assert 'id="nav-sidebar"' in page
