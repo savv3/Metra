@@ -12,11 +12,12 @@ and date. **Upgrade notes** says what an admin must do when upgrading
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-11-25
+
 ### Changed
 
 - The admin pages show the side list of every table again (taken away in
   0.8.0).
-
 - Every user must now use two-factor login, not only staff: board,
   treasurer and read-only users see members' personal details too.
   `METRA_REQUIRE_MFA_FOR=staff` keeps the old behaviour.
