@@ -40,9 +40,6 @@ admin.site.get_app_list = get_app_list
 admin.site.site_header = "Metra"
 admin.site.site_title = "Metra"
 admin.site.index_title = _("All data tables")
-# Settings open admin pages one at a time from Metra's Settings page; the
-# admin's own list of every table would lead people away from it.
-admin.site.enable_nav_sidebar = False
 
 
 class BackToSettingsMixin:
